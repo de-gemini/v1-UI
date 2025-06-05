@@ -1,82 +1,86 @@
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+
+import { Check, MapPin } from "lucide-react";
 
 const Home = () => {
+  const features = [
+    '24/7 service',
+    'Cashback up to £150',
+    'Eco-friendly',
+    'Pay as You Go',
+  ];
   return (
-    <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <div className="relative bg-primary-800">
-        <div className="absolute inset-0">
-          <img
-            className="w-full h-full object-cover"
-            src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-            alt="Cleaning Service"
-          />
-          <div className="absolute inset-0 bg-accent-700 mix-blend-multiply" />
-        </div>
-        <div className="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Professional Cleaning Services
+    <div className="min-h-screen bg-background-gray border border-red-500">
+      {/* Hero Section Container */}
+      <section className="flex items-center justify-center">
+        {/* Background Image/Overlay for people - Using a div with background image for responsiveness */}
+        {/* <div
+          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url('https://placehold.co/1920x1080/e0b1cb/ffffff?text=Cleaning+People')`, // Placeholder for background image of people
+            // Using a darker overlay on the image to make text more readable
+            backgroundBlendMode: 'multiply',
+            backgroundColor: 'rgba(106, 0, 141, 0.2)', // A slight purple overlay
+          }}
+        ></div> */}
+        {/* Fallback for image load error */}
+        <img
+          src="https://placehold.co/1920x1080/e0b1cb/ffffff?text=Cleaning+People+Fallback"
+          alt="Cleaning Service Staff"
+          className="absolute inset-0 z-0 object-cover w-full h-full opacity-0" // Hidden, only for error handling
+          onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+            const target = e.target as HTMLImageElement;
+            target.style.opacity = '1'; // Show fallback image
+            target.style.background = 'linear-gradient(to bottom right, #e0b1cb, #b8c4ea)'; // Background if image fails
+            target.src = ''; // Clear src to prevent infinite loops
+            target.alt = 'Fallback: Image of cleaning service staff could not load.';
+          }}
+        />
+
+        {/* Content Container */}
+        <div className="relative z-10 text-left w-full">
+          {/* Heading */}
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-purple-900 leading-tight mb-8 drop-shadow-sm">
+            Best Cleaning<br />Services In London
           </h1>
-          <p className="mt-6 text-xl text-primary-100 max-w-3xl">
-            We provide top-quality cleaning services for homes and offices. Our experienced team ensures your space is spotless and healthy.
-          </p>
-          <div className="mt-10">
-            <Link
-              to="/contact"
-              className="inline-block bg-white py-3 px-8 rounded-md text-base font-medium text-primary-600 hover:bg-primary-50"
-            >
-              Get Started
-            </Link>
+
+          {/* Features List */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-8 mb-10">
+            {features.map((feature, index) => (
+              <div key={index} className="flex items-center text-purple-800">
+                <Check className="h-6 w-6 text-green-500 mr-3 flex-shrink-0" />
+                <span className="text-lg sm:text-xl font-medium">{feature}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Postcode Input and Button */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-white p-2 pr-2 sm:p-3 sm:pr-3 rounded-xl shadow-lg border border-gray-200 max-w-md w-full">
+            <div className="flex items-center flex-grow p-2">
+              <MapPin className="h-6 w-6 text-gray-400 mr-3" />
+              <input
+                type="text"
+                placeholder="Enter your post code here"
+                className="flex-grow text-gray-700 placeholder-gray-400 focus:outline-none text-base sm:text-lg bg-transparent"
+                aria-label="Enter your postcode"
+              />
+            </div>
+            <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+              QUOTE ME
+            </button>
           </div>
         </div>
-      </div>
 
-      {/* Features Section */}
-      <div className="py-16 bg-secondary-50 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-3xl font-extrabold text-secondary-900 sm:text-4xl">
-              Why Choose Us?
-            </h2>
-            <p className="mt-4 text-lg text-secondary-500">
-              Experience the difference with our professional cleaning services
-            </p>
-          </div>
-
-          <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {/* Feature 1 */}
-            <div className="bg-white overflow-hidden shadow rounded-lg">
-              <div className="px-4 py-5 sm:p-6">
-                <h3 className="text-lg font-medium text-secondary-900">Professional Staff</h3>
-                <p className="mt-2 text-base text-secondary-500">
-                  Our team consists of trained and experienced cleaning professionals.
-                </p>
-              </div>
-            </div>
-
-            {/* Feature 2 */}
-            <div className="bg-white overflow-hidden shadow rounded-lg">
-              <div className="px-4 py-5 sm:p-6">
-                <h3 className="text-lg font-medium text-secondary-900">Eco-Friendly Products</h3>
-                <p className="mt-2 text-base text-secondary-500">
-                  We use environmentally friendly cleaning products that are safe for your family.
-                </p>
-              </div>
-            </div>
-
-            {/* Feature 3 */}
-            <div className="bg-white overflow-hidden shadow rounded-lg">
-              <div className="px-4 py-5 sm:p-6">
-                <h3 className="text-lg font-medium text-secondary-900">Satisfaction Guaranteed</h3>
-                <p className="mt-2 text-base text-secondary-500">
-                  We're not happy until you're completely satisfied with our service.
-                </p>
-              </div>
-            </div>
-          </div>
+        <div>
+          <img src="https://www.emop.co.uk/img/cleaning-employer.png" alt=""/>
         </div>
-      </div>
+
+      
+      </section>
+
     </div>
+
+    
   );
 };
 
