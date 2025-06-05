@@ -16,7 +16,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 function App() {
   return (
     <Router>
-      <div className="w-fit">
+      <div className="w-screen">
         <Navbar />
         <main className="">
           <Routes>
