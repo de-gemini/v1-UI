@@ -29,7 +29,7 @@ export const CostCard: React.FC<CostCardProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center border border-gray-200">
+    <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center border border-gray-500 hover:border hover:border-brand-secondary transition-all duration-75">
       <h3 className="text-2xl font-bold text-gray-800 mb-2 text-center">{title}</h3>
       <p className="text-purple-700 text-xl font-semibold mb-6 text-center">{price}</p>
 
