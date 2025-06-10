@@ -21,6 +21,7 @@ interface FAQCategoryData {
   faqs: FAQItemData[];
 }
 export default function Emoppers() {
+  
   const faqCategories: FAQCategoryData[] = [
     {
       id: "general",
@@ -30,8 +31,8 @@ export default function Emoppers() {
           id: "general-1",
           question: "About eMop platform",
           answer: `eMop is an online app that connects customers and professional cleaners. eMop acts as a powerful platform arranging fast and high-quality service for the customers, where safety is our priority.
-
-Cleaners work as independent cleaning partners. They access the eMop platform via eMop mobile App where they pick up customers’ orders that have been booked via the eMop website.`,
+  
+  Cleaners work as independent cleaning partners. They access the eMop platform via eMop mobile App where they pick up customers’ orders that have been booked via the eMop website.`,
         },
         {
           id: "general-2",
@@ -72,23 +73,23 @@ Cleaners work as independent cleaning partners. They access the eMop platform vi
           id: "prospective-1",
           question: "How do I become a cleaner with eMop",
           answer: `Before you can start working with eMop, you will need to provide a list of documents. You will need to register and upload a photo of your documents on the website www.emop.co.uk
-
-After the interview, you will have your first test job. If the customer is happy with the cleaning, it is paid and you can have an access to all the cleaning bookings on the App. If we receive a negative feedback, you are not paid for the job and you will be deactivated from the platform. Its as simple as that. Customer satisfaction is key to all our success.`,
+  
+  After the interview, you will have your first test job. If the customer is happy with the cleaning, it is paid and you can have an access to all the cleaning bookings on the App. If we receive a negative feedback, you are not paid for the job and you will be deactivated from the platform. Its as simple as that. Customer satisfaction is key to all our success.`,
         },
         {
           id: "prospective-2",
           question: "What are the requirements to join?",
           answer: `You can apply for the position of as one of our cleaners via our website.
-
-The requirements are the following:
-
-At least 1 year experience in domestic cleaning;
-Fluent in written and spoken English.
-You will be contacted to fix a telephone interview. Please make sure you read eMop rules before the interview.
-
- Please note that  you will be required to pay a £20 deposit before joining the platform. 
-
-After you have paid the deposit, we will provide you with access to the mobile App where you will pick up all your jobs and we will schedule your first test cleaning job with a client.`,
+  
+  The requirements are the following:
+  
+  At least 1 year experience in domestic cleaning;
+  Fluent in written and spoken English.
+  You will be contacted to fix a telephone interview. Please make sure you read eMop rules before the interview.
+  
+  Please note that  you will be required to pay a £20 deposit before joining the platform. 
+  
+  After you have paid the deposit, we will provide you with access to the mobile App where you will pick up all your jobs and we will schedule your first test cleaning job with a client.`,
         },
         {
           id: "prospective-3",
@@ -104,7 +105,6 @@ After you have paid the deposit, we will provide you with access to the mobile A
       ],
     },
   ];
-
   // State for search input
   const [searchTerm, setSearchTerm] = useState<string>("");
   // State for active category in sidebar (for scroll-based highlighting)
@@ -191,6 +191,15 @@ After you have paid the deposit, we will provide you with access to the mobile A
 
   return (
     <div className="font-sans antialiased bg-gray-50 text-gray-800">
+        <nav className="bg-white p-8 flex items-center justify-center w-full">
+
+
+<div className=" w-[4rem] md:w-[5rem] lg:w-[7rem]">
+    <img src="https://www.emop.co.uk/help/wp-content/uploads/2019/08/152x90emop_logox2.png" alt="logo" className="w-full h-auto object-cover" />
+</div>
+
+
+</nav>
       {/* Header Section */}
       <section
         className="relative bg-gradient-to-br from-purple-700 to-indigo-800 py-20 px-4 sm:px-6 lg:px-8 text-white overflow-hidden"
@@ -534,3 +543,7 @@ After you have paid the deposit, we will provide you with access to the mobile A
     </div>
   );
 }
+
+
+
+

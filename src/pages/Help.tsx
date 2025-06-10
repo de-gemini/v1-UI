@@ -23,7 +23,7 @@ export default function Help() {
           title: 'FAQ for Clients',
           description: "You're a client and have a trouble ordering a cleaning?",
           linkText: 'Get answers',
-          linkHref: '#', // Link to client FAQ page
+          linkHref: '/help/Clients', // Link to client FAQ page
         },
         {
           id: 'emopers-faq',
