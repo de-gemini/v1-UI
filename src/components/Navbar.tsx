@@ -135,7 +135,7 @@ const Navbar = () => {
           <li><a href="#" className="text-gray-700 text-[16px] font-semibold hover:text-purple-700 transition duration-300 ease-in-out">Pricing</a></li>
           <li><a href="#" className="text-gray-700 text-[16px] font-semibold hover:text-purple-700 transition duration-300 ease-in-out">Gifts</a></li>
           <li><a href="#" className="text-gray-700 text-[16px] font-semibold hover:text-purple-700 transition duration-300 ease-in-out">Blog</a></li>
-          <li><a href="#" className="text-gray-700 text-[16px] font-semibold hover:text-purple-700 transition duration-300 ease-in-out">Help</a></li>
+          <li><a href="/help" className="text-gray-700 text-[16px] font-semibold hover:text-purple-700 transition duration-300 ease-in-out">Help</a></li>
           <li><a href="#" className="text-gray-700 text-[16px] font-semibold hover:text-purple-700 transition duration-300 ease-in-out">Reclean guarantee</a></li>
           <li><a href="#" className="text-gray-700 text-[16px] font-semibold hover:text-purple-700 transition duration-300 ease-in-out">Become a cleaner</a></li>
           <li>
@@ -181,7 +181,7 @@ const Navbar = () => {
           <li><a onClick={toggleMobileMenu} href="#" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Pricing</a></li>
           <li><a onClick={toggleMobileMenu} href="#" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Gifts</a></li>
           <li><a onClick={toggleMobileMenu} href="#" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Blog</a></li>
-          <li><a onClick={toggleMobileMenu} href="#" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Help</a></li>
+          <li><a onClick={toggleMobileMenu} href="/help" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Help</a></li>
           <li><a onClick={toggleMobileMenu} href="#" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Reclean guarantee</a></li>
           <li><a onClick={toggleMobileMenu} href="#" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Become a cleaner</a></li>
           <li className="w-full pt-4">

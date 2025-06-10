@@ -44,7 +44,7 @@ export const Footer: React.FC = () => {
             <li><a href="#" className="hover:underline">Sitemap</a></li>
           </ul>
           {/* Sub-section: For Cleaners */}
-          <h3 className="font-bold text-lg mt-8 mb-4 text-purple-50">FOR CLEANERS</h3>
+          <h3 className="font-bold text-lg mb-4 text-brand-secondary">FOR CLEANERS</h3>
           <ul className="space-y-2">
             <li><a href="#" className="hover:underline">Become an eMopper</a></li>
           </ul>
@@ -69,7 +69,7 @@ export const Footer: React.FC = () => {
             <li><a href="#" className="hover:underline">Spring cleaning</a></li>
           </ul>
           {/* Sub-section: Who We Are */}
-          <h3 className="font-bold text-lg mt-8 mb-4 text-purple-50">WHO WE ARE</h3>
+          <h3 className="font-bold text-lg mb-4 text-brand-secondary">WHO WE ARE</h3>
           <ul className="space-y-2">
             <li><a href="#" className="hover:underline">About us</a></li>
             <li><a href="#" className="hover:underline">Contact us</a></li>
@@ -81,7 +81,7 @@ export const Footer: React.FC = () => {
           {/* Logo */}
           <img src="https://www.emop.co.uk/static/images/152x90emop_logox2.png" alt="eMop Logo" className="w-24 mb-4" />
           
-          <p className="text-purple-50 text-sm font-bold mb-4">CLEANING AVAILABLE 24/7</p>
+          <p className="font-bold text-lg mb-4 text-brand-secondary">CLEANING AVAILABLE 24/7</p>
 
           {/* App Store Badges */}
           <div className="flex flex-col space-y-3 mb-6">
@@ -94,13 +94,13 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Social Media */}
-          <h3 className="font-bold text-lg mb-4 text-purple-50">SOCIAL MEDIA</h3>
+          <h3 className="font-bold text-lg mb-4 text-brand-secondary">SOCIAL MEDIA</h3>
           <div className="flex space-x-4">
             <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <Instagram className="h-7 w-7 text-purple-100 hover:text-white transition duration-300" />
+              <Instagram className="h-7 w-7 text-brand-secondary hover:text-white transition duration-300" />
             </a>
             <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <Facebook className="h-7 w-7 text-purple-100 hover:text-white transition duration-300" />
+              <Facebook className="h-7 w-7 text-brand-secondary hover:text-white transition duration-300" />
             </a>
           </div>
         </div>
