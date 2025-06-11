@@ -21,6 +21,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 const Help = lazy(() => import("./pages/Help"));
 const Emoppers = lazy(() => import("./pages/Emoppers"));
 const Clients = lazy(() => import("./pages/Clients"));
+const Become = lazy(() => import("./pages/BecomeCleaner"));
 
 function App() {
   return (
@@ -56,6 +57,8 @@ function App() {
             } />
 
               <Route path="/help/Clients" element={<Clients />} />
+              <Route path="/home/registercleaner" element={<Become />} />
+
             </Routes>
           </main>
         </div>
