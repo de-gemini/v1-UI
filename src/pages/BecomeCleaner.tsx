@@ -428,8 +428,8 @@ export default function BecomeCleaner() {
         </div>
       </div>
 
-      <section className="w-full bg-[#f5f9fc] relative">
-      <div className="absolute z-[40] w-full font-sans antialiased bg-[#f5f9fc] min-h-screen py-16 px-4 sm:px-6 lg:px-8">
+      <section className="w-full bg-[#f5f9fc]">
+      <div className="relative z-[40] top-10 w-full shadow-[2rem] font-sans antialiased bg-[#f5f9fc]">
       <MultiStepForm
         steps={formSteps}
         onSubmit={handleFormSubmission}
@@ -437,8 +437,8 @@ export default function BecomeCleaner() {
       />
     </div>
       {/* Any other content for your JoinPage */}
-      <footer className="bg-brand-secondary mt-[12rem] absolute z-[30] top-[95%] w-full min-h-screen text-white">
-        <ul className="w-fit flex flex-col md:flex-col lg:flex-row items-center justify-between">
+      <footer className="bg-brand-secondary w-full text-white pt-[12rem] min-h-screen">
+        <ul className="w-full underline flex flex-col gap-[1rem] md:flex-col lg:flex-row items-center justify-center">
           <li className="text-gray-400 text-[14px] transition duration-300 hover:text-[rgb(216,196,21)]">Terms&Conditions</li>
           <li className="text-gray-400 text-[14px] transition duration-300 hover:text-[rgb(216,196,21)]"> Booking T&C</li>
           <li className="text-gray-400 text-[14px] transition duration-300 hover:text-[rgb(216,196,21)]">Privacy Policy</li>

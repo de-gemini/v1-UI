@@ -137,7 +137,7 @@ const Navbar = () => {
           <li><a href="#" className="text-gray-700 text-[16px] font-semibold hover:text-purple-700 transition duration-300 ease-in-out">Blog</a></li>
           <li><a href="/help" className="text-gray-700 text-[16px] font-semibold hover:text-purple-700 transition duration-300 ease-in-out">Help</a></li>
           <li><a href="#" className="text-gray-700 text-[16px] font-semibold hover:text-purple-700 transition duration-300 ease-in-out">Reclean guarantee</a></li>
-          <li><a href="#" className="text-gray-700 text-[16px] font-semibold hover:text-purple-700 transition duration-300 ease-in-out">Become a cleaner</a></li>
+          <li><a href="/home/registercleaner" className="text-gray-700 text-[16px] font-semibold hover:text-purple-700 transition duration-300 ease-in-out">Become a cleaner</a></li>
           <li>
             <a href="#" className="px-5 py-2 border border-purple-700 text-purple-700 rounded-md hover:bg-purple-700 hover:text-white transition duration-300 ease-in-out">
               Sign In
@@ -183,7 +183,7 @@ const Navbar = () => {
           <li><a onClick={toggleMobileMenu} href="#" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Blog</a></li>
           <li><a onClick={toggleMobileMenu} href="/help" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Help</a></li>
           <li><a onClick={toggleMobileMenu} href="#" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Reclean guarantee</a></li>
-          <li><a onClick={toggleMobileMenu} href="#" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Become a cleaner</a></li>
+          <li><a onClick={toggleMobileMenu} href="/home/registercleaner" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Become a cleaner</a></li>
           <li className="w-full pt-4">
             <a onClick={toggleMobileMenu} href="#" className="block w-full text-center px-5 py-3 border border-purple-700 text-purple-700 rounded-lg hover:bg-purple-700 hover:text-white transition duration-300 ease-in-out text-lg">
               Sign In
