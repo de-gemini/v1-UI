@@ -1,17 +1,10 @@
 import { Link } from "react-router-dom";
 
 import React, { useState } from "react";
-
-import {
-  Plus,
-  X,
-  CheckSquare,
-  FileText,
-  Smartphone,
-  User,
-  PaintBucket,
-  PhoneCall,
-} from "lucide-react";
+import placeHolder from "../assets/images/Screenshot (427).png";
+import { MultiStepForm } from "../components/MultiStep";
+import { Plus, X, Check, MapPin, Phone, User, Upload, Flag } from "lucide-react";
+import { FaFacebookSquare, FaInstagramSquare } from "react-icons/fa";
 
 interface StepData {
   id: string;
@@ -21,9 +14,70 @@ interface StepData {
   tooltipContent?: string; // Optional content to show on click
 }
 
+interface SafetyFeature {
+  title: string;
+  description: string;
+}
+
+interface FormData {
+  postcode: string;
+  phone: string;
+  personalData: {
+    firstName: string;
+    lastName: string;
+    email: string;
+  };
+  documentsUploaded: boolean;
+}
+
+interface Step {
+  id: number;
+  name: string;
+  icon: React.ElementType;
+}
+
 export default function BecomeCleaner() {
   // State to manage which step's tooltip content is currently open
   const [openTooltipId, setOpenTooltipId] = useState<string | null>(null);
+
+  const [activeTab, setActiveTab] = useState<"before" | "after">("before");
+
+  const beforeCleaningFeatures: SafetyFeature[] = [
+    {
+      title: "No anonymous customers",
+      description:
+        "All customers must create an account and provide their name, email address, and phone number before they can request a cleaner. That is why, when you accept the job you will know who made the request and so will we. Moreover, customers will have rating and feedback from other cleaners (provided that they are not completely new to our service).",
+    },
+    {
+      title: "24/7 support",
+      description:
+        "Our support team is always ready to respond to any questions you may have about your cleaning experience",
+    },
+    
+  ];
+
+  // Content for the 'AFTER CLEANING' tab (based on your screenshot)
+  const afterCleaningFeatures: SafetyFeature[] = [
+    {
+      title: "Payment",
+      description:
+        "Customer’s account is automatically charged for any fares. You will avoid using cash and any potential issues associated with non-payment.",
+    },
+    {
+      title: "Cleaners feedback",
+      description:
+        "You rate your customer after each job. We review those ratings on a regular basis to ensure that everyone you worked for is as respectful as you are. Customers reported to violate our terms of service may be prevented from using eMop.",
+    },
+    {
+      title: "24/7 support",
+      description:
+        "Our support team is always ready to respond to any questions you may have about your cleaning experience",
+    },
+  ];
+
+  // Determine which features to display based on the active tab
+  const displayedFeatures =
+    activeTab === "before" ? beforeCleaningFeatures : afterCleaningFeatures;
 
   const steps: StepData[] = [
     {
@@ -90,6 +144,34 @@ export default function BecomeCleaner() {
     setOpenTooltipId(openTooltipId === id ? null : id);
   };
 
+  const requirements = [
+    "Be 18+ years old",
+    "Be legally allowed to work in the UK",
+    "Have a smartphone",
+    {
+      text: "Provide us with copy of your:",
+      subItems: ["Photo", "ID", "NI", "Proof of the address"],
+    },
+  ];
+
+  const formSteps: Step[] = [
+    { id: 1, name: 'Postal code', icon: MapPin },
+    { id: 2, name: 'Phone', icon: Phone },
+    { id: 3, name: 'Provide personal data', icon: User },
+    { id: 4, name: 'Upload your documents', icon: Upload },
+    { id: 5, name: 'Finish', icon: Flag },
+  ];
+
+  const handleFormSubmission = (data: FormData) => {
+    
+    console.log('Final form submitted:', data);
+    alert('Form submission successful! Check console for data.');
+  };
+
+  const handleStepChange = (currentStep: number, totalSteps: number) => {
+    
+    console.log(`User moved to step ${currentStep} of ${totalSteps}`);
+  };
   return (
     <main className="w-full min-h-screen">
       {/* banner part */}
@@ -155,6 +237,9 @@ export default function BecomeCleaner() {
         </p>
 
         {/* icons */}
+        <div className="w-full mt-[2rem]">
+          <img src={placeHolder} alt="placeholder" />
+        </div>
       </section>
 
       <div className="font-sans antialiased bg-white min-h-screen py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -173,12 +258,21 @@ export default function BecomeCleaner() {
               <div
                 key={step.id}
                 className="relative group flex flex-col items-center p-4 rounded-lg transition-transform duration-300 ease-in-out hover:-translate-y-2">
+                {/* Step Title */}
+                <h3 className="mb-2 text-sm font-thin text-brand-secondary">
+                  {step.title}
+                </h3>
+                {step.description && (
+                  <p className="mb-2 text-sm font-thin text-brand-secondary">
+                    {step.description}
+                  </p>
+                )}
                 {/* Main Circular Icon Container */}
                 <div
-                  className={`relative w-40 h-40 sm:w-48 sm:h-48 rounded-full flex items-center justify-center border-4 border-purple-200 transition-colors duration-300
+                  className={`relative w-40 h-40 bg-[#f2f3f5] hover:bg-[#fcdb00] sm:w-48 sm:h-48 rounded-full flex items-center justify-center transition-colors duration-300
                             ${
                               openTooltipId === step.id
-                                ? "bg-purple-100 border-purple-400"
+                                ? "bg-[#fcdb00]"
                                 : "bg-gray-100 group-hover:bg-purple-50 group-hover:border-purple-300"
                             }`}>
                   {/* Plus/X Icon on Top Right */}
@@ -203,27 +297,17 @@ export default function BecomeCleaner() {
                   />
                 </div>
 
-                {/* Step Title */}
-                <h3 className="mt-6 text-xl sm:text-2xl font-semibold text-gray-800">
-                  {step.title}
-                </h3>
-                {step.description && (
-                  <p className="mt-2 text-sm text-gray-600 max-w-xs">
-                    {step.description}
-                  </p>
-                )}
-
                 {/* Tooltip/Content that appears on click */}
                 {step.tooltipContent && (
                   <div
-                    className={`absolute top-full left-1/2 -translate-x-1/2 mt-4 w-64 p-4 bg-purple-700 text-white text-sm rounded-lg shadow-lg z-20
+                    className={`absolute bottom-[90%] left-1/2 -translate-x-1/2 mt-4 w-64 p-4 bg-purple-700 text-white text-sm rounded-lg shadow-lg z-20
                               transform transition-all duration-300 ease-in-out origin-top
                               ${
                                 openTooltipId === step.id
                                   ? "scale-y-100 opacity-100 visible"
                                   : "scale-y-0 opacity-0 invisible"
                               }`}>
-                    <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent border-b-purple-700"></div>
+                    <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-b-purple-700"></div>
                     {step.tooltipContent}
                   </div>
                 )}
@@ -232,16 +316,141 @@ export default function BecomeCleaner() {
           </div>
         </div>
 
-        {/* Optional: More content to show page structure */}
-        <div className="mt-20 py-12 text-center bg-gray-100 rounded-lg shadow-md">
-          <h2 className="text-2xl font-bold text-gray-700">
-            More sections of your app...
-          </h2>
-          <p className="text-gray-600 mt-4">
-            This content is just to demonstrate the layout.
-          </p>
+        <div className="font-sans antialiased min-h-screen py-16">
+          <div className="w-full bg-white rounded-lg shadow-lg overflow-hidden md:flex">
+            {/* Left Section: Image */}
+            <div className="md:w-1/2 overflow-hidden bg-yellow-100 flex items-center justify-center p-4">
+              <img
+                src="https://www.emop.co.uk/img/requirements-img.jpg" // Placeholder for your image
+                alt="Two cleaners smiling"
+                className="w-full h-full object-cover object-center rounded-lg"
+                onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src =
+                    "https://placehold.co/800x600/e0e0e0/555555?text=Image+Not+Found";
+                  target.alt = "Fallback image: Cleaners image not found.";
+                }}
+              />
+            </div>
+
+            {/* Right Section: Text Content */}
+            <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center bg-yellow-50">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-purple-900 mb-4">
+                REQUIREMENTS
+              </h1>
+              <p className="text-lg sm:text-xl text-gray-700 mb-8">
+                To work with eMop you need to
+              </p>
+
+              <ul className="text-gray-700 space-y-3">
+                {requirements.map((item, index) => (
+                  <li key={index}>
+                    {typeof item === "string" ? (
+                      <div className="flex items-start">
+                        <Check className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-1" />
+                        <span className="text-base sm:text-lg">{item}</span>
+                      </div>
+                    ) : (
+                      <div className="flex flex-col">
+                        <div className="flex items-start mb-2">
+                          <Check className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-1" />
+                          <span className="text-base sm:text-lg">
+                            {item.text}
+                          </span>
+                        </div>
+                        <ul className="ml-8 space-y-2">
+                          {" "}
+                          {/* Indent sub-items */}
+                          {item.subItems.map((subItem, subIndex) => (
+                            <li key={subIndex} className="flex items-center">
+                              <span className="text-gray-500 mr-2">-</span>{" "}
+                              {/* Dash for sub-bullet */}
+                              <span className="text-base sm:text-lg">
+                                {subItem}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Optional: More content to show page structure */}
+          
+          <div className="max-w-7xl mx-auto text-center mt-[3rem]">
+            <h1 className="text-[22px] md:text-[28px] lg:text-[32px] font-[400] text-brand-secondary mb-6">
+              YOUR SAFETY AT WORK IS OUR PRIORITY
+            </h1>
+
+            {/* Tab Buttons */}
+            <div className="flex justify-center mb-12">
+              <button
+                onClick={() => setActiveTab("before")}
+                className={`px-8 py-3 rounded-l-full border-2 border-purple-700 font-semibold text-lg transition-all duration-300
+                        ${
+                          activeTab === "before"
+                            ? "bg-brand-secondary text-white shadow-md"
+                            : "bg-transparent text-brand-secondary hover:bg-purple-50"
+                        }`}>
+                BEFORE CLEANING
+              </button>
+              <button
+                onClick={() => setActiveTab("after")}
+                className={`px-8 py-3 rounded-r-full border-2 border-gray-400 font-semibold text-lg transition-all duration-300
+                        ${
+                          activeTab === "after"
+                            ? "bg-brand-secondary text-white shadow-md"
+                            : "bg-transparent text-brand-secondary hover:bg-purple-50"
+                        }`}>
+                AFTER CLEANING
+              </button>
+            </div>
+          </div>
+        </div>
+        {/* Content Display Area */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left mt-8">
+          {displayedFeatures.map((feature, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center justify-start text-center h-full">
+              <h3 className="text-[28px] font-[400] text-brand-secondary mb-3">
+                {feature.title}
+              </h3>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                {feature.description}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
+
+      <section className="w-full bg-[#f5f9fc] relative">
+      <div className="absolute z-[40] w-full font-sans antialiased bg-[#f5f9fc] min-h-screen py-16 px-4 sm:px-6 lg:px-8">
+      <MultiStepForm
+        steps={formSteps}
+        onSubmit={handleFormSubmission}
+        onStepChange={handleStepChange} // This prop is optional
+      />
+    </div>
+      {/* Any other content for your JoinPage */}
+      <footer className="bg-brand-secondary mt-[12rem] absolute z-[30] top-[95%] w-full min-h-screen text-white">
+        <ul className="w-fit flex flex-col md:flex-col lg:flex-row items-center justify-between">
+          <li className="text-gray-400 text-[14px] transition duration-300 hover:text-[rgb(216,196,21)]">Terms&Conditions</li>
+          <li className="text-gray-400 text-[14px] transition duration-300 hover:text-[rgb(216,196,21)]"> Booking T&C</li>
+          <li className="text-gray-400 text-[14px] transition duration-300 hover:text-[rgb(216,196,21)]">Privacy Policy</li>
+          <li className="text-gray-400 text-[14px] transition duration-300 hover:text-[rgb(216,196,21)]">Cookie Policy</li>
+          <li className="text-gray-400 text-[14px] transition duration-300 hover:text-[rgb(216,196,21)]">Cancellation Policy</li>
+          <li className="flex items-center justify-center">
+            <FaFacebookSquare className="text-[24px] text-gray-400 mr-2 transition duration-300 hover:text-[rgb(216,196,21)]" />
+            <FaInstagramSquare className="text-[24px] text-gray-400 transition duration-300 hover:text-[rgb(216,196,21)]" />
+          </li>
+        </ul>
+      </footer>
+      </section>
     </main>
   );
 }
