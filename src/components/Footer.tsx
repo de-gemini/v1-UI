@@ -3,7 +3,7 @@ import { Instagram, Facebook, Phone } from 'lucide-react'; // Importing icons fo
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="relative text-gray-600 py-12 px-4 sm:px-6 lg:px-8">
+    <footer className="relative bg-transparent text-gray-600 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-y-10 gap-x-8 text-sm">
 
         {/* Column 1: Cleaner Locations */}

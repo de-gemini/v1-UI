@@ -22,6 +22,7 @@ const Help = lazy(() => import("./pages/Help"));
 const Emoppers = lazy(() => import("./pages/Emoppers"));
 const Clients = lazy(() => import("./pages/Clients"));
 const Become = lazy(() => import("./pages/BecomeCleaner"));
+const GiftVoucher = lazy(() => import("./pages/Gift"));
 
 function App() {
   return (
@@ -50,15 +51,15 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-
               <Route path="/help" element={<Help />} />
-              <Route path="/help/Emoppers" element={
-                <Emoppers />
-            } />
-
+              <Route path="/help/Emoppers" element={<Emoppers />} />
               <Route path="/help/Clients" element={<Clients />} />
               <Route path="/home/registercleaner" element={<Become />} />
-
+              <Route path="/giftVoucher" element={
+                <Layout>
+                  <GiftVoucher />
+                </Layout>
+                } />
             </Routes>
           </main>
         </div>

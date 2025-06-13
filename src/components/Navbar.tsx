@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react'; // Using lucide-react for icons
 
 // Define a type for the service links
-interface ServiceLink {
+interface Links {
   name: string;
   href: string;
 }
@@ -10,6 +10,8 @@ interface ServiceLink {
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState<boolean>(false);
+  const [isPricingDropdownOpen, setIsPricingDropdownOpen] = useState<boolean>(false);
+
 
   // Ref for the dropdown to detect clicks outside on desktop
   const dropdownRef = useRef<HTMLLIElement>(null);
@@ -25,18 +27,24 @@ const Navbar = () => {
         if (isServicesDropdownOpen) {
           setIsServicesDropdownOpen(false);
         }
+
+        if(isPricingDropdownOpen) {
+          setIsPricingDropdownOpen(false);
+        }
       }
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [isMobileMenuOpen, isServicesDropdownOpen]); // Depend on both states
+  }, [isMobileMenuOpen, isServicesDropdownOpen, isPricingDropdownOpen]); // Depend on both states
 
   // Close services dropdown when clicking outside of it on desktop
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       // Only apply this on desktop where dropdown is hover-based
       if (window.innerWidth >= 768 && dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsServicesDropdownOpen(false); // Ensure state is false if clicked outside
+        setIsServicesDropdownOpen(false);
+        setIsPricingDropdownOpen(false); // Ensure state is false if clicked outside
+         // Ensure state is false if clicked outside
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -48,6 +56,10 @@ const Navbar = () => {
     // When opening/closing mobile menu, also ensure services dropdown is closed
     if (isServicesDropdownOpen) {
       setIsServicesDropdownOpen(false);
+    }
+
+    if (isPricingDropdownOpen) {
+      setIsPricingDropdownOpen(false);
     }
   };
 
@@ -61,7 +73,15 @@ const Navbar = () => {
     // as it's primarily hover-driven.
   };
 
-  const servicesLinks: ServiceLink[] = [
+  const handlePricingDropdownClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // Only toggle on click for mobile screens
+    if (window.innerWidth < 768) {
+      e.preventDefault(); // Prevent default link behavior on mobile
+      setIsPricingDropdownOpen(!isPricingDropdownOpen);
+    }
+  };
+
+  const servicesLinks: Links[] = [
     { name: 'Regular cleaning', href: '#' },
     { name: 'Deep cleaning', href: '#' },
     { name: 'Office cleaning', href: '#' },
@@ -75,6 +95,15 @@ const Navbar = () => {
     { name: 'Bathroom cleaning', href: '#' },
     { name: 'Mattress cleaning', href: '#' },
     { name: 'Spring cleaning', href: '#' },
+  ];
+
+  const pricingLinks: Links[] = [
+    { name: 'House cleaning', href: '#' },
+    { name: 'Office cleaning', href: '#' },
+    { name: 'Deep cleaning', href: '#' },
+    { name: 'End of Tenancy cleaning', href: '#' },
+    { name: 'Carpet cleaning', href: '#' },
+    { name: 'Upholstery cleaning', href: '#' },
   ];
 
   return (
@@ -132,8 +161,36 @@ const Navbar = () => {
             </div>
           </li>
 
-          <li><a href="#" className="text-gray-700 text-[16px] font-semibold hover:text-purple-700 transition duration-300 ease-in-out">Pricing</a></li>
-          <li><a href="#" className="text-gray-700 text-[16px] font-semibold hover:text-purple-700 transition duration-300 ease-in-out">Gifts</a></li>
+          {/* Our Pricing Dropdown for Desktop */}
+          <li
+            className="relative group"
+            onMouseEnter={() => setIsPricingDropdownOpen(true)} // Always set state on hover for desktop
+            onMouseLeave={() => setIsPricingDropdownOpen(false)} // Always set state on leave for desktop
+            ref={dropdownRef} // Attach ref for click outside
+          >
+            <a
+              href="#"
+              onClick={handlePricingDropdownClick} // Conditional click handling
+              className={`flex text-purple-700 text-[16px] font-semibold items-center border-b-2 border-purple-700 pb-1 transition duration-300 ease-in-out ${isPricingDropdownOpen ? 'text-purple-700' : 'hover:text-purple-700'}`}
+            >
+              Pricing
+              <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-300 ${isPricingDropdownOpen ? 'rotate-180' : ''} group-hover:rotate-180`} />
+            </a>
+            {/* Dropdown Menu Content (Desktop) */}
+            <div
+              // Removed isServicesDropdownOpen from desktop visibility logic, relying on group-hover and onMouseEnter/Leave
+              className={`absolute left-0 mt-4 bg-white shadow-lg rounded-lg p-4 min-w-[400px] grid grid-cols-2 gap-x-6 gap-y-2
+                transition-all duration-300 ease-in-out opacity-0 invisible translate-y-2
+                group-hover:opacity-100 group-hover:visible group-hover:translate-y-0`}
+            >
+              {pricingLinks.map((link, index) => (
+                <a key={index} href={link.href} className="block text-gray-700 hover:text-purple-700 whitespace-nowrap p-1 rounded-md transition duration-200">
+                  {link.name}
+                </a>
+              ))}
+            </div>
+          </li>
+          <li><a href="/giftVoucher" className="text-gray-700 text-[16px] font-semibold hover:text-purple-700 transition duration-300 ease-in-out">Gifts</a></li>
           <li><a href="#" className="text-gray-700 text-[16px] font-semibold hover:text-purple-700 transition duration-300 ease-in-out">Blog</a></li>
           <li><a href="/help" className="text-gray-700 text-[16px] font-semibold hover:text-purple-700 transition duration-300 ease-in-out">Help</a></li>
           <li><a href="#" className="text-gray-700 text-[16px] font-semibold hover:text-purple-700 transition duration-300 ease-in-out">Reclean guarantee</a></li>
@@ -178,7 +235,34 @@ const Navbar = () => {
             </div>
           </li>
 
-          <li><a onClick={toggleMobileMenu} href="#" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Pricing</a></li>
+          <li
+            className="relative group"
+            onMouseEnter={() => setIsPricingDropdownOpen(true)} // Always set state on hover for desktop
+            onMouseLeave={() => setIsPricingDropdownOpen(false)} // Always set state on leave for desktop
+            ref={dropdownRef} // Attach ref for click outside
+          >
+            <a
+              href="#"
+              onClick={handlePricingDropdownClick} // Conditional click handling
+              className={`flex text-purple-700 text-[16px] font-semibold items-center border-b-2 border-purple-700 pb-1 transition duration-300 ease-in-out ${isPricingDropdownOpen ? 'text-purple-700' : 'hover:text-purple-700'}`}
+            >
+              Pricing
+              <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-300 ${isPricingDropdownOpen ? 'rotate-180' : ''} group-hover:rotate-180`} />
+            </a>
+            {/* Dropdown Menu Content (Desktop) */}
+            <div
+              // Removed isServicesDropdownOpen from desktop visibility logic, relying on group-hover and onMouseEnter/Leave
+              className={`absolute left-0 mt-4 bg-white shadow-lg rounded-lg p-4 min-w-[400px] grid grid-cols-2 gap-x-6 gap-y-2
+                transition-all duration-300 ease-in-out opacity-0 invisible translate-y-2
+                group-hover:opacity-100 group-hover:visible group-hover:translate-y-0`}
+            >
+              {pricingLinks.map((link, index) => (
+                <a key={index} href={link.href} className="block text-gray-700 hover:text-purple-700 whitespace-nowrap p-1 rounded-md transition duration-200">
+                  {link.name}
+                </a>
+              ))}
+            </div>
+          </li>
           <li><a onClick={toggleMobileMenu} href="#" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Gifts</a></li>
           <li><a onClick={toggleMobileMenu} href="#" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Blog</a></li>
           <li><a onClick={toggleMobileMenu} href="/help" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Help</a></li>
