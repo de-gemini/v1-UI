@@ -23,6 +23,8 @@ const Emoppers = lazy(() => import("./pages/Emoppers"));
 const Clients = lazy(() => import("./pages/Clients"));
 const Become = lazy(() => import("./pages/BecomeCleaner"));
 const GiftVoucher = lazy(() => import("./pages/Gift"));
+const Reclean = lazy(() => import("./pages/Reclean"));
+
 
 function App() {
   return (
@@ -58,6 +60,11 @@ function App() {
               <Route path="/giftVoucher" element={
                 <Layout>
                   <GiftVoucher />
+                </Layout>
+                } />
+                <Route path="/reclean-guarantee" element={
+                <Layout>
+                  <Reclean />
                 </Layout>
                 } />
             </Routes>

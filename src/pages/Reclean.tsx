@@ -1,0 +1,215 @@
+
+
+import { ChevronDown, MapPin } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
+
+
+export default function Reclean() {
+
+    const [openItemId, setOpenItemId] = useState<string | null>(null);
+    
+    const [postcode, setPostcode] = useState<string>("");
+    
+    const handleQuoteMeClick = () => {
+        console.log(
+            `Getting quote for additional services with postcode: ${postcode}`
+        );
+    };
+    
+    const handleRegularQuote = (code: string) => {
+        console.log(`Regular Cleaning Quote for: ${code}`);
+      };
+    interface FAQItemData {
+        id: string;
+        question: string;
+        answer: string;
+      }
+    
+      const faqData: FAQItemData[] = [
+        {
+          id: "packages",
+          question: "What is included in eMop cleaning service?",
+          answer:
+            `You can review what is included in the cleaning here`,
+        },
+        {
+          id: "booking-reclean",
+          question: "How to book a reclean?",
+          answer:
+            "Please email us at support@emop.world or get in touch via live chat feature on our website within 48 hours of the cleaning being completed with a full description of the issues together with any supporting evidence. Our support team will review your email and get in touch with you ASAP.",
+        },
+        {
+          id: "hire-per-week",
+          question: "What is eMop complaint procedure?",
+          answer:
+            "Please read more about eMop complaints procedure here",
+        },
+      ];
+
+      const toggleFAQ = (id: string) => {
+        setOpenItemId(openItemId === id ? null : id);
+      };
+
+    return(
+        <div className="w-full min-h-screen">
+            {/* Hero Section Container */}
+      <section className="flex items-center bg-[#f7f7ff] justify-center w-full">
+        <div
+          className="absolute inset-0 z-0 bg-cover bg-center opacity-0 bg-no-repeat"
+          style={{
+            backgroundImage: `url('https://www.emop.co.uk/static/images/reclean-wave.png')`,
+            backgroundBlendMode: "multiply",
+            backgroundColor: "rgba(106, 0, 141, 0.2)",
+          }}></div>
+
+        <img
+          src="https://placehold.co/1920x1080/e0b1cb/ffffff?text=Cleaning+People+Fallback"
+          alt="Cleaning Service Staff"
+          className="absolute inset-0 z-0 object-cover w-full h-full hidden opacity-0" // Hidden, only for error handling
+          onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+            const target = e.target as HTMLImageElement;
+            target.style.opacity = "1"; // Show fallback image
+            target.style.background =
+              "linear-gradient(to bottom right, #e0b1cb, #b8c4ea)"; // Background if image fails
+            target.src = ""; // Clear src to prevent infinite loops
+            target.alt =
+              "Fallback: Image of cleaning service staff could not load.";
+          }}
+        />
+
+        {/* Content Container */}
+        <div className="relative z-10 text-left w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8">
+          <div className="w-full lg:w-1/2">
+            {/* Heading */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-purple-900 leading-tight mb-8 drop-shadow-sm">
+            Unhappy with your clean? Reclean Guarantee
+            </h1>
+
+            {/* Features List */}
+            <p className="text-brand-secondary text-[16px] font-[700] mb-5">We care about the quality of our services and offer the Reclean Guarantee to our customers. Compensation can be provided in the form of a reclean, credit to your account, complimentary future clean or free additional addons.</p>
+
+            {/* Postcode Input and Button */}
+            
+              <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+                Learn more
+                </button>
+          </div>
+
+          <div className="w-full lg:w-1/2 flex justify-center">
+            <img
+              src="https://www.emop.co.uk/static/images/reclean-employer.png"
+              alt=""
+              className="max-w-full h-auto object-contain"
+            />
+          </div>
+        </div>
+      </section>
+
+      <div className="max-w-4xl mx-auto mt-[3rem]">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-purple-900 mb-10 text-center">
+            Frequently asked questions
+          </h1>
+
+          <div className="space-y-4">
+            {faqData.map((item) => (
+              <div
+                key={item.id}
+                className="bg-[#f7f7ff] rounded-lg shadow-md overflow-hidden">
+                <button
+                  className="w-full flex justify-between items-center p-5 sm:p-6 text-left focus:outline-none bg-[#f7f7ff] hover:bg-gray-200 transition duration-300"
+                  onClick={() => toggleFAQ(item.id)}
+                  aria-expanded={openItemId === item.id}
+                  aria-controls={`faq-content-${item.id}`}>
+                  <span className="text-lg sm:text-xl font-semibold text-gray-800">
+                    {item.question}
+                  </span>
+                  <ChevronDown
+                    className={`w-6 h-6 text-gray-600 transition-transform duration-300 ${
+                      openItemId === item.id ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                <div
+                  id={`faq-content-${item.id}`}
+                  role="region"
+                  aria-labelledby={`faq-question-${item.id}`}
+                  style={{
+                    maxHeight: openItemId === item.id ? "500px" : "0", // Increased max-height for longer content
+                    opacity: openItemId === item.id ? 1 : 0,
+                    transition:
+                      "max-height 0.4s ease-in-out, opacity 0.4s ease-in-out",
+                  }}
+                  className="overflow-hidden p-5 sm:p-6 pt-0 text-gray-700" // Added pt-0 to prevent double padding top
+                >
+                  <p className="mt-4">{item.answer}</p>{" "}
+                  {/* Added mt-4 for spacing */}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* another section */}
+        <div className="max-w-4xl mx-auto bg-[#f7f7ff] mt-[4rem] px-5 py-10 rounded-lg">
+            <h1 className="text-brand-secondary text-[30px] font-[700] mb-6">Book cleaning service</h1>
+            <p className="text-[rgb(47,60,72)] text-[16px] font-[400] mb-6">Our standard cleaning service includes everything you need to get your home in order as quickly as possible. You can book additional services when you make your booking.</p>
+
+            {/* Postcode Input and Button */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-white p-2 pr-2 sm:p-3 sm:pr-3 rounded-xl shadow-lg border border-gray-200 max-w-md w-full">
+              <div className="flex items-center flex-grow p-2">
+                <MapPin className="h-6 w-6 text-gray-400 mr-3" />
+                <input
+                  type="text"
+                  placeholder="Enter your post code here"
+                  className="flex-grow text-gray-700 placeholder-gray-400 focus:outline-none text-base sm:text-lg bg-transparent"
+                  aria-label="Enter your postcode"
+                />
+              </div>
+              <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+                QUOTE ME
+              </button>
+            </div>
+
+
+        </div>
+
+        {/* Optional: More content to show page structure */}
+        <section className="w-full flex flex-col items-center justify-center mt-[4rem] md:mt-[7rem] lg:mt-[10rem] mb-[5rem]"
+        style={{
+          backgroundImage: `url('https://www.emop.co.uk/static/images/bot_cta_bg_new.png')`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+        }}
+        >
+          <h1 className="font-[700] text-[30px] md:text-[40px] lg:text-[40px] text-brand-secondary">
+          Cleaning Is No Longer <br />
+          Your Burden
+          </h1>
+
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-white p-2 pr-2 sm:p-3 sm:pr-3 rounded-xl shadow-lg border border-purple-300 max-w-md w-full">
+                <div className="flex items-center flex-grow p-2">
+                  <MapPin className="h-6 w-6 text-gray-400 mr-3 flex-shrink-0" />
+                  <input
+                    type="text"
+                    placeholder="Enter your post code here"
+                    className="flex-grow text-gray-700 placeholder-gray-400 focus:outline-none text-base sm:text-lg bg-transparent"
+                    value={postcode}
+                    onChange={(e) => setPostcode(e.target.value)}
+                    aria-label="Enter your postcode"
+                  />
+                </div>
+                <button
+                  onClick={handleQuoteMeClick}
+                  className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+                  QUOTE ME
+                </button>
+              </div>
+
+          
+
+        </section>
+
+        </div>
+    )
+};
