@@ -24,6 +24,8 @@ const Clients = lazy(() => import("./pages/Clients"));
 const Become = lazy(() => import("./pages/BecomeCleaner"));
 const GiftVoucher = lazy(() => import("./pages/Gift"));
 const Reclean = lazy(() => import("./pages/Reclean"));
+const Blog = lazy(() => import("./pages/Blog"));
+
 
 
 function App() {
@@ -67,6 +69,7 @@ function App() {
                   <Reclean />
                 </Layout>
                 } />
+              <Route path="/blog" element={<Blog />} />
             </Routes>
           </main>
         </div>
