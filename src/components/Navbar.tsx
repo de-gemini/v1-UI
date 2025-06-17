@@ -110,8 +110,10 @@ const Navbar = () => {
     <header className="relative w-full bg-white shadow-md z-50"> {/* Added z-50 to ensure navbar is on top */}
       <nav className="max-w-7xl mx-auto flex items-center justify-between py-4 px-4 md:px-6">
         {/* Logo */}
-        <a href="#" className="flex items-center">
-          <img src="https://www.emop.co.uk/static/images/152x90emop_logox2.png" alt="eMop Logo" className="w-[5rem] rounded-md" />
+        <a href="/" className="flex items-center">
+          <h1 className='text-brand-secondary trade-winds-logo text-[20px]'>
+          De Gemini Services LTD
+          </h1>
         </a>
 
         {/* Hamburger/Close Button for Mobile */}
@@ -141,7 +143,7 @@ const Navbar = () => {
             <a
               href="#"
               onClick={handleServicesDropdownClick} // Conditional click handling
-              className={`flex text-purple-700 text-[16px] font-semibold items-center border-b-2 border-purple-700 pb-1 transition duration-300 ease-in-out ${isServicesDropdownOpen ? 'text-purple-700' : 'hover:text-purple-700'}`}
+              className={`flex text-black text-[16px] font-semibold items-center transition duration-300 ease-in-out ${isServicesDropdownOpen ? 'text-brand-secondary border-b-2 border-purple-700 pb-1' : 'hover:text-brand-secondary'}`}
             >
               Our Services
               <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-300 ${isServicesDropdownOpen ? 'rotate-180' : ''} group-hover:rotate-180`} />
@@ -154,7 +156,7 @@ const Navbar = () => {
                 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0`}
             >
               {servicesLinks.map((link, index) => (
-                <a key={index} href={link.href} className="block text-gray-700 hover:text-purple-700 whitespace-nowrap p-1 rounded-md transition duration-200">
+                <a key={index} href={link.href} className="block text-gray-700 hover:text-brand-secondary whitespace-nowrap p-1 rounded-md transition duration-200">
                   {link.name}
                 </a>
               ))}
@@ -171,7 +173,7 @@ const Navbar = () => {
             <a
               href="#"
               onClick={handlePricingDropdownClick} // Conditional click handling
-              className={`flex text-purple-700 text-[16px] font-semibold items-center border-b-2 border-purple-700 pb-1 transition duration-300 ease-in-out ${isPricingDropdownOpen ? 'text-purple-700' : 'hover:text-purple-700'}`}
+              className={`flex text-black text-[16px] font-semibold items-center transition duration-300 ease-in-out ${isPricingDropdownOpen ? 'border-b-2 border-purple-700 pb-1 text-brand-secondary' : 'hover:text-brand-secondary'}`}
             >
               Pricing
               <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-300 ${isPricingDropdownOpen ? 'rotate-180' : ''} group-hover:rotate-180`} />
@@ -244,7 +246,7 @@ const Navbar = () => {
             <a
               href="#"
               onClick={handlePricingDropdownClick} // Conditional click handling
-              className={`flex text-purple-700 text-[16px] font-semibold items-center border-b-2 border-purple-700 pb-1 transition duration-300 ease-in-out ${isPricingDropdownOpen ? 'text-purple-700' : 'hover:text-purple-700'}`}
+              className={`flex text-black text-[16px] font-semibold items-center  transition duration-300 ease-in-out ${isPricingDropdownOpen ? 'border-b-2 border-purple-700 pb-1 text-brand-secondary' : 'hover:text-brand-secondary'}`}
             >
               Pricing
               <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-300 ${isPricingDropdownOpen ? 'rotate-180' : ''} group-hover:rotate-180`} />

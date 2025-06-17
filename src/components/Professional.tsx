@@ -30,7 +30,7 @@ const StarRating: React.FC<{ rating: number }> = ({ rating }) => {
   const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 
   return (
-    <div className="flex items-center text-yellow-400">
+    <div className="flex items-center text-brand-primary">
       {[...Array(fullStars)].map((_, i) => (
         <svg key={`full-${i}`} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
           <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
@@ -89,7 +89,7 @@ const ProfessionalCard: React.FC<ProfessionalCardProps> = ({ professional }) => 
         {description.length > textLimit && (
           <button
             onClick={toggleReadMore}
-            className="text-purple-600 font-semibold text-sm self-start hover:underline focus:outline-none"
+            className="text-brand-secondary font-semibold text-sm self-start hover:underline focus:outline-none"
           >
             {isExpanded ? 'See less' : 'See more'}
           </button>
@@ -104,7 +104,7 @@ export const ProfessionalsCarousel: React.FC<ProfessionalsCarouselProps> = ({ pr
   return (
     <section className="bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl sm:text-4xl font-extrabold text-purple-900 mb-8 text-center md:text-left">Meet our professionals</h2>
+        
         <Swiper
           modules={[Pagination, Navigation, A11y]}
           spaceBetween={24} // Spacing between slides

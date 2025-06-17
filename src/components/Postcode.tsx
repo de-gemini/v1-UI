@@ -30,8 +30,8 @@ export const CostCard: React.FC<CostCardProps> = ({
 
   return (
     <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center border border-gray-500 hover:border hover:border-brand-secondary transition-all duration-75">
-      <h3 className="text-2xl font-bold text-gray-800 mb-2 text-center">{title}</h3>
-      <p className="text-purple-700 text-xl font-semibold mb-6 text-center">{price}</p>
+      <h3 className="text-2xl font-bold text-brand-secondary mb-2 text-center">{title}</h3>
+      <p className="text-brand-secondary text-xl font-semibold mb-6 text-center">{price}</p>
 
       {/* Postcode Input */}
       <div className="flex items-center w-full max-w-xs bg-white border border-purple-300 rounded-lg p-3 mb-6">
@@ -49,7 +49,7 @@ export const CostCard: React.FC<CostCardProps> = ({
       
       <button
         onClick={handleQuoteClick}
-        className="w-full max-w-xs bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5"
+        className="w-full max-w-xs bg-brand-primary hover:bg-yellow-300 text-brand-secondary font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5"
       >
         {buttonText}
       </button>

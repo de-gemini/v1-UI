@@ -90,9 +90,9 @@ export default function Reclean() {
 
             {/* Postcode Input and Button */}
             
-              <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+            <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary nunito-sans-heading py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
                 Learn more
-                </button>
+              </button>
           </div>
 
           <div className="w-full lg:w-1/2 flex justify-center">
@@ -106,7 +106,7 @@ export default function Reclean() {
       </section>
 
       <div className="max-w-4xl mx-auto mt-[3rem]">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-purple-900 mb-10 text-center">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold nunito-sans-heading text-brand-secondary mb-10 text-center">
             Frequently asked questions
           </h1>
 
@@ -116,18 +116,20 @@ export default function Reclean() {
                 key={item.id}
                 className="bg-[#f7f7ff] rounded-lg shadow-md overflow-hidden">
                 <button
-                  className="w-full flex justify-between items-center p-5 sm:p-6 text-left focus:outline-none bg-[#f7f7ff] hover:bg-gray-200 transition duration-300"
+                  className="w-full flex gap-[10px] items-center p-5 sm:p-6 text-left focus:outline-none bg-[#f7f7ff] hover:bg-gray-200 transition duration-300"
                   onClick={() => toggleFAQ(item.id)}
                   aria-expanded={openItemId === item.id}
                   aria-controls={`faq-content-${item.id}`}>
-                  <span className="text-lg sm:text-xl font-semibold text-gray-800">
-                    {item.question}
-                  </span>
+                    <div className="p-4 bg-white shadow-xl rounded-[50%]">
                   <ChevronDown
                     className={`w-6 h-6 text-gray-600 transition-transform duration-300 ${
                       openItemId === item.id ? "rotate-180" : ""
                     }`}
                   />
+                    </div>
+                  <span className="text-lg sm:text-xl font-semibold text-gray-800">
+                    {item.question}
+                  </span>
                 </button>
                 <div
                   id={`faq-content-${item.id}`}
@@ -165,7 +167,7 @@ export default function Reclean() {
                   aria-label="Enter your postcode"
                 />
               </div>
-              <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+              <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary nunito-sans-heading py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
                 QUOTE ME
               </button>
             </div>
@@ -199,11 +201,9 @@ export default function Reclean() {
                     aria-label="Enter your postcode"
                   />
                 </div>
-                <button
-                  onClick={handleQuoteMeClick}
-                  className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
-                  QUOTE ME
-                </button>
+                <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary nunito-sans-heading py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+                QUOTE ME
+              </button>
               </div>
 
           

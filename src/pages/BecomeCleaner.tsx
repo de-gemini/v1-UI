@@ -184,11 +184,11 @@ export default function BecomeCleaner() {
         {/* text content */}
         <div className="flex flex-col gap-[1.2rem] px-4">
           <div className="w-[4rem] md:w-[6rem] lg:w-[10rem]">
-            <img
-              src="https://www.emop.co.uk/static/images/152x90emop_logox2.png"
-              alt="logo"
-              className="w-full"
-            />
+          <a href="/" className="flex items-center">
+          <h1 className='text-brand-secondary trade-winds-logo text-[40px]'>
+          De Gemini Services LTD
+          </h1>
+        </a>
           </div>
           <div className="flex flex-col">
             <h1 className="text-brand-secondary font-[700] text-[30px] md:text-[52px] lg:text-[82px] uppercase">
