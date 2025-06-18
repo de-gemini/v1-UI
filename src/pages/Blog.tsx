@@ -114,10 +114,10 @@ export default function Blog() {
           De Gemini Services LTD
           </h1>
         </a>
-            <button
-            className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
-            BOOK NOW
-          </button>
+        <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary nunito-sans-heading py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5"
+          >
+                BOOK NOW
+              </button>
         </div>
         <BlogCard post={featuredPost} isFeatured={true} />
       </section>
