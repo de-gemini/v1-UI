@@ -110,7 +110,7 @@ export default function Blog() {
         {/* header */}
         <div className="bg-transparent flex items-center justify-between">
         <a href="/" className="flex items-center">
-          <h1 className='text-brand-secondary trade-winds-logo text-[40px]'>
+          <h1 className='text-brand-secondary  text-[40px]'>
           De Gemini Services LTD
           </h1>
         </a>
@@ -159,7 +159,7 @@ export default function Blog() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between">
           <div className="text-center md:text-left mb-6 md:mb-0">
           <a href="/" className="flex items-center">
-          <h1 className='text-brand-secondary trade-winds-logo text-[40px]'>
+          <h1 className='text-brand-secondary  text-[40px]'>
           De Gemini Services LTD
           </h1>
         </a>

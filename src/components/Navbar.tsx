@@ -111,8 +111,8 @@ const Navbar = () => {
       <nav className="max-w-7xl mx-auto flex items-center justify-between py-4 px-4 md:px-6">
         {/* Logo */}
         <a href="/" className="flex items-center">
-          <h1 className='text-brand-secondary trade-winds-logo text-[20px]'>
-          De Gemini Services LTD
+          <h1 className='text-brand-secondary  text-[20px]'>
+            De<span className="font-semibold" >Gemini</span> 
           </h1>
         </a>
 
