@@ -256,7 +256,7 @@ If you are not home at the end of cleaning it might be more difficult to prove t
 
     <div className=" w-[4rem] md:w-[5rem] lg:w-[7rem]">
     <a href="/" className="flex items-center">
-          <h1 className='text-brand-secondary trade-winds-logo text-[40px]'>
+          <h1 className='text-brand-secondary  text-[40px]'>
           De Gemini Services LTD
           </h1>
         </a>
@@ -403,7 +403,7 @@ If you are not home at the end of cleaning it might be more difficult to prove t
                 {/* Column 1: Logo (Left aligned on desktop) */}
                 <div className="lg:col-span-1 flex justify-center md:justify-start">
                 <a href="/" className="flex items-center">
-          <h1 className='text-brand-secondary trade-winds-logo text-[40px]'>
+          <h1 className='text-brand-secondary  text-[40px]'>
           De Gemini Services LTD
           </h1>
         </a>

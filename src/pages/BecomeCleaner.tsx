@@ -185,7 +185,7 @@ export default function BecomeCleaner() {
         <div className="flex flex-col gap-[1.2rem] px-4">
           <div className="w-[4rem] md:w-[6rem] lg:w-[10rem]">
           <a href="/" className="flex items-center">
-          <h1 className='text-brand-secondary trade-winds-logo text-[40px]'>
+          <h1 className='text-brand-secondary  text-[40px]'>
           De Gemini Services LTD
           </h1>
         </a>
