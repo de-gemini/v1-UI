@@ -109,13 +109,15 @@ export default function Blog() {
       <section className="py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         {/* header */}
         <div className="bg-transparent flex items-center justify-between">
-        <h2 className="text-4xl font-extrabold text-purple-900 mb-2">
-            <img src="https://www.emop.co.uk/static/images/152x90emop_logox2.png" alt="eMop Logo" className="w-24 mb-4 inline" /> <span className="font-extralight text-brand-primary tracking-[1rem]">BLOG</span>
-            </h2>
-            <button
-            className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
-            BOOK NOW
-          </button>
+        <a href="/" className="flex items-center">
+          <h1 className='text-brand-secondary trade-winds-logo text-[40px]'>
+          De Gemini Services LTD
+          </h1>
+        </a>
+        <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary nunito-sans-heading py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5"
+          >
+                BOOK NOW
+              </button>
         </div>
         <BlogCard post={featuredPost} isFeatured={true} />
       </section>
@@ -156,9 +158,11 @@ export default function Blog() {
       <section className="bg-white py-12 px-4 sm:px-6 lg:px-8 border-b border-gray-200">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between">
           <div className="text-center md:text-left mb-6 md:mb-0">
-            <h2 className="text-4xl font-extrabold text-purple-900 mb-2">
-            <img src="https://www.emop.co.uk/static/images/152x90emop_logox2.png" alt="eMop Logo" className="w-24 mb-4 inline" /> <span className="font-extralight text-brand-primary tracking-[1rem]">BLOG</span>
-            </h2>
+          <a href="/" className="flex items-center">
+          <h1 className='text-brand-secondary trade-winds-logo text-[40px]'>
+          De Gemini Services LTD
+          </h1>
+        </a>
             <p className="text-gray-600 text-lg">
             Welcome to the blog from eMop - the best cleaning company in London
             </p>
@@ -203,11 +207,11 @@ export default function Blog() {
               aria-label="Enter your postcode"
             />
           </div>
-          <button
-            onClick={handleQuoteMeClick}
-            className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
-            QUOTE ME
-          </button>
+          <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary nunito-sans-heading py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5"
+          onClick={handleQuoteMeClick}
+          >
+                QUOTE ME
+              </button>
         </div>
       </section>
 

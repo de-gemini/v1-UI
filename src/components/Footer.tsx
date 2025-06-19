@@ -79,7 +79,9 @@ export const Footer: React.FC = () => {
         {/* Column 4 (combined from screenshot): Logo, App Downloads, Social Media */}
         <div className="md:col-span-2 lg:col-span-2 flex flex-col items-center md:items-start lg:items-end text-center md:text-left lg:text-right">
           {/* Logo */}
-          <img src="https://www.emop.co.uk/static/images/152x90emop_logox2.png" alt="eMop Logo" className="w-24 mb-4" />
+          <h1 className='text-brand-secondary trade-winds-logo text-[40px]'>
+          De Gemini Services LTD
+          </h1>
           
           <p className="font-bold text-lg mb-4 text-brand-secondary">CLEANING AVAILABLE 24/7</p>
 
@@ -109,7 +111,7 @@ export const Footer: React.FC = () => {
       {/* Floating Call Button */}
       <a 
         href="tel:+1234567890" // Replace with actual phone number
-        className="fixed bottom-6 right-6 md:bottom-10 md:right-10 bg-purple-600 hover:bg-purple-700 text-white rounded-full p-4 shadow-lg transition duration-300 ease-in-out transform hover:scale-110 z-50"
+        className="fixed bottom-6 right-6 md:bottom-10 md:right-10 bg-brand-primary hover:bg-purple-700 text-brand-secondary rounded-full p-4 shadow-lg transition duration-300 ease-in-out transform hover:scale-110 z-50"
         aria-label="Call us"
       >
         <Phone className="h-7 w-7" />

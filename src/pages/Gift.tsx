@@ -99,7 +99,7 @@ export default function GiftVouch() {
 
   const renderSectionHeader = (title: string, icon?: React.ElementType) => (
     <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 flex items-center">
-      {icon && React.createElement(icon, { className: "w-7 h-7 text-purple-600 mr-3" })}
+      {icon && React.createElement(icon, { className: "w-7 h-7 text-brand-secondary mr-3" })}
       {title}
     </h2>
   );
@@ -119,16 +119,16 @@ export default function GiftVouch() {
 
 <div className="w-full flex flex-col gap-[10px] items-start justify-start px-4">
   <div className="">
-    <h1 className="text-brand-secondary text-[48px] font-[800]">Gift Vouchers</h1>
+    <h1 className="text-brand-secondary nunito-sans-heading text-[48px] font-[800]">Gift Vouchers</h1>
     <p className="text-[rgb(80,96,107)] text-[20px] font-[400]">Bespoke cleaning services for your home</p>
   </div>
 
-  <h1 className='text-brand-secondary text-[42px] md:text-[60px] lg:text-[72px] font-[800]'>Make someone smile today</h1>
+  <h1 className='text-brand-secondary text-[42px] nunito-sans-title md:text-[60px] lg:text-[72px] font-[800]'>Make someone smile today</h1>
 
 </div>
   <div className="font-sans antialiased py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto p-8 sm:p-10 lg:p-12">
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-800 mb-10 text-center">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-secondary mb-10 text-center">
           Choose your voucher amount:
         </h1>
 
@@ -300,7 +300,7 @@ export default function GiftVouch() {
             <div className="lg:w-1/2 flex flex-col justify-between items-center lg:items-end">
               <div className="text-right mb-8 lg:mb-0">
                 <p className="text-3xl sm:text-4xl font-bold text-gray-800">
-                  Total amount: <span className="text-purple-700">£{selectedAmount}.00</span>
+                  Total amount: <span className="text-brand-secondary">£{selectedAmount}.00</span>
                 </p>
               </div>
 
@@ -315,7 +315,7 @@ export default function GiftVouch() {
                   />
                   <span className="ml-2 text-sm sm:text-base">
                     I agree with the{' '}
-                    <a href="#" className="text-purple-700 font-semibold hover:underline">
+                    <a href="#" className="text-brand-secondary font-semibold hover:underline">
                       Terms & Conditions
                     </a>
                   </span>

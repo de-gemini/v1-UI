@@ -184,11 +184,11 @@ export default function BecomeCleaner() {
         {/* text content */}
         <div className="flex flex-col gap-[1.2rem] px-4">
           <div className="w-[4rem] md:w-[6rem] lg:w-[10rem]">
-            <img
-              src="https://www.emop.co.uk/static/images/152x90emop_logox2.png"
-              alt="logo"
-              className="w-full"
-            />
+          <a href="/" className="flex items-center">
+          <h1 className='text-brand-secondary trade-winds-logo text-[40px]'>
+          De Gemini Services LTD
+          </h1>
+        </a>
           </div>
           <div className="flex flex-col">
             <h1 className="text-brand-secondary font-[700] text-[30px] md:text-[52px] lg:text-[82px] uppercase">
@@ -245,7 +245,7 @@ export default function BecomeCleaner() {
       <div className="font-sans antialiased bg-white min-h-screen py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="max-w-6xl mx-auto text-center">
           {/* Main Heading and Subheading */}
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-800 mb-4">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-secondary mb-4">
             TO GET YOU STARTED
           </h1>
           <p className="text-xl sm:text-2xl text-gray-600 mb-12">
@@ -272,13 +272,13 @@ export default function BecomeCleaner() {
                   className={`relative w-40 h-40 bg-[#f2f3f5] hover:bg-[#fcdb00] sm:w-48 sm:h-48 rounded-full flex items-center justify-center transition-colors duration-300
                             ${
                               openTooltipId === step.id
-                                ? "bg-[#fcdb00]"
+                                ? "bg-brand-primary"
                                 : "bg-gray-100 group-hover:bg-purple-50 group-hover:border-purple-300"
                             }`}>
                   {/* Plus/X Icon on Top Right */}
                   <button
                     onClick={() => toggleTooltip(step.id)}
-                    className="absolute top-2 right-2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-purple-600 text-white flex items-center justify-center z-10 shadow-md transition-all duration-200 hover:bg-purple-700"
+                    className="absolute top-2 right-2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-brand-secondary text-white flex items-center justify-center z-10 shadow-md transition-all duration-200 hover:bg-purple-700"
                     aria-label={
                       openTooltipId === step.id ? "Close info" : "Open info"
                     }>
@@ -293,21 +293,21 @@ export default function BecomeCleaner() {
                   <img
                     src={step.mainIcon}
                     alt="iocn"
-                    className="text-purple-700"
+                    className="text-brand-secondary"
                   />
                 </div>
 
                 {/* Tooltip/Content that appears on click */}
                 {step.tooltipContent && (
                   <div
-                    className={`absolute bottom-[90%] left-1/2 -translate-x-1/2 mt-4 w-64 p-4 bg-purple-700 text-white text-sm rounded-lg shadow-lg z-20
+                    className={`absolute bottom-[90%] left-1/2 -translate-x-1/2 mt-4 w-64 p-4 bg-brand-secondary text-white text-sm rounded-lg shadow-lg z-20
                               transform transition-all duration-300 ease-in-out origin-top
                               ${
                                 openTooltipId === step.id
                                   ? "scale-y-100 opacity-100 visible"
                                   : "scale-y-0 opacity-0 invisible"
                               }`}>
-                    <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-b-purple-700"></div>
+                    <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-b-brand-secondary"></div>
                     {step.tooltipContent}
                   </div>
                 )}
@@ -335,7 +335,7 @@ export default function BecomeCleaner() {
 
             {/* Right Section: Text Content */}
             <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center bg-yellow-50">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-purple-900 mb-4">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-secondary mb-4">
                 REQUIREMENTS
               </h1>
               <p className="text-lg sm:text-xl text-gray-700 mb-8">
@@ -347,13 +347,13 @@ export default function BecomeCleaner() {
                   <li key={index}>
                     {typeof item === "string" ? (
                       <div className="flex items-start">
-                        <Check className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-1" />
+                        <Check className="w-5 h-5 text-brand-primary mr-3 flex-shrink-0 mt-1" />
                         <span className="text-base sm:text-lg">{item}</span>
                       </div>
                     ) : (
                       <div className="flex flex-col">
                         <div className="flex items-start mb-2">
-                          <Check className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-1" />
+                          <Check className="w-5 h-5 text-brand-primary mr-3 flex-shrink-0 mt-1" />
                           <span className="text-base sm:text-lg">
                             {item.text}
                           </span>
@@ -390,7 +390,7 @@ export default function BecomeCleaner() {
             <div className="flex justify-center mb-12">
               <button
                 onClick={() => setActiveTab("before")}
-                className={`px-8 py-3 rounded-l-full border-2 border-purple-700 font-semibold text-lg transition-all duration-300
+                className={`px-8 py-3 rounded-l-full border-2 border- font-semibold text-lg transition-all duration-300
                         ${
                           activeTab === "before"
                             ? "bg-brand-secondary text-white shadow-md"

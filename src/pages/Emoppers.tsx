@@ -195,7 +195,11 @@ export default function Emoppers() {
 
 
 <div className=" w-[4rem] md:w-[5rem] lg:w-[7rem]">
-    <img src="https://www.emop.co.uk/help/wp-content/uploads/2019/08/152x90emop_logox2.png" alt="logo" className="w-full h-auto object-cover" />
+<a href="/" className="flex items-center">
+          <h1 className='text-brand-secondary trade-winds-logo text-[40px]'>
+          De Gemini Services LTD
+          </h1>
+        </a>
 </div>
 
 
@@ -338,11 +342,11 @@ export default function Emoppers() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-y-10 gap-x-8 w-full text-center md:text-left">
             {/* Column 1: Logo (Left aligned on desktop) */}
             <div className="lg:col-span-1 flex justify-center md:justify-start">
-              <img
-                src="https://www.emop.co.uk/static/images/152x90emop_logox2.png"
-                alt="eMop Logo"
-                className=""
-              />
+            <a href="/" className="flex items-center">
+          <h1 className='text-brand-secondary trade-winds-logo text-[40px]'>
+          De Gemini Services LTD
+          </h1>
+        </a>
             </div>
 
             {/* Column 2: FOR CUSTOMERS */}

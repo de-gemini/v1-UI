@@ -352,7 +352,7 @@ const Home = () => {
         <div className="relative z-10 text-left w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8">
           <div className="w-full lg:w-1/2">
             {/* Heading */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-purple-900 leading-tight mb-8 drop-shadow-sm">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl nunito-sans-title text-brand-secondary leading-tight mb-8 drop-shadow-sm">
               Best Cleaning
               <br />
               Services In London
@@ -362,8 +362,8 @@ const Home = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-8 mb-10">
               {features.map((feature, index) => (
                 <div key={index} className="flex items-center text-purple-800">
-                  <Check className="h-6 w-6 text-green-500 mr-3 flex-shrink-0" />
-                  <span className="text-lg sm:text-xl font-medium">
+                  <Check className="h-6 w-6 text-brand-primary mr-3 flex-shrink-0" />
+                  <span className="text-lg sm:text-xl nunito-sans-text text-brand-secondary">
                     {feature}
                   </span>
                 </div>
@@ -381,7 +381,7 @@ const Home = () => {
                   aria-label="Enter your postcode"
                 />
               </div>
-              <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+              <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary nunito-sans-heading py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
                 QUOTE ME
               </button>
             </div>
@@ -405,15 +405,15 @@ const Home = () => {
         }}>
         <div className="py-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-5xl mx-auto text-left">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-purple-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-extrabold nunito-sans-heading text-brand-secondary mb-4">
               Trusted service
             </h2>
             <p className="text-xl sm:text-2xl text-gray-700 flex items-center">
               See our{" "}
-              <span className="font-bold text-purple-800 ml-2">1,268</span>{" "}
+              <span className="font-bold text-brand-secondary ml-2">1,268</span>{" "}
               reviews on
-              <span className="inline-flex items-center ml-3 text-green-600 font-bold">
-                <Star className="h-6 w-6 fill-current text-green-500 mr-1" />{" "}
+              <span className="inline-flex items-center ml-3 text-brand-primary nunito-sans-heading">
+                <Star className="h-6 w-6 fill-current text-brand-primary  mr-1" />{" "}
                 {/* Filled star icon */}
                 Trustpilot
               </span>
@@ -422,7 +422,7 @@ const Home = () => {
         </div>
 
         <div className="font-sans antialiased bg-gray-50 min-h-screen">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-purple-900 text-center py-10">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-secondary text-center py-10">
             Our Featured Services
           </h2>
           <ServiceCarousel services={serviceData} />
@@ -432,7 +432,7 @@ const Home = () => {
 
       {/* Post code section */}
       <section className="font-sans antialiased bg-gray-50 py-4 px-4 sm:px-6 lg:px-8">
-        <h1 className="text-[30px] font-[700] text-gray-800 mb-8 md:mb-12">
+        <h1 className="text-[30px] font-[700] text-brand-secondary nunito-sans-heading mb-8 md:mb-12">
           How much does a house cleaner cost in London
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mt-4">
@@ -464,28 +464,28 @@ const Home = () => {
         <HowItWorksSection />
       </section>
 
-      <h1 className="text-center text-brand-secondary text-[32px] font-[800] mb-5">
+      <h1 className="text-center text-brand-secondary nunito-sans-heading text-[32px] font-[800] mb-5">
         What is included in eMop cleaning?
       </h1>
       {/* Service list section */}
       <div className="max-w-7xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden md:flex">
         {/* Left Section: Text Content */}
         <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-          <div className="flex items-center text-purple-800 mb-6">
-            <Sofa className="w-8 h-8 mr-3 text-purple-600" />
-            <h2 className="text-xl sm:text-2xl font-bold">
+          <div className="flex items-center text-brand-secondary mb-6">
+            <Sofa className="w-8 h-8 mr-3 text-brand-secondary" />
+            <h2 className="text-xl sm:text-2xl font-bold nunito-sans-heading">
               Bedroom, living, dining, office rooms
             </h2>
           </div>
 
-          <p className="text-gray-700 text-base sm:text-lg mb-6">
+          <p className="text-gray-700 nunito-sans-text text-base sm:text-lg mb-6">
             Our cleaning London services include:
           </p>
 
           <ul className="text-gray-700 space-y-2 mb-6">
             {displayedServices.map((service, index) => (
               <li key={index} className="flex items-start">
-                <span className="flex-shrink-0 mr-3 text-purple-600">
+                <span className="flex-shrink-0 mr-3 text-brand-secondary">
                   <svg
                     className="w-4 h-4 mt-1"
                     fill="currentColor"
@@ -502,7 +502,7 @@ const Home = () => {
           {allCleaningServices.length > initialItemsToShow && (
             <button
               onClick={() => setShowAll(!showAll)}
-              className="text-purple-600 font-semibold text-left self-start hover:underline focus:outline-none">
+              className="text-brand-secondary font-semibold text-left self-start hover:underline focus:outline-none">
               {showAll ? "See less" : "See more"}
             </button>
           )}
@@ -542,19 +542,19 @@ const Home = () => {
 
         {/* Right Section: Image */}
         <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-          <div className="flex items-center text-purple-800 mb-6">
+          <div className="flex items-center text-brand-secondary nunito-sans-heading mb-6">
             <img src="https://www.emop.co.uk/img/bedroom-icon.svg" alt="" />
             <h2 className="text-xl sm:text-2xl font-bold">Halls and stairs</h2>
           </div>
 
-          <p className="text-gray-700 text-base sm:text-lg mb-6">
+          <p className="text-gray-700 text-base nunito-sans-text sm:text-lg mb-6">
             Our cleaning London services include:
           </p>
 
           <ul className="text-gray-700 space-y-2 mb-6">
             {displayedServicesForHall.map((service, index) => (
               <li key={index} className="flex items-start">
-                <span className="flex-shrink-0 mr-3 text-purple-600">
+                <span className="flex-shrink-0 mr-3 text-brand-secondary">
                   <svg
                     className="w-4 h-4 mt-1"
                     fill="currentColor"
@@ -571,7 +571,7 @@ const Home = () => {
           {allCleaningServices.length > initialItemsToShow && (
             <button
               onClick={() => setShowAll(!showAll)}
-              className="text-purple-600 font-semibold text-left self-start hover:underline focus:outline-none">
+              className="text-brand-secondary font-semibold text-left self-start hover:underline focus:outline-none">
               {showAll ? "See less" : "See more"}
             </button>
           )}
@@ -581,12 +581,12 @@ const Home = () => {
       <div className="max-w-7xl mx-auto bg-white rounded-lg mt-4 shadow-lg overflow-hidden md:flex">
         {/* Left Section: Text Content */}
         <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-          <div className="flex items-center text-purple-800 mb-6">
+          <div className="flex items-center text-brand-secondary mb-6">
             <img
               src="https://www.emop.co.uk/img/kitchen-icon.svg"
               className="w-8 h-8 mr-3"
             />
-            <h2 className="text-xl sm:text-2xl font-bold">Kitchen</h2>
+            <h2 className="text-xl sm:text-2xl font-bold nunito-sans-heading">Kitchen</h2>
           </div>
 
           <p className="text-gray-700 text-base sm:text-lg mb-6">
@@ -598,7 +598,7 @@ const Home = () => {
           <ul className="text-gray-700 space-y-2 mb-6">
             {displayedServicesForKitchen.map((service, index) => (
               <li key={index} className="flex items-start">
-                <span className="flex-shrink-0 mr-3 text-purple-600">
+                <span className="flex-shrink-0 mr-3 text-brand-secondary">
                   <svg
                     className="w-4 h-4 mt-1"
                     fill="currentColor"
@@ -615,7 +615,7 @@ const Home = () => {
           {kitchen.length > initialItemsForKitchen && (
             <button
               onClick={() => setShowAll(!showAll)}
-              className="text-purple-600 font-semibold text-left self-start hover:underline focus:outline-none">
+              className="text-brand-secondary font-semibold text-left self-start hover:underline focus:outline-none">
               {showAll ? "See less" : "See more"}
             </button>
           )}
@@ -655,12 +655,12 @@ const Home = () => {
 
         {/* Right Section: Image */}
         <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-          <div className="flex items-center text-purple-800 mb-6">
+          <div className="flex items-center text-brand-secondary mb-6">
             <img src="https://www.emop.co.uk/img/bathroom-icon.svg" alt="" />
             <h2 className="text-xl sm:text-2xl font-bold">Bathroom</h2>
           </div>
 
-          <p className="text-gray-700 text-base sm:text-lg mb-6">
+          <p className="text-gray-700 text-base nunito-sans-text sm:text-lg mb-6">
             Bathrooms require regular and meticulous servicing to maintain a
             sanitary space. So, our cleaners come with all the necessary
             equipment to clean yours perfectly.
@@ -669,7 +669,7 @@ const Home = () => {
           <ul className="text-gray-700 space-y-2 mb-6">
             {displayedServicesForBathroom.map((service, index) => (
               <li key={index} className="flex items-start">
-                <span className="flex-shrink-0 mr-3 text-purple-600">
+                <span className="flex-shrink-0 mr-3 text-brand-secondary">
                   <svg
                     className="w-4 h-4 mt-1"
                     fill="currentColor"
@@ -686,7 +686,7 @@ const Home = () => {
           {bathroom.length > initialItemsForBathroom && (
             <button
               onClick={() => setShowAll(!showAll)}
-              className="text-purple-600 font-semibold text-left self-start hover:underline focus:outline-none">
+              className="text-brand-secondary font-semibold text-left self-start hover:underline focus:outline-none">
               {showAll ? "See less" : "See more"}
             </button>
           )}
@@ -696,15 +696,15 @@ const Home = () => {
       <div className="max-w-7xl mx-auto bg-white rounded-lg mt-4 shadow-lg overflow-hidden md:flex">
         {/* Left Section: Text Content */}
         <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-          <div className="flex items-center text-purple-800 mb-6">
+          <div className="flex items-center text-brand-secondary mb-6">
             <img
               src="https://www.emop.co.uk/img/kitchen-icon.svg"
               className="w-8 h-8 mr-3"
             />
-            <h2 className="text-xl sm:text-2xl font-bold">Kitchen</h2>
+            <h2 className="text-xl sm:text-2xl font-bold nunito-sans-heading">Kitchen</h2>
           </div>
 
-          <p className="text-gray-700 text-base sm:text-lg mb-6">
+          <p className="text-gray-700 text-base sm:text-lg mb-6 nunito-sans-text">
             As you know, the kitchen is one of the most difficult rooms to clean
             in a London house. So, here are all the tasks we perform in the
             kitchen.
@@ -713,7 +713,7 @@ const Home = () => {
           <ul className="text-gray-700 space-y-2 mb-6">
             {displayedServicesForOffice.map((service, index) => (
               <li key={index} className="flex items-start">
-                <span className="flex-shrink-0 mr-3 text-purple-600">
+                <span className="flex-shrink-0 mr-3 text-brand-secondary">
                   <svg
                     className="w-4 h-4 mt-1"
                     fill="currentColor"
@@ -730,7 +730,7 @@ const Home = () => {
           {office.length > initialItemsForOffice && (
             <button
               onClick={() => setShowAll(!showAll)}
-              className="text-purple-600 font-semibold text-left self-start hover:underline focus:outline-none">
+              className="text-brand-secondary font-semibold text-left self-start hover:underline focus:outline-none">
               {showAll ? "See less" : "See more"}
             </button>
           )}
@@ -771,7 +771,7 @@ const Home = () => {
 
       {/* Professionals */}
       <section className="w-full px-4">
-        <h1 className="text-start ml-[3rem] text-brand-secondary text-[30px] font-[700]">
+        <h1 className="text-start ml-[3rem] text-brand-secondary nunito-sans-heading text-[30px] font-[700]">
           Meet our Professionals
         </h1>
         <ProfessionalsCarousel professionals={dummyProfessionals} />
@@ -791,10 +791,10 @@ const Home = () => {
               />
             </div>
 
-            <h1 className="text-brand-secondary text-[24px]">
+            <h1 className="text-brand-secondary nunito-sans-heading text-[24px]">
               24/7 Availability
             </h1>
-            <p className="text-center">
+            <p className="text-center nunito-sans-text">
               Pick a date and time that suits you. You can even book for same
               day cleaning, 4 hours in advance
             </p>
@@ -809,12 +809,11 @@ const Home = () => {
               />
             </div>
 
-            <h1 className="text-brand-secondary text-[24px]">
-              24/7 Availability
+            <h1 className="text-brand-secondary nunito-sans-heading text-[24px]">
+            Bespoke Service
             </h1>
-            <p className="text-center">
-              Pick a date and time that suits you. You can even book for same
-              day cleaning, 4 hours in advance
+            <p className="text-center nunito-sans-text">
+            You can choose which rooms you wish us to clean and book only the services you need.
             </p>
           </div>
 
@@ -827,12 +826,11 @@ const Home = () => {
               />
             </div>
 
-            <h1 className="text-brand-secondary text-[24px]">
-              24/7 Availability
+            <h1 className="text-brand-secondary nunito-sans-heading text-[24px]">
+            Pay as You Go
             </h1>
-            <p className="text-center">
-              Pick a date and time that suits you. You can even book for same
-              day cleaning, 4 hours in advance
+            <p className="text-center nunito-sans-text">
+            We charge clients only for the actual time a cleaner spends at your property.
             </p>
           </div>
 
@@ -845,12 +843,11 @@ const Home = () => {
               />
             </div>
 
-            <h1 className="text-brand-secondary text-[24px]">
-              24/7 Availability
+            <h1 className="text-brand-secondary nunito-sans-heading text-[24px]">
+            Last minute cleaning
             </h1>
-            <p className="text-center">
-              Pick a date and time that suits you. You can even book for same
-              day cleaning, 4 hours in advance
+            <p className="text-center nunito-sans-text">
+            Need urgent cleaning? You can make a booking 4 hours in advance.
             </p>
           </div>
         </div>
@@ -868,10 +865,10 @@ const Home = () => {
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Section: Text and Input */}
             <div className="flex flex-col justify-center">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-purple-900 mb-6">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold nunito-sans-heading text-brand-secondary mb-6">
                 Additional domestic cleaning services
               </h1>
-              <p className="text-gray-700 text-base sm:text-lg mb-8 leading-relaxed">
+              <p className="text-gray-700 text-base sm:text-lg mb-8 nunito-sans-text leading-relaxed">
                 For advanced cleaning, you can add more services when booking.
                 Most extra cleaning add-ons add half an hour to the cleaning
                 time of your booking.
@@ -892,7 +889,7 @@ const Home = () => {
                 </div>
                 <button
                   onClick={handleQuoteMeClick}
-                  className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+                  className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
                   QUOTE ME
                 </button>
               </div>
@@ -912,10 +909,10 @@ const Home = () => {
                     <img
                       src={service.icon}
                       alt="image"
-                      className="w-12 h-12 sm:w-16 sm:h-16 text-purple-600 relative z-10"
+                      className="w-12 h-12 sm:w-16 sm:h-16 text-brand-secondary relative z-10"
                     />
                   </div>
-                  <p className="text-gray-700 font-semibold text-sm sm:text-base">
+                  <p className="text-gray-700 font-semibold text-sm nunito-sans-heading sm:text-base">
                     {service.title}
                   </p>
                 </div>
@@ -943,7 +940,7 @@ const Home = () => {
 
             {/* Right Section: Image */}
             <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-              <p className="text-gray-700 text-base sm:text-lg mb-6 leading-relaxed">
+              <p className="text-gray-700 text-base sm:text-lg mb-6 nunito-sans-text leading-relaxed">
                 eMop is a professional cleaning company that operates in London
                 and other UK cities. We offer a wide range of cleaning services
                 London, including regular, one-off deep clean, and
@@ -962,11 +959,11 @@ const Home = () => {
           <div className="max-w-7xl mx-auto bg-white rounded-lg overflow-hidden md:flex mb-6">
             {/* Left Section: Text Content */}
             <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-purple-900 mb-6">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold nunito-sans-heading text-brand-secondary mb-6">
                 Reliable Experts in London
               </h1>
 
-              <p className="text-gray-700 text-base sm:text-lg mb-6 leading-relaxed">
+              <p className="text-gray-700 text-base sm:text-lg mb-6 nunito-sans-text leading-relaxed">
                 If you're looking for reliable house cleaning services in
                 London, eMop is an excellent option. We offer our customers a
                 wide range of house cleaning solutions, and we're always looking
@@ -977,7 +974,7 @@ const Home = () => {
               <ul className="text-gray-700 space-y-2 mb-4">
                 {displayedFeatures.map((feature, index) => (
                   <li key={index} className="flex items-start">
-                    <span className="flex-shrink-0 mr-3 text-purple-600">
+                    <span className="flex-shrink-0 mr-3 nunito-sans-text text-brand-secondary">
                       {/* Purple square-like bullet, using a simple SVG or a div */}
                       <svg
                         className="w-3 h-3 mt-1.5"
@@ -1002,7 +999,7 @@ const Home = () => {
               {allFeatures.length > initialFeaturesToShow && (
                 <button
                   onClick={toggleFeaturesVisibility}
-                  className="text-purple-600 font-semibold text-left self-start hover:underline focus:outline-none">
+                  className="text-brand-secondary font-semibold text-left self-start hover:underline focus:outline-none">
                   {showAllFeatures
                     ? "See less"
                     : `${allFeatures.length - initialFeaturesToShow} more`}
@@ -1044,10 +1041,10 @@ const Home = () => {
 
             {/* Right Section: Image */}
             <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-              <h1 className="text-[20px] font-[700] text-brand-secondary mb-3">
+              <h1 className="text-[20px] font-[700] text-brand-secondary nunito-sans-heading mb-3">
                 A Cleaning Service that Cares for Your Home
               </h1>
-              <p className="text-gray-700 text-base sm:text-lg mb-6 leading-relaxed">
+              <p className="text-gray-700 text-base sm:text-lg nunito-sans-text mb-6 leading-relaxed">
                 Every house service is unique, which is why our employees are
                 encouraged to take a personalised approach. Besides, different
                 clients require different service packages, and fully satisfying
@@ -1067,11 +1064,11 @@ const Home = () => {
           <div className="max-w-7xl mx-auto bg-white rounded-lg overflow-hidden md:flex mb-6">
             {/* Left Section: Text Content */}
             <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-              <h1 className="text-[20px] sm:text-[20px] lg:text-[40px] font-[700] text-purple-900 mb-6">
+              <h1 className="text-[20px] sm:text-[20px] lg:text-[40px] font-[700] text-brand-secondary nunito-sans-heading mb-6">
                 Appreciate the Benefits of Domestic Cleaners
               </h1>
 
-              <p className="text-gray-700 text-base sm:text-lg mb-6 leading-relaxed">
+              <p className="text-gray-700 text-base sm:text-lg mb-6 nunito-sans-text leading-relaxed">
                 If you're looking for reliable house cleaning services in
                 London, eMop is an excellent option. We offer our customers a
                 wide range of house cleaning solutions, and we're always looking
@@ -1082,7 +1079,7 @@ const Home = () => {
               <ul className="text-gray-700 space-y-2 mb-4">
                 {displayedFeatures.map((feature, index) => (
                   <li key={index} className="flex items-start">
-                    <span className="flex-shrink-0 mr-3 text-purple-600">
+                    <span className="flex-shrink-0 mr-3 text-brand-secondary">
                       {/* Purple square-like bullet, using a simple SVG or a div */}
                       <svg
                         className="w-3 h-3 mt-1.5"
@@ -1107,7 +1104,7 @@ const Home = () => {
               {allFeatures.length > initialFeaturesToShow && (
                 <button
                   onClick={toggleFeaturesVisibility}
-                  className="text-purple-600 font-semibold text-left self-start hover:underline focus:outline-none">
+                  className="text-brand-secondary font-semibold text-left self-start hover:underline focus:outline-none">
                   {showAllFeatures
                     ? "See less"
                     : `${allFeatures.length - initialFeaturesToShow} more`}
@@ -1149,7 +1146,7 @@ const Home = () => {
 
             {/* Right Section: Image */}
             <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-              <p className="text-gray-700 text-base sm:text-lg mb-6 leading-relaxed">
+              <p className="text-gray-700 text-base nunito-sans-text sm:text-lg mb-6 leading-relaxed">
                 Working people need to take care of multiple tasks every single
                 day. As a result, cleaning becomes a lower priority, and this
                 can lead to a dirty and/or disorganised home. To avoid that,
@@ -1168,7 +1165,7 @@ const Home = () => {
       {/* FAQ */}
       <div className="font-sans antialiased bg-gray-50 min-h-screen py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-purple-900 mb-10 text-center">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold nunito-sans-heading text-brand-secondary mb-10 text-center">
             Frequently asked questions
           </h1>
 
@@ -1178,18 +1175,20 @@ const Home = () => {
                 key={item.id}
                 className="bg-[#f7f7ff] rounded-lg shadow-md overflow-hidden">
                 <button
-                  className="w-full flex justify-between items-center p-5 sm:p-6 text-left focus:outline-none bg-[#f7f7ff] hover:bg-gray-200 transition duration-300"
+                  className="w-full flex gap-[10px] items-center p-5 sm:p-6 text-left focus:outline-none bg-[#f7f7ff] hover:bg-gray-200 transition duration-300"
                   onClick={() => toggleFAQ(item.id)}
                   aria-expanded={openItemId === item.id}
                   aria-controls={`faq-content-${item.id}`}>
-                  <span className="text-lg sm:text-xl font-semibold text-gray-800">
-                    {item.question}
-                  </span>
+                    <div className="p-4 bg-white shadow-xl rounded-[50%]">
                   <ChevronDown
                     className={`w-6 h-6 text-gray-600 transition-transform duration-300 ${
                       openItemId === item.id ? "rotate-180" : ""
                     }`}
                   />
+                    </div>
+                  <span className="text-lg sm:text-xl font-semibold text-gray-800">
+                    {item.question}
+                  </span>
                 </button>
                 <div
                   id={`faq-content-${item.id}`}
@@ -1239,7 +1238,7 @@ const Home = () => {
                 </div>
                 <button
                   onClick={handleQuoteMeClick}
-                  className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+                  className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
                   QUOTE ME
                 </button>
               </div>

@@ -44,17 +44,17 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, isFeatured = false }) 
           />
         </div>
       )}
-      <div className={`p-5 flex flex-col border border-l-brand-primary border-r-brand-primary ${isFeatured ? 'lg:w-1/2' : 'flex-grow'}`}>
-        <p className="text-brand-primary text-xs font-semibold uppercase mb-2">
+      <div className={`p-5 flex flex-col bg-brand-primary border border-l-brand-primary border-r-brand-primary ${isFeatured ? 'lg:w-1/2' : 'flex-grow'}`}>
+        <p className="text-white nunito-sans-text text-xs font-semibold uppercase mb-2">
           {post.date} &bull; {post.category}
         </p>
         <h3 className={`font-bold text-brand-secondary mb-3 ${isFeatured ? 'text-2xl lg:text-3xl' : 'text-lg lg:text-xl'}`}>
           {post.title}
         </h3>
-        <p className={`text-brand-primary ${isFeatured ? 'text-base lg:text-lg' : 'text-sm'} leading-relaxed flex-grow`}>
+        <p className={`text-white nunito-sans-text ${isFeatured ? 'text-base lg:text-lg' : 'text-sm'} leading-relaxed flex-grow`}>
           {post.excerpt}
         </p>
-        <a href={post.readMoreLink} className="mt-4 text-brand-primary font-semibold flex items-center hover:underline">
+        <a href={post.readMoreLink} className="mt-4 text-white nunito-sans-text font-semibold flex items-center hover:underline">
           READ ARTICLE <ArrowRight className="ml-2 w-4 h-4" />
         </a>
       </div>
