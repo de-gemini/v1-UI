@@ -11,11 +11,22 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Contact from "./pages/Contact";
 import Layout from "./Layout/Layout";
+import AdminLayout from "./pages/admin/AdminLayout";
+import AdminDashboard from "./pages/admin/Dashboard";
+import PricingManagement from "./pages/admin/PricingManagement";
+import ErrorAlert from './components/ErrorAlert';
 
 // Protected Route wrapper component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   return isAuthenticated ? <>{children}</> : <Navigate to="/login" />;
+};
+
+// Admin Route wrapper component
+const AdminRoute = ({ children }: { children: React.ReactNode }) => {
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const isAdmin = useAuthStore((state) => state.isAdmin);
+  return isAuthenticated && isAdmin ? <>{children}</> : <Navigate to="/login" />;
 };
 
 const Help = lazy(() => import("./pages/Help"));
@@ -32,6 +43,7 @@ function App() {
   return (
     <Router>
       <Suspense fallback={<p>Loading......</p>}>
+        <ErrorAlert />
         <div className="w-screen">
           <main className="">
             <Routes>
@@ -70,6 +82,26 @@ function App() {
                 </Layout>
                 } />
               <Route path="/blog" element={<Blog />} />
+              <Route
+                path="/admin"
+                element={
+                  <AdminRoute>
+                    <AdminLayout>
+                      <AdminDashboard />
+                    </AdminLayout>
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="/admin/pricing"
+                element={
+                  <AdminRoute>
+                    <AdminLayout>
+                      <PricingManagement />
+                    </AdminLayout>
+                  </AdminRoute>
+                }
+              />
             </Routes>
           </main>
         </div>
