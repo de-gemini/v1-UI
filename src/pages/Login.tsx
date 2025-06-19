@@ -17,7 +17,12 @@ const Login = () => {
 
     try {
       await login(email, password);
-      navigate('/dashboard');
+      const isAdmin = useAuthStore.getState().isAdmin;
+      if (isAdmin) {
+        navigate('/admin');
+      } else {
+        navigate('/dashboard');
+      }
     } catch (err) {
       setError('Invalid credentials. Please try again.');
     } finally {
