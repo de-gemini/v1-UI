@@ -780,7 +780,7 @@ const Home = () => {
       {/* Why choose?? */}
       <section className="w-full flex flex-col items-center justify-center">
         {/* cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-[5px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-[5px] px-3 w-full md:w-full lg:max-w-4xl">
           {/* each card */}
           <div className="border-[3px] border-gray-300 flex flex-col items-center justify-center py-4 rounded-lg gap-[4px]">
             <div className="">

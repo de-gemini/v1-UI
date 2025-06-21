@@ -79,8 +79,8 @@ export const Footer: React.FC = () => {
         {/* Column 4 (combined from screenshot): Logo, App Downloads, Social Media */}
         <div className="md:col-span-2 lg:col-span-2 flex flex-col items-center md:items-start lg:items-end text-center md:text-left lg:text-right">
           {/* Logo */}
-          <h1 className='text-brand-secondary  text-[40px]'>
-          De Gemini Services LTD
+          <h1 className='text-brand-secondary text-[20px] md:text-[25px] lg:text-[30px]'>
+          De Gemini
           </h1>
           
           <p className="font-bold text-lg mb-4 text-brand-secondary">CLEANING AVAILABLE 24/7</p>
