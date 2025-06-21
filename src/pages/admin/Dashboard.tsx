@@ -1,14 +1,13 @@
 import { FaArrowUp, FaArrowDown, FaShoePrints, FaBoxOpen, FaTshirt } from 'react-icons/fa';
+import {Header} from './components/Header.tsx'
+
 
 const AdminDashboard = () => {
   return (
     <div className="space-y-8">
-      {/* Welcome Section */}
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900">Welcome Back, Admin!</h1>
-        <p className="text-gray-500 mt-1">Here's what's happening with your store today</p>
-      </div>
-
+      
+            
+      <Header head="Welcome back Kelly" subtitle="Welcome to your admin dashboard"/>
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
         <div className="bg-orange-50 p-6 rounded-xl shadow flex flex-col">

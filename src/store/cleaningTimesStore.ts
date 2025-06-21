@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { getAllCleaningTimes, createCleaningTime, updateCleaningTime } from '../api/cleaningTimes';
+import { getAllCleaningTimes, createCleaningTime, updateCleaningTime, deleteCleaningTime } from '../api/cleaningTimes';
+import { useErrorStore } from './errorStore';
 
 interface CleaningTime {
   _id: string;
@@ -12,12 +13,12 @@ interface CleaningTimesState {
   loading: boolean;
   showAddRoomForm: boolean;
   rowLoading: { [id: string]: boolean };
-  rowMessage: { [id: string]: string };
   editValues: { [id: string]: string };
   message: { type: string; text: string };
   fetchCleaningTimes: () => Promise<void>;
   addCleaningTime: (name: string, cleaningTime: number) => Promise<void>;
   updateCleaningTimeValue: (id: string, cleaningTime: number) => Promise<void>;
+  deleteCleaningTimeValue: (id: string) => Promise<void>;
   setShowAddRoomForm: (show: boolean) => void;
   setEditValue: (id: string, value: string) => void;
   clearMessage: () => void;
@@ -28,7 +29,6 @@ export const useCleaningTimesStore = create<CleaningTimesState>((set, get) => ({
   loading: false,
   showAddRoomForm: false,
   rowLoading: {},
-  rowMessage: {},
   editValues: {},
   message: { type: '', text: '' },
   fetchCleaningTimes: async () => {
@@ -48,23 +48,36 @@ export const useCleaningTimesStore = create<CleaningTimesState>((set, get) => ({
       set({ loading: false });
     }
   },
-  addCleaningTime: async (name, cleaningTime) => {
+  addCleaningTime: async (payload) => {
     try {
-      await createCleaningTime({ name, cleaningTime });
+      await createCleaningTime(payload);
       set({ message: { type: 'success', text: 'Room added successfully!' }, showAddRoomForm: false });
+      useErrorStore.getState().setSuccess('Room added successfully!');
       await get().fetchCleaningTimes();
     } catch (err) {
       set({ message: { type: 'error', text: 'Failed to add room.' } });
     }
   },
   updateCleaningTimeValue: async (id, cleaningTime) => {
-    set(state => ({ rowLoading: { ...state.rowLoading, [id]: true }, rowMessage: { ...state.rowMessage, [id]: '' } }));
+    set(state => ({ rowLoading: { ...state.rowLoading, [id]: true } }));
     try {
       await updateCleaningTime(id, cleaningTime);
-      set(state => ({ rowMessage: { ...state.rowMessage, [id]: 'Updated!' } }));
+      useErrorStore.getState().setSuccess('Room updated successfully!');
       await get().fetchCleaningTimes();
     } catch (err) {
-      set(state => ({ rowMessage: { ...state.rowMessage, [id]: 'Error updating.' } }));
+      // error handled globally
+    } finally {
+      set(state => ({ rowLoading: { ...state.rowLoading, [id]: false } }));
+    }
+  },
+  deleteCleaningTimeValue: async (id) => {
+    set(state => ({ rowLoading: { ...state.rowLoading, [id]: true } }));
+    try {
+      await deleteCleaningTime(id);
+      useErrorStore.getState().setSuccess('Room deleted successfully!');
+      await get().fetchCleaningTimes();
+    } catch (err) {
+      // error handled globally
     } finally {
       set(state => ({ rowLoading: { ...state.rowLoading, [id]: false } }));
     }
