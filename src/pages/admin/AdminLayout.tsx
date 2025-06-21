@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
 import {
   FaTachometerAlt,
   FaBoxOpen,
@@ -12,6 +13,8 @@ import {
   FaSignOutAlt,
   FaBoxes,
   FaCalendarAlt,
+  FaBars,
+  FaTimes,
 } from "react-icons/fa";
 import { FiSearch, FiBell } from "react-icons/fi";
 
@@ -40,15 +43,40 @@ const accountItems = [
 
 const AdminLayout = ({ children }: AdminLayoutProps) => {
   const location = useLocation();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const isActive = (path: string) => location.pathname === path;
 
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
-    <div className="flex min-h-screen bg-background-gray">
+    <div className={`admin-font flex min-h-screen bg-background-gray`}>
+      {/* Mobile Overlay */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          onClick={toggleSidebar}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="w-64 bg-white shadow-lg flex flex-col justify-between">
+      <aside
+        className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-white shadow-lg flex flex-col justify-between transform transition-transform duration-300 ease-in-out ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+        }`}
+      >
         <div>
-          <div className="flex items-center gap-2 p-6 text-2xl font-bold text-brand-secondary">
-            Gemini Admin
+          <div className="flex items-center justify-between p-6">
+            <div className="flex items-center gap-2 text-xl sm:text-2xl font-bold text-brand-secondary">
+              Gemini Admin
+            </div>
+            <button
+              onClick={toggleSidebar}
+              className="lg:hidden p-2 hover:bg-gray-100 rounded-lg"
+            >
+              <FaTimes className="text-gray-600" />
+            </button>
           </div>
           <nav className="mt-6">
             <div className="text-xs text-gray-400 px-6 mb-2">GENERAL</div>
@@ -56,7 +84,8 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
               <Link
                 key={item.label}
                 to={item.path}
-                className={`flex items-center px-6 py-3 text-sm gap-3  mb-1 transition-colors ${
+                onClick={() => setIsSidebarOpen(false)}
+                className={`flex items-center px-6 py-3 text-sm gap-3 mb-1 transition-colors ${
                   isActive(item.path)
                     ? "bg-brand-primary text-brand-secondary font-bold"
                     : "text-brand-secondary hover:bg-background-100"
@@ -76,6 +105,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
               <Link
                 key={item.label}
                 to={item.path}
+                onClick={() => setIsSidebarOpen(false)}
                 className={`flex items-center px-6 py-3 text-sm gap-3 rounded-lg mb-1 transition-colors ${
                   isActive(item.path)
                     ? "bg-brand-primary text-white"
@@ -88,27 +118,39 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
             ))}
           </nav>
         </div>
-        <button className="flex items-center px-6 py-3 text-sm gap-3 text-red-600 hover:bg-red-50 transition-colors mb-6">
+        <button
+          onClick={() => setIsSidebarOpen(false)}
+          className="flex items-center px-6 py-3 text-sm gap-3 text-red-600 hover:bg-red-50 transition-colors mb-6"
+        >
           <FaSignOutAlt /> Logout
         </button>
       </aside>
+
       {/* Main Content */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col lg:ml-0">
         {/* Top Bar */}
-        <header className="flex items-center justify-between px-8 py-4 bg-white shadow-sm">
-          <div className="flex items-center gap-4 w-1/2">
-            <div className="relative w-full">
-              <input
-                type="text"
-                placeholder="Search"
-                className="w-full pl-10 pr-4 py-2 rounded-lg border border-background-300 focus:outline-none focus:ring-2 focus:ring-brand-primary"
-              />
-              <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-background-400" />
+        <header className="flex items-center justify-between px-4 sm:px-8 py-4 bg-white shadow-sm">
+          <div className="flex items-center gap-4">
+            <button
+              onClick={toggleSidebar}
+              className="lg:hidden p-2 hover:bg-gray-100 rounded-lg"
+            >
+              <FaBars className="text-gray-600" />
+            </button>
+            <div className="hidden sm:flex items-center gap-4 w-full max-w-md">
+              <div className="relative w-full">
+                <input
+                  type="text"
+                  placeholder="Search"
+                  className="w-full pl-10 pr-4 py-2 rounded-lg border border-background-300 focus:outline-none focus:ring-2 focus:ring-brand-primary text-sm"
+                />
+                <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-background-400" />
+              </div>
             </div>
           </div>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-3 sm:gap-6">
             <button className="relative">
-              <FiBell className="text-2xl text-background-500" />
+              <FiBell className="text-xl sm:text-2xl text-background-500" />
               {/* Notification badge example */}
               <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1">
                 3
@@ -117,12 +159,25 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
             <img
               src="https://randomuser.me/api/portraits/men/32.jpg"
               alt="Profile"
-              className="w-10 h-10 rounded-full border-2 border-brand-primary"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-brand-primary"
             />
           </div>
         </header>
+
+        {/* Mobile Search Bar */}
+        <div className="sm:hidden px-4 py-3 bg-white border-b border-gray-200">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search"
+              className="w-full pl-10 pr-4 py-2 rounded-lg border border-background-300 focus:outline-none focus:ring-2 focus:ring-brand-primary text-sm"
+            />
+            <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-background-400" />
+          </div>
+        </div>
+
         {/* Main Dashboard Content */}
-        <main className="flex-1 bg-neutral-100 p-8 overflow-y-auto">
+        <main className="flex-1 bg-neutral-100 p-4 sm:p-8 overflow-y-auto">
           {children}
         </main>
       </div>
