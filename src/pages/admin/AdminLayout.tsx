@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { FaTachometerAlt, FaBoxOpen, FaUsers, FaStar, FaCreditCard, FaPlug, FaCog, FaQuestionCircle, FaUserShield, FaSignOutAlt, FaBoxes } from 'react-icons/fa';
+import { FaTachometerAlt, FaBoxOpen, FaUsers, FaStar, FaCreditCard, FaPlug, FaCog, FaQuestionCircle, FaUserShield, FaSignOutAlt, FaBoxes, FaCalendarAlt } from 'react-icons/fa';
 import { FiSearch, FiBell } from 'react-icons/fi';
 
 interface AdminLayoutProps {
@@ -9,18 +9,19 @@ interface AdminLayoutProps {
 const navItems = [
   { label: 'Dashboard', icon: <FaTachometerAlt />, path: '/admin' },
   { label: 'Pricing', icon: <FaBoxOpen />, path: '/admin/pricing' },
-  { label: 'Product', icon: <FaBoxOpen />, path: '/admin/product' },
-  { label: 'Inventory', icon: <FaBoxes />, path: '/admin/inventory' },
-  { label: 'Customers', icon: <FaUsers />, path: '/admin/customers' },
-  { label: 'Review', icon: <FaStar />, path: '/admin/review', badge: 2 },
-  { label: 'Payment', icon: <FaCreditCard />, path: '/admin/payment' },
-  { label: 'Integration', icon: <FaPlug />, path: '/admin/integration' },
+  { label: 'Calender', icon: <FaBoxOpen />, path: '/admin/calendar' },
+  // { label: 'Product', icon: <FaBoxOpen />, path: '/admin/product' },
+  // { label: 'Inventory', icon: <FaBoxes />, path: '/admin/inventory' },
+  // { label: 'Customers', icon: <FaUsers />, path: '/admin/customers' },
+  // { label: 'Review', icon: <FaStar />, path: '/admin/review', badge: 2 },
+  // { label: 'Payment', icon: <FaCreditCard />, path: '/admin/payment' },
+  // { label: 'Integration', icon: <FaPlug />, path: '/admin/integration' },
 ];
 
 const accountItems = [
   { label: 'Settings', icon: <FaCog />, path: '/admin/settings' },
-  { label: 'Help', icon: <FaQuestionCircle />, path: '/admin/help' },
-  { label: 'Manage Users', icon: <FaUserShield />, path: '/admin/manage-users' },
+  // { label: 'Help', icon: <FaQuestionCircle />, path: '/admin/help' },
+  // { label: 'Manage Users', icon: <FaUserShield />, path: '/admin/manage-users' },
 ];
 
 const AdminLayout = ({ children }: AdminLayoutProps) => {
@@ -32,9 +33,8 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       {/* Sidebar */}
       <aside className="w-64 bg-white shadow-lg flex flex-col justify-between">
         <div>
-          <div className="flex items-center gap-2 p-6 text-2xl font-bold text-brand-primary">
-            <span className="bg-brand-primary text-white rounded-full p-2"><FaTachometerAlt /></span>
-            subcom
+          <div className="flex items-center gap-2 p-6 text-2xl font-bold text-brand-secondary">
+            Gemini Admin
           </div>
           <nav className="mt-6">
             <div className="text-xs text-gray-400 px-6 mb-2">GENERAL</div>
@@ -42,9 +42,9 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
               <Link
                 key={item.label}
                 to={item.path}
-                className={`flex items-center px-6 py-3 text-sm gap-3 rounded-lg mb-1 transition-colors ${
+                className={`flex items-center px-6 py-3 text-sm gap-3  mb-1 transition-colors ${
                   isActive(item.path)
-                    ? 'bg-brand-primary text-white'
+                    ? 'bg-brand-primary text-brand-secondary font-bold'
                     : 'text-brand-secondary hover:bg-background-100'
                 }`}
               >
@@ -104,7 +104,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
           </div>
         </header>
         {/* Main Dashboard Content */}
-        <main className="flex-1 bg-background-gray p-8 overflow-y-auto">
+        <main className="flex-1 bg-neutral-100 p-8 overflow-y-auto">
           {children}
         </main>
       </div>

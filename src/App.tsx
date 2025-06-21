@@ -9,12 +9,14 @@ import { useAuthStore } from "./store/authStore";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import CalendarAvailability from "./pages/admin/CalendarAvailability";
 import Contact from "./pages/Contact";
 import Layout from "./Layout/Layout";
 import AdminLayout from "./pages/admin/AdminLayout";
 import AdminDashboard from "./pages/admin/Dashboard";
 import PricingManagement from "./pages/admin/PricingManagement";
 import ErrorAlert from './components/ErrorAlert';
+import SuccessAlert from './components/SuccessAlert';
 
 // Protected Route wrapper component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -44,6 +46,7 @@ function App() {
     <Router>
       <Suspense fallback={<p>Loading......</p>}>
         <ErrorAlert />
+        <SuccessAlert />
         <div className="w-screen">
           <main className="">
             <Routes>
@@ -98,6 +101,16 @@ function App() {
                   <AdminRoute>
                     <AdminLayout>
                       <PricingManagement />
+                    </AdminLayout>
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="/admin/calendar"
+                element={
+                  <AdminRoute>
+                    <AdminLayout>
+                      <CalendarAvailability />
                     </AdminLayout>
                   </AdminRoute>
                 }

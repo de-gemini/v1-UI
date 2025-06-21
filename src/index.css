@@ -82,8 +82,84 @@
     "YTLC" 500;
 }
 
-. {
+/* .{
   font-family: "Trade Winds", system-ui;
   font-weight: 800;
   font-style: normal;
+} */
+
+/* Remove custom styles for .react-calendar and related classes to revert to default and allow Tailwind styling in the component. */
+/* Vanilla CSS overrides for react-calendar */
+.react-calendar {
+  background: #f9fafb;
+  /* border-radius: 1rem; */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  border-top: dashed 4px gray !important;
+  padding: 2rem;
+}
+.react-calendar__navigation {
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  margin-bottom: 0.5rem;
+}
+.react-calendar__navigation button {
+  color: #777;
+  font-weight: bold;
+  font-size: 1.1rem;
+  background: transparent !important;
+  /* border-radius: 0.5rem; */
+  transition: background 0.2s;
+}
+
+.react-calendar__navigation button:enabled:hover {
+  background: #ede9fe;
+}
+
+.react-calendar__month-view__weekdays {
+  text-transform: uppercase;
+  color: #a1a1aa;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.react-calendar__tile {
+  /* border-radius: 0.5rem; */
+  transition: background 0.2s, color 0.2s;
+  font-size: 1rem;
+  color: #334155;
+  height: 2.2rem;
+  width: 2.2rem;
+}
+.react-calendar__tile--active {
+  background: transparent !important;
+  color: #000 !important;
+}
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background: transparent;
+  font-weight: 900;
+  /* color: #fff; */
+  border-bottom: 2px solid gray;
+}
+.react-calendar__tile--now {
+  background: #7df3684e !important;
+  color: #1e293b !important;
+  border-bottom: 2px solid gray !important;
+  font-weight: 900 !important;
+}
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: #d1d5db;
+}
+
+/* Custom classes for calendar day availability */
+.calendar-day-unavailable {
+  text-decoration: line-through;
+  opacity: 0.4;
+  border-bottom: #e63e3e 2px solid !important;
+}
+.calendar-day-available {
+  text-decoration: none;
+  opacity: 1;
+  font-weight: 800;
 }
