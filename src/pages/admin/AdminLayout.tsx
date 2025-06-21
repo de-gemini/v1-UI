@@ -1,15 +1,29 @@
-import { Link, useLocation } from 'react-router-dom';
-import { FaTachometerAlt, FaBoxOpen, FaUsers, FaStar, FaCreditCard, FaPlug, FaCog, FaQuestionCircle, FaUserShield, FaSignOutAlt, FaBoxes, FaCalendarAlt } from 'react-icons/fa';
-import { FiSearch, FiBell } from 'react-icons/fi';
+import { Link, useLocation } from "react-router-dom";
+import {
+  FaTachometerAlt,
+  FaBoxOpen,
+  FaUsers,
+  FaStar,
+  FaCreditCard,
+  FaPlug,
+  FaCog,
+  FaQuestionCircle,
+  FaUserShield,
+  FaSignOutAlt,
+  FaBoxes,
+  FaCalendarAlt,
+} from "react-icons/fa";
+import { FiSearch, FiBell } from "react-icons/fi";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
 }
 
 const navItems = [
-  { label: 'Dashboard', icon: <FaTachometerAlt />, path: '/admin' },
-  { label: 'Pricing', icon: <FaBoxOpen />, path: '/admin/pricing' },
-  { label: 'Calender', icon: <FaBoxOpen />, path: '/admin/calendar' },
+  { label: "Dashboard", icon: <FaTachometerAlt />, path: "/admin" },
+  { label: "Pricing", icon: <FaBoxOpen />, path: "/admin/pricing" },
+  { label: "Calendar", icon: <FaCalendarAlt />, path: "/admin/calendar" },
+  { label: "Bookings", icon: <FaUsers />, path: "/admin/bookings" },
   // { label: 'Product', icon: <FaBoxOpen />, path: '/admin/product' },
   // { label: 'Inventory', icon: <FaBoxes />, path: '/admin/inventory' },
   // { label: 'Customers', icon: <FaUsers />, path: '/admin/customers' },
@@ -19,7 +33,7 @@ const navItems = [
 ];
 
 const accountItems = [
-  { label: 'Settings', icon: <FaCog />, path: '/admin/settings' },
+  { label: "Settings", icon: <FaCog />, path: "/admin/settings" },
   // { label: 'Help', icon: <FaQuestionCircle />, path: '/admin/help' },
   // { label: 'Manage Users', icon: <FaUserShield />, path: '/admin/manage-users' },
 ];
@@ -44,14 +58,16 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                 to={item.path}
                 className={`flex items-center px-6 py-3 text-sm gap-3  mb-1 transition-colors ${
                   isActive(item.path)
-                    ? 'bg-brand-primary text-brand-secondary font-bold'
-                    : 'text-brand-secondary hover:bg-background-100'
+                    ? "bg-brand-primary text-brand-secondary font-bold"
+                    : "text-brand-secondary hover:bg-background-100"
                 }`}
               >
                 {item.icon}
                 {item.label}
                 {item.badge && (
-                  <span className="ml-auto bg-green-500 text-white text-xs rounded-full px-2 py-0.5">{item.badge.toString().padStart(2, '0')}</span>
+                  <span className="ml-auto bg-green-500 text-white text-xs rounded-full px-2 py-0.5">
+                    {item.badge.toString().padStart(2, "0")}
+                  </span>
                 )}
               </Link>
             ))}
@@ -62,8 +78,8 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                 to={item.path}
                 className={`flex items-center px-6 py-3 text-sm gap-3 rounded-lg mb-1 transition-colors ${
                   isActive(item.path)
-                    ? 'bg-brand-primary text-white'
-                    : 'text-brand-secondary hover:bg-background-100'
+                    ? "bg-brand-primary text-white"
+                    : "text-brand-secondary hover:bg-background-100"
                 }`}
               >
                 {item.icon}
@@ -94,7 +110,9 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
             <button className="relative">
               <FiBell className="text-2xl text-background-500" />
               {/* Notification badge example */}
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1">3</span>
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1">
+                3
+              </span>
             </button>
             <img
               src="https://randomuser.me/api/portraits/men/32.jpg"
@@ -112,4 +130,4 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   );
 };
 
-export default AdminLayout; 
+export default AdminLayout;
