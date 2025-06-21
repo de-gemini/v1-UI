@@ -15,8 +15,9 @@ import Layout from "./Layout/Layout";
 import AdminLayout from "./pages/admin/AdminLayout";
 import AdminDashboard from "./pages/admin/Dashboard";
 import PricingManagement from "./pages/admin/PricingManagement";
-import ErrorAlert from './components/ErrorAlert';
-import SuccessAlert from './components/SuccessAlert';
+import ErrorAlert from "./components/ErrorAlert";
+import SuccessAlert from "./components/SuccessAlert";
+import ScheduleManagement from "./pages/admin/ScheduleManagement";
 
 // Protected Route wrapper component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -28,7 +29,11 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 const AdminRoute = ({ children }: { children: React.ReactNode }) => {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const isAdmin = useAuthStore((state) => state.isAdmin);
-  return isAuthenticated && isAdmin ? <>{children}</> : <Navigate to="/login" />;
+  return isAuthenticated && isAdmin ? (
+    <>{children}</>
+  ) : (
+    <Navigate to="/login" />
+  );
 };
 
 const Help = lazy(() => import("./pages/Help"));
@@ -38,8 +43,6 @@ const Become = lazy(() => import("./pages/BecomeCleaner"));
 const GiftVoucher = lazy(() => import("./pages/Gift"));
 const Reclean = lazy(() => import("./pages/Reclean"));
 const Blog = lazy(() => import("./pages/Blog"));
-
-
 
 function App() {
   return (
@@ -74,16 +77,22 @@ function App() {
               <Route path="/help/Emoppers" element={<Emoppers />} />
               <Route path="/help/Clients" element={<Clients />} />
               <Route path="/home/registercleaner" element={<Become />} />
-              <Route path="/giftVoucher" element={
-                <Layout>
-                  <GiftVoucher />
-                </Layout>
-                } />
-                <Route path="/reclean-guarantee" element={
-                <Layout>
-                  <Reclean />
-                </Layout>
-                } />
+              <Route
+                path="/giftVoucher"
+                element={
+                  <Layout>
+                    <GiftVoucher />
+                  </Layout>
+                }
+              />
+              <Route
+                path="/reclean-guarantee"
+                element={
+                  <Layout>
+                    <Reclean />
+                  </Layout>
+                }
+              />
               <Route path="/blog" element={<Blog />} />
               <Route
                 path="/admin"
@@ -111,6 +120,16 @@ function App() {
                   <AdminRoute>
                     <AdminLayout>
                       <CalendarAvailability />
+                    </AdminLayout>
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="/admin/bookings"
+                element={
+                  <AdminRoute>
+                    <AdminLayout>
+                      <ScheduleManagement />
                     </AdminLayout>
                   </AdminRoute>
                 }
