@@ -81,12 +81,12 @@ export default function Reclean() {
         <div className="relative z-10 text-left w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8">
           <div className="w-full lg:w-1/2">
             {/* Heading */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-purple-900 leading-tight mb-8 drop-shadow-sm">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-primary leading-tight mb-8 drop-shadow-sm">
             Unhappy with your clean? Reclean Guarantee
             </h1>
 
             {/* Features List */}
-            <p className="text-brand-secondary text-[16px] font-[700] mb-5">We care about the quality of our services and offer the Reclean Guarantee to our customers. Compensation can be provided in the form of a reclean, credit to your account, complimentary future clean or free additional addons.</p>
+            <p className="text-brand-primary text-[16px] font-[700] mb-5">We care about the quality of our services and offer the Reclean Guarantee to our customers. Compensation can be provided in the form of a reclean, credit to your account, complimentary future clean or free additional addons.</p>
 
             {/* Postcode Input and Button */}
             
@@ -106,7 +106,7 @@ export default function Reclean() {
       </section>
 
       <div className="max-w-4xl mx-auto mt-[3rem]">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold nunito-sans-heading text-brand-secondary mb-10 text-center">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold nunito-sans-heading text-brand-primary mb-10 text-center">
             Frequently asked questions
           </h1>
 
@@ -153,7 +153,7 @@ export default function Reclean() {
 
         {/* another section */}
         <div className="max-w-4xl mx-auto bg-[#f7f7ff] mt-[4rem] px-5 py-10 rounded-lg">
-            <h1 className="text-brand-secondary text-[30px] font-[700] mb-6">Book cleaning service</h1>
+            <h1 className="text-brand-primary text-[30px] font-[700] mb-6">Book cleaning service</h1>
             <p className="text-[rgb(47,60,72)] text-[16px] font-[400] mb-6">Our standard cleaning service includes everything you need to get your home in order as quickly as possible. You can book additional services when you make your booking.</p>
 
             {/* Postcode Input and Button */}

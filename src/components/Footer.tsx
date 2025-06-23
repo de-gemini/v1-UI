@@ -8,7 +8,7 @@ export const Footer: React.FC = () => {
 
         {/* Column 1: Cleaner Locations */}
         <div className="lg:col-span-1">
-          <h3 className="font-bold text-lg mb-4 text-brand-secondary">CLEANER LOCATIONS</h3>
+          <h3 className="font-bold text-lg mb-4 text-brand-primary">CLEANER LOCATIONS</h3>
           <ul className="space-y-2">
             <li><a href="#" className="hover:underline">Edinburgh Birmingham</a></li>
             <li><a href="#" className="hover:underline">Manchester St Albans</a></li>
@@ -30,7 +30,7 @@ export const Footer: React.FC = () => {
 
         {/* Column 2: For Customers */}
         <div className="lg:col-span-1">
-          <h3 className="font-bold text-lg mb-4 text-brand-secondary">FOR CUSTOMERS</h3>
+          <h3 className="font-bold text-lg mb-4 text-brand-primary">FOR CUSTOMERS</h3>
           <ul className="space-y-2">
             <li><a href="#" className="hover:underline">Pricing</a></li>
             <li><a href="#" className="hover:underline">What's included</a></li>
@@ -44,7 +44,7 @@ export const Footer: React.FC = () => {
             <li><a href="#" className="hover:underline">Sitemap</a></li>
           </ul>
           {/* Sub-section: For Cleaners */}
-          <h3 className="font-bold text-lg mb-4 text-brand-secondary">FOR CLEANERS</h3>
+          <h3 className="font-bold text-lg mb-4 text-brand-primary">FOR CLEANERS</h3>
           <ul className="space-y-2">
             <li><a href="#" className="hover:underline">Become an eMopper</a></li>
           </ul>
@@ -52,7 +52,7 @@ export const Footer: React.FC = () => {
 
         {/* Column 3: eMop Service */}
         <div className="lg:col-span-1">
-          <h3 className="font-bold text-lg mb-4 text-brand-secondary">EMOP SERVICE</h3>
+          <h3 className="font-bold text-lg mb-4 text-brand-primary">EMOP SERVICE</h3>
           <ul className="space-y-2">
             <li><a href="#" className="hover:underline">Regular cleaning</a></li>
             <li><a href="#" className="hover:underline">Deep cleaning</a></li>
@@ -69,7 +69,7 @@ export const Footer: React.FC = () => {
             <li><a href="#" className="hover:underline">Spring cleaning</a></li>
           </ul>
           {/* Sub-section: Who We Are */}
-          <h3 className="font-bold text-lg mb-4 text-brand-secondary">WHO WE ARE</h3>
+          <h3 className="font-bold text-lg mb-4 text-brand-primary">WHO WE ARE</h3>
           <ul className="space-y-2">
             <li><a href="#" className="hover:underline">About us</a></li>
             <li><a href="#" className="hover:underline">Contact us</a></li>
@@ -79,11 +79,11 @@ export const Footer: React.FC = () => {
         {/* Column 4 (combined from screenshot): Logo, App Downloads, Social Media */}
         <div className="md:col-span-2 lg:col-span-2 flex flex-col items-center md:items-start lg:items-end text-center md:text-left lg:text-right">
           {/* Logo */}
-          <h1 className='text-brand-secondary text-[20px] md:text-[25px] lg:text-[30px]'>
+          <h1 className='text-brand-primary text-[20px] md:text-[25px] lg:text-[30px]'>
           De Gemini
           </h1>
           
-          <p className="font-bold text-lg mb-4 text-brand-secondary">CLEANING AVAILABLE 24/7</p>
+          <p className="font-bold text-lg mb-4 text-brand-primary">CLEANING AVAILABLE 24/7</p>
 
           {/* App Store Badges */}
           <div className="flex flex-col space-y-3 mb-6">
@@ -96,13 +96,13 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Social Media */}
-          <h3 className="font-bold text-lg mb-4 text-brand-secondary">SOCIAL MEDIA</h3>
+          <h3 className="font-bold text-lg mb-4 text-brand-primary">SOCIAL MEDIA</h3>
           <div className="flex space-x-4">
             <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <Instagram className="h-7 w-7 text-brand-secondary hover:text-white transition duration-300" />
+              <Instagram className="h-7 w-7 text-brand-peimary hover:text-white transition duration-300" />
             </a>
             <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <Facebook className="h-7 w-7 text-brand-secondary hover:text-white transition duration-300" />
+              <Facebook className="h-7 w-7 text-brand-primary hover:text-white transition duration-300" />
             </a>
           </div>
         </div>

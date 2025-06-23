@@ -98,12 +98,12 @@ const Navbar = () => {
   ];
 
   const pricingLinks: Links[] = [
-    { name: 'House cleaning', href: '#' },
-    { name: 'Office cleaning', href: '#' },
-    { name: 'Deep cleaning', href: '#' },
-    { name: 'End of Tenancy cleaning', href: '#' },
-    { name: 'Carpet cleaning', href: '#' },
-    { name: 'Upholstery cleaning', href: '#' },
+    { name: 'House cleaning', href: '/prcing-house-cleaning' },
+    { name: 'Office cleaning', href: '/prcing-office-cleaning' },
+    { name: 'Deep cleaning', href: '/prcing-deep-cleaning' },
+    { name: 'End of Tenancy cleaning', href: '/prcing-tenancy-cleaning' },
+    { name: 'Carpet cleaning', href: '/prcing-carpet-cleaning' },
+    { name: 'Upholstery cleaning', href: '/prcing-upholstery-cleaning' },
   ];
 
   return (
@@ -111,8 +111,8 @@ const Navbar = () => {
       <nav className="max-w-7xl mx-auto flex items-center justify-between py-4 px-4 md:px-6">
         {/* Logo */}
         <a href="/" className="flex items-center">
-          <h1 className='text-brand-secondary  text-[20px]'>
-            De<span className="font-semibold" >Gemini</span> 
+          <h1 className='text-brand-primary text-[20px]'>
+            De<span className="font-semibold">Gemini</span> 
           </h1>
         </a>
 
@@ -143,7 +143,7 @@ const Navbar = () => {
             <a
               href="#"
               onClick={handleServicesDropdownClick} // Conditional click handling
-              className={`flex text-black text-[16px] font-semibold items-center transition duration-300 ease-in-out ${isServicesDropdownOpen ? 'text-brand-secondary border-b-2 border-purple-700 pb-1' : 'hover:text-brand-secondary'}`}
+              className={`flex text-black text-[16px] font-semibold items-center transition duration-300 ease-in-out ${isServicesDropdownOpen ? 'text-brand-primary border-b-2 border-purple-700 pb-1' : 'hover:text-brand-secondary'}`}
             >
               Our Services
               <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-300 ${isServicesDropdownOpen ? 'rotate-180' : ''} group-hover:rotate-180`} />
@@ -156,7 +156,7 @@ const Navbar = () => {
                 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0`}
             >
               {servicesLinks.map((link, index) => (
-                <a key={index} href={link.href} className="block text-gray-700 hover:text-brand-secondary whitespace-nowrap p-1 rounded-md transition duration-200">
+                <a key={index} href={link.href} className="block text-gray-700 hover:text-brand-primary whitespace-nowrap p-1 rounded-md transition duration-200">
                   {link.name}
                 </a>
               ))}
@@ -173,8 +173,9 @@ const Navbar = () => {
             <a
               href="#"
               onClick={handlePricingDropdownClick} // Conditional click handling
-              className={`flex text-black text-[16px] font-semibold items-center transition duration-300 ease-in-out ${isPricingDropdownOpen ? 'border-b-2 border-purple-700 pb-1 text-brand-secondary' : 'hover:text-brand-secondary'}`}
+              className={`flex text-black text-[16px] font-semibold items-center transition duration-300 ease-in-out ${isPricingDropdownOpen ? 'border-b-2 border-purple-700 pb-1 text-brand-primary' : 'hover:text-brand-text'}`}
             >
+
               Pricing
               <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-300 ${isPricingDropdownOpen ? 'rotate-180' : ''} group-hover:rotate-180`} />
             </a>
@@ -246,7 +247,7 @@ const Navbar = () => {
             <a
               href="#"
               onClick={handlePricingDropdownClick} // Conditional click handling
-              className={`flex text-black text-[16px] font-semibold items-center  transition duration-300 ease-in-out ${isPricingDropdownOpen ? 'border-b-2 border-purple-700 pb-1 text-brand-secondary' : 'hover:text-brand-secondary'}`}
+              className={`flex text-black text-[16px] font-semibold items-center  transition duration-300 ease-in-out ${isPricingDropdownOpen ? 'border-b-2 border-purple-700 pb-1 text-brand-primary' : 'hover:text-brand-text'}`}
             >
               Pricing
               <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-300 ${isPricingDropdownOpen ? 'rotate-180' : ''} group-hover:rotate-180`} />

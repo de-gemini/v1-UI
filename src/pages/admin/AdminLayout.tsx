@@ -68,7 +68,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       >
         <div>
           <div className="flex items-center justify-between p-6">
-            <div className="flex items-center gap-2 text-xl sm:text-2xl font-bold text-brand-secondary">
+            <div className="flex items-center gap-2 text-xl sm:text-2xl font-bold text-brand-primary">
               Gemini Admin
             </div>
             <button

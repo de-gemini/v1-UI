@@ -34,7 +34,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   description,
 }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl flex flex-col h-full">
+    <div className="bg-brand-blue rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl flex flex-col h-full">
       {/* Image */}
       <div className="h-48 w-full overflow-hidden">
         <img
@@ -53,7 +53,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       {/* Content */}
       <div className="p-4 flex flex-col flex-grow">
         <h3 className="text-xl font-bold text-gray-800 mb-2">{title}</h3>
-        <p className="text-purple-700 text-lg font-semibold mb-3">{price}</p>
+        <p className="text-brand-primary text-lg font-semibold mb-3">{price}</p>
         <p className="text-gray-700 text-sm leading-relaxed flex-grow">
           {description}
         </p>

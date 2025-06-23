@@ -100,7 +100,7 @@ const PricingManagement = () => {
             <form onSubmit={handleAddRoom}>
               <h3 className="text-lg font-semibold mb-4">Add New Room Type</h3>
               <div className="mb-4">
-                <label htmlFor="roomName" className="block text-sm font-medium text-brand-secondary mb-2">
+                <label htmlFor="roomName" className="block text-sm font-medium text-brand-primary mb-2">
                   Room Name
                 </label>
                 <input
@@ -113,7 +113,7 @@ const PricingManagement = () => {
                 />
               </div>
               <div className="mb-6">
-                <label htmlFor="roomMinutes" className="block text-sm font-medium text-brand-secondary mb-2">
+                <label htmlFor="roomMinutes" className="block text-sm font-medium text-brand-primary mb-2">
                   Cleaning Time (minutes)
                 </label>
                 <input
@@ -180,7 +180,7 @@ const PricingManagement = () => {
                         <div className="absolute z-10 right-0 mt-2 w-28 bg-white border border-background-300 rounded shadow-lg flex flex-col">
                           <button
                             type="button"
-                            className="flex items-center gap-2 px-4 py-2 hover:bg-background-100 text-brand-secondary"
+                            className="flex items-center gap-2 px-4 py-2 hover:bg-background-100 text-brand-primary"
                             onClick={() => {
                               setActionDropdown(null);
                               updateCleaningTimeValue(room._id, Number(editValues[room._id]));
@@ -220,7 +220,7 @@ const PricingManagement = () => {
             <p className="mb-6 text-center text-gray-500">{cleaningTimes.find(r => r._id === confirmDeleteId)?.name}</p>
             <div className="flex gap-4">
               <button
-                className="px-6 py-2 rounded bg-background-200 text-brand-secondary hover:bg-background-300"
+                className="px-6 py-2 rounded bg-background-200 text-brand-primary hover:bg-background-300"
                 onClick={() => setConfirmDeleteId(null)}
               >
                 Cancel

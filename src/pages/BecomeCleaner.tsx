@@ -185,13 +185,13 @@ export default function BecomeCleaner() {
         <div className="flex flex-col gap-[1.2rem] px-4">
           <div className="w-[4rem] md:w-[6rem] lg:w-[10rem]">
           <a href="/" className="flex items-center">
-          <h1 className='text-brand-secondary text-[20px] md:text-[20px] lg:text-[40px]'>
+          <h1 className='text-brand-primary text-[20px] md:text-[20px] lg:text-[40px]'>
           De Gemini Services LTD
           </h1>
         </a>
           </div>
           <div className="flex flex-col">
-            <h1 className="text-brand-secondary font-[700] text-[30px] md:text-[52px] lg:text-[82px] uppercase">
+            <h1 className="text-brand-primary font-[700] text-[30px] md:text-[52px] lg:text-[82px] uppercase">
               Become a <br />{" "}
               <span
                 style={{
@@ -204,13 +204,13 @@ export default function BecomeCleaner() {
               </span>
             </h1>
 
-            <p className="font-[600] text-[16px] md:text-[20px] lg:text-[28px] text-brand-secondary max-w-[360px]">
+            <p className="font-[600] text-[16px] md:text-[20px] lg:text-[28px] text-brand-primary max-w-[360px]">
               Part time flexible cleaning role with £15/h average monthly rate
               or full time role with £1800+/month
             </p>
 
             <Link to="/home/registercleaner">
-              <button className="bg-[#ffcc00] w-fit md:w-fit lg:w-full p-4 transition font-[700] text-brand-secondary rounded-md hover:bg-[#f7d344] hover:shadow-xl hover:scale-95 duration-300">
+              <button className="bg-[#ffcc00] w-fit md:w-fit lg:w-full p-4 transition font-[700] text-brand-primary rounded-md hover:bg-[#f7d344] hover:shadow-xl hover:scale-95 duration-300">
                 <p className="text-lg">Become a cleaner</p>
               </button>
             </Link>
@@ -220,7 +220,7 @@ export default function BecomeCleaner() {
 
       {/* What is Emop */}
       <section className="bg-[#f5f9fc] min-h-screen flex flex-col items-center py-12 text-center">
-        <h1 className="text-brand-secondary text-[30px] font-[800]">
+        <h1 className="text-brand-primary text-[30px] font-[800]">
           What is eMop?
         </h1>
         <p className="mb-6 max-w-[1000px]">
@@ -245,7 +245,7 @@ export default function BecomeCleaner() {
       <div className="font-sans antialiased bg-white min-h-screen py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="max-w-6xl mx-auto text-center">
           {/* Main Heading and Subheading */}
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-secondary mb-4">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-primary mb-4">
             TO GET YOU STARTED
           </h1>
           <p className="text-xl sm:text-2xl text-gray-600 mb-12">
@@ -259,11 +259,11 @@ export default function BecomeCleaner() {
                 key={step.id}
                 className="relative group flex flex-col items-center p-4 rounded-lg transition-transform duration-300 ease-in-out hover:-translate-y-2">
                 {/* Step Title */}
-                <h3 className="mb-2 text-sm font-thin text-brand-secondary">
+                <h3 className="mb-2 text-sm font-thin text-brand-primary">
                   {step.title}
                 </h3>
                 {step.description && (
-                  <p className="mb-2 text-sm font-thin text-brand-secondary">
+                  <p className="mb-2 text-sm font-thin text-brand-primary">
                     {step.description}
                   </p>
                 )}
@@ -293,7 +293,7 @@ export default function BecomeCleaner() {
                   <img
                     src={step.mainIcon}
                     alt="iocn"
-                    className="text-brand-secondary"
+                    className="text-brand-primary"
                   />
                 </div>
 
@@ -335,7 +335,7 @@ export default function BecomeCleaner() {
 
             {/* Right Section: Text Content */}
             <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center bg-yellow-50">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-secondary mb-4">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-primary mb-4">
                 REQUIREMENTS
               </h1>
               <p className="text-lg sm:text-xl text-gray-700 mb-8">
@@ -382,7 +382,7 @@ export default function BecomeCleaner() {
           {/* Optional: More content to show page structure */}
           
           <div className="max-w-7xl mx-auto text-center mt-[3rem]">
-            <h1 className="text-[22px] md:text-[28px] lg:text-[32px] font-[400] text-brand-secondary mb-6">
+            <h1 className="text-[22px] md:text-[28px] lg:text-[32px] font-[400] text-brand-primary mb-6">
               YOUR SAFETY AT WORK IS OUR PRIORITY
             </h1>
 
@@ -393,8 +393,8 @@ export default function BecomeCleaner() {
                 className={`px-8 py-3 rounded-l-full border-2 border- font-semibold text-lg transition-all duration-300
                         ${
                           activeTab === "before"
-                            ? "bg-brand-secondary text-white shadow-md"
-                            : "bg-transparent text-brand-secondary hover:bg-purple-50"
+                            ? "bg-brand-primary text-white shadow-md"
+                            : "bg-transparent text-brand-text hover:bg-purple-50"
                         }`}>
                 BEFORE CLEANING
               </button>
@@ -403,8 +403,8 @@ export default function BecomeCleaner() {
                 className={`px-8 py-3 rounded-r-full border-2 border-gray-400 font-semibold text-lg transition-all duration-300
                         ${
                           activeTab === "after"
-                            ? "bg-brand-secondary text-white shadow-md"
-                            : "bg-transparent text-brand-secondary hover:bg-purple-50"
+                            ? "bg-brand-primary text-white shadow-md"
+                            : "bg-transparent text-brand-text hover:bg-purple-50"
                         }`}>
                 AFTER CLEANING
               </button>
@@ -417,7 +417,7 @@ export default function BecomeCleaner() {
             <div
               key={index}
               className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center justify-start text-center h-full">
-              <h3 className="text-[28px] font-[400] text-brand-secondary mb-3">
+              <h3 className="text-[28px] font-[400] text-brand-primary mb-3">
                 {feature.title}
               </h3>
               <p className="text-gray-500 text-sm leading-relaxed">

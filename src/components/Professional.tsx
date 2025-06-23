@@ -89,7 +89,7 @@ const ProfessionalCard: React.FC<ProfessionalCardProps> = ({ professional }) => 
         {description.length > textLimit && (
           <button
             onClick={toggleReadMore}
-            className="text-brand-secondary font-semibold text-sm self-start hover:underline focus:outline-none"
+            className="text-brand-primary font-semibold text-sm self-start hover:underline focus:outline-none"
           >
             {isExpanded ? 'See less' : 'See more'}
           </button>

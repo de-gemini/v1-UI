@@ -11,7 +11,7 @@ interface FeatureCardProps {
 // Reusable FeatureCard Component
 const FeatureCard: React.FC<FeatureCardProps> = ({ icon, iconBgColor, title, points }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center text-center h-full">
+    <div className="bg-brand-blue rounded-lg shadow-md p-6 flex flex-col items-center text-center h-full">
       {/* Icon/Illustration Container */}
       <div className={`relative w-24 h-24 bg-white rounded-full flex items-center justify-center mb-6 overflow-hidden ${iconBgColor}`}>
         {/* Abstract circle patterns as seen in the image - adjust colors as needed */}
@@ -22,13 +22,13 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon, iconBgColor, title, poi
       </div>
 
       {/* Title */}
-      <h3 className="text-2xl font-bold nunito-sans-heading text-brand-secondary mb-4">{title}</h3>
+      <h3 className="text-2xl font-bold nunito-sans-heading text-brand-primary mb-4">{title}</h3>
 
       {/* Points List */}
       <ul className="text-left w-full text-gray-700 space-y-2 flex-grow">
         {points.map((point, index) => (
           <li key={index} className="flex items-start text-base">
-            <span className="flex-shrink-0 mr-2 text-brand-secondary font-bold text-xl leading-none">&bull;</span> {/* Custom bullet */}
+            <span className="flex-shrink-0 mr-2 text-brand-primary font-bold text-xl leading-none">&bull;</span> {/* Custom bullet */}
             {point}
           </li>
         ))}

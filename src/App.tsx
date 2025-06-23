@@ -18,6 +18,7 @@ import PricingManagement from "./pages/admin/PricingManagement";
 import ErrorAlert from "./components/ErrorAlert";
 import SuccessAlert from "./components/SuccessAlert";
 import ScheduleManagement from "./pages/admin/ScheduleManagement";
+import DeepCleaning from "./pages/DeepCleaning";
 
 // Protected Route wrapper component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -43,6 +44,9 @@ const Become = lazy(() => import("./pages/BecomeCleaner"));
 const GiftVoucher = lazy(() => import("./pages/Gift"));
 const Reclean = lazy(() => import("./pages/Reclean"));
 const Blog = lazy(() => import("./pages/Blog"));
+const HouseCleaning = lazy(() => import("./pages/HouseCleaning"));
+const DeppCleaning = lazy(() => import("./pages/DeepCleaning"));
+
 
 function App() {
   return (
@@ -132,6 +136,22 @@ function App() {
                       <ScheduleManagement />
                     </AdminLayout>
                   </AdminRoute>
+                }
+              />
+              <Route
+                path="/prcing-house-cleaning"
+                element={
+                    <Layout>
+                      <HouseCleaning />
+                    </Layout>
+                }
+              />
+              <Route
+                path="/prcing-deep-cleaning"
+                element={
+                    <Layout>
+                      <DeepCleaning />
+                    </Layout>
                 }
               />
             </Routes>

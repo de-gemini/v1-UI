@@ -190,7 +190,7 @@ export default function Blog() {
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
         }}>
-        <h1 className="font-[700] text-[30px] md:text-[40px] lg:text-[40px] text-brand-secondary">
+        <h1 className="font-[700] text-[30px] md:text-[40px] lg:text-[40px] text-brand-primary">
           Cleaning Is No Longer <br />
           Your Burden
         </h1>

@@ -352,7 +352,7 @@ const Home = () => {
         <div className="relative z-10 text-left w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8">
           <div className="w-full lg:w-1/2">
             {/* Heading */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl nunito-sans-title text-brand-secondary leading-tight mb-8 drop-shadow-sm">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl nunito-sans-title text-brand-text leading-tight mb-8 drop-shadow-sm">
               Best Cleaning
               <br />
               Services In London
@@ -363,7 +363,7 @@ const Home = () => {
               {features.map((feature, index) => (
                 <div key={index} className="flex items-center text-purple-800">
                   <Check className="h-6 w-6 text-brand-primary mr-3 flex-shrink-0" />
-                  <span className="text-lg sm:text-xl nunito-sans-text text-brand-secondary">
+                  <span className="text-lg sm:text-xl nunito-sans-text text-brand-text">
                     {feature}
                   </span>
                 </div>
@@ -405,12 +405,12 @@ const Home = () => {
         }}>
         <div className="py-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-5xl mx-auto text-left">
-            <h2 className="text-3xl sm:text-4xl font-extrabold nunito-sans-heading text-brand-secondary mb-4">
+            <h2 className="text-3xl sm:text-4xl font-extrabold nunito-sans-heading text-brand-primary mb-4">
               Trusted service
             </h2>
             <p className="text-xl sm:text-2xl text-gray-700 flex items-center">
               See our{" "}
-              <span className="font-bold text-brand-secondary ml-2">1,268</span>{" "}
+              <span className="font-bold text-brand-primary ml-2">1,268</span>{" "}
               reviews on
               <span className="inline-flex items-center ml-3 text-brand-primary nunito-sans-heading">
                 <Star className="h-6 w-6 fill-current text-brand-primary  mr-1" />{" "}
@@ -443,6 +443,7 @@ const Home = () => {
             <CostCard
               title="Regular house cleaning"
               price="from £17/h"
+              text="-"
               inputPlaceholder="Enter your full post code here"
               buttonText="QUOTE ME"
               onQuoteMeClick={handleRegularQuote}
@@ -452,6 +453,7 @@ const Home = () => {
           <CostCard
             title="One-off domestic cleaning"
             price="from £19/h"
+            text="-"
             inputPlaceholder="Enter your full post code here"
             buttonText="QUOTE ME"
             onQuoteMeClick={handleOneOffQuote}
@@ -464,14 +466,14 @@ const Home = () => {
         <HowItWorksSection />
       </section>
 
-      <h1 className="text-center text-brand-secondary nunito-sans-heading text-[32px] font-[800] mb-5">
+      <h1 className="text-center text-brand-primary nunito-sans-heading text-[32px] font-[800] mb-5">
         What is included in eMop cleaning?
       </h1>
       {/* Service list section */}
       <div className="max-w-7xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden md:flex">
         {/* Left Section: Text Content */}
         <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-          <div className="flex items-center text-brand-secondary mb-6">
+          <div className="flex items-center text-brand-primary mb-6">
             <Sofa className="w-8 h-8 mr-3 text-brand-secondary" />
             <h2 className="text-xl sm:text-2xl font-bold nunito-sans-heading">
               Bedroom, living, dining, office rooms

@@ -5,6 +5,7 @@ import { MapPin } from 'lucide-react';
 interface CostCardProps {
   title: string;
   price: string;
+  text: string;
   inputPlaceholder: string;
   buttonText: string;
   onQuoteMeClick?: (postcode: string) => void; 
@@ -14,6 +15,7 @@ interface CostCardProps {
 export const CostCard: React.FC<CostCardProps> = ({
   title,
   price,
+  text,
   inputPlaceholder,
   buttonText,
   onQuoteMeClick,
@@ -30,12 +32,14 @@ export const CostCard: React.FC<CostCardProps> = ({
 
   return (
     <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center border border-gray-500 hover:border hover:border-brand-secondary transition-all duration-75">
-      <h3 className="text-2xl font-bold text-brand-secondary mb-2 text-center">{title}</h3>
-      <p className="text-brand-secondary text-xl font-semibold mb-6 text-center">{price}</p>
+      <h3 className="text-2xl font-bold text-brand-primary mb-2 text-center">{title}</h3>
+      <p className="text-brand-primary text-xl font-semibold mb-6 text-center">{price}</p>
+      <p className="text-brand-primary text-xl font-semibold mb-6 mt-1 text-center">{text}</p>
+
 
       {/* Postcode Input */}
       <div className="flex items-center w-full max-w-xs bg-white border border-purple-300 rounded-lg p-3 mb-6">
-        <MapPin className="h-5 w-5 text-brand-secondary mr-3 flex-shrink-0" />
+        <MapPin className="h-5 w-5 text-brand-primary mr-3 flex-shrink-0" />
         <input
           type="text"
           placeholder={inputPlaceholder}
