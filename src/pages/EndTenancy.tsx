@@ -1,9 +1,12 @@
+
+
+
 import { Check, ChevronDown, MapPin } from "lucide-react";
 import { CostCard } from "../components/Postcode";
 import { useState } from "react";
 import { HowItWorksSection } from "../components/HowItWorks";
 
-export default function OfficeCleaning() {
+export default function EndTenancy() {
   const [postcode, setPostcode] = useState<string>("");
   const [openItemId, setOpenItemId] = useState<string | null>
   (null);
@@ -37,30 +40,26 @@ export default function OfficeCleaning() {
   ];
 
   const whyChoose = [
-    "The primary responsibility of an office cleaner is to perform general cleaning tasks close to the office. Frequently, you will mention to the person or business what cleaning duties you want the office cleaners to carry out.",
-    "These chores include sweeping, dusting, vacuuming, mopping, emptying trash cans, and more. If you have a bathroom and kitchen area, the toilets will be cleaned and bleached, and the floors will be mopped. The kitchen will be wiped down and the stove will be cleaned.",
-    "Along with offering a general clean, a deep clean will emphasise improving the level of hygiene. The cleaners will get rid of stubborn stains and/or grime, and enhance the general hygienic conditions in your office.",
-    "ORegular office cleanings can be done in accordance with your needs; depending on the size of the workplace and the number of staff you recruit, you might need a cleaner to come in every day, every two days, or every three days.",
-    "Cleaners generally operate outside of regular business hours, such as early in the morning or late in the afternoon, to reduce disruption to daily office operations. However, the cleaning contract ought to mention the hours.",
-    "To be clear, everything listed below is included in our office cleaning service. This includes dusting every piece of furniture, washing every glass surface, vacuuming and mopping the floors, removing the trash, and doing tests for ATP and hygiene.",
+    "There are a number of variables that can affect the cost of end of tenancy cleaning. First and foremost, the size of the property is important. Larger properties cost more, since cleaning them takes more time, labor, and resources.",
+    "Second, the property's condition is quite important. In comparison to a property that needs a thorough deep cleaning to get it back to its original cleanliness, cleaning a well-maintained property may be easier and less expensive.",
+    "The number of rooms and other areas that need to be cleaned, such as the number of bathrooms, kitchens, and living spaces, is another consideration. The price might also be affected by the existence of particular objects that need special maintenance, like professional carpet or upholstery cleaning.",
+    "OA price rise may also result from the addition of extra services like oven cleaning, fridge, ironing, microwave, bed making, outdoor cleaning, laundry, kitchen, bookcase and window cleaning.",
+    "eMop may charge more if you need urgent or same-day cleaning services because we may need to add more workers or adjust their timetable.",
+    "Last but not least, end of tenancy cleaning prices may differ depending on where the property is located. A professional cleaning service agency should be consulted to provide exact tenancy cleaning quotes based on these variables.",
   ];
 
     const extraServices = [
       {
-        title: "Size of the office",
-        description: "The size of the office has the most noticeable effect on cleaning expenses. Larger spaces necessitate more time, manpower, and cleaning materials, which inevitably drives up the overall cost. Larger offices incur higher costs because cleaning fees are often calculated based on square footage.",
+        title: "Clear prices",
+        description: "Prices that are transparent and free of ambiguity enable customers to make well-informed choices. Ensuring there are no surprises or hidden fees improves client happiness and trust. Most cleaning companies may hide their service costs, but for eMop, you know the price of the professional cleaning services at the moment of booking.",
       },
       {
-        title: "Frequency of cleaning",
-        description: "How frequently cleaning services are employed has the biggest impact on costs. Cleaning an office on a daily basis will be more expensive than doing so once or twice a week. The cleaning schedule can be modified in accordance with the requirements and cost constraints of the office.",
+        title: "Pay-as-you-go approach",
+        description: "Your bank account will be put on hold to cover the projected cost of your reservation. You will only be charged for the time a tenancy cleaner actually worked after the cleaning session is over. You only pay for the actual time they spent cleaning your home.",
       },
       {
-        title: "Type of cleaning",
-        description: "Cleaning requirements differ depending on the type of workplace. As an illustration, a creative agency with an open floor design could require more frequent cleaning than a law firm with private offices.",
-      },
-      {
-        title: "Specialized equipment and correct cleaning products",
-        description: "It may be necessary to use specialised cleaning tools and solutions on specific office supplies and surfaces, which will raise the overall cost. For instance, expensive furniture or fragile gadgets may require extra cleaning care.",
+        title: "Insured and accredited cleaners",
+        description: "A thorough background check is carried out on our end of tenancy cleaners to examine their past records. This is to ensure the safety of our customers. In addition to that, our professional clean team are duly insured and licensed to carry out cleaning activities in the UK. They are trained and have become professional cleaners over time and can fit into any professional cleaning company. You can be sure to get professional end of tenancy cleaning services when you choose eMop. If you need office cleaning also, eMop cleaners can help also.",
       },
     ];
 
@@ -95,9 +94,11 @@ export default function OfficeCleaning() {
     ];
 
   const payment = [
-    "This service means that payment on our website is handled by a safe third-party supplier. Once the job is finished, your card won't be charged until then. It's quite practical to pay as you go for cleaning solutions.",
-    "Without committing to a lengthy contract, you can utilise it to clean your property or place of business. You make the necessary payments, and the cleaners then arrive and take care of everything.",
-    "For customers who may want a flexible and non-committing cleaning solution, this may be a fantastic choice."
+    "Depending on the expert service you pick and what services they offer, the specifics of an end of tenancy clean will vary. Normally, your home will receive a deep clean, including dusting and cleaning any cabinets, cupboards, and drawers by a professional cleaner to remove any stains.",
+    "The sinks, bathtubs, and showers will be scrubbed clean, as well as any en suite bathrooms, and the tiles will be cleaned to get rid of any mold. In-depth limescale removal cleaning will be performed on the shower head.",
+    "Deep cleaning of all surfaces, including the floors, walls, skirting boards and ceilings, is typically part of the procedure. Ovens, refrigerators, washing machines, and other kitchen appliances all receive thorough interior and exterior cleaning.",
+    "The fixtures, tiles, and grout in bathrooms and kitchens go through a thorough cleaning and disinfection process. In addition to completely vacuuming or steam cleaning the carpets and furniture, windows, frames, and sills are cleaned. All areas are dusted, and cobwebs are also removed.",
+    "Hiring an end of tenancy cleaning team normally guarantees that the home is left in immaculate shape for the subsequent tenants and may encompass other particular activities as needed."
   ];
 
   const [showAll, setShowAll] = useState<boolean>(false);
@@ -119,7 +120,7 @@ export default function OfficeCleaning() {
   const displayExtraServices = showAll
     ? extraServices
     : extraServices.slice(0, initialItemsForExtraServices);
-  const initialItemsForPayment = 3;
+  const initialItemsForPayment = 1;
   const displayPayment = showAll
     ? payment
     : payment.slice(0, initialItemsForPayment);
@@ -153,27 +154,27 @@ export default function OfficeCleaning() {
   const faqData: FAQItemData[] = [
     {
       id: "charge-per-hour",
-      question: "How often does an office get cleaned?",
+      question: "Do I need to pay a deposit?",
       answer:
-        "To keep it clean and organised, a workplace usually gets cleaned daily or on a regular schedule. Depending on the needs and size of the office, the frequency may change.",
+        "Payment according to end of tenancy cleaning prices is made on our website via a secure 3rd-party provider. Funds will only be taken from your card once the job has been completed. However, please note that as soon as the booking is confirmed, the estimated amount of the job is pre-authorised on your card to be sure the payment will go through after the cleaning job is completed.",
     },
     {
       id: "house-cost",
-      question: "How long should an office take to clean?",
+      question: "Can you provide an accurate estimate for my clean?",
       answer:
-        "The size, amount of debris, and cleaning chores involved will all affect how long it takes to clean an office. Typically, it could take up to three hours or longer.",
+        "This is possible when you provide us with the necessary information about your property. Information like the size of your property, the general state of the apartment or property, additional services you require, and the number of cleaners you need, etc. will help us give you an accurate estimate for your cleaning need.",
     },
     {
       id: "pay-perp-clean",
-      question: "Do you do cleaning, before, during or after office hours?",
+      question: "Are there any supplementary costs?",
       answer:
-        "In order to minimise disturbance to everyday office operations, cleaners typically work outside of regular business hours, such as early in the morning or late in the afternoon. However, you and the person or cleaning service should come to an agreement over the hours. You will be required to pay more if you need a cleaner during office hours.",
+        "If you place an order that includes equipment, there will be an extra fee. When placing an order, please ask the cleaner to include all the cleaning materials if you don't have your own equipment. Extra costs may be added for additional services like window, oven, fridge, bookcase, carpet cleaning, etc.",
     },
     {
       id: "standard-cleaning-price",
-      question: "Is it safe to give cleaners keys to our office?",
+      question: "Do you charge VAT?",
       answer:
-        "Keys to the office should only be given to cleaners under strict supervision. Make sure the commercial cleaning service is reliable, performs background checks, and has the necessary security measures in place to protect your office building.",
+        "Prices may include VAT unless it is clearly stated otherwise in the estimated cost.",
     },
   ];
 
@@ -186,9 +187,9 @@ export default function OfficeCleaning() {
           <div className="w-full lg:w-1/2">
             {/* Heading */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl nunito-sans-title text-brand-primary leading-tight mb-8 drop-shadow-sm">
-              Office cleaning prices
+              End of tenancy cleaning
               <br />
-              in London
+              prices
             </h1>
 
             {/* Features List */}
@@ -227,7 +228,7 @@ export default function OfficeCleaning() {
       {/* Post code section */}
       <section className="font-sans antialiased mt-[3rem] mb-[3rem] bg-gray-50 py-4 px-4 sm:px-6 lg:px-8">
         <h1 className="text-[30px] font-[700] text-brand-primary nunito-sans-heading mb-8 md:mb-12">
-        What is the price of office cleaning?
+        End of tenancy professional cleaning cost
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mt-4">
           <div className="relative">
@@ -235,9 +236,9 @@ export default function OfficeCleaning() {
               Cashback up to £150
             </div>
             <CostCard
-              title="Office cleaning"
+              title="End of Tenancy cleaning"
               price="from £19"
-              text="Professional cleaning and maintenance services for workplaces and other business settings are part of our office cleaning service. Vacuuming, dusting, sanitising toilets, and maintaining a neat space for staff and customers are among the duties carried out by eMop cleaners."
+              text="An end of tenancy cleaning service is a professional cleaning and maintenance task carried out at the conclusion of a rental contract. In order to get the place ready for new renters, it attempts to bring it back to its pre-damage state while maintaining cleanliness and fixing any issues in the entire property."
               inputPlaceholder="Enter your full post code here"
               buttonText="QUOTE ME"
               onQuoteMeClick={handleRegularQuote}
@@ -247,7 +248,7 @@ export default function OfficeCleaning() {
       </section>
 
       <h1 className="text-brand-primary ml-[1rem] md:ml-[2rem] lg:ml-[3rem] text-xl">
-      Types of office cleaning and their costs
+      Average price for end of tenancy cleaning
       </h1>
 
       <div className="max-w-7xl mx-auto mt-4 bg-white rounded-lg shadow-lg overflow-hidden md:flex">
@@ -272,15 +273,6 @@ export default function OfficeCleaning() {
             
           </div>
 
-          <p className="text-gray-700 text-base nunito-sans-text sm:text-lg mb-6">
-          Vacuuming and mopping the floors, washing the windows, cleaning the bathrooms (cleaning the sink, wiping the mirrors, cleaning the toilet and bath), organising the workstations and cleaning the pantry are all regular cleaning duties.
-          </p>
-
-          <p className="text-gray-700 text-base nunito-sans-text sm:text-lg mb-6">
-          A routine cleaning package also takes care of difficult-to-reach areas including workstations, chairs, light switches, remote controls, panels, screens, doors, floors, stairs, walls, and other furniture in a busy office.
-
-Deep cleaning these areas typically requires specialised tools and/or techniques, which lengthens the process and increases the cost.
-          </p>
 
           <p className="text-gray-700 text-base nunito-sans-text sm:text-lg mb-6">
           eMop’s average office cleaning cost is £17/h. The frequencies are listed below:
@@ -302,6 +294,8 @@ Deep cleaning these areas typically requires specialised tools and/or techniques
             ))}
           </ul>
 
+          <p className="text-gray-700 text-base nunito-sans-text sm:text-lg mb-6">End of tenancy cleaning prices for a one-bedroom apartment normally costs between £100 and £200 in the UK. The price might range from £150 to £300 or more for bigger homes like two- or three-bedroom apartments. Based on the number of bedrooms, bathrooms, and total square footage, the price might vary dramatically and be very competitive.</p>
+
 
           {/* See more/See less button */}
           {HouseCleaning.length > initialItemsForHall && (
@@ -318,7 +312,7 @@ Deep cleaning these areas typically requires specialised tools and/or techniques
         {/*Left Section: Image */}
         <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
           <div className="flex items-center text-brand-primary nunito-sans-heading mb-6">
-            <h2 className="text-xl sm:text-2xl font-bold">What's included in office cleaning?</h2>
+            <h2 className="text-xl sm:text-2xl font-bold">What Determines the Price of End of Tenancy Cleaning?</h2>
           </div>
 
           <ul className="text-gray-700 space-y-2 mb-6">
@@ -350,7 +344,7 @@ Deep cleaning these areas typically requires specialised tools and/or techniques
         {/*Right Section: Text Content */}
         <div className="md:w-1/2 overflow-hidden">
           <img
-            src="https://www.emop.co.uk/static/redesign/images/services/office/1.jpg"
+            src="https://www.emop.co.uk/img/borough-2.jpg"
             alt="Cleaning services in living room"
             className="w-full h-full object-cover object-center"
             onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
@@ -363,13 +357,13 @@ Deep cleaning these areas typically requires specialised tools and/or techniques
         </div>
       </div>
 
-      {/* Different */}
-
       <div className="max-w-7xl mx-auto mt-[2.5rem] md:mt-[4rem] lg:mt-[5rem] bg-white rounded-lg shadow-lg overflow-hidden md:flex">
+        
+
         {/*Right Section: Text Content */}
         <div className="md:w-1/2 overflow-hidden">
           <img
-            src="https://www.emop.co.uk/static/redesign/images/services/office/5.jpg"
+            src="https://www.emop.co.uk/img/borough-3.jpg"
             alt="Cleaning services in living room"
             className="w-full h-full object-cover object-center"
             onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
@@ -380,6 +374,43 @@ Deep cleaning these areas typically requires specialised tools and/or techniques
             }}
           />
         </div>
+
+
+        {/*Left Section: Image */}
+        <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
+          <div className="flex items-center text-brand-primary nunito-sans-heading mb-6">
+            <h2 className="text-xl sm:text-2xl font-bold">What does an end of tenancy cleaning price include?</h2>
+          </div>
+
+          <ul className="text-gray-700 space-y-2 mb-6">
+            {displayPayment.map((service, index) => (
+              <li key={index} className="flex items-start">
+                <span className="flex-shrink-0 mr-3 text-brand-secondary">
+                  <svg
+                    className="w-4 h-4 mt-1"
+                    fill="currentColor"
+                    viewBox="0 0 20 20">
+                    <path d="M7 3a1 1 0 00-1 1v1a1 1 0 002 0V4a1 1 0 00-1-1zM9 5a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 7a1 1 0 00-1 1v1a1 1 0 002 0V8a1 1 0 00-1-1zM11 7a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 9a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 9a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 11a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 11a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 13a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 13a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM10 20a10 10 0 100-20 10 10 0 000 20zm0-2a8 8 0 100-16 8 8 0 000 16z" />
+                  </svg>
+                </span>
+                {service}
+              </li>
+            ))}
+          </ul>
+
+          {/* See more/See less button */}
+          {payment.length > initialItemsForPayment && (
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="text-brand-primary font-semibold text-left self-start hover:underline focus:outline-none">
+              {showAll ? "See less" : "See more"}
+            </button>
+          )}
+        </div>
+      </div>
+
+
+      <div className="max-w-7xl mx-auto mt-[2.5rem] md:mt-[4rem] lg:mt-[5rem] bg-white rounded-lg shadow-lg overflow-hidden md:flex">
 
         {/*Left Section: Image */}
         <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
@@ -423,57 +454,11 @@ Deep cleaning these areas typically requires specialised tools and/or techniques
             </button>
           )}
         </div>
-      </div>
-
-
-      <div className="max-w-7xl mx-auto mt-[2.5rem] md:mt-[4rem] lg:mt-[5rem] bg-white rounded-lg shadow-lg overflow-hidden md:flex">
-
-        {/*Left Section: Image */}
-        <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-          <div className="flex items-center text-brand-primary nunito-sans-heading mb-6">
-          </div>
-
-          <ul className="text-gray-700 space-y-2 mb-6">
-            {displayDifferentCleaning.map((service, index) => (
-              <li key={index} className="flex items-start">
-                <span className="flex-shrink-0 mr-3 text-brand-secondary">
-                  <svg
-                    className="w-4 h-4 mt-1"
-                    fill="currentColor"
-                    viewBox="0 0 20 20">
-                    <path d="M7 3a1 1 0 00-1 1v1a1 1 0 002 0V4a1 1 0 00-1-1zM9 5a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 7a1 1 0 00-1 1v1a1 1 0 002 0V8a1 1 0 00-1-1zM11 7a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 9a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 9a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 11a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 11a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 13a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 13a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM10 20a10 10 0 100-20 10 10 0 000 20zm0-2a8 8 0 100-16 8 8 0 000 16z" />
-                  </svg>
-                </span>
-                <div className="flex flex-col gap-2">
-                <p className="text-brand-primary font-extrabold text-base nunito-sans-text sm:text-lg mb-6">
-                  {service.title}
-                </p>
-
-                <p className="text-gray-700 text-base nunito-sans-text sm:text-lg mb-6">
-                  {service.description}
-                </p>
-
-                </div>
-              </li>
-            ))}
-          </ul>
-
-          {/* See more/See less button */}
-          {DifferentCleaning.length > initialItemsForDifferentCleaning && (
-            <button
-              onClick={() => setShowAll(!showAll)}
-              className="text-brand-primary font-semibold text-left self-start hover:underline focus:outline-none">
-              {showAll ? "See less" : "See more"}
-            </button>
-          )}
-        </div>
-
-
 
         {/*Right Section: Text Content */}
         <div className="md:w-1/2 overflow-hidden">
           <img
-            src="https://www.emop.co.uk/static/redesign/images/services/office/6.jpg"
+            src="https://www.emop.co.uk/img/borough-5.jpg"
             alt="Cleaning services in living room"
             className="w-full h-full object-cover object-center"
             onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
@@ -486,67 +471,6 @@ Deep cleaning these areas typically requires specialised tools and/or techniques
         </div>
 
         
-      </div>
-
-
-      <div className="max-w-7xl mx-auto mt-[2.5rem] md:mt-[4rem] lg:mt-[5rem] bg-white rounded-lg shadow-lg overflow-hidden md:flex">
-        {/*Right Section: Text Content */}
-        <div className="md:w-1/2 overflow-hidden">
-          <img
-            src="https://www.emop.co.uk/static/redesign/images/services/office/2.jpg"
-            alt="Cleaning services in living room"
-            className="w-full h-full object-cover object-center"
-            onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-              const target = e.target as HTMLImageElement;
-              target.src =
-                "https://placehold.co/800x600/e0e0e0/555555?text=Image+Not+Found";
-              target.alt = "Fallback image: Cleaning services image not found.";
-            }}
-          />
-        </div>
-
-        {/*Left Section: Image */}
-        <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-          <div className="flex items-center text-brand-primary nunito-sans-heading mb-6">
-            <h2 className="text-xl sm:text-2xl font-bold">
-            Why choose eMop?
-            </h2>
-          </div>
-
-          <ul className="text-gray-700 space-y-2 mb-6">
-            {displayChoosing.map((service, index) => (
-              <li key={index} className="flex items-start">
-                <span className="flex-shrink-0 mr-3 text-brand-secondary">
-                  <svg
-                    className="w-4 h-4 mt-1"
-                    fill="currentColor"
-                    viewBox="0 0 20 20">
-                    <path d="M7 3a1 1 0 00-1 1v1a1 1 0 002 0V4a1 1 0 00-1-1zM9 5a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 7a1 1 0 00-1 1v1a1 1 0 002 0V8a1 1 0 00-1-1zM11 7a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 9a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 9a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 11a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 11a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 13a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 13a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM10 20a10 10 0 100-20 10 10 0 000 20zm0-2a8 8 0 100-16 8 8 0 000 16z" />
-                  </svg>
-                </span>
-                <div className="flex flex-col gap-2">
-                <p className="text-brand-primary font-extrabold text-base nunito-sans-text sm:text-lg mb-6">
-                  {service.title}
-                </p>
-
-                <p className="text-gray-700 text-base nunito-sans-text sm:text-lg mb-6">
-                  {service.description}
-                </p>
-
-                </div>
-              </li>
-            ))}
-          </ul>
-
-          {/* See more/See less button */}
-          {choosing.length > initialItemsForChoosing && (
-            <button
-              onClick={() => setShowAll(!showAll)}
-              className="text-brand-primary font-semibold text-left self-start hover:underline focus:outline-none">
-              {showAll ? "See less" : "See more"}
-            </button>
-          )}
-        </div>
       </div>
 
       <section className="w-full mb-4">
