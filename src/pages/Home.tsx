@@ -422,7 +422,7 @@ const Home = () => {
         </div>
 
         <div className="font-sans antialiased bg-gray-50 min-h-screen">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-secondary text-center py-10">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-primary text-center py-10">
             Our Featured Services
           </h2>
           <ServiceCarousel services={serviceData} />

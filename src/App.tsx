@@ -46,6 +46,7 @@ const Reclean = lazy(() => import("./pages/Reclean"));
 const Blog = lazy(() => import("./pages/Blog"));
 const HouseCleaning = lazy(() => import("./pages/HouseCleaning"));
 const DeppCleaning = lazy(() => import("./pages/DeepCleaning"));
+const OfficeCleaning = lazy(() => import("./pages/OfficeCleaning"));
 
 
 function App() {
@@ -151,6 +152,14 @@ function App() {
                 element={
                     <Layout>
                       <DeepCleaning />
+                    </Layout>
+                }
+              />
+              <Route
+                path="/prcing-office-cleaning"
+                element={
+                    <Layout>
+                      <OfficeCleaning />
                     </Layout>
                 }
               />
