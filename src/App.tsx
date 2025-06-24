@@ -48,6 +48,8 @@ const HouseCleaning = lazy(() => import("./pages/HouseCleaning"));
 const DeppCleaning = lazy(() => import("./pages/DeepCleaning"));
 const OfficeCleaning = lazy(() => import("./pages/OfficeCleaning"));
 const EndTenancy = lazy(() => import("./pages/EndTenancy"));
+const CarpetCleaning = lazy(() => import("./pages/CarpetCleaning"));
+
 
 
 function App() {
@@ -169,6 +171,14 @@ function App() {
                 element={
                     <Layout>
                       <EndTenancy />
+                    </Layout>
+                }
+              />
+              <Route
+                path="/prcing-carpet-cleaning"
+                element={
+                    <Layout>
+                      <CarpetCleaning />
                     </Layout>
                 }
               />
