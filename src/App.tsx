@@ -49,6 +49,8 @@ const DeppCleaning = lazy(() => import("./pages/DeepCleaning"));
 const OfficeCleaning = lazy(() => import("./pages/OfficeCleaning"));
 const EndTenancy = lazy(() => import("./pages/EndTenancy"));
 const CarpetCleaning = lazy(() => import("./pages/CarpetCleaning"));
+const Upholstery = lazy(() => import("./pages/Upholstery"));
+
 
 
 
@@ -179,6 +181,14 @@ function App() {
                 element={
                     <Layout>
                       <CarpetCleaning />
+                    </Layout>
+                }
+              />
+              <Route
+                path="/prcing-upholstery-cleaning"
+                element={
+                    <Layout>
+                      <Upholstery />
                     </Layout>
                 }
               />
