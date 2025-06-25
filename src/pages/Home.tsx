@@ -148,7 +148,7 @@ const Home = () => {
     "Taking out rubbish and replacing with new bin liners",
   ];
 
-  const dummyProfessionals: Professional[] = [
+  const dummyProfessionals = [
     {
       id: 1,
       imageSrc:

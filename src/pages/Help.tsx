@@ -16,6 +16,7 @@ interface CardData {
   
 
 export default function Help() {
+  const myYear = new Date().getFullYear()
     const cardsData: CardData[] = [
         {
           id: 'clients-faq',
@@ -43,13 +44,13 @@ export default function Help() {
                 <div className="w-full flex items-center justify-center gap-3 md:gap-[24px] lg:gap-[5rem]">
                     <div className=" w-[4rem] md:w-[5rem] lg:w-[7rem]">
                     <a href="/" className="flex items-center">
-          <h1 className='text-brand-secondary  text-[40px]'>
+          <h1 className='text-brand-primary text-[20px]'>
           De Gemini Services LTD
           </h1>
         </a>
                     </div>
                   <Link to='/home/registercleaner'>
-                    <button className="border border-brand-secondary p-4 transition text-brand-secondary hover:text-white hover:bg-brand-secondary duration-300">
+                    <button className="border border-brand-primary p-4 transition text-brand-primary hover:text-white hover:bg-brand-primary duration-300">
                         <p className="text-lg">
                             Become a cleaner
                         </p>
@@ -60,7 +61,7 @@ export default function Help() {
             </nav>
             <div className="font-sans antialiased bg-gray-50 min-h-screen py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-secondary mb-12 text-center uppercse">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-primary mb-12 text-center uppercse">
         Help centre
         </h1>
 
@@ -95,7 +96,7 @@ export default function Help() {
               <a
                 href={card.linkHref}
                 className="absolute bottom-6 opacity-0 invisible group-hover:opacity-100 group-hover:visible
-                           bg-brand-secondary hover:bg-brand-secondary text-white font-semibold py-3 px-6 rounded-lg shadow-md
+                           bg-brand-primary hover:bg-blue-400 text-white font-semibold py-3 px-6 rounded-lg shadow-md
                            transition-all duration-300 ease-in-out transform translate-y-4 group-hover:translate-y-0
                            text-base whitespace-nowrap"
               >
@@ -131,7 +132,7 @@ export default function Help() {
             {/* Column 1: Logo (Left aligned on desktop) */}
             <div className="lg:col-span-1 flex justify-center md:justify-start">
             <a href="/" className="flex items-center">
-          <h1 className='text-brand-secondary  text-[40px]'>
+          <h1 className='text-brand-primary  text-[40px]'>
           De Gemini Services LTD
           </h1>
         </a>
@@ -224,7 +225,7 @@ export default function Help() {
           {/* Bottom Copyright and Address */}
           <div className="mt-8 w-full border-t border-gray-200 pt-8 text-center text-xs text-gray-600 flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0">
             <p className="order-2 md:order-1">www.emop.co.uk</p>
-            <p className="order-1 md:order-2">Copyright © eMop 2024</p>
+          <p className="order-1 md:order-2">Copyright © eMop {myYear}</p>
             <p className="order-3 md:order-3">Registered office address: Suite 5 3rd Floor, Sovereign House 1 Albert Place, London, England, N1 0BQ</p>
           </div>
         </div>

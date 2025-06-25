@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { useRef } from 'react';
 // Import Swiper modules
 import { Pagination, Navigation, A11y } from 'swiper/modules';
 
@@ -101,9 +102,29 @@ const ProfessionalCard: React.FC<ProfessionalCardProps> = ({ professional }) => 
 
 // --- ProfessionalsCarousel Component (Integrates Swiper) ---
 export const ProfessionalsCarousel: React.FC<ProfessionalsCarouselProps> = ({ professionals }) => {
+  // Refs for custom navigation buttons
+  const prevRef = useRef<HTMLButtonElement | null>(null);
+  const nextRef = useRef<HTMLButtonElement | null>(null);
   return (
     <section className="bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto relative">
+
+        <button
+        ref={prevRef}
+        aria-label="Previous slide"
+        className="absolute z-10 left-2 top-1/2 -translate-y-1/2 bg-white border border-gray-300 shadow-lg rounded-full p-2 flex items-center justify-center hover:bg-brand-primary hover:text-white transition disabled:opacity-50 disabled:cursor-not-allowed"
+        style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}
+      >
+        <ArrowLeft className="w-6 h-6" />
+      </button>
+      <button
+        ref={nextRef}
+        aria-label="Next slide"
+        className="absolute z-10 right-2 top-1/2 -translate-y-1/2 bg-white border border-gray-300 shadow-lg rounded-full p-2 flex items-center justify-center hover:bg-brand-primary hover:text-white transition disabled:opacity-50 disabled:cursor-not-allowed"
+        style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}
+      >
+        <ArrowRight className="w-6 h-6" />
+      </button>
         
         <Swiper
           modules={[Pagination, Navigation, A11y]}

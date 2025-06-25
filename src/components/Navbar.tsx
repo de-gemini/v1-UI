@@ -82,7 +82,7 @@ const Navbar = () => {
   };
 
   const servicesLinks: Links[] = [
-    { name: 'Regular cleaning', href: '#' },
+    { name: 'Regular cleaning', href: '/regular-cleaning' },
     { name: 'Deep cleaning', href: '#' },
     { name: 'Office cleaning', href: '#' },
     { name: 'End of Tenancy cleaning', href: '#' },
