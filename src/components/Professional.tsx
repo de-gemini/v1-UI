@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { useRef } from 'react';
+
 // Import Swiper modules
 import { Pagination, Navigation, A11y } from 'swiper/modules';
 
@@ -105,35 +105,51 @@ export const ProfessionalsCarousel: React.FC<ProfessionalsCarouselProps> = ({ pr
   // Refs for custom navigation buttons
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
+
+  // No need for swiperInstance state or useEffect for navigation setup with this approach
+
   return (
     <section className="bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto relative">
 
         <button
-        ref={prevRef}
-        aria-label="Previous slide"
-        className="absolute z-10 left-2 top-1/2 -translate-y-1/2 bg-white border border-gray-300 shadow-lg rounded-full p-2 flex items-center justify-center hover:bg-brand-primary hover:text-white transition disabled:opacity-50 disabled:cursor-not-allowed"
-        style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}
-      >
-        <ArrowLeft className="w-6 h-6" />
-      </button>
-      <button
-        ref={nextRef}
-        aria-label="Next slide"
-        className="absolute z-10 right-2 top-1/2 -translate-y-1/2 bg-white border border-gray-300 shadow-lg rounded-full p-2 flex items-center justify-center hover:bg-brand-primary hover:text-white transition disabled:opacity-50 disabled:cursor-not-allowed"
-        style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}
-      >
-        <ArrowRight className="w-6 h-6" />
-      </button>
+          ref={prevRef}
+          aria-label="Previous slide"
+          className="swiper-button-prev absolute z-10 left-2 top-1/2 -translate-y-1/2 bg-white border border-gray-300 shadow-lg rounded-full p-2 flex items-center justify-center hover:bg-brand-primary hover:text-white transition disabled:opacity-50 disabled:cursor-not-allowed"
+          style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}
+        >
+          <ArrowLeft className="w-6 h-6" />
+        </button>
+        <button
+          ref={nextRef}
+          aria-label="Next slide"
+          className="swiper-button-next absolute z-10 right-2 top-1/2 -translate-y-1/2 bg-white border border-gray-300 shadow-lg rounded-full p-2 flex items-center justify-center hover:bg-brand-primary hover:text-white transition disabled:opacity-50 disabled:cursor-not-allowed"
+          style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}
+        >
+          <ArrowRight className="w-6 h-6" />
+        </button>
         
         <Swiper
           modules={[Pagination, Navigation, A11y]}
           spaceBetween={24} // Spacing between slides
           slidesPerView={1.2} // Default for mobile to show partial next slide
-          navigation // Enable navigation arrows
+          // Pass the refs directly to the navigation object.
+          // Swiper will look for these elements on initialization.
+          navigation={{
+            prevEl: prevRef.current,
+            nextEl: nextRef.current,
+          }}
           pagination={{ clickable: true }} // Enable clickable pagination dots
           loop={false} // Set to true if you want infinite loop
           className="mySwiper !pb-10" // Add padding bottom for pagination dots to avoid overlapping
+          // Use onBeforeInit to ensure navigation elements are available when Swiper initializes
+          onBeforeInit={(swiper) => {
+            if (swiper.params.navigation && typeof swiper.params.navigation !== 'boolean') {
+              const { navigation } = swiper.params;
+              navigation.prevEl = prevRef.current;
+              navigation.nextEl = nextRef.current;
+            }
+          }}
           breakpoints={{
             // When window width is >= 640px (sm)
             640: {

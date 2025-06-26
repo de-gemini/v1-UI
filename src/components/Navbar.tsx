@@ -83,11 +83,11 @@ const Navbar = () => {
 
   const servicesLinks: Links[] = [
     { name: 'Regular cleaning', href: '/regular-cleaning' },
-    { name: 'Deep cleaning', href: '#' },
-    { name: 'Office cleaning', href: '#' },
-    { name: 'End of Tenancy cleaning', href: '#' },
-    { name: 'Carpet cleaning', href: '#' },
-    { name: 'Upholstery cleaning', href: '#' },
+    { name: 'Deep cleaning', href: '/services-deep-cleaning' },
+    { name: 'Office cleaning', href: '/services-office-cleaning' },
+    { name: 'End of Tenancy cleaning', href: '/services-end-cleaning' },
+    { name: 'Carpet cleaning', href: '/services-carpet-cleaning' },
+    { name: 'Upholstery cleaning', href: '/services-upholstery-cleaning' },
     { name: 'Same Day cleaning', href: '#' },
     { name: 'Kitchen Deep Cleaning', href: '#' },
     { name: 'Rug Cleaning', href: '#' },

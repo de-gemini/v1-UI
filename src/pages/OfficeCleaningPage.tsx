@@ -6,7 +6,7 @@ import { useState } from "react";
 import { PriceCard } from "../components/PriceCard";
 import { HowItWorksSection } from "../components/HowItWorks";
 
-export default function RegularCleaning() {
+export default function OfficeCleaningPage() {
   const [openItemId, setOpenItemId] = useState<string | null>(null);
 
   interface ServiceItem {
@@ -265,7 +265,7 @@ export default function RegularCleaning() {
   ];
   return (
     <div className="min-h-screen bg-white overflow-x-hidden w-full">
-      <Banner title="Regular Cleaners in London" />
+      <Banner title="Office Cleaning Services in London" />
 
       {/* Carousel section */}
       <section
@@ -300,85 +300,14 @@ export default function RegularCleaning() {
         <ProfessionalsCarousel professionals={dummyProfessionals} />
       </section>
 
-      {/* Post code section */}
-      <section className="font-sans antialiased bg-gray-50 py-4 px-4 sm:px-6 lg:px-8">
-        <h1 className="text-[30px] font-[700] text-brand-primary nunito-sans-heading mb-8 md:mb-12">
-          How much does a house cleaner cost in London
-        </h1>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mt-4">
-          <div className="bg-gray-100 rounded-lg shadow-xl p-6 relative w-full max-w-sm mx-auto">
-            <h1 className="text-brand-primary text-[30px] font-bold">
-              What is included in regular cleaning in London?
-            </h1>
-
-            <ul className="mt-[3rem] flex flex-col gap-5">
-              <li className="flex gap-3">
-                <span className="flex-shrink-0 mr-3 text-brand-primary">
-                  <svg
-                    className="w-4 h-4 mt-1"
-                    fill="currentColor"
-                    viewBox="0 0 20 20">
-                    <path d="M7 3a1 1 0 00-1 1v1a1 1 0 002 0V4a1 1 0 00-1-1zM9 5a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 7a1 1 0 00-1 1v1a1 1 0 002 0V8a1 1 0 00-1-1zM11 7a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 9a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 9a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 11a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 11a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 13a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 13a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM10 20a10 10 0 100-20 10 10 0 000 20zm0-2a8 8 0 100-16 8 8 0 000 16z" />
-                  </svg>
-                </span>
-
-                <p>Tidying up the rooms</p>
-              </li>
-
-              <li className="flex gap-3">
-                <span className="flex-shrink-0 mr-3 text-brand-primary">
-                  <svg
-                    className="w-4 h-4 mt-1"
-                    fill="currentColor"
-                    viewBox="0 0 20 20">
-                    <path d="M7 3a1 1 0 00-1 1v1a1 1 0 002 0V4a1 1 0 00-1-1zM9 5a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 7a1 1 0 00-1 1v1a1 1 0 002 0V8a1 1 0 00-1-1zM11 7a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 9a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 9a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 11a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 11a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 13a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 13a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM10 20a10 10 0 100-20 10 10 0 000 20zm0-2a8 8 0 100-16 8 8 0 000 16z" />
-                  </svg>
-                </span>
-
-                <p>Wiping surfaces in kitchens and bathrooms</p>
-              </li>
-
-              <li className="flex gap-3">
-                <span className="flex-shrink-0 mr-3 text-brand-primary">
-                  <svg
-                    className="w-4 h-4 mt-1"
-                    fill="currentColor"
-                    viewBox="0 0 20 20">
-                    <path d="M7 3a1 1 0 00-1 1v1a1 1 0 002 0V4a1 1 0 00-1-1zM9 5a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 7a1 1 0 00-1 1v1a1 1 0 002 0V8a1 1 0 00-1-1zM11 7a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 9a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 9a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 11a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 11a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 13a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 13a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM10 20a10 10 0 100-20 10 10 0 000 20zm0-2a8 8 0 100-16 8 8 0 000 16z" />
-                  </svg>
-                </span>
-                <p>Cleaning floors</p>
-              </li>
-
-              <li className="flex gap-3">
-                <span className="flex-shrink-0 mr-3 text-brand-primary">
-                  <svg
-                    className="w-4 h-4 mt-1"
-                    fill="currentColor"
-                    viewBox="0 0 20 20">
-                    <path d="M7 3a1 1 0 00-1 1v1a1 1 0 002 0V4a1 1 0 00-1-1zM9 5a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 7a1 1 0 00-1 1v1a1 1 0 002 0V8a1 1 0 00-1-1zM11 7a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 9a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 9a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 11a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 11a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 13a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 13a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM10 20a10 10 0 100-20 10 10 0 000 20zm0-2a8 8 0 100-16 8 8 0 000 16z" />
-                  </svg>
-                </span>
-
-                <p>Taking out the rubbish</p>
-              </li>
-            </ul>
-          </div>
-          <div className="relative">
-            <PriceCard onQuoteMeClick={handleRegularQuote} />
-          </div>
-        </div>
-      </section>
+      
 
       <div className="bg-white p-8 md:p-12 lg:p-16 rounded-lg w-full max-w-4xl mx-auto my-12">
         <h2 className="text-2xl md:text-3xl font-bold text-brand-primary mb-4">
-          Regular cleaning service in London
+        Business office cleaning service in London
         </h2>
         <p className="text-gray-700 text-base md:text-lg mb-8">
-          Our standard cleaning service includes everything you need to get your
-          home in order as quickly as possible. You can book additional services
-          when you make your booking.
+        Our standard cleaning service includes everything you need to get your home in order as quickly as possible. You can book additional services when you make your booking.
         </p>
 
         <div className="flex flex-col sm:flex-row w-full bg-white rounded-lg overflow-hidden shadow-md border border-purple-300 focus-within:border-purple-500 transition-colors duration-200">
@@ -492,33 +421,48 @@ export default function RegularCleaning() {
       </div>
 
       <section className="mt-[4rem] w-full flex flex-col items-center justify-center">
-        <h1 className="text-brand-primary text-[25px] font-extrabold">Priority areas</h1>
+        <h1 className="text-brand-primary text-[25px]">Office cleaning</h1>
 
         <div className="grid max-w-6xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-center gap-[10px] mt-[2rem]">
           <div className="flex flex-col w-fit gap-[10px] border-[2px] p-4 rounded-[10px] border-gray-100">
             <h1 className="text-brand-primary text-[25px] font-bold">
-            Living room and bedroom
+              Stain removal with professional equipment
             </h1>
             <p className="text-brand-text mt-[1rem]">
-            Professional dusting of surfaces (including furniture, bed frames, bookcases, etc.), wiping the mirrors, mopping, hoovering the carpet, and wiping the picture frames. If needed, you can request changing the linens and bed covers and various other additional services.
+              The work of stain removal may be carried out by cleaners offering
+              office cleaning services utilizing expert equipment. This entails
+              spotting and eliminating various stains on a range of
+              office-related surfaces. The cleaners will employ specialized
+              equipment and cleaning solutions to efficiently remove any stains,
+              whether they be on carpets, furniture, or walls.
             </p>
           </div>
 
           <div className="flex flex-col w-fit gap-[10px] border-[2px] p-4 rounded-[10px] border-gray-100">
             <h1 className="text-brand-primary text-[25px] font-bold">
-            Kitchen
+              Interior and exterior window cleaning
             </h1>
             <p className="text-brand-text mt-[1rem]">
-            Wiping and polishing all surfaces and worktops, mopping and vacuuming the floors, cleaning equipment and appliances, washing the dishes, cleaning doors and handles. You can also request cleaning inside the fridge, the oven and the microwave, arranging things inside kitchen cabinets, etc.
+              Our cleaners will make sure that the windows are free of dust,
+              filth, smudges, and fingerprints. To get streak-free, immaculate
+              results on interior windows, cleaners can utilize window cleaning
+              products, squeegees, and microfiber cloths. To securely reach
+              upper windows when cleaning outside windows, you might need to use
+              ladders, poles, or even specialized tools like water-fed poles.
             </p>
           </div>
 
           <div className="flex flex-col w-fit gap-[10px] border-[2px] p-4 rounded-[10px] border-gray-100">
             <h1 className="text-brand-primary text-[25px] font-bold">
-            Bathroom and hallway
+              Balcony cleaning
             </h1>
             <p className="text-brand-text mt-[1rem]">
-            Polishing and sanitising the sink, the tiles, the toilet, the toilet seat, the bathtubs and/or the shower cubicle. Also, our cleaners hoover/sweep and mop the floors, polish the accessible surfaces and furniture, clean mirrors and glasses, remove fingerprints and marks from surfaces, wipe the skirting boards and the inside of the front door.
+              In office buildings with balconies or other outside spaces, our
+              cleaners can handle the job of cleaning the balcony. This includes
+              cleaning the furniture, railing, and balcony floor of any
+              collected dirt, dust, or debris. They can sweep up debris and
+              leaves with brooms, brushes, and vacuums, and wash the balcony's
+              surfaces with the proper cleaning solutions.
             </p>
           </div>
         </div>
