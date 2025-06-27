@@ -1,3 +1,6 @@
+
+
+
 import { ChevronDown, MapPin, Star } from "lucide-react";
 import Banner from "../components/Banner";
 import ImageSlider from "../components/ImageSlider";
@@ -5,8 +8,9 @@ import { ProfessionalsCarousel } from "../components/Professional";
 import { useState } from "react";
 import { PriceCard } from "../components/PriceCard";
 import { HowItWorksSection } from "../components/HowItWorks";
+import { DeepPriceCard } from "../components/DeepPriceCard";
 
-export default function RegularCleaning() {
+export default function SameDayCleaning() {
   const [openItemId, setOpenItemId] = useState<string | null>(null);
 
   interface ServiceItem {
@@ -69,19 +73,22 @@ export default function RegularCleaning() {
     },
     {
       id: "house-cost",
-      question: "Why is the estimated price for the cleaning more than what I chose?",
+      question:
+        "Why is the estimated price for the cleaning more than what I chose?",
       answer:
         "The minimum duration of the job is 3 hours. If the cleaner finishes early, please give them another task.",
     },
     {
       id: "pay-perp-clean",
-      question: "I need a quotation for end of tenancy / one off / carpet (combined) order",
+      question:
+        "I need a quotation for end of tenancy / one off / carpet (combined) order",
       answer:
         "Please request a quote on our website simply entering your postcode. Please add all items you need to be cleaned and you will receive the quotation for the service.",
     },
     {
       id: "standard-cleaning-price",
-      question: "Is there a guarantee of a refund if the job isn't done up to standard?",
+      question:
+        "Is there a guarantee of a refund if the job isn't done up to standard?",
       answer:
         "According to eMop policy we do not provide any refunds. However, in case of any complaint, we will investigate the case, review the evidence and get back to you with a proposed solution in accordance with eMop policy. The full description of the complaint followed by picture evidence will be requested.",
     },
@@ -272,7 +279,7 @@ export default function RegularCleaning() {
   ];
   return (
     <div className="min-h-screen bg-white overflow-x-hidden w-full">
-      <Banner title="Regular Cleaners in London" />
+      <Banner title="Same Day Cleaning in London" />
 
       {/* Carousel section */}
       <section
@@ -316,7 +323,7 @@ export default function RegularCleaning() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mt-4">
           <div className="bg-gray-100 rounded-lg shadow-xl p-6 relative w-full max-w-sm mx-auto">
             <h1 className="text-brand-primary text-[30px] font-bold">
-              What is included in regular cleaning in London?
+              What is included in deep cleaning in London?
             </h1>
 
             <ul className="mt-[3rem] flex flex-col gap-5">
@@ -330,7 +337,7 @@ export default function RegularCleaning() {
                   </svg>
                 </span>
 
-                <p>Tidying up the rooms</p>
+                <p>Dust all furniture including bottoms and sides</p>
               </li>
 
               <li className="flex gap-3">
@@ -343,7 +350,10 @@ export default function RegularCleaning() {
                   </svg>
                 </span>
 
-                <p>Wiping surfaces in kitchens and bathrooms</p>
+                <p>
+                  Clean all glass surfaces including cleaning and disinfect
+                  bathrooms
+                </p>
               </li>
 
               <li className="flex gap-3">
@@ -355,7 +365,9 @@ export default function RegularCleaning() {
                     <path d="M7 3a1 1 0 00-1 1v1a1 1 0 002 0V4a1 1 0 00-1-1zM9 5a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 7a1 1 0 00-1 1v1a1 1 0 002 0V8a1 1 0 00-1-1zM11 7a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 9a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 9a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 11a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 11a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 13a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 13a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM10 20a10 10 0 100-20 10 10 0 000 20zm0-2a8 8 0 100-16 8 8 0 000 16z" />
                   </svg>
                 </span>
-                <p>Cleaning floors</p>
+                <p>
+                  Cleaning appliances if requested and hoover or mop all floors
+                </p>
               </li>
 
               <li className="flex gap-3">
@@ -373,14 +385,14 @@ export default function RegularCleaning() {
             </ul>
           </div>
           <div className="relative">
-            <PriceCard onQuoteMeClick={handleRegularQuote} />
+            <DeepPriceCard onQuoteMeClick={handleRegularQuote} />
           </div>
         </div>
       </section>
 
       <div className="bg-white p-8 md:p-12 lg:p-16 rounded-lg w-full max-w-4xl mx-auto my-12">
         <h2 className="text-2xl md:text-3xl font-bold text-brand-primary mb-4">
-          Regular cleaning service in London
+          One-off deep cleaning service in London
         </h2>
         <p className="text-gray-700 text-base md:text-lg mb-8">
           Our standard cleaning service includes everything you need to get your
@@ -499,40 +511,53 @@ export default function RegularCleaning() {
       </div>
 
       <section className="mt-[4rem] w-full flex flex-col items-center justify-center">
-        <h1 className="text-brand-primary text-[25px] font-extrabold">Priority areas</h1>
+        <h1 className="text-brand-primary text-[25px] font-extrabold">
+          One-off deep cleaning for all occasions
+        </h1>
 
         <div className="grid max-w-6xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-center gap-[10px] mt-[2rem]">
           <div className="flex flex-col w-fit gap-[10px] border-[2px] p-4 rounded-[10px] border-gray-100">
             <h1 className="text-brand-primary text-[25px] font-bold">
-            Living room and bedroom
+              Annual one-time spring or autumn clean-ups
             </h1>
             <p className="text-brand-text mt-[1rem]">
-            Professional dusting of surfaces (including furniture, bed frames, bookcases, etc.), wiping the mirrors, mopping, hoovering the carpet, and wiping the picture frames. If needed, you can request changing the linens and bed covers and various other additional services.
+              To remove the accumulated filth, dust, and allergens that have
+              accumulated over time and ensure a fresh and clean living
+              environment, one-time deep cleaning is required during the spring
+              or autumn seasons.
             </p>
           </div>
 
           <div className="flex flex-col w-fit gap-[10px] border-[2px] p-4 rounded-[10px] border-gray-100">
             <h1 className="text-brand-primary text-[25px] font-bold">
-            Kitchen
+              When moving in or out of a rental property
             </h1>
             <p className="text-brand-text mt-[1rem]">
-            Wiping and polishing all surfaces and worktops, mopping and vacuuming the floors, cleaning equipment and appliances, washing the dishes, cleaning doors and handles. You can also request cleaning inside the fridge, the oven and the microwave, arranging things inside kitchen cabinets, etc.
+              Prior to moving into a new rental property, a one-time deep
+              cleaning is necessary to sterilise the area, get rid of any
+              lingering odors or stains, and guarantee a fresh start. To leave
+              the house in good shape when leaving, a thorough cleaning is
+              necessary.
             </p>
           </div>
 
           <div className="flex flex-col w-fit gap-[10px] border-[2px] p-4 rounded-[10px] border-gray-100">
             <h1 className="text-brand-primary text-[25px] font-bold">
-            Bathroom and hallway
+              Before and after an event or party
             </h1>
             <p className="text-brand-text mt-[1rem]">
-            Polishing and sanitising the sink, the tiles, the toilet, the toilet seat, the bathtubs and/or the shower cubicle. Also, our cleaners hoover/sweep and mop the floors, polish the accessible surfaces and furniture, clean mirrors and glasses, remove fingerprints and marks from surfaces, wipe the skirting boards and the inside of the front door.
+              A one-time deep cleaning is essential before holding an event or
+              party to make the space hospitable and hygienic for attendees.
+              Deep cleaning is required after the event to get rid of any
+              spills, stains, and general mess, and bring the area back to its
+              pre-event cleanliness.
             </p>
           </div>
         </div>
       </section>
 
       <h1 className="text-brand-primary mt-[4rem] ml-[1rem] md:ml-[2rem] lg:ml-[3rem] mb-[2rem] text-2xl font-extrabold">
-      eMop Regular Cleaning in London
+        Deep Cleaning Services with eMop in London
       </h1>
 
       <div className="max-w-7xl mx-auto mt-4 bg-white rounded-lg shadow-lg overflow-hidden md:flex">
@@ -587,7 +612,8 @@ export default function RegularCleaning() {
         <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
           <div className="flex items-center text-brand-primary nunito-sans-heading mb-6">
             <h2 className="text-xl sm:text-2xl font-bold">
-            As part of our regular cleaning packages, priority areas for our cleaners include
+              As part of our regular cleaning packages, priority areas for our
+              cleaners include
             </h2>
           </div>
 
@@ -801,8 +827,6 @@ export default function RegularCleaning() {
         </div>
       </div>
 
-      
-
       <section className="w-full flex flex-col items-center justify-center mt-[3rem]">
         <div className="bg-[#f7f7ff] p-4 w-full">
           <h1 className="text-3xl text-brand-primary font-bold">
@@ -930,8 +954,6 @@ export default function RegularCleaning() {
           </button>
         </div>
       </section>
-
-      
     </div>
   );
 }

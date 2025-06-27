@@ -45,13 +45,21 @@ const GiftVoucher = lazy(() => import("./pages/Gift"));
 const Reclean = lazy(() => import("./pages/Reclean"));
 const Blog = lazy(() => import("./pages/Blog"));
 const HouseCleaning = lazy(() => import("./pages/HouseCleaning"));
-const DeppCleaning = lazy(() => import("./pages/DeepCleaning"));
+// const DeepCleaning = lazy(() => import("./pages/DeepCleaning"));
 const OfficeCleaning = lazy(() => import("./pages/OfficeCleaning"));
 const EndTenancy = lazy(() => import("./pages/EndTenancy"));
 const CarpetCleaning = lazy(() => import("./pages/CarpetCleaning"));
 const Upholstery = lazy(() => import("./pages/Upholstery"));
 const RegularCleaning = lazy(() => import("./pages/RegularCleaning"));
 const OfficeCleaningPage = lazy(() => import("./pages/OfficeCleaningPage"));
+const DeepCleaningService = lazy(() => import("./pages/DeepCleaningService"));
+const SameDayCleaning = lazy(() => import("./pages/SameDayCleaning"));
+const KitchenDeepCleaning = lazy(() => import("./pages/KitchenDeep"));
+const EndTenancyService = lazy(() => import("./pages/EndTenancyPage"));
+
+
+
+
 
 
 
@@ -209,6 +217,38 @@ function App() {
                 element={
                     <Layout>
                       <OfficeCleaningPage />
+                    </Layout>
+                }
+              />
+              <Route
+                path="/services/deep-cleaning"
+                element={
+                    <Layout>
+                      <DeepCleaningService />
+                    </Layout>
+                }
+              />
+              <Route
+                path="/services/same-day-cleaning"
+                element={
+                    <Layout>
+                      <SameDayCleaning />
+                    </Layout>
+                }
+              />
+              <Route
+                path="/services/kitchen-deep-cleaning"
+                element={
+                    <Layout>
+                      <KitchenDeepCleaning />
+                    </Layout>
+                }
+              />
+              <Route
+                path="/services/end-tenancy-cleaning"
+                element={
+                    <Layout>
+                      <EndTenancyService />
                     </Layout>
                 }
               />
