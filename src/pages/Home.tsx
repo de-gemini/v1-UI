@@ -8,6 +8,7 @@ import { HowItWorksSection } from "../components/HowItWorks";
 import { Sofa } from "lucide-react";
 import placeHolder from "../assets/images/Screenshot (409).png";
 import { ProfessionalsCarousel } from "../components/Professional";
+import { RatingCarousel } from "../components/ratingCard";
 
 const Home = () => {
   const features = [
@@ -53,6 +54,65 @@ const Home = () => {
       question: "Should I clean before a cleaner comes?",
       answer:
         "It is not necessary to clean before a cleaner arrives. eMop cleaners are used to working in homes that are not perfectly clean, and they will be able to adjust their approach accordingly.",
+    },
+  ];
+
+  const ratings = [
+    {
+      name: "Ritchter Belmont",
+      date: "13th of June, 2025",
+      avatar: "https://lh3.googleusercontent.com/a-/ALV-UjXCgM-XZ5mAU0bxL8SErlHjjgIA6HyaHgwXz5KsmvnTjfMOnuQ=s120-c-rp-mo-br100",
+      review: "I booked a deep cleaning for the kitchen with Emop and was really impressed. The cleaner arrived on time, worked efficiently, and did an amazing job. Highly recommended!",
+      rating: 5,
+    },
+    {
+      name: "Fatima Jones",
+      date: "26th of April, 2025",
+      avatar: "https://example.com/avatar1.jpg",
+      review: "Cheap one-off cleans which is why I use them, 2 out of 3 have been great but the other 1 turned up an hour late and then couldn't figure out how to use my key safe. For what you pay, it's excellent, and I did get some money off for that incident. Job #397083 was completed to a good standard by Lydia.",
+      rating: 4,
+    },
+    {
+      name: "Fatima Jones",
+      date: "26th of April, 2025",
+      avatar: "https://example.com/avatar1.jpg",
+      review: "Cheap one-off cleans which is why I use them, 2 out of 3 have been great but the other 1 turned up an hour late and then couldn't figure out how to use my key safe. For what you pay, it's excellent, and I did get some money off for that incident. Job #397083 was completed to a good standard by Lydia.",
+      rating: 4,
+    },
+    {
+      name: "Fatima Jones",
+      date: "26th of April, 2025",
+      avatar: "https://example.com/avatar1.jpg",
+      review: "Cheap one-off cleans which is why I use them, 2 out of 3 have been great but the other 1 turned up an hour late and then couldn't figure out how to use my key safe. For what you pay, it's excellent, and I did get some money off for that incident. Job #397083 was completed to a good standard by Lydia.",
+      rating: 4,
+    },
+    {
+      name: "Fatima Jones",
+      date: "26th of April, 2025",
+      avatar: "https://example.com/avatar1.jpg",
+      review: "Cheap one-off cleans which is why I use them, 2 out of 3 have been great but the other 1 turned up an hour late and then couldn't figure out how to use my key safe. For what you pay, it's excellent, and I did get some money off for that incident. Job #397083 was completed to a good standard by Lydia.",
+      rating: 4,
+    },
+    {
+      name: "Fatima Jones",
+      date: "26th of April, 2025",
+      avatar: "https://example.com/avatar1.jpg",
+      review: "Cheap one-off cleans which is why I use them, 2 out of 3 have been great but the other 1 turned up an hour late and then couldn't figure out how to use my key safe. For what you pay, it's excellent, and I did get some money off for that incident. Job #397083 was completed to a good standard by Lydia.",
+      rating: 5,
+    },
+    {
+      name: "Fatima Jones",
+      date: "26th of April, 2025",
+      avatar: "https://example.com/avatar1.jpg",
+      review: "Cheap one-off cleans which is why I use them, 2 out of 3 have been great but the other 1 turned up an hour late and then couldn't figure out how to use my key safe. For what you pay, it's excellent, and I did get some money off for that incident. Job #397083 was completed to a good standard by Lydia.",
+      rating: 3,
+    },
+    {
+      name: "Fatima Jones",
+      date: "26th of April, 2025",
+      avatar: "https://example.com/avatar1.jpg",
+      review: "Cheap one-off cleans which is why I use them, 2 out of 3 have been great but the other 1 turned up an hour late and then couldn't figure out how to use my key safe. For what you pay, it's excellent, and I did get some money off for that incident. Job #397083 was completed to a good standard by Lydia.",
+      rating: 5,
     },
   ];
 
@@ -355,7 +415,7 @@ const Home = () => {
             <h1 className="text-4xl sm:text-5xl lg:text-6xl nunito-sans-title text-brand-text leading-tight mb-8 drop-shadow-sm">
               Best Cleaning
               <br />
-              Services In London
+              Services In England
             </h1>
 
             {/* Features List */}
@@ -432,7 +492,7 @@ const Home = () => {
 
       {/* Post code section */}
       <section className="font-sans antialiased bg-gray-50 py-4 px-4 sm:px-6 lg:px-8">
-        <h1 className="text-[30px] font-[700] text-brand-secondary nunito-sans-heading mb-8 md:mb-12">
+        <h1 className="text-[30px] font-[700] text-brand-primary nunito-sans-heading mb-8 md:mb-12">
           How much does a house cleaner cost in London
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mt-4">
@@ -467,14 +527,14 @@ const Home = () => {
       </section>
 
       <h1 className="text-center text-brand-primary nunito-sans-heading text-[32px] font-[800] mb-5">
-        What is included in eMop cleaning?
+        What is included in De gemini cleaning?
       </h1>
       {/* Service list section */}
       <div className="max-w-7xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden md:flex">
         {/* Left Section: Text Content */}
         <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
           <div className="flex items-center text-brand-primary mb-6">
-            <Sofa className="w-8 h-8 mr-3 text-brand-secondary" />
+            <Sofa className="w-8 h-8 mr-3 text-brand-primary" />
             <h2 className="text-xl sm:text-2xl font-bold nunito-sans-heading">
               Bedroom, living, dining, office rooms
             </h2>
@@ -544,7 +604,7 @@ const Home = () => {
 
         {/* Right Section: Image */}
         <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-          <div className="flex items-center text-brand-secondary nunito-sans-heading mb-6">
+          <div className="flex items-center text-brand-primary nunito-sans-heading mb-6">
             <img src="https://www.emop.co.uk/img/bedroom-icon.svg" alt="" />
             <h2 className="text-xl sm:text-2xl font-bold">Halls and stairs</h2>
           </div>
@@ -583,7 +643,7 @@ const Home = () => {
       <div className="max-w-7xl mx-auto bg-white rounded-lg mt-4 shadow-lg overflow-hidden md:flex">
         {/* Left Section: Text Content */}
         <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-          <div className="flex items-center text-brand-secondary mb-6">
+          <div className="flex items-center text-brand-primary mb-6">
             <img
               src="https://www.emop.co.uk/img/kitchen-icon.svg"
               className="w-8 h-8 mr-3"
@@ -657,7 +717,7 @@ const Home = () => {
 
         {/* Right Section: Image */}
         <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-          <div className="flex items-center text-brand-secondary mb-6">
+          <div className="flex items-center text-brand-primary mb-6">
             <img src="https://www.emop.co.uk/img/bathroom-icon.svg" alt="" />
             <h2 className="text-xl sm:text-2xl font-bold">Bathroom</h2>
           </div>
@@ -698,7 +758,7 @@ const Home = () => {
       <div className="max-w-7xl mx-auto bg-white rounded-lg mt-4 shadow-lg overflow-hidden md:flex">
         {/* Left Section: Text Content */}
         <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-          <div className="flex items-center text-brand-secondary mb-6">
+          <div className="flex items-center text-brand-primary mb-6">
             <img
               src="https://www.emop.co.uk/img/kitchen-icon.svg"
               className="w-8 h-8 mr-3"
@@ -767,13 +827,13 @@ const Home = () => {
           </h1>
         </div>
         <div className="mt-[2rem]">
-          <img src={placeHolder} alt="banner" />
+        <RatingCarousel ratings={ratings} />
         </div>
       </section>
 
       {/* Professionals */}
       <section className="w-full px-4">
-        <h1 className="text-start ml-[3rem] text-brand-secondary nunito-sans-heading text-[30px] font-[700]">
+        <h1 className="text-start ml-[3rem] text-brand-primary nunito-sans-heading text-[30px] font-[700]">
           Meet our Professionals
         </h1>
         <ProfessionalsCarousel professionals={dummyProfessionals} />
@@ -793,7 +853,7 @@ const Home = () => {
               />
             </div>
 
-            <h1 className="text-brand-secondary nunito-sans-heading text-[24px]">
+            <h1 className="text-brand-primary nunito-sans-heading text-[24px]">
               24/7 Availability
             </h1>
             <p className="text-center nunito-sans-text">
@@ -811,7 +871,7 @@ const Home = () => {
               />
             </div>
 
-            <h1 className="text-brand-secondary nunito-sans-heading text-[24px]">
+            <h1 className="text-brand-primary nunito-sans-heading text-[24px]">
             Bespoke Service
             </h1>
             <p className="text-center nunito-sans-text">
@@ -828,7 +888,7 @@ const Home = () => {
               />
             </div>
 
-            <h1 className="text-brand-secondary nunito-sans-heading text-[24px]">
+            <h1 className="text-brand-primary nunito-sans-heading text-[24px]">
             Pay as You Go
             </h1>
             <p className="text-center nunito-sans-text">
@@ -845,7 +905,7 @@ const Home = () => {
               />
             </div>
 
-            <h1 className="text-brand-secondary nunito-sans-heading text-[24px]">
+            <h1 className="text-brand-primary nunito-sans-heading text-[24px]">
             Last minute cleaning
             </h1>
             <p className="text-center nunito-sans-text">
@@ -867,7 +927,7 @@ const Home = () => {
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Section: Text and Input */}
             <div className="flex flex-col justify-center">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold nunito-sans-heading text-brand-secondary mb-6">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold nunito-sans-heading text-brand-primary mb-6">
                 Additional domestic cleaning services
               </h1>
               <p className="text-gray-700 text-base sm:text-lg mb-8 nunito-sans-text leading-relaxed">
@@ -961,7 +1021,7 @@ const Home = () => {
           <div className="max-w-7xl mx-auto bg-white rounded-lg overflow-hidden md:flex mb-6">
             {/* Left Section: Text Content */}
             <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold nunito-sans-heading text-brand-secondary mb-6">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold nunito-sans-heading text-brand-primary mb-6">
                 Reliable Experts in London
               </h1>
 
@@ -1043,7 +1103,7 @@ const Home = () => {
 
             {/* Right Section: Image */}
             <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-              <h1 className="text-[20px] font-[700] text-brand-secondary nunito-sans-heading mb-3">
+              <h1 className="text-[20px] font-[700] text-brand-primary nunito-sans-heading mb-3">
                 A Cleaning Service that Cares for Your Home
               </h1>
               <p className="text-gray-700 text-base sm:text-lg nunito-sans-text mb-6 leading-relaxed">
@@ -1066,7 +1126,7 @@ const Home = () => {
           <div className="max-w-7xl mx-auto bg-white rounded-lg overflow-hidden md:flex mb-6">
             {/* Left Section: Text Content */}
             <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-              <h1 className="text-[20px] sm:text-[20px] lg:text-[40px] font-[700] text-brand-secondary nunito-sans-heading mb-6">
+              <h1 className="text-[20px] sm:text-[20px] lg:text-[40px] font-[700] text-brand-primary nunito-sans-heading mb-6">
                 Appreciate the Benefits of Domestic Cleaners
               </h1>
 
@@ -1167,7 +1227,7 @@ const Home = () => {
       {/* FAQ */}
       <div className="font-sans antialiased bg-gray-50 min-h-screen py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold nunito-sans-heading text-brand-secondary mb-10 text-center">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold nunito-sans-heading text-brand-primary mb-10 text-center">
             Frequently asked questions
           </h1>
 
@@ -1221,7 +1281,7 @@ const Home = () => {
           backgroundPosition: "center",
         }}
         >
-          <h1 className="font-[700] text-[30px] md:text-[40px] lg:text-[40px] text-brand-secondary">
+          <h1 className="font-[700] text-[30px] md:text-[40px] lg:text-[40px] text-brand-primary">
           Cleaning Is No Longer <br />
           Your Burden
           </h1>

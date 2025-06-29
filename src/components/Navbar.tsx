@@ -86,15 +86,15 @@ const Navbar = () => {
     { name: 'Deep cleaning', href: '/services-deep-cleaning' },
     { name: 'Office cleaning', href: '/services-office-cleaning' },
     { name: 'End of Tenancy cleaning', href: '/services/end-tenancy-cleaning' },
-    { name: 'Carpet cleaning', href: '/services-carpet-cleaning' },
+    { name: 'Carpet cleaning', href: '/services/carpet-cleaning' },
     { name: 'Upholstery cleaning', href: '/services-upholstery-cleaning' },
     { name: 'Same Day cleaning', href: '/services/same-day-cleaning' },
     { name: 'Kitchen Deep Cleaning', href: '/services/kitchen-deep-cleaning' },
-    { name: 'Rug Cleaning', href: '#' },
-    { name: 'Move in cleaning', href: '#' },
-    { name: 'Bathroom cleaning', href: '#' },
-    { name: 'Mattress cleaning', href: '#' },
-    { name: 'Spring cleaning', href: '#' },
+    { name: 'Rug Cleaning', href: '/services/rug-cleaning' },
+    { name: 'Move in cleaning', href: '/services/move-in-cleaning' },
+    { name: 'Bathroom cleaning', href: '/services/bathroom-cleaning' },
+    { name: 'Mattress cleaning', href: '/services/mattress-cleaning' },
+    { name: 'Spring cleaning', href: '/services/spring-cleaning' },
   ];
 
   const pricingLinks: Links[] = [
@@ -131,7 +131,7 @@ const Navbar = () => {
 
         {/* Desktop Navigation Links */}
         <ul className="hidden md:flex items-center space-x-6 lg:space-x-8">
-          <li><a href="#" className="text-gray-700 text-[16px] font-semibold hover:text-purple-700 transition duration-300 ease-in-out">Locations</a></li>
+          <li><a href="#" className="text-gray-700 text-[16px] font-semibold hover:text-brand-primary transition duration-300 ease-in-out">Locations</a></li>
 
           {/* Our Services Dropdown for Desktop */}
           <li
@@ -143,7 +143,7 @@ const Navbar = () => {
             <a
               href="#"
               onClick={handleServicesDropdownClick} // Conditional click handling
-              className={`flex text-black text-[16px] font-semibold items-center transition duration-300 ease-in-out ${isServicesDropdownOpen ? 'text-brand-primary border-b-2 border-purple-700 pb-1' : 'hover:text-brand-secondary'}`}
+              className={`flex text-black text-[16px] font-semibold items-center transition duration-300 ease-in-out ${isServicesDropdownOpen ? 'text-brand-primary border-b-2 border-brand-primary pb-1' : 'hover:text-brand-secondary'}`}
             >
               Our Services
               <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-300 ${isServicesDropdownOpen ? 'rotate-180' : ''} group-hover:rotate-180`} />
@@ -173,7 +173,7 @@ const Navbar = () => {
             <a
               href="#"
               onClick={handlePricingDropdownClick} // Conditional click handling
-              className={`flex text-black text-[16px] font-semibold items-center transition duration-300 ease-in-out ${isPricingDropdownOpen ? 'border-b-2 border-purple-700 pb-1 text-brand-primary' : 'hover:text-brand-text'}`}
+              className={`flex text-black text-[16px] font-semibold items-center transition duration-300 ease-in-out ${isPricingDropdownOpen ? 'border-b-2 border-brand-primary pb-1 text-brand-primary' : 'hover:text-brand-text'}`}
             >
 
               Pricing
@@ -187,19 +187,19 @@ const Navbar = () => {
                 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0`}
             >
               {pricingLinks.map((link, index) => (
-                <a key={index} href={link.href} className="block text-gray-700 hover:text-purple-700 whitespace-nowrap p-1 rounded-md transition duration-200">
+                <a key={index} href={link.href} className="block text-gray-700 hover:text-brand-primary whitespace-nowrap p-1 rounded-md transition duration-200">
                   {link.name}
                 </a>
               ))}
             </div>
           </li>
-          <li><a href="/giftVoucher" className="text-gray-700 text-[16px] font-semibold hover:text-purple-700 transition duration-300 ease-in-out">Gifts</a></li>
-          <li><a href="/blog" className="text-gray-700 text-[16px] font-semibold hover:text-purple-700 transition duration-300 ease-in-out">Blog</a></li>
-          <li><a href="/help" className="text-gray-700 text-[16px] font-semibold hover:text-purple-700 transition duration-300 ease-in-out">Help</a></li>
-          <li><a href="/reclean-guarantee" className="text-gray-700 text-[16px] font-semibold hover:text-purple-700 transition duration-300 ease-in-out">Reclean guarantee</a></li>
-          <li><a href="/home/registercleaner" className="text-gray-700 text-[16px] font-semibold hover:text-purple-700 transition duration-300 ease-in-out">Become a cleaner</a></li>
+          <li><a href="/giftVoucher" className="text-gray-700 text-[16px] font-semibold hover:text-brand-primary transition duration-300 ease-in-out">Gifts</a></li>
+          <li><a href="/blog" className="text-gray-700 text-[16px] font-semibold hover:text-brand-primary transition duration-300 ease-in-out">Blog</a></li>
+          <li><a href="/help" className="text-gray-700 text-[16px] font-semibold hover:text-brand-primary transition duration-300 ease-in-out">Help</a></li>
+          <li><a href="/reclean-guarantee" className="text-gray-700 text-[16px] font-semibold hover:text-brand-primary transition duration-300 ease-in-out">Reclean guarantee</a></li>
+          <li><a href="/home/registercleaner" className="text-gray-700 text-[16px] font-semibold hover:text-brand-primary transition duration-300 ease-in-out">Become a cleaner</a></li>
           <li>
-            <a href="#" className="px-5 py-2 border border-purple-700 text-purple-700 rounded-md hover:bg-purple-700 hover:text-white transition duration-300 ease-in-out">
+            <a href="/login" className="px-5 py-2 border border-brand-primary text-brand-primary rounded-md hover:bg-brand-primary hover:text-white transition duration-300 ease-in-out">
               Sign In
             </a>
           </li>
@@ -247,7 +247,7 @@ const Navbar = () => {
             <a
               href="#"
               onClick={handlePricingDropdownClick} // Conditional click handling
-              className={`flex text-black text-[16px] font-semibold items-center  transition duration-300 ease-in-out ${isPricingDropdownOpen ? 'border-b-2 border-purple-700 pb-1 text-brand-primary' : 'hover:text-brand-text'}`}
+              className={`flex text-black text-[16px] font-semibold items-center  transition duration-300 ease-in-out ${isPricingDropdownOpen ? 'border-b-2 border-brand-primary pb-1 text-brand-primary' : 'hover:text-brand-text'}`}
             >
               Pricing
               <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-300 ${isPricingDropdownOpen ? 'rotate-180' : ''} group-hover:rotate-180`} />
@@ -260,7 +260,7 @@ const Navbar = () => {
                 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0`}
             >
               {pricingLinks.map((link, index) => (
-                <a key={index} href={link.href} className="block text-gray-700 hover:text-purple-700 whitespace-nowrap p-1 rounded-md transition duration-200">
+                <a key={index} href={link.href} className="block text-gray-700 hover:text-brand-primary whitespace-nowrap p-1 rounded-md transition duration-200">
                   {link.name}
                 </a>
               ))}
@@ -272,7 +272,7 @@ const Navbar = () => {
           <li><a onClick={toggleMobileMenu} href="/reclean-guarantee" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Reclean guarantee</a></li>
           <li><a onClick={toggleMobileMenu} href="/home/registercleaner" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Become a cleaner</a></li>
           <li className="w-full pt-4">
-            <a onClick={toggleMobileMenu} href="#" className="block w-full text-center px-5 py-3 border border-purple-700 text-purple-700 rounded-lg hover:bg-purple-700 hover:text-white transition duration-300 ease-in-out text-lg">
+            <a onClick={toggleMobileMenu} href="#" className="block w-full text-center px-5 py-3 border border-brand-primary text-brand-primary rounded-lg hover:bg-brand-primary hover:text-white transition duration-300 ease-in-out text-lg">
               Sign In
             </a>
           </li>

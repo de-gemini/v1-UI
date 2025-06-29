@@ -45,7 +45,6 @@ const GiftVoucher = lazy(() => import("./pages/Gift"));
 const Reclean = lazy(() => import("./pages/Reclean"));
 const Blog = lazy(() => import("./pages/Blog"));
 const HouseCleaning = lazy(() => import("./pages/HouseCleaning"));
-// const DeepCleaning = lazy(() => import("./pages/DeepCleaning"));
 const OfficeCleaning = lazy(() => import("./pages/OfficeCleaning"));
 const EndTenancy = lazy(() => import("./pages/EndTenancy"));
 const CarpetCleaning = lazy(() => import("./pages/CarpetCleaning"));
@@ -56,13 +55,12 @@ const DeepCleaningService = lazy(() => import("./pages/DeepCleaningService"));
 const SameDayCleaning = lazy(() => import("./pages/SameDayCleaning"));
 const KitchenDeepCleaning = lazy(() => import("./pages/KitchenDeep"));
 const EndTenancyService = lazy(() => import("./pages/EndTenancyPage"));
-
-
-
-
-
-
-
+const CarpetService = lazy(() => import("./pages/CarpetService"));
+const RugCleaning = lazy(() => import("./pages/RugCleaning"));
+const MoveInCleaning = lazy(() => import("./pages/MoveIn"));
+const BathroomCleaning = lazy(() => import("./pages/BathroomCleaning"));
+const MattressCleaning = lazy(() => import("./pages/MattressCleaning"));
+const SpringCleaning = lazy(() => import("./pages/SpringCleaning"));
 
 
 
@@ -83,7 +81,11 @@ function App() {
                   </Layout>
                 }
               />
-              <Route path="/login" element={<Login />} />
+              <Route path="/login" element={
+                <Layout>
+                <Login />
+                </Layout>
+                } />
               <Route path="/contact" element={<Contact />} />
               <Route
                 path="/dashboard"
@@ -249,6 +251,54 @@ function App() {
                 element={
                     <Layout>
                       <EndTenancyService />
+                    </Layout>
+                }
+              />
+              <Route
+                path="/services/carpet-cleaning"
+                element={
+                    <Layout>
+                      <CarpetService />
+                    </Layout>
+                }
+              />
+              <Route
+                path="/services/rug-cleaning"
+                element={
+                    <Layout>
+                      <RugCleaning />
+                    </Layout>
+                }
+              />
+              <Route
+                path="/services/move-in-cleaning"
+                element={
+                    <Layout>
+                      <MoveInCleaning />
+                    </Layout>
+                }
+              />
+              <Route
+                path="/services/bathroom-cleaning"
+                element={
+                    <Layout>
+                      <BathroomCleaning />
+                    </Layout>
+                }
+              />
+              <Route
+                path="/services/mattress-cleaning"
+                element={
+                    <Layout>
+                      <MattressCleaning />
+                    </Layout>
+                }
+              />
+              <Route
+                path="/services/spring-cleaning"
+                element={
+                    <Layout>
+                      <SpringCleaning />
                     </Layout>
                 }
               />

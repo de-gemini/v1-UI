@@ -52,7 +52,7 @@ export const Footer: React.FC = () => {
 
         {/* Column 3: eMop Service */}
         <div className="lg:col-span-1">
-          <h3 className="font-bold text-lg mb-4 text-brand-primary">EMOP SERVICE</h3>
+          <h3 className="font-bold text-lg mb-4 text-brand-primary">De Gemini SERVICE</h3>
           <ul className="space-y-2">
             <li><a href="#" className="hover:underline">Regular cleaning</a></li>
             <li><a href="#" className="hover:underline">Deep cleaning</a></li>
@@ -85,15 +85,7 @@ export const Footer: React.FC = () => {
           
           <p className="font-bold text-lg mb-4 text-brand-primary">CLEANING AVAILABLE 24/7</p>
 
-          {/* App Store Badges */}
-          <div className="flex flex-col space-y-3 mb-6">
-            <a href="#" target="_blank" rel="noopener noreferrer">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/2560px-Download_on_the_App_Store_Badge.svg.png" alt="Download on the App Store" className="h-10 md:h-12 w-auto" />
-            </a>
-            <a href="#" target="_blank" rel="noopener noreferrer">
-              <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" className="h-10 md:h-12 w-auto" />
-            </a>
-          </div>
+          
 
           {/* Social Media */}
           <h3 className="font-bold text-lg mb-4 text-brand-primary">SOCIAL MEDIA</h3>
