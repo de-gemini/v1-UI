@@ -281,7 +281,7 @@ export default function RugCleaning() {
   ];
   return (
     <div className="min-h-screen bg-white overflow-x-hidden w-full">
-      <Banner title="Same Day Cleaning in London" />
+      <Banner title="Rug Cleaning Services in England" />
 
       {/* Carousel section */}
       <section

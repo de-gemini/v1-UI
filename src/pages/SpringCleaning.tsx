@@ -276,7 +276,7 @@ export default function SpringCleaning() {
   ];
   return (
     <div className="min-h-screen bg-white overflow-x-hidden w-full">
-      <Banner title="Regular Cleaners in London" />
+      <Banner title="Spring cleaning services in London" />
 
       {/* Carousel section */}
       <section

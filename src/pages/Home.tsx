@@ -9,6 +9,9 @@ import { Sofa } from "lucide-react";
 import placeHolder from "../assets/images/Screenshot (409).png";
 import { ProfessionalsCarousel } from "../components/Professional";
 import { RatingCarousel } from "../components/ratingCard";
+import axiosInstance from '../api/axiosInstance';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Home = () => {
   const features = [
@@ -378,9 +381,25 @@ const Home = () => {
       title: "End of tenancy cleaning service",
       price: "from £19/h",
       description:
-        "If you’re preparing to leave your leased home, you can benefit from our practical end-of-tenancy packages. We typically send two professionals to your home to do this job, and they are properly outfitted and educated to adhere to a specific protocol that satisfies the requirements of landlords.",
+        "If you're preparing to leave your leased home, you can benefit from our practical end-of-tenancy packages. We typically send two professionals to your home to do this job, and they are properly outfitted and educated to adhere to a specific protocol that satisfies the requirements of landlords.",
     },
   ];
+
+  // Postcode API handler
+  const handlePostcodeApi = async () => {
+    if (!postcode.trim()) {
+      toast.error('Please enter a postcode.');
+      return;
+    }
+    try {
+      const res = await axiosInstance.post('https://v1-api-6rdd.onrender.com/postcode', { postcode });
+      toast.success(`Success: ${JSON.stringify(res.data)}`);
+    } catch (err: any) {
+      const msg = err?.response?.data?.message || err.message || 'An error occurred';
+      toast.error(msg);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background-gray overflow-x-hidden w-full">
       {/* Hero Section Container */}
@@ -439,9 +458,14 @@ const Home = () => {
                   placeholder="Enter your post code here"
                   className="flex-grow text-gray-700 placeholder-gray-400 focus:outline-none text-base sm:text-lg bg-transparent"
                   aria-label="Enter your postcode"
+                  value={postcode}
+                  onChange={e => setPostcode(e.target.value)}
                 />
               </div>
-              <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary nunito-sans-heading py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+              <button
+                className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary nunito-sans-heading py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5"
+                onClick={handlePostcodeApi}
+              >
                 QUOTE ME
               </button>
             </div>
@@ -1007,7 +1031,7 @@ const Home = () => {
                 and other UK cities. We offer a wide range of cleaning services
                 London, including regular, one-off deep clean, and
                 end-of-tenancy solutions. eMop is convenient because it provides
-                a flexible house cleaning service tailored to each customer’s
+                a flexible house cleaning service tailored to each customer's
                 needs. Our professional cleaners are hand-picked and tested,
                 then thoroughly trained to offer the best possible service. Our
                 domestic cleaners are familiar with treating all types of
@@ -1111,11 +1135,11 @@ const Home = () => {
                 encouraged to take a personalised approach. Besides, different
                 clients require different service packages, and fully satisfying
                 your needs is our top priority. The ability to modify the
-                standard set of tasks is a major benefit of using eMop’s
+                standard set of tasks is a major benefit of using eMop's
                 professional cleaning services in London. When the plan is
                 tailored to your needs, you are paying precisely for the package
                 you need. However, there are certain things our professionals
-                can’t do. For example, we don’t lift or move heavy objects, do
+                can't do. For example, we don't lift or move heavy objects, do
                 ironing, or clean the back garden. If you want to discuss
                 add-ons in detail, we are always happy to answer your questions
                 about one off deep cleaning.
@@ -1125,6 +1149,21 @@ const Home = () => {
 
           <div className="max-w-7xl mx-auto bg-white rounded-lg overflow-hidden md:flex mb-6">
             {/* Left Section: Text Content */}
+            <div className="md:w-1/2 overflow-hidden bg-gray-100 flex items-center justify-center">
+              <img
+                src="https://www.emop.co.uk/static/redesign/images/services/regular/4.jpg"
+                alt="Cleaned bedroom"
+                className="w-full h-full object-cover object-center rounded-lg md:rounded-l-none"
+                onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src =
+                    "https://placehold.co/800x600/e0e0e0/555555?text=Image+Not+Found";
+                  target.alt = "Fallback image: Cleaned room image not found.";
+                }}
+              />
+            </div>
+
+            {/* Right Section: Image */}
             <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
               <h1 className="text-[20px] sm:text-[20px] lg:text-[40px] font-[700] text-brand-primary nunito-sans-heading mb-6">
                 Appreciate the Benefits of Domestic Cleaners
@@ -1177,7 +1216,7 @@ const Home = () => {
             {/* Right Section: Image */}
             <div className="md:w-1/2 overflow-hidden bg-gray-100 flex items-center justify-center">
               <img
-                src="https://www.emop.co.uk/static/redesign/images/services/regular/4.jpg"
+                src="https://www.emop.co.uk/static/redesign/images/services/regular/5.jpg"
                 alt="Cleaned bedroom"
                 className="w-full h-full object-cover object-center rounded-lg md:rounded-l-none"
                 onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
@@ -1194,7 +1233,7 @@ const Home = () => {
             {/* Left Section: Text Content */}
             <div className="md:w-1/2 overflow-hidden bg-gray-100 flex items-center justify-center">
               <img
-                src="https://www.emop.co.uk/static/redesign/images/services/regular/5.jpg"
+                src="https://www.emop.co.uk/static/redesign/images/services/regular/6.jpg"
                 alt="Cleaned bedroom"
                 className="w-full h-full object-cover object-center rounded-lg md:rounded-l-none"
                 onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
@@ -1215,7 +1254,7 @@ const Home = () => {
                 hire someone to do the hard work. This will have a positive
                 effect on your mental and physical well-being. eMop provides
                 excellent cleaning services, which will make you wonder why you
-                didn’t do it sooner. It is quick, convenient, and affordable.
+                didn't do it sooner. It is quick, convenient, and affordable.
                 You will be surprised by how much a spotless living space can
                 improve the quality of your life.
               </p>
@@ -1309,6 +1348,7 @@ const Home = () => {
 
         </section>
       </div>
+      <ToastContainer position="top-right" autoClose={4000} hideProgressBar={false} newestOnTop closeOnClick pauseOnFocusLoss draggable pauseOnHover />
     </div>
   );
 };

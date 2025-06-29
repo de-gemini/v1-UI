@@ -274,7 +274,7 @@ export default function MoveIn() {
   ];
   return (
     <div className="min-h-screen bg-white overflow-x-hidden w-full">
-      <Banner title="Regular Cleaners in London" />
+      <Banner title="Moving in cleaning service in London" />
 
       {/* Carousel section */}
       <section

@@ -274,7 +274,7 @@ export default function MattressCleaning() {
   ];
   return (
     <div className="min-h-screen bg-white overflow-x-hidden w-full">
-      <Banner title="Regular Cleaners in London" />
+      <Banner title="Professional Mattress Cleaning Services in London" />
 
       {/* Carousel section */}
       <section
