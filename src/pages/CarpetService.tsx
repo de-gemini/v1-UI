@@ -8,6 +8,7 @@ import { ProfessionalsCarousel } from "../components/Professional";
 import { useState } from "react";
 import { PriceCard } from "../components/PriceCard";
 import { HowItWorksSection } from "../components/HowItWorks";
+import { useNavigate } from "react-router-dom";
 
 export default function CarpetService() {
   const [openItemId, setOpenItemId] = useState<string | null>(null);
@@ -273,6 +274,13 @@ export default function CarpetService() {
         "Hi, my name is Silvie and I have more than 5 years experience as a cleaner. Let me help you to make your home spotless. 😊",
     },
   ];
+
+  const navigate = useNavigate();
+
+  const handlePostcodeApi = () => {
+    navigate(`/checkout?postcode=${encodeURIComponent(postcode.trim())}`);
+  };
+
   return (
     <div className="min-h-screen bg-white overflow-x-hidden w-full">
       <Banner title="Professional carpet cleaning in London" />
@@ -345,6 +353,7 @@ export default function CarpetService() {
                     <path d="M7 3a1 1 0 00-1 1v1a1 1 0 002 0V4a1 1 0 00-1-1zM9 5a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 7a1 1 0 00-1 1v1a1 1 0 002 0V8a1 1 0 00-1-1zM11 7a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 9a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 9a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 11a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 11a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 13a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 13a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM10 20a10 10 0 100-20 10 10 0 000 20zm0-2a8 8 0 100-16 8 8 0 000 16z" />
                   </svg>
                 </span>
+                <p>ovreieiovinj</p>
 
                 <p>Wiping surfaces in kitchens and bathrooms</p>
               </li>
@@ -403,7 +412,7 @@ export default function CarpetService() {
               aria-label=""
             />
           </div>
-          <button className="bg-brand-primary hover:bg-blue-200 text-white font-semibold py-3 px-6 md:py-4 md:px-8 text-base md:text-lg transition duration-300 flex-shrink-0">
+          <button className="bg-brand-primary hover:bg-blue-200 text-white font-semibold py-3 px-6 md:py-4 md:px-8 text-base md:text-lg transition duration-300 flex-shrink-0" onClick={handlePostcodeApi}>
             Quote me
           </button>
         </div>

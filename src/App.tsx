@@ -61,7 +61,7 @@ const MoveInCleaning = lazy(() => import("./pages/MoveIn"));
 const BathroomCleaning = lazy(() => import("./pages/BathroomCleaning"));
 const MattressCleaning = lazy(() => import("./pages/MattressCleaning"));
 const SpringCleaning = lazy(() => import("./pages/SpringCleaning"));
-
+const Checkout = lazy(() => import("./pages/Checkout"));
 
 
 function App() {
@@ -302,6 +302,7 @@ function App() {
                     </Layout>
                 }
               />
+              <Route path="/checkout" element={<Checkout />} />
             </Routes>
           </main>
         </div>

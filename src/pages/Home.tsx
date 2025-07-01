@@ -11,6 +11,7 @@ import { ProfessionalsCarousel } from "../components/Professional";
 import { RatingCarousel } from "../components/ratingCard";
 import axiosInstance from '../api/axiosInstance';
 import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 
 const Home = () => {
@@ -20,6 +21,8 @@ const Home = () => {
     "Eco-friendly",
     "Pay as You Go",
   ];
+
+  const navigate = useNavigate();
 
   interface FAQItemData {
     id: string;
@@ -394,6 +397,7 @@ const Home = () => {
     try {
       const res = await axiosInstance.post('https://v1-api-6rdd.onrender.com/postcode', { postcode });
       toast.success(`Success: ${JSON.stringify(res.data)}`);
+      navigate(`/checkout?postcode=${encodeURIComponent(postcode.trim())}`);
     } catch (err: any) {
       const msg = err?.response?.data?.message || err.message || 'An error occurred';
       toast.error(msg);
