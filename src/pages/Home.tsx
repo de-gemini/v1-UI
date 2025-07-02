@@ -407,6 +407,15 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-background-gray overflow-x-hidden w-full">
       {/* Hero Section Container */}
+      <ToastContainer
+        position='top-right'
+        rtl={true}
+        hideProgressBar={false}
+        autoClose={5000}
+        draggable={true}
+        icon={<Check/>}
+        pauseOnHover={true}
+        />
       <section className="flex items-center justify-center w-full px-4 max-w-7xl mx-auto">
         <div
           className="absolute inset-0 z-0 bg-cover bg-center opacity-0 bg-no-repeat"
@@ -978,7 +987,7 @@ const Home = () => {
                   />
                 </div>
                 <button
-                  onClick={handleQuoteMeClick}
+                  onClick={handlePostcodeApi}
                   className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
                   QUOTE ME
                 </button>
@@ -1342,7 +1351,7 @@ const Home = () => {
                   />
                 </div>
                 <button
-                  onClick={handleQuoteMeClick}
+                  onClick={handlePostcodeApi}
                   className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
                   QUOTE ME
                 </button>

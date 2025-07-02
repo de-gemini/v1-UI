@@ -1,19 +1,29 @@
-
-
-import { ChevronDown, MapPin } from "lucide-react";
+import { Check, ChevronDown, MapPin } from "lucide-react";
 import React, { useState, useEffect, useRef } from "react";
-
+import axiosInstance from '../api/axiosInstance';
+import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 export default function Reclean() {
 
     const [openItemId, setOpenItemId] = useState<string | null>(null);
     
     const [postcode, setPostcode] = useState<string>("");
+    const navigate = useNavigate();
     
-    const handleQuoteMeClick = () => {
-        console.log(
-            `Getting quote for additional services with postcode: ${postcode}`
-        );
+    const handleQuoteMeClick = async () => {
+        if (!postcode.trim()) {
+            toast.error('Please enter a postcode.');
+            return;
+        }
+        try {
+            const res = await axiosInstance.post('https://v1-api-6rdd.onrender.com/postcode', { postcode });
+            toast.success(`Success: ${JSON.stringify(res.data)}`);
+            navigate(`/checkout?postcode=${encodeURIComponent(postcode.trim())}`);
+        } catch (err: any) {
+            const msg = err?.response?.data?.message || err.message || 'An error occurred';
+            toast.error(msg);
+        }
     };
     
     const handleRegularQuote = (code: string) => {
@@ -53,6 +63,15 @@ export default function Reclean() {
     return(
         <div className="w-full min-h-screen">
             {/* Hero Section Container */}
+            <ToastContainer
+        position='top-right'
+        rtl={true}
+        hideProgressBar={false}
+        autoClose={5000}
+        draggable={true}
+        icon={<Check/>}
+        pauseOnHover={true}
+        />
       <section className="flex items-center bg-[#f7f7ff] justify-center w-full">
         <div
           className="absolute inset-0 z-0 bg-cover bg-center opacity-0 bg-no-repeat"
@@ -165,9 +184,11 @@ export default function Reclean() {
                   placeholder="Enter your post code here"
                   className="flex-grow text-gray-700 placeholder-gray-400 focus:outline-none text-base sm:text-lg bg-transparent"
                   aria-label="Enter your postcode"
+                  value={postcode}
+                  onChange={(e) => setPostcode(e.target.value)}
                 />
               </div>
-              <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary nunito-sans-heading py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+              <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary nunito-sans-heading py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5" onClick={handleQuoteMeClick}>
                 QUOTE ME
               </button>
             </div>

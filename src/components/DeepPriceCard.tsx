@@ -1,9 +1,8 @@
-
-
-
-
 import React from 'react';
-import { MapPin } from 'lucide-react';
+import { Check, MapPin } from 'lucide-react';
+import axiosInstance from '../api/axiosInstance';
+import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 // You might consider making these props if you have different variations
 interface PriceCardProps {
@@ -20,17 +19,39 @@ export const DeepPriceCard: React.FC<PriceCardProps> = ({
   onQuoteMeClick,
 }) => {
   const [postcode, setPostcode] = React.useState<string>('');
+  const navigate = useNavigate();
 
-  const handleQuoteClick = () => {
+  const handleQuoteClick = async () => {
     if (onQuoteMeClick) {
       onQuoteMeClick(postcode);
+      return;
     }
-    console.log(`Getting quote for postcode: ${postcode}`);
+    if (!postcode.trim()) {
+      toast.error('Please enter a postcode.');
+      return;
+    }
+    try {
+      const res = await axiosInstance.post('https://v1-api-6rdd.onrender.com/postcode', { postcode });
+      toast.success(`Success: ${JSON.stringify(res.data)}`);
+      navigate(`/checkout?postcode=${encodeURIComponent(postcode.trim())}`);
+    } catch (err: any) {
+      const msg = err?.response?.data?.message || err.message || 'An error occurred';
+      toast.error(msg);
+    }
   };
 
   return (
     <div className="bg-white rounded-lg shadow-xl p-6 relative w-full max-w-sm mx-auto">
       {/* Cashback Badge */}
+      <ToastContainer
+        position='top-right'
+        rtl={true}
+        hideProgressBar={false}
+        autoClose={5000}
+        draggable={true}
+        icon={<Check/>}
+        pauseOnHover={true}
+        />
       <div className="absolute -top-4 left-6 bg-yellow-300 text-gray-800 text-sm font-semibold px-4 py-2 rounded-lg shadow-md">
         {cashbackText}
       </div>

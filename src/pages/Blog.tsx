@@ -1,15 +1,28 @@
 import React, { useState } from "react";
-import { Search, ArrowRight, MapPin } from "lucide-react";
+import { Search, ArrowRight, MapPin, Check } from "lucide-react";
 import { BlogCard } from "../components/BlogCard";
 import { Footer } from "../components/Footer";
+import axiosInstance from '../api/axiosInstance';
+import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 export default function Blog() {
   const [postcode, setPostcode] = useState<string>("");
+  const navigate = useNavigate();
 
-  const handleQuoteMeClick = () => {
-    console.log(
-      `Getting quote for additional services with postcode: ${postcode}`
-    );
+  const handleQuoteMeClick = async () => {
+    if (!postcode.trim()) {
+      toast.error('Please enter a postcode.');
+      return;
+    }
+    try {
+      const res = await axiosInstance.post('https://v1-api-6rdd.onrender.com/postcode', { postcode });
+      toast.success(`Success: ${JSON.stringify(res.data)}`);
+      navigate(`/checkout?postcode=${encodeURIComponent(postcode.trim())}`);
+    } catch (err: any) {
+      const msg = err?.response?.data?.message || err.message || 'An error occurred';
+      toast.error(msg);
+    }
   };
 
   interface BlogPost {
@@ -106,6 +119,15 @@ export default function Blog() {
   return (
     <div className="font-sans antialiased bg-gray-100 text-gray-800 min-h-screen">
       {/* Featured Blog Post Section */}
+      <ToastContainer
+        position='top-right'
+        rtl={true}
+        hideProgressBar={false}
+        autoClose={5000}
+        draggable={true}
+        icon={<Check/>}
+        pauseOnHover={true}
+        />
       <section className="py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         {/* header */}
         <div className="bg-transparent flex items-center justify-between">

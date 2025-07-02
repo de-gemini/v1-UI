@@ -1,16 +1,16 @@
-
-
-
 import { Check, ChevronDown, MapPin } from "lucide-react";
 import { CostCard } from "../components/Postcode";
 import { useState } from "react";
 import { HowItWorksSection } from "../components/HowItWorks";
+import axiosInstance from '../api/axiosInstance';
+import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 export default function EndTenancy() {
   const [postcode, setPostcode] = useState<string>("");
   const [openItemId, setOpenItemId] = useState<string | null>
   (null);
-
+  const navigate = useNavigate();
 
   const toggleFAQ = (id: string) => {
     setOpenItemId(openItemId === id ? null : id);
@@ -178,9 +178,33 @@ export default function EndTenancy() {
     },
   ];
 
+  const handleQuoteMeClick = async () => {
+    if (!postcode.trim()) {
+      toast.error('Please enter a postcode.');
+      return;
+    }
+    try {
+      const res = await axiosInstance.post('https://v1-api-6rdd.onrender.com/postcode', { postcode });
+      toast.success(`Success: ${JSON.stringify(res.data)}`);
+      navigate(`/checkout?postcode=${encodeURIComponent(postcode.trim())}`);
+    } catch (err: any) {
+      const msg = err?.response?.data?.message || err.message || 'An error occurred';
+      toast.error(msg);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-whiteoverflow-x-hidden w-full">
       {/* Hero Section Container */}
+      <ToastContainer
+        position='top-right'
+        rtl={true}
+        hideProgressBar={false}
+        autoClose={5000}
+        draggable={true}
+        icon={<Check/>}
+        pauseOnHover={true}
+        />
       <section className="flex items-center justify-center w-full mt-[2rem] px-4 max-w-7xl mx-auto">
         {/* Content Container */}
         <div className="relative z-10 text-left w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8">
@@ -213,9 +237,13 @@ export default function EndTenancy() {
                   placeholder="Enter your post code here"
                   className="flex-grow text-gray-700 placeholder-gray-400 focus:outline-none text-base sm:text-lg bg-transparent"
                   aria-label="Enter your postcode"
+                  value={postcode}
+                  onChange={(e) => setPostcode(e.target.value)}
                 />
               </div>
-              <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary nunito-sans-heading py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+              <button
+                onClick={handleQuoteMeClick}
+                className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary nunito-sans-heading py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
                 QUOTE ME
               </button>
             </div>
@@ -275,7 +303,7 @@ export default function EndTenancy() {
 
 
           <p className="text-gray-700 text-base nunito-sans-text sm:text-lg mb-6">
-          eMop’s average office cleaning cost is £17/h. The frequencies are listed below:
+          eMop's average office cleaning cost is £17/h. The frequencies are listed below:
           </p>
 
           <ul className="text-gray-700 space-y-2 mb-6">

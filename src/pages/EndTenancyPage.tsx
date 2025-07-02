@@ -1,20 +1,18 @@
-
-
-
-
-
-
-
-import { ChevronDown, MapPin, Star } from "lucide-react";
+import { Check, ChevronDown, MapPin, Star } from "lucide-react";
 import Banner from "../components/Banner";
 import ImageSlider from "../components/ImageSlider";
 import { ProfessionalsCarousel } from "../components/Professional";
 import { useState } from "react";
 import { HowItWorksSection } from "../components/HowItWorks";
 import { DeepPriceCard } from "../components/DeepPriceCard";
+import axiosInstance from '../api/axiosInstance';
+import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 export default function EndTenancyService() {
   const [openItemId, setOpenItemId] = useState<string | null>(null);
+  const [postcode, setPostcode] = useState<string>("");
+  const navigate = useNavigate();
 
   interface ServiceItem {
     id: string;
@@ -210,10 +208,23 @@ export default function EndTenancyService() {
     console.log(`Regular Cleaning Quote for: ${code}`);
   };
 
-  const [postcode, setPostcode] = useState<string>("");
-
   const handleOneOffQuote = (code: string) => {
     console.log(`One-off Cleaning Quote for: ${code}`);
+  };
+
+  const handleQuoteMeClick = async () => {
+    if (!postcode.trim()) {
+      toast.error('Please enter a postcode.');
+      return;
+    }
+    try {
+      const res = await axiosInstance.post('https://v1-api-6rdd.onrender.com/postcode', { postcode });
+      toast.success(`Success: ${JSON.stringify(res.data)}`);
+      navigate(`/checkout?postcode=${encodeURIComponent(postcode.trim())}`);
+    } catch (err: any) {
+      const msg = err?.response?.data?.message || err.message || 'An error occurred';
+      toast.error(msg);
+    }
   };
 
   const dummyProfessionals = [
@@ -282,6 +293,15 @@ export default function EndTenancyService() {
   ];
   return (
     <div className="min-h-screen bg-white overflow-x-hidden w-full">
+      <ToastContainer
+        position='top-right'
+        rtl={true}
+        hideProgressBar={false}
+        autoClose={5000}
+        draggable={true}
+        icon={<Check/>}
+        pauseOnHover={true}
+        />
       <Banner title="End of Tenancy Cleaning in London" />
 
       {/* Carousel section */}
@@ -415,7 +435,7 @@ export default function EndTenancyService() {
               aria-label=""
             />
           </div>
-          <button className="bg-brand-primary hover:bg-blue-200 text-white font-semibold py-3 px-6 md:py-4 md:px-8 text-base md:text-lg transition duration-300 flex-shrink-0">
+          <button className="bg-brand-primary hover:bg-blue-200 text-white font-semibold py-3 px-6 md:py-4 md:px-8 text-base md:text-lg transition duration-300 flex-shrink-0" onClick={handleQuoteMeClick}>
             Quote me
           </button>
         </div>
