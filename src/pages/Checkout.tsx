@@ -119,6 +119,7 @@ const Checkout = () => {
   const [surname, setSurname] = useState("");
   const [address, setAddress] = useState("");
   const [comments, setComments] = useState("");
+  const [dirtLevel, setDirtLevel] = useState<'light' | 'medium' | 'heavy'>('medium');
 
   // Time picker handlers
   const incrementHour = () => setHour(h => (h + 1) % 24);
@@ -168,7 +169,7 @@ const Checkout = () => {
       address,
       postcode,
       scheduledDate: scheduledDateTime,
-      dirtLevel: "medium", // placeholder
+      dirtLevel: dirtLevel,
       estimatedDuration: duration, // in minutes
       estimatedPrice,
       notes: comments,
@@ -356,6 +357,7 @@ const Checkout = () => {
                   <span className="ml-2 text-xs text-[#a78bfa]">2h clean with Cleaning products included</span>
                 </div>
               </div>
+              
               {/* Navigation */}
               <div className="flex items-center justify-center gap-[10px] mt-8">
                 <button
@@ -506,16 +508,52 @@ const Checkout = () => {
                 <button className={`px-4 py-1 rounded-md border font-bold ${!keyPickup ? 'bg-white border-[#a78bfa] text-[#a78bfa]' : 'bg-[#a78bfa] text-white border-[#a78bfa]'}`} onClick={() => setKeyPickup(false)}>No</button>
                 <button className={`px-4 py-1 rounded-md border font-bold ${keyPickup ? 'bg-[#a78bfa] text-white border-[#a78bfa]' : 'bg-white border-[#a78bfa] text-[#a78bfa]'}`} onClick={() => setKeyPickup(true)}>Yes</button>
               </div>
-              {/* Promo code */}
-              <div className="flex items-center gap-4">
-                <span className="font-semibold">Have a Promocode/Voucher?</span>
-                <input
-                  type="text"
-                  value={promoCode}
-                  onChange={e => setPromoCode(e.target.value)}
-                  className="border border-gray-300 rounded-md px-3 py-2 text-lg"
-                  placeholder="Enter code"
-                />
+
+              {/* Dirt Level UI */}
+              <div className="mt-8">
+                <div className={`flex items-center mb-4 border-l-4 pl-2 ${dirtLevel === 'light' ? 'border-green-500' : dirtLevel === 'medium' ? 'border-yellow-400' : 'border-red-500'}`}> 
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={dirtLevel === 'light' ? '#22c55e' : dirtLevel === 'medium' ? '#eab308' : '#ef4444'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2"><circle cx="12" cy="12" r="10" /><path d="M9 12l2 2 4-4" /></svg>
+                  <h3 className={`text-lg font-semibold ${dirtLevel === 'light' ? 'text-green-600' : dirtLevel === 'medium' ? 'text-yellow-600' : 'text-red-500'}`}>Let us know the level of dirt at your property</h3>
+                </div>
+                <div className="flex border rounded-lg overflow-hidden w-full max-w-xl mb-4">
+                  {['light', 'medium', 'heavy'].map(level => (
+                    <button
+                      key={level}
+                      onClick={() => setDirtLevel(level as 'light' | 'medium' | 'heavy')}
+                      className={`flex-1 py-4 text-lg font-semibold transition-all border-none outline-none focus:z-10
+                        ${dirtLevel === level
+                          ? `${level === 'light' ? 'text-green-600 border-green-500' : level === 'medium' ? 'text-yellow-600 border-yellow-400' : 'text-red-500 border-red-500'} bg-white border`
+                          : 'text-gray-700 bg-white hover:bg-gray-50'}
+                        ${level === 'light' ? 'rounded-l-lg' : ''} ${level === 'heavy' ? 'rounded-r-lg' : ''}`}
+                      style={{ borderRight: level !== 'heavy' ? '1px solid #eee' : undefined }}
+                    >
+                      {level.charAt(0).toUpperCase() + level.slice(1)}
+                    </button>
+                  ))}
+                </div>
+                <ul className="mt-2 space-y-1 text-sm">
+                  {dirtLevel === 'light' && (
+                    <>
+                      <li className="text-green-700">• You clean your home regularly</li>
+                      <li className="text-green-700">• There is little dust and no visible stains</li>
+                      <li className="text-green-700">• No rearrangement or extra effort needed</li>
+                    </>
+                  )}
+                  {dirtLevel === 'medium' && (
+                    <>
+                      <li className="text-yellow-600">• You clean your home every few weeks</li>
+                      <li className="text-yellow-600">• Some dust, limescale, or grease present</li>
+                      <li className="text-yellow-600">• Some rearrangement or extra effort may be needed</li>
+                    </>
+                  )}
+                  {dirtLevel === 'heavy' && (
+                    <>
+                      <li className="text-red-500">• You haven't done cleaning for over a month or even two</li>
+                      <li className="text-red-500">• You have a lot of stuff that need to be moved /rearranged to clean your home</li>
+                      <li className="text-red-500">• You had a party and there are a lot of things to be cleaned and arranged</li>
+                    </>
+                  )}
+                </ul>
               </div>
             </div>
             {/* Final action button */}
