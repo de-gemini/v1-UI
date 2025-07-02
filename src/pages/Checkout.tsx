@@ -1,16 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css';
 import axiosInstance from '../api/axiosInstance';
 import { toast, ToastContainer } from 'react-toastify';
 import { Check } from 'lucide-react';
+import { fetchWithAuth } from "../utils/helper";
 
 const cleaningTypes = [
   "One-Off / Regular / Carpet&Upholstery",
   "End of Tenancy",
   "Carpet&Upholstery only",
 ];
+
+type AvailabilityDay = string; // e.g., "2025-07-02"
+
+const formatDate = (date: Date): string => {
+  const yyyy = date.getFullYear();
+  const mm = String(date.getMonth() + 1).padStart(2, '0');
+  const dd = String(date.getDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
+};
 
 const frequencyOptions = [
   {
@@ -94,83 +104,100 @@ const Checkout = () => {
   const params = new URLSearchParams(search);
   const postcode = params.get("postcode") || "E1 6AN";
 
-  const [step, setStep] = useState(1); // 1: cleaning type, 2: what to clean, 3: additional info
-  const [step1View, setStep1View] = useState(0); // 0: cleaning type, 1: frequency/date/time
-  const [selectedType, setSelectedType] = useState(0); // First option selected by default
-  const [selectedFrequency, setSelectedFrequency] = useState<number | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-  const [hour, setHour] = useState(8);
-  const [minute, setMinute] = useState(0);
-  // Step 2 state
-  const [roomCounts, setRoomCounts] = useState(roomTypes.map(() => 0));
+  const [unavailableDates, setUnavailableDates] = useState<AvailabilityDay[]>([]);
+
+  const year = selectedDate.getFullYear();
+  const month = selectedDate.getMonth() + 1; // 0-based, API uses 1-based
+
+  useEffect(() => {
+    const fetchMonthlyAvailability = async () => {
+      try {
+        const res = await fetch(`https://v1-api-6rdd.onrender.com/calendar/month?year=${year}&month=${month}`);
+        const data = await res.json();
+
+        // Assuming the API returns an array like: ["2025-07-01", "2025-07-10"]
+        setUnavailableDates(data.unavailable || []);
+      } catch (error) {
+        console.error("Error fetching availability:", error);
+      }
+    };
+
+    fetchMonthlyAvailability();
+  }, [year, month]);
+
+  const isDateUnavailable = (date: Date): boolean => {
+    const yyyy = date.getFullYear();
+    const mm = String(date.getMonth() + 1).padStart(2, '0');
+    const dd = String(date.getDate()).padStart(2, '0');
+    const formatted = `${yyyy}-${mm}-${dd}`;
+    return unavailableDates.includes(formatted);
+  };
+
+  const [step, setStep] = useState<number>(1);
+  const [step1View, setStep1View] = useState<number>(0);
+  const [selectedType, setSelectedType] = useState<number>(0);
+  const [selectedFrequency, setSelectedFrequency] = useState<number | null>(null);
+  const [hour, setHour] = useState<number>(8);
+  const [minute, setMinute] = useState<number>(0);
+  const [roomCounts, setRoomCounts] = useState<number[]>(roomTypes.map(() => 0));
   const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
-  const [ecoFriendly, setEcoFriendly] = useState(false);
-  const [hooverMop, setHooverMop] = useState(false);
-  const [disinfection, setDisinfection] = useState(false);
-  const [errandHours, setErrandHours] = useState(0);
-  const [checkJob, setCheckJob] = useState(false);
-  const [havePets, setHavePets] = useState(false);
-  const [keyPickup, setKeyPickup] = useState(false);
-  const [promoCode, setPromoCode] = useState("");
-  // Step 3 state (contact & address)
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [address, setAddress] = useState("");
-  const [comments, setComments] = useState("");
+  const [ecoFriendly, setEcoFriendly] = useState<boolean>(false);
+  const [hooverMop, setHooverMop] = useState<boolean>(false);
+  const [disinfection, setDisinfection] = useState<boolean>(false);
+  const [errandHours, setErrandHours] = useState<number>(0);
+  const [checkJob, setCheckJob] = useState<boolean>(false);
+  const [havePets, setHavePets] = useState<boolean>(false);
+  const [keyPickup, setKeyPickup] = useState<boolean>(false);
+  const [promoCode, setPromoCode] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [phone, setPhone] = useState<string>('');
+  const [name, setName] = useState<string>('');
+  const [surname, setSurname] = useState<string>('');
+  const [address, setAddress] = useState<string>('');
+  const [comments, setComments] = useState<string>('');
   const [dirtLevel, setDirtLevel] = useState<'light' | 'medium' | 'heavy'>('medium');
 
-  // Time picker handlers
   const incrementHour = () => setHour(h => (h + 1) % 24);
   const decrementHour = () => setHour(h => (h - 1 + 24) % 24);
   const incrementMinute = () => setMinute(m => (m + 1) % 60);
   const decrementMinute = () => setMinute(m => (m - 1 + 60) % 60);
 
-  // Add-on toggle
   const toggleAddOn = (key: string) => {
-    setSelectedAddOns((prev) =>
-      prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]
+    setSelectedAddOns(prev =>
+      prev.includes(key) ? prev.filter(k => k !== key) : [...prev, key]
     );
   };
 
-  // Calculate estimated price and duration (simple logic for demo)
   const baseRate = selectedFrequency !== null ? [17, 18, 19, 19][selectedFrequency] : 17;
-  const roomTotal = roomTypes.reduce((sum, room, idx) => sum + roomCounts[idx], 0);
+  const roomTotal = roomCounts.reduce((sum, count) => sum + count, 0);
   const duration = roomTypes.reduce((sum, room, idx) => sum + roomCounts[idx] * room.estimatedTime, 0) + errandHours * 60;
-  let estimatedPrice = Math.max(54, Math.round((duration / 60) * baseRate)); // min price £54
+  let estimatedPrice = Math.max(54, Math.round((duration / 60) * baseRate));
   if (ecoFriendly) estimatedPrice += 6;
   if (hooverMop) estimatedPrice += 15;
   if (disinfection) estimatedPrice += 10;
 
-  // Map selectedType to serviceType
-  const getServiceType = () => {
+  const getServiceType = (): string => {
     switch (selectedType) {
-      case 0:
-        return "regular_oneoff";
-      case 1:
-        return "end_of_tenancy";
-      case 2:
-        return "carpet_upholstery";
-      default:
-        return "regular_oneoff";
+      case 0: return 'regular_oneoff';
+      case 1: return 'end_of_tenancy';
+      case 2: return 'carpet_upholstery';
+      default: return 'regular_oneoff';
     }
   };
 
-  // API integration for booking (now uses all fields)
   const handleGetAQuote = async () => {
-    // Compose scheduledDateTime in ISO format
     const date = new Date(selectedDate);
     date.setHours(hour, minute, 0, 0);
     const scheduledDateTime = date.toISOString();
-    // Compose rooms array
     const rooms = roomTypes
       .map((room, idx) => ({
         type: room.type,
         quantity: roomCounts[idx],
         estimatedTime: room.estimatedTime,
       }))
-      .filter((r) => r.quantity > 0);
+      .filter(r => r.quantity > 0);
+
     if (rooms.length === 0) {
       toast.error('Please select at least one room.');
       return;
@@ -183,50 +210,56 @@ const Checkout = () => {
       toast.error('Please select a frequency.');
       return;
     }
-    // Compose request body to match API sample
+
     const body = {
       serviceType: getServiceType(),
       rooms,
       address,
-      postcode,
+      postcode: '', // Add postcode field from user input if available
       scheduledDate: scheduledDateTime,
-      dirtLevel: dirtLevel,
-      estimatedDuration: duration, // in minutes
+      dirtLevel,
+      estimatedDuration: duration,
       estimatedPrice,
       notes: comments,
       promoCode: promoCode || undefined,
-      frequency: selectedFrequency !== null ? frequencyOptions[selectedFrequency].label.toLowerCase().replace(/[^a-z]/g, '') : '',
+      frequency: frequencyOptions[selectedFrequency].label.toLowerCase().replace(/[^a-z]/g, ''),
       ecofriendlyProduct: ecoFriendly,
       errandHours,
       havePets,
-      whereToPickKey: keyPickup ? "With the neighbour" : "",
+      whereToPickKey: keyPickup ? 'With the neighbour' : '',
       scheduledDayOfWeek: date.getDay(),
       scheduledDayOfMonth: date.getDate(),
       scheduledTime: `${pad(hour)}:${pad(minute)}`,
       scheduledDateTime,
       subscriptionMonths: 1,
-      // The following fields are not in the sample, so omit:
-      // hooverMop, disinfection, email, phone, name, surname, addOns
     };
+
     try {
-      const res = await axiosInstance.post('https://v1-api-6rdd.onrender.com/bookings', body);
-      toast.success('Booking created!');
-      if(res.status === 400) {
-        toast.error('Something has gone wrong!')
+      const res = await fetch('https://v1-api-6rdd.onrender.com/bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+
+      if (res.status === 400) {
+        toast.error('Something has gone wrong!');
+        return;
       }
+
+      toast.success('Booking created!');
     } catch (err: any) {
       const msg = err?.response?.data?.message || err.message || 'An error occurred';
       toast.error(msg);
     }
   };
 
-  // Progress bar step status
-  const isStepDone = (idx: number) => {
+  const isStepDone = (idx: number): boolean => {
     if (idx === 0) return step > 1;
     if (idx === 1) return step > 2;
-    if (idx === 2) return false;
     return false;
   };
+
+
 
   return (
     <div className="min-h-screen flex flex-col items-center py-8 px-2 bg-[#fafaff]">
@@ -333,14 +366,15 @@ const Checkout = () => {
                     <div className="flex-1">
                       <h3 className="text-lg font-semibold mb-2">Choose date</h3>
                       <div className="bg-white rounded-lg shadow p-4">
-                        <Calendar
-                          onChange={date => setSelectedDate(date as Date)}
-                          value={selectedDate}
-                          minDate={new Date()}
-                          calendarType="iso8601"
-                          prev2Label={null}
-                          next2Label={null}
-                        />
+                      <Calendar
+        onChange={date => setSelectedDate(date as Date)}
+        value={selectedDate}
+        minDate={new Date()}
+        calendarType="iso8601"
+        prev2Label={null}
+        next2Label={null}
+        tileDisabled={({ date }) => isDateUnavailable(date)}
+      />
                       </div>
                     </div>
                     <div className="flex-1">
