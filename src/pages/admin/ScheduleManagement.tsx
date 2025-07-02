@@ -19,44 +19,7 @@ import {
 import { Header } from "./components/Header";
 import { useBookingScheduleStore } from "../../store/bookingScheduleStore";
 import { Countdown } from "../../components/shared/Countdown";
-// import { Schedule } from "../../api/bookingSchedules";
-
-export interface Schedule {
-  _id: string;
-  booking: {
-    _id: string;
-    user: {
-      _id: string;
-      name: string;
-      email: string;
-      phoneNumber: string;
-      address: string;
-    };
-    scheduledDate: string;
-    scheduledTime: string;
-    address: string;
-    frequency: "onetime" | "weekly" | "fortnight" | "monthly";
-    monthDuration: number;
-    endOftenancy: boolean;
-    expressStudio: boolean;
-    ecofriendlyProduct: boolean;
-    errandHours: number;
-    havePets: boolean;
-    whereToPickKey: string;
-    notes: string;
-    status: "pending" | "confirmed" | "completed" | "cancelled";
-    estimatedPrice: number;
-    estimatedDuration: number;
-    paymentStatus: string;
-  };
-  frequency: string;
-  startDate: string;
-  dayOfWeek: number;
-  time: string;
-  status: "pending" | "confirmed" | "completed" | "cancelled";
-  createdAt: string;
-  updatedAt: string;
-}
+import type { Schedule } from "../../api/bookingSchedules";
 
 interface ScheduleManagementProps {
   className?: string;

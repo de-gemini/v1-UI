@@ -2,14 +2,12 @@ import React, { useEffect, useState } from "react";
 import {
   FaChevronLeft,
   FaChevronRight,
-  FaEye,
-  FaCheck,
-  FaTimes,
   FaClock,
+  FaTimes,
   FaUser,
 } from "react-icons/fa";
-import { Header } from "./components/Header";
 import { useBookingScheduleStore } from "../../store/bookingScheduleStore";
+import { Header } from "./components/Header";
 
 interface BookingCalendarProps {
   className?: string;
@@ -47,6 +45,7 @@ const BookingCalendar: React.FC<BookingCalendarProps> = ({
       days.push(new Date(year, month - 1, i));
     }
 
+    // Do NOT add trailing days from the next month
     return days;
   };
 

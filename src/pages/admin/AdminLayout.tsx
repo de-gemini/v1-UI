@@ -1,22 +1,16 @@
-import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import {
-  FaTachometerAlt,
-  FaBoxOpen,
-  FaUsers,
-  FaStar,
-  FaCreditCard,
-  FaPlug,
-  FaCog,
-  FaQuestionCircle,
-  FaUserShield,
-  FaSignOutAlt,
-  FaBoxes,
-  FaCalendarAlt,
   FaBars,
+  FaBoxOpen,
+  FaCalendarAlt,
+  FaCog,
+  FaSignOutAlt,
+  FaTachometerAlt,
   FaTimes,
+  FaUsers,
 } from "react-icons/fa";
-import { FiSearch, FiBell } from "react-icons/fi";
+import { FiBell, FiSearch } from "react-icons/fi";
+import { Link, useLocation } from "react-router-dom";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -88,16 +82,16 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                 className={`flex items-center px-6 py-3 text-sm gap-3 mb-1 transition-colors ${
                   isActive(item.path)
                     ? "bg-brand-primary text-brand-secondary font-bold"
-                    : "text-brand-secondary hover:bg-background-100"
+                    : "text-neutral-500 hover:bg-background-100"
                 }`}
               >
                 {item.icon}
                 {item.label}
-                {item.badge && (
+                {/* {item.badge && (
                   <span className="ml-auto bg-green-500 text-white text-xs rounded-full px-2 py-0.5">
                     {item.badge.toString().padStart(2, "0")}
                   </span>
-                )}
+                )} */}
               </Link>
             ))}
             <div className="text-xs text-gray-400 px-6 mt-6 mb-2">ACCOUNT</div>
@@ -109,7 +103,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                 className={`flex items-center px-6 py-3 text-sm gap-3 rounded-lg mb-1 transition-colors ${
                   isActive(item.path)
                     ? "bg-brand-primary text-white"
-                    : "text-brand-secondary hover:bg-background-100"
+                    : "text-neutral-500 hover:bg-background-100"
                 }`}
               >
                 {item.icon}
