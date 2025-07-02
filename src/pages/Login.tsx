@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -79,6 +80,7 @@ const Login = () => {
               {isLoading ? 'Signing in...' : 'SIGN IN'}
             </button>
           </form>
+          <div className='flex items-center justify-center gap-[10px]'>
           <a
             href="#"
             className="block mt-4 text-sm text-[#3B2E7E] text-center font-medium hover:underline"
@@ -86,6 +88,15 @@ const Login = () => {
           >
             Forgot password?
           </a>
+
+          <Link
+            to='/register'
+            className="block mt-4 text-sm text-[#3B2E7E] text-center font-medium hover:underline"
+            tabIndex={0}
+          >
+            Don't have an account? Sign up
+          </Link>
+          </div>
         </div>
       </div>
     </div>

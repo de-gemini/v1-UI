@@ -62,6 +62,8 @@ const BathroomCleaning = lazy(() => import("./pages/BathroomCleaning"));
 const MattressCleaning = lazy(() => import("./pages/MattressCleaning"));
 const SpringCleaning = lazy(() => import("./pages/SpringCleaning"));
 const Checkout = lazy(() => import("./pages/Checkout"));
+const Signup = lazy(() => import("./pages/Signup"));
+
 
 
 function App() {
@@ -303,6 +305,11 @@ function App() {
                 }
               />
               <Route path="/checkout" element={<Checkout />} />
+              <Route path="/register" element={
+                <Layout>
+                  <Signup />
+                </Layout>
+                } />
             </Routes>
           </main>
         </div>

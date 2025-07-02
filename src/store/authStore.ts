@@ -17,6 +17,14 @@ interface AuthState {
   token: string | null;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
+  register: (data: {
+    name: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+    phoneNumber: string;
+    address: string;
+  }) => Promise<void>;
 }
 
 // Test account credentials
@@ -56,5 +64,12 @@ export const useAuthStore = create<AuthState>((set) => ({
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     localStorage.removeItem('role');
+  },
+  register: async (data) => {
+    try {
+      await axios.post(`${API_BASE_URL}/auth/register`, data);
+    } catch (error) {
+      throw error;
+    }
   },
 })); 

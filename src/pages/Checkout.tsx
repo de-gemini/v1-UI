@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css';
 import axiosInstance from '../api/axiosInstance';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import { Check } from 'lucide-react';
 
 const cleaningTypes = [
@@ -143,6 +143,20 @@ const Checkout = () => {
   if (hooverMop) estimatedPrice += 15;
   if (disinfection) estimatedPrice += 10;
 
+  // Map selectedType to serviceType
+  const getServiceType = () => {
+    switch (selectedType) {
+      case 0:
+        return "regular_oneoff";
+      case 1:
+        return "end_of_tenancy";
+      case 2:
+        return "carpet_upholstery";
+      default:
+        return "regular_oneoff";
+    }
+  };
+
   // API integration for booking (now uses all fields)
   const handleGetAQuote = async () => {
     // Compose scheduledDateTime in ISO format
@@ -161,11 +175,18 @@ const Checkout = () => {
       toast.error('Please select at least one room.');
       return;
     }
-    // Compose request body
+    if (!address || !email || !phone || !name || !surname) {
+      toast.error('Please fill in all required fields.');
+      return;
+    }
+    if (selectedFrequency === null) {
+      toast.error('Please select a frequency.');
+      return;
+    }
+    // Compose request body to match API sample
     const body = {
-      serviceType: "regular_oneoff", // or map from selectedType
+      serviceType: getServiceType(),
       rooms,
-      addOns: selectedAddOns, // send selected add-ons
       address,
       postcode,
       scheduledDate: scheduledDateTime,
@@ -173,10 +194,8 @@ const Checkout = () => {
       estimatedDuration: duration, // in minutes
       estimatedPrice,
       notes: comments,
-      promoCode,
+      promoCode: promoCode || undefined,
       frequency: selectedFrequency !== null ? frequencyOptions[selectedFrequency].label.toLowerCase().replace(/[^a-z]/g, '') : '',
-      endOftenancy: false, // placeholder
-      expressStudio: false, // placeholder
       ecofriendlyProduct: ecoFriendly,
       errandHours,
       havePets,
@@ -185,18 +204,16 @@ const Checkout = () => {
       scheduledDayOfMonth: date.getDate(),
       scheduledTime: `${pad(hour)}:${pad(minute)}`,
       scheduledDateTime,
-      subscriptionMonths: 1, // placeholder
-      hooverMop,
-      disinfection,
-      email,
-      phone,
-      name,
-      surname,
+      subscriptionMonths: 1,
+      // The following fields are not in the sample, so omit:
+      // hooverMop, disinfection, email, phone, name, surname, addOns
     };
     try {
       const res = await axiosInstance.post('https://v1-api-6rdd.onrender.com/bookings', body);
       toast.success('Booking created!');
-      // Optionally, move to next step or show summary
+      if(res.status === 400) {
+        toast.error('Something has gone wrong!')
+      }
     } catch (err: any) {
       const msg = err?.response?.data?.message || err.message || 'An error occurred';
       toast.error(msg);
@@ -213,6 +230,12 @@ const Checkout = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center py-8 px-2 bg-[#fafaff]">
+      <ToastContainer
+      position="top-right"
+      rtl={true}
+      autoClose={5000}
+      hideProgressBar={false}
+      />
       {/* Progress Bar */}
       <div className="w-full max-w-5xl flex justify-center mb-8 px-2">
         <div className="w-full flex flex-col sm:flex-row items-center sm:items-end gap-4 sm:gap-0 bg-transparent">
@@ -496,6 +519,7 @@ const Checkout = () => {
                 <button className={`px-4 py-1 rounded-md border font-bold ${!checkJob ? 'bg-white border-[#a78bfa] text-[#a78bfa]' : 'bg-[#a78bfa] text-white border-[#a78bfa]'}`} onClick={() => setCheckJob(false)}>No</button>
                 <button className={`px-4 py-1 rounded-md border font-bold ${checkJob ? 'bg-[#a78bfa] text-white border-[#a78bfa]' : 'bg-white border-[#a78bfa] text-[#a78bfa]'}`} onClick={() => setCheckJob(true)}>Yes</button>
               </div>
+              
               {/* Pets */}
               <div className="flex items-center gap-4">
                 <span className="font-semibold">Do you have pets?</span>
