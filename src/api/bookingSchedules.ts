@@ -1,6 +1,6 @@
+import { API_BASE_URL } from "../constants";
 import axiosInstance from "./axiosInstance";
 import { getAuthHeader } from "./cleaningTimes";
-import { API_BASE_URL } from "../constants";
 
 // Types for the API responses
 export interface User {
@@ -28,8 +28,35 @@ export interface Booking {
 
 export interface Schedule {
   _id: string;
-  booking: Booking;
-  date: string;
+  booking: {
+    _id: string;
+    user: {
+      _id: string;
+      name: string;
+      email: string;
+      phoneNumber: string;
+      address: string;
+    };
+    scheduledDate: string;
+    scheduledTime: string;
+    address: string;
+    frequency: "onetime" | "weekly" | "fortnight" | "monthly";
+    monthDuration: number;
+    endOftenancy: boolean;
+    expressStudio: boolean;
+    ecofriendlyProduct: boolean;
+    errandHours: number;
+    havePets: boolean;
+    whereToPickKey: string;
+    notes: string;
+    status: "pending" | "confirmed" | "completed" | "cancelled";
+    estimatedPrice: number;
+    estimatedDuration: number;
+    paymentStatus: string;
+  };
+  frequency: string;
+  startDate: string;
+  dayOfWeek: number;
   time: string;
   status: "pending" | "confirmed" | "completed" | "cancelled";
   createdAt: string;
