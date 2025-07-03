@@ -16,7 +16,7 @@ interface CleaningTimesState {
   editValues: { [id: string]: string };
   message: { type: string; text: string };
   fetchCleaningTimes: () => Promise<void>;
-  addCleaningTime: (name: string, cleaningTime: number) => Promise<void>;
+  addCleaningTime: (payload: { name: string; cleaningTime: number }) => Promise<void>;
   updateCleaningTimeValue: (id: string, cleaningTime: number) => Promise<void>;
   deleteCleaningTimeValue: (id: string) => Promise<void>;
   setShowAddRoomForm: (show: boolean) => void;
@@ -48,7 +48,7 @@ export const useCleaningTimesStore = create<CleaningTimesState>((set, get) => ({
       set({ loading: false });
     }
   },
-  addCleaningTime: async (payload) => {
+  addCleaningTime: async (payload: { name: string; cleaningTime: number }) => {
     try {
       await createCleaningTime(payload);
       set({ message: { type: 'success', text: 'Room added successfully!' }, showAddRoomForm: false });

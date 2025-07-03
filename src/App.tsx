@@ -19,6 +19,9 @@ import ErrorAlert from "./components/ErrorAlert";
 import SuccessAlert from "./components/SuccessAlert";
 import ScheduleManagement from "./pages/admin/ScheduleManagement";
 import DeepCleaning from "./pages/DeepCleaning";
+import StripeTestPage from './pages/StripeTestPage';
+import StripeCardPaymentPage from './pages/StripeCardPaymentPage';
+import PaymentSuccessPage from './pages/PaymentSuccessPage';
 
 // Protected Route wrapper component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -310,6 +313,9 @@ function App() {
                   <Signup />
                 </Layout>
                 } />
+              <Route path="/test-stripe-processor" element={<StripeTestPage />} />
+              <Route path="/stripe-card-payment" element={<StripeCardPaymentPage />} />
+              <Route path="/payment-success" element={<PaymentSuccessPage />} />
             </Routes>
           </main>
         </div>

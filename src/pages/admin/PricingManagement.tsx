@@ -22,9 +22,9 @@ const PricingManagement = () => {
     loading,
     showAddRoomForm,
     rowLoading,
-    rowMessage,
+    // rowMessage,
     editValues,
-    message,
+    // message,
     fetchCleaningTimes,
     addCleaningTime,
     updateCleaningTimeValue,
@@ -162,7 +162,7 @@ const PricingManagement = () => {
                         type="number"
                         value={editValues[room._id]}
                         min={1}
-                        onChange={(e) => setEditValue(room._id, Number(e.target.value))}
+                        onChange={(e) => setEditValue(room._id, e.target.value)}
                         className="w-24 px-2 py-1 border border-background-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary"
                       />
                     </td>
