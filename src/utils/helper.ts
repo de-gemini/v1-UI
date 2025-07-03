@@ -11,6 +11,8 @@ export const fetchWithAuth = async (
     throw new Error("Unauthorized");
   }
 
+  console.log(token)
+
   const headers: HeadersInit = {
     Authorization: `Bearer ${token}`,
     ...(options.headers || {}),

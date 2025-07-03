@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css';
-import axiosInstance from '../api/axiosInstance';
 import { toast, ToastContainer } from 'react-toastify';
 import { Check } from 'lucide-react';
 import { fetchWithAuth } from "../utils/helper";
+import { useAuthStore } from "../store/authStore";
+
 
 const cleaningTypes = [
   "One-Off / Regular / Carpet&Upholstery",
@@ -13,14 +14,11 @@ const cleaningTypes = [
   "Carpet&Upholstery only",
 ];
 
-type AvailabilityDay = string; // e.g., "2025-07-02"
-
-const formatDate = (date: Date): string => {
-  const yyyy = date.getFullYear();
-  const mm = String(date.getMonth() + 1).padStart(2, '0');
-  const dd = String(date.getDate()).padStart(2, '0');
-  return `${yyyy}-${mm}-${dd}`;
-};
+interface DayAvailabilityResponse {
+  statusCode: number;
+  message: string;
+  payload: string[] | null;
+}
 
 const frequencyOptions = [
   {
@@ -69,9 +67,11 @@ const frequencyOptions = [
   },
 ];
 
+const frequencyBackendValues = ["weekly", "fortnight", "monthly", "onetime"];
+
 const roomTypes = [
   { type: "bedroom", label: "Bedroom", estimatedTime: 25, icon: "https://www.emop.co.uk/static/images/steps_booking/bedroom.svg" },
-  { type: "living", label: "Living/Dining room", estimatedTime: 30, icon: "https://www.emop.co.uk/static/images/steps_booking/living_dining.svg" },
+  { type: "living_room", label: "Living/Dining room", estimatedTime: 30, icon: "https://www.emop.co.uk/static/images/steps_booking/living_dining.svg" },
   { type: "bathroom", label: "Bathroom", estimatedTime: 45, icon: "https://www.emop.co.uk/static/images/steps_booking/bathroom.svg" },
   { type: "hall", label: "Hall", estimatedTime: 10, icon: "https://www.emop.co.uk/static/images/steps_booking/hall.svg" },
   { type: "staircase", label: "Staircase", estimatedTime: 15, icon: "https://www.emop.co.uk/static/images/steps_booking/stairs.svg" },
@@ -103,35 +103,71 @@ const Checkout = () => {
   const search = useLocation().search;
   const params = new URLSearchParams(search);
   const postcode = params.get("postcode") || "E1 6AN";
+  const user = useAuthStore.getState().user
 
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-  const [unavailableDates, setUnavailableDates] = useState<AvailabilityDay[]>([]);
+  const [disabledDates, setDisabledDates] = useState<Date[]>([]);
+  const [availableTimes, setAvailableTimes] = useState<string[]>([]);
+  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [loadingTimes, setLoadingTimes] = useState(false);
 
-  const year = selectedDate.getFullYear();
-  const month = selectedDate.getMonth() + 1; // 0-based, API uses 1-based
+  const fetchDisabledDates = useCallback(async () => {
+    try {
+      const res = await fetch('https://v1-api-6rdd.onrender.com/calendar');
+      const data = await res.json();
 
-  useEffect(() => {
-    const fetchMonthlyAvailability = async () => {
-      try {
-        const res = await fetch(`https://v1-api-6rdd.onrender.com/calendar/month?year=${year}&month=${month}`);
-        const data = await res.json();
-
-        // Assuming the API returns an array like: ["2025-07-01", "2025-07-10"]
-        setUnavailableDates(data.unavailable || []);
-      } catch (error) {
-        console.error("Error fetching availability:", error);
+      if (Array.isArray(data.payload)) {
+        const unavailable = data.payload.filter((d: any) => !d.available);
+        const disabled = unavailable.map((entry: any) => new Date(entry.date));
+        setDisabledDates(disabled);
       }
-    };
+    } catch (err) {
+      console.error('Failed to fetch unavailable dates:', err);
+    }
+  }, []);
 
-    fetchMonthlyAvailability();
-  }, [year, month]);
+  // Fetch times for selected date
+  const fetchDayAvailability = useCallback(async (date: Date) => {
+    setLoadingTimes(true);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
 
-  const isDateUnavailable = (date: Date): boolean => {
-    const yyyy = date.getFullYear();
-    const mm = String(date.getMonth() + 1).padStart(2, '0');
-    const dd = String(date.getDate()).padStart(2, '0');
-    const formatted = `${yyyy}-${mm}-${dd}`;
-    return unavailableDates.includes(formatted);
+    try {
+      const res = await fetch(`https://v1-api-6rdd.onrender.com/calendar/${year}/${month}/${day}`);
+      const data: DayAvailabilityResponse = await res.json();
+
+      if (data.payload === null) {
+        setAvailableTimes(['Any time']); // available all day
+      } else if (Array.isArray(data.payload) && data.payload.length > 0) {
+        setAvailableTimes(data.payload);
+      } else {
+        setAvailableTimes([]);
+      }
+    } catch (err) {
+      console.error('Failed to load day slots:', err);
+      setAvailableTimes([]);
+    } finally {
+      setLoadingTimes(false);
+    }
+  }, []);
+
+  // Fetch times whenever selectedDate changes
+  useEffect(() => {
+    fetchDayAvailability(selectedDate);
+  }, [selectedDate, fetchDayAvailability]);
+
+  // Fetch disabled dates on mount
+  useEffect(() => {
+    fetchDisabledDates();
+  }, [fetchDisabledDates]);
+
+  const isTileDisabled = ({ date }: { date: Date }) => {
+    return disabledDates.some(
+      (d) => d.getFullYear() === date.getFullYear() &&
+             d.getMonth() === date.getMonth() &&
+             d.getDate() === date.getDate()
+    );
   };
 
   const [step, setStep] = useState<number>(1);
@@ -215,14 +251,14 @@ const Checkout = () => {
       serviceType: getServiceType(),
       rooms,
       address,
-      postcode: '', // Add postcode field from user input if available
+      postcode: '',
       scheduledDate: scheduledDateTime,
       dirtLevel,
       estimatedDuration: duration,
       estimatedPrice,
       notes: comments,
       promoCode: promoCode || undefined,
-      frequency: frequencyOptions[selectedFrequency].label.toLowerCase().replace(/[^a-z]/g, ''),
+      frequency: frequencyBackendValues[selectedFrequency],
       ecofriendlyProduct: ecoFriendly,
       errandHours,
       havePets,
@@ -235,7 +271,7 @@ const Checkout = () => {
     };
 
     try {
-      const res = await fetch('https://v1-api-6rdd.onrender.com/bookings', {
+      const res = await fetchWithAuth('https://v1-api-6rdd.onrender.com/bookings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
@@ -245,7 +281,6 @@ const Checkout = () => {
         toast.error('Something has gone wrong!');
         return;
       }
-
       toast.success('Booking created!');
     } catch (err: any) {
       const msg = err?.response?.data?.message || err.message || 'An error occurred';
@@ -367,14 +402,39 @@ const Checkout = () => {
                       <h3 className="text-lg font-semibold mb-2">Choose date</h3>
                       <div className="bg-white rounded-lg shadow p-4">
                       <Calendar
-        onChange={date => setSelectedDate(date as Date)}
+        onChange={(date) => setSelectedDate(date as Date)}
         value={selectedDate}
         minDate={new Date()}
+        tileDisabled={isTileDisabled}
         calendarType="iso8601"
         prev2Label={null}
         next2Label={null}
-        tileDisabled={({ date }) => isDateUnavailable(date)}
       />
+
+      <div className="mt-6">
+        <h3 className="text-lg font-semibold mb-2">Available Times</h3>
+        {loadingTimes ? (
+          <p className="text-sm text-gray-500">Loading times...</p>
+        ) : availableTimes.length > 0 ? (
+          <div className="flex flex-wrap gap-2">
+            {availableTimes.map((time) => (
+              <button
+                key={time}
+                className={`px-4 py-2 rounded-md text-sm font-semibold border ${
+                  selectedTime === time
+                    ? 'bg-purple-600 text-white border-purple-600'
+                    : 'border-gray-300 text-gray-700 hover:bg-gray-100'
+                }`}
+                onClick={() => setSelectedTime(time)}
+              >
+                {time}
+              </button>
+            ))}
+          </div>
+        ) : (
+          <p className="text-sm text-red-500">No time slots available on this day</p>
+        )}
+      </div>
                       </div>
                     </div>
                     <div className="flex-1">
@@ -672,7 +732,7 @@ const Checkout = () => {
               <div className="flex flex-col md:flex-row gap-4 mb-6">
                 <div className="flex-1">
                   <label className="block text-gray-700 font-semibold mb-1">Email</label>
-                  <input type="email" className="w-full border border-gray-300 rounded-md px-4 py-2 text-lg bg-gray-100" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" />
+                  <input type="email" className="w-full border border-gray-300 rounded-md px-4 py-2 text-lg bg-gray-100" value={user?.email} readOnly placeholder="Email" />
                 </div>
                 <div className="flex-1">
                   <label className="block text-gray-700 font-semibold mb-1">Phone number</label>
