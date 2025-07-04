@@ -50,7 +50,7 @@ export default function Blog() {
     category: "EMOP STORIES",
     title: "An Update on eMop's Growth Throughout the UK",
     excerpt:
-      "We are excited to announce eMop's latest achievement - our growth throughout the UK. We have not just been pleasing clients in London - where we began - but in recent years, throughout the UK.",
+      "We are excited to announce eMop's latest achievement - our growth throughout the UK. We have not just been pleasing clients in England - where we began - but in recent years, throughout the UK.",
     imageUrl:
       "https://www.emop.co.uk/blog/wp-content/uploads/2023/10/pexels-karolina-grabowska-4239031.jpg", // Example featured image
     readMoreLink: "#",
@@ -63,7 +63,7 @@ export default function Blog() {
       category: "EMOP STORIES",
       title: "An Update on eMop's Growth Throughout the UK",
       excerpt:
-        "We are excited to announce eMop's latest achievement - our growth throughout the UK. We have not just been pleasing clients in London - where we began - but in recent years, throughout the UK.",
+        "We are excited to announce eMop's latest achievement - our growth throughout the UK. We have not just been pleasing clients in England - where we began - but in recent years, throughout the UK.",
       imageUrl:
         "https://www.emop.co.uk/blog/wp-content/uploads/2023/10/pexels-karolina-grabowska-4239031.jpg", // Small card image
       readMoreLink: "#",
@@ -186,7 +186,7 @@ export default function Blog() {
           </h1>
         </a>
             <p className="text-gray-600 text-lg">
-            Welcome to the blog from eMop - the best cleaning company in London
+            Welcome to the blog from eMop - the best cleaning company in England
             </p>
           </div>
           {/* Optional: Add image/element from screenshot here if desired */}

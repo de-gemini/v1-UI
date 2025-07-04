@@ -66,7 +66,7 @@ export default function EndTenancy() {
     const DifferentCleaning = [
       {
         title: "Location of the office",
-        description: "Location has a significant impact on office cleaning costs per hour, just like it does for other services. Office cleaning costs in London and other major UK cities can range from £17 to £20, including a one-time cleaning fee. A difference in labour costs, transportation costs, and cost of living depending on where the office space is located can affect cleaning prices.",
+        description: "Location has a significant impact on office cleaning costs per hour, just like it does for other services. Office cleaning costs in England and other major UK cities can range from £17 to £20, including a one-time cleaning fee. A difference in labour costs, transportation costs, and cost of living depending on where the office space is located can affect cleaning prices.",
       },
       {
         title: "Quality of service",

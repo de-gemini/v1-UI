@@ -57,7 +57,7 @@ export const PriceCard: React.FC<PriceCardProps> = ({
       </div>
 
       <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mt-4 mb-2">
-        Prices for regular cleaning in London
+        Prices for regular cleaning in England
       </h2>
       <p className="text-purple-700 text-2xl md:text-3xl font-bold mb-8">
         from £17/h

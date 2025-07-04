@@ -33,9 +33,9 @@ const Home = () => {
   const faqData: FAQItemData[] = [
     {
       id: "how-get-cleaners",
-      question: "How do I get good cleaners in London?",
+      question: "How do I get good cleaners in England?",
       answer:
-        "First, ask for recommendations from friends or family living in the city. They can help you identify good options. Second, check online directories and review sites to see what others have said about different cleaners in London. That can give you a good idea of who to contact and who to avoid. Finally, you can also contact a trusted company like eMop and choose from our top-rated professionals.",
+        "First, ask for recommendations from friends or family living in the city. They can help you identify good options. Second, check online directories and review sites to see what others have said about different cleaners in England. That can give you a good idea of who to contact and who to avoid. Finally, you can also contact a trusted company like eMop and choose from our top-rated professionals.",
     },
     {
       id: "uk-cleaners-cost",
@@ -336,7 +336,7 @@ const Home = () => {
       title: "Deep cleaning",
       price: "from £19/h",
       description:
-        "For an extra deep clean of your home, eMop provides comprehensive deep cleaning in London and the surrounding areas. While a one-off service agreement will significantly reduce the clutter in your home, you may also want to use our regular services if you have a busy lifestyle.",
+        "For an extra deep clean of your home, eMop provides comprehensive deep cleaning in England and the surrounding areas. While a one-off service agreement will significantly reduce the clutter in your home, you may also want to use our regular services if you have a busy lifestyle.",
     },
     {
       imageSrc: "https://www.emop.co.uk/img/upholstery.png",
@@ -344,7 +344,7 @@ const Home = () => {
       title: "Upholstery cleaning",
       price: "from £19/h",
       description:
-        "The upholstery service from eMop eliminates visible surface dirt, such as dust and grime. Our team in London will use specialised stain-removal chemicals to get rid of any discolouring on your furniture. The solution offered by eMop includes the elimination of offensive odours, which can be a major issue if you have pets in your house.",
+        "The upholstery service from eMop eliminates visible surface dirt, such as dust and grime. Our team in England will use specialised stain-removal chemicals to get rid of any discolouring on your furniture. The solution offered by eMop includes the elimination of offensive odours, which can be a major issue if you have pets in your house.",
     },
     {
       imageSrc: "https://www.emop.co.uk/img/regular.png",
@@ -360,7 +360,7 @@ const Home = () => {
       title: "Deep cleaning",
       price: "from £19/h",
       description:
-        " For an extra-through clean of your home, eMop provides complete deep cleaning in London and its surroundings. When you enter into a service agreement, our team can significantly reduce your workload.",
+        " For an extra-through clean of your home, eMop provides complete deep cleaning in England and its surroundings. When you enter into a service agreement, our team can significantly reduce your workload.",
     },
     {
       imageSrc: "https://www.emop.co.uk/img/carpet.png",
@@ -368,7 +368,7 @@ const Home = () => {
       title: "Deep cleaning",
       price: "from £19/h",
       description:
-        "For an extra deep clean of your home, eMop provides comprehensive deep cleaning in London and the surrounding areas. While a one-off service agreement will significantly reduce the clutter in your home, you may also want to use our regular services if you have a busy lifestyle.",
+        "For an extra deep clean of your home, eMop provides comprehensive deep cleaning in England and the surrounding areas. While a one-off service agreement will significantly reduce the clutter in your home, you may also want to use our regular services if you have a busy lifestyle.",
     },
     {
       imageSrc: "https://www.emop.co.uk/img/ofice.png",
@@ -530,7 +530,7 @@ const Home = () => {
       {/* Post code section */}
       <section className="font-sans antialiased bg-gray-50 py-4 px-4 sm:px-6 lg:px-8">
         <h1 className="text-[30px] font-[700] text-brand-primary nunito-sans-heading mb-8 md:mb-12">
-          How much does a house cleaner cost in London
+          How much does a house cleaner cost in England
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mt-4">
           <div className="relative">
@@ -1040,7 +1040,7 @@ const Home = () => {
             {/* Right Section: Image */}
             <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
               <p className="text-gray-700 text-base sm:text-lg mb-6 nunito-sans-text leading-relaxed">
-                eMop is a professional cleaning company that operates in London
+                eMop is a professional cleaning company that operates in England
                 and other UK cities. We offer a wide range of cleaning services
                 London, including regular, one-off deep clean, and
                 end-of-tenancy solutions. eMop is convenient because it provides
@@ -1059,7 +1059,7 @@ const Home = () => {
             {/* Left Section: Text Content */}
             <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold nunito-sans-heading text-brand-primary mb-6">
-                Reliable Experts in London
+                Reliable Experts in England
               </h1>
 
               <p className="text-gray-700 text-base sm:text-lg mb-6 nunito-sans-text leading-relaxed">
@@ -1149,7 +1149,7 @@ const Home = () => {
                 clients require different service packages, and fully satisfying
                 your needs is our top priority. The ability to modify the
                 standard set of tasks is a major benefit of using eMop's
-                professional cleaning services in London. When the plan is
+                professional cleaning services in England. When the plan is
                 tailored to your needs, you are paying precisely for the package
                 you need. However, there are certain things our professionals
                 can't do. For example, we don't lift or move heavy objects, do

@@ -79,11 +79,11 @@ export default function CarpetCleaning() {
     },
     {
       title: "The location of your property",
-      description: "Your location is important since some carpet or upholstery cleaning firms may charge more to travel to farther-flung places. The typical day fee in London is about £140, but businesses in the nearby districts only charge about £100 per day. If you live in London, you should prepare to spend extra.",
+      description: "Your location is important since some carpet or upholstery cleaning firms may charge more to travel to farther-flung places. The typical day fee in England is about £140, but businesses in the nearby districts only charge about £100 per day. If you live in England, you should prepare to spend extra.",
     },
     {
         title: "The location of your property",
-        description: "Your location is important since some carpet or upholstery cleaning firms may charge more to travel to farther-flung places. The typical day fee in London is about £140, but businesses in the nearby districts only charge about £100 per day. If you live in London, you should prepare to spend extra.",
+        description: "Your location is important since some carpet or upholstery cleaning firms may charge more to travel to farther-flung places. The typical day fee in England is about £140, but businesses in the nearby districts only charge about £100 per day. If you live in England, you should prepare to spend extra.",
       },
   ];
 
@@ -186,7 +186,7 @@ export default function CarpetCleaning() {
             <h1 className="text-4xl sm:text-5xl lg:text-6xl nunito-sans-title text-brand-primary leading-tight mb-8 drop-shadow-sm">
             Carpet Cleaning
               <br />
-              prices in London
+              prices in England
             </h1>
 
             {/* Features List */}
@@ -225,7 +225,7 @@ export default function CarpetCleaning() {
       {/* Post code section */}
       <section className="font-sans antialiased mt-[3rem] mb-[3rem] bg-gray-50 py-4 px-4 sm:px-6 lg:px-8">
         <h1 className="text-[30px] font-[700] text-brand-primary nunito-sans-heading mb-8 md:mb-12">
-        How Much Are Carpet Cleaning Prices in London?
+        How Much Are Carpet Cleaning Prices in England?
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mt-4">
           <div className="relative">
@@ -235,7 +235,7 @@ export default function CarpetCleaning() {
             <CostCard
               title="Carpet cleaning"
               price="from £48"
-              text="Through a variety of cleaning techniques, filth, stains, and allergens are removed from carpets to enhance their appearance, hygienic quality, and durability. They include vacuuming the carpet, scrubbing dirt and stains out of it, and using a carpet washer to wash the carpet. In London, carpet cleaning prices start at £48 per hour."
+              text="Through a variety of cleaning techniques, filth, stains, and allergens are removed from carpets to enhance their appearance, hygienic quality, and durability. They include vacuuming the carpet, scrubbing dirt and stains out of it, and using a carpet washer to wash the carpet. in England, carpet cleaning prices start at £48 per hour."
               inputPlaceholder="Enter your full post code here"
               buttonText="QUOTE ME"
               onQuoteMeClick={handleRegularQuote}

@@ -77,12 +77,12 @@ export default function CarpetCleaning() {
     {
       title: "The location of your property",
       description:
-        "Your location is important since some carpet or upholstery cleaning firms may charge more to travel to farther-flung places. The typical day fee in London is about £140, but businesses in the nearby districts only charge about £100 per day. If you live in London, you should prepare to spend extra.",
+        "Your location is important since some carpet or upholstery cleaning firms may charge more to travel to farther-flung places. The typical day fee in England is about £140, but businesses in the nearby districts only charge about £100 per day. If you live in England, you should prepare to spend extra.",
     },
     {
       title: "The location of your property",
       description:
-        "Your location is important since some carpet or upholstery cleaning firms may charge more to travel to farther-flung places. The typical day fee in London is about £140, but businesses in the nearby districts only charge about £100 per day. If you live in London, you should prepare to spend extra.",
+        "Your location is important since some carpet or upholstery cleaning firms may charge more to travel to farther-flung places. The typical day fee in England is about £140, but businesses in the nearby districts only charge about £100 per day. If you live in England, you should prepare to spend extra.",
     },
   ];
 
@@ -222,7 +222,7 @@ export default function CarpetCleaning() {
       {/* Post code section */}
       <section className="font-sans antialiased mt-[3rem] mb-[3rem] bg-gray-50 py-4 px-4 sm:px-6 lg:px-8">
         <h1 className="text-[30px] font-[700] text-brand-primary nunito-sans-heading mb-8 md:mb-12">
-          How much does professional sofa cleaning cost In London?
+          How much does professional sofa cleaning cost in England?
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mt-4">
           <div className="relative">
@@ -232,7 +232,7 @@ export default function CarpetCleaning() {
             <CostCard
               title="Upholstery cleaning"
               price="from £48"
-              text="A sofa cleaning service comprises maintaining and cleaning couches and sofas to get rid of stains, odours, and other impurities. The life of your furniture can be renewed and extended, and it frequently involves vacuuming, spot removal, and upholstery cleaning. Prices for sofa cleaning with eMop begin at £48/h in London."
+              text="A sofa cleaning service comprises maintaining and cleaning couches and sofas to get rid of stains, odours, and other impurities. The life of your furniture can be renewed and extended, and it frequently involves vacuuming, spot removal, and upholstery cleaning. Prices for sofa cleaning with eMop begin at £48/h in England."
               inputPlaceholder="Enter your full post code here"
               buttonText="QUOTE ME"
               onQuoteMeClick={handleRegularQuote}

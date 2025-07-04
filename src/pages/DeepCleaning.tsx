@@ -240,7 +240,7 @@ export default function DeepCleaning() {
           </div>
 
           <p className="text-gray-700 text-base nunito-sans-text sm:text-lg mb-6">
-            As domestic cleaning prices in London vary according to location,
+            As domestic cleaning prices in England vary according to location,
             type of cleaning and size of property, we need to know the postcode
             of the property for which you are interested in domestic cleaning
             service.
@@ -267,9 +267,9 @@ export default function DeepCleaning() {
           </ul>
 
           <p className="text-gray-700 text-base nunito-sans-text sm:text-lg mb-6">
-            Our cleaning prices at eMop are the best you will get in London and
+            Our cleaning prices at eMop are the best you will get in England and
             around the UK. We take pride in offering cost-effective cleaning aid
-            of the highest quality. For all cleaning services in London that are
+            of the highest quality. For all cleaning services in England that are
             provided to our cherished clients, eMop strives to offer the finest
             price to quality ratio.
           </p>

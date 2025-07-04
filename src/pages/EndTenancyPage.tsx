@@ -116,8 +116,8 @@ export default function EndTenancyService() {
   ];
 
   const HouseCleaning = [
-    "When customers enter your office, their first impressions matter. If the office space is clean, tidy and generally pleasant to be in, it sets your relationship with the customer on the right path. Our office cleaning service in London is here to help you present your business in the best",
-    "possible light. An uncluttered, spotless work environment sends an important message to your customers as well as your employees. eMop is dedicated to achieving and maintaining the highest standards when it comes to commercial cleaning services. Our crew of skilled office cleaners in London is composed of enthusiastic, committed experts. Our professional office cleaners have access to the training and education necessary to provide cleaning services that go above and beyond clients' expectations thanks to our staff training programs.",
+    "When customers enter your office, their first impressions matter. If the office space is clean, tidy and generally pleasant to be in, it sets your relationship with the customer on the right path. Our office cleaning service in England is here to help you present your business in the best",
+    "possible light. An uncluttered, spotless work environment sends an important message to your customers as well as your employees. eMop is dedicated to achieving and maintaining the highest standards when it comes to commercial cleaning services. Our crew of skilled office cleaners in England is composed of enthusiastic, committed experts. Our professional office cleaners have access to the training and education necessary to provide cleaning services that go above and beyond clients' expectations thanks to our staff training programs.",
   ];
 
   const whyChoose = [
@@ -302,7 +302,7 @@ export default function EndTenancyService() {
         icon={<Check/>}
         pauseOnHover={true}
         />
-      <Banner title="End of Tenancy Cleaning in London" />
+      <Banner title="End of Tenancy Cleaning in England" />
 
       {/* Carousel section */}
       <section
@@ -340,13 +340,13 @@ export default function EndTenancyService() {
       {/* Post code section */}
       <section className="font-sans antialiased bg-gray-50 py-4 px-4 sm:px-6 lg:px-8">
         <h1 className="text-[30px] font-[700] text-brand-primary nunito-sans-heading mb-8 md:mb-12">
-          How much does a house cleaner cost in London
+          How much does a house cleaner cost in England
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mt-4">
           <div className="bg-gray-100 rounded-lg shadow-xl p-6 relative w-full max-w-sm mx-auto">
             <h1 className="text-brand-primary text-[30px] font-bold">
-              What is included in deep cleaning in London?
+              What is included in deep cleaning in England?
             </h1>
 
             <ul className="mt-[3rem] flex flex-col gap-5">
@@ -415,7 +415,7 @@ export default function EndTenancyService() {
 
       <div className="bg-white p-8 md:p-12 lg:p-16 rounded-lg w-full max-w-4xl mx-auto my-12">
         <h2 className="text-2xl md:text-3xl font-bold text-brand-primary mb-4">
-          One-off deep cleaning service in London
+          One-off deep cleaning service in England
         </h2>
         <p className="text-gray-700 text-base md:text-lg mb-8">
           Our standard cleaning service includes everything you need to get your
@@ -580,7 +580,7 @@ export default function EndTenancyService() {
       </section>
 
       <h1 className="text-brand-primary mt-[4rem] ml-[1rem] md:ml-[2rem] lg:ml-[3rem] mb-[2rem] text-2xl font-extrabold">
-        Deep Cleaning Services with eMop in London
+        Deep Cleaning Services with eMop in England
       </h1>
 
       <div className="max-w-7xl mx-auto mt-4 bg-white rounded-lg shadow-lg overflow-hidden md:flex">

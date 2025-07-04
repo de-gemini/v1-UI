@@ -62,9 +62,9 @@ export default function OfficeCleaningPage() {
   const faqData: FAQItemData[] = [
     {
       id: "charge-per-hour",
-      question: "How much is a professional cleaner in London?",
+      question: "How much is a professional cleaner in England?",
       answer:
-        "One-time deep cleaning services in London would cost between £14 per hour and £25 per hour, with the average hourly rate for house cleaning in London being between £12 and £13. Get the best office cleaning prices and excellent quality by requesting a quote from eMop.",
+        "One-time deep cleaning services in England would cost between £14 per hour and £25 per hour, with the average hourly rate for house cleaning in England being between £12 and £13. Get the best office cleaning prices and excellent quality by requesting a quote from eMop.",
     },
     {
       id: "house-cost",
@@ -101,8 +101,8 @@ export default function OfficeCleaningPage() {
   ];
 
   const HouseCleaning = [
-    "When customers enter your office, their first impressions matter. If the office space is clean, tidy and generally pleasant to be in, it sets your relationship with the customer on the right path. Our office cleaning service in London is here to help you present your business in the best",
-    "possible light. An uncluttered, spotless work environment sends an important message to your customers as well as your employees. eMop is dedicated to achieving and maintaining the highest standards when it comes to commercial cleaning services. Our crew of skilled office cleaners in London is composed of enthusiastic, committed experts. Our professional office cleaners have access to the training and education necessary to provide cleaning services that go above and beyond clients' expectations thanks to our staff training programs.",
+    "When customers enter your office, their first impressions matter. If the office space is clean, tidy and generally pleasant to be in, it sets your relationship with the customer on the right path. Our office cleaning service in England is here to help you present your business in the best",
+    "possible light. An uncluttered, spotless work environment sends an important message to your customers as well as your employees. eMop is dedicated to achieving and maintaining the highest standards when it comes to commercial cleaning services. Our crew of skilled office cleaners in England is composed of enthusiastic, committed experts. Our professional office cleaners have access to the training and education necessary to provide cleaning services that go above and beyond clients' expectations thanks to our staff training programs.",
   ];
 
   const whyChoose = [
@@ -265,7 +265,7 @@ export default function OfficeCleaningPage() {
   ];
   return (
     <div className="min-h-screen bg-white overflow-x-hidden w-full">
-      <Banner title="Office Cleaning Services in London" />
+      <Banner title="Office Cleaning Services in England" />
 
       {/* Carousel section */}
       <section
@@ -304,7 +304,7 @@ export default function OfficeCleaningPage() {
 
       <div className="bg-white p-8 md:p-12 lg:p-16 rounded-lg w-full max-w-4xl mx-auto my-12">
         <h2 className="text-2xl md:text-3xl font-bold text-brand-primary mb-4">
-        Business office cleaning service in London
+        Business office cleaning service in England
         </h2>
         <p className="text-gray-700 text-base md:text-lg mb-8">
         Our standard cleaning service includes everything you need to get your home in order as quickly as possible. You can book additional services when you make your booking.
@@ -469,7 +469,7 @@ export default function OfficeCleaningPage() {
       </section>
 
       <h1 className="text-brand-primary mt-[4rem] ml-[1rem] md:ml-[2rem] lg:ml-[3rem] mb-[2rem] text-2xl font-extrabold">
-        Choose trusted office cleaning service in London
+        Choose trusted office cleaning service in England
       </h1>
 
       <div className="max-w-7xl mx-auto mt-4 bg-white rounded-lg shadow-lg overflow-hidden md:flex">

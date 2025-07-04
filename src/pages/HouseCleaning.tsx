@@ -105,21 +105,21 @@ export default function HouseCleaning() {
   const faqData: FAQItemData[] = [
     {
       id: "charge-per-hour",
-      question: "How do I get good cleaners in London?",
+      question: "How do I get good cleaners in England?",
       answer:
-        "House cleaners charge from £19/h for one-off cleanings and from £19/h for regular cleanings in London.",
+        "House cleaners charge from £19/h for one-off cleanings and from £19/h for regular cleanings in England.",
     },
     {
       id: "house-cost",
-      question: "How much does it cost to hire a house cleaner in London?",
+      question: "How much does it cost to hire a house cleaner in England?",
       answer:
-        "The cost of hiring a house cleaner in London depends on factors such as the type of service,location, experience and additional tasks. For basic cleaning you can expect to pay £16-£20 per hour or £16-£80 per visit for a flat or house. Prices are higher for one-off deep cleanings.",
+        "The cost of hiring a house cleaner in England depends on factors such as the type of service,location, experience and additional tasks. For basic cleaning you can expect to pay £16-£20 per hour or £16-£80 per visit for a flat or house. Prices are higher for one-off deep cleanings.",
     },
     {
       id: "pay-perp-clean",
       question: "How much money should you get for cleaning the whole house?",
       answer:
-        "For a full house cleaning in London, a reasonable rate is £100-£200 for an average sized house requiring standard cleaning services. Larger homes, additional services such as laundry or windows, and poor condition requiring extensive cleaning can significantly increase the expected rate.",
+        "For a full house cleaning in England, a reasonable rate is £100-£200 for an average sized house requiring standard cleaning services. Larger homes, additional services such as laundry or windows, and poor condition requiring extensive cleaning can significantly increase the expected rate.",
     },
     {
       id: "standard-cleaning-price",
@@ -140,7 +140,7 @@ export default function HouseCleaning() {
             <h1 className="text-4xl sm:text-5xl lg:text-6xl nunito-sans-title text-brand-primary leading-tight mb-8 drop-shadow-sm">
               House cleaning prices
               <br />
-              in London
+              in England
             </h1>
 
             {/* Features List */}
@@ -179,7 +179,7 @@ export default function HouseCleaning() {
       {/* Post code section */}
       <section className="font-sans antialiased mb-[3rem] bg-gray-50 py-4 px-4 sm:px-6 lg:px-8">
         <h1 className="text-[30px] font-[700] text-brand-secondary nunito-sans-heading mb-8 md:mb-12">
-          How much does a house cleaner cost in London
+          How much does a house cleaner cost in England
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mt-4">
           <div className="relative">
@@ -236,7 +236,7 @@ export default function HouseCleaning() {
           </div>
 
           <p className="text-gray-700 text-base nunito-sans-text sm:text-lg mb-6">
-            As domestic cleaning prices in London vary according to location,
+            As domestic cleaning prices in England vary according to location,
             type of cleaning and size of property, we need to know the postcode
             of the property for which you are interested in domestic cleaning
             service.
@@ -263,9 +263,9 @@ export default function HouseCleaning() {
           </ul>
 
           <p className="text-gray-700 text-base nunito-sans-text sm:text-lg mb-6">
-            Our cleaning prices at eMop are the best you will get in London and
+            Our cleaning prices at eMop are the best you will get in England and
             around the UK. We take pride in offering cost-effective cleaning aid
-            of the highest quality. For all cleaning services in London that are
+            of the highest quality. For all cleaning services in England that are
             provided to our cherished clients, eMop strives to offer the finest
             price to quality ratio.
           </p>
