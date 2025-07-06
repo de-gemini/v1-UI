@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 const Login = () => {
   const navigate = useNavigate();
   const login = useAuthStore(state => state.login);
-  const [email, setEmail] = useState('admin@geminicleaning.com');
-  const [password, setPassword] = useState('admin123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -22,7 +22,7 @@ const Login = () => {
       if (isAdmin) {
         navigate('/admin');
       } else {
-        navigate('/dashboard');
+        navigate('/');
       }
     } catch (err) {
       setError('Invalid credentials. Please try again.');

@@ -1,11 +1,13 @@
 import { useState, useEffect, useCallback } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css';
 import { toast, ToastContainer } from 'react-toastify';
 import { Check } from 'lucide-react';
 import { fetchWithAuth } from "../utils/helper";
 import { useAuthStore } from "../store/authStore";
+import { createStripePaymentIntent } from "../api/stripePayment";
+
 
 
 const cleaningTypes = [
@@ -104,6 +106,7 @@ const Checkout = () => {
   const params = new URLSearchParams(search);
   const postcode = params.get("postcode") || "E1 6AN";
   const user = useAuthStore.getState().user
+  const navigate = useNavigate()
 
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [disabledDates, setDisabledDates] = useState<Date[]>([]);
@@ -186,7 +189,6 @@ const Checkout = () => {
   const [havePets, setHavePets] = useState<boolean>(false);
   const [keyPickup, setKeyPickup] = useState<boolean>(false);
   const [promoCode, setPromoCode] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [name, setName] = useState<string>('');
   const [surname, setSurname] = useState<string>('');
@@ -238,7 +240,7 @@ const Checkout = () => {
       toast.error('Please select at least one room.');
       return;
     }
-    if (!address || !email || !phone || !name || !surname) {
+    if (!address || !phone || !name || !surname) {
       toast.error('Please fill in all required fields.');
       return;
     }
@@ -276,12 +278,29 @@ const Checkout = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       });
+      const booking = await res.json()
+      console.log(booking);
+      const bookingId = booking?.payload?._id
 
-      if (res.status === 400) {
+      if (!bookingId) {
+        toast.error('Booking ID not found in response')
+        throw new Error('Booking ID not found in response');
+      }
+      if (!res.ok) {
         toast.error('Something has gone wrong!');
+        navigate('/login')
         return;
       }
-      toast.success('Booking created!');
+      if (res.status === 401) {
+        toast.error('Not authorized, please login.');
+        navigate('/login')
+        return;
+      }
+      if(res.status === 201) {
+        toast.success('Booking created!');
+        const paymentIntent = await createStripePaymentIntent(bookingId);
+       return { booking, paymentIntent };
+      }
     } catch (err: any) {
       const msg = err?.response?.data?.message || err.message || 'An error occurred';
       toast.error(msg);

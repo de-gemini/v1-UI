@@ -10,7 +10,7 @@ export const getAllCleaningTimes = async () => {
   const res = await axiosInstance.get(`${API_BASE_URL}/cleaning-times/active`, {
     headers: getAuthHeader(),
   });
-  return res.data.payload; // assuming payload contains the list
+  return res.data.payload; 
 };
 
 export const createCleaningTime = async (data: { name: string; cleaningTime: number }) => {
