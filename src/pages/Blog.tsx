@@ -5,6 +5,7 @@ import { Footer } from "../components/Footer";
 import axiosInstance from '../api/axiosInstance';
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from "../constants";
 
 export default function Blog() {
   const [postcode, setPostcode] = useState<string>("");
@@ -15,14 +16,25 @@ export default function Blog() {
       toast.error('Please enter a postcode.');
       return;
     }
+  
     try {
-      const res = await axiosInstance.post('https://v1-api-6rdd.onrender.com/postcode', { postcode });
-      toast.success(`Success: ${JSON.stringify(res.data)}`);
+      const res = await axiosInstance.post(`${API_BASE_URL}/postcode`, { postcode });
+  
+      // Optional: log or inspect the API response
+      console.log(res.data);
+  
+       // Check if the API returned a valid area
+    if (res.data?.area) {
+      toast.success(`Postcode found: ${res.data.area}`);
       navigate(`/checkout?postcode=${encodeURIComponent(postcode.trim())}`);
-    } catch (err: any) {
-      const msg = err?.response?.data?.message || err.message || 'An error occurred';
-      toast.error(msg);
+    } else {
+      toast.error('Invalid postcode or area not found.');
     }
+
+  } catch (err: any) {
+    const msg = err?.response?.data?.message || err.message || 'An error occurred';
+    toast.error(msg);
+  }
   };
 
   interface BlogPost {

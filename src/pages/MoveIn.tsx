@@ -8,6 +8,7 @@ import { HowItWorksSection } from "../components/HowItWorks";
 import axiosInstance from '../api/axiosInstance';
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from "../constants";
 
 export default function MoveIn() {
   const [openItemId, setOpenItemId] = useState<string | null>(null);
@@ -214,14 +215,25 @@ export default function MoveIn() {
       toast.error('Please enter a postcode.');
       return;
     }
+  
     try {
-      const res = await axiosInstance.post('https://v1-api-6rdd.onrender.com/postcode', { postcode });
-      toast.success(`Success: ${JSON.stringify(res.data)}`);
+      const res = await axiosInstance.post(`${API_BASE_URL}/postcode`, { postcode });
+  
+      // Optional: log or inspect the API response
+      console.log(res.data);
+  
+       // Check if the API returned a valid area
+    if (res.data?.area) {
+      toast.success(`Postcode found: ${res.data.area}`);
       navigate(`/checkout?postcode=${encodeURIComponent(postcode.trim())}`);
-    } catch (err: any) {
-      const msg = err?.response?.data?.message || err.message || 'An error occurred';
-      toast.error(msg);
+    } else {
+      toast.error('Invalid postcode or area not found.');
     }
+
+  } catch (err: any) {
+    const msg = err?.response?.data?.message || err.message || 'An error occurred';
+    toast.error(msg);
+  }
   };
 
   const dummyProfessionals = [
@@ -427,7 +439,9 @@ export default function MoveIn() {
               aria-label=""
             />
           </div>
-          <button className="bg-brand-primary hover:bg-blue-200 text-white font-semibold py-3 px-6 md:py-4 md:px-8 text-base md:text-lg transition duration-300 flex-shrink-0">
+          <button
+          onClick={handleQuoteMeClick}
+          className="bg-brand-primary hover:bg-blue-200 text-white font-semibold py-3 px-6 md:py-4 md:px-8 text-base md:text-lg transition duration-300 flex-shrink-0">
             Quote me
           </button>
         </div>
@@ -952,7 +966,9 @@ export default function MoveIn() {
               aria-label="Enter your postcode"
             />
           </div>
-          <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+          <button 
+          onClick={handleQuoteMeClick}
+          className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
             QUOTE ME
           </button>
         </div>

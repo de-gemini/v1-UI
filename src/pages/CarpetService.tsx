@@ -11,6 +11,7 @@ import { HowItWorksSection } from "../components/HowItWorks";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 import { toast, ToastContainer } from "react-toastify";
+import { API_BASE_URL } from "../constants";
 
 export default function CarpetService() {
   const [openItemId, setOpenItemId] = useState<string | null>(null);
@@ -286,7 +287,7 @@ export default function CarpetService() {
     }
   
     try {
-      const res = await axiosInstance.post('https://v1-api-6rdd.onrender.com/postcode', { postcode });
+      const res = await axiosInstance.post(`${API_BASE_URL}/postcode`, { postcode });
   
       // Optional: log or inspect the API response
       console.log(res.data);
@@ -445,7 +446,9 @@ export default function CarpetService() {
               aria-label=""
             />
           </div>
-          <button className="bg-brand-primary hover:bg-blue-200 text-white font-semibold py-3 px-6 md:py-4 md:px-8 text-base md:text-lg transition duration-300 flex-shrink-0" onClick={handlePostcodeApi}>
+          <button
+          onClickCapture={handlePostcodeApi}
+          className="bg-brand-primary hover:bg-blue-200 text-white font-semibold py-3 px-6 md:py-4 md:px-8 text-base md:text-lg transition duration-300 flex-shrink-0" onClick={handlePostcodeApi}>
             Quote me
           </button>
         </div>
@@ -970,7 +973,9 @@ export default function CarpetService() {
               aria-label="Enter your postcode"
             />
           </div>
-          <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+          <button
+          onClick={handlePostcodeApi}
+          className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
             QUOTE ME
           </button>
         </div>

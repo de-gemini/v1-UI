@@ -10,6 +10,10 @@ import { ProfessionalsCarousel } from "../components/Professional";
 import { useState } from "react";
 import { HowItWorksSection } from "../components/HowItWorks";
 import { DeepPriceCard } from "../components/DeepPriceCard";
+import { toast } from "react-toastify";
+import axiosInstance from "../api/axiosInstance";
+import { API_BASE_URL } from "../constants";
+import { useNavigate } from "react-router-dom";
 
 export default function KitchenDeep() {
   const [openItemId, setOpenItemId] = useState<string | null>(null);
@@ -278,6 +282,34 @@ export default function KitchenDeep() {
         "Hi, my name is Silvie and I have more than 5 years experience as a cleaner. Let me help you to make your home spotless. 😊",
     },
   ];
+
+  const navigate = useNavigate()
+
+  const handlePostcodeApi = async () => {
+    if (!postcode.trim()) {
+      toast.error('Please enter a postcode.');
+      return;
+    }
+  
+    try {
+      const res = await axiosInstance.post(`${API_BASE_URL}/postcode`, { postcode });
+  
+      // Optional: log or inspect the API response
+      console.log(res.data);
+  
+       // Check if the API returned a valid area
+    if (res.data?.area) {
+      toast.success(`Postcode found: ${res.data.area}`);
+      navigate(`/checkout?postcode=${encodeURIComponent(postcode.trim())}`);
+    } else {
+      toast.error('Invalid postcode or area not found.');
+    }
+
+  } catch (err: any) {
+    const msg = err?.response?.data?.message || err.message || 'An error occurred';
+    toast.error(msg);
+  }
+  };
   return (
     <div className="min-h-screen bg-white overflow-x-hidden w-full">
       <Banner title="Kitchen Deep Cleaning Services in England" />
@@ -413,7 +445,9 @@ export default function KitchenDeep() {
               aria-label=""
             />
           </div>
-          <button className="bg-brand-primary hover:bg-blue-200 text-white font-semibold py-3 px-6 md:py-4 md:px-8 text-base md:text-lg transition duration-300 flex-shrink-0">
+          <button 
+          onClick={handlePostcodeApi}
+          className="bg-brand-primary hover:bg-blue-200 text-white font-semibold py-3 px-6 md:py-4 md:px-8 text-base md:text-lg transition duration-300 flex-shrink-0">
             Quote me
           </button>
         </div>
@@ -950,7 +984,9 @@ export default function KitchenDeep() {
               aria-label="Enter your postcode"
             />
           </div>
-          <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+          <button 
+          onClick={handlePostcodeApi}
+          className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
             QUOTE ME
           </button>
         </div>

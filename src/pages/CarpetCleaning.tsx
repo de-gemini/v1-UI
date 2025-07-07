@@ -5,6 +5,10 @@ import { Check, ChevronDown, MapPin } from "lucide-react";
 import { CostCard } from "../components/Postcode";
 import { useState } from "react";
 import { HowItWorksSection } from "../components/HowItWorks";
+import { toast, ToastContainer } from "react-toastify";
+import axiosInstance from "../api/axiosInstance";
+import { API_BASE_URL } from "../constants";
+import { useNavigate } from "react-router-dom";
 
 export default function CarpetCleaning() {
   const [postcode, setPostcode] = useState<string>("");
@@ -175,8 +179,43 @@ export default function CarpetCleaning() {
       },
   ];
 
+  const navigate = useNavigate()
+
+  const handlePostcodeApi = async () => {
+    if (!postcode.trim()) {
+      toast.error('Please enter a postcode.');
+      return;
+    }
+  
+    try {
+      const res = await axiosInstance.post(`${API_BASE_URL}/postcode`, { postcode });
+  
+      // Optional: log or inspect the API response
+      console.log(res.data);
+  
+       // Check if the API returned a valid area
+    if (res.data?.area) {
+      toast.success(`Postcode found: ${res.data.area}`);
+      navigate(`/checkout?postcode=${encodeURIComponent(postcode.trim())}`);
+    } else {
+      toast.error('Invalid postcode or area not found.');
+    }
+
+  } catch (err: any) {
+    const msg = err?.response?.data?.message || err.message || 'An error occurred';
+    toast.error(msg);
+  }
+  };
+
   return (
     <div className="min-h-screen bg-background-gray overflow-x-hidden w-full">
+      <ToastContainer
+      position="top-right"
+      rtl={true}
+      autoClose={5000}
+      draggable={true}
+      pauseOnHover={true}
+      />
       {/* Hero Section Container */}
       <section className="flex items-center justify-center w-full mt-[2rem] px-4 max-w-7xl mx-auto">
         {/* Content Container */}
@@ -212,7 +251,7 @@ export default function CarpetCleaning() {
                   aria-label="Enter your postcode"
                 />
               </div>
-              <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary nunito-sans-heading py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+              <button onClick={handlePostcodeApi} className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary nunito-sans-heading py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
                 QUOTE ME
               </button>
             </div>
@@ -238,7 +277,7 @@ export default function CarpetCleaning() {
               text="Through a variety of cleaning techniques, filth, stains, and allergens are removed from carpets to enhance their appearance, hygienic quality, and durability. They include vacuuming the carpet, scrubbing dirt and stains out of it, and using a carpet washer to wash the carpet. in England, carpet cleaning prices start at £48 per hour."
               inputPlaceholder="Enter your full post code here"
               buttonText="QUOTE ME"
-              onQuoteMeClick={handleRegularQuote}
+              onQuoteMeClick={handlePostcodeApi}
             />
           </div>
 
@@ -567,6 +606,7 @@ export default function CarpetCleaning() {
                   />
                 </div>
                 <button
+                onClick={handlePostcodeApi}
                   className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
                   QUOTE ME
                 </button>

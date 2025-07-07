@@ -561,7 +561,7 @@ const Home = () => {
               text="-"
               inputPlaceholder="Enter your full post code here"
               buttonText="QUOTE ME"
-              onQuoteMeClick={handleRegularQuote}
+              onQuoteMeClick={handlePostcodeApi}
             />
           </div>
 
@@ -571,7 +571,7 @@ const Home = () => {
             text="-"
             inputPlaceholder="Enter your full post code here"
             buttonText="QUOTE ME"
-            onQuoteMeClick={handleOneOffQuote}
+            onQuoteMeClick={handlePostcodeApi}
           />
         </div>
       </section>

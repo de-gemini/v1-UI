@@ -2,6 +2,10 @@ import { Check, ChevronDown, MapPin } from "lucide-react";
 import { CostCard } from "../components/Postcode";
 import { useState } from "react";
 import { HowItWorksSection } from "../components/HowItWorks";
+import { toast } from "react-toastify";
+import axiosInstance from "../api/axiosInstance";
+import { API_BASE_URL } from "../constants";
+import { useNavigate } from "react-router-dom";
 
 export default function CarpetCleaning() {
   const [postcode, setPostcode] = useState<string>("");
@@ -172,6 +176,34 @@ export default function CarpetCleaning() {
     },
   ];
 
+  const navigate = useNavigate()
+
+  const handlePostcodeApi = async () => {
+    if (!postcode.trim()) {
+      toast.error('Please enter a postcode.');
+      return;
+    }
+  
+    try {
+      const res = await axiosInstance.post(`${API_BASE_URL}/postcode`, { postcode });
+  
+      // Optional: log or inspect the API response
+      console.log(res.data);
+  
+       // Check if the API returned a valid area
+    if (res.data?.area) {
+      toast.success(`Postcode found: ${res.data.area}`);
+      navigate(`/checkout?postcode=${encodeURIComponent(postcode.trim())}`);
+    } else {
+      toast.error('Invalid postcode or area not found.');
+    }
+
+  } catch (err: any) {
+    const msg = err?.response?.data?.message || err.message || 'An error occurred';
+    toast.error(msg);
+  }
+  };
+
   return (
     <div className="min-h-screen bg-background-gray overflow-x-hidden w-full">
       {/* Hero Section Container */}
@@ -209,7 +241,9 @@ export default function CarpetCleaning() {
                   aria-label="Enter your postcode"
                 />
               </div>
-              <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary nunito-sans-heading py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+              <button 
+              onClick={handlePostcodeApi}
+              className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary nunito-sans-heading py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
                 QUOTE ME
               </button>
             </div>
@@ -235,7 +269,7 @@ export default function CarpetCleaning() {
               text="A sofa cleaning service comprises maintaining and cleaning couches and sofas to get rid of stains, odours, and other impurities. The life of your furniture can be renewed and extended, and it frequently involves vacuuming, spot removal, and upholstery cleaning. Prices for sofa cleaning with eMop begin at £48/h in England."
               inputPlaceholder="Enter your full post code here"
               buttonText="QUOTE ME"
-              onQuoteMeClick={handleRegularQuote}
+              onQuoteMeClick={handlePostcodeApi}
             />
           </div>
         </div>
@@ -564,7 +598,9 @@ export default function CarpetCleaning() {
               aria-label="Enter your postcode"
             />
           </div>
-          <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+          <button 
+          onClick={handlePostcodeApi}
+          className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
             QUOTE ME
           </button>
         </div>

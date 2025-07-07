@@ -5,6 +5,7 @@ import { HowItWorksSection } from "../components/HowItWorks";
 import axiosInstance from '../api/axiosInstance';
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from "../constants";
 
 export default function OfficeCleaning() {
   const [postcode, setPostcode] = useState<string>("");
@@ -194,14 +195,25 @@ export default function OfficeCleaning() {
       toast.error('Please enter a postcode.');
       return;
     }
+  
     try {
-      const res = await axiosInstance.post('https://v1-api-6rdd.onrender.com/postcode', { postcode });
-      toast.success(`Success: ${JSON.stringify(res.data)}`);
+      const res = await axiosInstance.post(`${API_BASE_URL}/postcode`, { postcode });
+  
+      // Optional: log or inspect the API response
+      console.log(res.data);
+  
+       // Check if the API returned a valid area
+    if (res.data?.area) {
+      toast.success(`Postcode found: ${res.data.area}`);
       navigate(`/checkout?postcode=${encodeURIComponent(postcode.trim())}`);
-    } catch (err: any) {
-      const msg = err?.response?.data?.message || err.message || 'An error occurred';
-      toast.error(msg);
+    } else {
+      toast.error('Invalid postcode or area not found.');
     }
+
+  } catch (err: any) {
+    const msg = err?.response?.data?.message || err.message || 'An error occurred';
+    toast.error(msg);
+  }
   };
 
   return (
@@ -252,7 +264,9 @@ export default function OfficeCleaning() {
                   onChange={(e) => setPostcode(e.target.value)}
                 />
               </div>
-              <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary nunito-sans-heading py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5" onClick={handleQuoteMeClick}>
+              <button 
+              
+              className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary nunito-sans-heading py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5" onClick={handleQuoteMeClick}>
                 QUOTE ME
               </button>
             </div>
@@ -278,7 +292,7 @@ export default function OfficeCleaning() {
               text="Professional cleaning and maintenance services for workplaces and other business settings are part of our office cleaning service. Vacuuming, dusting, sanitising toilets, and maintaining a neat space for staff and customers are among the duties carried out by eMop cleaners."
               inputPlaceholder="Enter your full post code here"
               buttonText="QUOTE ME"
-              onQuoteMeClick={handleRegularQuote}
+              onQuoteMeClick={handleQuoteMeClick}
             />
           </div>
         </div>
@@ -656,7 +670,9 @@ export default function OfficeCleaning() {
               aria-label="Enter your postcode"
             />
           </div>
-          <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+          <button 
+          onClick={handleQuoteMeClick}
+          className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
             QUOTE ME
           </button>
         </div>
