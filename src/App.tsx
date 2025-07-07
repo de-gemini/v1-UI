@@ -4,6 +4,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import { AuthGateway } from "./Layout/AuthGateway";
 import { Suspense, lazy } from "react";
 import { useAuthStore } from "./store/authStore";
 import Home from "./pages/Home";
@@ -307,7 +308,11 @@ function App() {
                     </Layout>
                 }
               />
-              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/checkout" element={
+                <AuthGateway>
+                  <Checkout />
+                </AuthGateway>
+                  } />
               <Route path="/register" element={
                 <Layout>
                   <Signup />

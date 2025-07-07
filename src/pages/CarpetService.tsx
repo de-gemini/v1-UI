@@ -1,7 +1,7 @@
 
 
 
-import { ChevronDown, MapPin, Star } from "lucide-react";
+import { Check, ChevronDown, MapPin, Star } from "lucide-react";
 import Banner from "../components/Banner";
 import ImageSlider from "../components/ImageSlider";
 import { ProfessionalsCarousel } from "../components/Professional";
@@ -9,6 +9,8 @@ import { useState } from "react";
 import { PriceCard } from "../components/PriceCard";
 import { HowItWorksSection } from "../components/HowItWorks";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../api/axiosInstance";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function CarpetService() {
   const [openItemId, setOpenItemId] = useState<string | null>(null);
@@ -277,12 +279,43 @@ export default function CarpetService() {
 
   const navigate = useNavigate();
 
-  const handlePostcodeApi = () => {
-    navigate(`/checkout?postcode=${encodeURIComponent(postcode.trim())}`);
+  const handlePostcodeApi = async () => {
+    if (!postcode.trim()) {
+      toast.error('Please enter a postcode.');
+      return;
+    }
+  
+    try {
+      const res = await axiosInstance.post('https://v1-api-6rdd.onrender.com/postcode', { postcode });
+  
+      // Optional: log or inspect the API response
+      console.log(res.data);
+  
+       // Check if the API returned a valid area
+    if (res.data?.area) {
+      toast.success(`Postcode found: ${res.data.area}`);
+      navigate(`/checkout?postcode=${encodeURIComponent(postcode.trim())}`);
+    } else {
+      toast.error('Invalid postcode or area not found.');
+    }
+
+  } catch (err: any) {
+    const msg = err?.response?.data?.message || err.message || 'An error occurred';
+    toast.error(msg);
+  }
   };
 
   return (
     <div className="min-h-screen bg-white overflow-x-hidden w-full">
+      <ToastContainer
+        position='top-right'
+        rtl={true}
+        hideProgressBar={false}
+        autoClose={5000}
+        draggable={true}
+        icon={<Check/>}
+        pauseOnHover={true}
+        />
       <Banner title="Professional carpet cleaning in England" />
 
       {/* Carousel section */}

@@ -7,6 +7,8 @@ import { Check } from 'lucide-react';
 import { fetchWithAuth } from "../utils/helper";
 import { useAuthStore } from "../store/authStore";
 import { createStripePaymentIntent } from "../api/stripePayment";
+import { isTokenValid } from "../utils/isTokenValid";
+import AuthModal from "../components/AuthModal";
 
 
 
@@ -195,6 +197,7 @@ const Checkout = () => {
   const [address, setAddress] = useState<string>('');
   const [comments, setComments] = useState<string>('');
   const [dirtLevel, setDirtLevel] = useState<'light' | 'medium' | 'heavy'>('medium');
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   const incrementHour = () => setHour(h => (h + 1) % 24);
   const decrementHour = () => setHour(h => (h - 1 + 24) % 24);
@@ -225,6 +228,12 @@ const Checkout = () => {
   };
 
   const handleGetAQuote = async () => {
+    const token = localStorage.getItem("token");
+    if (!isTokenValid(token)) {
+      setShowAuthModal(true);
+      return;
+    }
+
     const date = new Date(selectedDate);
     date.setHours(hour, minute, 0, 0);
     const scheduledDateTime = date.toISOString();
@@ -841,6 +850,21 @@ const Checkout = () => {
             </div>
           </div>
         </div>
+      )}
+
+      {showAuthModal && (
+        <AuthModal
+          title="Session Expired"
+          message="Your session has expired or you are not logged in. Please login or signup to continue."
+          onClose={() => {
+            setShowAuthModal(false);
+            navigate("/login");
+          }}
+          actions={[
+            { label: "Login", onClick: () => navigate("/login") },
+            { label: "Signup", onClick: () => navigate("/signup") },
+          ]}
+        />
       )}
     </div>
   );

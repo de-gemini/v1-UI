@@ -201,13 +201,9 @@ const Navbar = () => {
           <li><a href="/reclean-guarantee" className="text-gray-700 text-[16px] font-semibold hover:text-brand-primary transition duration-300 ease-in-out">Reclean guarantee</a></li>
           <li><a href="/home/registercleaner" className="text-gray-700 text-[16px] font-semibold hover:text-brand-primary transition duration-300 ease-in-out">Become a cleaner</a></li>
           <li>
-            {user ? (<p>
-              {user.email}
-            </p>): (
             <a href="/login" className="px-5 py-2 border border-brand-primary text-brand-primary rounded-md hover:bg-brand-primary hover:text-white transition duration-300 ease-in-out">
               Sign In
             </a>
-            )}
           </li>
         </ul>
       </nav>
