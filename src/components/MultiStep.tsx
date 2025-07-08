@@ -249,16 +249,16 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({ steps, initialForm
       <p className="text-lg sm:text-xl text-gray-600 mb-12 text-center">Sign up right now and fill in the form below</p>
 
       {/* Progress Indicator */}
-      <div className="flex justify-between border border-red-700 items-center mb-12 relative">
+      <div className="flex justify-between items-center mb-12 relative">
         {steps.map((step, index) => (
           <React.Fragment key={step.id}>
             <div className="flex flex-col items-center relative z-10">
               <div
                 className={`w-10 h-10  rounded-full flex items-center justify-center font-bold text-white transition-all duration-300 ease-in-out
                             ${currentStep > step.id
-                                ? 'bg-green-500' // Completed
+                                ? 'bg-blue-900' // Completed
                                 : currentStep === step.id
-                                  ? 'bg-yellow-400' // Current
+                                  ? 'bg-blue-700' // Current
                                   : 'bg-gray-300' // Upcoming
                             }`}
               >

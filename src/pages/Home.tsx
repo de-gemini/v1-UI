@@ -422,7 +422,7 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background-gray overflow-x-hidden w-full">
+    <div className="min-h-screen bg-white overflow-x-hidden w-full">
       {/* Hero Section Container */}
       <ToastContainer
         position='top-right'
@@ -433,7 +433,8 @@ const Home = () => {
         icon={<Check/>}
         pauseOnHover={true}
         />
-      <section className="flex items-center justify-center w-full px-4 max-w-7xl mx-auto">
+        <div className="px-4 sm:px-6 lg:px-8">
+      <section className="flex items-center justify-center max-w-7xl mx-auto">
         <div
           className="absolute inset-0 z-0 bg-cover bg-center opacity-0 bg-no-repeat"
           style={{
@@ -461,7 +462,7 @@ const Home = () => {
         <div className="relative z-10 text-left w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8">
           <div className="w-full lg:w-1/2">
             {/* Heading */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl nunito-sans-title text-brand-text leading-tight mb-8 drop-shadow-sm">
+            <h1 className="text-4xl mt-4 sm:text-5xl lg:text-6xl nunito-sans-title text-brand-text leading-tight mb-8 drop-shadow-sm">
               Best Cleaning
               <br />
               Services In England
@@ -546,7 +547,7 @@ const Home = () => {
       </section>
 
       {/* Post code section */}
-      <section className="font-sans antialiased bg-gray-50 py-4 px-4 sm:px-6 lg:px-8">
+      <section className="font-sans antialiased py-4 max-w-7xl mx-auto">
         <h1 className="text-[30px] font-[700] text-brand-primary nunito-sans-heading mb-8 md:mb-12">
           How much does a house cleaner cost in England
         </h1>
@@ -577,7 +578,7 @@ const Home = () => {
       </section>
 
       {/* How it works */}
-      <section className="w-full mb-4">
+      <section className="max-w-7xl mx-auto mb-4">
         <HowItWorksSection />
       </section>
 
@@ -887,7 +888,7 @@ const Home = () => {
       </section>
 
       {/* Professionals */}
-      <section className="w-full px-4">
+      <section className="max-w-7xl mx-auto">
         <h1 className="text-start ml-[3rem] text-brand-primary nunito-sans-heading text-[30px] font-[700]">
           Meet our Professionals
         </h1>
@@ -895,9 +896,9 @@ const Home = () => {
       </section>
 
       {/* Why choose?? */}
-      <section className="w-full flex flex-col items-center justify-center">
+      <section className="max-w-7xl mx-auto flex flex-col items-center justify-center">
         {/* cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-[5px] px-3 w-full md:w-full lg:max-w-4xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-[5px] px-3">
           {/* each card */}
           <div className="border-[3px] border-gray-300 flex flex-col items-center justify-center py-4 rounded-lg gap-[4px]">
             <div className="">
@@ -972,13 +973,13 @@ const Home = () => {
 
       {/* additional */}
       <section
-        className="w-full"
+        className="max-w-7xl mx-auto"
         style={{
           backgroundImage: `url('https://www.emop.co.uk/img/domestic-background.png')`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
         }}>
-        <div className="font-sans antialiased bg-purple-50 min-h-screen py-16 px-4 sm:px-6 lg:px-8">
+        <div className="font-sans antialiased min-h-screen py-16">
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Section: Text and Input */}
             <div className="flex flex-col justify-center">
@@ -992,7 +993,7 @@ const Home = () => {
               </p>
 
               {/* Postcode Input and Button */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-white p-2 pr-2 sm:p-3 sm:pr-3 rounded-xl shadow-lg border border-purple-300 max-w-md w-full">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-white p-2 pr-2 sm:p-3 sm:pr-3 rounded-xl shadow-lg border border-blue-900 max-w-md w-full">
                 <div className="flex items-center flex-grow p-2">
                   <MapPin className="h-6 w-6 text-gray-400 mr-3 flex-shrink-0" />
                   <input
@@ -1176,8 +1177,8 @@ const Home = () => {
       </section>
 
       {/* FAQ */}
-      <div className="font-sans antialiased bg-gray-50 min-h-screen py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
+      <div className="font-sans antialiased min-h-screen py-16 max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold nunito-sans-heading text-brand-primary mb-10 text-center">
             Frequently asked questions
           </h1>
@@ -1260,7 +1261,8 @@ const Home = () => {
 
         </section>
       </div>
-      <ToastContainer position="top-right" autoClose={4000} hideProgressBar={false} newestOnTop closeOnClick pauseOnFocusLoss draggable pauseOnHover />
+        </div>
+      
     </div>
   );
 };

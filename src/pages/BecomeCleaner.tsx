@@ -98,15 +98,6 @@ export default function BecomeCleaner() {
     },
     {
       id: "step3",
-      mainIcon: "https://www.emop.co.uk/img/cooperate-icon-3.jpg",
-      title: "Download eMopper App on your smartphone",
-      description:
-        "You will be able to activate it when you are authorized on the eMop platform",
-      tooltipContent:
-        "Get the eMopper app from your app store. It's essential for managing your bookings and communicating with customers.",
-    },
-    {
-      id: "step4",
       mainIcon: "https://www.emop.co.uk/img/cooperate-icon-4.png",
       title: "Complete your profile",
       description: "",
@@ -114,16 +105,16 @@ export default function BecomeCleaner() {
         "Fill in your professional profile with your experience, preferences, and a friendly profile picture to attract more bookings.",
     },
     {
-      id: "step5",
+      id: "step4",
       // Changed mainIcon from MopBucket to Bucket, as MopBucket is not a direct export from lucide-react
       mainIcon: "https://www.emop.co.uk/img/cooperate-icon-5.png",
       title: "Attend onboarding session",
       description: "",
       tooltipContent:
-        "Participate in our online or in-person onboarding session to learn about eMop standards, platform usage, and best practices.",
+        "Participate in our online or in-person onboarding session to learn about Degemini standards, platform usage, and best practices.",
     },
     {
-      id: "step6",
+      id: "step5",
       mainIcon: "https://www.emop.co.uk/img/cooperate-icon-6.png",
       title: "Start receiving jobs",
       description: "",
@@ -131,7 +122,7 @@ export default function BecomeCleaner() {
         "Once authorized, you can start receiving job offers through the app. Accept jobs that fit your schedule and start earning!",
     },
     {
-      id: "step7",
+      id: "step6",
       mainIcon: "https://www.emop.co.uk/img/finish.png",
       title: "Start receiving jobs",
       description: "",
@@ -221,11 +212,11 @@ export default function BecomeCleaner() {
       {/* What is Emop */}
       <section className="bg-[#f5f9fc] min-h-screen flex flex-col items-center py-12 text-center">
         <h1 className="text-brand-primary text-[30px] font-[800]">
-          What is eMop?
+          What is De gemini?
         </h1>
         <p className="mb-6 max-w-[1000px]">
-          eMop is a service aggregator that connects households and cleaners,
-          whom we call eMoppers. eMop acts as a powerful platform arranging fast
+          Degemini is a service aggregator that connects households and cleaners,
+          whom we call Degemini. Degemini acts as a powerful platform arranging fast
           and high-quality service for the clients
         </p>
 
@@ -233,7 +224,7 @@ export default function BecomeCleaner() {
           Our platform facilitates and provides part-time and full-time work for
           people in the cleaning industry through live training for eMoppers to
           guarantee the highest level of quality. We ensure safety for both:
-          eMoppers and customers, and solve issues that can arise between them
+          Degemini and customers, and solve issues that can arise between them
         </p>
 
         {/* icons */}
@@ -249,7 +240,7 @@ export default function BecomeCleaner() {
             TO GET YOU STARTED
           </h1>
           <p className="text-xl sm:text-2xl text-gray-600 mb-12">
-            To work with eMop you need to
+            To work with Degemini you need to
           </p>
 
           {/* Steps Grid */}
@@ -269,7 +260,7 @@ export default function BecomeCleaner() {
                 )}
                 {/* Main Circular Icon Container */}
                 <div
-                  className={`relative w-40 h-40 bg-[#f2f3f5] hover:bg-[#fcdb00] sm:w-48 sm:h-48 rounded-full flex items-center justify-center transition-colors duration-300
+                  className={`relative w-40 h-40 bg-[#f2f3f5] hover:bg-brand-primary sm:w-48 sm:h-48 rounded-full flex items-center justify-center transition-colors duration-300
                             ${
                               openTooltipId === step.id
                                 ? "bg-brand-primary"
@@ -278,7 +269,7 @@ export default function BecomeCleaner() {
                   {/* Plus/X Icon on Top Right */}
                   <button
                     onClick={() => toggleTooltip(step.id)}
-                    className="absolute top-2 right-2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-brand-secondary text-white flex items-center justify-center z-10 shadow-md transition-all duration-200 hover:bg-brand-primary"
+                    className="absolute top-2 right-2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-900 text-brand-primary flex items-center justify-center z-10 shadow-md transition-all duration-200 hover:bg-white"
                     aria-label={
                       openTooltipId === step.id ? "Close info" : "Open info"
                     }>
@@ -300,7 +291,7 @@ export default function BecomeCleaner() {
                 {/* Tooltip/Content that appears on click */}
                 {step.tooltipContent && (
                   <div
-                    className={`absolute bottom-[90%] left-1/2 -translate-x-1/2 mt-4 w-64 p-4 bg-brand-secondary text-white text-sm rounded-lg shadow-lg z-20
+                    className={`absolute bottom-[90%] left-1/2 -translate-x-1/2 mt-4 w-64 p-4 bg-brand-secondary text-brand-primary text-sm rounded-lg shadow-lg z-20
                               transform transition-all duration-300 ease-in-out origin-top
                               ${
                                 openTooltipId === step.id
@@ -339,7 +330,7 @@ export default function BecomeCleaner() {
                 REQUIREMENTS
               </h1>
               <p className="text-lg sm:text-xl text-gray-700 mb-8">
-                To work with eMop you need to
+                To work with Degemini you need to
               </p>
 
               <ul className="text-gray-700 space-y-3">

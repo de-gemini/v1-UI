@@ -30,8 +30,8 @@ export default function Help() {
         {
           id: 'emopers-faq',
           imageSrc: 'https://www.emop.co.uk/help/wp-content/themes/emop_faq/static/images/general/2_cleaners.svg', // Placeholder for eMopers illustration
-          altText: 'Illustration of eMopers',
-          title: 'FAQ for eMopers',
+          altText: 'Illustration of Degemini',
+          title: 'FAQ for Degemini',
           description: "You're a cleaner and want to be sure that you're following the procedure",
           linkText: 'Get answers',
           linkHref: '/help/Emoppers', 
@@ -168,7 +168,7 @@ export default function Help() {
 
             {/* Column 4: EMOP SERVICE */}
             <div className="lg:col-span-1">
-              <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">EMOP SERVICE</h3>
+              <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">Degemini SERVICE</h3>
               <ul className="space-y-2">
                 <li><a href="#" className="hover:underline text-gray-700">Domestic cleaning</a></li>
                 <li><a href="#" className="hover:underline text-gray-700">Regular cleaning</a></li>
@@ -187,7 +187,7 @@ export default function Help() {
                   className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-700"
                 />
               </div>
-              <button className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out">
+              <button className="w-full bg-brand-primary hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out">
                 SUBSCRIBE NOW
               </button>
 
@@ -224,8 +224,8 @@ export default function Help() {
 
           {/* Bottom Copyright and Address */}
           <div className="mt-8 w-full border-t border-gray-200 pt-8 text-center text-xs text-gray-600 flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0">
-            <p className="order-2 md:order-1">www.emop.co.uk</p>
-          <p className="order-1 md:order-2">Copyright © eMop {myYear}</p>
+            <p className="order-2 md:order-1"></p>
+          <p className="order-1 md:order-2">Copyright © Degemini {myYear}</p>
             <p className="order-3 md:order-3">Registered office address: Suite 5 3rd Floor, Sovereign House 1 Albert Place, London, England, N1 0BQ</p>
           </div>
         </div>
