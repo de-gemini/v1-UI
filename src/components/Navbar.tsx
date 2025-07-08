@@ -121,7 +121,7 @@ const Navbar = () => {
         {/* Hamburger/Close Button for Mobile */}
         <button
           onClick={toggleMobileMenu}
-          className="md:hidden text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-md p-2 transition-transform duration-300 ease-in-out z-50"
+          className="md:hidden text-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-primary rounded-md p-2 transition-transform duration-300 ease-in-out z-50"
           aria-label="Toggle navigation"
         >
           {isMobileMenuOpen ? (

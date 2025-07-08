@@ -310,7 +310,7 @@ export default function GiftVouch() {
                     type="checkbox"
                     checked={agreedToTerms}
                     onChange={(e) => setAgreedToTerms(e.target.checked)}
-                    className="form-checkbox h-5 w-5 text-purple-600 rounded-md focus:ring-purple-500 transition duration-150 ease-in-out"
+                    className="form-checkbox h-5 w-5 text-brand-primary rounded-md focus:ring-blue-800 transition duration-150 ease-in-out"
                     aria-label="Agree to Terms and Conditions"
                   />
                   <span className="ml-2 text-sm sm:text-base">

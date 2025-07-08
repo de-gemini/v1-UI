@@ -242,7 +242,7 @@ export default function OfficeCleaning() {
             {/* Features List */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-8 mb-10">
               {features.map((feature, index) => (
-                <div key={index} className="flex items-center text-purple-800">
+                <div key={index} className="flex items-center text-brand-primary">
                   <Check className="h-6 w-6 text-brand-primary mr-3 flex-shrink-0" />
                   <span className="text-lg sm:text-xl nunito-sans-text text-brand-text">
                     {feature}

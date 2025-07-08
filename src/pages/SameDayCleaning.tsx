@@ -432,7 +432,7 @@ export default function SameDayCleaning() {
           when you make your booking.
         </p>
 
-        <div className="flex flex-col sm:flex-row w-full bg-white rounded-lg overflow-hidden shadow-md border border-purple-300 focus-within:border-purple-500 transition-colors duration-200">
+        <div className="flex flex-col sm:flex-row w-full bg-white rounded-lg overflow-hidden shadow-md border border-purple-300 focus-within:border-blue-800 transition-colors duration-200">
           <div className="flex-grow p-3 md:p-4 flex items-center">
             <MapPin className="h-5 w-5 text-brand-primary mr-3 flex-shrink-0" />
             <input

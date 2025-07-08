@@ -470,7 +470,7 @@ const Home = () => {
             {/* Features List */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-8 mb-10">
               {features.map((feature, index) => (
-                <div key={index} className="flex items-center text-purple-800">
+                <div key={index} className="flex items-center text-brand-primary">
                   <Check className="h-6 w-6 text-brand-primary mr-3 flex-shrink-0" />
                   <span className="text-lg sm:text-xl nunito-sans-text text-brand-text">
                     {feature}
@@ -1140,131 +1140,12 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="max-w-7xl mx-auto bg-white rounded-lg overflow-hidden md:flex mb-6">
-            {/* Left Section: Text Content */}
-            <div className="md:w-1/2 overflow-hidden bg-gray-100 flex items-center justify-center">
-              <img
-                src="https://www.emop.co.uk/static/redesign/images/services/regular/3.jpg"
-                alt="Cleaned bedroom"
-                className="w-full h-full object-cover object-center rounded-lg md:rounded-l-none"
-                onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-                  const target = e.target as HTMLImageElement;
-                  target.src =
-                    "https://placehold.co/800x600/e0e0e0/555555?text=Image+Not+Found";
-                  target.alt = "Fallback image: Cleaned room image not found.";
-                }}
-              />
-            </div>
-
-            {/* Right Section: Image */}
-            <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-              <h1 className="text-[20px] font-[700] text-brand-primary nunito-sans-heading mb-3">
-                A Cleaning Service that Cares for Your Home
-              </h1>
-              <p className="text-gray-700 text-base sm:text-lg nunito-sans-text mb-6 leading-relaxed">
-                Every house service is unique, which is why our employees are
-                encouraged to take a personalised approach. Besides, different
-                clients require different service packages, and fully satisfying
-                your needs is our top priority. The ability to modify the
-                standard set of tasks is a major benefit of using eMop's
-                professional cleaning services in England. When the plan is
-                tailored to your needs, you are paying precisely for the package
-                you need. However, there are certain things our professionals
-                can't do. For example, we don't lift or move heavy objects, do
-                ironing, or clean the back garden. If you want to discuss
-                add-ons in detail, we are always happy to answer your questions
-                about one off deep cleaning.
-              </p>
-            </div>
-          </div>
 
           <div className="max-w-7xl mx-auto bg-white rounded-lg overflow-hidden md:flex mb-6">
             {/* Left Section: Text Content */}
-            <div className="md:w-1/2 overflow-hidden bg-gray-100 flex items-center justify-center">
-              <img
-                src="https://www.emop.co.uk/static/redesign/images/services/regular/4.jpg"
-                alt="Cleaned bedroom"
-                className="w-full h-full object-cover object-center rounded-lg md:rounded-l-none"
-                onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-                  const target = e.target as HTMLImageElement;
-                  target.src =
-                    "https://placehold.co/800x600/e0e0e0/555555?text=Image+Not+Found";
-                  target.alt = "Fallback image: Cleaned room image not found.";
-                }}
-              />
-            </div>
-
-            {/* Right Section: Image */}
-            <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-              <h1 className="text-[20px] sm:text-[20px] lg:text-[40px] font-[700] text-brand-primary nunito-sans-heading mb-6">
-                Appreciate the Benefits of Domestic Cleaners
-              </h1>
-
-              <p className="text-gray-700 text-base sm:text-lg mb-6 nunito-sans-text leading-relaxed">
-                If you're looking for reliable house cleaning services in
-                London, eMop is an excellent option. We offer our customers a
-                wide range of house cleaning solutions, and we're always looking
-                for new ways to improve them. That is why eMop is a reliable
-                platform for hiring expert cleaners.
-              </p>
-
-              <ul className="text-gray-700 space-y-2 mb-4">
-                {displayedFeatures.map((feature, index) => (
-                  <li key={index} className="flex items-start">
-                    <span className="flex-shrink-0 mr-3 text-brand-secondary">
-                      {/* Purple square-like bullet, using a simple SVG or a div */}
-                      <svg
-                        className="w-3 h-3 mt-1.5"
-                        fill="currentColor"
-                        viewBox="0 0 20 20">
-                        <rect
-                          x="0"
-                          y="0"
-                          width="20"
-                          height="20"
-                          rx="4"
-                          ry="4"
-                        />
-                      </svg>
-                    </span>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-
-              {/* "3 more" / "See less" button */}
-              {allFeatures.length > initialFeaturesToShow && (
-                <button
-                  onClick={toggleFeaturesVisibility}
-                  className="text-brand-secondary font-semibold text-left self-start hover:underline focus:outline-none">
-                  {showAllFeatures
-                    ? "See less"
-                    : `${allFeatures.length - initialFeaturesToShow} more`}
-                </button>
-              )}
-            </div>
-
-            {/* Right Section: Image */}
             <div className="md:w-1/2 overflow-hidden bg-gray-100 flex items-center justify-center">
               <img
                 src="https://www.emop.co.uk/static/redesign/images/services/regular/5.jpg"
-                alt="Cleaned bedroom"
-                className="w-full h-full object-cover object-center rounded-lg md:rounded-l-none"
-                onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-                  const target = e.target as HTMLImageElement;
-                  target.src =
-                    "https://placehold.co/800x600/e0e0e0/555555?text=Image+Not+Found";
-                  target.alt = "Fallback image: Cleaned room image not found.";
-                }}
-              />
-            </div>
-          </div>
-
-          <div className="max-w-7xl mx-auto bg-white rounded-lg overflow-hidden md:flex mb-6">
-            {/* Left Section: Text Content */}
-            <div className="md:w-1/2 overflow-hidden bg-gray-100 flex items-center justify-center">
-              <img
-                src="https://www.emop.co.uk/static/redesign/images/services/regular/6.jpg"
                 alt="Cleaned bedroom"
                 className="w-full h-full object-cover object-center rounded-lg md:rounded-l-none"
                 onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {

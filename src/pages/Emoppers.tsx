@@ -351,7 +351,7 @@ export default function Emoppers() {
 
             {/* Column 2: FOR CUSTOMERS */}
             <div className="lg:col-span-1">
-              <h3 className="font-bold text-base sm:text-lg mb-4 text-purple-900 uppercase">
+              <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">
                 FOR CUSTOMERS
               </h3>
               <ul className="space-y-2">
@@ -400,7 +400,7 @@ export default function Emoppers() {
 
             {/* Column 3: FOR CLEANERS & WHO WE ARE */}
             <div className="lg:col-span-1">
-              <h3 className="font-bold text-base sm:text-lg mb-4 text-purple-900 uppercase">
+              <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">
                 FOR CLEANERS
               </h3>
               <ul className="space-y-2 mb-8">
@@ -410,7 +410,7 @@ export default function Emoppers() {
                   </a>
                 </li>
               </ul>
-              <h3 className="font-bold text-base sm:text-lg mb-4 text-purple-900 uppercase">
+              <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">
                 WHO WE ARE
               </h3>
               <ul className="space-y-2">
@@ -429,7 +429,7 @@ export default function Emoppers() {
 
             {/* Column 4: EMOP SERVICE */}
             <div className="lg:col-span-1">
-              <h3 className="font-bold text-base sm:text-lg mb-4 text-purple-900 uppercase">
+              <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">
                 EMOP SERVICE
               </h3>
               <ul className="space-y-2">
@@ -458,7 +458,7 @@ export default function Emoppers() {
 
             {/* Column 5: SUBSCRIBE TO OUR NEWSLETTER & Social Media */}
             <div className="lg:col-span-1 flex flex-col items-center md:items-start lg:items-stretch">
-              <h3 className="font-bold text-base sm:text-lg mb-4 text-purple-900 uppercase">
+              <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">
                 SUBSCRIBE TO OUR NEWSLETTER
               </h3>
               <div className="w-full mb-4">
@@ -468,12 +468,12 @@ export default function Emoppers() {
                   className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-700"
                 />
               </div>
-              <button className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out">
+              <button className="w-full bg-brand-primary hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out">
                 SUBSCRIBE NOW
               </button>
 
               <div className="mt-8">
-                <h3 className="font-bold text-base sm:text-lg mb-4 text-purple-900 uppercase">
+                <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">
                   SOCIAL MEDIA
                 </h3>
                 <div className="flex justify-center md:justify-start space-x-4">
@@ -483,21 +483,21 @@ export default function Emoppers() {
                     rel="noopener noreferrer"
                     aria-label="Pinterest">
                     {/* Using Pin icon as a placeholder for Pinterest, as Pinterest icon is not directly available in lucide-react */}
-                    <Pin className="h-7 w-7 text-gray-600 hover:text-purple-600 transition duration-300" />
+                    <Pin className="h-7 w-7 text-gray-600 hover:text-brand-primary transition duration-300" />
                   </a>
                   <a
                     href="#"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Instagram">
-                    <Instagram className="h-7 w-7 text-gray-600 hover:text-purple-600 transition duration-300" />
+                    <Instagram className="h-7 w-7 text-gray-600 hover:text-brand-primary transition duration-300" />
                   </a>
                   <a
                     href="#"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Facebook">
-                    <Facebook className="h-7 w-7 text-gray-600 hover:text-purple-600 transition duration-300" />
+                    <Facebook className="h-7 w-7 text-gray-600 hover:text-brand-primary transition duration-300" />
                   </a>
                 </div>
               </div>
@@ -506,7 +506,7 @@ export default function Emoppers() {
 
           {/* Cleaner Locations Section (Full Width) */}
           <div className="mt-12 w-full border-t border-gray-200 pt-8 text-center">
-            <h3 className="font-bold text-base sm:text-lg mb-4 text-purple-900 uppercase">
+            <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">
               CLEANER LOCATIONS
             </h3>
             <p className="text-gray-700 text-sm leading-relaxed">

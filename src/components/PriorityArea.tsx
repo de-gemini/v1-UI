@@ -9,8 +9,8 @@ interface PriorityAreaCardProps {
 
 const PriorityAreaCard: React.FC<PriorityAreaCardProps> = ({ title, description }) => {
   return (
-    <div className="bg-white p-6 rounded-lg shadow-sm border border-purple-200 hover:border-purple-400 transition-colors duration-200 h-full">
-      <h3 className="text-xl font-bold text-purple-800 mb-3">{title}</h3>
+    <div className="bg-white p-6 rounded-lg shadow-sm border border-purple-200 hover:border-brand-primary transition-colors duration-200 h-full">
+      <h3 className="text-xl font-bold text-brand-primary mb-3">{title}</h3>
       <p className="text-gray-700 text-base leading-relaxed">{description}</p>
     </div>
   );

@@ -178,7 +178,7 @@ export default function Blog() {
                   transition duration-300 ease-in-out
                   ${
                     activeCategory === category
-                      ? "bg-purple-700 text-white shadow-md"
+                      ? "bg-brand-primary text-white shadow-md"
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }
                 `}>

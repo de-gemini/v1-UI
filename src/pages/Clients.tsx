@@ -411,7 +411,7 @@ If you are not home at the end of cleaning it might be more difficult to prove t
     
                 {/* Column 2: FOR CUSTOMERS */}
                 <div className="lg:col-span-1">
-                  <h3 className="font-bold text-base sm:text-lg mb-4 text-purple-900 uppercase">
+                  <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">
                     FOR CUSTOMERS
                   </h3>
                   <ul className="space-y-2">
@@ -460,7 +460,7 @@ If you are not home at the end of cleaning it might be more difficult to prove t
     
                 {/* Column 3: FOR CLEANERS & WHO WE ARE */}
                 <div className="lg:col-span-1">
-                  <h3 className="font-bold text-base sm:text-lg mb-4 text-purple-900 uppercase">
+                  <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">
                     FOR CLEANERS
                   </h3>
                   <ul className="space-y-2 mb-8">
@@ -470,7 +470,7 @@ If you are not home at the end of cleaning it might be more difficult to prove t
                       </a>
                     </li>
                   </ul>
-                  <h3 className="font-bold text-base sm:text-lg mb-4 text-purple-900 uppercase">
+                  <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">
                     WHO WE ARE
                   </h3>
                   <ul className="space-y-2">
@@ -489,7 +489,7 @@ If you are not home at the end of cleaning it might be more difficult to prove t
     
                 {/* Column 4: EMOP SERVICE */}
                 <div className="lg:col-span-1">
-                  <h3 className="font-bold text-base sm:text-lg mb-4 text-purple-900 uppercase">
+                  <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">
                     EMOP SERVICE
                   </h3>
                   <ul className="space-y-2">
@@ -518,7 +518,7 @@ If you are not home at the end of cleaning it might be more difficult to prove t
     
                 {/* Column 5: SUBSCRIBE TO OUR NEWSLETTER & Social Media */}
                 <div className="lg:col-span-1 flex flex-col items-center md:items-start lg:items-stretch">
-                  <h3 className="font-bold text-base sm:text-lg mb-4 text-purple-900 uppercase">
+                  <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">
                     SUBSCRIBE TO OUR NEWSLETTER
                   </h3>
                   <div className="w-full mb-4">
@@ -533,7 +533,7 @@ If you are not home at the end of cleaning it might be more difficult to prove t
                   </button>
     
                   <div className="mt-8">
-                    <h3 className="font-bold text-base sm:text-lg mb-4 text-purple-900 uppercase">
+                    <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">
                       SOCIAL MEDIA
                     </h3>
                     <div className="flex justify-center md:justify-start space-x-4">
@@ -566,7 +566,7 @@ If you are not home at the end of cleaning it might be more difficult to prove t
     
               {/* Cleaner Locations Section (Full Width) */}
               <div className="mt-12 w-full border-t border-gray-200 pt-8 text-center">
-                <h3 className="font-bold text-base sm:text-lg mb-4 text-purple-900 uppercase">
+                <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">
                   CLEANER LOCATIONS
                 </h3>
                 <p className="text-gray-700 text-sm leading-relaxed">

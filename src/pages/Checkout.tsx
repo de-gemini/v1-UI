@@ -9,6 +9,7 @@ import { useAuthStore } from "../store/authStore";
 import { createStripePaymentIntent } from "../api/stripePayment";
 import { isTokenValid } from "../utils/isTokenValid";
 import AuthModal from "../components/AuthModal";
+import { API_BASE_URL } from "../constants";
 
 
 
@@ -109,6 +110,14 @@ const Checkout = () => {
   const postcode = params.get("postcode") || "E1 6AN";
   const user = useAuthStore.getState().user
   const navigate = useNavigate()
+
+  const [selectedDuration, setSelectedDuration] = useState('6');
+
+  const plans = [
+    { months: '3', cashback: '£25', color: 'bg-yellow-100 text-yellow-700' },
+    { months: '6', cashback: '£75', color: 'bg-yellow-200 text-yellow-800' },
+    { months: '9', cashback: '£150', color: 'bg-yellow-400 text-yellow-900' },
+  ];
 
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [disabledDates, setDisabledDates] = useState<Date[]>([]);
@@ -282,7 +291,7 @@ const Checkout = () => {
     };
 
     try {
-      const res = await fetchWithAuth('https://v1-api-6rdd.onrender.com/bookings', {
+      const res = await fetchWithAuth(`${API_BASE_URL}/bookings`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
@@ -296,8 +305,7 @@ const Checkout = () => {
         throw new Error('Booking ID not found in response');
       }
       if (!res.ok) {
-        toast.error('Something has gone wrong!');
-        navigate('/login')
+        toast.error('Something has gone wrong!, please try again.');
         return;
       }
       if (res.status === 401) {
@@ -333,55 +341,95 @@ const Checkout = () => {
       hideProgressBar={false}
       />
       {/* Progress Bar */}
-      <div className="w-full max-w-5xl flex justify-center mb-8 px-2">
-        <div className="w-full flex flex-col sm:flex-row items-center sm:items-end gap-4 sm:gap-0 bg-transparent">
-          <h2 className="text-2xl font-bold text-brand-primary text-xl mb-2 sm:mb-0 sm:mr-6">Degemini</h2>
-          <div className="flex flex-col sm:flex-row w-full">
-            {['When to clean', 'What to clean', 'Additional info'].map((label, idx) => (
-              <div key={label} className="flex-1 flex flex-row sm:flex-col items-center sm:items-center relative mb-2 sm:mb-0">
-                <span className={`text-sm sm:text-base font-semibold mb-0 sm:mb-2 ${step - 1 === idx ? "text-brand-primary" : isStepDone(idx) ? 'text-green-600' : "text-gray-700"}`}>{label}</span>
-                <div className={`flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 ${step - 1 === idx ? 'border-brand-primary' : isStepDone(idx) ? 'border-green-600 bg-green-100' : 'border-[#d6d6f7]'} bg-white text-base sm:text-lg font-bold ${isStepDone(idx) ? 'text-green-600' : 'text-brand-primary'} ml-2 sm:ml-0`} style={{ zIndex: 2 }}>{isStepDone(idx) ? <Check className="w-5 h-5" /> : idx + 1}</div>
-                {idx < 2 && <div className="hidden sm:block absolute top-4 right-0 w-full h-0.5 bg-gray-200 z-0" style={{ left: '50%', width: '100%' }}></div>}
-              </div>
-            ))}
-          </div>
+<div className="w-full max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-center px-4 mb-8">
+  <h2 className="text-xl lg:text-2xl font-bold text-brand-primary mb-4 sm:mb-0 sm:mr-6">
+    Degemini
+  </h2>
+  <div className="flex w-full sm:w-auto flex-col sm:flex-row items-center justify-between sm:gap-12">
+    {['When to clean', 'What to clean', 'Additional info'].map((label, idx) => (
+      <div
+        key={label}
+        className="flex-1 flex flex-col sm:flex-col items-center relative sm:min-w-[120px]"
+      >
+        <span
+          className={`text-sm sm:text-base font-semibold ${
+            step - 1 === idx
+              ? 'text-brand-primary'
+              : isStepDone(idx)
+              ? 'text-brand-primary'
+              : 'text-gray-600'
+          }`}
+        >
+          {label}
+        </span>
+        <div
+          className={`mt-1 flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 bg-white font-bold text-sm sm:text-base
+            ${
+              step - 1 === idx
+                ? 'border-brand-primary text-brand-primary'
+                : isStepDone(idx)
+                ? 'border-brand-primary bg-blue-100 text-brand-primary'
+                : 'border-gray-300 text-gray-400'
+            }`}
+        >
+          {isStepDone(idx) ? <Check className="w-5 h-5" /> : idx + 1}
         </div>
+        {idx < 2 && (
+          <div className="hidden sm:block absolute top-1/2 left-full w-full h-0.5 bg-gray-200 -translate-y-1/2 z-0"></div>
+        )}
       </div>
-
+    ))}
+  </div>
+</div>
       {/* Step 1: Choose cleaning type and frequency/date/time */}
       {step === 1 && (
         <div className="w-full flex flex-col items-center md:items-center lg:items-start">
           {step1View === 0 && (
-            <div className="w-full max-w-6xl bg-white border border-gray-300 p-8 mt-4">
-              <div className="flex items-center mb-6">
-                <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-[#a78bfa] text-[#a78bfa] font-bold mr-3">1</div>
-                <h2 className="text-xl font-semibold text-gray-800">Choose a type of cleaning</h2>
+            <div className="w-full max-w-3xl bg-white border border-gray-200 rounded-lg p-6 sm:p-8 mt-4">
+            <div className="flex items-center mb-6">
+              <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-brand-primary text-brand-primary font-bold mr-3">
+                1
               </div>
-              <div className="flex flex-col gap-4 mb-8">
-                {cleaningTypes.map((type, idx) => (
-                  <button
-                    key={type}
-                    onClick={() => setSelectedType(idx)}
-                    className={`w-full text-left px-6 py-4 rounded-md border transition-all font-medium text-lg flex items-center gap-2
-                      ${selectedType === idx
-                        ? "border-[#a78bfa] bg-[#fafaff] text-brand-primary shadow-sm ring-2 ring-[#a78bfa]"
-                        : "border-gray-200 bg-gray-50 text-gray-500 hover:border-[#a78bfa] hover:bg-[#f3f0ff]"}
-                    `}
-                  >
-                    <span className={`inline-block w-5 h-5 rounded-full border-2 flex items-center justify-center mr-2 ${selectedType === idx ? "border-[#a78bfa] bg-[#a78bfa]" : "border-gray-300 bg-white"}`}>
-                      {selectedType === idx && <span className="w-3 h-3 bg-white rounded-full block" />}
-                    </span>
-                    {type}
-                  </button>
-                ))}
-              </div>
-              <button
-                className="w-full bg-[#22c55e] hover:bg-[#16a34a] text-white font-bold py-3 rounded-md text-lg transition mt-2"
-                onClick={() => setStep1View(1)}
-              >
-                NEXT
-              </button>
+              <h2 className="text-xl font-semibold text-gray-800">
+                Choose a type of cleaning
+              </h2>
             </div>
+    
+            <div className="flex flex-col gap-4 mb-8">
+              {cleaningTypes.map((type, idx) => (
+                <button
+                  key={type}
+                  onClick={() => setSelectedType(idx)}
+                  className={`w-full text-left px-5 py-4 rounded-md border transition-all text-base sm:text-lg flex items-center gap-3
+                    ${
+                      selectedType === idx
+                        ? 'border-brand-primary bg-[#fafaff] text-brand-primary shadow-sm ring-2 ring-brand-primary'
+                        : 'border-gray-200 bg-gray-50 text-gray-500 hover:border-brand-primary hover:bg-[#f3f0ff]'
+                    }`}
+                >
+                  <span
+                    className={`inline-block w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                      selectedType === idx
+                        ? 'border-brand-primary bg-brand-primary'
+                        : 'border-gray-300 bg-white'
+                    }`}
+                  >
+                    {selectedType === idx && (
+                      <span className="w-2.5 h-2.5 bg-white rounded-full block" />
+                    )}
+                  </span>
+                  {type}
+                </button>
+              ))}
+            </div>
+    
+            <button
+              className="w-full bg-brand-primary hover:bg-blue-900 text-white font-semibold py-3 rounded-md text-base sm:text-lg transition"
+              onClick={() => setStep1View(1)}
+            >
+              NEXT
+            </button>
+          </div>
           )}
           {step1View === 1 && (
             <div className="w-full max-w-6xl bg-white border border-gray-300 p-8 mt-4">
@@ -450,7 +498,7 @@ const Checkout = () => {
                 key={time}
                 className={`px-4 py-2 rounded-md text-sm font-semibold border ${
                   selectedTime === time
-                    ? 'bg-purple-600 text-white border-purple-600'
+                    ? 'bg-brand-primary text-white border-purple-600'
                     : 'border-gray-300 text-gray-700 hover:bg-gray-100'
                 }`}
                 onClick={() => setSelectedTime(time)}
@@ -467,41 +515,211 @@ const Checkout = () => {
                     </div>
                     <div className="flex-1">
                       <h3 className="text-lg font-semibold mb-2">Choose start time</h3>
-                      <div className="flex flex-col items-center bg-white rounded-lg shadow p-4">
-                        <div className="flex items-center gap-2 mb-2">
-                          <button onClick={incrementHour} className="px-2 py-1 text-xl font-bold text-brand-primary hover:bg-gray-100 rounded">▲</button>
-                          <span className="w-8 text-center text-2xl font-mono">{pad(hour)}</span>
-                          <span className="text-2xl font-mono">:</span>
-                          <span className="w-8 text-center text-2xl font-mono">{pad(minute)}</span>
-                          <button onClick={incrementMinute} className="px-2 py-1 text-xl font-bold text-brand-primary hover:bg-gray-100 rounded">▲</button>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <button onClick={decrementHour} className="px-2 py-1 text-xl font-bold text-brand-primary hover:bg-gray-100 rounded">▼</button>
-                          <span className="w-8" />
-                          <span className="w-8" />
-                          <button onClick={decrementMinute} className="px-2 py-1 text-xl font-bold text-brand-primary hover:bg-gray-100 rounded">▼</button>
-                        </div>
-                        <div className="mt-2 text-gray-500 text-sm">Time is in 24 h format</div>
-                      </div>
+                      <div className="flex flex-col items-center bg-white rounded-lg shadow p-4 w-fit">
+  <div className="grid grid-cols-4 gap-x-8 gap-y-1 mb-2 items-center justify-items-center">
+    <button
+      onClick={incrementHour}
+      className="px-2 py-1 text-xl font-bold text-brand-primary hover:bg-gray-100 rounded"
+    >
+      ▲
+    </button>
+    <span className="col-span-2 text-center text-2xl font-mono">{pad(hour)}:<span>{pad(minute)}</span></span>
+    <button
+      onClick={incrementMinute}
+      className="px-2 py-1 text-xl font-bold text-brand-primary hover:bg-gray-100 rounded"
+    >
+      ▲
+    </button>
+
+    <button
+      onClick={decrementHour}
+      className="px-2 py-1 text-xl font-bold text-brand-primary hover:bg-gray-100 rounded"
+    >
+      ▼
+    </button>
+    <span className="col-span-2" />
+    <button
+      onClick={decrementMinute}
+      className="px-2 py-1 text-xl font-bold text-brand-primary hover:bg-gray-100 rounded"
+    >
+      ▼
+    </button>
+  </div>
+
+  <div className="mt-2 text-gray-500 text-sm">Time is in 24 h format</div>
+</div>
+
                     </div>
                   </div>
                 </div>
               </div>
-              {/* Extra options (End of Tenancy, Express/Studio) */}
-              <div className="flex flex-col gap-4 mt-8">
-                <div className="flex items-center gap-4">
-                  <span className="font-semibold">Do you need End of Tenancy cleaning?</span>
-                  <button className="px-4 py-1 rounded-md border font-bold border-[#a78bfa] text-[#a78bfa] bg-white">No</button>
-                  <button className="px-4 py-1 rounded-md border font-bold border-[#a78bfa] text-white bg-[#a78bfa]">Yes</button>
-                  <span className="ml-2 text-xs text-[#a78bfa]">Please check our Check-list <a href="#" className="underline">here</a> ( Additional £39 )</span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <span className="font-semibold">Need Express or Studio cleaning?</span>
-                  <button className="px-4 py-1 rounded-md border font-bold border-[#a78bfa] text-[#a78bfa] bg-white">No</button>
-                  <button className="px-4 py-1 rounded-md border font-bold border-[#a78bfa] text-white bg-[#a78bfa]">Yes</button>
-                  <span className="ml-2 text-xs text-[#a78bfa]">2h clean with Cleaning products included</span>
-                </div>
-              </div>
+              {/* Extra options based on frequency */}
+<div className="flex flex-col gap-4 mt-8">
+  {/* One-Off Extra Options */}
+  {selectedFrequency === 3 && (
+    <div className="flex flex-col gap-4">
+      <div className="flex items-center gap-4">
+        <span className="font-semibold">Do you need End of Tenancy cleaning?</span>
+        <button
+          className="px-4 py-1 rounded-md border font-bold border-[#a78bfa] text-[#a78bfa] bg-white"
+          onClick={() => setEndOfTenancy(false)}
+        >
+          No
+        </button>
+        <button
+          className="px-4 py-1 rounded-md border font-bold border-[#a78bfa] text-white bg-[#a78bfa]"
+          onClick={() => setEndOfTenancy(true)}
+        >
+          Yes
+        </button>
+        <span className="ml-2 text-xs text-[#a78bfa]">
+          Please check our Check-list <a href="#" className="underline">here</a> ( Additional £39 )
+        </span>
+      </div>
+      <div className="flex items-center gap-4">
+        <span className="font-semibold">Need Express or Studio cleaning?</span>
+        <button
+          className="px-4 py-1 rounded-md border font-bold border-[#a78bfa] text-[#a78bfa] bg-white"
+          onClick={() => setExpressStudio(false)}
+        >
+          No
+        </button>
+        <button
+          className="px-4 py-1 rounded-md border font-bold border-[#a78bfa] text-white bg-[#a78bfa]"
+          onClick={() => setExpressStudio(true)}
+        >
+          Yes
+        </button>
+        <span className="ml-2 text-xs text-[#a78bfa]">2h clean with Cleaning products included</span>
+      </div>
+    </div>
+  )}
+
+  {/* Fortnightly Extra Options */}
+  {selectedFrequency === 1 && (
+    <div className="flex flex-col gap-5">
+<div className="flex max-w-xl mt-6">
+    {plans.map((plan) => (
+      <button
+        key={plan.months}
+        onClick={() => setSelectedDuration(plan.months)}
+        className={`relative flex flex-col items-center justify-center px-6 py-3 border rounded-md w-full
+          ${
+            selectedDuration === plan.months
+              ? 'border-brand-primary'
+              : 'border-gray-300 hover:border-purple-300'
+          } transition-all`}
+      >
+        <span
+          className={`text-sm font-medium mb-1 ${
+            selectedDuration === plan.months ? 'text-brand-primary' : 'text-gray-500'
+          }`}
+        >
+          {plan.months} months
+        </span>
+
+        <span
+          className={`absolute -bottom-3 px-3 py-1 rounded-full text-sm font-semibold shadow-sm ${plan.color}`}
+        >
+          Cashback {plan.cashback}
+        </span>
+      </button>
+    ))}
+  </div>
+
+    <div className="flex items-center gap-4">
+    <span className="font-semibold">Need Express or Studio cleaning?</span>
+    <button
+      className="px-4 py-1 rounded-md border font-bold border-[#a78bfa] text-[#a78bfa] bg-white"
+      onClick={() => setEndOfTenancy(false)}
+    >
+      No
+    </button>
+    <button
+      className="px-4 py-1 rounded-md border font-bold border-[#a78bfa] text-white bg-[#a78bfa]"
+      onClick={() => setEndOfTenancy(true)}
+    >
+      Yes
+    </button>
+    <span className="ml-2 text-xs text-[#a78bfa]">
+    2h clean with Cleaning products included
+    </span>
+  </div>
+    </div>
+  )}
+
+  {/* Weekly Extra Options */}
+  {selectedFrequency === 0 && (
+    <div className="flex flex-col gap-4">
+      <div className="flex items-center gap-4">
+        <span className="font-semibold">Need Express or Studio cleaning?</span>
+        <button
+          className="px-4 py-1 rounded-md border font-bold border-[#a78bfa] text-[#a78bfa] bg-white"
+          onClick={() => setErrandHours(0)}
+        >
+          No
+        </button>
+        <button
+          className="px-4 py-1 rounded-md border font-bold border-[#a78bfa] text-white bg-[#a78bfa]"
+          onClick={() => setErrandHours(2)}
+        >
+          Yes
+        </button>
+        <span className="ml-2 text-xs text-[#a78bfa]">2h clean with Cleaning products included</span>
+      </div>
+    </div>
+  )}
+
+  {/* Monthly Extra Options */}
+  {selectedFrequency === 2 && (
+    <div className="flex flex-col gap-5">
+    <div className="flex max-w-xl mt-6">
+    {plans.map((plan) => (
+      <button
+        key={plan.months}
+        onClick={() => setSelectedDuration(plan.months)}
+        className={`relative flex flex-col items-center justify-center px-6 py-3 border rounded-md w-full
+          ${
+            selectedDuration === plan.months
+              ? 'border-brand-primary'
+              : 'border-gray-300 hover:border-purple-300'
+          } transition-all`}
+      >
+        <span
+          className={`text-sm font-medium mb-1 ${
+            selectedDuration === plan.months ? 'text-brand-primary' : 'text-gray-500'
+          }`}
+        >
+          {plan.months} months
+        </span>
+
+        <span
+          className={`absolute -bottom-3 px-3 py-1 rounded-full text-sm font-semibold shadow-sm ${plan.color}`}
+        >
+          Cashback {plan.cashback}
+        </span>
+      </button>
+    ))}
+  </div>
+    <div className="flex items-center gap-4">
+        <span className="font-semibold">Need Express or Studio cleaning?</span>
+        <button
+          className="px-4 py-1 rounded-md border font-bold border-[#a78bfa] text-[#a78bfa] bg-white"
+          onClick={() => setErrandHours(0)}
+        >
+          No
+        </button>
+        <button
+          className="px-4 py-1 rounded-md border font-bold border-blue-400 text-white bg-blue-400"
+          onClick={() => setErrandHours(2)}
+        >
+          Yes
+        </button>
+        <span className="ml-2 text-xs text-[#a78bfa]">2h clean with Cleaning products included</span>
+      </div>
+    </div>
+  )}
+</div>
               
               {/* Navigation */}
               <div className="flex items-center justify-center gap-[10px] mt-8">

@@ -108,7 +108,7 @@ export default function Help() {
 
         {/* Bottom Text */}
         <div className="mt-16 text-center text-gray-700 text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
-          Need help? <a href="mailto:info@emop.co.uk" className="text-purple-700 font-semibold hover:underline">Click here to email us</a> — For urgent issues, we aim to respond within minutes. Apart from that please navigate yourself through our FAQ pages.
+          Need help? <a href="mailto:info@emop.co.uk" className="text-brand-primary font-semibold hover:underline">Click here to email us</a> — For urgent issues, we aim to respond within minutes. Apart from that please navigate yourself through our FAQ pages.
         </div>
       </div>
 
@@ -140,7 +140,7 @@ export default function Help() {
 
             {/* Column 2: FOR CUSTOMERS */}
             <div className="lg:col-span-1">
-              <h3 className="font-bold text-base sm:text-lg mb-4 text-purple-900 uppercase">FOR CUSTOMERS</h3>
+              <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">FOR CUSTOMERS</h3>
               <ul className="space-y-2">
                 <li><a href="#" className="hover:underline text-gray-700">Booking T&C</a></li>
                 <li><a href="#" className="hover:underline text-gray-700">Cancellation Policy</a></li>
@@ -155,11 +155,11 @@ export default function Help() {
 
             {/* Column 3: FOR CLEANERS & WHO WE ARE */}
             <div className="lg:col-span-1">
-              <h3 className="font-bold text-base sm:text-lg mb-4 text-purple-900 uppercase">FOR CLEANERS</h3>
+              <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">FOR CLEANERS</h3>
               <ul className="space-y-2 mb-8">
                 <li><a href="/home/registercleaner" className="hover:underline text-gray-700">Become a cleaner</a></li>
               </ul>
-              <h3 className="font-bold text-base sm:text-lg mb-4 text-purple-900 uppercase">WHO WE ARE</h3>
+              <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">WHO WE ARE</h3>
               <ul className="space-y-2">
                 <li><a href="#" className="hover:underline text-gray-700">About Us</a></li>
                 <li><a href="#" className="hover:underline text-gray-700">Contact Us</a></li>
@@ -168,7 +168,7 @@ export default function Help() {
 
             {/* Column 4: EMOP SERVICE */}
             <div className="lg:col-span-1">
-              <h3 className="font-bold text-base sm:text-lg mb-4 text-purple-900 uppercase">EMOP SERVICE</h3>
+              <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">EMOP SERVICE</h3>
               <ul className="space-y-2">
                 <li><a href="#" className="hover:underline text-gray-700">Domestic cleaning</a></li>
                 <li><a href="#" className="hover:underline text-gray-700">Regular cleaning</a></li>
@@ -179,7 +179,7 @@ export default function Help() {
 
             {/* Column 5: SUBSCRIBE TO OUR NEWSLETTER & Social Media */}
             <div className="lg:col-span-1 flex flex-col items-center md:items-start lg:items-stretch">
-              <h3 className="font-bold text-base sm:text-lg mb-4 text-purple-900 uppercase">SUBSCRIBE TO OUR NEWSLETTER</h3>
+              <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">SUBSCRIBE TO OUR NEWSLETTER</h3>
               <div className="w-full mb-4">
                 <input
                   type="email"
@@ -192,7 +192,7 @@ export default function Help() {
               </button>
 
               <div className="mt-8">
-                <h3 className="font-bold text-base sm:text-lg mb-4 text-purple-900 uppercase">SOCIAL MEDIA</h3>
+                <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">SOCIAL MEDIA</h3>
                 <div className="flex justify-center md:justify-start space-x-4">
                   <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
                     {/* Using Pin icon as a placeholder for Pinterest, as Pinterest icon is not directly available in lucide-react */}
@@ -211,7 +211,7 @@ export default function Help() {
 
           {/* Cleaner Locations Section (Full Width) */}
           <div className="mt-12 w-full border-t border-gray-200 pt-8 text-center">
-            <h3 className="font-bold text-base sm:text-lg mb-4 text-purple-900 uppercase">CLEANER LOCATIONS</h3>
+            <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">CLEANER LOCATIONS</h3>
             <p className="text-gray-700 text-sm leading-relaxed">
               <span className="mr-2">East London</span> <span className="mr-2">North London</span> <span className="mr-2">South London</span> |{' '}
               <span className="mr-2">West London</span> | <span className="mr-2">Balham</span> <span className="mr-2">Islington</span> <span className="mr-2">Watford</span> <span className="mr-2">Bromley</span> |{' '}

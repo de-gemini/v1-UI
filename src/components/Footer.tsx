@@ -103,7 +103,7 @@ export const Footer: React.FC = () => {
       {/* Floating Call Button */}
       <a 
         href="tel:+1234567890" // Replace with actual phone number
-        className="fixed bottom-6 right-6 md:bottom-10 md:right-10 bg-brand-primary hover:bg-purple-700 text-brand-secondary rounded-full p-4 shadow-lg transition duration-300 ease-in-out transform hover:scale-110 z-50"
+        className="fixed bottom-6 right-6 md:bottom-10 md:right-10 bg-brand-primary hover:bg-brand-primary text-brand-secondary rounded-full p-4 shadow-lg transition duration-300 ease-in-out transform hover:scale-110 z-50"
         aria-label="Call us"
       >
         <Phone className="h-7 w-7" />

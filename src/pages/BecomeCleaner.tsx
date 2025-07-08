@@ -278,7 +278,7 @@ export default function BecomeCleaner() {
                   {/* Plus/X Icon on Top Right */}
                   <button
                     onClick={() => toggleTooltip(step.id)}
-                    className="absolute top-2 right-2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-brand-secondary text-white flex items-center justify-center z-10 shadow-md transition-all duration-200 hover:bg-purple-700"
+                    className="absolute top-2 right-2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-brand-secondary text-white flex items-center justify-center z-10 shadow-md transition-all duration-200 hover:bg-brand-primary"
                     aria-label={
                       openTooltipId === step.id ? "Close info" : "Open info"
                     }>

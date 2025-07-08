@@ -221,7 +221,7 @@ export default function CarpetCleaning() {
             {/* Features List */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-8 mb-10">
               {features.map((feature, index) => (
-                <div key={index} className="flex items-center text-purple-800">
+                <div key={index} className="flex items-center text-brand-primary">
                   <Check className="h-6 w-6 text-brand-primary mr-3 flex-shrink-0" />
                   <span className="text-lg sm:text-xl nunito-sans-text text-brand-text">
                     {feature}
@@ -586,7 +586,7 @@ export default function CarpetCleaning() {
           Your Burden
         </h1>
 
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-white p-2 pr-2 sm:p-3 sm:pr-3 rounded-xl shadow-lg border border-purple-300 max-w-md w-full">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-white p-2 pr-2 sm:p-3 sm:pr-3 rounded-xl shadow-lg border border-blue-800 max-w-md w-full">
           <div className="flex items-center flex-grow p-2">
             <MapPin className="h-6 w-6 text-gray-400 mr-3 flex-shrink-0" />
             <input

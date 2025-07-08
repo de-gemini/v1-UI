@@ -424,7 +424,7 @@ export default function SpringCleaning() {
           when you make your booking.
         </p>
 
-        <div className="flex flex-col sm:flex-row w-full bg-white rounded-lg overflow-hidden shadow-md border border-purple-300 focus-within:border-purple-500 transition-colors duration-200">
+        <div className="flex flex-col sm:flex-row w-full bg-white rounded-lg overflow-hidden shadow-md border border-purple-300 focus-within:border-blue-800 transition-colors duration-200">
           <div className="flex-grow p-3 md:p-4 flex items-center">
             <MapPin className="h-5 w-5 text-brand-primary mr-3 flex-shrink-0" />
             <input
@@ -925,7 +925,7 @@ export default function SpringCleaning() {
                 bg-purple-50
                 rounded-full
                 border border-purple-200
-                hover:bg-purple-100 hover:border-purple-300
+                hover:bg-purple-100 hover:border-blue-800
                 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-opacity-50
                 transition duration-300 ease-in-out
                 shadow-sm hover:shadow-md
@@ -951,7 +951,7 @@ export default function SpringCleaning() {
           Your Burden
         </h1>
 
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-white p-2 pr-2 sm:p-3 sm:pr-3 rounded-xl shadow-lg border border-purple-300 max-w-md w-full">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-white p-2 pr-2 sm:p-3 sm:pr-3 rounded-xl shadow-lg border border-blue-900 max-w-md w-full">
           <div className="flex items-center flex-grow p-2">
             <MapPin className="h-6 w-6 text-gray-400 mr-3 flex-shrink-0" />
             <input

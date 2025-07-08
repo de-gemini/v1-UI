@@ -67,7 +67,7 @@ export const DeepPriceCard: React.FC<PriceCardProps> = ({
       <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mt-4 mb-2">
       Prices for deep cleaning in England
       </h2>
-      <p className="text-purple-700 text-2xl md:text-3xl font-bold mb-8">
+      <p className="text-brand-primary text-2xl md:text-3xl font-bold mb-8">
         from £19/h
       </p>
 
@@ -104,8 +104,8 @@ export const DeepPriceCard: React.FC<PriceCardProps> = ({
       </div>
 
       {/* Postcode Input */}
-      <div className="flex items-center w-full bg-white border border-purple-400 rounded-lg p-3 mb-6 focus-within:border-purple-600 transition-colors duration-200">
-        <MapPin className="h-5 w-5 text-purple-700 mr-3 flex-shrink-0" />
+      <div className="flex items-center w-full bg-white border border-brand-primary rounded-lg p-3 mb-6 focus-within:border-brand-primary transition-colors duration-200">
+        <MapPin className="h-5 w-5 text-brand-primary mr-3 flex-shrink-0" />
         <input
           type="text"
           placeholder={inputPlaceholder}
