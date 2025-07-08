@@ -207,6 +207,88 @@ const Checkout = () => {
   const [comments, setComments] = useState<string>('');
   const [dirtLevel, setDirtLevel] = useState<'light' | 'medium' | 'heavy'>('medium');
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [endOfTenancy, setEndOfTenancy] = useState(false); // Tracks End of Tenancy cleaning selection
+const [expressStudio, setExpressStudio] = useState(false); // Tracks Express or Studio cleaning selection
+const [ecoFriendlyProduct, setEcoFriendlyProduct] = useState(false); // Tracks Eco-Friendly cleaning product selection
+
+// summary calculation
+const calculateSummary = () => {
+  // Base rate per frequency
+  const baseRate = selectedFrequency !== null ? [17, 18, 19, 19][selectedFrequency] : 17;
+  // One-off special rate (if selected)
+  let oneOffRate = baseRate;
+  let oneOffLabel = '';
+  if (selectedFrequency === 3 && frequencyOptions[3].oneOffDetails) {
+    // You may want to let user pick which one-off type, here we default to "Next day"
+    oneOffLabel = frequencyOptions[3].oneOffDetails[0].label;
+    oneOffRate = Number(frequencyOptions[3].oneOffDetails[0].price.replace(/[^\d]/g, '')) || 19;
+  }
+
+  // Room duration
+  const roomDetails = roomTypes
+    .map((room, idx) => ({
+      ...room,
+      quantity: roomCounts[idx],
+      totalTime: roomCounts[idx] * room.estimatedTime,
+    }))
+    .filter(r => r.quantity > 0);
+
+  // Add-ons
+  const addOnDetails = addOns
+    .map(addon => {
+      const count = selectedAddOns.filter(k => k === addon.key).length;
+      return count > 0
+        ? {
+            ...addon,
+            count,
+            totalTime: addon.estimatedTime * count,
+            totalPrice: addon.price ? addon.price * count : 0,
+          }
+        : null;
+    })
+    .filter(Boolean);
+
+  // Total duration (rooms + add-ons + errands)
+  const totalDuration =
+    roomDetails.reduce((sum, r) => sum + r.totalTime, 0) +
+    addOnDetails.reduce((sum, a) => sum + a!.totalTime, 0) +
+    errandHours * 60;
+
+  // Calculate base price
+  let price = Math.max(54, Math.round((totalDuration / 60) * (selectedFrequency === 3 ? oneOffRate : baseRate)));
+
+  // Add-ons with price
+  price += addOnDetails.reduce((sum, a) => sum + a!.totalPrice, 0);
+
+  // Extras
+  if (ecoFriendly) price += 6;
+  if (hooverMop) price += 15;
+  if (disinfection) price += 10;
+  if (selectedFrequency === 3 && endOfTenancy) price += 39;
+  // Add more extras as needed (e.g., pets, key pickup, etc.)
+
+  // Discount (promo code logic here if needed)
+  let discount = 0;
+  // if (promoCode === 'SOMECODE') discount = 10; // Example
+
+  // Final total
+  const total = Math.max(0, price - discount);
+
+  return {
+    baseRate: selectedFrequency === 3 ? oneOffRate : baseRate,
+    oneOffLabel,
+    roomDetails,
+    addOnDetails,
+    totalDuration,
+    price,
+    discount,
+    total,
+  };
+};
+
+const summary = calculateSummary();
+
+
 
   const incrementHour = () => setHour(h => (h + 1) % 24);
   const decrementHour = () => setHour(h => (h - 1 + 24) % 24);
@@ -560,36 +642,60 @@ const Checkout = () => {
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-4">
         <span className="font-semibold">Do you need End of Tenancy cleaning?</span>
-        <button
-          className="px-4 py-1 rounded-md border font-bold border-[#a78bfa] text-[#a78bfa] bg-white"
-          onClick={() => setEndOfTenancy(false)}
-        >
-          No
-        </button>
-        <button
-          className="px-4 py-1 rounded-md border font-bold border-[#a78bfa] text-white bg-[#a78bfa]"
-          onClick={() => setEndOfTenancy(true)}
-        >
-          Yes
-        </button>
+        <div className="flex gap-4">
+          <label className="flex items-center gap-2">
+            <input
+              type="radio"
+              name="endOfTenancy"
+              value="no"
+              checked={!endOfTenancy}
+              onChange={() => setEndOfTenancy(false)}
+              className="accent-[#a78bfa]"
+            />
+            No
+          </label>
+          <label className="flex items-center gap-2">
+            <input
+              type="radio"
+              name="endOfTenancy"
+              value="yes"
+              checked={endOfTenancy}
+              onChange={() => setEndOfTenancy(true)}
+              className="accent-[#a78bfa]"
+            />
+            Yes
+          </label>
+        </div>
         <span className="ml-2 text-xs text-[#a78bfa]">
           Please check our Check-list <a href="#" className="underline">here</a> ( Additional £39 )
         </span>
       </div>
       <div className="flex items-center gap-4">
         <span className="font-semibold">Need Express or Studio cleaning?</span>
-        <button
-          className="px-4 py-1 rounded-md border font-bold border-[#a78bfa] text-[#a78bfa] bg-white"
-          onClick={() => setExpressStudio(false)}
-        >
-          No
-        </button>
-        <button
-          className="px-4 py-1 rounded-md border font-bold border-[#a78bfa] text-white bg-[#a78bfa]"
-          onClick={() => setExpressStudio(true)}
-        >
-          Yes
-        </button>
+        <div className="flex gap-4">
+          <label className="flex items-center gap-2">
+            <input
+              type="radio"
+              name="expressStudio"
+              value="no"
+              checked={!expressStudio}
+              onChange={() => setExpressStudio(false)}
+              className="accent-[#a78bfa]"
+            />
+            No
+          </label>
+          <label className="flex items-center gap-2">
+            <input
+              type="radio"
+              name="expressStudio"
+              value="yes"
+              checked={expressStudio}
+              onChange={() => setExpressStudio(true)}
+              className="accent-[#a78bfa]"
+            />
+            Yes
+          </label>
+        </div>
         <span className="ml-2 text-xs text-[#a78bfa]">2h clean with Cleaning products included</span>
       </div>
     </div>
@@ -598,53 +704,63 @@ const Checkout = () => {
   {/* Fortnightly Extra Options */}
   {selectedFrequency === 1 && (
     <div className="flex flex-col gap-5">
-<div className="flex max-w-xl mt-6">
-    {plans.map((plan) => (
-      <button
-        key={plan.months}
-        onClick={() => setSelectedDuration(plan.months)}
-        className={`relative flex flex-col items-center justify-center px-6 py-3 border rounded-md w-full
-          ${
-            selectedDuration === plan.months
-              ? 'border-brand-primary'
-              : 'border-gray-300 hover:border-purple-300'
-          } transition-all`}
-      >
-        <span
-          className={`text-sm font-medium mb-1 ${
-            selectedDuration === plan.months ? 'text-brand-primary' : 'text-gray-500'
-          }`}
-        >
-          {plan.months} months
-        </span>
+      <div className="flex max-w-xl mt-6">
+        {plans.map((plan) => (
+          <button
+            key={plan.months}
+            onClick={() => setSelectedDuration(plan.months)}
+            className={`relative flex flex-col items-center justify-center px-6 py-3 border rounded-md w-full
+              ${
+                selectedDuration === plan.months
+                  ? 'border-brand-primary'
+                  : 'border-gray-300 hover:border-purple-300'
+              } transition-all`}
+          >
+            <span
+              className={`text-sm font-medium mb-1 ${
+                selectedDuration === plan.months ? 'text-brand-primary' : 'text-gray-500'
+              }`}
+            >
+              {plan.months} months
+            </span>
 
-        <span
-          className={`absolute -bottom-3 px-3 py-1 rounded-full text-sm font-semibold shadow-sm ${plan.color}`}
-        >
-          Cashback {plan.cashback}
-        </span>
-      </button>
-    ))}
-  </div>
+            <span
+              className={`absolute -bottom-3 px-3 py-1 rounded-full text-sm font-semibold shadow-sm ${plan.color}`}
+            >
+              Cashback {plan.cashback}
+            </span>
+          </button>
+        ))}
+      </div>
 
-    <div className="flex items-center gap-4">
-    <span className="font-semibold">Need Express or Studio cleaning?</span>
-    <button
-      className="px-4 py-1 rounded-md border font-bold border-[#a78bfa] text-[#a78bfa] bg-white"
-      onClick={() => setEndOfTenancy(false)}
-    >
-      No
-    </button>
-    <button
-      className="px-4 py-1 rounded-md border font-bold border-[#a78bfa] text-white bg-[#a78bfa]"
-      onClick={() => setEndOfTenancy(true)}
-    >
-      Yes
-    </button>
-    <span className="ml-2 text-xs text-[#a78bfa]">
-    2h clean with Cleaning products included
-    </span>
-  </div>
+      <div className="flex items-center gap-4">
+        <span className="font-semibold">Need Express or Studio cleaning?</span>
+        <div className="flex gap-4">
+          <label className="flex items-center gap-2">
+            <input
+              type="radio"
+              name="expressStudio"
+              value="no"
+              checked={!expressStudio}
+              onChange={() => setExpressStudio(false)}
+              className="accent-[#a78bfa]"
+            />
+            No
+          </label>
+          <label className="flex items-center gap-2">
+            <input
+              type="radio"
+              name="expressStudio"
+              value="yes"
+              checked={expressStudio}
+              onChange={() => setExpressStudio(true)}
+              className="accent-[#a78bfa]"
+            />
+            Yes
+          </label>
+        </div>
+        <span className="ml-2 text-xs text-[#a78bfa]">2h clean with Cleaning products included</span>
+      </div>
     </div>
   )}
 
@@ -653,18 +769,30 @@ const Checkout = () => {
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-4">
         <span className="font-semibold">Need Express or Studio cleaning?</span>
-        <button
-          className="px-4 py-1 rounded-md border font-bold border-[#a78bfa] text-[#a78bfa] bg-white"
-          onClick={() => setErrandHours(0)}
-        >
-          No
-        </button>
-        <button
-          className="px-4 py-1 rounded-md border font-bold border-[#a78bfa] text-white bg-[#a78bfa]"
-          onClick={() => setErrandHours(2)}
-        >
-          Yes
-        </button>
+        <div className="flex gap-4">
+          <label className="flex items-center gap-2">
+            <input
+              type="radio"
+              name="expressStudio"
+              value="no"
+              checked={!expressStudio}
+              onChange={() => setExpressStudio(false)}
+              className="accent-[#a78bfa]"
+            />
+            No
+          </label>
+          <label className="flex items-center gap-2">
+            <input
+              type="radio"
+              name="expressStudio"
+              value="yes"
+              checked={expressStudio}
+              onChange={() => setExpressStudio(true)}
+              className="accent-[#a78bfa]"
+            />
+            Yes
+          </label>
+        </div>
         <span className="ml-2 text-xs text-[#a78bfa]">2h clean with Cleaning products included</span>
       </div>
     </div>
@@ -673,48 +801,60 @@ const Checkout = () => {
   {/* Monthly Extra Options */}
   {selectedFrequency === 2 && (
     <div className="flex flex-col gap-5">
-    <div className="flex max-w-xl mt-6">
-    {plans.map((plan) => (
-      <button
-        key={plan.months}
-        onClick={() => setSelectedDuration(plan.months)}
-        className={`relative flex flex-col items-center justify-center px-6 py-3 border rounded-md w-full
-          ${
-            selectedDuration === plan.months
-              ? 'border-brand-primary'
-              : 'border-gray-300 hover:border-purple-300'
-          } transition-all`}
-      >
-        <span
-          className={`text-sm font-medium mb-1 ${
-            selectedDuration === plan.months ? 'text-brand-primary' : 'text-gray-500'
-          }`}
-        >
-          {plan.months} months
-        </span>
+      <div className="flex max-w-xl mt-6">
+        {plans.map((plan) => (
+          <button
+            key={plan.months}
+            onClick={() => setSelectedDuration(plan.months)}
+            className={`relative flex flex-col items-center justify-center px-6 py-3 border rounded-md w-full
+              ${
+                selectedDuration === plan.months
+                  ? 'border-brand-primary'
+                  : 'border-gray-300 hover:border-purple-300'
+              } transition-all`}
+          >
+            <span
+              className={`text-sm font-medium mb-1 ${
+                selectedDuration === plan.months ? 'text-brand-primary' : 'text-gray-500'
+              }`}
+            >
+              {plan.months} months
+            </span>
 
-        <span
-          className={`absolute -bottom-3 px-3 py-1 rounded-full text-sm font-semibold shadow-sm ${plan.color}`}
-        >
-          Cashback {plan.cashback}
-        </span>
-      </button>
-    ))}
-  </div>
-    <div className="flex items-center gap-4">
+            <span
+              className={`absolute -bottom-3 px-3 py-1 rounded-full text-sm font-semibold shadow-sm ${plan.color}`}
+            >
+              Cashback {plan.cashback}
+            </span>
+          </button>
+        ))}
+      </div>
+      <div className="flex items-center gap-4">
         <span className="font-semibold">Need Express or Studio cleaning?</span>
-        <button
-          className="px-4 py-1 rounded-md border font-bold border-[#a78bfa] text-[#a78bfa] bg-white"
-          onClick={() => setErrandHours(0)}
-        >
-          No
-        </button>
-        <button
-          className="px-4 py-1 rounded-md border font-bold border-blue-400 text-white bg-blue-400"
-          onClick={() => setErrandHours(2)}
-        >
-          Yes
-        </button>
+        <div className="flex gap-4">
+          <label className="flex items-center gap-2">
+            <input
+              type="radio"
+              name="expressStudio"
+              value="no"
+              checked={!expressStudio}
+              onChange={() => setExpressStudio(false)}
+              className="accent-[#a78bfa]"
+            />
+            No
+          </label>
+          <label className="flex items-center gap-2">
+            <input
+              type="radio"
+              name="expressStudio"
+              value="yes"
+              checked={expressStudio}
+              onChange={() => setExpressStudio(true)}
+              className="accent-[#a78bfa]"
+            />
+            Yes
+          </label>
+        </div>
         <span className="ml-2 text-xs text-[#a78bfa]">2h clean with Cleaning products included</span>
       </div>
     </div>
@@ -942,21 +1082,41 @@ const Checkout = () => {
               <span className="font-bold text-lg">Booking Summary</span>
               <span className="text-xl">&#8964;</span>
             </div>
-            <div className="text-sm">
-              <div className="flex justify-between"><span>Tariff</span><span className="font-bold">{selectedFrequency !== null ? frequencyOptions[selectedFrequency].label : '-'}</span></div>
-              <div className="flex justify-between"><span>Rate</span><span className="font-bold">£{baseRate}/h</span></div>
-              <div className="flex justify-between"><span>Date</span><span>{selectedDate.toLocaleDateString()} {pad(hour)}:{pad(minute)}</span></div>
-              <div className="flex justify-between"><span>Rooms</span><span>{roomTotal}</span></div>
-              <div className="flex justify-between"><span>Duration</span><span>{Math.floor(duration / 60)}h {duration % 60}m</span></div>
-              <div className="flex justify-between"><span>Eco-friendly</span><span>{ecoFriendly ? 'Yes' : 'No'}</span></div>
-              <div className="flex justify-between"><span>Hoover & Mop</span><span>{hooverMop ? 'Yes' : 'No'}</span></div>
-              <div className="flex justify-between"><span>Disinfection</span><span>{disinfection ? 'Yes' : 'No'}</span></div>
-              <div className="flex justify-between"><span>Errands</span><span>{errandHours}h</span></div>
-              <div className="flex justify-between"><span>Pets</span><span>{havePets ? 'Yes' : 'No'}</span></div>
-              <div className="flex justify-between"><span>Key pickup</span><span>{keyPickup ? 'Yes' : 'No'}</span></div>
-              <div className="flex justify-between font-bold text-lg mt-2"><span>Estimated Amount</span><span>£{estimatedPrice}</span></div>
-              <div className="flex justify-between text-xs text-gray-500"><span>Min time price</span><span>£54</span></div>
-            </div>
+            <div className="flex justify-between"><span>Tariff</span>
+  <span className="font-bold">
+    {selectedFrequency === 3
+      ? `One - off ${summary.oneOffLabel}`
+      : selectedFrequency !== null
+        ? frequencyOptions[selectedFrequency].label
+        : '-'}
+  </span>
+</div>
+<div className="flex justify-between"><span>Rate</span>
+  <span className="font-bold">£{summary.baseRate}/h</span>
+</div>
+<div className="flex justify-between"><span>Date</span>
+  <span>{selectedDate.toLocaleDateString()} {pad(hour)}:{pad(minute)}</span>
+</div>
+{summary.roomDetails.map(room => (
+  <div key={room.type} className="flex justify-between">
+    <span>{room.label} x{room.quantity}</span>
+    <span>{room.totalTime} min</span>
+  </div>
+))}
+{summary.addOnDetails.map(addon => (
+  <div key={addon!.key} className="flex justify-between">
+    <span>{addon!.label} x{addon!.count}</span>
+    <span>{addon!.estimatedTime > 0 ? `${addon?.totalTime} min` : ''} {addon!.price ? `£${addon!.totalPrice}` : ''}</span>
+  </div>
+))}
+<div className="flex justify-between"><span>Hoover and a Mop</span><span>£{hooverMop ? 15 : 0}</span></div>
+<div className="flex justify-between"><span>End of Tenancy cleaning</span><span>£{selectedFrequency === 3 && endOfTenancy ? 39 : 0}</span></div>
+<div className="flex justify-between"><span>Level of dirt</span><span>{dirtLevel.charAt(0).toUpperCase() + dirtLevel.slice(1)}</span></div>
+<div className="flex justify-between"><span>Estimated duration</span>
+  <span>{Math.floor(summary.totalDuration / 60)}h {summary.totalDuration % 60}m</span>
+</div>
+<div className="flex justify-between"><span>Discount</span><span>£{summary.discount}</span></div>
+<div className="flex justify-between font-bold text-lg mt-2"><span>Estimated Amount</span><span>£{summary.total}</span></div>
           </div>
         </div>
       )}
