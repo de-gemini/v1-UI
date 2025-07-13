@@ -169,3 +169,14 @@
 .admin-font {
   font-family: "Poppins", "Inter", system-ui, sans-serif;
 }
+
+/* Custom class for selected date tile */
+.selected-date {
+  background-color: #4f46e5 !important; /* brand-primary */
+  color: white !important;
+  font-weight: bold;
+  border-radius: 9999px; /* fully rounded circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

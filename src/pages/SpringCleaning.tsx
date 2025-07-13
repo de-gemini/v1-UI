@@ -260,7 +260,7 @@ export default function SpringCleaning() {
       description: `My name's Gerilee, I've been working in the cleaning industry for about 3 years. Cleaning is my passion and I thoroughly enjoy it. I love making people's homes/offices into a spotless sanctuary!`,
     },
     {
-      id: 5,
+      id: 6,
       imageSrc:
         "https://www.emop.co.uk/static/redesign/images/services/cleaners/cleaner-6.jpg",
       name: "Alberto",
@@ -269,7 +269,7 @@ export default function SpringCleaning() {
         "As an aspiring actor, eMop allows me to work flexibly and around my film schedules. The pay is really great and the training is excellent.",
     },
     {
-      id: 6,
+      id: 7,
       imageSrc:
         "https://www.emop.co.uk/static/redesign/images/services/cleaners/cleaner-7.jpg",
       name: "Silvie",

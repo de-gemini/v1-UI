@@ -3,6 +3,7 @@ import {
   Routes,
   Route,
   Navigate,
+  useNavigate,
 } from "react-router-dom";
 import { AuthGateway } from "./Layout/AuthGateway";
 import { Suspense, lazy } from "react";
@@ -23,6 +24,10 @@ import DeepCleaning from "./pages/DeepCleaning";
 import StripeTestPage from './pages/StripeTestPage';
 import StripeCardPaymentPage from './pages/StripeCardPaymentPage';
 import PaymentSuccessPage from './pages/PaymentSuccessPage';
+import { useEffect, useState } from "react";
+import { isTokenValid } from "./utils/isTokenValid";
+import { PendingBookingModal } from "./components/PendingBookingModal";
+import ScrollToTop from "./components/ScrollToTop";
 
 // Protected Route wrapper component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -73,9 +78,11 @@ const Signup = lazy(() => import("./pages/Signup"));
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Suspense fallback={<p>Loading......</p>}>
         <ErrorAlert />
         <SuccessAlert />
+        <PendingBookingModal />
         <div className="w-screen">
           <main className="">
             <Routes>
@@ -309,10 +316,8 @@ function App() {
                 }
               />
               <Route path="/checkout" element={
-                <AuthGateway>
-                  <Checkout />
-                </AuthGateway>
-                  } />
+                <Checkout />
+              } />
               <Route path="/register" element={
                 <Layout>
                   <Signup />

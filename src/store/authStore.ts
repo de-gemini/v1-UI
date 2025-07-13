@@ -2,12 +2,15 @@ import { create } from 'zustand';
 import axios from 'axios';
 import { API_BASE_URL } from '../constants';
 
-interface User {
+export interface User {
   id: string;
   email: string;
   name: string;
   role: string;
   isActive: boolean;
+  phone?: string;
+  surname?: string;
+  address?: string;
 }
 
 interface AuthState {
@@ -27,11 +30,6 @@ interface AuthState {
   }) => Promise<void>;
 }
 
-// Test account credentials
-const ADMIN_EMAIL = 'admin@geminicleaning.com';
-const ADMIN_PASSWORD = 'admin123';
-const TEST_USER_EMAIL = 'user@example.com';
-const TEST_USER_PASSWORD = 'user123';
 
 export const useAuthStore = create<AuthState>((set) => ({
   isAuthenticated: !!localStorage.getItem('token'),

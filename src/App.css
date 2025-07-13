@@ -11,7 +11,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  overflow: hidden !important;
+}
+
+/* Ensure html and body are scrollable */
+html, body {
+  overflow: auto;
+  scroll-behavior: smooth;
 }
 
 .logo {

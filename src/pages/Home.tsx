@@ -261,7 +261,7 @@ const Home = () => {
       description: `My name's Gerilee, I've been working in the cleaning industry for about 3 years. Cleaning is my passion and I thoroughly enjoy it. I love making people's homes/offices into a spotless sanctuary!`,
     },
     {
-      id: 5,
+      id: 6,
       imageSrc:
         "https://www.emop.co.uk/static/redesign/images/services/cleaners/cleaner-6.jpg",
       name: "Alberto",
@@ -270,7 +270,7 @@ const Home = () => {
         "As an aspiring actor, eMop allows me to work flexibly and around my film schedules. The pay is really great and the training is excellent.",
     },
     {
-      id: 5,
+      id: 7,
       imageSrc:
         "https://www.emop.co.uk/static/redesign/images/services/cleaners/cleaner-7.jpg",
       name: "Silvie",
@@ -1073,74 +1073,6 @@ const Home = () => {
               </p>
             </div>
           </div>
-
-          <div className="max-w-7xl mx-auto bg-white rounded-lg overflow-hidden md:flex mb-6">
-            {/* Left Section: Text Content */}
-            <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold nunito-sans-heading text-brand-primary mb-6">
-                Reliable Experts in England
-              </h1>
-
-              <p className="text-gray-700 text-base sm:text-lg mb-6 nunito-sans-text leading-relaxed">
-                If you're looking for reliable house cleaning services in
-                London, eMop is an excellent option. We offer our customers a
-                wide range of house cleaning solutions, and we're always looking
-                for new ways to improve them. That is why eMop is a reliable
-                platform for hiring expert cleaners.
-              </p>
-
-              <ul className="text-gray-700 space-y-2 mb-4">
-                {displayedFeatures.map((feature, index) => (
-                  <li key={index} className="flex items-start">
-                    <span className="flex-shrink-0 mr-3 nunito-sans-text text-brand-secondary">
-                      {/* Purple square-like bullet, using a simple SVG or a div */}
-                      <svg
-                        className="w-3 h-3 mt-1.5"
-                        fill="currentColor"
-                        viewBox="0 0 20 20">
-                        <rect
-                          x="0"
-                          y="0"
-                          width="20"
-                          height="20"
-                          rx="4"
-                          ry="4"
-                        />
-                      </svg>
-                    </span>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-
-              {/* "3 more" / "See less" button */}
-              {allFeatures.length > initialFeaturesToShow && (
-                <button
-                  onClick={toggleFeaturesVisibility}
-                  className="text-brand-secondary font-semibold text-left self-start hover:underline focus:outline-none">
-                  {showAllFeatures
-                    ? "See less"
-                    : `${allFeatures.length - initialFeaturesToShow} more`}
-                </button>
-              )}
-            </div>
-
-            {/* Right Section: Image */}
-            <div className="md:w-1/2 overflow-hidden bg-gray-100 flex items-center justify-center">
-              <img
-                src="https://www.emop.co.uk/static/redesign/images/services/regular/2.jpg"
-                alt="Cleaned bedroom"
-                className="w-full h-full object-cover object-center rounded-lg md:rounded-l-none"
-                onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-                  const target = e.target as HTMLImageElement;
-                  target.src =
-                    "https://placehold.co/800x600/e0e0e0/555555?text=Image+Not+Found";
-                  target.alt = "Fallback image: Cleaned room image not found.";
-                }}
-              />
-            </div>
-          </div>
-
 
           <div className="max-w-7xl mx-auto bg-white rounded-lg overflow-hidden md:flex mb-6">
             {/* Left Section: Text Content */}

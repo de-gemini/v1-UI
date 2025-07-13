@@ -9,7 +9,7 @@ export default {
     extend: {
       colors: {
         brand: {
-          primary: '#2f0785',//primary-yellow
+          primary: '#0e57c5',//primary-yellow
           secondary: '#fff',//primary-blue
           blue: '#edf0ff',
           text: '#000',
