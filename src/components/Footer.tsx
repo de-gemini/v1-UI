@@ -1,15 +1,16 @@
-import React from 'react';
-import { Instagram, Facebook, Phone } from 'lucide-react'; // Importing icons for social media and phone
+import React, { useState } from 'react';
+import { Instagram, Facebook, Phone } from 'lucide-react';
+import { DropdownHeader } from './DropdownHeader';
 
 export const Footer: React.FC = () => {
+
   return (
     <footer className="relative bg-transparent text-gray-600 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-y-10 gap-x-8 text-sm">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-y-3 gap-x-8 text-sm">
 
-        {/* Column 1: Cleaner Locations */}
-        <div className="lg:col-span-1">
-          <h3 className="font-bold text-lg mb-4 text-brand-primary">CLEANER LOCATIONS</h3>
-          <ul className="space-y-2">
+      <div className="lg:col-span-1">
+        <DropdownHeader title="CLEANER LOCATIONS" dropdownName="cleanerLocations">
+          <ul className="space-y-2 pb-4 lg:pb-0">
             <li><a href="#" className="hover:underline">Edinburgh Birmingham</a></li>
             <li><a href="#" className="hover:underline">Manchester St Albans</a></li>
             <li><a href="#" className="hover:underline">Glasgow Leeds Bradford</a></li>
@@ -26,12 +27,13 @@ export const Footer: React.FC = () => {
             <li><a href="#" className="hover:underline">Walthamstow Battersea</a></li>
             <li><a href="#" className="hover:underline">Canary Wharf</a></li>
           </ul>
-        </div>
+        </DropdownHeader>
+      </div>
 
-        {/* Column 2: For Customers */}
-        <div className="lg:col-span-1">
-          <h3 className="font-bold text-lg mb-4 text-brand-primary">FOR CUSTOMERS</h3>
-          <ul className="space-y-2">
+      {/* Column 2: For Customers & For Cleaners */}
+      <div className="lg:col-span-1">
+        <DropdownHeader title="FOR CUSTOMERS" dropdownName="forCustomers">
+          <ul className="space-y-2 pb-4 lg:pb-0">
             <li><a href="#" className="hover:underline">Pricing</a></li>
             <li><a href="#" className="hover:underline">What's included</a></li>
             <li><a href="#" className="hover:underline">Blog</a></li>
@@ -43,17 +45,19 @@ export const Footer: React.FC = () => {
             <li><a href="#" className="hover:underline">Reclean Guarantee</a></li>
             <li><a href="#" className="hover:underline">Sitemap</a></li>
           </ul>
-          {/* Sub-section: For Cleaners */}
-          <h3 className="font-bold text-lg mb-4 text-brand-primary">FOR CLEANERS</h3>
-          <ul className="space-y-2">
+        </DropdownHeader>
+
+        <DropdownHeader title="FOR CLEANERS" dropdownName="forCleaners">
+          <ul className="space-y-2 pb-4 lg:pb-0">
             <li><a href="#" className="hover:underline">Become an eMopper</a></li>
           </ul>
-        </div>
+        </DropdownHeader>
+      </div>
 
-        {/* Column 3: eMop Service */}
-        <div className="lg:col-span-1">
-          <h3 className="font-bold text-lg mb-4 text-brand-primary">De Gemini SERVICE</h3>
-          <ul className="space-y-2">
+      {/* Column 3: De Gemini Service & Who We Are */}
+      <div className="lg:col-span-1">
+        <DropdownHeader title="De Gemini SERVICE" dropdownName="deGeminiService">
+          <ul className="space-y-2 pb-4 lg:pb-0">
             <li><a href="#" className="hover:underline">Regular cleaning</a></li>
             <li><a href="#" className="hover:underline">Deep cleaning</a></li>
             <li><a href="#" className="hover:underline">Office cleaning</a></li>
@@ -68,13 +72,15 @@ export const Footer: React.FC = () => {
             <li><a href="#" className="hover:underline">Mattress cleaning</a></li>
             <li><a href="#" className="hover:underline">Spring cleaning</a></li>
           </ul>
-          {/* Sub-section: Who We Are */}
-          <h3 className="font-bold text-lg mb-4 text-brand-primary">WHO WE ARE</h3>
-          <ul className="space-y-2">
+        </DropdownHeader>
+
+        <DropdownHeader title="WHO WE ARE" dropdownName="whoWeAre">
+          <ul className="space-y-2 pb-4 lg:pb-0">
             <li><a href="#" className="hover:underline">About us</a></li>
             <li><a href="#" className="hover:underline">Contact us</a></li>
           </ul>
-        </div>
+        </DropdownHeader>
+      </div>
 
         {/* Column 4 (combined from screenshot): Logo, App Downloads, Social Media */}
         <div className="md:col-span-2 lg:col-span-2 flex flex-col items-center md:items-start lg:items-end text-center md:text-left lg:text-right">

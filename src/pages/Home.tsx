@@ -6,13 +6,15 @@ import { ServiceCarousel } from "../components/CardComponent";
 import { CostCard } from "../components/Postcode";
 import { HowItWorksSection } from "../components/HowItWorks";
 import { Sofa } from "lucide-react";
-import placeHolder from "../assets/images/Screenshot (409).png";
 import { ProfessionalsCarousel } from "../components/Professional";
 import { RatingCarousel } from "../components/ratingCard";
 import axiosInstance from '../api/axiosInstance';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../constants";
+import ServiceCard from "../components/ServiceCard";
+import CallToActionSection from "../components/CallToAction";
+
 import 'react-toastify/dist/ReactToastify.css';
 
 const Home = () => {
@@ -163,46 +165,96 @@ const Home = () => {
     },
   ];
 
-  const allCleaningServices = [
-    "Dusting all accessible surfaces",
-    "Cleaning lighting appliances, and chandeliers",
-    "Wiping appliances",
-    "Wiping mirrors and glass fixtures",
-    "Folding clothes and arranging things",
-    "Wiping doors, door handles, and switches",
-    "Vacuuming the carpets and washing the floor and skirting boards",
-    "Taking out rubbish",
-    "Cleaning kitchen surfaces (additional service)",
-    "Cleaning bathrooms (additional service)",
-    "Wiping baseboards and window sills",
-    "Emptying trash bins and replacing liners",
-  ];
-
-  const Halls = [
-    "Dusting all accessible surfaces",
-    "Cleaning mirrors and glass surfaces and the front door (inside)",
-    "Vacuuming and mopping the floor and the skirting boards",
-    "Arranging things",
-    "Taking out rubbish",
-  ];
-
-  const kitchen = [
-    "Getting all accessible surfaces free from dust and grease (sinks, taps, surfaces, stoves, and kitchen equipment)",
-    "Making the front, upper and bottom kitchen facades spotless",
-    "Vacuuming and washing the floor and skirting boards",
-    "Wiping doors, door handles, and switches",
-    "Doing the washing-up",
-    "Taking out rubbish",
-  ];
-
-  const bathroom = [
-    "Washing and sanitizing the toilet, the sink and the bidet",
-    "Washing the shower and the tub",
-    "Wiping down mirrors, glass fixtures and lighting appliance",
-    "Dusting all accessible surfaces",
-    "Wiping down walls, doors, door handles and switches",
-    "Vacuuming and washing the floor and skirting boards",
-    "Taking out rubbish",
+  const cleaningServicesData = [
+    {
+      title: "Bedroom, living, dining, office rooms",
+      description: "Our cleaning London services include:",
+      services: [
+        "Dusting and wiping of all accessible surfaces.",
+        "Vacuuming carpets and mopping hard floors.",
+        "Cleaning mirrors and glass surfaces.",
+        "Emptying trash bins and replacing liners.",
+        "Making beds and tidying up living areas.",
+        "Cleaning light fixtures and ceiling fans.",
+        "Wiping down doors and door frames.",
+        "Sanitizing high-touch areas (light switches, doorknobs).",
+      ],
+      imageSrc: "https://www.emop.co.uk/img/bedroom.png",
+      imageAlt: "Cleaned living room and bedroom",
+      IconComponent: Sofa, // Using Heroicon here
+      initialItemsToShow: 2, // Example: show 2 initially
+      imagePosition: 'right' as 'right', // Explicitly type as 'right'
+    },
+    {
+      title: "Halls and stairs",
+      description: "Our cleaning London services include:",
+      services: [
+        "Dusting all accessible surfaces.",
+        "Vacuuming and mopping stairs and landings.",
+        "Cleaning mirrors and glass surfaces and the front door (inside).",
+        "Wiping down railings and banisters.",
+        "Removing cobwebs.",
+      ],
+      imageSrc: "https://www.emop.co.uk/img/halls.png",
+      imageAlt: "Cleaned hall and stairs",
+      iconSrc: "https://www.emop.co.uk/img/halls-stairs-icon.svg", // Example: using image icon for halls
+      initialItemsToShow: 2,
+      imagePosition: 'left' as 'left', // Explicitly type as 'left'
+    },
+    {
+      title: "Kitchen",
+      description: "As you know, the kitchen is one of the most difficult rooms to clean in a London house. So, here are all the tasks we perform in the kitchen.",
+      services: [
+        "Cleaning and sanitizing countertops.",
+        "Wiping down appliance exteriors (microwave, oven, fridge).",
+        "Cleaning sink and taps.",
+        "Wiping down cabinet exteriors.",
+        "Mopping floors.",
+        "Emptying trash bins.",
+        "Cleaning inside microwave.",
+        "Wiping down backsplash.",
+      ],
+      imageSrc: "https://www.emop.co.uk/img/kitchen.png",
+      imageAlt: "Cleaned kitchen",
+      iconSrc: "https://www.emop.co.uk/img/kitchen-icon.svg",
+      initialItemsToShow: 2,
+      imagePosition: 'right' as 'right',
+    },
+    {
+      title: "Bathroom",
+      description: "Bathrooms require regular and meticulous servicing to maintain a sanitary space. So, our cleaners come with all the necessary equipment to clean yours perfectly.",
+      services: [
+        "Cleaning and disinfecting toilet, shower, and sink.",
+        "Wiping down mirrors and fixtures.",
+        "Mopping floors.",
+        "Cleaning grout lines.",
+        "Wiping down cabinet exteriors.",
+        "Emptying trash bins.",
+        "Replenishing toilet paper and hand soap (if provided).",
+      ],
+      imageSrc: "https://www.emop.co.uk/img/bathroom.png",
+      imageAlt: "Cleaned bathroom",
+      iconSrc: "https://www.emop.co.uk/img/bathroom-icon.svg",
+      initialItemsToShow: 2,
+      imagePosition: 'left' as 'left',
+    },
+    {
+      title: "Office",
+      description: "Keeping your office clean promotes a healthier and more productive environment. Our office cleaning services include:",
+      services: [
+        "Dusting and wiping desks and office equipment.",
+        "Vacuuming carpets or mopping hard floors.",
+        "Emptying trash bins.",
+        "Cleaning and sanitizing common areas (breakrooms, restrooms).",
+        "Wiping down accessible surfaces.",
+        "Cleaning glass partitions and windows.",
+      ],
+      imageSrc: "https://www.emop.co.uk/img/office.png",
+      imageAlt: "Cleaned office space",
+      iconSrc: "https://www.emop.co.uk/img/office-icon.svg", // Assuming an office icon exists, or use a Heroicon
+      initialItemsToShow: 2,
+      imagePosition: 'right' as 'right',
+    },
   ];
 
   const office = [
@@ -300,27 +352,7 @@ const Home = () => {
 
   const [showAll, setShowAll] = useState<boolean>(false);
 
-  // Determine how many items to show initially
-  const initialItemsToShow = 6; // As observed in the screenshot for the visible portion
-  const displayedServices = showAll
-    ? allCleaningServices
-    : allCleaningServices.slice(0, initialItemsToShow);
-  const initialItemsForHall = 2;
-  const displayedServicesForHall = showAll
-    ? Halls
-    : Halls.slice(0, initialItemsForHall);
-  const initialItemsForKitchen = 2;
-  const displayedServicesForKitchen = showAll
-    ? kitchen
-    : kitchen.slice(0, initialItemsForKitchen);
-  const initialItemsForBathroom = 2;
-  const displayedServicesForBathroom = showAll
-    ? bathroom
-    : bathroom.slice(0, initialItemsForBathroom);
-  const initialItemsForOffice = 2;
-  const displayedServicesForOffice = showAll
-    ? office
-    : office.slice(0, initialItemsForOffice);
+
 
   const handleOneOffQuote = (code: string) => {
     console.log(`One-off Cleaning Quote for: ${code}`);
@@ -403,7 +435,7 @@ const Home = () => {
     try {
       const res = await axiosInstance.post(`${API_BASE_URL}/postcode`, { postcode });
   
-      // Optional: log or inspect the API response
+      
       console.log(res.data);
   
        // Check if the API returned a valid area
@@ -585,291 +617,25 @@ const Home = () => {
       <h1 className="text-center text-brand-primary nunito-sans-heading text-[32px] font-[800] mb-5">
         What is included in De gemini cleaning?
       </h1>
-      {/* Service list section */}
-      <div className="max-w-7xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden md:flex">
-        {/* Left Section: Text Content */}
-        <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-          <div className="flex items-center text-brand-primary mb-6">
-            <Sofa className="w-8 h-8 mr-3 text-brand-primary" />
-            <h2 className="text-xl sm:text-2xl font-bold nunito-sans-heading">
-              Bedroom, living, dining, office rooms
-            </h2>
-          </div>
 
-          <p className="text-gray-700 nunito-sans-text text-base sm:text-lg mb-6">
-            Our cleaning London services include:
-          </p>
-
-          <ul className="text-gray-700 space-y-2 mb-6">
-            {displayedServices.map((service, index) => (
-              <li key={index} className="flex items-start">
-                <span className="flex-shrink-0 mr-3 text-brand-secondary">
-                  <svg
-                    className="w-4 h-4 mt-1"
-                    fill="currentColor"
-                    viewBox="0 0 20 20">
-                    <path d="M7 3a1 1 0 00-1 1v1a1 1 0 002 0V4a1 1 0 00-1-1zM9 5a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 7a1 1 0 00-1 1v1a1 1 0 002 0V8a1 1 0 00-1-1zM11 7a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 9a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 9a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 11a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 11a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 13a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 13a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM10 20a10 10 0 100-20 10 10 0 000 20zm0-2a8 8 0 100-16 8 8 0 000 16z" />
-                  </svg>
-                </span>
-                {service}
-              </li>
-            ))}
-          </ul>
-
-          {/* See more/See less button */}
-          {allCleaningServices.length > initialItemsToShow && (
-            <button
-              onClick={() => setShowAll(!showAll)}
-              className="text-brand-secondary font-semibold text-left self-start hover:underline focus:outline-none">
-              {showAll ? "See less" : "See more"}
-            </button>
-          )}
-        </div>
-
-        {/* Right Section: Image */}
-        <div className="md:w-1/2 overflow-hidden">
-          <img
-            src="https://www.emop.co.uk/img/bedroom.png"
-            alt="Cleaning services in living room"
-            className="w-full h-full object-cover object-center"
-            onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-              const target = e.target as HTMLImageElement;
-              target.src =
-                "https://placehold.co/800x600/e0e0e0/555555?text=Image+Not+Found";
-              target.alt = "Fallback image: Cleaning services image not found.";
-            }}
-          />
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto mt-4 bg-white rounded-lg shadow-lg overflow-hidden md:flex">
-        {/* Left Section: Text Content */}
-        <div className="md:w-1/2 overflow-hidden">
-          <img
-            src="https://www.emop.co.uk/img/halls.png"
-            alt="Cleaning services in living room"
-            className="w-full h-full object-cover object-center"
-            onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-              const target = e.target as HTMLImageElement;
-              target.src =
-                "https://placehold.co/800x600/e0e0e0/555555?text=Image+Not+Found";
-              target.alt = "Fallback image: Cleaning services image not found.";
-            }}
-          />
-        </div>
-
-        {/* Right Section: Image */}
-        <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-          <div className="flex items-center text-brand-primary nunito-sans-heading mb-6">
-            <img src="https://www.emop.co.uk/img/bedroom-icon.svg" alt="" />
-            <h2 className="text-xl sm:text-2xl font-bold">Halls and stairs</h2>
-          </div>
-
-          <p className="text-gray-700 text-base nunito-sans-text sm:text-lg mb-6">
-            Our cleaning London services include:
-          </p>
-
-          <ul className="text-gray-700 space-y-2 mb-6">
-            {displayedServicesForHall.map((service, index) => (
-              <li key={index} className="flex items-start">
-                <span className="flex-shrink-0 mr-3 text-brand-secondary">
-                  <svg
-                    className="w-4 h-4 mt-1"
-                    fill="currentColor"
-                    viewBox="0 0 20 20">
-                    <path d="M7 3a1 1 0 00-1 1v1a1 1 0 002 0V4a1 1 0 00-1-1zM9 5a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 7a1 1 0 00-1 1v1a1 1 0 002 0V8a1 1 0 00-1-1zM11 7a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 9a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 9a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 11a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 11a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 13a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 13a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM10 20a10 10 0 100-20 10 10 0 000 20zm0-2a8 8 0 100-16 8 8 0 000 16z" />
-                  </svg>
-                </span>
-                {service}
-              </li>
-            ))}
-          </ul>
-
-          {/* See more/See less button */}
-          {allCleaningServices.length > initialItemsToShow && (
-            <button
-              onClick={() => setShowAll(!showAll)}
-              className="text-brand-secondary font-semibold text-left self-start hover:underline focus:outline-none">
-              {showAll ? "See less" : "See more"}
-            </button>
-          )}
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto bg-white rounded-lg mt-4 shadow-lg overflow-hidden md:flex">
-        {/* Left Section: Text Content */}
-        <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-          <div className="flex items-center text-brand-primary mb-6">
-            <img
-              src="https://www.emop.co.uk/img/kitchen-icon.svg"
-              className="w-8 h-8 mr-3"
-            />
-            <h2 className="text-xl sm:text-2xl font-bold nunito-sans-heading">Kitchen</h2>
-          </div>
-
-          <p className="text-gray-700 text-base sm:text-lg mb-6">
-            As you know, the kitchen is one of the most difficult rooms to clean
-            in a London house. So, here are all the tasks we perform in the
-            kitchen.
-          </p>
-
-          <ul className="text-gray-700 space-y-2 mb-6">
-            {displayedServicesForKitchen.map((service, index) => (
-              <li key={index} className="flex items-start">
-                <span className="flex-shrink-0 mr-3 text-brand-secondary">
-                  <svg
-                    className="w-4 h-4 mt-1"
-                    fill="currentColor"
-                    viewBox="0 0 20 20">
-                    <path d="M7 3a1 1 0 00-1 1v1a1 1 0 002 0V4a1 1 0 00-1-1zM9 5a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 7a1 1 0 00-1 1v1a1 1 0 002 0V8a1 1 0 00-1-1zM11 7a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 9a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 9a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 11a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 11a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 13a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 13a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM10 20a10 10 0 100-20 10 10 0 000 20zm0-2a8 8 0 100-16 8 8 0 000 16z" />
-                  </svg>
-                </span>
-                {service}
-              </li>
-            ))}
-          </ul>
-
-          {/* See more/See less button */}
-          {kitchen.length > initialItemsForKitchen && (
-            <button
-              onClick={() => setShowAll(!showAll)}
-              className="text-brand-secondary font-semibold text-left self-start hover:underline focus:outline-none">
-              {showAll ? "See less" : "See more"}
-            </button>
-          )}
-        </div>
-
-        {/* Right Section: Image */}
-        <div className="md:w-1/2 overflow-hidden">
-          <img
-            src="https://www.emop.co.uk/img/kitchen.png"
-            alt="Cleaning services in living room"
-            className="w-full h-[85%] object-cover object-center"
-            onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-              const target = e.target as HTMLImageElement;
-              target.src =
-                "https://placehold.co/800x600/e0e0e0/555555?text=Image+Not+Found";
-              target.alt = "Fallback image: Cleaning services image not found.";
-            }}
-          />
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto mt-4 bg-white rounded-lg shadow-lg overflow-hidden md:flex">
-        {/* Left Section: Text Content */}
-        <div className="md:w-1/2 overflow-hidden">
-          <img
-            src="https://www.emop.co.uk/img/bathroom.png"
-            alt="Cleaning services in living room"
-            className="w-full h-[85%] object-cover object-center"
-            onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-              const target = e.target as HTMLImageElement;
-              target.src =
-                "https://placehold.co/800x600/e0e0e0/555555?text=Image+Not+Found";
-              target.alt = "Fallback image: Cleaning services image not found.";
-            }}
-          />
-        </div>
-
-        {/* Right Section: Image */}
-        <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-          <div className="flex items-center text-brand-primary mb-6">
-            <img src="https://www.emop.co.uk/img/bathroom-icon.svg" alt="" />
-            <h2 className="text-xl sm:text-2xl font-bold">Bathroom</h2>
-          </div>
-
-          <p className="text-gray-700 text-base nunito-sans-text sm:text-lg mb-6">
-            Bathrooms require regular and meticulous servicing to maintain a
-            sanitary space. So, our cleaners come with all the necessary
-            equipment to clean yours perfectly.
-          </p>
-
-          <ul className="text-gray-700 space-y-2 mb-6">
-            {displayedServicesForBathroom.map((service, index) => (
-              <li key={index} className="flex items-start">
-                <span className="flex-shrink-0 mr-3 text-brand-secondary">
-                  <svg
-                    className="w-4 h-4 mt-1"
-                    fill="currentColor"
-                    viewBox="0 0 20 20">
-                    <path d="M7 3a1 1 0 00-1 1v1a1 1 0 002 0V4a1 1 0 00-1-1zM9 5a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 7a1 1 0 00-1 1v1a1 1 0 002 0V8a1 1 0 00-1-1zM11 7a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 9a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 9a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 11a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 11a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 13a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 13a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM10 20a10 10 0 100-20 10 10 0 000 20zm0-2a8 8 0 100-16 8 8 0 000 16z" />
-                  </svg>
-                </span>
-                {service}
-              </li>
-            ))}
-          </ul>
-
-          {/* See more/See less button */}
-          {bathroom.length > initialItemsForBathroom && (
-            <button
-              onClick={() => setShowAll(!showAll)}
-              className="text-brand-secondary font-semibold text-left self-start hover:underline focus:outline-none">
-              {showAll ? "See less" : "See more"}
-            </button>
-          )}
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto bg-white rounded-lg mt-4 shadow-lg overflow-hidden md:flex">
-        {/* Left Section: Text Content */}
-        <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-          <div className="flex items-center text-brand-primary mb-6">
-            <img
-              src="https://www.emop.co.uk/img/kitchen-icon.svg"
-              className="w-8 h-8 mr-3"
-            />
-            <h2 className="text-xl sm:text-2xl font-bold nunito-sans-heading">Kitchen</h2>
-          </div>
-
-          <p className="text-gray-700 text-base sm:text-lg mb-6 nunito-sans-text">
-            As you know, the kitchen is one of the most difficult rooms to clean
-            in a London house. So, here are all the tasks we perform in the
-            kitchen.
-          </p>
-
-          <ul className="text-gray-700 space-y-2 mb-6">
-            {displayedServicesForOffice.map((service, index) => (
-              <li key={index} className="flex items-start">
-                <span className="flex-shrink-0 mr-3 text-brand-secondary">
-                  <svg
-                    className="w-4 h-4 mt-1"
-                    fill="currentColor"
-                    viewBox="0 0 20 20">
-                    <path d="M7 3a1 1 0 00-1 1v1a1 1 0 002 0V4a1 1 0 00-1-1zM9 5a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 7a1 1 0 00-1 1v1a1 1 0 002 0V8a1 1 0 00-1-1zM11 7a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 9a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 9a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 11a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 11a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM7 13a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zM11 13a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM10 20a10 10 0 100-20 10 10 0 000 20zm0-2a8 8 0 100-16 8 8 0 000 16z" />
-                  </svg>
-                </span>
-                {service}
-              </li>
-            ))}
-          </ul>
-
-          {/* See more/See less button */}
-          {office.length > initialItemsForOffice && (
-            <button
-              onClick={() => setShowAll(!showAll)}
-              className="text-brand-secondary font-semibold text-left self-start hover:underline focus:outline-none">
-              {showAll ? "See less" : "See more"}
-            </button>
-          )}
-        </div>
-
-        {/* Right Section: Image */}
-        <div className="md:w-1/2 overflow-hidden">
-          <img
-            src="https://www.emop.co.uk/img/office.png"
-            alt="Cleaning services in living room"
-            className="w-full h-[85%] object-cover object-center"
-            onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-              const target = e.target as HTMLImageElement;
-              target.src =
-                "https://placehold.co/800x600/e0e0e0/555555?text=Image+Not+Found";
-              target.alt = "Fallback image: Cleaning services image not found.";
-            }}
-          />
-        </div>
-      </div>
-
+      <section className="py-10">
+      {/* Map over your data to render ServiceCard components */}
+      {cleaningServicesData.map((cardData, index) => (
+        <ServiceCard
+          key={index} // Using index as key is okay if the list is static and not reordered
+          title={cardData.title}
+          description={cardData.description}
+          services={cardData.services}
+          imageSrc={cardData.imageSrc}
+          imageAlt={cardData.imageAlt}
+          initialItemsToShow={cardData.initialItemsToShow}
+          iconSrc={cardData.iconSrc}
+          IconComponent={cardData.IconComponent}
+          imagePosition={cardData.imagePosition}
+        />
+      ))}
+    </section>
+      
       {/* google section */}
       <section className="w=full mt-[2rem]">
         <div className="flex items-center justify-center gap-[6px]">
@@ -878,7 +644,7 @@ const Home = () => {
             alt="google"
             className="w-[3rem]"
           />
-          <h1 className="text-brand-secondary text-[30px] font-[700]">
+          <h1 className="text-brand-primary text-[30px] font-[700]">
             Google score 4.1
           </h1>
         </div>
@@ -888,12 +654,12 @@ const Home = () => {
       </section>
 
       {/* Professionals */}
-      <section className="max-w-7xl mx-auto">
-        <h1 className="text-start ml-[3rem] text-brand-primary nunito-sans-heading text-[30px] font-[700]">
-          Meet our Professionals
-        </h1>
-        <ProfessionalsCarousel professionals={dummyProfessionals} />
-      </section>
+      <section className="max-w-7xl mx-auto py-10">
+  <h1 className="text-start sm:pl-6 lg:pl-8 text-brand-primary nunito-sans-heading text-[30px] font-[700] mb-3">
+    Meet Our Professionals
+  </h1>
+  <ProfessionalsCarousel professionals={dummyProfessionals} />
+</section>
 
       {/* Why choose?? */}
       <section className="max-w-7xl mx-auto flex flex-col items-center justify-center">
@@ -1157,41 +923,9 @@ const Home = () => {
         </div>
 
         {/* Optional: More content to show page structure */}
-        <section className="w-full flex flex-col items-center justify-center mt-10"
-        style={{
-          backgroundImage: `url('https://www.emop.co.uk/static/images/bot_cta_bg_new.png')`,
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-        }}
-        >
-          <h1 className="font-[700] text-[30px] md:text-[40px] lg:text-[40px] text-brand-primary">
-          Cleaning Is No Longer <br />
-          Your Burden
-          </h1>
-
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-white p-2 pr-2 sm:p-3 sm:pr-3 rounded-xl shadow-lg border border-purple-300 max-w-md w-full">
-                <div className="flex items-center flex-grow p-2">
-                  <MapPin className="h-6 w-6 text-gray-400 mr-3 flex-shrink-0" />
-                  <input
-                    type="text"
-                    placeholder="Enter your post code here"
-                    className="flex-grow text-gray-700 placeholder-gray-400 focus:outline-none text-base sm:text-lg bg-transparent"
-                    value={postcode}
-                    onChange={(e) => setPostcode(e.target.value)}
-                    aria-label="Enter your postcode"
-                  />
-                </div>
-                <button
-                  onClick={handlePostcodeApi}
-                  className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
-                  QUOTE ME
-                </button>
-              </div>
-
-          
-
-        </section>
+        <div className="mt-[3rem]">
+        <CallToActionSection/>
+        </div>
       </div>
         </div>
       
