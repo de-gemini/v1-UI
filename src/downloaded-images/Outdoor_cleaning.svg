@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="43px" viewBox="0 0 52 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group 95 Copy</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="2-choose-rooms" transform="translate(-481.000000, -1254.000000)">
+            <g id="Group-95-Copy" transform="translate(482.000000, 1255.000000)">
+                <g id="Group-93" transform="translate(3.960064, 20.276345)">
+                    <polygon id="Контур_15" fill="#F8E71C" fill-rule="nonzero" points="1.79437063 7.74963589 9.15820505 7.74963589 9.15820505 11.6712045 1.79437063 11.6712045"></polygon>
+                    <path d="M0.800252979,15.5757051 L1.79437063,11.4329962 L1.79437063,1.32432225 C1.74189002,0.44144075 1.14376648,2.22915368e-13 2.22588832e-13,2.22915368e-13" id="Path-63" stroke="#332855" stroke-width="0.980392157" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <polyline id="Path-68" stroke="#332855" stroke-width="0.980392157" stroke-linecap="round" stroke-linejoin="round" points="10.1851706 15.5757051 9.15820505 11.4131708 9.15820505 7.38024858 1.79437063 7.38024858"></polyline>
+                    <line x1="1.79437063" y1="11.4779769" x2="9.15820505" y2="11.4779769" id="Path-69" stroke="#332855" stroke-width="0.980392157" stroke-linecap="round" stroke-linejoin="round"></line>
+                </g>
+                <g id="Group-93-Copy" transform="translate(40.126731, 28.276345) scale(-1, 1) translate(-40.126731, -28.276345) translate(34.626731, 20.276345)">
+                    <polygon id="Контур_15" fill="#F8E71C" fill-rule="nonzero" points="1.79437063 7.74963589 9.15820505 7.74963589 9.15820505 11.6712045 1.79437063 11.6712045"></polygon>
+                    <path d="M0.800252979,15.5757051 L1.79437063,11.4329962 L1.79437063,1.32432225 C1.74189002,0.44144075 1.14376648,2.22915368e-13 2.22588832e-13,2.22915368e-13" id="Path-63" stroke="#332855" stroke-width="0.980392157" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <polyline id="Path-68" stroke="#332855" stroke-width="0.980392157" stroke-linecap="round" stroke-linejoin="round" points="10.1851706 15.5757051 9.15820505 11.4131708 9.15820505 7.38024858 1.79437063 7.38024858"></polyline>
+                    <line x1="1.79437063" y1="11.4779769" x2="9.15820505" y2="11.4779769" id="Path-69" stroke="#332855" stroke-width="0.980392157" stroke-linecap="round" stroke-linejoin="round"></line>
+                </g>
+                <line x1="0.204637411" y1="35.8823529" x2="49.7144413" y2="35.8823529" id="Линия_4" stroke="#332855" stroke-width="1.0620915" stroke-linecap="round"></line>
+                <line x1="24.7577622" y1="35.8520496" x2="24.7577622" y2="27.3159508" id="Path-70" stroke="#332855" stroke-width="0.980392157" stroke-linecap="round" stroke-linejoin="round"></line>
+                <path d="M21.7694555,35.8520496 C21.8462618,33.5531779 22.8421887,32.403742 24.7572362,32.403742 C26.6722837,32.403742 27.6604939,33.5531779 27.7218667,35.8520496" id="Path-71" stroke="#332855" stroke-width="0.980392157" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M23.2021748,24.4134321 C23.0976115,26.3484446 23.6161406,27.3159508 24.7577622,27.3159508 C25.8993838,27.3159508 26.3975547,26.3484446 26.2522748,24.4134321" id="Path-72" stroke="#332855" stroke-width="0.980392157" stroke-linecap="round" stroke-linejoin="round"></path>
+                <line x1="16.584372" y1="24.4134321" x2="32.8240583" y2="24.4134321" id="Path-73" stroke="#332855" stroke-width="0.980392157" stroke-linecap="round" stroke-linejoin="round"></line>
+                <line x1="24.7577622" y1="24.4134321" x2="24.7577622" y2="10.2502451" id="Path-74" stroke="#332855" stroke-width="0.980392157" stroke-linecap="round" stroke-linejoin="round"></line>
+                <polygon id="Path-75" stroke="#332855" stroke-width="0.980392157" stroke-linecap="round" stroke-linejoin="round" points="6.72110177 10.2502451 42.7933707 10.2502451 24.7577622 0"></polygon>
+                <line x1="24.7577622" y1="10.2502451" x2="24.7577622" y2="0.344330862" id="Path-76" stroke="#332855" stroke-width="0.980392157"></line>
+                <polyline id="Path-77" stroke="#332855" stroke-width="0.980392157" points="16.584372 10.2502451 24.7577622 0.344330862 32.8240583 10.2502451"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

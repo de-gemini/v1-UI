@@ -46,7 +46,7 @@ export const Footer: React.FC = () => {
           {/* Sub-section: For Cleaners */}
           <h3 className="font-bold text-lg mb-4 text-brand-primary">FOR CLEANERS</h3>
           <ul className="space-y-2">
-            <li><a href="#" className="hover:underline">Become an eMopper</a></li>
+            <li><a href="#" className="hover:underline">Join Us</a></li>
           </ul>
         </div>
 

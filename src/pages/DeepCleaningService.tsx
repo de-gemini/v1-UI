@@ -100,6 +100,8 @@ export default function DeepCleaningService() {
         "As soon as you make a booking it becomes available to all cleaners in the eMop platform. The time of the booking confirmation depends on the availability of the cleaners in the area and the type of the cleaning you request. eMop team will contact you if there is no availability for the chosen time and offer you the closest available time of the cleaning.",
     },
   ];
+
+  
   const allCleaningServices = [
     "Dusting all accessible surfaces",
     "Cleaning lighting appliances, and chandeliers",

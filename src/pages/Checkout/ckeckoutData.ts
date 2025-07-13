@@ -575,6 +575,8 @@ export const cleaningTypes = [
   
   export const frequencyBackendValues = ["weekly", "fortnight", "monthly", "onetime"];
   
+
+  
   export const roomTypes = [
     { type: "bedroom", label: "Bedroom", estimatedTime: 25, icon: "https://www.emop.co.uk/static/images/steps_booking/bedroom.svg" },
     { type: "living_room", label: "Living/Dining room", estimatedTime: 30, icon: "https://www.emop.co.uk/static/images/steps_booking/living_dining.svg" },
