@@ -168,7 +168,17 @@ const Home = () => {
     },
   ];
 
-  const cleaningServicesData = [
+  const cleaningServicesData: Array<{
+    title: string;
+    description: string;
+    services: string[];
+    mainImageUrl: string;
+    imageAlt: string;
+    smallIconUrl?: string;
+    initialItemsToShow?: number;
+    imagePosition: 'left' | 'right';
+    SmallIconComponent?: React.ElementType;
+  }> = [
     {
       title: "Bedroom, living, dining, office rooms",
       description: "Our cleaning London services include:",
@@ -433,7 +443,7 @@ const Home = () => {
         pauseOnHover={true}
         />
         <div className="px-4 sm:px-6 lg:px-8">
-      <section className="flex items-center justify-center max-w-7xl mx-auto">
+      <section className="flex items-center justify-center max-w-7xl mx-auto relative overflow-hidden">
         <div
           className="absolute inset-0 z-0 bg-cover bg-center opacity-0 bg-no-repeat"
           style={{
@@ -502,13 +512,19 @@ const Home = () => {
               <p className="text-red-500 text-lg">{error}</p>
           </div>
 
-          <div className="w-full lg:w-1/2 flex justify-center">
+          <div className="w-full mb-1 lg:w-1/2 flex justify-center">
             <img
               src={home}
               alt=""
               className="max-w-full h-auto object-contain"
             />
           </div>
+        </div>
+        {/* Curvy white overlay at the bottom */}
+        <div className="absolute left-0 right-0 bottom-0 w-full pointer-events-none z-20">
+          <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-[80px]" preserveAspectRatio="none">
+            <path d="M0,100 C360,100 1080,0 1440,100 L1440,100 L0,100 Z" fill="#f7f7f7" />
+          </svg>
         </div>
       </section>
 
@@ -596,7 +612,6 @@ const Home = () => {
           mainImageUrl={cardData.mainImageUrl}
           imageAlt={cardData.imageAlt}
           initialItemsToShow={cardData.initialItemsToShow}
-          SmallIconComponent={cardData.SmallIconComponent}
           imagePosition={cardData.imagePosition}
         />
       ))}
