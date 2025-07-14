@@ -28,7 +28,7 @@ import card3 from '../assets/images/card-3.jpg'
 import card4 from '../assets/images/card-4.jpg';
 import card5 from '../assets/images/card-5.png';
 import card6 from '../assets/images/card-6.jpg';
-import home from '../assets/images/banner-gemini-removebg.png'
+import home from '../assets/images/main-banner-removebg-preview.png'
 import 'react-toastify/dist/ReactToastify.css';
 
 const Home = () => {
@@ -182,7 +182,7 @@ const Home = () => {
         "Wiping down doors and door frames.",
         "Sanitizing high-touch areas (light switches, doorknobs).",
       ],
-      mainImageUrl: card1,
+      mainImageUrl: card5,
       imageAlt: "Cleaned living room and bedroom",
       smallIconUrl: '',
       initialItemsToShow: 2,
@@ -252,7 +252,7 @@ const Home = () => {
         "Wiping down accessible surfaces.",
         "Cleaning glass partitions and windows.",
       ],
-      mainImageUrl: card5,
+      mainImageUrl: card1,
       imageAlt: "Cleaned office space",
       smallIconUrl: '',
       initialItemsToShow: 2,
@@ -620,12 +620,12 @@ const Home = () => {
       </section>
 
       {/* Professionals */}
-      <section className="max-w-7xl mx-auto py-10">
+      {/* <section className="max-w-7xl mx-auto py-10">
   <h1 className="text-start sm:pl-6 lg:pl-8 text-brand-primary nunito-sans-heading text-[30px] font-[700] mb-3">
     Meet Our Professionals
   </h1>
   <ProfessionalsCarousel professionals={dummyProfessionals} />
-</section>
+</section> */}
 
       {/* Why choose?? */}
       <div className="mt-[3rem]">
