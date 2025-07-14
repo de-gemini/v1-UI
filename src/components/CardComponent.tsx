@@ -4,11 +4,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { useRef } from 'react';
 
-// Import Swiper styles
-// These imports are crucial for Swiper to function correctly.
-// If you encounter "Could not resolve" errors, please ensure you have
-// installed Swiper correctly and your build system is configured to
-// recognize these imports.
 import "../index.css";
 
 // Import Swiper modules

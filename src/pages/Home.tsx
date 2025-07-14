@@ -14,7 +14,21 @@ import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../constants";
 import ServiceCard from "../components/ServiceCard";
 import CallToActionSection from "../components/CallToAction";
-
+import WhyChooseSection from "../components/WhyChooseSection";
+import ContentBlock from "../components/ContentBlock";
+import { regularCleaningBlocks, reliableExpertsContent, caringServiceContent } from '../data/cleaningContent';
+import slide1 from '../assets/images/slide-1.png'
+import slide2 from '../assets/images/slide-2.png'
+import slide3 from '../assets/images/slide-3.png'
+import slide4 from '../assets/images/slide-4.png'
+import slide5 from '../assets/images/slide-5.png'
+import card1 from '../assets/images/card-1.jpg'
+import card2 from '../assets/images/card-2.jpg'
+import card3 from '../assets/images/card-3.jpg'
+import card4 from '../assets/images/card-4.jpg';
+import card5 from '../assets/images/card-5.png';
+import card6 from '../assets/images/card-6.jpg';
+import home from '../assets/images/banner-gemini-removebg.png'
 import 'react-toastify/dist/ReactToastify.css';
 
 const Home = () => {
@@ -125,19 +139,8 @@ const Home = () => {
     },
   ];
 
-  const handleRegularQuote = (code: string) => {
-    console.log(`Regular Cleaning Quote for: ${code}`);
-  };
-
   const [postcode, setPostcode] = useState<string>("");
-  const [showAllFeatures, setShowAllFeatures] = useState<boolean>(false);
   const [openItemId, setOpenItemId] = useState<string | null>(null);
-
-  const handleQuoteMeClick = () => {
-    console.log(
-      `Getting quote for additional services with postcode: ${postcode}`
-    );
-  };
 
   const additionalServices = [
     {
@@ -179,11 +182,11 @@ const Home = () => {
         "Wiping down doors and door frames.",
         "Sanitizing high-touch areas (light switches, doorknobs).",
       ],
-      imageSrc: "https://www.emop.co.uk/img/bedroom.png",
+      mainImageUrl: card1,
       imageAlt: "Cleaned living room and bedroom",
-      IconComponent: Sofa, // Using Heroicon here
-      initialItemsToShow: 2, // Example: show 2 initially
-      imagePosition: 'right' as 'right', // Explicitly type as 'right'
+      smallIconUrl: '',
+      initialItemsToShow: 2,
+      imagePosition: 'right' as 'right',
     },
     {
       title: "Halls and stairs",
@@ -195,9 +198,9 @@ const Home = () => {
         "Wiping down railings and banisters.",
         "Removing cobwebs.",
       ],
-      imageSrc: "https://www.emop.co.uk/img/halls.png",
+      mainImageUrl: card2,
       imageAlt: "Cleaned hall and stairs",
-      iconSrc: "https://www.emop.co.uk/img/halls-stairs-icon.svg", // Example: using image icon for halls
+      smallIconUrl: '',
       initialItemsToShow: 2,
       imagePosition: 'left' as 'left', // Explicitly type as 'left'
     },
@@ -214,9 +217,9 @@ const Home = () => {
         "Cleaning inside microwave.",
         "Wiping down backsplash.",
       ],
-      imageSrc: "https://www.emop.co.uk/img/kitchen.png",
+      mainImageUrl: card3,
       imageAlt: "Cleaned kitchen",
-      iconSrc: "https://www.emop.co.uk/img/kitchen-icon.svg",
+      smallIconUrl: '',
       initialItemsToShow: 2,
       imagePosition: 'right' as 'right',
     },
@@ -232,9 +235,9 @@ const Home = () => {
         "Emptying trash bins.",
         "Replenishing toilet paper and hand soap (if provided).",
       ],
-      imageSrc: "https://www.emop.co.uk/img/bathroom.png",
+      mainImageUrl: card4,
       imageAlt: "Cleaned bathroom",
-      iconSrc: "https://www.emop.co.uk/img/bathroom-icon.svg",
+      smallIconUrl: '',
       initialItemsToShow: 2,
       imagePosition: 'left' as 'left',
     },
@@ -249,22 +252,12 @@ const Home = () => {
         "Wiping down accessible surfaces.",
         "Cleaning glass partitions and windows.",
       ],
-      imageSrc: "https://www.emop.co.uk/img/office.png",
+      mainImageUrl: card5,
       imageAlt: "Cleaned office space",
-      iconSrc: "https://www.emop.co.uk/img/office-icon.svg", // Assuming an office icon exists, or use a Heroicon
+      smallIconUrl: '',
       initialItemsToShow: 2,
       imagePosition: 'right' as 'right',
     },
-  ];
-
-  const office = [
-    "Dusting of desks and computer equipment",
-    "Vacuuming carpets, mopping the floor, and removing dirt from skirting boards",
-    "Wiping mirrors and glass fixtures",
-    "Washing and sanitising the toilet and shower",
-    "Toilet and shower washing and sanitizing",
-    "Kitchen sanitation: washing all used crockery and equipment, as well as wiping and sanitising all the external surfaces",
-    "Taking out rubbish and replacing with new bin liners",
   ];
 
   const dummyProfessionals = [
@@ -332,39 +325,13 @@ const Home = () => {
     },
   ];
 
-  const allFeatures = [
-    "If you require, you can get our team to change your bed linen and perform additional tasks to ensure a clean home.",
-    "Our cleaners are fully vetted and insured, ensuring peace of mind for every booking.",
-    "We use eco-friendly cleaning products upon request to protect your home and the environment.",
-    "Flexible booking options are available, allowing you to schedule cleaning at your convenience.",
-    "Dedicated customer support is always ready to assist you with any queries or concerns.",
-    "We guarantee satisfaction with every clean; if you're not happy, we'll re-clean!",
-  ];
-
-  const initialFeaturesToShow = 1;
-  const displayedFeatures = showAllFeatures
-    ? allFeatures
-    : allFeatures.slice(0, initialFeaturesToShow);
-
-  const toggleFeaturesVisibility = () => {
-    setShowAllFeatures(!showAllFeatures);
-  };
-
-  const [showAll, setShowAll] = useState<boolean>(false);
-
-
-
-  const handleOneOffQuote = (code: string) => {
-    console.log(`One-off Cleaning Quote for: ${code}`);
-  };
-
   const toggleFAQ = (id: string) => {
     setOpenItemId(openItemId === id ? null : id);
   };
 
   const serviceData = [
     {
-      imageSrc: "https://www.emop.co.uk/img/domestic-service.jpg",
+      imageSrc: slide1,
       altText: "Domestic Cleaning",
       title: "Deep cleaning",
       price: "from £19/h",
@@ -372,7 +339,7 @@ const Home = () => {
         "For an extra deep clean of your home, eMop provides comprehensive deep cleaning in England and the surrounding areas. While a one-off service agreement will significantly reduce the clutter in your home, you may also want to use our regular services if you have a busy lifestyle.",
     },
     {
-      imageSrc: "https://www.emop.co.uk/img/upholstery.png",
+      imageSrc: slide2,
       altText: "Upholstery cleaning",
       title: "Upholstery cleaning",
       price: "from £19/h",
@@ -380,7 +347,7 @@ const Home = () => {
         "The upholstery service from eMop eliminates visible surface dirt, such as dust and grime. Our team in England will use specialised stain-removal chemicals to get rid of any discolouring on your furniture. The solution offered by eMop includes the elimination of offensive odours, which can be a major issue if you have pets in your house.",
     },
     {
-      imageSrc: "https://www.emop.co.uk/img/regular.png",
+      imageSrc: slide3,
       altText: "Regular cleaning",
       title: "Regular cleaning",
       price: "from £19/h",
@@ -388,7 +355,7 @@ const Home = () => {
         "In addition to providing you with thorough one off cleaning for your home at a time and day that suits you, our regular house cleaning service sends a professional to your home each week to give you peace of mind and guarantee that your preferred routine is clearly established.",
     },
     {
-      imageSrc: "https://www.emop.co.uk/img/benefits.jpg",
+      imageSrc: slide4,
       altText: "Deep cleaning",
       title: "Deep cleaning",
       price: "from £19/h",
@@ -396,7 +363,7 @@ const Home = () => {
         " For an extra-through clean of your home, eMop provides complete deep cleaning in England and its surroundings. When you enter into a service agreement, our team can significantly reduce your workload.",
     },
     {
-      imageSrc: "https://www.emop.co.uk/img/carpet.png",
+      imageSrc: slide5,
       altText: "Domestic Cleaning",
       title: "Deep cleaning",
       price: "from £19/h",
@@ -404,7 +371,7 @@ const Home = () => {
         "For an extra deep clean of your home, eMop provides comprehensive deep cleaning in England and the surrounding areas. While a one-off service agreement will significantly reduce the clutter in your home, you may also want to use our regular services if you have a busy lifestyle.",
     },
     {
-      imageSrc: "https://www.emop.co.uk/img/ofice.png",
+      imageSrc: slide2,
       altText: "Office cleaning",
       title: "Office cleaning",
       price: "from £19/h",
@@ -412,7 +379,7 @@ const Home = () => {
         "You may rely on our company to keep your London office spotless. The frequency and duration of our visits are totally up to you, even if you need us multiple days a week.",
     },
     {
-      imageSrc: "https://www.emop.co.uk/img/tenancy.png",
+      imageSrc: slide1,
       altText: "End of tenancy cleaning service",
       title: "End of tenancy cleaning service",
       price: "from £19/h",
@@ -494,7 +461,7 @@ const Home = () => {
         <div className="relative z-10 text-left w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8">
           <div className="w-full lg:w-1/2">
             {/* Heading */}
-            <h1 className="text-4xl mt-4 sm:text-5xl lg:text-6xl nunito-sans-title text-brand-text leading-tight mb-8 drop-shadow-sm">
+            <h1 className="text-4xl mt-4 sm:text-5xl lg:text-6xl nunito-sans-title text-brand-primary leading-tight mb-8 drop-shadow-sm">
               Best Cleaning
               <br />
               Services In England
@@ -537,7 +504,7 @@ const Home = () => {
 
           <div className="w-full lg:w-1/2 flex justify-center">
             <img
-              src="https://www.emop.co.uk/img/cleaning-employer.png"
+              src={home}
               alt=""
               className="max-w-full h-auto object-contain"
             />
@@ -556,7 +523,7 @@ const Home = () => {
             <h2 className="text-3xl sm:text-4xl font-extrabold nunito-sans-heading text-brand-primary mb-4">
               Trusted service
             </h2>
-            <p className="text-xl sm:text-2xl text-gray-700 flex items-center">
+            <p className="text-sm md:text-xl text-gray-700 flex items-center">
               See our{" "}
               <span className="font-bold text-brand-primary ml-2">1,268</span>{" "}
               reviews on
@@ -619,18 +586,17 @@ const Home = () => {
       </h1>
 
       <section className="py-10">
-      {/* Map over your data to render ServiceCard components */}
+      
       {cleaningServicesData.map((cardData, index) => (
         <ServiceCard
-          key={index} // Using index as key is okay if the list is static and not reordered
+          key={index}
           title={cardData.title}
           description={cardData.description}
           services={cardData.services}
-          imageSrc={cardData.imageSrc}
+          mainImageUrl={cardData.mainImageUrl}
           imageAlt={cardData.imageAlt}
           initialItemsToShow={cardData.initialItemsToShow}
-          iconSrc={cardData.iconSrc}
-          IconComponent={cardData.IconComponent}
+          SmallIconComponent={cardData.SmallIconComponent}
           imagePosition={cardData.imagePosition}
         />
       ))}
@@ -662,80 +628,9 @@ const Home = () => {
 </section>
 
       {/* Why choose?? */}
-      <section className="max-w-7xl mx-auto flex flex-col items-center justify-center">
-        {/* cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-[5px] px-3">
-          {/* each card */}
-          <div className="border-[3px] border-gray-300 flex flex-col items-center justify-center py-4 rounded-lg gap-[4px]">
-            <div className="">
-              <img
-                src="https://www.emop.co.uk/static/images/best1.svg"
-                className="w-full"
-                alt="image"
-              />
-            </div>
-
-            <h1 className="text-brand-primary nunito-sans-heading text-[24px]">
-              24/7 Availability
-            </h1>
-            <p className="text-center nunito-sans-text">
-              Pick a date and time that suits you. You can even book for same
-              day cleaning, 4 hours in advance
-            </p>
-          </div>
-
-          <div className="border-[3px] border-gray-300 flex flex-col items-center justify-center py-4 rounded-lg gap-[4px]">
-            <div className="">
-              <img
-                src="https://www.emop.co.uk/static/images/best3.svg"
-                className="w-full"
-                alt="image"
-              />
-            </div>
-
-            <h1 className="text-brand-primary nunito-sans-heading text-[24px]">
-            Bespoke Service
-            </h1>
-            <p className="text-center nunito-sans-text">
-            You can choose which rooms you wish us to clean and book only the services you need.
-            </p>
-          </div>
-
-          <div className="border-[3px] border-gray-300 flex flex-col items-center justify-center py-4 rounded-lg gap-[4px]">
-            <div className="">
-              <img
-                src="https://www.emop.co.uk/static/images/best2.svg"
-                className="w-full"
-                alt="image"
-              />
-            </div>
-
-            <h1 className="text-brand-primary nunito-sans-heading text-[24px]">
-            Pay as You Go
-            </h1>
-            <p className="text-center nunito-sans-text">
-            We charge clients only for the actual time a cleaner spends at your property.
-            </p>
-          </div>
-
-          <div className="border-[3px] border-gray-300 flex flex-col items-center justify-center py-4 rounded-lg gap-[4px]">
-            <div className="">
-              <img
-                src="https://www.emop.co.uk/static/images/last_minute.svg"
-                className="w-full"
-                alt="image"
-              />
-            </div>
-
-            <h1 className="text-brand-primary nunito-sans-heading text-[24px]">
-            Last minute cleaning
-            </h1>
-            <p className="text-center nunito-sans-text">
-            Need urgent cleaning? You can make a booking 4 hours in advance.
-            </p>
-          </div>
-        </div>
-      </section>
+      <div className="mt-[3rem]">
+        <WhyChooseSection/>
+      </div>
 
       {/* additional */}
       <section
@@ -803,75 +698,20 @@ const Home = () => {
               ))}
             </div>
           </div>
-
-          {/* More content to show page  */}
-
-          <div className="max-w-7xl mx-auto bg-white rounded-lg overflow-hidden md:flex mb-6">
-            {/* Left Section: Text Content */}
-            <div className="md:w-1/2 overflow-hidden bg-gray-100 flex items-center justify-center">
-              <img
-                src="https://www.emop.co.uk/img/professional-first.jpg"
-                alt="Cleaned bedroom"
-                className="w-full h-full object-cover object-center rounded-lg md:rounded-l-none"
-                onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-                  const target = e.target as HTMLImageElement;
-                  target.src =
-                    "https://placehold.co/800x600/e0e0e0/555555?text=Image+Not+Found";
-                  target.alt = "Fallback image: Cleaned room image not found.";
-                }}
-              />
-            </div>
-
-            {/* Right Section: Image */}
-            <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-              <p className="text-gray-700 text-base sm:text-lg mb-6 nunito-sans-text leading-relaxed">
-                eMop is a professional cleaning company that operates in England
-                and other UK cities. We offer a wide range of cleaning services
-                London, including regular, one-off deep clean, and
-                end-of-tenancy solutions. eMop is convenient because it provides
-                a flexible house cleaning service tailored to each customer's
-                needs. Our professional cleaners are hand-picked and tested,
-                then thoroughly trained to offer the best possible service. Our
-                domestic cleaners are familiar with treating all types of
-                surfaces, including delicate fabrics. Our professionals will
-                meticulously remove any rubbish, dust, grime, or stains that may
-                be present.
-              </p>
-            </div>
-          </div>
-
-          <div className="max-w-7xl mx-auto bg-white rounded-lg overflow-hidden md:flex mb-6">
-            {/* Left Section: Text Content */}
-            <div className="md:w-1/2 overflow-hidden bg-gray-100 flex items-center justify-center">
-              <img
-                src="https://www.emop.co.uk/static/redesign/images/services/regular/5.jpg"
-                alt="Cleaned bedroom"
-                className="w-full h-full object-cover object-center rounded-lg md:rounded-l-none"
-                onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-                  const target = e.target as HTMLImageElement;
-                  target.src =
-                    "https://placehold.co/800x600/e0e0e0/555555?text=Image+Not+Found";
-                  target.alt = "Fallback image: Cleaned room image not found.";
-                }}
-              />
-            </div>
-
-            {/* Right Section: Image */}
-            <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-              <p className="text-gray-700 text-base nunito-sans-text sm:text-lg mb-6 leading-relaxed">
-                Working people need to take care of multiple tasks every single
-                day. As a result, cleaning becomes a lower priority, and this
-                can lead to a dirty and/or disorganised home. To avoid that,
-                hire someone to do the hard work. This will have a positive
-                effect on your mental and physical well-being. eMop provides
-                excellent cleaning services, which will make you wonder why you
-                didn't do it sooner. It is quick, convenient, and affordable.
-                You will be surprised by how much a spotless living space can
-                improve the quality of your life.
-              </p>
-            </div>
-          </div>
         </div>
+      </section>
+
+      <section className="py-16 bg-gray-50">
+        {/* <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold nunito-sans-heading text-brand-primary text-center mb-12">
+        Expert Cleaning Services in London
+        </h2> */}
+        {regularCleaningBlocks.map((block, index) => (
+          <ContentBlock
+            key={index}
+            mainTitle={index === 0 ? "Expert Cleaning Services in London" : undefined} 
+            {...block}
+          />
+        ))}
       </section>
 
       {/* FAQ */}

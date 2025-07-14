@@ -37,16 +37,13 @@ const Navbar = () => {
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [isMobileMenuOpen, isServicesDropdownOpen, isPricingDropdownOpen]); // Depend on both states
+  }, [isMobileMenuOpen, isServicesDropdownOpen, isPricingDropdownOpen]);
 
-  // Close services dropdown when clicking outside of it on desktop
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      // Only apply this on desktop where dropdown is hover-based
       if (window.innerWidth >= 768 && dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsServicesDropdownOpen(false);
-        setIsPricingDropdownOpen(false); // Ensure state is false if clicked outside
-         // Ensure state is false if clicked outside
+        setIsPricingDropdownOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -66,19 +63,15 @@ const Navbar = () => {
   };
 
   const handleServicesDropdownClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    // Only toggle on click for mobile screens
     if (window.innerWidth < 768) {
-      e.preventDefault(); // Prevent default link behavior on mobile
+      e.preventDefault();
       setIsServicesDropdownOpen(!isServicesDropdownOpen);
     }
-    // On desktop, clicks on this link don't directly open/close the dropdown state,
-    // as it's primarily hover-driven.
   };
 
   const handlePricingDropdownClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    // Only toggle on click for mobile screens
     if (window.innerWidth < 768) {
-      e.preventDefault(); // Prevent default link behavior on mobile
+      e.preventDefault();
       setIsPricingDropdownOpen(!isPricingDropdownOpen);
     }
   };
@@ -121,7 +114,7 @@ const Navbar = () => {
         {/* Hamburger/Close Button for Mobile */}
         <button
           onClick={toggleMobileMenu}
-          className="md:hidden text-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-primary rounded-md p-2 transition-transform duration-300 ease-in-out z-50"
+          className="block md:block lg:hidden text-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-primary rounded-md p-2 transition-transform duration-300 ease-in-out z-50"
           aria-label="Toggle navigation"
         >
           {isMobileMenuOpen ? (
@@ -132,15 +125,15 @@ const Navbar = () => {
         </button>
 
         {/* Desktop Navigation Links */}
-        <ul className="hidden md:flex items-center space-x-6 lg:space-x-8">
+        <ul className="hidden md:hidden lg:flex items-center space-x-6 lg:space-x-8">
           <li><a href="#" className="text-gray-700 text-[16px] font-semibold hover:text-brand-primary transition duration-300 ease-in-out">Locations</a></li>
 
           {/* Our Services Dropdown for Desktop */}
           <li
             className="relative group"
-            onMouseEnter={() => setIsServicesDropdownOpen(true)} // Always set state on hover for desktop
-            onMouseLeave={() => setIsServicesDropdownOpen(false)} // Always set state on leave for desktop
-            ref={dropdownRef} // Attach ref for click outside
+            onMouseEnter={() => setIsServicesDropdownOpen(true)}
+            onMouseLeave={() => setIsServicesDropdownOpen(false)}
+            ref={dropdownRef} 
           >
             <a
               href="#"
@@ -168,9 +161,9 @@ const Navbar = () => {
           {/* Our Pricing Dropdown for Desktop */}
           <li
             className="relative group"
-            onMouseEnter={() => setIsPricingDropdownOpen(true)} // Always set state on hover for desktop
-            onMouseLeave={() => setIsPricingDropdownOpen(false)} // Always set state on leave for desktop
-            ref={dropdownRef} // Attach ref for click outside
+            onMouseEnter={() => setIsPricingDropdownOpen(true)}
+            onMouseLeave={() => setIsPricingDropdownOpen(false)} 
+            ref={dropdownRef} 
           >
             <a
               href="#"
@@ -183,7 +176,6 @@ const Navbar = () => {
             </a>
             {/* Dropdown Menu Content (Desktop) */}
             <div
-              // Removed isServicesDropdownOpen from desktop visibility logic, relying on group-hover and onMouseEnter/Leave
               className={`absolute left-0 mt-4 bg-white shadow-lg rounded-lg p-4 min-w-[400px] grid grid-cols-2 gap-x-6 gap-y-2
                 transition-all duration-300 ease-in-out opacity-0 invisible translate-y-2
                 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0`}
@@ -210,7 +202,7 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 bg-white transform transition-transform duration-300 ease-in-out md:hidden z-40
+        className={`fixed inset-0 bg-white transform transition-transform duration-300 ease-in-out lg:hidden z-40
           ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
         <ul className="flex flex-col items-start pt-20 px-6 space-y-4 h-full overflow-y-auto"> {/* Added h-full and overflow-y-auto for full-screen scroll */}
@@ -239,7 +231,6 @@ const Navbar = () => {
               </ul>
             </div>
           </li>
-
           <li
             className="relative group"
             onMouseEnter={() => setIsPricingDropdownOpen(true)} // Always set state on hover for desktop
@@ -256,7 +247,7 @@ const Navbar = () => {
             </a>
             {/* Dropdown Menu Content (Desktop) */}
             <div
-              // Removed isServicesDropdownOpen from desktop visibility logic, relying on group-hover and onMouseEnter/Leave
+              
               className={`absolute left-0 mt-4 bg-white shadow-lg rounded-lg p-4 min-w-[400px] grid grid-cols-2 gap-x-6 gap-y-2
                 transition-all duration-300 ease-in-out opacity-0 invisible translate-y-2
                 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0`}

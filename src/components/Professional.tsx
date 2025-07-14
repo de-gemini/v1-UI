@@ -129,7 +129,7 @@ export const ProfessionalsCarousel: React.FC<ProfessionalsCarouselProps> = ({ pr
           modules={[Pagination, Navigation, A11y]}
           spaceBetween={24}
           slidesPerView={1.1}
-          centeredSlides={false} // Ensure this is false so slides start from the left
+          centeredSlides={false}
           navigation={{
             prevEl: prevRef.current,
             nextEl: nextRef.current,
@@ -137,10 +137,8 @@ export const ProfessionalsCarousel: React.FC<ProfessionalsCarouselProps> = ({ pr
           pagination={{ clickable: true }}
           loop={false}
           className="mySwiper !pb-12"
-          // Use slidesOffsetBefore and slidesOffsetAfter to control starting/ending space
-          // These values should typically match your desired side padding.
-          slidesOffsetBefore={16} // Equivalent to px-4 (16px) for smallest screens
-          slidesOffsetAfter={16}  // Equivalent to px-4 (16px) for smallest screens
+          slidesOffsetBefore={16}
+          slidesOffsetAfter={16} 
           onBeforeInit={(swiper) => {
             if (swiper.params.navigation && typeof swiper.params.navigation !== 'boolean') {
               const { navigation } = swiper.params;
@@ -152,25 +150,25 @@ export const ProfessionalsCarousel: React.FC<ProfessionalsCarouselProps> = ({ pr
             640: { // sm
               slidesPerView: 2.2,
               spaceBetween: 24,
-              slidesOffsetBefore: 24, // Equivalent to sm:px-6 (24px)
+              slidesOffsetBefore: 24,
               slidesOffsetAfter: 24,
             },
             768: { // md
               slidesPerView: 3.2,
               spaceBetween: 24,
-              slidesOffsetBefore: 32, // Equivalent to lg:px-8 (32px)
+              slidesOffsetBefore: 32,
               slidesOffsetAfter: 32,
             },
-            1024: { // lg
+            1024: {
               slidesPerView: 3.8,
               spaceBetween: 32,
-              slidesOffsetBefore: 32, // Equivalent to lg:px-8 (32px)
+              slidesOffsetBefore: 32,
               slidesOffsetAfter: 32,
             },
-            1280: { // xl
+            1280: {
               slidesPerView: 4.2,
               spaceBetween: 32,
-              slidesOffsetBefore: 32, // Maintain consistent offset for xl
+              slidesOffsetBefore: 32, 
               slidesOffsetAfter: 32,
             },
           }}
