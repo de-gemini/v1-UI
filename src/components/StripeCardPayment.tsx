@@ -4,7 +4,8 @@ import { Elements, CardElement, useStripe, useElements } from '@stripe/react-str
 import { useNavigate } from 'react-router-dom';
 
 // Replace with your Stripe publishable key
-const stripePromise = loadStripe('pk_test_51RTqcG2M2NssQa7jZWQnswH0Uj42bkyqpMU9dRvPc0x069k1ggQox10Qp0xQPmAhk8sb7xUFlpcivc9k9dMJGpbz00n2hfHr1n');
+// const stripePromise = loadStripe('pk_test_51RTqcG2M2NssQa7jZWQnswH0Uj42bkyqpMU9dRvPc0x069k1ggQox10Qp0xQPmAhk8sb7xUFlpcivc9k9dMJGpbz00n2hfHr1n');
+const stripePromise = loadStripe('pk_live_51RTqbk2M4WBVH3k2qWtWUBjBoCCDUffofAXePbga1zGVbEqEv7vPG1kXsDxuu8Axz74uWQPtvcGxmqERMYo1qMfw008X7RW3AT');
 
 interface StripeCardPaymentProps {
   clientSecret: string;
