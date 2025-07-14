@@ -82,23 +82,20 @@ export const Footer: React.FC = () => {
       </div>
 
         {/* Column 4 (combined from screenshot): Logo, App Downloads, Social Media */}
-        <div className="md:col-span-2 lg:col-span-2 flex flex-col items-center md:items-start lg:items-end text-center md:text-left lg:text-right">
+        <div className="md:col-span-2 lg:col-span-2 flex flex-col items-start md:items-start lg:items-end text-center md:text-left lg:text-right">
           {/* Logo */}
-          <h1 className='text-brand-primary text-[20px] md:text-[25px] lg:text-[30px]'>
+          <h1 className='text-brand-primary hidden md:hidden lg:block text-[20px] md:text-[25px] lg:text-[30px]'>
           De Gemini
           </h1>
           
           <p className="font-bold text-lg mb-4 text-brand-primary">CLEANING AVAILABLE 24/7</p>
-
-          
-
           {/* Social Media */}
           <h3 className="font-bold text-lg mb-4 text-brand-primary">SOCIAL MEDIA</h3>
           <div className="flex space-x-4">
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <Instagram className="h-7 w-7 text-brand-peimary hover:text-white transition duration-300" />
+            <a href="https://www.instagram.com/de_gemini_sevices?igsh=dGFqbmFrZTMxcGI1" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <Instagram className="h-7 w-7 text-brand-primary hover:text-white transition duration-300" />
             </a>
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <a href="https://www.facebook.com/share/1Axqo294Wx/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
               <Facebook className="h-7 w-7 text-brand-primary hover:text-white transition duration-300" />
             </a>
           </div>
