@@ -60,9 +60,9 @@ export default function Blog() {
     id: "featured-1",
     date: "14 OCTOBER",
     category: "EMOP STORIES",
-    title: "An Update on eMop's Growth Throughout the UK",
+    title: "An Update on De-Gemini's Growth Throughout the UK",
     excerpt:
-      "We are excited to announce eMop's latest achievement - our growth throughout the UK. We have not just been pleasing clients in England - where we began - but in recent years, throughout the UK.",
+      "We are excited to announce De-Gemini's latest achievement - our growth throughout the UK. We have not just been pleasing clients in England - where we began - but in recent years, throughout the UK.",
     imageUrl:
       "https://www.emop.co.uk/blog/wp-content/uploads/2023/10/pexels-karolina-grabowska-4239031.jpg", // Example featured image
     readMoreLink: "#",
@@ -73,9 +73,9 @@ export default function Blog() {
       id: "blog-1",
       date: "14 OCTOBER",
       category: "EMOP STORIES",
-      title: "An Update on eMop's Growth Throughout the UK",
+      title: "An Update on De-Gemini's Growth Throughout the UK",
       excerpt:
-        "We are excited to announce eMop's latest achievement - our growth throughout the UK. We have not just been pleasing clients in England - where we began - but in recent years, throughout the UK.",
+        "We are excited to announce De-Gemini's latest achievement - our growth throughout the UK. We have not just been pleasing clients in England - where we began - but in recent years, throughout the UK.",
       imageUrl:
         "https://www.emop.co.uk/blog/wp-content/uploads/2023/10/pexels-karolina-grabowska-4239031.jpg", // Small card image
       readMoreLink: "#",
@@ -84,7 +84,7 @@ export default function Blog() {
       id: "blog-2",
       date: "21 APRIL",
       category: "EMOP STORIES",
-      title: "Reclean Is Guaranteed With eMop",
+      title: "Reclean Is Guaranteed With De-Gemini",
       excerpt:
         "Although we are confident in the quality of our cleaning services, we understand that there may be instances where things don't go as planned.",
       imageUrl:
@@ -188,7 +188,7 @@ export default function Blog() {
         </div>
       </section>
 
-      {/* eMop Blog Welcome Section */}
+      {/* De-Gemini Blog Welcome Section */}
       <section className="bg-white py-12 px-4 sm:px-6 lg:px-8 border-b border-gray-200">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between">
           <div className="text-center md:text-left mb-6 md:mb-0">
@@ -198,7 +198,7 @@ export default function Blog() {
           </h1>
         </a>
             <p className="text-gray-600 text-lg">
-            Welcome to the blog from eMop - the best cleaning company in England
+            Welcome to the blog from De-Gemini - the best cleaning company in England
             </p>
           </div>
           {/* Optional: Add image/element from screenshot here if desired */}

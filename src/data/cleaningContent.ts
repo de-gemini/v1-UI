@@ -68,7 +68,7 @@ export const regularCleaningBlocks = [
     imagePosition: 'right' as 'right', // Image on the right of text on desktop
     title: "Reliable Experts in London", // Explicitly added based on screenshot
     content: [
-      "If you're looking for reliable house cleaning services in London, eMop is an excellent option. We offer our customers a wide range of house cleaning solutions, and we're always looking for new ways to improve them. That is why eMop is a reliable platform for hiring expert cleaners.",
+      "If you're looking for reliable house cleaning services in London, De-Gemini is an excellent option. We offer our customers a wide range of house cleaning solutions, and we're always looking for new ways to improve them. That is why De-Gemini is a reliable platform for hiring expert cleaners.",
       "If you require, you can get our team to change your bed linen and perform additional tasks to ensure a clean home.",
       // Assuming there are more hidden items for "3 more"
       "Our cleaners are fully vetted and insured for your peace of mind.",
@@ -84,6 +84,6 @@ export const regularCleaningBlocks = [
     imageAlt: "A Cleaning Service that Cares for Your Home - clean kitchen", // More descriptive alt text
     imagePosition: 'left' as 'left', // Image on the left of text on desktop
     title: "A Cleaning Service that Cares for Your Home", // Explicitly added based on screenshot
-    content: "Every house service is unique, which is why our employees are encouraged to take a personalised approach. Besides, different clients require different service packages, and fully satisfying your needs is our top priority. The ability to modify the standard set of tasks is a major benefit of using eMop’s professional cleaning services in London. When the plan is tailored to your needs, you are paying precisely for the package you need. However, there are certain things our professionals can’t do. For example, we don’t lift or move heavy objects, do ironing, or clean the back garden. If you want to discuss add-ons in detail, we are always happy to answer your questions about one off deep cleaning.",
+    content: "Every house service is unique, which is why our employees are encouraged to take a personalised approach. Besides, different clients require different service packages, and fully satisfying your needs is our top priority. The ability to modify the standard set of tasks is a major benefit of using De-Gemini’s professional cleaning services in London. When the plan is tailored to your needs, you are paying precisely for the package you need. However, there are certain things our professionals can’t do. For example, we don’t lift or move heavy objects, do ironing, or clean the back garden. If you want to discuss add-ons in detail, we are always happy to answer your questions about one off deep cleaning.",
     initialItemsToShow: 0, // It's a single paragraph, no 'see more' needed unless it's extremely long.
   };

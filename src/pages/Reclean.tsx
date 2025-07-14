@@ -50,7 +50,7 @@ export default function Reclean() {
       const faqData: FAQItemData[] = [
         {
           id: "packages",
-          question: "What is included in eMop cleaning service?",
+          question: "What is included in De-Gemini cleaning service?",
           answer:
             `You can review what is included in the cleaning here`,
         },
@@ -62,9 +62,9 @@ export default function Reclean() {
         },
         {
           id: "hire-per-week",
-          question: "What is eMop complaint procedure?",
+          question: "What is De-Gemini complaint procedure?",
           answer:
-            "Please read more about eMop complaints procedure here",
+            "Please read more about De-Gemini complaints procedure here",
         },
       ];
 

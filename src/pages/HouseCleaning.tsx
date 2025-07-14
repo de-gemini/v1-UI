@@ -52,9 +52,9 @@ export default function HouseCleaning() {
   ];
 
   const extraServices = [
-    "For an additional cost, eMop provides additional services. That may entail outdoor and deep cleaning service, carpet cleaning, window washing, fridge, microwave, ironing, bed making, kitchen, bathroom, bookcase, oven and grill cleaning.",
+    "For an additional cost, De-Gemini provides additional services. That may entail outdoor and deep cleaning service, carpet cleaning, window washing, fridge, microwave, ironing, bed making, kitchen, bathroom, bookcase, oven and grill cleaning.",
     "If you find that you require any of these services, be sure to research the cost of our house cleaning. Be aware that the minimum charge for the extra aid prices starts at £9 to £25 on an hourly rate.",
-    "If you're looking for a trustworthy cleaning service that's reasonably priced and also provides other solutions, eMop is the ideal option. We provide carpet cleaning, upholstery, and end of tenancy cleaning, for instance, at very affordable prices.",
+    "If you're looking for a trustworthy cleaning service that's reasonably priced and also provides other solutions, De-Gemini is the ideal option. We provide carpet cleaning, upholstery, and end of tenancy cleaning, for instance, at very affordable prices.",
     "Additionally, one of our many areas of expertise is window washing. Delivering exceptional service to every customer has always been the priority of our professional cleaners.",
   ];
 
@@ -277,7 +277,7 @@ export default function HouseCleaning() {
           </p>
 
           <p className="text-gray-700 text-base nunito-sans-text sm:text-lg mb-6">
-            House cleaning prices at eMop are the following:
+            House cleaning prices at De-Gemini are the following:
           </p>
 
           <ul className="text-gray-700 space-y-2 mb-6">
@@ -297,10 +297,10 @@ export default function HouseCleaning() {
           </ul>
 
           <p className="text-gray-700 text-base nunito-sans-text sm:text-lg mb-6">
-            Our cleaning prices at eMop are the best you will get in England and
+            Our cleaning prices at De-Gemini are the best you will get in England and
             around the UK. We take pride in offering cost-effective cleaning aid
             of the highest quality. For all cleaning services in England that are
-            provided to our cherished clients, eMop strives to offer the finest
+            provided to our cherished clients, De-Gemini strives to offer the finest
             price to quality ratio.
           </p>
 
@@ -319,7 +319,7 @@ export default function HouseCleaning() {
         {/*Left Section: Image */}
         <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
           <div className="flex items-center text-brand-secondary nunito-sans-heading mb-6">
-            <h2 className="text-xl sm:text-2xl font-bold">Why choose eMop?</h2>
+            <h2 className="text-xl sm:text-2xl font-bold">Why choose De-Gemini?</h2>
           </div>
 
           <ul className="text-gray-700 space-y-2 mb-6">

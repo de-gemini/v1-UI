@@ -32,13 +32,13 @@ export default function CarpetCleaning() {
   const whyChoose = [
     {
       title:
-        "Regardless of whether you require a one-time clean or regular cleaning services, eMop professional cleaners will go above and beyond your expectations.",
+        "Regardless of whether you require a one-time clean or regular cleaning services, De-Gemini professional cleaners will go above and beyond your expectations.",
       description:
-        "We've cleaned a lot of sofas over the years, and we don't consider any job to be too big or small. In all of our activities, at eMop, we place a high priority on quality, using only the best cleaning products and disinfection techniques.",
+        "We've cleaned a lot of sofas over the years, and we don't consider any job to be too big or small. In all of our activities, at De-Gemini, we place a high priority on quality, using only the best cleaning products and disinfection techniques.",
     },
     {
       title:
-        "Your house is safe with us since we are completely covered by insurance, including fidelity guarantee, public and products liability, and employer's responsibility. You don't need to be home to allow our staff in to clean because we are an insured company. If you are looking to get the best upholstery cleaning services, eMop is the agency to call.",
+        "Your house is safe with us since we are completely covered by insurance, including fidelity guarantee, public and products liability, and employer's responsibility. You don't need to be home to allow our staff in to clean because we are an insured company. If you are looking to get the best upholstery cleaning services, De-Gemini is the agency to call.",
       description: "-",
     },
     {
@@ -266,7 +266,7 @@ export default function CarpetCleaning() {
             <CostCard
               title="Upholstery cleaning"
               price="from £48"
-              text="A sofa cleaning service comprises maintaining and cleaning couches and sofas to get rid of stains, odours, and other impurities. The life of your furniture can be renewed and extended, and it frequently involves vacuuming, spot removal, and upholstery cleaning. Prices for sofa cleaning with eMop begin at £48/h in England."
+              text="A sofa cleaning service comprises maintaining and cleaning couches and sofas to get rid of stains, odours, and other impurities. The life of your furniture can be renewed and extended, and it frequently involves vacuuming, spot removal, and upholstery cleaning. Prices for sofa cleaning with De-Gemini begin at £48/h in England."
               inputPlaceholder="Enter your full post code here"
               buttonText="QUOTE ME"
               onQuoteMeClick={handlePostcodeApi}
@@ -469,7 +469,7 @@ export default function CarpetCleaning() {
         {/*Left Section: Image */}
         <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
           <div className="flex items-center text-brand-primary nunito-sans-heading mb-6">
-            <h2 className="text-xl sm:text-2xl font-bold">Why choose eMop?</h2>
+            <h2 className="text-xl sm:text-2xl font-bold">Why choose De-Gemini?</h2>
           </div>
 
           <ul className="text-gray-700 space-y-2 mb-6">

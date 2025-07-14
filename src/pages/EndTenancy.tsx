@@ -45,14 +45,14 @@ export default function EndTenancy() {
     "Second, the property's condition is quite important. In comparison to a property that needs a thorough deep cleaning to get it back to its original cleanliness, cleaning a well-maintained property may be easier and less expensive.",
     "The number of rooms and other areas that need to be cleaned, such as the number of bathrooms, kitchens, and living spaces, is another consideration. The price might also be affected by the existence of particular objects that need special maintenance, like professional carpet or upholstery cleaning.",
     "OA price rise may also result from the addition of extra services like oven cleaning, fridge, ironing, microwave, bed making, outdoor cleaning, laundry, kitchen, bookcase and window cleaning.",
-    "eMop may charge more if you need urgent or same-day cleaning services because we may need to add more workers or adjust their timetable.",
+    "De-Gemini may charge more if you need urgent or same-day cleaning services because we may need to add more workers or adjust their timetable.",
     "Last but not least, end of tenancy cleaning prices may differ depending on where the property is located. A professional cleaning service agency should be consulted to provide exact tenancy cleaning quotes based on these variables.",
   ];
 
     const extraServices = [
       {
         title: "Clear prices",
-        description: "Prices that are transparent and free of ambiguity enable customers to make well-informed choices. Ensuring there are no surprises or hidden fees improves client happiness and trust. Most cleaning companies may hide their service costs, but for eMop, you know the price of the professional cleaning services at the moment of booking.",
+        description: "Prices that are transparent and free of ambiguity enable customers to make well-informed choices. Ensuring there are no surprises or hidden fees improves client happiness and trust. Most cleaning companies may hide their service costs, but for De-Gemini, you know the price of the professional cleaning services at the moment of booking.",
       },
       {
         title: "Pay-as-you-go approach",
@@ -60,7 +60,7 @@ export default function EndTenancy() {
       },
       {
         title: "Insured and accredited cleaners",
-        description: "A thorough background check is carried out on our end of tenancy cleaners to examine their past records. This is to ensure the safety of our customers. In addition to that, our professional clean team are duly insured and licensed to carry out cleaning activities in the UK. They are trained and have become professional cleaners over time and can fit into any professional cleaning company. You can be sure to get professional end of tenancy cleaning services when you choose eMop. If you need office cleaning also, eMop cleaners can help also.",
+        description: "A thorough background check is carried out on our end of tenancy cleaners to examine their past records. This is to ensure the safety of our customers. In addition to that, our professional clean team are duly insured and licensed to carry out cleaning activities in the UK. They are trained and have become professional cleaners over time and can fit into any professional cleaning company. You can be sure to get professional end of tenancy cleaning services when you choose De-Gemini. If you need office cleaning also, De-Gemini cleaners can help also.",
       },
     ];
 
@@ -82,7 +82,7 @@ export default function EndTenancy() {
     const choosing = [
       {
         title: "Clear prices",
-        description: "Prices that are transparent and free of ambiguity enable customers to make well-informed choices. Ensuring there are no surprises or hidden fees improves client happiness and trust. Any other local cleaning company may hide their office cleaning costs, but with eMop, you know the price of the professional cleaning services at the moment of booking.",
+        description: "Prices that are transparent and free of ambiguity enable customers to make well-informed choices. Ensuring there are no surprises or hidden fees improves client happiness and trust. Any other local cleaning company may hide their office cleaning costs, but with De-Gemini, you know the price of the professional cleaning services at the moment of booking.",
       },
       {
         title: "Pay-as-you-go approach",
@@ -90,7 +90,7 @@ export default function EndTenancy() {
       },
       {
         title: "Insured and accredited cleaners",
-        description: "A thorough background check is carried out on our commercial cleaners to examine their past records. This is to ensure the safety of our customers. In addition to that, our professional clean team are duly insured and licensed to carry out cleaning activities in the UK. They are trained and have become professional cleaners over time and can fit into any professional cleaning company. You can be sure to get professional office cleaning services when you choose eMop. If you also need domestic cleaning services, eMop cleaners can help.",
+        description: "A thorough background check is carried out on our commercial cleaners to examine their past records. This is to ensure the safety of our customers. In addition to that, our professional clean team are duly insured and licensed to carry out cleaning activities in the UK. They are trained and have become professional cleaners over time and can fit into any professional cleaning company. You can be sure to get professional office cleaning services when you choose De-Gemini. If you also need domestic cleaning services, De-Gemini cleaners can help.",
       },
     ];
 
@@ -315,7 +315,7 @@ export default function EndTenancy() {
 
 
           <p className="text-gray-700 text-base nunito-sans-text sm:text-lg mb-6">
-          eMop's average office cleaning cost is £17/h. The frequencies are listed below:
+          De-Gemini's average office cleaning cost is £17/h. The frequencies are listed below:
           </p>
 
           <ul className="text-gray-700 space-y-2 mb-6">

@@ -87,13 +87,13 @@ export default function RegularCleaning() {
       id: "standard-cleaning-price",
       question: "Is there a guarantee of a refund if the job isn't done up to standard?",
       answer:
-        "According to eMop policy we do not provide any refunds. However, in case of any complaint, we will investigate the case, review the evidence and get back to you with a proposed solution in accordance with eMop policy. The full description of the complaint followed by picture evidence will be requested.",
+        "According to De-Gemini policy we do not provide any refunds. However, in case of any complaint, we will investigate the case, review the evidence and get back to you with a proposed solution in accordance with De-Gemini policy. The full description of the complaint followed by picture evidence will be requested.",
     },
     {
       id: "get-confirmation",
       question: "When will I get confirmation for my booking?",
       answer:
-        "As soon as you make a booking it becomes available to all cleaners in the eMop platform. The time of the booking confirmation depends on the availability of the cleaners in the area and the type of the cleaning you request. eMop team will contact you if there is no availability for the chosen time and offer you the closest available time of the cleaning.",
+        "As soon as you make a booking it becomes available to all cleaners in the De-Gemini platform. The time of the booking confirmation depends on the availability of the cleaners in the area and the type of the cleaning you request. De-Gemini team will contact you if there is no availability for the chosen time and offer you the closest available time of the cleaning.",
     },
   ];
   const allCleaningServices = [
@@ -113,7 +113,7 @@ export default function RegularCleaning() {
 
   const HouseCleaning = [
     "When customers enter your office, their first impressions matter. If the office space is clean, tidy and generally pleasant to be in, it sets your relationship with the customer on the right path. Our office cleaning service in England is here to help you present your business in the best",
-    "possible light. An uncluttered, spotless work environment sends an important message to your customers as well as your employees. eMop is dedicated to achieving and maintaining the highest standards when it comes to commercial cleaning services. Our crew of skilled office cleaners in England is composed of enthusiastic, committed experts. Our professional office cleaners have access to the training and education necessary to provide cleaning services that go above and beyond clients' expectations thanks to our staff training programs.",
+    "possible light. An uncluttered, spotless work environment sends an important message to your customers as well as your employees. De-Gemini is dedicated to achieving and maintaining the highest standards when it comes to commercial cleaning services. Our crew of skilled office cleaners in England is composed of enthusiastic, committed experts. Our professional office cleaners have access to the training and education necessary to provide cleaning services that go above and beyond clients' expectations thanks to our staff training programs.",
   ];
 
   const whyChoose = [
@@ -236,7 +236,7 @@ export default function RegularCleaning() {
       name: "Sumae",
       rating: 5,
       description:
-        "The flexibility of working with eMop has still allowed me to still keep to my lifestyle. I pickup jobs when needed and work around my schedule. I love the freedom this job gives me, and I always strive to deliver excellent results to my clients.",
+        "The flexibility of working with De-Gemini has still allowed me to still keep to my lifestyle. I pickup jobs when needed and work around my schedule. I love the freedom this job gives me, and I always strive to deliver excellent results to my clients.",
     },
     {
       id: 4,
@@ -245,7 +245,7 @@ export default function RegularCleaning() {
       name: "Veronika",
       rating: 4.9,
       description:
-        "Hello from Veronika, I am really glad to have found eMop, working with my colleagues have really improved my cleaning skills and made me a better professional. I enjoy the team spirit and continuous learning opportunities.",
+        "Hello from Veronika, I am really glad to have found De-Gemini, working with my colleagues have really improved my cleaning skills and made me a better professional. I enjoy the team spirit and continuous learning opportunities.",
     },
     {
       id: 5,
@@ -262,7 +262,7 @@ export default function RegularCleaning() {
       name: "Alberto",
       rating: 4.7,
       description:
-        "As an aspiring actor, eMop allows me to work flexibly and around my film schedules. The pay is really great and the training is excellent.",
+        "As an aspiring actor, De-Gemini allows me to work flexibly and around my film schedules. The pay is really great and the training is excellent.",
     },
     {
       id: 6,
@@ -443,7 +443,7 @@ export default function RegularCleaning() {
       {/* How it works */}
       <section className="w-full mb-4">
         <h1 className="font-bold text-start ml-2 text-brand-primary text-[20px]">
-          How eMop cleaning service works
+          How De-Gemini cleaning service works
         </h1>
 
         <HowItWorksSection />
@@ -566,7 +566,7 @@ export default function RegularCleaning() {
       </section>
 
       <h1 className="text-brand-primary mt-[4rem] ml-[1rem] md:ml-[2rem] lg:ml-[3rem] mb-[2rem] text-2xl font-extrabold">
-      eMop Regular Cleaning in England
+      De-Gemini Regular Cleaning in England
       </h1>
 
       <div className="max-w-7xl mx-auto mt-4 bg-white rounded-lg shadow-lg overflow-hidden md:flex">

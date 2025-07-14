@@ -93,13 +93,13 @@ export default function CarpetService() {
       id: "standard-cleaning-price",
       question: "Is there a guarantee of a refund if the job isn't done up to standard?",
       answer:
-        "According to eMop policy we do not provide any refunds. However, in case of any complaint, we will investigate the case, review the evidence and get back to you with a proposed solution in accordance with eMop policy. The full description of the complaint followed by picture evidence will be requested.",
+        "According to De-Gemini policy we do not provide any refunds. However, in case of any complaint, we will investigate the case, review the evidence and get back to you with a proposed solution in accordance with De-Gemini policy. The full description of the complaint followed by picture evidence will be requested.",
     },
     {
       id: "get-confirmation",
       question: "When will I get confirmation for my booking?",
       answer:
-        "As soon as you make a booking it becomes available to all cleaners in the eMop platform. The time of the booking confirmation depends on the availability of the cleaners in the area and the type of the cleaning you request. eMop team will contact you if there is no availability for the chosen time and offer you the closest available time of the cleaning.",
+        "As soon as you make a booking it becomes available to all cleaners in the De-Gemini platform. The time of the booking confirmation depends on the availability of the cleaners in the area and the type of the cleaning you request. De-Gemini team will contact you if there is no availability for the chosen time and offer you the closest available time of the cleaning.",
     },
   ];
   
@@ -157,7 +157,7 @@ export default function CarpetService() {
       name: "Sumae",
       rating: 5,
       description:
-        "The flexibility of working with eMop has still allowed me to still keep to my lifestyle. I pickup jobs when needed and work around my schedule. I love the freedom this job gives me, and I always strive to deliver excellent results to my clients.",
+        "The flexibility of working with De-Gemini has still allowed me to still keep to my lifestyle. I pickup jobs when needed and work around my schedule. I love the freedom this job gives me, and I always strive to deliver excellent results to my clients.",
     },
     {
       id: 4,
@@ -166,7 +166,7 @@ export default function CarpetService() {
       name: "Veronika",
       rating: 4.9,
       description:
-        "Hello from Veronika, I am really glad to have found eMop, working with my colleagues have really improved my cleaning skills and made me a better professional. I enjoy the team spirit and continuous learning opportunities.",
+        "Hello from Veronika, I am really glad to have found De-Gemini, working with my colleagues have really improved my cleaning skills and made me a better professional. I enjoy the team spirit and continuous learning opportunities.",
     },
     {
       id: 5,
@@ -183,7 +183,7 @@ export default function CarpetService() {
       name: "Alberto",
       rating: 4.7,
       description:
-        "As an aspiring actor, eMop allows me to work flexibly and around my film schedules. The pay is really great and the training is excellent.",
+        "As an aspiring actor, De-Gemini allows me to work flexibly and around my film schedules. The pay is really great and the training is excellent.",
     },
     {
       id: 6,
@@ -375,7 +375,7 @@ export default function CarpetService() {
       {/* How it works */}
       <section className="w-full mb-4">
         <h1 className="font-bold text-start ml-2 text-brand-primary text-[20px]">
-          How eMop cleaning service works
+          How De-Gemini cleaning service works
         </h1>
 
         <HowItWorksSection />
@@ -499,12 +499,12 @@ export default function CarpetService() {
 
       <section className="py-16 bg-gray-50">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold nunito-sans-heading text-brand-primary text-center mb-12">
-          What is included in eMop cleaning?
+          What is included in De-Gemini cleaning?
         </h2>
         {regularCleaningBlocks.map((block, index) => (
           <ContentBlock
             key={index}
-            mainTitle={index === 0 ? "eMop Regular Cleaning in England" : undefined} 
+            mainTitle={index === 0 ? "De-Gemini Regular Cleaning in England" : undefined} 
             {...block}
           />
         ))}

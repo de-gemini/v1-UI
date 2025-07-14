@@ -37,7 +37,7 @@ export default function CarpetCleaning() {
   ];
 
   const HouseCleaning = [
-    "For eMop, the average professional carpet cleaning cost may start from £48 per hour. However, between £60 to £160 is the typical price range in the UK for booking a carpet cleaner. In addition, we describe the carpet cleaning prices in the UK's minimum, maximum, and median ranges.",
+    "For De-Gemini, the average professional carpet cleaning cost may start from £48 per hour. However, between £60 to £160 is the typical price range in the UK for booking a carpet cleaner. In addition, we describe the carpet cleaning prices in the UK's minimum, maximum, and median ranges.",
     "The size of the room, the state of the carpet, and the location all affect the typical carpet cleaning cost in the UK. Basic services cost between £30 and £50 for each room. It could cost more to use specialised cleaning methods like steam cleaning or spot treatment.",
     "To obtain the best offers in a highly competitive industry, comparing quotations from different providers is crucial. Prices can differ between regions.",
   ];
@@ -45,7 +45,7 @@ export default function CarpetCleaning() {
   const whyChoose = [
     {
         title: "Clear prices",
-        description: "make well-informed choices. Ensuring there are no surprises or hidden fees improves client happiness and trust. Any other local cleaning company may hide their carpet cleaning prices, but with eMop, you know the price of the professional carpet cleaning services at the moment of booking.",
+        description: "make well-informed choices. Ensuring there are no surprises or hidden fees improves client happiness and trust. Any other local cleaning company may hide their carpet cleaning prices, but with De-Gemini, you know the price of the professional carpet cleaning services at the moment of booking.",
       },
       {
         title: "Insured and accredited cleaners",
@@ -53,7 +53,7 @@ export default function CarpetCleaning() {
       },
       {
         title: "-",
-        description: "They are trained and have become professional carpet cleaners over time and can fit into any professional cleaning company. You can be sure to get professional carpet cleaning services when you choose eMop. If you also need end of tenancy cleaning services, eMop cleaners can help too.",
+        description: "They are trained and have become professional carpet cleaners over time and can fit into any professional cleaning company. You can be sure to get professional carpet cleaning services when you choose De-Gemini. If you also need end of tenancy cleaning services, De-Gemini cleaners can help too.",
       },
   ];
 

@@ -29,7 +29,7 @@ export default function Help() {
         },
         {
           id: 'emopers-faq',
-          imageSrc: 'https://www.emop.co.uk/help/wp-content/themes/emop_faq/static/images/general/2_cleaners.svg', // Placeholder for eMopers illustration
+          imageSrc: 'https://www.emop.co.uk/help/wp-content/themes/emop_faq/static/images/general/2_cleaners.svg', // Placeholder for De-Geminiers illustration
           altText: 'Illustration of Degemini',
           title: 'FAQ for Degemini',
           description: "You're a cleaner and want to be sure that you're following the procedure",

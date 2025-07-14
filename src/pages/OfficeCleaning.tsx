@@ -93,7 +93,7 @@ export default function OfficeCleaning() {
     {
       title: "Clear prices",
       description:
-        "Prices that are transparent and free of ambiguity enable customers to make well-informed choices. Ensuring there are no surprises or hidden fees improves client happiness and trust. Any other local cleaning company may hide their office cleaning costs, but with eMop, you know the price of the professional cleaning services at the moment of booking.",
+        "Prices that are transparent and free of ambiguity enable customers to make well-informed choices. Ensuring there are no surprises or hidden fees improves client happiness and trust. Any other local cleaning company may hide their office cleaning costs, but with De-Gemini, you know the price of the professional cleaning services at the moment of booking.",
     },
     {
       title: "Pay-as-you-go approach",
@@ -103,7 +103,7 @@ export default function OfficeCleaning() {
     {
       title: "Insured and accredited cleaners",
       description:
-        "A thorough background check is carried out on our commercial cleaners to examine their past records. This is to ensure the safety of our customers. In addition to that, our professional clean team are duly insured and licensed to carry out cleaning activities in the UK. They are trained and have become professional cleaners over time and can fit into any professional cleaning company. You can be sure to get professional office cleaning services when you choose eMop. If you also need domestic cleaning services, eMop cleaners can help.",
+        "A thorough background check is carried out on our commercial cleaners to examine their past records. This is to ensure the safety of our customers. In addition to that, our professional clean team are duly insured and licensed to carry out cleaning activities in the UK. They are trained and have become professional cleaners over time and can fit into any professional cleaning company. You can be sure to get professional office cleaning services when you choose De-Gemini. If you also need domestic cleaning services, De-Gemini cleaners can help.",
     },
   ];
 
@@ -289,7 +289,7 @@ export default function OfficeCleaning() {
             <CostCard
               title="Office cleaning"
               price="from £19"
-              text="Professional cleaning and maintenance services for workplaces and other business settings are part of our office cleaning service. Vacuuming, dusting, sanitising toilets, and maintaining a neat space for staff and customers are among the duties carried out by eMop cleaners."
+              text="Professional cleaning and maintenance services for workplaces and other business settings are part of our office cleaning service. Vacuuming, dusting, sanitising toilets, and maintaining a neat space for staff and customers are among the duties carried out by De-Gemini cleaners."
               inputPlaceholder="Enter your full post code here"
               buttonText="QUOTE ME"
               onQuoteMeClick={handleQuoteMeClick}
@@ -339,7 +339,7 @@ export default function OfficeCleaning() {
           </p>
 
           <p className="text-gray-700 text-base nunito-sans-text sm:text-lg mb-6">
-            eMop's average office cleaning cost is £17/h. The frequencies are
+            De-Gemini's average office cleaning cost is £17/h. The frequencies are
             listed below:
           </p>
 
@@ -556,7 +556,7 @@ export default function OfficeCleaning() {
         {/*Left Section: Image */}
         <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
           <div className="flex items-center text-brand-primary nunito-sans-heading mb-6">
-            <h2 className="text-xl sm:text-2xl font-bold">Why choose eMop?</h2>
+            <h2 className="text-xl sm:text-2xl font-bold">Why choose De-Gemini?</h2>
           </div>
 
           <ul className="text-gray-700 space-y-2 mb-6">

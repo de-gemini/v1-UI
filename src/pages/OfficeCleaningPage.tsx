@@ -68,7 +68,7 @@ export default function OfficeCleaningPage() {
       id: "charge-per-hour",
       question: "How much is a professional cleaner in England?",
       answer:
-        "One-time deep cleaning services in England would cost between £14 per hour and £25 per hour, with the average hourly rate for house cleaning in England being between £12 and £13. Get the best office cleaning prices and excellent quality by requesting a quote from eMop.",
+        "One-time deep cleaning services in England would cost between £14 per hour and £25 per hour, with the average hourly rate for house cleaning in England being between £12 and £13. Get the best office cleaning prices and excellent quality by requesting a quote from De-Gemini.",
     },
     {
       id: "house-cost",
@@ -106,7 +106,7 @@ export default function OfficeCleaningPage() {
 
   const HouseCleaning = [
     "When customers enter your office, their first impressions matter. If the office space is clean, tidy and generally pleasant to be in, it sets your relationship with the customer on the right path. Our office cleaning service in England is here to help you present your business in the best",
-    "possible light. An uncluttered, spotless work environment sends an important message to your customers as well as your employees. eMop is dedicated to achieving and maintaining the highest standards when it comes to commercial cleaning services. Our crew of skilled office cleaners in England is composed of enthusiastic, committed experts. Our professional office cleaners have access to the training and education necessary to provide cleaning services that go above and beyond clients' expectations thanks to our staff training programs.",
+    "possible light. An uncluttered, spotless work environment sends an important message to your customers as well as your employees. De-Gemini is dedicated to achieving and maintaining the highest standards when it comes to commercial cleaning services. Our crew of skilled office cleaners in England is composed of enthusiastic, committed experts. Our professional office cleaners have access to the training and education necessary to provide cleaning services that go above and beyond clients' expectations thanks to our staff training programs.",
   ];
 
   const whyChoose = [
@@ -229,7 +229,7 @@ export default function OfficeCleaningPage() {
       name: "Sumae",
       rating: 5,
       description:
-        "The flexibility of working with eMop has still allowed me to still keep to my lifestyle. I pickup jobs when needed and work around my schedule. I love the freedom this job gives me, and I always strive to deliver excellent results to my clients.",
+        "The flexibility of working with De-Gemini has still allowed me to still keep to my lifestyle. I pickup jobs when needed and work around my schedule. I love the freedom this job gives me, and I always strive to deliver excellent results to my clients.",
     },
     {
       id: 4,
@@ -238,7 +238,7 @@ export default function OfficeCleaningPage() {
       name: "Veronika",
       rating: 4.9,
       description:
-        "Hello from Veronika, I am really glad to have found eMop, working with my colleagues have really improved my cleaning skills and made me a better professional. I enjoy the team spirit and continuous learning opportunities.",
+        "Hello from Veronika, I am really glad to have found De-Gemini, working with my colleagues have really improved my cleaning skills and made me a better professional. I enjoy the team spirit and continuous learning opportunities.",
     },
     {
       id: 5,
@@ -255,7 +255,7 @@ export default function OfficeCleaningPage() {
       name: "Alberto",
       rating: 4.7,
       description:
-        "As an aspiring actor, eMop allows me to work flexibly and around my film schedules. The pay is really great and the training is excellent.",
+        "As an aspiring actor, De-Gemini allows me to work flexibly and around my film schedules. The pay is really great and the training is excellent.",
     },
     {
       id: 6,
@@ -366,7 +366,7 @@ export default function OfficeCleaningPage() {
       {/* How it works */}
       <section className="w-full mb-4">
         <h1 className="font-bold text-start ml-2 text-brand-primary text-[20px]">
-          How eMop cleaning service works
+          How De-Gemini cleaning service works
         </h1>
 
         <HowItWorksSection />
@@ -778,7 +778,7 @@ export default function OfficeCleaningPage() {
         <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
           <div className="flex items-center text-brand-primary nunito-sans-heading mb-6">
             <h2 className="text-xl sm:text-2xl font-bold">
-              Why book office cleaning service from eMop London
+              Why book office cleaning service from De-Gemini London
             </h2>
           </div>
 

@@ -640,7 +640,7 @@ const summary = calculateSummary();
           )}
           {step1View === 1 && (
             <div className="w-full max-w-6xl bg-white border border-gray-300 p-8 mt-4">
-              {/* Frequency and One-Off/Regular UI, date/time picker, and extra options go here (see eMop screenshot) */}
+              {/* Frequency and One-Off/Regular UI, date/time picker, and extra options go here (see De-Gemini screenshot) */}
               <div className="flex flex-col md:flex-row gap-8">
                 {/* Frequency/One-Off selection */}
                 <div className="flex-1 flex flex-col gap-4">

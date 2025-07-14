@@ -80,7 +80,7 @@ export const HowItWorksSection: React.FC = () => {
             points={[
               'When you submit your cleaning request, your booking becomes available to all cleaners in the system',
               'When you make an appointment with a cleaner, we email you or send a text message through the app',
-              'You can use MyAccount on our website or the eMop App to keep track of your booking',
+              'You can use MyAccount on our website or the De-Gemini App to keep track of your booking',
             ]}
           />
         </div>

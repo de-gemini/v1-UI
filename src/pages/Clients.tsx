@@ -33,27 +33,27 @@ export default function Clients() {
       faqs: [
         {
           id: "general-1",
-          question: "About eMop platform",
-          answer: `eMop is an online app that connects customers and professional cleaners. eMop acts as a powerful platform arranging fast and high-quality service for the customers, where safety is our priority.
+          question: "About De-Gemini platform",
+          answer: `De-Gemini is an online app that connects customers and professional cleaners. De-Gemini acts as a powerful platform arranging fast and high-quality service for the customers, where safety is our priority.
 
-Cleaners work as independent cleaning partners. They access the eMop platform via eMop mobile App where they pick up customers’ orders that have been booked via the eMop website.`,
+Cleaners work as independent cleaning partners. They access the De-Gemini platform via De-Gemini mobile App where they pick up customers’ orders that have been booked via the De-Gemini website.`,
         },
         {
           id: "general-2",
           question: "What about the Degemini's safety?",
-          answer: `Cleaners and customers’ safety at work is our priority. Before cleaning we will provide you with the customer’s details, rating and feedback from other cleaners (unless the customer is new). Therefore, you will know what to expect. After the cleaning is completed, the customer’s account is automatically charged online. This avoids you taking cash and getting involved in any potential issues associated with non-payment. You will also have the opportunity to rate your customer after each job. If you feel unsafe at a customer’s home, please exit the property immediately and contact eMop via Telegram.`,
+          answer: `Cleaners and customers’ safety at work is our priority. Before cleaning we will provide you with the customer’s details, rating and feedback from other cleaners (unless the customer is new). Therefore, you will know what to expect. After the cleaning is completed, the customer’s account is automatically charged online. This avoids you taking cash and getting involved in any potential issues associated with non-payment. You will also have the opportunity to rate your customer after each job. If you feel unsafe at a customer’s home, please exit the property immediately and contact De-Gemini via Telegram.`,
         },
         {
           id: "general-3",
           question: "How are Degemini matched with customers?",
           answer:
-            "When a customer books a cleaning service on the eMop Platform, their order becomes available for all cleaners who are ‘online’ on their eMop App. As soon as the cleaner accepts the job they are assigned to the booking, please note this is appointed on a first come first serve basis.",
+            "When a customer books a cleaning service on the De-Gemini Platform, their order becomes available for all cleaners who are ‘online’ on their De-Gemini App. As soon as the cleaner accepts the job they are assigned to the booking, please note this is appointed on a first come first serve basis.",
         },
         {
           id: "general-4",
-          question: "How can I contact eMop?",
+          question: "How can I contact De-Gemini?",
           answer:
-            "At eMop our best way of communication is via Text or an email emopper@emop.world. Before reaching out to us, please have a look at our FAQs for Degemini on the website or in your Mobile App. It’s possible you may find your answer without having to wait for our response.",
+            "At De-Gemini our best way of communication is via Text or an email [email@mail.com]. Before reaching out to us, please have a look at our FAQs for Degemini on the website or in your Mobile App. It’s possible you may find your answer without having to wait for our response.",
         },
         {
           id: "general-5",
@@ -65,7 +65,7 @@ Cleaners work as independent cleaning partners. They access the eMop platform vi
           id: "general-6",
           question: "Cancellation Policy",
           answer:
-            "The eMop platform is designed to be as flexible as possible. We can understand that changes may occur. However, customers should not suffer because of last-minute cancellations by Degemini. If you cancel a job less than 24 hours before the start time, you will be subject to late cancellation fees. You can find the Degemini Cancellation Policy in your Service Agreement on the Mobile App.",
+            "The De-Gemini platform is designed to be as flexible as possible. We can understand that changes may occur. However, customers should not suffer because of last-minute cancellations by Degemini. If you cancel a job less than 24 hours before the start time, you will be subject to late cancellation fees. You can find the Degemini Cancellation Policy in your Service Agreement on the Mobile App.",
         },
       ],
     },
@@ -105,7 +105,7 @@ Please be aware that you may be required to pay a fee for late rescheduling. Ple
           {
             id: "cleaning-1",
             question: "What is included in the cleaning service?",
-            answer: `Here you can review what the full eMop cleaning service is.`,
+            answer: `Here you can review what the full De-Gemini cleaning service is.`,
           },
           {
             id: "cleaning-2",
@@ -115,7 +115,7 @@ Please be aware that you may be required to pay a fee for late rescheduling. Ple
           {
             id: "cleaning-3",
             question: "Do you clean offices?",
-            answer: `eMop does provide this service. If interested, please book.`,
+            answer: `De-Gemini does provide this service. If interested, please book.`,
           },
         ],
       },
@@ -153,7 +153,7 @@ However, please note that as soon as the booking is confirmed, the estimated amo
           {
             id: "issues-2",
             question: "I am not satisfied with the cleaning service",
-            answer: `We do our best to make our clients happy and keep working on improving the quality of our service. However, if you are not satisfied with how your home was cleaned, please, let us know as soon as possible and tell us what exactly went wrong. Please write to our Support Desk, and attach photos to show us exactly what was wrong. Be advised that we cannot accept complaints later than 48 hours after the cleaning took place. After the investigation of the case, we may send one of our supervisors to re-clean the missed areas for free. eMop doesn’t provide any refunds for our service, that is why we strongly recommend:
+            answer: `We do our best to make our clients happy and keep working on improving the quality of our service. However, if you are not satisfied with how your home was cleaned, please, let us know as soon as possible and tell us what exactly went wrong. Please write to our Support Desk, and attach photos to show us exactly what was wrong. Be advised that we cannot accept complaints later than 48 hours after the cleaning took place. After the investigation of the case, we may send one of our supervisors to re-clean the missed areas for free. De-Gemini doesn’t provide any refunds for our service, that is why we strongly recommend:
 
 If you are at home during the cleaning, always check how the job was done at the end of the cleaning. The cleaner will clean the places that you thought were not cleaned well enough again at your request.
 If you are not home at the end of cleaning it might be more difficult to prove that the job was done incorrectly. Please be sure someone can check how the cleaning was done before the cleaner leaves your home.`,
@@ -597,7 +597,7 @@ If you are not home at the end of cleaning it might be more difficult to prove t
               {/* Bottom Copyright and Address */}
               <div className="mt-8 w-full border-t border-gray-200 pt-8 text-center text-xs text-gray-600 flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0">
                 <p className="order-2 md:order-1">www.emop.co.uk</p>
-                <p className="order-1 md:order-2">Copyright © eMop 2024</p>
+                <p className="order-1 md:order-2">Copyright © De-Gemini 2024</p>
                 <p className="order-3 md:order-3">
                   Registered office address: Suite 5 3rd Floor, Sovereign House 1
                   Albert Place, London, England, N1 0BQ

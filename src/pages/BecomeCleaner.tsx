@@ -66,7 +66,7 @@ export default function BecomeCleaner() {
     {
       title: "Cleaners feedback",
       description:
-        "You rate your customer after each job. We review those ratings on a regular basis to ensure that everyone you worked for is as respectful as you are. Customers reported to violate our terms of service may be prevented from using eMop.",
+        "You rate your customer after each job. We review those ratings on a regular basis to ensure that everyone you worked for is as respectful as you are. Customers reported to violate our terms of service may be prevented from using De-Gemini.",
     },
     {
       title: "24/7 support",
@@ -222,7 +222,7 @@ export default function BecomeCleaner() {
 
         <p className="max-w-[1000px]">
           Our platform facilitates and provides part-time and full-time work for
-          people in the cleaning industry through live training for eMoppers to
+          people in the cleaning industry through live training for De-Geminipers to
           guarantee the highest level of quality. We ensure safety for both:
           Degemini and customers, and solve issues that can arise between them
         </p>

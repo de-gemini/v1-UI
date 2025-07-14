@@ -52,19 +52,19 @@ const Home = () => {
       id: "how-get-cleaners",
       question: "How do I get good cleaners in England?",
       answer:
-        "First, ask for recommendations from friends or family living in the city. They can help you identify good options. Second, check online directories and review sites to see what others have said about different cleaners in England. That can give you a good idea of who to contact and who to avoid. Finally, you can also contact a trusted company like eMop and choose from our top-rated professionals.",
+        "First, ask for recommendations from friends or family living in the city. They can help you identify good options. Second, check online directories and review sites to see what others have said about different cleaners in England. That can give you a good idea of who to contact and who to avoid. Finally, you can also contact a trusted company like De-Gemini and choose from our top-rated professionals.",
     },
     {
       id: "uk-cleaners-cost",
       question: "How much do UK cleaners cost?",
       answer:
-        "The price of hiring a home professional in the UK will range between £8 to £20 per hour. eMop offers great prices, and that's why it's economical for you to go with us. When you hire through eMop, we guarantee that all our employees are highly trained and vetted for your safety and peace of mind. The average hourly rate for a general service in eMop is £17 per hour. This covers tasks such as tidying, dusting, vacuuming, wiping down surfaces and carpets, and cleaning toilets. However, it's always best to check with the cleaners beforehand to see what is included in their package.",
+        "The price of hiring a home professional in the UK will range between £8 to £20 per hour. De-Gemini offers great prices, and that's why it's economical for you to go with us. When you hire through De-Gemini, we guarantee that all our employees are highly trained and vetted for your safety and peace of mind. The average hourly rate for a general service in De-Gemini is £17 per hour. This covers tasks such as tidying, dusting, vacuuming, wiping down surfaces and carpets, and cleaning toilets. However, it's always best to check with the cleaners beforehand to see what is included in their package.",
     },
     {
       id: "hire-per-week",
       question: "How much is it to hire someone per week in the UK?",
       answer:
-        "A weekly cleanse for a home costs in the range of £48 to £92 for a four-hour service. You can check the average cost for a four-hour session done by a cleaner from eMop here, though it varies depending on your location and property size. Many cleaners, whether they work for a prominent company or are self-employed, extend discounts to those who avail of their service regularly.",
+        "A weekly cleanse for a home costs in the range of £48 to £92 for a four-hour service. You can check the average cost for a four-hour session done by a cleaner from De-Gemini here, though it varies depending on your location and property size. Many cleaners, whether they work for a prominent company or are self-employed, extend discounts to those who avail of their service regularly.",
     },
     {
       id: "What can a cleaner do in three hours?",
@@ -76,7 +76,7 @@ const Home = () => {
       id: "Should I clean before a cleaner comes?",
       question: "Should I clean before a cleaner comes?",
       answer:
-        "It is not necessary to clean before a cleaner arrives. eMop cleaners are used to working in homes that are not perfectly clean, and they will be able to adjust their approach accordingly.",
+        "It is not necessary to clean before a cleaner arrives. De-Gemini cleaners are used to working in homes that are not perfectly clean, and they will be able to adjust their approach accordingly.",
     },
   ];
 
@@ -286,7 +286,7 @@ const Home = () => {
       name: "Sumae",
       rating: 5,
       description:
-        "The flexibility of working with eMop has still allowed me to still keep to my lifestyle. I pickup jobs when needed and work around my schedule. I love the freedom this job gives me, and I always strive to deliver excellent results to my clients.",
+        "The flexibility of working with De-Gemini has still allowed me to still keep to my lifestyle. I pickup jobs when needed and work around my schedule. I love the freedom this job gives me, and I always strive to deliver excellent results to my clients.",
     },
     {
       id: 4,
@@ -295,7 +295,7 @@ const Home = () => {
       name: "Veronika",
       rating: 4.9,
       description:
-        "Hello from Veronika, I am really glad to have found eMop, working with my colleagues have really improved my cleaning skills and made me a better professional. I enjoy the team spirit and continuous learning opportunities.",
+        "Hello from Veronika, I am really glad to have found De-Gemini, working with my colleagues have really improved my cleaning skills and made me a better professional. I enjoy the team spirit and continuous learning opportunities.",
     },
     {
       id: 5,
@@ -312,7 +312,7 @@ const Home = () => {
       name: "Alberto",
       rating: 4.7,
       description:
-        "As an aspiring actor, eMop allows me to work flexibly and around my film schedules. The pay is really great and the training is excellent.",
+        "As an aspiring actor, De-Gemini allows me to work flexibly and around my film schedules. The pay is really great and the training is excellent.",
     },
     {
       id: 7,
@@ -336,7 +336,7 @@ const Home = () => {
       title: "Deep cleaning",
       price: "from £19/h",
       description:
-        "For an extra deep clean of your home, eMop provides comprehensive deep cleaning in England and the surrounding areas. While a one-off service agreement will significantly reduce the clutter in your home, you may also want to use our regular services if you have a busy lifestyle.",
+        "For an extra deep clean of your home, De-Gemini provides comprehensive deep cleaning in England and the surrounding areas. While a one-off service agreement will significantly reduce the clutter in your home, you may also want to use our regular services if you have a busy lifestyle.",
     },
     {
       imageSrc: slide2,
@@ -344,7 +344,7 @@ const Home = () => {
       title: "Upholstery cleaning",
       price: "from £19/h",
       description:
-        "The upholstery service from eMop eliminates visible surface dirt, such as dust and grime. Our team in England will use specialised stain-removal chemicals to get rid of any discolouring on your furniture. The solution offered by eMop includes the elimination of offensive odours, which can be a major issue if you have pets in your house.",
+        "The upholstery service from De-Gemini eliminates visible surface dirt, such as dust and grime. Our team in England will use specialised stain-removal chemicals to get rid of any discolouring on your furniture. The solution offered by De-Gemini includes the elimination of offensive odours, which can be a major issue if you have pets in your house.",
     },
     {
       imageSrc: slide3,
@@ -360,7 +360,7 @@ const Home = () => {
       title: "Deep cleaning",
       price: "from £19/h",
       description:
-        " For an extra-through clean of your home, eMop provides complete deep cleaning in England and its surroundings. When you enter into a service agreement, our team can significantly reduce your workload.",
+        " For an extra-through clean of your home, De-Gemini provides complete deep cleaning in England and its surroundings. When you enter into a service agreement, our team can significantly reduce your workload.",
     },
     {
       imageSrc: slide5,
@@ -368,7 +368,7 @@ const Home = () => {
       title: "Deep cleaning",
       price: "from £19/h",
       description:
-        "For an extra deep clean of your home, eMop provides comprehensive deep cleaning in England and the surrounding areas. While a one-off service agreement will significantly reduce the clutter in your home, you may also want to use our regular services if you have a busy lifestyle.",
+        "For an extra deep clean of your home, De-Gemini provides comprehensive deep cleaning in England and the surrounding areas. While a one-off service agreement will significantly reduce the clutter in your home, you may also want to use our regular services if you have a busy lifestyle.",
     },
     {
       imageSrc: slide2,
