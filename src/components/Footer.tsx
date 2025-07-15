@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Instagram, Facebook, Phone } from 'lucide-react';
 import { DropdownHeader } from './DropdownHeader';
+import { AiFillTikTok } from "react-icons/ai";
 
 export const Footer: React.FC = () => {
 
@@ -93,10 +94,13 @@ export const Footer: React.FC = () => {
           <h3 className="font-bold text-lg mb-4 text-brand-primary">SOCIAL MEDIA</h3>
           <div className="flex space-x-4">
             <a href="https://www.instagram.com/de_gemini_sevices?igsh=dGFqbmFrZTMxcGI1" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <Instagram className="h-7 w-7 text-brand-primary hover:text-white transition duration-300" />
+              <Instagram className="h-7 w-7 text-brand-primary hover:text-blue-500 transition duration-300" />
             </a>
             <a href="https://www.facebook.com/share/1Axqo294Wx/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <Facebook className="h-7 w-7 text-brand-primary hover:text-white transition duration-300" />
+              <Facebook className="h-7 w-7 text-brand-primary hover:text-blue-500 transition duration-300" />
+            </a>
+            <a href="https://www.tiktok.com/@de.gemini.services?_t=ZS-8xiqay0oCet&_r=1" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <AiFillTikTok className="h-7 w-7 text-brand-primary hover:text-blue-500 transition duration-300" />
             </a>
           </div>
         </div>

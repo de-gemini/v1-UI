@@ -778,7 +778,7 @@ export default function OfficeCleaningPage() {
         <div className="md:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
           <div className="flex items-center text-brand-primary nunito-sans-heading mb-6">
             <h2 className="text-xl sm:text-2xl font-bold">
-              Why book office cleaning service from De-Gemini London
+              Why book office cleaning service from De-Gemini England
             </h2>
           </div>
 

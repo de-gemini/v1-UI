@@ -22,13 +22,14 @@ import slide2 from '../assets/images/slide-2.png'
 import slide3 from '../assets/images/slide-3.png'
 import slide4 from '../assets/images/slide-4.png'
 import slide5 from '../assets/images/slide-5.png'
+import slide6 from '../assets/images/card-7.png'
 import card1 from '../assets/images/card-1.jpg'
 import card2 from '../assets/images/card-2.jpg'
 import card3 from '../assets/images/card-3.jpg'
 import card4 from '../assets/images/card-4.jpg';
 import card5 from '../assets/images/card-5.png';
-import card6 from '../assets/images/card-6.jpg';
 import home from '../assets/images/main-banner-removebg-preview.png'
+import office from '../assets/images/office-cleaning.png'
 import 'react-toastify/dist/ReactToastify.css';
 
 const Home = () => {
@@ -181,7 +182,7 @@ const Home = () => {
   }> = [
     {
       title: "Bedroom, living, dining, office rooms",
-      description: "Our cleaning London services include:",
+      description: "Our cleaning England services include:",
       services: [
         "Dusting and wiping of all accessible surfaces.",
         "Vacuuming carpets and mopping hard floors.",
@@ -200,7 +201,7 @@ const Home = () => {
     },
     {
       title: "Halls and stairs",
-      description: "Our cleaning London services include:",
+      description: "Our cleaning England services include:",
       services: [
         "Dusting all accessible surfaces.",
         "Vacuuming and mopping stairs and landings.",
@@ -216,7 +217,7 @@ const Home = () => {
     },
     {
       title: "Kitchen",
-      description: "As you know, the kitchen is one of the most difficult rooms to clean in a London house. So, here are all the tasks we perform in the kitchen.",
+      description: "As you know, the kitchen is one of the most difficult rooms to clean in a England house. So, here are all the tasks we perform in the kitchen.",
       services: [
         "Cleaning and sanitizing countertops.",
         "Wiping down appliance exteriors (microwave, oven, fridge).",
@@ -373,7 +374,7 @@ const Home = () => {
         " For an extra-through clean of your home, De-Gemini provides complete deep cleaning in England and its surroundings. When you enter into a service agreement, our team can significantly reduce your workload.",
     },
     {
-      imageSrc: slide5,
+      imageSrc: slide6,
       altText: "Domestic Cleaning",
       title: "Deep cleaning",
       price: "from £19/h",
@@ -381,15 +382,15 @@ const Home = () => {
         "For an extra deep clean of your home, De-Gemini provides comprehensive deep cleaning in England and the surrounding areas. While a one-off service agreement will significantly reduce the clutter in your home, you may also want to use our regular services if you have a busy lifestyle.",
     },
     {
-      imageSrc: slide2,
+      imageSrc: office,
       altText: "Office cleaning",
       title: "Office cleaning",
       price: "from £19/h",
       description:
-        "You may rely on our company to keep your London office spotless. The frequency and duration of our visits are totally up to you, even if you need us multiple days a week.",
+        "You may rely on our company to keep your England office spotless. The frequency and duration of our visits are totally up to you, even if you need us multiple days a week.",
     },
     {
-      imageSrc: slide1,
+      imageSrc: slide5,
       altText: "End of tenancy cleaning service",
       title: "End of tenancy cleaning service",
       price: "from £19/h",
@@ -718,12 +719,12 @@ const Home = () => {
 
       <section className="py-16 bg-gray-50">
         {/* <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold nunito-sans-heading text-brand-primary text-center mb-12">
-        Expert Cleaning Services in London
+        Expert Cleaning Services in England
         </h2> */}
         {regularCleaningBlocks.map((block, index) => (
           <ContentBlock
             key={index}
-            mainTitle={index === 0 ? "Expert Cleaning Services in London" : undefined} 
+            mainTitle={index === 0 ? "Expert Cleaning Services in EngLand" : undefined} 
             {...block}
           />
         ))}

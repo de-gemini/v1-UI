@@ -10,16 +10,16 @@ export const regularCleaningBlocks = [
       imageAlt: "Cleaning services in living room",
       imagePosition: 'right' as 'right',
       paragraph:
-        "De gemini is a professional cleaning company that operates in London and other UK cities. We offer a wide range of cleaning services England, including regular, one-off deep clean, and end-of-tenancy solutions. De-gemini is convenient because it provides a flexible house cleaning service tailored to each customer’s needs. Our professional cleaners are hand-picked and tested, then thoroughly trained to offer the best possible service. Our domestic cleaners are familiar with treating all types of surfaces, including delicate fabrics. Our professionals will meticulously remove any rubbish, dust, grime, or stains that may be present."
+        "De gemini is a professional cleaning company that operates in England and other UK cities. We offer a wide range of cleaning services England, including regular, one-off deep clean, and end-of-tenancy solutions. De-gemini is convenient because it provides a flexible house cleaning service tailored to each customer’s needs. Our professional cleaners are hand-picked and tested, then thoroughly trained to offer the best possible service. Our domestic cleaners are familiar with treating all types of surfaces, including delicate fabrics. Our professionals will meticulously remove any rubbish, dust, grime, or stains that may be present."
       ,
       initialItemsToShow: 1,
     },
     {
       imageUrl: card2,
-      imageAlt: "Reliable Experts in London",
+      imageAlt: "Reliable Experts in England",
       imagePosition: 'left' as 'left', // Image on the left, text on the right
-      title: "Reliable Experts in London",
-      paragraph: 'If you’re looking for reliable house cleaning services in London, De-gemini is an excellent option. We offer our customers a wide range of house cleaning solutions, and we’re always looking for new ways to improve them. That is why De-gemini is a reliable platform for hiring expert cleaners.',
+      title: "Reliable Experts in England",
+      paragraph: 'If you’re looking for reliable house cleaning services in England, De-gemini is an excellent option. We offer our customers a wide range of house cleaning solutions, and we’re always looking for new ways to improve them. That is why De-gemini is a reliable platform for hiring expert cleaners.',
       content: [
         "If you require, you can get our team to change your bed linen and perform additional tasks to ensure a clean home.",
         "In the kitchen, the professionals will wipe and polish all surfaces and worktops. They’ll mop and vacuum the floors and clean equipment, appliances, doors, and handles. They’ll also wash the dishes. You can request that they take care of the fridge, the oven, and the microwave and arrange things inside kitchen cabinets.",
@@ -33,7 +33,7 @@ export const regularCleaningBlocks = [
       imageAlt: "Customized commercial cleaning",
       imagePosition: 'right' as 'right',
       title: "A Cleaning Service that Cares for Your Home",
-      paragraph: 'Every house service is unique, which is why our employees are encouraged to take a personalised approach. Besides, different clients require different service packages, and fully satisfying your needs is our top priority. The ability to modify the standard set of tasks is a major benefit of using De-gemini’s professional cleaning services in London. When the plan is tailored to your needs, you are paying precisely for the package you need. However, there are certain things our professionals can’t do. For example, we don’t lift or move heavy objects, do ironing, or clean the back garden. If you want to discuss add-ons in detail, we are always happy to answer your questions about one off deep cleaning.',
+      paragraph: 'Every house service is unique, which is why our employees are encouraged to take a personalised approach. Besides, different clients require different service packages, and fully satisfying your needs is our top priority. The ability to modify the standard set of tasks is a major benefit of using De-gemini’s professional cleaning services in England. When the plan is tailored to your needs, you are paying precisely for the package you need. However, there are certain things our professionals can’t do. For example, we don’t lift or move heavy objects, do ironing, or clean the back garden. If you want to discuss add-ons in detail, we are always happy to answer your questions about one off deep cleaning.',
       initialItemsToShow: 1,
     },
     {
@@ -61,14 +61,14 @@ export const regularCleaningBlocks = [
     },
   ];
   
-  // Data for the "Reliable Experts in London" section (from your screenshot)
+  // Data for the "Reliable Experts in England" section (from your screenshot)
   export const reliableExpertsContent = {
     imageUrl: "http://googleusercontent.com/file_content/0", // From your screenshot
-    imageAlt: "Reliable Experts in London - bedroom cleaned", // More descriptive alt text
+    imageAlt: "Reliable Experts in England - bedroom cleaned", // More descriptive alt text
     imagePosition: 'right' as 'right', // Image on the right of text on desktop
-    title: "Reliable Experts in London", // Explicitly added based on screenshot
+    title: "Reliable Experts in England", // Explicitly added based on screenshot
     content: [
-      "If you're looking for reliable house cleaning services in London, De-Gemini is an excellent option. We offer our customers a wide range of house cleaning solutions, and we're always looking for new ways to improve them. That is why De-Gemini is a reliable platform for hiring expert cleaners.",
+      "If you're looking for reliable house cleaning services in England, De-Gemini is an excellent option. We offer our customers a wide range of house cleaning solutions, and we're always looking for new ways to improve them. That is why De-Gemini is a reliable platform for hiring expert cleaners.",
       "If you require, you can get our team to change your bed linen and perform additional tasks to ensure a clean home.",
       // Assuming there are more hidden items for "3 more"
       "Our cleaners are fully vetted and insured for your peace of mind.",
@@ -84,6 +84,6 @@ export const regularCleaningBlocks = [
     imageAlt: "A Cleaning Service that Cares for Your Home - clean kitchen", // More descriptive alt text
     imagePosition: 'left' as 'left', // Image on the left of text on desktop
     title: "A Cleaning Service that Cares for Your Home", // Explicitly added based on screenshot
-    content: "Every house service is unique, which is why our employees are encouraged to take a personalised approach. Besides, different clients require different service packages, and fully satisfying your needs is our top priority. The ability to modify the standard set of tasks is a major benefit of using De-Gemini’s professional cleaning services in London. When the plan is tailored to your needs, you are paying precisely for the package you need. However, there are certain things our professionals can’t do. For example, we don’t lift or move heavy objects, do ironing, or clean the back garden. If you want to discuss add-ons in detail, we are always happy to answer your questions about one off deep cleaning.",
+    content: "Every house service is unique, which is why our employees are encouraged to take a personalised approach. Besides, different clients require different service packages, and fully satisfying your needs is our top priority. The ability to modify the standard set of tasks is a major benefit of using De-Gemini’s professional cleaning services in England. When the plan is tailored to your needs, you are paying precisely for the package you need. However, there are certain things our professionals can’t do. For example, we don’t lift or move heavy objects, do ironing, or clean the back garden. If you want to discuss add-ons in detail, we are always happy to answer your questions about one off deep cleaning.",
     initialItemsToShow: 0, // It's a single paragraph, no 'see more' needed unless it's extremely long.
   };

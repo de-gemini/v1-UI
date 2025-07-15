@@ -18,7 +18,9 @@ import { DeepPriceCard } from "../components/DeepPriceCard";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 import { API_BASE_URL } from "../constants";
+import WhychooseSection from "../components/WhyChooseSection";
 import { toast, ToastContainer } from "react-toastify";
+import WhyChooseSection from "../components/WhyChooseSection";
 
 export default function BathroomCleaning() {
   const [openItemId, setOpenItemId] = useState<string | null>(null);
@@ -476,82 +478,9 @@ export default function BathroomCleaning() {
       </section>
 
       {/* Why choose?? */}
-      <section className="w-full flex flex-col items-center justify-center">
-        {/* cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-[5px] px-3 w-full md:w-full lg:max-w-4xl">
-          {/* each card */}
-          <div className="border-[3px] border-gray-300 flex flex-col items-center justify-center py-4 rounded-lg gap-[4px]">
-            <div className="">
-              <img
-                src="https://www.emop.co.uk/static/images/best1.svg"
-                className="w-full"
-                alt="image"
-              />
-            </div>
-
-            <h1 className="text-brand-secondary nunito-sans-heading text-[24px]">
-              24/7 Availability
-            </h1>
-            <p className="text-center nunito-sans-text">
-              Pick a date and time that suits you. You can even book for same
-              day cleaning, 4 hours in advance
-            </p>
-          </div>
-
-          <div className="border-[3px] border-gray-300 flex flex-col items-center justify-center py-4 rounded-lg gap-[4px]">
-            <div className="">
-              <img
-                src="https://www.emop.co.uk/static/images/best3.svg"
-                className="w-full"
-                alt="image"
-              />
-            </div>
-
-            <h1 className="text-brand-secondary nunito-sans-heading text-[24px]">
-              Bespoke Service
-            </h1>
-            <p className="text-center nunito-sans-text">
-              You can choose which rooms you wish us to clean and book only the
-              services you need.
-            </p>
-          </div>
-
-          <div className="border-[3px] border-gray-300 flex flex-col items-center justify-center py-4 rounded-lg gap-[4px]">
-            <div className="">
-              <img
-                src="https://www.emop.co.uk/static/images/best2.svg"
-                className="w-full"
-                alt="image"
-              />
-            </div>
-
-            <h1 className="text-brand-secondary nunito-sans-heading text-[24px]">
-              Pay as You Go
-            </h1>
-            <p className="text-center nunito-sans-text">
-              We charge clients only for the actual time a cleaner spends at
-              your property.
-            </p>
-          </div>
-
-          <div className="border-[3px] border-gray-300 flex flex-col items-center justify-center py-4 rounded-lg gap-[4px]">
-            <div className="">
-              <img
-                src="https://www.emop.co.uk/static/images/last_minute.svg"
-                className="w-full"
-                alt="image"
-              />
-            </div>
-
-            <h1 className="text-brand-secondary nunito-sans-heading text-[24px]">
-              Last minute cleaning
-            </h1>
-            <p className="text-center nunito-sans-text">
-              Need urgent cleaning? You can make a booking 4 hours in advance.
-            </p>
-          </div>
-        </div>
-      </section>
+      <div className="mt-[2rem]">
+        <WhyChooseSection/>
+      </div>
 
       <div className="p-4 max-w-5xl mx-auto mt-[4rem]">
         <h1 className="text-2xl font-bold text-brand-primary mb-4">Results</h1>

@@ -3,16 +3,19 @@
 
 import React from 'react';
 import WhyChooseCard from './WhyChooseCard'; 
+import whychoose1 from '../assets/images/whychoose1-removebg-preview.png'
+import whychoose2 from '../assets/images/whychoose2-removebg-preview.png'
+
 
 
 const whyChooseData = [
   {
-    imageSrc: "https://www.emop.co.uk/static/images/best1.svg",
+    imageSrc: whychoose2,
     title: "24/7 Availability",
     description: "Pick a date and time that suits you. You can even book for same day cleaning, 4 hours in advance.",
   },
   {
-    imageSrc: "https://www.emop.co.uk/static/images/best3.svg",
+    imageSrc: whychoose1,
     title: "Bespoke Service",
     description: "You can choose which rooms you wish us to clean and book only the services you need.",
   },
