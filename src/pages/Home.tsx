@@ -28,9 +28,14 @@ import card2 from '../assets/images/card-2.jpg'
 import card3 from '../assets/images/card-3.jpg'
 import card4 from '../assets/images/card-4.jpg';
 import card5 from '../assets/images/card-5.png';
+import card6 from '../assets/images/card-6.jpg';
 import home from '../assets/images/main-banner-removebg-preview.png'
 import office from '../assets/images/office-cleaning.png'
 import 'react-toastify/dist/ReactToastify.css';
+import CommonPostcodeInput from '../components/commons/CommonPostcodeInput';
+import HomeHeroSection from '../components/HomeHeroSection';
+import CommonFAQ from "../components/commons/CommonFAQ";
+import BeforeAfterSlider from "../components/BeforeAfterSlider";
 
 const Home = () => {
   const features = [
@@ -344,60 +349,61 @@ const Home = () => {
     {
       imageSrc: slide1,
       altText: "Domestic Cleaning",
-      title: "Deep cleaning",
+      title: "Domestic Cleaning",
       price: "from £19/h",
       description:
-        "For an extra deep clean of your home, De-Gemini provides comprehensive deep cleaning in England and the surrounding areas. While a one-off service agreement will significantly reduce the clutter in your home, you may also want to use our regular services if you have a busy lifestyle.",
+        "Experience a sparkling clean home with our tailored domestic cleaning services. Whether it’s a one-time tidy or scheduled upkeep, we adapt to your lifestyle and home needs.",
     },
     {
       imageSrc: slide2,
-      altText: "Upholstery cleaning",
-      title: "Upholstery cleaning",
+      altText: "Upholstery Cleaning",
+      title: "Upholstery Cleaning",
       price: "from £19/h",
       description:
-        "The upholstery service from De-Gemini eliminates visible surface dirt, such as dust and grime. Our team in England will use specialised stain-removal chemicals to get rid of any discolouring on your furniture. The solution offered by De-Gemini includes the elimination of offensive odours, which can be a major issue if you have pets in your house.",
+        "Revive your sofas, armchairs, and other upholstered items with our advanced stain and odor removal treatment. Ideal for homes with kids or pets.",
     },
     {
       imageSrc: slide3,
-      altText: "Regular cleaning",
-      title: "Regular cleaning",
+      altText: "Regular Cleaning",
+      title: "Regular Cleaning",
       price: "from £19/h",
       description:
-        "In addition to providing you with thorough one off cleaning for your home at a time and day that suits you, our regular house cleaning service sends a professional to your home each week to give you peace of mind and guarantee that your preferred routine is clearly established.",
+        "Our recurring cleaning plans ensure your home stays fresh week after week. We follow your preferred routine with a reliable, friendly cleaner.",
     },
     {
       imageSrc: slide4,
-      altText: "Deep cleaning",
-      title: "Deep cleaning",
+      altText: "Spring Cleaning",
+      title: "Spring Cleaning",
       price: "from £19/h",
       description:
-        " For an extra-through clean of your home, De-Gemini provides complete deep cleaning in England and its surroundings. When you enter into a service agreement, our team can significantly reduce your workload.",
-    },
-    {
-      imageSrc: slide6,
-      altText: "Domestic Cleaning",
-      title: "Deep cleaning",
-      price: "from £19/h",
-      description:
-        "For an extra deep clean of your home, De-Gemini provides comprehensive deep cleaning in England and the surrounding areas. While a one-off service agreement will significantly reduce the clutter in your home, you may also want to use our regular services if you have a busy lifestyle.",
-    },
-    {
-      imageSrc: office,
-      altText: "Office cleaning",
-      title: "Office cleaning",
-      price: "from £19/h",
-      description:
-        "You may rely on our company to keep your England office spotless. The frequency and duration of our visits are totally up to you, even if you need us multiple days a week.",
+        "Get your home ready for the season with our deep spring cleaning service. Perfect for decluttering and removing dust build-up in hard-to-reach places.",
     },
     {
       imageSrc: slide5,
-      altText: "End of tenancy cleaning service",
-      title: "End of tenancy cleaning service",
+      altText: "End of Tenancy Cleaning",
+      title: "End of Tenancy Cleaning",
       price: "from £19/h",
       description:
-        "If you're preparing to leave your leased home, you can benefit from our practical end-of-tenancy packages. We typically send two professionals to your home to do this job, and they are properly outfitted and educated to adhere to a specific protocol that satisfies the requirements of landlords.",
+        "Secure your deposit with our detailed move-out cleaning. Our team follows a landlord-approved checklist to ensure your place is spotless and inspection-ready.",
+    },
+    {
+      imageSrc: slide6,
+      altText: "After Builders Cleaning",
+      title: "After Builders Cleaning",
+      price: "from £19/h",
+      description:
+        "Post-renovation mess? We’ll handle it. Our after-builders cleaning service clears dust, paint, and debris so your property looks brand new again.",
+    },
+    {
+      imageSrc: office,
+      altText: "Office Cleaning",
+      title: "Office Cleaning",
+      price: "from £19/h",
+      description:
+        "Keep your workspace professional and hygienic. From desks to restrooms, we offer flexible cleaning plans for offices of all sizes across England.",
     },
   ];
+  
 
   const [error, setError] = useState('')
 
@@ -442,130 +448,28 @@ const Home = () => {
         draggable={true}
         icon={<Check/>}
         pauseOnHover={true}
-        />
-        <div className="px-4 sm:px-6 lg:px-8">
-      <section className="flex items-center justify-center max-w-7xl mx-auto relative overflow-hidden">
-        <div
-          className="absolute inset-0 z-0 bg-cover bg-center opacity-0 bg-no-repeat"
+      />
+      <div className="px-6 sm:px-16">
+        <HomeHeroSection features={features} error={error} home={home} />
+        {/* Carousel section */}
+        <section
+          className="w-full"
           style={{
-            backgroundImage: `url('https://placehold.co/1920x1080/e0b1cb/ffffff?text=Cleaning+People')`,
-            backgroundBlendMode: "multiply",
-            backgroundColor: "rgba(106, 0, 141, 0.2)",
-          }}></div>
-
-        <img
-          src="https://placehold.co/1920x1080/e0b1cb/ffffff?text=Cleaning+People+Fallback"
-          alt="Cleaning Service Staff"
-          className="absolute inset-0 z-0 object-cover w-full h-full hidden opacity-0" // Hidden, only for error handling
-          onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-            const target = e.target as HTMLImageElement;
-            target.style.opacity = "1"; // Show fallback image
-            target.style.background =
-              "linear-gradient(to bottom right, #e0b1cb, #b8c4ea)"; // Background if image fails
-            target.src = ""; // Clear src to prevent infinite loops
-            target.alt =
-              "Fallback: Image of cleaning service staff could not load.";
-          }}
-        />
-
-        {/* Content Container */}
-        <div className="relative z-10 text-left w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8">
-          <div className="w-full lg:w-1/2">
-            {/* Heading */}
-            <h1 className="text-4xl mt-4 sm:text-5xl lg:text-6xl nunito-sans-title text-brand-primary leading-tight mb-8 drop-shadow-sm">
-              Best Cleaning
-              <br />
-              Services In England
-            </h1>
-
-            {/* Features List */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-8 mb-10">
-              {features.map((feature, index) => (
-                <div key={index} className="flex items-center text-brand-primary">
-                  <Check className="h-6 w-6 text-brand-primary mr-3 flex-shrink-0" />
-                  <span className="text-lg sm:text-xl nunito-sans-text text-brand-text">
-                    {feature}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            {/* Postcode Input and Button */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-white p-2 pr-2 sm:p-3 sm:pr-3 rounded-xl shadow-lg border border-gray-200 max-w-md w-full">
-              <div className="flex items-center flex-grow p-2">
-                <MapPin className="h-6 w-6 text-gray-400 mr-3" />
-                <input
-                  type="text"
-                  placeholder="Enter your post code here"
-                  className="flex-grow text-gray-700 placeholder-gray-400 focus:outline-none text-base sm:text-lg bg-transparent"
-                  aria-label="Enter your postcode"
-                  value={postcode}
-                  onChange={e => setPostcode(e.target.value)}
-                />
-              </div>
-              <button
-                className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary nunito-sans-heading py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5"
-                onClick={handlePostcodeApi}
-              >
-                QUOTE ME
-              </button>
-            </div>
-              <p className="text-red-500 text-lg">{error}</p>
-          </div>
-
-          <div className="w-full mb-1 lg:w-1/2 flex justify-center">
-            <img
-              src={home}
-              alt=""
-              className="max-w-full h-auto object-contain"
-            />
-          </div>
-        </div>
-        {/* Curvy white overlay at the bottom */}
-        <div className="absolute left-0 right-0 bottom-0 w-full pointer-events-none z-20">
-          <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-[80px]" preserveAspectRatio="none">
-            <path d="M0,100 C360,100 1080,0 1440,100 L1440,100 L0,100 Z" fill="#f7f7f7" />
-          </svg>
-        </div>
-      </section>
-
-      {/* Carousel section */}
-      <section
-        className="w-full"
-        style={{
-          backgroundImage: `url('https://www.emop.co.uk/img/wave.png')`,
-        }}>
-        <div className="py-12 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-5xl mx-auto text-left">
-            <h2 className="text-3xl sm:text-4xl font-extrabold nunito-sans-heading text-brand-primary mb-4">
-              Trusted service
+            backgroundImage: `url('https://www.emop.co.uk/img/wave.png')`,
+          }}>
+          <div className="font-sans antialiased bg-blue-50/50 ">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-primary text-center py-10">
+              Our Featured Services
             </h2>
-            <p className="text-sm md:text-xl text-gray-700 flex items-center">
-              See our{" "}
-              <span className="font-bold text-brand-primary ml-2">1,268</span>{" "}
-              reviews on
-              <span className="inline-flex items-center ml-3 text-brand-primary nunito-sans-heading">
-                <Star className="h-6 w-6 fill-current text-brand-primary  mr-1" />{" "}
-                {/* Filled star icon */}
-                Trustpilot
-              </span>
-            </p>
+            <ServiceCarousel services={serviceData} />
+            <div className=""></div> {/* Spacer for demonstration */}
           </div>
-        </div>
-
-        <div className="font-sans antialiased bg-gray-50 min-h-screen">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-primary text-center py-10">
-            Our Featured Services
-          </h2>
-          <ServiceCarousel services={serviceData} />
-          <div className="h-48"></div> {/* Spacer for demonstration */}
-        </div>
-      </section>
+        </section>
 
       {/* Post code section */}
       <section className="font-sans antialiased py-4 max-w-7xl mx-auto">
         <h1 className="text-[30px] font-[700] text-brand-primary nunito-sans-heading mb-8 md:mb-12">
-          How much does a house cleaner cost in England
+          How much does a house cleaner cost in England?
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mt-4">
           <div className="relative">
@@ -575,7 +479,7 @@ const Home = () => {
             <CostCard
               title="Regular house cleaning"
               price="from £17/h"
-              text="-"
+              
               inputPlaceholder="Enter your full post code here"
               buttonText="QUOTE ME"
               onQuoteMeClick={handlePostcodeApi}
@@ -585,7 +489,7 @@ const Home = () => {
           <CostCard
             title="One-off domestic cleaning"
             price="from £19/h"
-            text="-"
+            
             inputPlaceholder="Enter your full post code here"
             buttonText="QUOTE ME"
             onQuoteMeClick={handlePostcodeApi}
@@ -618,21 +522,32 @@ const Home = () => {
       ))}
     </section>
       
-      {/* google section */}
-      <section className="w=full mt-[2rem]">
-        <div className="flex items-center justify-center gap-[6px]">
-          <img
-            src="https://www.emop.co.uk/static/images/google-icon.png"
-            alt="google"
-            className="w-[3rem]"
-          />
-          <h1 className="text-brand-primary text-[30px] font-[700]">
-            Google score 4.1
-          </h1>
-        </div>
-        <div className="mt-[2rem]">
-        <RatingCarousel ratings={ratings} />
-        </div>
+      {/* Before/After Slider Section */}
+      <section className="w-full mt-[2rem]">
+        <BeforeAfterSlider
+          title="See the Difference"
+          subtitle="We make your space look absolutely sparkling"
+          slides={[
+            {
+              before: card1,
+              after: card2,
+              title: 'Kitchen Deep Clean',
+              description: 'Spotless kitchen after our deep cleaning service.'
+            },
+            {
+              before: card3,
+              after: card4,
+              title: 'Bathroom Transformation',
+              description: 'A sparkling bathroom, every time.'
+            },
+            {
+              before: card5,
+              after: card6,
+              title: 'Living Room Refresh',
+              description: 'Enjoy a fresh, clean living space.'
+            },
+          ]}
+        />
       </section>
 
       {/* Professionals */}
@@ -670,24 +585,9 @@ const Home = () => {
               </p>
 
               {/* Postcode Input and Button */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-white p-2 pr-2 sm:p-3 sm:pr-3 rounded-xl shadow-lg border border-blue-900 max-w-md w-full">
-                <div className="flex items-center flex-grow p-2">
-                  <MapPin className="h-6 w-6 text-gray-400 mr-3 flex-shrink-0" />
-                  <input
-                    type="text"
-                    placeholder="Enter your post code here"
-                    className="flex-grow text-gray-700 placeholder-gray-400 focus:outline-none text-base sm:text-lg bg-transparent"
-                    value={postcode}
-                    onChange={(e) => setPostcode(e.target.value)}
-                    aria-label="Enter your postcode"
-                  />
-                </div>
-                <button
-                  onClick={handlePostcodeApi}
-                  className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
-                  QUOTE ME
-                </button>
-              </div>
+              
+                <CommonPostcodeInput />
+              
             </div>
 
             {/* Right Section: Service Icons Grid */}
@@ -717,7 +617,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 ">
         {/* <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold nunito-sans-heading text-brand-primary text-center mb-12">
         Expert Cleaning Services in England
         </h2> */}
@@ -730,59 +630,9 @@ const Home = () => {
         ))}
       </section>
 
-      {/* FAQ */}
-      <div className="font-sans antialiased min-h-screen py-16 max-w-7xl mx-auto">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold nunito-sans-heading text-brand-primary mb-10 text-center">
-            Frequently asked questions
-          </h1>
+      
+        <CommonFAQ/>
 
-          <div className="space-y-4">
-            {faqData.map((item) => (
-              <div
-                key={item.id}
-                className="bg-[#f7f7ff] rounded-lg shadow-md overflow-hidden">
-                <button
-                  className="w-full flex gap-[10px] items-center p-5 sm:p-6 text-left focus:outline-none bg-[#f7f7ff] hover:bg-gray-200 transition duration-300"
-                  onClick={() => toggleFAQ(item.id)}
-                  aria-expanded={openItemId === item.id}
-                  aria-controls={`faq-content-${item.id}`}>
-                    <div className="p-4 bg-white shadow-xl rounded-[50%]">
-                  <ChevronDown
-                    className={`w-6 h-6 text-gray-600 transition-transform duration-300 ${
-                      openItemId === item.id ? "rotate-180" : ""
-                    }`}
-                  />
-                    </div>
-                  <span className="text-lg sm:text-xl font-semibold text-gray-800">
-                    {item.question}
-                  </span>
-                </button>
-                <div
-                  id={`faq-content-${item.id}`}
-                  role="region"
-                  aria-labelledby={`faq-question-${item.id}`}
-                  style={{
-                    maxHeight: openItemId === item.id ? "500px" : "0", // Increased max-height for longer content
-                    opacity: openItemId === item.id ? 1 : 0,
-                    transition:
-                      "max-height 0.4s ease-in-out, opacity 0.4s ease-in-out",
-                  }}
-                  className="overflow-hidden p-5 sm:p-6 pt-0 text-gray-700" // Added pt-0 to prevent double padding top
-                >
-                  <p className="mt-4">{item.answer}</p>{" "}
-                  {/* Added mt-4 for spacing */}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Optional: More content to show page structure */}
-        <div className="mt-[3rem]">
-        <CallToActionSection/>
-        </div>
-      </div>
         </div>
       
     </div>

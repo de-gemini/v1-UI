@@ -4,6 +4,7 @@ import axiosInstance from '../api/axiosInstance';
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../constants';
+import CommonPostcodeInput from './commons/CommonPostcodeInput';
 
 // You might consider making these props if you have different variations
 interface PriceCardProps {
@@ -93,25 +94,9 @@ export const PriceCard: React.FC<PriceCardProps> = ({
       </div>
 
       {/* Postcode Input */}
-      <div className="flex items-center w-full bg-white border border-purple-400 rounded-lg p-3 mb-6 focus-within:border-brand-primary transition-colors duration-200">
-        <MapPin className="h-5 w-5 text-brand-primary mr-3 flex-shrink-0" />
-        <input
-          type="text"
-          placeholder={inputPlaceholder}
-          className="flex-grow text-gray-700 placeholder-gray-400 focus:outline-none bg-transparent text-base"
-          value={postcode}
-          onChange={(e) => setPostcode(e.target.value)}
-          aria-label={inputPlaceholder}
-        />
-      </div>
-
-      {/* Quote Me Button */}
-      <button
-        onClick={handleQuoteClick}
-        className="w-full bg-brand-primary hover:bg-blue-500 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300"
-      >
-        {buttonText}
-      </button>
+      
+        <CommonPostcodeInput />
+      
     </div>
   );
 };

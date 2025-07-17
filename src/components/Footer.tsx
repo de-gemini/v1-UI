@@ -1,105 +1,108 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Instagram, Facebook, Phone } from 'lucide-react';
 import { DropdownHeader } from './DropdownHeader';
 import { AiFillTikTok } from "react-icons/ai";
 
 export const Footer: React.FC = () => {
-
   return (
-    <footer className="relative bg-transparent text-gray-600 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-y-3 gap-x-8 text-sm">
-
-      <div className="lg:col-span-1">
-        <DropdownHeader title="CLEANER LOCATIONS" dropdownName="cleanerLocations">
-          <ul className="space-y-2 pb-4 lg:pb-0">
-            <li><a href="#" className="hover:underline">Edinburgh Birmingham</a></li>
-            <li><a href="#" className="hover:underline">Manchester St Albans</a></li>
-            <li><a href="#" className="hover:underline">Glasgow Leeds Bradford</a></li>
-            <li><a href="#" className="hover:underline">Liverpool Central London</a></li>
-            <li><a href="#" className="hover:underline">North London South London</a></li>
-            <li><a href="#" className="hover:underline">West London East London</a></li>
-            <li><a href="#" className="hover:underline">Watford Greenwich</a></li>
-            <li><a href="#" className="hover:underline">Croydon</a></li>
-            <li><a href="#" className="hover:underline">Kensington & Chelsea</a></li>
-            <li><a href="#" className="hover:underline">Bromley Islington</a></li>
-            <li><a href="#" className="hover:underline">Wimbledon Barking</a></li>
-            <li><a href="#" className="hover:underline">Kingston Fulham Richmond</a></li>
-            <li><a href="#" className="hover:underline">Clapham Romford Ealing</a></li>
-            <li><a href="#" className="hover:underline">Walthamstow Battersea</a></li>
-            <li><a href="#" className="hover:underline">Canary Wharf</a></li>
-          </ul>
-        </DropdownHeader>
+    <footer className="relative bg-transparent text-gray-600 py-12 px-6 sm:px-16 overflow-hidden">
+        <div className="w- top-0 absolute ">
+          <svg viewBox="0 0 1440 320" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-24 sm:h-32 md:h-40 lg:h-48" style={{ opacity: 0.08 }}>
+            <path fill="#42337E" d="M0,256L60,229.3C120,203,240,149,360,154.7C480,160,600,224,720,229.3C840,235,960,181,1080,176C1200,171,1320,213,1380,234.7L1440,256L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z" />
+        </svg>
+        </div>
+      {/* Subtle SVG Background only behind headline */}
+      <div className='mb-12'>
+        <h1 className="  text-brand-primary  font-extrabold text-6xl sm:text-6xl lg:text-7xl  mb-6">
+          Clean, <span className='editorial'>Fresh, </span> Gemini.
+        </h1>
+        <p className="text-brand-primary text-3xl sm:text-xl font-bold tracking-wide mb-2">Your Instant Cleaning Service In England.</p>
       </div>
 
-      {/* Column 2: For Customers & For Cleaners */}
-      <div className="lg:col-span-1">
-        <DropdownHeader title="FOR CUSTOMERS" dropdownName="forCustomers">
-          <ul className="space-y-2 pb-4 lg:pb-0">
-            <li><a href="#" className="hover:underline">Pricing</a></li>
-            <li><a href="#" className="hover:underline">What's included</a></li>
-            <li><a href="#" className="hover:underline">Blog</a></li>
-            <li><a href="#" className="hover:underline">Booking Policy</a></li>
-            <li><a href="#" className="hover:underline">Cancellation Policy</a></li>
-            <li><a href="#" className="hover:underline">Terms & Conditions</a></li>
-            <li><a href="#" className="hover:underline">Privacy Policy</a></li>
-            <li><a href="#" className="hover:underline">Cookies Policy</a></li>
-            <li><a href="#" className="hover:underline">Reclean Guarantee</a></li>
-            <li><a href="#" className="hover:underline">Sitemap</a></li>
-          </ul>
-          {/* Sub-section: For Cleaners */}
-          <h3 className="font-bold text-lg mb-4 text-brand-primary">FOR CLEANERS</h3>
-          <ul className="space-y-2">
-            <li><a href="#" className="hover:underline">Join Us</a></li>
-          </ul>
-        </DropdownHeader>
-      </div>
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-y-10 gap-x-12 text-base relative z-10">
+        {/* Locations */}
+        <div className="lg:col-span-1">
+          <DropdownHeader title="CLEANER LOCATIONS" dropdownName="cleanerLocations">
+            <ul className="space-y-2 pb-4 lg:pb-0">
+              <li><a href="#" className="hover:underline">Edinburgh Birmingham</a></li>
+              <li><a href="#" className="hover:underline">Manchester St Albans</a></li>
+              <li><a href="#" className="hover:underline">Glasgow Leeds Bradford</a></li>
+              <li><a href="#" className="hover:underline">Liverpool Central London</a></li>
+              <li><a href="#" className="hover:underline">North London South London</a></li>
+              <li><a href="#" className="hover:underline">West London East London</a></li>
+              <li><a href="#" className="hover:underline">Watford Greenwich</a></li>
+              <li><a href="#" className="hover:underline">Croydon</a></li>
+              <li><a href="#" className="hover:underline">Kensington & Chelsea</a></li>
+              <li><a href="#" className="hover:underline">Bromley Islington</a></li>
+              <li><a href="#" className="hover:underline">Wimbledon Barking</a></li>
+              <li><a href="#" className="hover:underline">Kingston Fulham Richmond</a></li>
+              <li><a href="#" className="hover:underline">Clapham Romford Ealing</a></li>
+              <li><a href="#" className="hover:underline">Walthamstow Battersea</a></li>
+              <li><a href="#" className="hover:underline">Canary Wharf</a></li>
+            </ul>
+          </DropdownHeader>
+        </div>
 
-      {/* Column 3: De Gemini Service & Who We Are */}
-      <div className="lg:col-span-1">
-        <DropdownHeader title="De Gemini SERVICE" dropdownName="deGeminiService">
-          <ul className="space-y-2 pb-4 lg:pb-0">
-            <li><a href="#" className="hover:underline">Regular cleaning</a></li>
-            <li><a href="#" className="hover:underline">Deep cleaning</a></li>
-            <li><a href="#" className="hover:underline">Office cleaning</a></li>
-            <li><a href="#" className="hover:underline">End of Tenancy cleaning</a></li>
-            <li><a href="#" className="hover:underline">Carpet cleaning</a></li>
-            <li><a href="#" className="hover:underline">Upholstery cleaning</a></li>
-            <li><a href="#" className="hover:underline">Same Day cleaning</a></li>
-            <li><a href="#" className="hover:underline">Kitchen Deep Cleaning</a></li>
-            <li><a href="#" className="hover:underline">Rug Cleaning</a></li>
-            <li><a href="#" className="hover:underline">Move in cleaning</a></li>
-            <li><a href="#" className="hover:underline">Bathroom cleaning</a></li>
-            <li><a href="#" className="hover:underline">Mattress cleaning</a></li>
-            <li><a href="#" className="hover:underline">Spring cleaning</a></li>
-          </ul>
-        </DropdownHeader>
+        {/* For Customers & For Cleaners */}
+        <div className="lg:col-span-1">
+          <DropdownHeader title="FOR CUSTOMERS" dropdownName="forCustomers">
+            <ul className="space-y-2 pb-4 lg:pb-0">
+              <li><a href="#" className="hover:underline">Pricing</a></li>
+              <li><a href="#" className="hover:underline">What's included</a></li>
+              <li><a href="#" className="hover:underline">Blog</a></li>
+              <li><a href="#" className="hover:underline">Booking Policy</a></li>
+              <li><a href="#" className="hover:underline">Cancellation Policy</a></li>
+              <li><a href="#" className="hover:underline">Terms & Conditions</a></li>
+              <li><a href="#" className="hover:underline">Privacy Policy</a></li>
+              <li><a href="#" className="hover:underline">Cookies Policy</a></li>
+              {/* <li><a href="#" className="hover:underline">Reclean Guarantee</a></li> */}
+              <li><a href="#" className="hover:underline">Sitemap</a></li>
+            </ul>
+            <h3 className="font-bold text-lg mb-4 text-brand-primary mt-6">FOR CLEANERS</h3>
+            <ul className="space-y-2">
+              {/* <li><a href="#" className="hover:underline">Join Us</a></li> */}
+            </ul>
+          </DropdownHeader>
+        </div>
 
-        <DropdownHeader title="WHO WE ARE" dropdownName="whoWeAre">
-          <ul className="space-y-2 pb-4 lg:pb-0">
-            <li><a href="#" className="hover:underline">About us</a></li>
-            <li><a href="#" className="hover:underline">Contact us</a></li>
-          </ul>
-        </DropdownHeader>
-      </div>
+        {/* De Gemini Service & Who We Are */}
+        <div className="lg:col-span-1">
+          <DropdownHeader title="De Gemini SERVICE" dropdownName="deGeminiService">
+            <ul className="space-y-2 pb-4 lg:pb-0">
+              <li><a href="#" className="hover:underline">Regular cleaning</a></li>
+              <li><a href="#" className="hover:underline">Deep cleaning</a></li>
+              <li><a href="#" className="hover:underline">Office cleaning</a></li>
+              <li><a href="#" className="hover:underline">End of Tenancy cleaning</a></li>
+              <li><a href="#" className="hover:underline">Carpet cleaning</a></li>
+              <li><a href="#" className="hover:underline">Upholstery cleaning</a></li>
+              <li><a href="#" className="hover:underline">Same Day cleaning</a></li>
+              <li><a href="#" className="hover:underline">Kitchen Deep Cleaning</a></li>
+              <li><a href="#" className="hover:underline">Rug Cleaning</a></li>
+              <li><a href="#" className="hover:underline">Move in cleaning</a></li>
+              <li><a href="#" className="hover:underline">Bathroom cleaning</a></li>
+              <li><a href="#" className="hover:underline">Mattress cleaning</a></li>
+              <li><a href="#" className="hover:underline">Spring cleaning</a></li>
+            </ul>
+          </DropdownHeader>
+          <DropdownHeader title="WHO WE ARE" dropdownName="whoWeAre">
+            <ul className="space-y-2 pb-4 lg:pb-0">
+              <li><a href="#" className="hover:underline">About us</a></li>
+              <li><a href="#" className="hover:underline">Contact us</a></li>
+            </ul>
+          </DropdownHeader>
+        </div>
 
-        {/* Column 4 (combined from screenshot): Logo, App Downloads, Social Media */}
-        <div className="md:col-span-2 lg:col-span-2 flex flex-col items-start md:items-start lg:items-end text-center md:text-left lg:text-right">
-          {/* Logo */}
-          <h1 className='text-brand-primary hidden md:hidden lg:block text-[20px] md:text-[25px] lg:text-[30px]'>
-          De Gemini
-          </h1>
-          
-          <p className="font-bold text-lg mb-4 text-brand-primary">CLEANING AVAILABLE 24/7</p>
-          {/* Social Media */}
-          <h3 className="font-bold text-lg mb-4 text-brand-primary">SOCIAL MEDIA</h3>
-          <div className="flex space-x-4">
+        {/* Social Media - Modern, Centered on Mobile */}
+        <div className="lg:col-span-1 flex flex-col items-center lg:items-end justify-end mt-8 lg:mt-0">
+          <h3 className="font-bold text-lg mb-2 text-brand-primary tracking-wide">SOCIAL MEDIA</h3>
+          <div className="flex space-x-4 mb-2">
             <a href="https://www.instagram.com/de_gemini_sevices?igsh=dGFqbmFrZTMxcGI1" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <Instagram className="h-7 w-7 text-brand-primary hover:text-blue-500 transition duration-300" />
             </a>
             <a href="https://www.facebook.com/share/1Axqo294Wx/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
               <Facebook className="h-7 w-7 text-brand-primary hover:text-blue-500 transition duration-300" />
             </a>
-            <a href="https://www.tiktok.com/@de.gemini.services?_t=ZS-8xiqay0oCet&_r=1" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <a href="https://www.tiktok.com/@de.gemini.services?_t=ZS-8xiqay0oCet&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
               <AiFillTikTok className="h-7 w-7 text-brand-primary hover:text-blue-500 transition duration-300" />
             </a>
           </div>
@@ -108,7 +111,7 @@ export const Footer: React.FC = () => {
 
       {/* Floating Call Button */}
       <a 
-        href="tel:+1234567890" // Replace with actual phone number
+        href="tel:+1234567890"
         className="fixed bottom-6 right-6 md:bottom-10 md:right-10 bg-brand-primary hover:bg-brand-primary text-brand-secondary rounded-full p-4 shadow-lg transition duration-300 ease-in-out transform hover:scale-110 z-50"
         aria-label="Call us"
       >

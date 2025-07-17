@@ -13,7 +13,7 @@ const servicesLinks: Links[] = [
   { name: 'Office cleaning', href: '/services-office-cleaning' },
   { name: 'End of Tenancy cleaning', href: '/services/end-tenancy-cleaning' },
   { name: 'Carpet cleaning', href: '/services/carpet-cleaning' },
-  { name: 'Upholstery cleaning', href: '/services-upholstery-cleaning' },
+  // { name: 'Upholstery cleaning', href: '/services-upholstery-cleaning' },
   { name: 'Same Day cleaning', href: '/services/same-day-cleaning' },
   { name: 'Kitchen Deep Cleaning', href: '/services/kitchen-deep-cleaning' },
   { name: 'Rug Cleaning', href: '/services/rug-cleaning' },
@@ -119,13 +119,51 @@ const Navbar = () => {
   };
 
   return (
-    <header className="relative w-full bg-white shadow-md z-50">
-      <nav className="max-w-7xl mx-auto flex items-center justify-between py-4 px-4 md:px-6">
+    <header className="relative w-full bg-white shadow-md z-50 py-4 px-6 sm:px-16">
+      <nav className="max-w-7xl mx-auto flex items-center justify-between ">
         {/* Logo */}
-        <a href="/" className="flex items-center">
-          <h1 className='text-brand-primary text-[20px]'>
-            De<span className="font-semibold">Gemini</span>
+        <a href="/" className="flex flex-col items-start relative group">
+          <h1 className='text font-bold text-blue-400 text-[20px]'>
+            De<span className="font-semibold text-brand-primary">Gemini</span>
           </h1>
+          {/* Creative SVG Underline with Animation */}
+          <svg
+            className="absolute left-0 right-0 -bottom-0 w-full h-2 group-hover:opacity-100 opacity-80 transition"
+            viewBox="0 0 80 8"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            style={{ minWidth: '60px', maxWidth: '120px' }}
+          >
+            <path
+              className="logo-underline-animate"
+              d="M2 6C18 2 62 2 78 6"
+              stroke="#0e57c5"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              fill="none"
+            />
+          </svg>
+          <style>{`
+            @keyframes draw-erase-underline {
+              0% {
+                stroke-dashoffset: 80;
+              }
+              3.33% {
+                stroke-dashoffset: 0;
+              }
+              93.33% {
+                stroke-dashoffset: 0;
+              }
+              100% {
+                stroke-dashoffset: 80;
+              }
+            }
+            .logo-underline-animate {
+              stroke-dasharray: 80;
+              stroke-dashoffset: 80;
+              animation: draw-erase-underline 15s linear infinite;
+            }
+          `}</style>
         </a>
 
         {/* Hamburger/Close Button for Mobile */}
@@ -206,8 +244,10 @@ const Navbar = () => {
           <li><a href="/giftVoucher" className="text-gray-700 text-[16px] font-semibold hover:text-brand-primary transition duration-300 ease-in-out">Gifts</a></li>
           <li><a href="/blog" className="text-gray-700 text-[16px] font-semibold hover:text-brand-primary transition duration-300 ease-in-out">Blog</a></li>
           <li><a href="/help" className="text-gray-700 text-[16px] font-semibold hover:text-brand-primary transition duration-300 ease-in-out">Help</a></li>
+          {/*
           <li><a href="/reclean-guarantee" className="text-gray-700 text-[16px] font-semibold hover:text-brand-primary transition duration-300 ease-in-out">Reclean guarantee</a></li>
           <li><a href="/home/registercleaner" className="text-gray-700 text-[16px] font-semibold hover:text-brand-primary transition duration-300 ease-in-out">Become a cleaner</a></li>
+          */}
           <li>
             <a href="/login" className="px-5 py-2 border border-brand-primary text-brand-primary rounded-md hover:bg-brand-primary hover:text-white transition duration-300 ease-in-out">
               Sign In
@@ -276,8 +316,10 @@ const Navbar = () => {
           <li><a onClick={toggleMobileMenu} href="/giftVoucher" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Gifts</a></li>
           <li><a onClick={toggleMobileMenu} href="/blog" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Blog</a></li>
           <li><a onClick={toggleMobileMenu} href="/help" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Help</a></li>
+          {/*
           <li><a onClick={toggleMobileMenu} href="/reclean-guarantee" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Reclean guarantee</a></li>
           <li><a onClick={toggleMobileMenu} href="/home/registercleaner" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Become a cleaner</a></li>
+          */}
           <li className="w-full pt-4">
             <a onClick={toggleMobileMenu} href="#" className="block w-full text-center px-5 py-3 border border-brand-primary text-brand-primary rounded-lg hover:bg-brand-primary hover:text-white transition duration-300 ease-in-out text-lg">
               Sign In

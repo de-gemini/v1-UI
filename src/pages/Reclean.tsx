@@ -4,6 +4,7 @@ import axiosInstance from '../api/axiosInstance';
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from "../constants";
+import CommonPostcodeInput from '../components/commons/CommonPostcodeInput';
 
 export default function Reclean() {
 
@@ -188,22 +189,8 @@ export default function Reclean() {
             <p className="text-[rgb(47,60,72)] text-[16px] font-[400] mb-6">Our standard cleaning service includes everything you need to get your home in order as quickly as possible. You can book additional services when you make your booking.</p>
 
             {/* Postcode Input and Button */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-white p-2 pr-2 sm:p-3 sm:pr-3 rounded-xl shadow-lg border border-gray-200 max-w-md w-full">
-              <div className="flex items-center flex-grow p-2">
-                <MapPin className="h-6 w-6 text-gray-400 mr-3" />
-                <input
-                  type="text"
-                  placeholder="Enter your post code here"
-                  className="flex-grow text-gray-700 placeholder-gray-400 focus:outline-none text-base sm:text-lg bg-transparent"
-                  aria-label="Enter your postcode"
-                  value={postcode}
-                  onChange={(e) => setPostcode(e.target.value)}
-                />
-              </div>
-              <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary nunito-sans-heading py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5" onClick={handleQuoteMeClick}>
-                QUOTE ME
-              </button>
-            </div>
+            <CommonPostcodeInput />
+            
 
 
         </div>
@@ -222,24 +209,9 @@ export default function Reclean() {
           Your Burden
           </h1>
 
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-white p-2 pr-2 sm:p-3 sm:pr-3 rounded-xl shadow-lg border border-purple-300 max-w-md w-full">
-                <div className="flex items-center flex-grow p-2">
-                  <MapPin className="h-6 w-6 text-gray-400 mr-3 flex-shrink-0" />
-                  <input
-                    type="text"
-                    placeholder="Enter your post code here"
-                    className="flex-grow text-gray-700 placeholder-gray-400 focus:outline-none text-base sm:text-lg bg-transparent"
-                    value={postcode}
-                    onChange={(e) => setPostcode(e.target.value)}
-                    aria-label="Enter your postcode"
-                  />
-                </div>
-                <button 
-                onClick={handleQuoteMeClick}
-                className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary nunito-sans-heading py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5">
-                QUOTE ME
-              </button>
-              </div>
+          
+                <CommonPostcodeInput />
+           
 
           
 

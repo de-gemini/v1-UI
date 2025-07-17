@@ -1,186 +1,168 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation, A11y } from 'swiper/modules';
+import React, { useRef } from "react";
+import type { ReactNode } from "react";
+import card7 from "../assets/images/card-7.png";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, A11y, Autoplay } from "swiper/modules";
 import { ArrowLeft, ArrowRight } from 'lucide-react';
+// import "swiper/css";
+// import "swiper/css/navigation";
 
-interface Professional {
-  id: number;
-  imageSrc: string;
-  name: string;
-  rating: number;
+// New CleaningTip type for the carousel
+interface CleaningTip {
+  title: string;
   description: string;
-}
-
-interface ProfessionalCardProps {
-  professional: Professional;
+  image: string; // Required image URL
+  tag?: string;
+  link?: string;
+  color?: string;
 }
 
 interface ProfessionalsCarouselProps {
-  professionals: Professional[];
+  tips: CleaningTip[];
 }
 
-const StarRating: React.FC<{ rating: number }> = ({ rating }) => {
-  const fullStars = Math.floor(rating);
-  const hasHalfStar = rating % 1 !== 0;
-  const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+// Deeper color palette for icon, lighter for background
+const COLOR_PALETTE = [
+  { icon: '#34D399', bg: '#D1FAE5' }, // emerald-400, emerald-100
+  { icon: '#6366F1', bg: '#E0E7FF' }, // indigo-500, indigo-100
+  { icon: '#F59E42', bg: '#FEF3C7' }, // orange-400, orange-100
+  { icon: '#3B82F6', bg: '#DBEAFE' }, // blue-500, blue-100
+  { icon: '#F43F5E', bg: '#FFE4E6' }, // rose-500, rose-100
+  { icon: '#10B981', bg: '#D1FAE5' }, // green-500, green-100
+  { icon: '#A21CAF', bg: '#EDE9FE' }, // purple-800, purple-100
+];
 
-  return (
-    <div className="flex items-center text-brand-primary">
-      {[...Array(fullStars)].map((_, i) => (
-        <svg key={`full-${i}`} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
-          <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
-        </svg>
-      ))}
-      {hasHalfStar && (
-        <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
-          <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0z" />
-        </svg>
-      )}
-      {[...Array(emptyStars)].map((_, i) => (
-        <svg key={`empty-${i}`} className="w-4 h-4 fill-current text-gray-300" viewBox="0 0 20 20">
-          <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
-        </svg>
-      ))}
-    </div>
-  );
-};
+function getColor(idx: number) {
+  return COLOR_PALETTE[idx % COLOR_PALETTE.length];
+}
 
-const ProfessionalCard: React.FC<ProfessionalCardProps> = ({ professional }) => {
-  const { imageSrc, name, rating, description } = professional;
-  const [isExpanded, setIsExpanded] = useState(false);
-  const textLimit = 100;
+export const ProfessionalsCarousel: React.FC<ProfessionalsCarouselProps> = ({ tips }) => {
+  // Always show at least 6 cards for design consistency
+  let displayTips: CleaningTip[] = tips.length >= 6 ? tips : [
+    ...tips,
+    ...Array.from({ length: 6 - tips.length }, (_, i) => ({
+      title: "Coming Soon",
+      description: "More of our cleaning philosophy will be revealed soon!",
+      image: card7, // Placeholder image
+      tag: "Philosophy",
+      color: getColor(tips.length + i).icon,
+      link: undefined, // Ensure 'link' is always present
+    })),
+  ];
 
-  const toggleReadMore = () => {
-    setIsExpanded(!isExpanded);
-  };
-
-  return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full border border-gray-100">
-      <div className="w-full h-56 overflow-hidden bg-gray-100 flex items-center justify-center">
-        <img
-          src={imageSrc}
-          alt={name}
-          className="w-full h-full object-cover object-top"
-          onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-            const target = e.target as HTMLImageElement;
-            target.onerror = null;
-            target.src = 'https://placehold.co/400x250/ccc/333?text=Professional';
-            target.alt = `Image for ${name} not found`;
-          }}
-        />
-      </div>
-
-      <div className="p-4 flex flex-col flex-grow">
-        <h3 className="text-xl font-bold text-gray-800 mb-1">{name}</h3>
-        <StarRating rating={rating} />
-        <p className="text-gray-700 text-sm mt-3 mb-2 flex-grow leading-relaxed">
-          {description.length > textLimit && !isExpanded
-            ? `${description.substring(0, textLimit)}...`
-            : description}
-        </p>
-        {description.length > textLimit && (
-          <button
-            onClick={toggleReadMore}
-            className="text-brand-primary font-semibold text-sm self-start hover:underline focus:outline-none mt-auto"
-          >
-            {isExpanded ? 'See less' : 'See more'}
-          </button>
-        )}
-      </div>
-    </div>
-  );
-};
-
-export const ProfessionalsCarousel: React.FC<ProfessionalsCarouselProps> = ({ professionals }) => {
+  // Swiper navigation refs
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
 
-  useEffect(() => {
-    // This useEffect is mostly a fallback/re-initializer if Swiper's internal mechanisms
-    // somehow miss the refs on first render. onBeforeInit is the primary way.
-  }, []);
-
   return (
-    <section className="bg-white py-16">
-      <div className="max-w-7xl mx-auto relative overflow-hidden"> {/* Added overflow-hidden */}
-        {/* Swiper Navigation Buttons */}
-        <button
-          ref={prevRef}
-          aria-label="Previous slide"
-          // Adjusted left position to be slightly outside the content area for alignment with screenshot
-          // Consider matching your general page padding here
-          className="absolute z-20 left-4 sm:left-6 lg:left-8 top-1/2 -translate-y-1/2 bg-white border border-gray-200 shadow-lg rounded-full p-3 flex items-center justify-center hover:bg-brand-primary hover:text-white transition duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed hidden md:flex"
-          style={{ boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
-        >
-          <ArrowLeft className="w-7 h-7" />
-        </button>
-        <button
-          ref={nextRef}
-          aria-label="Next slide"
-          // Adjusted right position to be slightly outside the content area for alignment with screenshot
-          // Consider matching your general page padding here
-          className="absolute z-20 right-4 sm:right-6 lg:right-8 top-1/2 -translate-y-1/2 bg-white border border-gray-200 shadow-lg rounded-full p-3 flex items-center justify-center hover:bg-brand-primary hover:text-white transition duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed hidden md:flex"
-          style={{ boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
-        >
-          <ArrowRight className="w-7 h-7" />
-        </button>
-
-        <Swiper
-          modules={[Pagination, Navigation, A11y]}
-          spaceBetween={24}
-          slidesPerView={1.1}
-          centeredSlides={false}
-          navigation={{
-            prevEl: prevRef.current,
-            nextEl: nextRef.current,
-          }}
-          pagination={{ clickable: true }}
-          loop={false}
-          className="mySwiper !pb-12"
-          slidesOffsetBefore={16}
-          slidesOffsetAfter={16} 
-          onBeforeInit={(swiper) => {
-            if (swiper.params.navigation && typeof swiper.params.navigation !== 'boolean') {
-              const { navigation } = swiper.params;
-              navigation.prevEl = prevRef.current;
-              navigation.nextEl = nextRef.current;
-            }
-          }}
-          breakpoints={{
-            640: { // sm
-              slidesPerView: 2.2,
-              spaceBetween: 24,
-              slidesOffsetBefore: 24,
-              slidesOffsetAfter: 24,
-            },
-            768: { // md
-              slidesPerView: 3.2,
-              spaceBetween: 24,
-              slidesOffsetBefore: 32,
-              slidesOffsetAfter: 32,
-            },
-            1024: {
-              slidesPerView: 3.8,
-              spaceBetween: 32,
-              slidesOffsetBefore: 32,
-              slidesOffsetAfter: 32,
-            },
-            1280: {
-              slidesPerView: 4.2,
-              spaceBetween: 32,
-              slidesOffsetBefore: 32, 
-              slidesOffsetAfter: 32,
-            },
-          }}
-        >
-          {professionals.map((professional) => (
-            <SwiperSlide key={professional.id} className="!h-auto">
-              <ProfessionalCard professional={professional} />
+    <div className="w-full px-6 sm:px-16 pt-8 relative">
+      <h2 className="text-2xl md:text-3xl font-bold text-brand-primary mb-6">Our Cleaning Philosophy</h2>
+      {/* Navigation Arrows */}
+      <button
+        ref={prevRef}
+        aria-label="Previous slide"
+        className="absolute z-10 left-2 top-1/2 -translate-y-1/2 bg-white border border-gray-300 rounded-full p-2 flex items-center justify-center hover:bg-brand-primary hover:text-white transition disabled:opacity-50 disabled:cursor-not-allowed"
+        style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}
+      >
+        <ArrowLeft className="w-6 h-6" />
+      </button>
+      <button
+        ref={nextRef}
+        aria-label="Next slide"
+        className="absolute z-10 right-2 top-1/2 -translate-y-1/2 bg-white border border-gray-300 rounded-full p-2 flex items-center justify-center hover:bg-brand-primary hover:text-white transition disabled:opacity-50 disabled:cursor-not-allowed"
+        style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}
+      >
+        <ArrowRight className="w-6 h-6" />
+      </button>
+      <Swiper
+        modules={[Navigation, A11y, Autoplay]}
+        spaceBetween={24}
+        slidesPerView={1}
+        loop={true}
+        navigation={{ prevEl: prevRef.current, nextEl: nextRef.current }}
+        className="!pb-10 mx-auto justify-center"
+        centeredSlides={true}
+        centeredSlidesBounds={true}
+        autoplay={{ delay: 3500, disableOnInteraction: true }}
+        onInit={(swiper) => {
+          // @ts-ignore
+          swiper.params.navigation.prevEl = prevRef.current;
+          // @ts-ignore
+          swiper.params.navigation.nextEl = nextRef.current;
+          swiper.navigation.init();
+          swiper.navigation.update();
+        }}
+        breakpoints={{
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 24,
+            centeredSlides: false,
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 24,
+            centeredSlides: false,
+          },
+          1280: {
+            slidesPerView: 4,
+            spaceBetween: 24,
+            centeredSlides: false,
+          },
+        }}
+      >
+        {displayTips.map((tip, idx) => {
+          const { icon: iconColor, bg: bgColor } = getColor(idx);
+          return (
+            <SwiperSlide key={idx} className="h-full flex justify-center">
+              <div
+                className="min-h-[350px] shadow-sm w-full bg-white rounded-2xl flex-shrink-0 flex flex-col items-start p-0 relative border border-gray-200 overflow-hidden"
+              >
+                {/* Large top image, rounded top corners only */}
+                <div className="w-full relative">
+                  <img
+                    src={tip.image}
+                    alt={tip.title}
+                    className="w-full h-48 object-cover object-center rounded-t-2xl"
+                  />
+                  {/* Overlay mask */}
+                  <svg
+                    className="absolute left-0 -bottom-2 w-full h-12 z-10"
+                    viewBox="0 0 100 24"
+                    fill="white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    style={{ pointerEvents: 'none' }}
+                  >
+                    <path d="M0,24 Q100,0 100,24 Z" fill="white" />
+                  </svg>
+                </div>
+                <div className="flex flex-col items-start p-6 pt-4 w-full z-10">
+                  {tip.tag && (
+                    <span
+                      className="absolute opacity-0 top-4 right-4 text-xs font-semibold px-3 py-1 rounded-full z-10"
+                      style={{ background: iconColor, color: '#fff' }}
+                    >
+                      {tip.tag}
+                    </span>
+                  )}
+                  <h3 className="text-3xl font-bold my-6 text-brand-primary  z-10">{tip.title}</h3>
+                  <p className="text-gray-700 mb-4 text-sm z-10">{tip.description}</p>
+                  {tip.link && (
+                    <a
+                      href={tip.link}
+                      className="mt-auto text-brand-primary font-semibold hover:underline text-sm z-10"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Learn More
+                    </a>
+                  )}
+                </div>
+              </div>
             </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
-    </section>
+          );
+        })}
+      </Swiper>
+    </div>
   );
 };
 

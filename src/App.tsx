@@ -20,7 +20,6 @@ import PricingManagement from "./pages/admin/PricingManagement";
 import ErrorAlert from "./components/ErrorAlert";
 import SuccessAlert from "./components/SuccessAlert";
 import ScheduleManagement from "./pages/admin/ScheduleManagement";
-import DeepCleaning from "./pages/DeepCleaning";
 import StripeTestPage from './pages/StripeTestPage';
 import StripeCardPaymentPage from './pages/StripeCardPaymentPage';
 import PaymentSuccessPage from './pages/PaymentSuccessPage';
@@ -28,6 +27,8 @@ import { useEffect, useState } from "react";
 import { isTokenValid } from "./utils/isTokenValid";
 import { PendingBookingModal } from "./components/PendingBookingModal";
 import ScrollToTop from "./components/ScrollToTop";
+import { PageLoader } from "./components/LoadingSpinner";
+import StackedPagesLoader from "./components/StackedPagesLoader";
 
 // Protected Route wrapper component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -53,23 +54,23 @@ const Become = lazy(() => import("./pages/BecomeCleaner"));
 const GiftVoucher = lazy(() => import("./pages/Gift"));
 const Reclean = lazy(() => import("./pages/Reclean"));
 const Blog = lazy(() => import("./pages/Blog"));
-const HouseCleaning = lazy(() => import("./pages/HouseCleaning"));
-const OfficeCleaning = lazy(() => import("./pages/OfficeCleaning"));
-const EndTenancy = lazy(() => import("./pages/EndTenancy"));
-const CarpetCleaning = lazy(() => import("./pages/CarpetCleaning"));
-const Upholstery = lazy(() => import("./pages/Upholstery"));
-const RegularCleaning = lazy(() => import("./pages/RegularCleaning"));
-const OfficeCleaningPage = lazy(() => import("./pages/OfficeCleaningPage"));
-const DeepCleaningService = lazy(() => import("./pages/DeepCleaningService"));
-const SameDayCleaning = lazy(() => import("./pages/SameDayCleaning"));
-const KitchenDeepCleaning = lazy(() => import("./pages/KitchenDeep"));
-const EndTenancyService = lazy(() => import("./pages/EndTenancyPage"));
-const CarpetService = lazy(() => import("./pages/CarpetService"));
-const RugCleaning = lazy(() => import("./pages/RugCleaning"));
-const MoveInCleaning = lazy(() => import("./pages/MoveIn"));
-const BathroomCleaning = lazy(() => import("./pages/BathroomCleaning"));
-const MattressCleaning = lazy(() => import("./pages/MattressCleaning"));
-const SpringCleaning = lazy(() => import("./pages/SpringCleaning"));
+const HouseCleaning = lazy(() => import("./pages/pricing/HouseCleaning"));
+const OfficeCleaning = lazy(() => import("./pages/pricing/OfficeCleaning"));
+const EndTenancy = lazy(() => import("./pages/pricing/EndTenancy"));
+const CarpetCleaning = lazy(() => import("./pages/pricing/CarpetCleaning"));
+const Upholstery = lazy(() => import("./pages/pricing/Upholstery"));
+const RegularCleaning = lazy(() => import("./pages/services/RegularCleaning"));
+const OfficeCleaningPage = lazy(() => import("./pages/services/OfficeCleaningPage"));
+const DeepCleaningService = lazy(() => import("./pages/services/DeepCleaningService"));
+const SameDayCleaning = lazy(() => import("./pages/services/SameDayCleaning"));
+const KitchenDeepCleaning = lazy(() => import("./pages/services/KitchenDeep"));
+const EndTenancyService = lazy(() => import("./pages/services/EndTenancyPage"));
+const CarpetService = lazy(() => import("./pages/services/CarpetService"));
+const RugCleaning = lazy(() => import("./pages/services/RugCleaning"));
+const MoveInCleaning = lazy(() => import("./pages/services/MoveIn"));
+const BathroomCleaning = lazy(() => import("./pages/services/BathroomCleaning"));
+const MattressCleaning = lazy(() => import("./pages/services/MattressCleaning"));
+const SpringCleaning = lazy(() => import("./pages/services/SpringCleaning"));
 const Checkout = lazy(() => import("./pages/Checkout"));
 const Signup = lazy(() => import("./pages/Signup"));
 
@@ -79,7 +80,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <Suspense fallback={<p>Loading......</p>}>
+      <Suspense fallback={<StackedPagesLoader fullScreen text="Loading..." />}>
         <ErrorAlert />
         <SuccessAlert />
         <PendingBookingModal />
@@ -183,7 +184,7 @@ function App() {
                 path="/prcing-deep-cleaning"
                 element={
                     <Layout>
-                      <DeepCleaning />
+                      <DeepCleaningService />
                     </Layout>
                 }
               />
@@ -236,7 +237,7 @@ function App() {
                 }
               />
               <Route
-                path="/services/deep-cleaning"
+                path="/services-deep-cleaning"
                 element={
                     <Layout>
                       <DeepCleaningService />

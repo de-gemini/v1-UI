@@ -4,6 +4,7 @@ import axiosInstance from '../api/axiosInstance';
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../constants';
+import CommonPostcodeInput from './commons/CommonPostcodeInput';
 
 // You might consider making these props if you have different variations
 interface PriceCardProps {
@@ -34,22 +35,22 @@ export const DeepPriceCard: React.FC<PriceCardProps> = ({
       // Optional: log or inspect the API response
       console.log(res.data);
   
-       // Check if the API returned a valid area
-    if (res.data?.area) {
-      toast.success(`Postcode found: ${res.data.area}`);
-      navigate(`/checkout?postcode=${encodeURIComponent(postcode.trim())}`);
-    } else {
-      toast.error('Invalid postcode or area not found.');
-    }
+      // Check if the API returned a valid area
+      if (res.data?.area) {
+        toast.success(`Postcode found: ${res.data.area}`);
+        navigate(`/checkout?postcode=${encodeURIComponent(postcode.trim())}`);
+      } else {
+        toast.error('Invalid postcode or area not found.');
+      }
 
-  } catch (err: any) {
-    const msg = err?.response?.data?.message || err.message || 'An error occurred';
-    toast.error(msg);
-  }
+    } catch (err: any) {
+      const msg = err?.response?.data?.message || err.message || 'An error occurred';
+      toast.error(msg);
+    }
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-xl p-6 relative w-full max-w-sm mx-auto">
+    <div className="relative w-full  mx-auto bg-white  p-8 flex flex-col items-center transition-all duration-300 ">
       {/* Cashback Badge */}
       <ToastContainer
         position='top-right'
@@ -57,72 +58,60 @@ export const DeepPriceCard: React.FC<PriceCardProps> = ({
         hideProgressBar={false}
         autoClose={5000}
         draggable={true}
-        icon={<Check/>}
+        icon={<Check />}
         pauseOnHover={true}
-        />
-      <div className="absolute -top-4 left-6 bg-yellow-300 text-gray-800 text-sm font-semibold px-4 py-2 rounded-lg shadow-md">
+      />
+      <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-yellow-300 to-yellow-400 text-gray-900 text-xs font-bold px-5 py-2 rounded-full shadow-lg border border-yellow-200 tracking-wide z-10">
         {cashbackText}
       </div>
 
-      <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mt-4 mb-2">
-      Prices for deep cleaning in England
+      <h2 className="text-center text-2xl md:text-3xl font-extrabold text-gray-800 mt-8 mb-2">
+        Prices for deep cleaning in England
       </h2>
-      <p className="text-brand-primary text-2xl md:text-3xl font-bold mb-8">
+      <p className="text-brand-primary text-3xl font-bold mb-8 text-center">
         from £19/h
       </p>
 
-      {/* Price List Items */}
-      <div className="space-y-4 mb-8">
-        {/* Weekly */}
-        <div className="flex justify-between items-center pb-4 border-b border-gray-200">
-        <span className="text-gray-700 text-lg">Next day</span>
-          <p className="font-semibold text-lg"><span>Any day from tomorrow (8 am - 9 pm)</span>
-<span className='text-brand-primary'>£19/h</span></p>
-        </div>
-
-        {/* Fortnightly */}
-        <div className="flex justify-between items-center pb-4 border-b border-gray-200">
-          <span className="text-gray-700 text-lg">Peak</span>
-          <p className="font-semibold text-lg"><span>High demand</span>
-<span className='text-brand-primary'>£20/h</span></p>
-        </div>
-
-        {/* Monthly - no bottom border on last item */}
-        <div className="flex justify-between items-center">
-          <span className="text-gray-700 text-lg">Night
-</span>
-<p className="font-semibold text-lg"><span>Any day (9 pm - 8 am)</span>
-<span className='text-brand-primary'>£29/h</span></p>
-        </div>
-
-        <div className="flex justify-between items-center">
-          <span className="text-gray-700 text-lg">End of tenancy
-</span>
-<p className="font-semibold text-lg"><span>Applicable Tariff + End of Tenancy Charge</span>
-<span className='text-brand-primary'>£39/h</span></p>
-        </div>
+      {/* Price List Table */}
+      <div className="w-full mb-8">
+        <table className="w-full text-left border-separate border-spacing-y-2">
+          <thead>
+            <tr>
+              <th className="text-gray-600 text-sm font-semibold pb-2">Type</th>
+              <th className="text-gray-600 text-sm font-semibold pb-2">Details</th>
+              <th className="text-gray-600 text-sm font-semibold pb-2 text-right">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="bg-gray-50 rounded-lg">
+              <td className="py-3 px-2 text-gray-800 font-medium rounded-l-lg">Next day</td>
+              <td className="py-3 px-2 text-gray-500">Any day from tomorrow (8 am - 9 pm)</td>
+              <td className="py-3 px-2 text-brand-primary font-bold text-right rounded-r-lg">£19/h</td>
+            </tr>
+            <tr className="bg-white">
+              <td className="py-3 px-2 text-gray-800 font-medium">Peak</td>
+              <td className="py-3 px-2 text-gray-500">High demand</td>
+              <td className="py-3 px-2 text-brand-primary font-bold text-right">£20/h</td>
+            </tr>
+            <tr className="bg-gray-50">
+              <td className="py-3 px-2 text-gray-800 font-medium">Night</td>
+              <td className="py-3 px-2 text-gray-500">Any day (9 pm - 8 am)</td>
+              <td className="py-3 px-2 text-brand-primary font-bold text-right">£29/h</td>
+            </tr>
+            <tr className="bg-white">
+              <td className="py-3 px-2 text-gray-800 font-medium">End of tenancy</td>
+              <td className="py-3 px-2 text-gray-500">Applicable Tariff + End of Tenancy Charge</td>
+              <td className="py-3 px-2 text-brand-primary font-bold text-right">£39/h</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
       {/* Postcode Input */}
-      <div className="flex items-center w-full bg-white border border-brand-primary rounded-lg p-3 mb-6 focus-within:border-brand-primary transition-colors duration-200">
-        <MapPin className="h-5 w-5 text-brand-primary mr-3 flex-shrink-0" />
-        <input
-          type="text"
-          placeholder={inputPlaceholder}
-          className="flex-grow text-gray-700 placeholder-gray-400 focus:outline-none bg-transparent text-base"
-          value={postcode}
-          onChange={(e) => setPostcode(e.target.value)}
-          aria-label={inputPlaceholder}
-        />
-      </div>
+      
+        <CommonPostcodeInput />
+      
 
-      {/* Quote Me Button */}
-      <button
-        onClick={handleQuoteClick}
-        className="w-full bg-brand-primary hover:bg-blue-500 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300"
-      >
-        {buttonText}
-      </button>
     </div>
   );
 };

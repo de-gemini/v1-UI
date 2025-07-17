@@ -6,36 +6,11 @@ import axiosInstance from '../api/axiosInstance';
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from "../constants";
+import CommonPostcodeInput from '../components/commons/CommonPostcodeInput';
+import Navbar from "../components/Navbar";
 
 export default function Blog() {
-  const [postcode, setPostcode] = useState<string>("");
   const navigate = useNavigate();
-
-  const handleQuoteMeClick = async () => {
-    if (!postcode.trim()) {
-      toast.error('Please enter a postcode.');
-      return;
-    }
-  
-    try {
-      const res = await axiosInstance.post(`${API_BASE_URL}/postcode`, { postcode });
-  
-      // Optional: log or inspect the API response
-      console.log(res.data);
-  
-       // Check if the API returned a valid area
-    if (res.data?.area) {
-      toast.success(`Postcode found: ${res.data.area}`);
-      navigate(`/checkout?postcode=${encodeURIComponent(postcode.trim())}`);
-    } else {
-      toast.error('Invalid postcode or area not found.');
-    }
-
-  } catch (err: any) {
-    const msg = err?.response?.data?.message || err.message || 'An error occurred';
-    toast.error(msg);
-  }
-  };
 
   interface BlogPost {
     id: string;
@@ -43,84 +18,92 @@ export default function Blog() {
     category: string;
     title: string;
     excerpt: string;
-    imageUrl?: string; // Optional image for the card
+    imageUrl?: string;
     readMoreLink: string;
   }
 
   const blogCategories = [
-    "CLEANING CHECKLISTS",
-    "CLEANING TIPS",
-    "DECLUTTERING",
-    "ECO LIVING",
-    "EMOP STORIES",
+    "CLEANING TRENDS",
+    "PET CARE",
+    "HEALTH & HYGIENE",
+    "FAMILY LIFE",
+    "SEASONAL CLEANING",
+    "TECH & TOOLS",
+    "GREEN LIVING",
+    "ORGANISATION",
+    "LIFESTYLE",
+    "DIY"
   ];
-  const [activeCategory, setActiveCategory] = useState<string>(""); // State for active category
+  const [activeCategory, setActiveCategory] = useState<string>("");
 
   const featuredPost: BlogPost = {
     id: "featured-1",
-    date: "14 OCTOBER",
-    category: "EMOP STORIES",
-    title: "An Update on De-Gemini's Growth Throughout the UK",
+    date: "20 JUNE",
+    category: "PET CARE",
+    title: "Dog Owners: Keeping Your Home Clean with Pets",
     excerpt:
-      "We are excited to announce De-Gemini's latest achievement - our growth throughout the UK. We have not just been pleasing clients in England - where we began - but in recent years, throughout the UK.",
+      "Dogs bring joy and companionship, but also fur and muddy paws! Discover practical tips for maintaining a spotless home with your canine friend.",
     imageUrl:
-      "https://www.emop.co.uk/blog/wp-content/uploads/2023/10/pexels-karolina-grabowska-4239031.jpg", // Example featured image
+      "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=800&q=80",
     readMoreLink: "#",
   };
 
   const allBlogPosts: BlogPost[] = [
     {
-      id: "blog-1",
-      date: "14 OCTOBER",
-      category: "EMOP STORIES",
-      title: "An Update on De-Gemini's Growth Throughout the UK",
-      excerpt:
-        "We are excited to announce De-Gemini's latest achievement - our growth throughout the UK. We have not just been pleasing clients in England - where we began - but in recent years, throughout the UK.",
-      imageUrl:
-        "https://www.emop.co.uk/blog/wp-content/uploads/2023/10/pexels-karolina-grabowska-4239031.jpg", // Small card image
-      readMoreLink: "#",
-    },
-    {
-      id: "blog-2",
-      date: "21 APRIL",
-      category: "EMOP STORIES",
-      title: "Reclean Is Guaranteed With De-Gemini",
-      excerpt:
-        "Although we are confident in the quality of our cleaning services, we understand that there may be instances where things don't go as planned.",
-      imageUrl:
-        "https://www.emop.co.uk/blog/wp-content/uploads/2023/04/housekeeping-2977056_1280.jpg", // Small card image
-      readMoreLink: "#",
-    },
-    {
-      id: "blog-3",
-      date: "01 MARCH",
-      category: "CLEANING TIPS",
-      title: "Top 5 Tips for a Sparkling Kitchen",
-      excerpt:
-        "Discover expert tips and tricks to keep your kitchen spotless and hygienic, making your cleaning routine more efficient and effective.",
-      readMoreLink: "#",
-    },
-    {
-      id: "blog-4",
-      date: "10 FEBRUARY",
-      category: "DECLUTTERING",
-      title: "Organizing Your Home: A Simple Guide",
-      excerpt:
-        "Learn easy strategies to declutter and organize your living spaces, creating a more peaceful and functional home environment.",
-      imageUrl:
-        "https://www.emop.co.uk/blog/wp-content/uploads/2023/04/jess-bailey-94Ld_MtIUf0-unsplash2-1.jpg", // Small card image
-      readMoreLink: "#",
-    },
-    {
-      id: "blog-5",
-      date: "05 JANUARY",
+      id: "blog-eco-1",
+      date: "15 JUNE",
       category: "ECO LIVING",
-      title: "Eco-Friendly Cleaning Products You Must Try",
+      title: "Eco-Friendly Cleaning Products for a Greener Home",
       excerpt:
-        "Explore sustainable and non-toxic cleaning alternatives that are good for your home, your health, and the planet.",
+        "Switch to sustainable cleaning with these eco-friendly products that are safe for your family and the planet.",
+      imageUrl:
+        "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=800&q=80",
       readMoreLink: "#",
     },
-    // Add more blog posts as needed to fill the grid
+    {
+      id: "blog-cleaner-1",
+      date: "10 JUNE",
+      category: "CLEANER STORIES",
+      title: "A Day in the Life of a Professional Cleaner",
+      excerpt:
+        "Ever wondered what it’s like to be a professional cleaner? Step into the shoes of a Gemini Cleaning team member for a day.",
+      imageUrl:
+        "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=800&q=80",
+      readMoreLink: "#",
+    },
+    {
+      id: "blog-schedule-1",
+      date: "05 JUNE",
+      category: "SCHEDULING",
+      title: "How to Schedule Your Cleaning for Maximum Efficiency",
+      excerpt:
+        "Learn how to create a cleaning schedule that fits your lifestyle and keeps your home sparkling all week long.",
+      imageUrl:
+        "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80", // human portrait
+      readMoreLink: "#",
+    },
+    {
+      id: "blog-tips-1",
+      date: "01 JUNE",
+      category: "CLEANING TIPS",
+      title: "Quick Cleaning Hacks for Busy People",
+      excerpt:
+        "Short on time? Try these quick and effective cleaning hacks to keep your home tidy with minimal effort.",
+      imageUrl:
+        "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80", // human portrait
+      readMoreLink: "#",
+    },
+    {
+      id: "blog-family-1",
+      date: "28 MAY",
+      category: "FAMILY LIFE",
+      title: "Getting Kids Involved in Cleaning: Fun & Easy Tips",
+      excerpt:
+        "Turn chores into games and teach your children valuable life skills with these creative cleaning activities.",
+      imageUrl:
+        "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=800&q=80",
+      readMoreLink: "#",
+    },
   ];
 
   // Filter posts based on active category
@@ -130,7 +113,6 @@ export default function Blog() {
 
   return (
     <div className="font-sans antialiased bg-gray-100 text-gray-800 min-h-screen">
-      {/* Featured Blog Post Section */}
       <ToastContainer
         position='top-right'
         rtl={true}
@@ -139,25 +121,48 @@ export default function Blog() {
         draggable={true}
         icon={<Check/>}
         pauseOnHover={true}
-        />
-      <section className="py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        {/* header */}
-        <div className="bg-transparent flex items-center justify-between">
-        <a href="/" className="flex items-center">
-          <h1 className='text-brand-secondary  text-[40px]'>
-          De Gemini Services LTD
-          </h1>
-        </a>
-        <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary nunito-sans-heading py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5"
-          >
-                BOOK NOW
-              </button>
+      />
+      <Navbar/>
+
+      {/* Bold Welcome/Hero Section */}
+      <section className="relative px-6 sm:px-16 py-12 bg-brand-primary text-white flex flex-col md:flex-row items-center justify-between overflow-hidden">
+        {/* SVG Background - Oval Shapes */}
+        <div className="absolute inset-0 w-full h-full z-0 pointer-events-none flex items-center justify-center -top-12 -right-32">
+          <svg width="800" height="400" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-auto" style={{ opacity: 0.10 }}>
+            <ellipse cx="400" cy="200" rx="350" ry="150" fill="#fff" />
+          </svg>
         </div>
-        <BlogCard post={featuredPost} isFeatured={true} />
+        {/* Smaller Oval */}
+        <div className="absolute top-10 left-10 z-0 pointer-events-none">
+          <svg width="300" height="120" viewBox="0 0 300 120" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ opacity: 0.07 }}>
+            <ellipse cx="150" cy="60" rx="120" ry="45" fill="#fff" />
+          </svg>
+        </div>
+        <div className="z-10 max-w-2xl">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4 drop-shadow-lg">
+            Welcome to the <span className="text-brand-secondary">De Gemini Blog</span>
+          </h1>
+          <p className="text-lg sm:text-xl font-medium mb-6">
+            Tips, stories, and inspiration from the UK's leading cleaning service.
+          </p>
+          <a
+            href="#blog-posts"
+            className="inline-block bg-brand-secondary text-brand-primary font-bold px-6 py-3 rounded-full shadow-lg hover:bg-white hover:text-brand-primary transition"
+          >
+            Explore Articles
+          </a>
+        </div>
+        <div className="hidden md:block absolute right-0 bottom-0 w-1/3 max-w-xs opacity-80 pointer-events-none" style={{ zIndex: 1 }}>
+          <img
+            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
+            alt="De Gemini Blog Hero"
+            className="w-full h-full object-cover"
+          />
+        </div>
       </section>
 
       {/* Categories Filter */}
-      <section className="bg-white py-6 px-4 sm:px-6 lg:px-8 shadow-md">
+      <section className="bg-white py-6 px-6 sm:px-16 shadow-md">
         <div className="max-w-7xl mx-auto flex flex-wrap justify-center md:justify-start gap-3">
           <div className="relative flex items-center border border-gray-300 rounded-full px-4 py-2 bg-gray-50 text-gray-600">
             <Search className="w-4 h-4 mr-2" />
@@ -172,52 +177,36 @@ export default function Blog() {
               key={category}
               onClick={() =>
                 setActiveCategory(activeCategory === category ? "" : category)
-              } // Toggle active category
+              }
               className={`
-                  px-4 py-2 rounded-full font-semibold text-sm whitespace-nowrap
-                  transition duration-300 ease-in-out
-                  ${
-                    activeCategory === category
-                      ? "bg-brand-primary text-white shadow-md"
-                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                  }
-                `}>
+                px-4 py-2 rounded-full font-semibold text-sm whitespace-nowrap
+                transition duration-300 ease-in-out
+                ${
+                  activeCategory === category
+                    ? "bg-brand-primary text-white shadow-md"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                }
+              `}
+            >
               {category}
             </button>
           ))}
         </div>
       </section>
 
-      {/* De-Gemini Blog Welcome Section */}
-      <section className="bg-white py-12 px-4 sm:px-6 lg:px-8 border-b border-gray-200">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between">
-          <div className="text-center md:text-left mb-6 md:mb-0">
-          <a href="/" className="flex items-center">
-          <h1 className='text-brand-secondary  text-[40px]'>
-          De Gemini Services LTD
-          </h1>
-        </a>
-            <p className="text-gray-600 text-lg">
-            Welcome to the blog from De-Gemini - the best cleaning company in England
-            </p>
-          </div>
-          {/* Optional: Add image/element from screenshot here if desired */}
-          {/* <img src="path/to/some/image.png" alt="Blog Illustration" className="w-48 h-auto" /> */}
-        </div>
-      </section>
-
       {/* Blog Posts Grid */}
-      <section className="py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredPosts.map((post) => (
-            <BlogCard key={post.id} post={post} />
+      <section id="blog-posts" className="py-12 px-6 sm:px-16 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <BlogCard post={featuredPost} isFeatured={true} />
+          {filteredPosts.map((post, idx) => (
+            <BlogCard key={post.id} post={post} showDivider={idx !== 0} />
           ))}
         </div>
       </section>
 
-      {/* Optional: Footer or other sections below */}
+      {/* Call to Action Section */}
       <section
-        className="w-full flex flex-col items-center justify-center mt-10 mb-[4rem]"
+        className="w-full flex flex-col items-center justify-center mt-10 mb-[4rem] px-6 sm:px-16"
         style={{
           backgroundImage: `url('https://www.emop.co.uk/static/images/bot_cta_bg_new.png')`,
           backgroundSize: "cover",
@@ -228,25 +217,7 @@ export default function Blog() {
           Cleaning Is No Longer <br />
           Your Burden
         </h1>
-
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-white p-2 pr-2 sm:p-3 sm:pr-3 rounded-xl shadow-lg border border-purple-300 max-w-md w-full">
-          <div className="flex items-center flex-grow p-2">
-            <MapPin className="h-6 w-6 text-gray-400 mr-3 flex-shrink-0" />
-            <input
-              type="text"
-              placeholder="Enter your post code here"
-              className="flex-grow text-gray-700 placeholder-gray-400 focus:outline-none text-base sm:text-lg bg-transparent"
-              value={postcode}
-              onChange={(e) => setPostcode(e.target.value)}
-              aria-label="Enter your postcode"
-            />
-          </div>
-          <button className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary nunito-sans-heading py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5"
-          onClick={handleQuoteMeClick}
-          >
-                QUOTE ME
-              </button>
-        </div>
+        <CommonPostcodeInput />
       </section>
 
       <Footer />

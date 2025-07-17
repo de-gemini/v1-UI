@@ -1,27 +1,28 @@
 import React from 'react';
-import { Check, MapPin } from 'lucide-react'; 
+import { Check, MapPin, Briefcase } from 'lucide-react'; 
 import axiosInstance from '../api/axiosInstance';
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../constants';
+import CommonPostcodeInput from './commons/CommonPostcodeInput';
 
 
 interface CostCardProps {
-  title: string;
-  price: string;
-  text: string;
-  inputPlaceholder: string;
-  buttonText: string;
+  title?: string;
+  price?: string;
+  text?: string;
+  inputPlaceholder?: string;
+  buttonText?: string;
   onQuoteMeClick?: (postcode: string) => void; 
 }
 
 
 export const CostCard: React.FC<CostCardProps> = ({
-  title,
-  price,
-  text,
-  inputPlaceholder,
-  buttonText,
+  title = 'Cleaning Service',
+  price = 'from £19/h',
+  text = 'Get a fast, free quote for your cleaning needs. Enter your postcode to see prices and availability.',
+  inputPlaceholder = 'Enter your post code',
+  buttonText = 'QUOTE ME',
   onQuoteMeClick,
 }) => {
   const [postcode, setPostcode] = React.useState<string>('');
@@ -35,26 +36,31 @@ export const CostCard: React.FC<CostCardProps> = ({
   
     try {
       const res = await axiosInstance.post(`${API_BASE_URL}/postcode`, { postcode });
-  
-      // Optional: log or inspect the API response
       console.log(res.data);
-  
-       // Check if the API returned a valid area
-    if (res.data?.area) {
-      toast.success(`Postcode found: ${res.data.area}`);
-      navigate(`/checkout?postcode=${encodeURIComponent(postcode.trim())}`);
-    } else {
-      toast.error('Invalid postcode or area not found.');
+      if (res.data?.area) {
+        toast.success(`Postcode found: ${res.data.area}`);
+        navigate(`/checkout?postcode=${encodeURIComponent(postcode.trim())}`);
+      } else {
+        toast.error('Invalid postcode or area not found.');
+      }
+    } catch (err: any) {
+      const msg = err?.response?.data?.message || err.message || 'An error occurred';
+      toast.error(msg);
     }
-
-  } catch (err: any) {
-    const msg = err?.response?.data?.message || err.message || 'An error occurred';
-    toast.error(msg);
-  }
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center border border-gray-500 hover:border hover:border-brand-secondary transition-all duration-75">
+    <div className="relative flex flex-col items-center border border-gray-200 bg-white px-8 py-10 min-h-[420px] overflow-hidden">
+      {/* Subtle SVG background with slow animation */}
+      <svg className="absolute inset-0 w-full h-full opacity-20 pointer-events-none animate-slowspin" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="200" cy="200" r="180" stroke="#A5B4FC" strokeWidth="2" fill="none" />
+        <rect x="60" y="60" width="280" height="280" rx="40" stroke="#A5B4FC" strokeWidth="1.5" fill="none" />
+        {/* Additional inner cubes for complexity */}
+        </svg>
+      <style>{`
+        @keyframes slowspin { to { transform: rotate(360deg); } }
+        .animate-slowspin { animation: slowspin 24s linear infinite; }
+      `}</style>
       <ToastContainer
         position='top-right'
         rtl={true}
@@ -63,32 +69,17 @@ export const CostCard: React.FC<CostCardProps> = ({
         draggable={true}
         icon={<Check/>}
         pauseOnHover={true}
-        />
-      <h3 className="text-2xl font-bold text-brand-primary mb-2 text-center">{title}</h3>
-      <p className="text-brand-primary text-xl font-semibold mb-6 text-center">{price}</p>
-      <p className="text-brand-primary text-xl font-semibold mb-6 mt-1 text-center">{text}</p>
-
-
-      {/* Postcode Input */}
-      <div className="flex items-center w-full max-w-xs bg-white border border-purple-300 rounded-lg p-3 mb-6">
-        <MapPin className="h-5 w-5 text-brand-primary mr-3 flex-shrink-0" />
-        <input
-          type="text"
-          placeholder={inputPlaceholder}
-          className="flex-grow text-gray-700 placeholder-gray-400 focus:outline-none bg-transparent"
-          value={postcode}
-          onChange={(e) => setPostcode(e.target.value)}
-          aria-label={inputPlaceholder}
-        />
+      />
+      {/* Corporate Icon */}
+      <div className="z-10 flex items-center justify-center w-16 h-16 bg-blue-50 rounded-full mb-4 mt-2">
+        <Briefcase className="w-8 h-8 text-blue-600" />
       </div>
-
+      <h3 className="z-10 text-2xl font-bold text-brand-primary mb-2 text-center tracking-tight">{title}</h3>
+      <p className="z-10 bg-white/50 text-blue-700 text-xl font-semibold mb-4 text-center">{price}</p>
+      <p className="z-10 text-gray-700 bg-white/70 text-base mb-6 mt-1 text-center leading-relaxed">{text}</p>
       
-      <button
-        onClick={handleQuoteClick}
-        className="w-full max-w-xs bg-brand-primary hover:bg-yellow-300 text-brand-secondary font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5"
-      >
-        {buttonText}
-      </button>
+        <CommonPostcodeInput />
+      
     </div>
   );
-};
+}

@@ -3,6 +3,7 @@
 import React, {useState} from "react";
 import { Instagram, Facebook, Pin } from 'lucide-react';
 import { Link } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 interface CardData {
     id: string;
@@ -39,26 +40,7 @@ export default function Help() {
       ];
     return(
         <div className="min-h-screen bg-[#f5f9fc] overflow-x-hidden w-full">
-            <nav className="bg-white p-8 flex items-center justify-center w-full">
-
-                <div className="w-full flex items-center justify-center gap-3 md:gap-[24px] lg:gap-[5rem]">
-                    <div className=" w-[4rem] md:w-[5rem] lg:w-[7rem]">
-                    <a href="/" className="flex items-center">
-          <h1 className='text-brand-primary text-[20px]'>
-          De Gemini Services LTD
-          </h1>
-        </a>
-                    </div>
-                  <Link to='/home/registercleaner'>
-                    <button className="border border-brand-primary p-4 transition text-brand-primary hover:text-white hover:bg-brand-primary duration-300">
-                        <p className="text-lg">
-                            Become a cleaner
-                        </p>
-                    </button>
-                  </Link>
-                </div>
-
-            </nav>
+            <Navbar/>
             <div className="font-sans antialiased bg-gray-50 min-h-screen py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-primary mb-12 text-center uppercse">
@@ -157,7 +139,7 @@ export default function Help() {
             <div className="lg:col-span-1">
               <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">FOR CLEANERS</h3>
               <ul className="space-y-2 mb-8">
-                <li><a href="/home/registercleaner" className="hover:underline text-gray-700">Become a cleaner</a></li>
+                {/* <li><a href="/home/registercleaner" className="hover:underline text-gray-700">Become a cleaner</a></li> */}
               </ul>
               <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">WHO WE ARE</h3>
               <ul className="space-y-2">

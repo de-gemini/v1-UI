@@ -33,7 +33,7 @@ const whyChooseData = [
 
 const WhyChooseSection: React.FC = () => {
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8"> {/* Added responsive padding */}
+    <section className="py-16"> {/* Removed responsive padding */}
       <h2 className="text-center text-brand-primary nunito-sans-heading text-[32px] font-[800] mb-12">
         Why choose De Gemini cleaning service in England?
       </h2>
