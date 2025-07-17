@@ -32,7 +32,7 @@ const BookingSummary: React.FC = () => {
   const pad = (n: number) => n.toString().padStart(2, '0');
 
   return (
-    <div className="bg-gray-100 rounded-2xl shadow-xl p-6 sm:p-8 md:p-10 mt-4 flex flex-col gap-6 border border-gray-200">
+    <div className="bg-gray-100 rounded-2xl p-6 sm:p-8 md:p-10 mt-4 flex flex-col gap-6 border border-gray-200">
       <div className="flex items-center justify-between mb-2">
         <span className="font-bold text-2xl text-brand-primary tracking-tight">Booking Summary</span>
         <span className="text-2xl text-gray-300">&#8964;</span>

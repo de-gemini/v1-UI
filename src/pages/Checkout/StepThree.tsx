@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState, useRef } from 'react';
 import BookingSummary from './BookingSummary';
 import { useCheckoutStore, useEstimatedHours, useEstimatedMinutes, useEstimatedPrice, usePricingBreakdown } from '../../store/checkoutStore';
 import { useAuthStore } from '../../store/authStore';
@@ -50,6 +50,9 @@ const StepThree: React.FC = () => {
   const navigate = useNavigate();
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [pendingBookingBody, setPendingBookingBody] = useState<any>(null);
+  const [addressSuggestions, setAddressSuggestions] = useState<any[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const debounceTimeout = useRef<number | null>(null);
   
   // Zustand store hooks
   const {
@@ -125,6 +128,41 @@ const StepThree: React.FC = () => {
       errandHours
     });
   }, [pricingBreakdown, endOfTenancy, expressStudio, ecoFriendly, hooverMop, disinfection, outdoorCleaning, laundry, checkJob, havePets, keyPickup, errandHours]);
+
+  // Fetch address suggestions from Nominatim
+  const fetchAddressSuggestions = (query: string) => {
+    if (!query || query.length < 3) {
+      setAddressSuggestions([]);
+      return;
+    }
+    fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&addressdetails=1&limit=5&countrycodes=gb`, {
+      headers: {
+        'Accept-Language': 'en',
+        'User-Agent': 'GeminiCleaning/1.0 (info@geminicleaning.com)'
+      }
+    })
+      .then(res => res.json())
+      .then(data => setAddressSuggestions(data))
+      .catch(() => setAddressSuggestions([]));
+  };
+
+  // Handle address input change with debounce
+  const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    set({ address: value });
+    setShowSuggestions(true);
+    if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
+    debounceTimeout.current = setTimeout(() => {
+      fetchAddressSuggestions(value);
+    }, 400);
+  };
+
+  // Handle suggestion click
+  const handleSuggestionClick = (suggestion: any) => {
+    set({ address: suggestion.display_name });
+    setShowSuggestions(false);
+    setAddressSuggestions([]);
+  };
 
   // Full quote handler with backend submission
   const handleGetAQuote = async () => {
@@ -280,7 +318,7 @@ const StepThree: React.FC = () => {
   return (
     <div className="w-full max-w-7xl flex flex-col lg:flex-row gap-8">
       {/* Main form */}
-      <div className="flex-1 bg-white rounded-xl shadow-lg p-4 sm:p-6 md:p-8 mt-4 flex flex-col gap-10">
+      <div className="flex-1 bg-white rounded-xl  p-4 sm:p-6 md:p-8 mt-4 flex flex-col gap-10">
         {/* Contact details */}
         <div>
           <div className="flex items-center mb-6">
@@ -319,7 +357,34 @@ const StepThree: React.FC = () => {
           </div>
           <div className="mb-6">
             <label className="block text-gray-700 font-semibold mb-1">Address</label>
-            <input type="text" className="w-full border border-gray-300 rounded-md px-4 py-2 text-lg" value={address} onChange={e => set({ address: e.target.value })} placeholder="Address" />
+            <div className="relative">
+              <input
+                type="text"
+                className="w-full border border-gray-300 rounded-md px-4 py-2 text-lg"
+                value={address}
+                onChange={handleAddressChange}
+                onFocus={() => address && setShowSuggestions(true)}
+                placeholder="Address"
+                autoComplete="off"
+              />
+              {showSuggestions && addressSuggestions.length > 0 && (
+                <ul className="absolute z-20 left-0 right-0 bg-white border border-gray-200 rounded-md mt-1 max-h-56 overflow-y-auto shadow-lg">
+                  {addressSuggestions.map((suggestion, idx) => (
+                    <React.Fragment key={suggestion.place_id}>
+                      <li
+                        className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-sm"
+                        onClick={() => handleSuggestionClick(suggestion)}
+                      >
+                        {suggestion.display_name}
+                      </li>
+                      {addressSuggestions.length > 2 && idx < addressSuggestions.length - 1 && (
+                        <hr className="border-t border-gray-200 mx-2" />
+                      )}
+                    </React.Fragment>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
           <div className="bg-yellow-50 border-l-4 border-yellow-400 p-3 mb-4 rounded">
             If you didn't find your address in the list, please provide it in comments below
@@ -330,7 +395,7 @@ const StepThree: React.FC = () => {
             <div className="text-right text-xs text-gray-500">{comments.length} / 500</div>
           </div>
           {/* Priority package promo */}
-          <div className="bg-yellow-100 border-l-4 border-yellow-400 p-6 rounded flex flex-col gap-2 mt-6">
+          <div className="bg-yellow-100  border-l-4 border-yellow-400 p-6 rounded hidden flex flex-col gap-2 mt-6">
             <div className="font-bold text-lg">Happiness upgraded with our <span className="text-brand-primary">Priority package</span></div>
             <ul className="list-disc pl-6 text-gray-700 text-base">
               <li>Highly Acclaimed Cleaner Guaranteed</li>
@@ -344,10 +409,16 @@ const StepThree: React.FC = () => {
             </div>
           </div>
         </div>
-        {/* Final action button */}
-        <div className="flex items-center justify-center gap-[10px] mt-8">
+        
+      </div>
+      {/* Booking Summary */}
+      <div className="w-full lg:w-[350px] lg:sticky lg:top-8 h-fit">
+        <BookingSummary />
+      </div>
+      {/* Final action button */}
+      <div className="flex items-center justify-center gap-[10px] mt-8">
           <button
-            className="px-8 py-3 bg-white border border-gray-300 rounded-md text-gray-700 font-bold text-lg hover:bg-gray-100 transition"
+            className="px-8 py-3 bg-red-400 text-white border border-gray-300 rounded-md  font-bold text-lg transition"
             onClick={() => set({ step: 2 })}
           >
             BACK
@@ -356,14 +427,9 @@ const StepThree: React.FC = () => {
             className="px-8 py-3 bg-brand-primary hover:bg-brand-primary/80 text-white font-bold rounded-md text-lg transition"
             onClick={handleGetAQuote}
           >
-            GET A QUOTE
+            SUBMIT BOOKING
           </button>
         </div>
-      </div>
-      {/* Booking Summary */}
-      <div className="w-full lg:w-[350px] lg:sticky lg:top-8 h-fit">
-        <BookingSummary />
-      </div>
 
       {/* Auth Modal */}
       {showAuthModal && (

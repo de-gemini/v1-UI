@@ -346,21 +346,7 @@ const StepTwo: React.FC = () => {
             </ul>
           </div>
         </div>
-        {/* Final action button */}
-        <div className="flex items-center justify-center gap-[10px] mt-8">
-          <button
-            className="px-8 py-3 bg-white border border-gray-300 rounded-md text-gray-700 font-bold text-lg hover:bg-gray-100 transition"
-            onClick={() => set({ step: 1 })}
-          >
-            BACK
-          </button>
-          <button
-            className="px-8 py-3 bg-brand-primary hover:bg-brand-primary/80 text-white font-bold rounded-md text-lg transition"
-            onClick={handleNextStep}
-          >
-            NEXT
-          </button>
-        </div>
+        
       </div>
       {/* Booking Summary */}
       <div className="w-full max-w-md mx-auto mb-8">
@@ -375,6 +361,21 @@ const StepTwo: React.FC = () => {
           </div>
         </div>
         <BookingSummary />
+        {/* Final action button */}
+        <div className="flex items-center justify-center gap-[10px] mt-8">
+          <button
+            className="px-8 py-3 bg-red-400 text-white border border-s                                                                                                                                                                                                                                                                                                                                                rounded-md  font-bold text-lg transition"
+            onClick={() => set({ step: 1 })}
+          >
+            BACK
+          </button>
+          <button
+            className="px-8 py-3 bg-brand-primary hover:bg-brand-primary/80 text-white font-bold rounded-md text-lg transition"
+            onClick={handleNextStep}
+          >
+            NEXT
+          </button>
+        </div>
       </div>
     </div>
   );
