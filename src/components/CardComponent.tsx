@@ -74,7 +74,7 @@ export const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
       <button
         ref={prevRef}
         aria-label="Previous slide"
-        className="absolute z-10 left-2 top-1/2 -translate-y-10 bg-white border border-gray-300 shadow-lg rounded-full p-2 flex items-center justify-center hover:bg-brand-primary hover:text-white transition disabled:opacity-50 disabled:cursor-not-allowed"
+        className="absolute z-10 -left-2 top-1/2 -translate-y-10 bg-white border border-gray-300 shadow-lg rounded-full p-2 flex items-center justify-center hover:bg-brand-primary hover:text-white transition disabled:opacity-50 disabled:cursor-not-allowed"
         style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}
       >
         <ArrowLeft className="w-6 h-6" />
@@ -82,7 +82,7 @@ export const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
       <button
         ref={nextRef}
         aria-label="Next slide"
-        className="absolute z-10 right-2 top-1/2 -translate-y-10 bg-white border border-gray-300 shadow-lg rounded-full p-2 flex items-center justify-center hover:bg-brand-primary hover:text-white transition disabled:opacity-50 disabled:cursor-not-allowed"
+        className="absolute z-10 -right-2 top-1/2 -translate-y-10 bg-white border border-gray-300 shadow-lg rounded-full p-2 flex items-center justify-center hover:bg-brand-primary hover:text-white transition disabled:opacity-50 disabled:cursor-not-allowed"
         style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}
       >
         <ArrowRight className="w-6 h-6" />

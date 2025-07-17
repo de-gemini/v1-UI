@@ -258,7 +258,7 @@ const Home = () => {
       imagePosition: 'left' as 'left',
     },
     {
-      title: "Office",
+      title: "Office Cleaning",
       description: "Keeping your office clean promotes a healthier and more productive environment. Our office cleaning services include:",
       services: [
         "Dusting and wiping desks and office equipment.",
@@ -371,12 +371,12 @@ const Home = () => {
         "Our recurring cleaning plans ensure your home stays fresh week after week. We follow your preferred routine with a reliable, friendly cleaner.",
     },
     {
-      imageSrc: slide4,
-      altText: "Spring Cleaning",
-      title: "Spring Cleaning",
+      imageSrc: "https://media.gettyimages.com/id/1417035212/photo/soaking-and-washing-furniture.jpg?s=612x612&w=0&k=20&c=9yTjWw7rPP2DP6fdqmEpxHImWIZEi79RB1UZtp0Qmco=",
+      altText: "Deep Cleaning",
+      title: "Deep Cleaning",
       price: "from £19/h",
       description:
-        "Get your home ready for the season with our deep spring cleaning service. Perfect for decluttering and removing dust build-up in hard-to-reach places.",
+        "Get your home ready for the season with our deep cleaning service. Perfect for decluttering and removing dust build-up in hard-to-reach places.",
     },
     {
       imageSrc: slide5,
@@ -387,9 +387,17 @@ const Home = () => {
         "Secure your deposit with our detailed move-out cleaning. Our team follows a landlord-approved checklist to ensure your place is spotless and inspection-ready.",
     },
     {
-      imageSrc: slide6,
-      altText: "After Builders Cleaning",
-      title: "After Builders Cleaning",
+      imageSrc:"https://media.gettyimages.com/id/2158719646/photo/janitors-cleaning-the-floor-in-school-hallway.jpg?s=612x612&w=0&k=20&c=-XG-hNji6xZzsjrvEqHpwWN7V76iqrpfRx1bET1UMdM=",
+      altText: "Commercial Cleaning",
+      title: "Commercial Cleaning",
+      price: "from £19/h",
+      description:
+        "Maintain a pristine and productive business environment with our commercial cleaning services. We tailor our solutions for offices, retail spaces, and more—ensuring a spotless, hygienic workplace that leaves a lasting impression on clients and staff.",
+    },
+    {
+      imageSrc: "https://media.gettyimages.com/id/1659313537/photo/young-woman-vacuuming-her-apartment.jpg?s=612x612&w=0&k=20&c=yvp7xobRlLrR6kqzwXNccQrqC2RT7EQbut0VSb6oXG8=",
+      altText: "Carpet cleaning",
+      title: "Carpet Cleaning",
       price: "from £19/h",
       description:
         "Post-renovation mess? We’ll handle it. Our after-builders cleaning service clears dust, paint, and debris so your property looks brand new again.",
