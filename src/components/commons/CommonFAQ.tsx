@@ -65,13 +65,13 @@ const CommonFAQ: React.FC = () => {
       <p className="text-gray-500 text-base md:text-lg mb-10 text-center max-w-2xl mx-auto">
         {subtitle}
       </p>
-      <div className="space-y-4" style={{position: 'relative', zIndex: 1}}>
+      <div className="" style={{position: 'relative', zIndex: 1}}>
         {items.map((item, idx) => {
           const isOpen = openFAQ === item.id;
           return (
             <div
               key={item.id || idx}
-              className="bg-white/50  rounded-2xl transition-all duration-200 overflow-hidden"
+              className="bg-white/50 rounded-2xl transition-all duration-200 overflow-hidden"
             >
               <button
                 className="w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none group"
@@ -79,7 +79,7 @@ const CommonFAQ: React.FC = () => {
                 aria-expanded={isOpen}
                 aria-controls={`faq-content-${item.id}`}
               >
-                <span className="text-lg md:text-xl font-semibold text-gray-900 group-hover:text-brand-primary transition-colors">
+                <span className="  md:text-xl font-semibold text-gray-400 group-hover:text-brand-primary transition-colors">
                   {item.question}
                 </span>
                 <span className="ml-4 flex items-center justify-center rounded-full border border-gray-200 bg-white w-8 h-8 transition-all duration-200">
