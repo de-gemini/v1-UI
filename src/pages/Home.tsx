@@ -268,7 +268,7 @@ const Home = () => {
         "Wiping down accessible surfaces.",
         "Cleaning glass partitions and windows.",
       ],
-      mainImageUrl: card1,
+      mainImageUrl: "https://media.gettyimages.com/id/518333440/photo/office-cleaning-contractors.jpg?s=612x612&w=0&k=20&c=8L42nfzmz10Bge74TGq5ZR9HuW37Z-3izzHYzg-rAS8=",
       imageAlt: "Cleaned office space",
       smallIconUrl: '',
       initialItemsToShow: 2,

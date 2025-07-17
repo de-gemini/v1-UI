@@ -29,7 +29,7 @@ export const regularCleaningBlocks = [
     initialItemsToShow: 1,
   },
   {
-    imageUrl: "https://www.emop.co.uk/static/redesign/images/services/regular/3.jpg",
+    imageUrl: "https://media.gettyimages.com/id/1327576000/photo/cleaning-eco-set-for-different-surfaces-in-home.jpg?s=612x612&w=0&k=20&c=crYCDMLbfEvr7zsnz6eX__Ttv7SMoQDTIfffNT0lgSY=",
     imageAlt: "Customized commercial cleaning",
     imagePosition: 'right' as 'right',
     title: "Personalised Cleaning That Works Around You",
@@ -38,7 +38,7 @@ export const regularCleaningBlocks = [
     initialItemsToShow: 1,
   },
   {
-    imageUrl: "https://www.emop.co.uk/static/redesign/images/services/regular/4.jpg",
+    imageUrl: "https://media.gettyimages.com/id/1417833200/photo/happy-professional-cleaners-cleaning-a-bathroom-at-an-apartment.jpg?s=612x612&w=0&k=20&c=98suJNqwaQnlzReilcdcfGDz_G7QNGUmha2Gm-6Yzug=",
     imageAlt: "Additional cleaning services",
     imagePosition: 'left' as 'left',
     title: "Why Our Domestic Cleaning Makes a Difference",
@@ -53,7 +53,7 @@ export const regularCleaningBlocks = [
     initialItemsToShow: 2,
   },
   {
-    imageUrl: "https://www.emop.co.uk/static/redesign/images/services/regular/5.jpg",
+    imageUrl: "https://media.gettyimages.com/id/1417833124/photo/professional-cleaner-cleaning-a-table-at-a-house.jpg?s=612x612&w=0&k=20&c=WNc3TvhLIETMdAZTa4dALGvkZGXWaDHG9CihXID31F4=",
     imageAlt: "Office kitchen cleaning",
     imagePosition: 'right' as 'right',
     title: "",
