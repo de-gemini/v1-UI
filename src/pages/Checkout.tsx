@@ -2,7 +2,7 @@ import { useState, useEffect, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import 'react-calendar/dist/Calendar.css';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast, ToastContainer, Zoom } from 'react-toastify';
 
 import { fetchWithAuth } from "../utils/helper";
 import { useAuthStore } from "../store/authStore";
@@ -299,12 +299,6 @@ useEffect(() => {
 
   return (
     <div className="min-h-screen flex flex-col items-center py-8 px-2 bg-[#fafaff]">
-      <ToastContainer
-      position="top-right"
-      rtl={true}
-      autoClose={5000}
-      hideProgressBar={false}
-      />
       {/* Progress Bar */}
       <ProgressBar step={step} isStepDone={isStepDone} onStepClick={handleStepClick} />
       {/* Step 1: Choose cleaning type and frequency/date/time */}

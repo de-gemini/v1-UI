@@ -367,14 +367,6 @@ export default function ServicePageTemplate({ pageData }: ServicePageTemplatePro
 
   return (
     <div className="min-h-screen bg-white overflow-x-hidden w-full">
-      <ToastContainer
-        position="top-right"
-        rtl={true}
-        hideProgressBar={false}
-        autoClose={5000}
-        draggable={true}
-        pauseOnHover={true}
-      />
       {pageData.banner && <Banner title={pageData.banner.title} />}
       {/* Cleaning Tips Carousel Section */}
       <ProfessionalsCarousel tips={cleaningTips} />

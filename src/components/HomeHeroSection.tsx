@@ -275,7 +275,8 @@ const items = [
           ))}
         </div>
       </div>
-
+      {/* Blurred glass effect at the left end */}
+      <div className="pointer-events-none absolute top-0 left-0 h-full w-6 z-20" style={{background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(8px)'}} />
       <style>{`
         .marquee {
           overflow: hidden;

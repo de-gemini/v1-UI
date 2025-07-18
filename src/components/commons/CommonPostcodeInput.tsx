@@ -7,6 +7,7 @@ import { API_BASE_URL } from '../../constants';
 
 const CommonPostcodeInput: React.FC = () => {
   const [postcode, setPostcode] = React.useState('');
+  const [loading, setLoading] = React.useState(false);
   const navigate = useNavigate();
 
   const handleQuoteMeClick = async () => {
@@ -14,17 +15,20 @@ const CommonPostcodeInput: React.FC = () => {
       toast.error('Please enter a postcode.');
       return;
     }
+    setLoading(true);
     try {
       const res = await axiosInstance.post(`${API_BASE_URL}/postcode`, { postcode });
       if (res.data?.area) {
         toast.success(`Postcode found: ${res.data.area}`);
         navigate(`/checkout?postcode=${encodeURIComponent(postcode.trim())}`);
       } else {
-        toast.error('Invalid postcode or area not found.');
+        toast.error('Sorry, your postcode is not within our coverage');
       }
     } catch (err: any) {
       const msg = err?.response?.data?.message || err.message || 'An error occurred';
       toast.error(msg);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -42,10 +46,18 @@ const CommonPostcodeInput: React.FC = () => {
         />
       </div>
       <button
-        className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-yellow-300 text-brand-secondary font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5"
+        className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-brand-primary/90 text-brand-secondary font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5 flex items-center justify-center min-w-[140px]"
         onClick={handleQuoteMeClick}
+        disabled={loading}
       >
-        GET STARTED
+        {loading ? (
+          <span className="flex items-center gap-2">
+            <svg className="animate-spin h-5 w-5 text-brand-secondary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path></svg>
+            Loading...
+          </span>
+        ) : (
+          'GET STARTED'
+        )}
       </button>
     </div>
   );

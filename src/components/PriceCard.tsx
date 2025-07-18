@@ -52,15 +52,6 @@ export const PriceCard: React.FC<PriceCardProps> = ({
   return (
     <div className="bg-white rounded-lg shadow-xl p-6 relative w-full max-w-sm mx-auto">
       {/* Cashback Badge */}
-      <ToastContainer
-        position='top-right'
-        rtl={true}
-        hideProgressBar={false}
-        autoClose={5000}
-        draggable={true}
-        icon={<Check/>}
-        pauseOnHover={true}
-        />
       <div className="absolute -top-4 left-6 bg-yellow-300 text-gray-800 text-sm font-semibold px-4 py-2 rounded-lg shadow-md">
         {cashbackText}
       </div>

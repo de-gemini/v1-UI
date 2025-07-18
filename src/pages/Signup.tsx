@@ -54,15 +54,6 @@ const Signup = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#FAFAFF] relative overflow-hidden">
-        <ToastContainer
-        position='top-right'
-        rtl={true}
-        hideProgressBar={false}
-        autoClose={5000}
-        draggable={true}
-        icon={<Check/>}
-        pauseOnHover={true}
-        />
       {/* Decorative background shape */}
       <div className="absolute inset-0 w-full h-full z-0">
         <svg width="100%" height="100%" viewBox="0 0 1440 600" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">

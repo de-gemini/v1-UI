@@ -52,15 +52,6 @@ export const DeepPriceCard: React.FC<PriceCardProps> = ({
   return (
     <div className="relative w-full  mx-auto bg-white  p-8 flex flex-col items-center transition-all duration-300 ">
       {/* Cashback Badge */}
-      <ToastContainer
-        position='top-right'
-        rtl={true}
-        hideProgressBar={false}
-        autoClose={5000}
-        draggable={true}
-        icon={<Check />}
-        pauseOnHover={true}
-      />
       <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-yellow-300 to-yellow-400 text-gray-900 text-xs font-bold px-5 py-2 rounded-full shadow-lg border border-yellow-200 tracking-wide z-10">
         {cashbackText}
       </div>

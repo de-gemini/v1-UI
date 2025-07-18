@@ -113,15 +113,6 @@ export default function Blog() {
 
   return (
     <div className="font-sans antialiased bg-gray-100 text-gray-800 min-h-screen">
-      <ToastContainer
-        position='top-right'
-        rtl={true}
-        hideProgressBar={false}
-        autoClose={5000}
-        draggable={true}
-        icon={<Check/>}
-        pauseOnHover={true}
-      />
       <Navbar/>
 
       {/* Bold Welcome/Hero Section */}

@@ -29,6 +29,7 @@ import { PendingBookingModal } from "./components/PendingBookingModal";
 import ScrollToTop from "./components/ScrollToTop";
 import { PageLoader } from "./components/LoadingSpinner";
 import StackedPagesLoader from "./components/StackedPagesLoader";
+import { ToastContainer, Zoom } from 'react-toastify';
 
 // Protected Route wrapper component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -79,6 +80,13 @@ const Signup = lazy(() => import("./pages/Signup"));
 function App() {
   return (
     <Router>
+      <ToastContainer
+        position="top-right"
+        rtl={true}
+        autoClose={5000}
+        hideProgressBar={false}
+        transition={Zoom}
+      />
       <ScrollToTop />
       <Suspense fallback={<StackedPagesLoader fullScreen text="Loading..." />}>
         <ErrorAlert />

@@ -448,15 +448,6 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-white overflow-x-hidden w-full">
       {/* Hero Section Container */}
-      <ToastContainer
-        position='top-right'
-        rtl={true}
-        hideProgressBar={false}
-        autoClose={5000}
-        draggable={true}
-        icon={<Check/>}
-        pauseOnHover={true}
-      />
       <div className="px-6 sm:px-16">
         <HomeHeroSection features={features} error={error} home={home} />
         {/* Carousel section */}

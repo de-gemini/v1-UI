@@ -541,12 +541,6 @@ const summary = calculateSummary();
 
   return (
     <div className="min-h-screen flex flex-col items-center py-8 px-2 bg-[#fafaff]">
-      <ToastContainer
-      position="top-right"
-      rtl={true}
-      autoClose={5000}
-      hideProgressBar={false}
-      />
       {/* Progress Bar */}
 <div className="w-full max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-center px-4 mb-8">
   <h2 className="text-xl lg:text-2xl font-bold text-brand-primary mb-4 sm:mb-0 sm:mr-6">

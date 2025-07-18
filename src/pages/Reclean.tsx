@@ -76,16 +76,7 @@ export default function Reclean() {
     return(
         <div className="w-full min-h-screen">
             {/* Hero Section Container */}
-            <ToastContainer
-        position='top-right'
-        rtl={true}
-        hideProgressBar={false}
-        autoClose={5000}
-        draggable={true}
-        icon={<Check/>}
-        pauseOnHover={true}
-        />
-      <section className="flex items-center bg-[#f7f7ff] justify-center w-full">
+            <section className="flex items-center bg-[#f7f7ff] justify-center w-full">
         <div
           className="absolute inset-0 z-0 bg-cover bg-center opacity-0 bg-no-repeat"
           style={{

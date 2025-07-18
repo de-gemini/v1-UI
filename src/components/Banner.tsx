@@ -26,15 +26,6 @@ const Banner: React.FC<BannerProps> = (
 
   return (
     <section className="relative w-full min-h-[520px] md:min-h-[600px] lg:min-h-[700px] flex items-center justify-center bg-gradient-to-br from-[#f8fafc] via-[#f3f4f6] to-[#e0e7ef] overflow-hidden px-4 md:px-8">
-      <ToastContainer
-        position='top-right'
-        rtl={true}
-        hideProgressBar={false}
-        autoClose={5000}
-        draggable={true}
-        icon={<Check/>}
-        pauseOnHover={true}
-      />
       {/* Decorative Gradient Circle */}
       <div className="absolute -top-32 -left-32 w-96 h-96 bg-gradient-to-br from-brand-primary/10 to-brand-primary/0 rounded-full blur-2xl z-0"></div>
       <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-gradient-to-tl from-yellow-200/30 to-white/0 rounded-full blur-2xl z-0"></div>

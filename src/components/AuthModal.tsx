@@ -48,7 +48,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ title, message, actions, onClose 
               onClick={action.onClick}
             >
               <span className="flex items-center justify-center w-full">
-                {action.label}
+              {action.label}
               </span>
             </button>
           ))}

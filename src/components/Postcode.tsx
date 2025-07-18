@@ -50,7 +50,7 @@ export const CostCard: React.FC<CostCardProps> = ({
   };
 
   return (
-    <div className="relative flex flex-col items-center border border-gray-200 bg-white px-8 py-10 min-h-[420px] overflow-hidden">
+    <div className="bg-white rounded-lg shadow-xl p-6 relative w-full  mx-auto">
       {/* Subtle SVG background with slow animation */}
       <svg className="absolute inset-0 w-full h-full opacity-20 pointer-events-none animate-slowspin" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="200" cy="200" r="180" stroke="#A5B4FC" strokeWidth="2" fill="none" />
@@ -61,15 +61,6 @@ export const CostCard: React.FC<CostCardProps> = ({
         @keyframes slowspin { to { transform: rotate(360deg); } }
         .animate-slowspin { animation: slowspin 24s linear infinite; }
       `}</style>
-      <ToastContainer
-        position='top-right'
-        rtl={true}
-        hideProgressBar={false}
-        autoClose={5000}
-        draggable={true}
-        icon={<Check/>}
-        pauseOnHover={true}
-      />
       {/* Corporate Icon */}
       <div className="z-10 flex items-center justify-center w-16 h-16 bg-blue-50 rounded-full mb-4 mt-2">
         <Briefcase className="w-8 h-8 text-blue-600" />
