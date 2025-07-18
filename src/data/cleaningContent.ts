@@ -6,7 +6,7 @@ import card4 from '../assets/images/card-4.jpg'
 
 export const regularCleaningBlocks = [
   {
-    imageUrl: card1,
+    imageUrl: "https://media.gettyimages.com/id/1417833172/photo/professional-cleaner-holding-a-basket-of-cleaning-products.jpg?s=612x612&w=0&k=20&c=bqhz1jDqSxEQB1OAvm9DP_7SWNKR2F8t7Mzfr4Hchm4=",
     imageAlt: "Cleaning services in living room",
     imagePosition: 'right' as 'right',
     paragraph:

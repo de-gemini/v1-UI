@@ -13,10 +13,10 @@ export const Footer: React.FC = () => {
         </div>
       {/* Subtle SVG Background only behind headline */}
       <div className='mb-12'>
-        <h1 className="  text-brand-primary  font-extrabold text-6xl sm:text-6xl lg:text-7xl  mb-6">
+        <h1 className="  text-brand-primary  font-extrabold text-3xl sm:text-6xl lg:text-7xl  mb-6">
           Clean, <span className='editorial'>Fresh, </span> Gemini.
         </h1>
-        <p className="text-brand-primary text-3xl sm:text-xl font-bold tracking-wide mb-2">Your Instant Cleaning Service In England.</p>
+        <p className="text-brand-primary text-xl sm:text-xl font-bold tracking-wide mb-2">Your Instant Cleaning Service In England.</p>
       </div>
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-y-10 gap-x-12 text-base relative z-10">
@@ -84,6 +84,9 @@ export const Footer: React.FC = () => {
               <li><a href="#" className="hover:underline">Spring cleaning</a></li>
             </ul>
           </DropdownHeader>
+          
+        </div>
+        <div className="lg:col-span-1">
           <DropdownHeader title="WHO WE ARE" dropdownName="whoWeAre">
             <ul className="space-y-2 pb-4 lg:pb-0">
               <li><a href="#" className="hover:underline">About us</a></li>
@@ -96,7 +99,7 @@ export const Footer: React.FC = () => {
         <div className="lg:col-span-1 flex flex-col items-center lg:items-end justify-end mt-8 lg:mt-0">
           <h3 className="font-bold text-lg mb-2 text-brand-primary tracking-wide">SOCIAL MEDIA</h3>
           <div className="flex space-x-4 mb-2">
-            <a href="https://www.instagram.com/de_gemini_sevices?igsh=dGFqbmFrZTMxcGI1" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <a href="https://www.instagram.com/de_gemini_services?igsh=dGFqbmFrZTMxcGI1" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <Instagram className="h-7 w-7 text-brand-primary hover:text-blue-500 transition duration-300" />
             </a>
             <a href="https://www.facebook.com/share/1Axqo294Wx/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
