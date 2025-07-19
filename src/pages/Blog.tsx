@@ -170,13 +170,13 @@ export default function Blog() {
                 setActiveCategory(activeCategory === category ? "" : category)
               }
               className={`
-                px-4 py-2 rounded-full font-semibold text-sm whitespace-nowrap
-                transition duration-300 ease-in-out
-                ${
-                  activeCategory === category
-                    ? "bg-brand-primary text-white shadow-md"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }
+                  px-4 py-2 rounded-full font-semibold text-sm whitespace-nowrap
+                  transition duration-300 ease-in-out
+                  ${
+                    activeCategory === category
+                      ? "bg-brand-primary text-white shadow-md"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }
               `}
             >
               {category}
@@ -208,7 +208,7 @@ export default function Blog() {
           Cleaning Is No Longer <br />
           Your Burden
         </h1>
-        <CommonPostcodeInput />
+          <CommonPostcodeInput />
       </section>
 
       <Footer />

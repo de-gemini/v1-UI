@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import StripeCardPayment from '../components/StripeCardPayment';
+import UnifiedStripePaymentForm from '../components/UnifiedStripePaymentForm';
 import axiosInstance from '../api/axiosInstance';
 import { getAuthHeader } from '../api/stripePayment';
 import { API_BASE_URL } from '../constants';
@@ -90,7 +90,27 @@ const StripeCardPaymentPage: React.FC = () => {
       ) : (
         booking && <PaymentSummary booking={booking} />
       )}
-      <StripeCardPayment clientSecret={clientSecret} bookingId={bookingId} />
+      <UnifiedStripePaymentForm
+        mode="one-time"
+        amount={booking?.estimatedPrice ?? 0}
+        currency="gbp"
+        bookingId={bookingId}
+        customerEmail={booking?.customerEmail || ''}
+        customerName={booking?.customerName || ''}
+        metadata={{ bookingId: bookingId }}
+        onSuccess={() => {
+          alert('Payment successful!');
+          navigate('/');
+        }}
+        onError={(error) => {
+          alert(`Payment failed: ${error}`);
+          console.error(error);
+        }}
+        onClose={() => {
+          alert('Payment cancelled.');
+          navigate('/');
+        }}
+      />
     </div>
   );
 };

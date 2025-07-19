@@ -8,7 +8,6 @@ const StripeTestPage: React.FC = () => {
 
   const handleSuccess = (result: { clientSecret: string }) => {
     // Pass both clientSecret and bookingId in state
-    navigate('/stripe-card-payment', { state: { clientSecret: result.clientSecret, bookingId } });
   };
 
   return (

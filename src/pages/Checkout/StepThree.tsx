@@ -6,10 +6,10 @@ import { frequencyOptions, roomTypes, addOns, calculatePrice, PRICING_CONFIG, Fr
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { fetchWithAuth } from '../../utils/helper';
-import { createStripePaymentIntent } from '../../api/stripePayment';
 import { isTokenValid } from '../../utils/isTokenValid';
 import { API_BASE_URL } from '../../constants';
 import AuthModal from '../../components/AuthModal';
+import UnifiedStripePaymentForm from '../../components/UnifiedStripePaymentForm';
 interface StepThreeProps {
   user: any;
   phone: string;
@@ -52,7 +52,10 @@ const StepThree: React.FC = () => {
   const [pendingBookingBody, setPendingBookingBody] = useState<any>(null);
   const [addressSuggestions, setAddressSuggestions] = useState<any[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [showPaymentFlow, setShowPaymentFlow] = useState(false);
+  const [currentBookingId, setCurrentBookingId] = useState<string>('');
   const debounceTimeout = useRef<number | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   // Zustand store hooks
   const {
@@ -166,6 +169,8 @@ const StepThree: React.FC = () => {
 
   // Full quote handler with backend submission
   const handleGetAQuote = async () => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
     const date = new Date(selectedDate);
     date.setHours(hour, minute, 0, 0);
     const scheduledDateTime = date.toISOString();
@@ -189,10 +194,12 @@ const StepThree: React.FC = () => {
 
     if (rooms.length === 0) {
       toast.error('Please select at least one room.');
+      setIsSubmitting(false);
       return;
     }
     if (selectedFrequency === null) {
       toast.error('Please select a frequency.');
+      setIsSubmitting(false);
       return;
     }
 
@@ -255,6 +262,7 @@ const StepThree: React.FC = () => {
       localStorage.setItem("pendingBooking", JSON.stringify(body)); // Save booking data
       setPendingBookingBody(body); // Save booking data to state as well
       setShowAuthModal(true);
+      setIsSubmitting(false);
       return;
     }
 
@@ -273,16 +281,18 @@ const StepThree: React.FC = () => {
       }
       if (!res.ok) {
         toast.error('Something has gone wrong!, please try again.');
+        setIsSubmitting(false);
         return;
       }
       if(res.status === 401) {
         toast.error('Not authorized, please login.');
         setPendingBookingBody(body);
         setShowAuthModal(true);
+        setIsSubmitting(false);
         return;
       }
       if(res.status === 201) {
-        toast.success('Booking created!');
+        toast.success('Booking created successfully');
         // Update user details in backend
         if (user && user.id) {
           await fetchWithAuth(`${API_BASE_URL}/users/${user.id}`, {
@@ -296,18 +306,20 @@ const StepThree: React.FC = () => {
             }),
           });
         }
-        const paymentIntent = await createStripePaymentIntent(bookingId);
+        
+        // Store booking ID and show smart payment flow
+        setCurrentBookingId(bookingId);
+        setShowPaymentFlow(true);
         localStorage.removeItem("pendingBooking"); // Clear after use
-        const clientSecret = paymentIntent?.payload?.clientSecret || paymentIntent?.data?.clientSecret || paymentIntent?.clientSecret;
-        if (clientSecret) {
-          navigate('/stripe-card-payment', { state: { clientSecret, bookingId } });
-        }
-        return { booking, paymentIntent };
+        localStorage.removeItem("pendingBookingHandled"); // Reset pending booking handled flag
+        
+        return { booking };
       }
     } catch (err: any) {
       const msg = err?.response?.data?.message || err.message || 'An error occurred';
       toast.error(msg);
     }
+    setIsSubmitting(false);
   };
 
   // Local scroll to top implementation
@@ -424,10 +436,19 @@ const StepThree: React.FC = () => {
             BACK
           </button>
           <button
-            className="px-8 py-3 bg-brand-primary hover:bg-brand-primary/80 text-white font-bold rounded-md text-lg transition"
+            className="px-8 py-3 bg-brand-primary hover:bg-brand-primary/80 text-white font-bold rounded-md text-lg transition flex items-center justify-center"
             onClick={handleGetAQuote}
+            disabled={isSubmitting || Object.values(roomCounts).reduce((sum, count) => sum + count, 0) === 0}
+            style={isSubmitting || Object.values(roomCounts).reduce((sum, count) => sum + count, 0) === 0 ? { opacity: 0.5, cursor: 'not-allowed' } : {}}
           >
-            SUBMIT BOOKING
+            {isSubmitting ? (
+              <span className="flex items-center gap-2">
+                <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path></svg>
+                Submitting...
+              </span>
+            ) : (
+              'SUBMIT BOOKING'
+            )}
           </button>
         </div>
 
@@ -444,6 +465,48 @@ const StepThree: React.FC = () => {
             { label: "Login", onClick: () => navigate("/login") },
             { label: "Signup", onClick: () => navigate("/register") },
           ]}
+        />
+      )}
+
+      {/* Smart Payment Flow Modal */}
+      {showPaymentFlow && currentBookingId && (
+        <UnifiedStripePaymentForm
+          mode={selectedFrequency !== null && selectedFrequency !== Frequency.ONE_OFF ? 'subscription' : 'one-time'}
+          amount={estimatedPrice}
+          currency="gbp"
+          frequency={selectedFrequency === Frequency.WEEKLY ? 'week' : selectedFrequency === Frequency.FORTNIGHTLY ? 'week' : selectedFrequency === Frequency.MONTHLY ? 'month' : undefined}
+          intervalCount={selectedFrequency === Frequency.FORTNIGHTLY ? 2 : 1}
+          productName={selectedFrequency !== null && selectedFrequency !== Frequency.ONE_OFF ? 'Cleaning Service Subscription' : undefined}
+          bookingId={currentBookingId}
+          customerEmail={user?.email || ''}
+          customerName={`${name} ${surname}`.trim()}
+          subscriptionMonths={Number(selectedDuration) || 1}
+          metadata={{
+            serviceType: getServiceType(),
+            rooms: JSON.stringify(roomTypes.map((room) => ({
+              type: room.type,
+              quantity: roomCounts[room.type] || 0,
+              estimatedTime: room.estimatedTime,
+            })).filter((r) => r.quantity > 0)),
+            addOns: JSON.stringify(addOns.map((addon) => ({
+              key: addon.key,
+              quantity: selectedAddOns[addon.key] || 0,
+              estimatedTime: addon.estimatedTime,
+              price: addon.price,
+            })).filter((addon) => addon.quantity > 0)),
+            address,
+            scheduledDate: (() => { const d = new Date(selectedDate); d.setHours(hour, minute, 0, 0); return d.toISOString(); })(),
+            frequency: frequencyBackendValues[selectedFrequency || 3],
+          }}
+          onSuccess={(result) => {
+            setShowPaymentFlow(false);
+            toast.success(result?.subscriptionId ? 'Subscription created successfully!' : 'Payment successful!');
+          }}
+          onError={(error) => {
+            setShowPaymentFlow(false);
+            toast.error(error);
+          }}
+          onClose={() => setShowPaymentFlow(false)}
         />
       )}
     </div>

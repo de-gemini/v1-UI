@@ -23,6 +23,7 @@ import ScheduleManagement from "./pages/admin/ScheduleManagement";
 import StripeTestPage from './pages/StripeTestPage';
 import StripeCardPaymentPage from './pages/StripeCardPaymentPage';
 import PaymentSuccessPage from './pages/PaymentSuccessPage';
+import StripeSubscriptionPage from './pages/StripeSubscriptionPage';
 import { useEffect, useState } from "react";
 import { isTokenValid } from "./utils/isTokenValid";
 import { PendingBookingModal } from "./components/PendingBookingModal";
@@ -84,7 +85,7 @@ function App() {
         position="top-right"
         rtl={true}
         autoClose={5000}
-        hideProgressBar={false}
+        hideProgressBar={true}
         transition={Zoom}
       />
       <ScrollToTop />
@@ -333,7 +334,7 @@ function App() {
                 </Layout>
                 } />
               <Route path="/test-stripe-processor" element={<StripeTestPage />} />
-              <Route path="/stripe-card-payment" element={<StripeCardPaymentPage />} />
+              <Route path="/subscriptions" element={<StripeSubscriptionPage />} />
               <Route path="/payment-success" element={<PaymentSuccessPage />} />
             </Routes>
           </main>
