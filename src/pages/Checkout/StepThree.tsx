@@ -170,6 +170,14 @@ const StepThree: React.FC = () => {
   // Full quote handler with backend submission
   const handleGetAQuote = async () => {
     if (isSubmitting) return;
+    if (!address || address.trim() === '') {
+      toast.error('Address is required.');
+      return;
+    }
+    if (!phone || phone.trim() === '') {
+      toast.error('Phone number is required.');
+      return;
+    }
     setIsSubmitting(true);
     const date = new Date(selectedDate);
     date.setHours(hour, minute, 0, 0);
@@ -277,6 +285,7 @@ const StepThree: React.FC = () => {
 
       if (!bookingId) {
         toast.error('Booking ID not found in response')
+        setIsSubmitting(false);
         throw new Error('Booking ID not found in response');
       }
       if (!res.ok) {
@@ -293,8 +302,8 @@ const StepThree: React.FC = () => {
       }
       if(res.status === 201) {
         toast.success('Booking created successfully');
-        // Update user details in backend
-        if (user && user.id) {
+        // Update user details in backend only if address and phone are present
+        if (user && user.id && address && phone) {
           await fetchWithAuth(`${API_BASE_URL}/users/${user.id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
@@ -302,7 +311,7 @@ const StepThree: React.FC = () => {
               name,
               surname,
               address,
-              phone,
+              phoneNumber: phone,
             }),
           });
         }
@@ -316,10 +325,10 @@ const StepThree: React.FC = () => {
         return { booking };
       }
     } catch (err: any) {
+      setIsSubmitting(false);
       const msg = err?.response?.data?.message || err.message || 'An error occurred';
       toast.error(msg);
     }
-    setIsSubmitting(false);
   };
 
   // Local scroll to top implementation
