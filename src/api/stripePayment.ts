@@ -87,4 +87,12 @@ export const resumeSubscription = async (subscriptionId: string) => {
     { headers: getAuthHeader() }
   );
   return response.data;
+};
+
+export const fetchPaymentRecords = async (page = 1, limit = 10) => {
+  const response = await axiosInstance.get(
+    `/payments/records?page=${page}&limit=${limit}`,
+    { headers: getAuthHeader() }
+  );
+  return response.data;
 }; 

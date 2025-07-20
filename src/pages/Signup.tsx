@@ -43,7 +43,7 @@ const Signup = () => {
         await register(form);
         setSuccess(true);
         toast.success('Registered successfully!')
-        navigate('/dashboard')
+        navigate('/login')
       } catch (err: any) {
         setError(err?.response?.data?.message || 'Registration failed.');
         toast.error(err?.response?.data?.message || 'Registration failed.')

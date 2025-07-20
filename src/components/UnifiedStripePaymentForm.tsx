@@ -74,6 +74,7 @@ const UnifiedPaymentForm: React.FC<UnifiedStripePaymentFormProps> = ({
     customerEmail,
     customerName,
   });
+  const [agreedToPaymentPolicy, setAgreedToPaymentPolicy] = useState(false);
   // Remove unused state for subscriptions
   // const [pendingClientSecret, setPendingClientSecret] = useState<string | null>(null);
   // const [isPolling, setIsPolling] = useState(false);
@@ -199,11 +200,28 @@ const UnifiedPaymentForm: React.FC<UnifiedStripePaymentFormProps> = ({
               email: formData.customerEmail,
             },
           },
+          setup_future_usage: 'off_session',
         });
         if (confirmError) {
           setError(confirmError.message || 'Payment confirmation failed');
           setProcessing(false);
           return;
+        }
+        // Save payment info for off-session
+        if (confirmedIntent && bookingId) {
+          // No need to send payment method to backend; webhook will handle it
+          const stripeCustomerId = confirmedIntent.customer;
+          const stripePaymentMethodId = confirmedIntent.payment_method;
+          console.log('[Save Payment Method] bookingId:', bookingId);
+          console.log('[Save Payment Method] stripeCustomerId:', stripeCustomerId);
+          console.log('[Save Payment Method] stripePaymentMethodId:', stripePaymentMethodId);
+          if (!stripeCustomerId) {
+            console.warn('Stripe customer ID missing from payment intent:', confirmedIntent);
+          }
+          if (!stripePaymentMethodId) {
+            console.warn('Stripe payment method ID missing from payment intent:', confirmedIntent);
+          }
+          // No axiosInstance.post here
         }
         toast.success('Payment successful!');
         if (onSuccess) onSuccess(paymentIntent);
@@ -327,9 +345,23 @@ const UnifiedPaymentForm: React.FC<UnifiedStripePaymentFormProps> = ({
                 <CardElement options={{ style: cardStyle }} />
               </div>
             </div>
+            <div className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                id="agree-payment-policy"
+                checked={agreedToPaymentPolicy}
+                onChange={e => setAgreedToPaymentPolicy(e.target.checked)}
+                required
+                className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                disabled={processing}
+              />
+              <label htmlFor="agree-payment-policy" className="text-xs sm:text-sm text-gray-700 select-none">
+                I agree to the <a href="/payment-policy" target="_blank" rel="noopener noreferrer" className="underline text-brand-primary hover:text-blue-700">Payment Policy</a>
+              </label>
+            </div>
             <button
               type="submit"
-              disabled={!stripe || processing}
+              disabled={!stripe || processing || !agreedToPaymentPolicy}
               className="w-full bg-blue-600 text-white py-3 px-4 rounded-md font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               {processing ? 'Processing Payment...' : 'Pay Now'}

@@ -31,6 +31,12 @@ import ScrollToTop from "./components/ScrollToTop";
 import { PageLoader } from "./components/LoadingSpinner";
 import StackedPagesLoader from "./components/StackedPagesLoader";
 import { ToastContainer, Zoom } from 'react-toastify';
+import VisitorTracker from './components/VisitorTracker';
+import TermsOfService from "./pages/TermsOfService";
+import PaymentPolicy from "./pages/PaymentPolicy";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import CookiePolicy from "./pages/CookiePolicy";
+import CancellationPolicy from "./pages/CancellationPolicy";
 
 // Protected Route wrapper component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -75,12 +81,13 @@ const MattressCleaning = lazy(() => import("./pages/services/MattressCleaning"))
 const SpringCleaning = lazy(() => import("./pages/services/SpringCleaning"));
 const Checkout = lazy(() => import("./pages/Checkout"));
 const Signup = lazy(() => import("./pages/Signup"));
-
+const PaymentRecords = lazy(() => import("./pages/admin/PaymentRecords"));
 
 
 function App() {
   return (
     <Router>
+      <VisitorTracker />
       <ToastContainer
         position="top-right"
         rtl={true}
@@ -177,6 +184,16 @@ function App() {
                   <AdminRoute>
                     <AdminLayout>
                       <ScheduleManagement />
+                    </AdminLayout>
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="/admin/payments"
+                element={
+                  <AdminRoute>
+                    <AdminLayout>
+                      <PaymentRecords />
                     </AdminLayout>
                   </AdminRoute>
                 }
@@ -336,6 +353,11 @@ function App() {
               <Route path="/test-stripe-processor" element={<StripeTestPage />} />
               <Route path="/subscriptions" element={<StripeSubscriptionPage />} />
               <Route path="/payment-success" element={<PaymentSuccessPage />} />
+              <Route path="/terms" element={<Layout><TermsOfService /></Layout>} />
+              <Route path="/payment-policy" element={<Layout><PaymentPolicy /></Layout>} />
+              <Route path="/privacy-policy" element={<Layout><PrivacyPolicy /></Layout>} />
+              <Route path="/cookie-policy" element={<Layout><CookiePolicy /></Layout>} />
+              <Route path="/cancellation-policy" element={<Layout><CancellationPolicy /></Layout>} />
             </Routes>
           </main>
         </div>
