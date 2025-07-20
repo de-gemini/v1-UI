@@ -10,6 +10,7 @@ import {
   DirtLevel
 } from './ckeckoutData';
 import { useCheckoutStore, useEstimatedHours, useEstimatedMinutes, useEstimatedPrice, usePricingBreakdown } from '../../store/checkoutStore';
+import { toast } from 'react-toastify';
 
 const formatPrice = (price: number) => `£${price}/h`;
 const pad = (n: number) => n.toString().padStart(2, '0');
@@ -98,6 +99,11 @@ const StepTwo: React.FC = () => {
 
   const handleNextStep = () => {
     // Only include add-ons with value > 0
+    const totalRooms = Object.values(roomCounts).reduce((sum, count) => sum + count, 0);
+    if (totalRooms === 0) {
+      toast.error('Please select at least one room.');
+      return;
+    }
     console.log('Moving to Step 3 with current selections:', {
       roomCounts,
       selectedAddOns,
@@ -364,7 +370,7 @@ const StepTwo: React.FC = () => {
         {/* Final action button */}
         <div className="flex items-center justify-center gap-[10px] mt-8">
           <button
-            className="px-8 py-3 bg-red-400 text-white border border-s                                                                                                                                                                                                                                                                                                                                                rounded-md  font-bold text-lg transition"
+            className="px-8 py-3 bg-red-400 text-white border border-gray-300 rounded-md  font-bold text-lg transition"
             onClick={() => set({ step: 1 })}
           >
             BACK

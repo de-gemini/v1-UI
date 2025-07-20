@@ -2,8 +2,15 @@ import React from 'react';
 import { Instagram, Facebook, Phone } from 'lucide-react';
 import { DropdownHeader } from './DropdownHeader';
 import { AiFillTikTok } from "react-icons/ai";
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { trackVisitor } from '../api/visitors';
 
 export const Footer: React.FC = () => {
+  const location = useLocation();
+  useEffect(() => {
+    trackVisitor(location.pathname);
+  }, [location]);
   return (
     <footer className="relative bg-transparent text-gray-600 py-12 px-6 sm:px-16 overflow-hidden">
         <div className="w- top-0 absolute ">
@@ -51,16 +58,25 @@ export const Footer: React.FC = () => {
               <li><a href="#" className="hover:underline">What's included</a></li>
               <li><a href="#" className="hover:underline">Blog</a></li>
               <li><a href="#" className="hover:underline">Booking Policy</a></li>
-              <li><a href="#" className="hover:underline">Cancellation Policy</a></li>
+              <li><a href="/cancellation-policy" className="hover:underline">Cancellation Policy</a></li>
               <li><a href="#" className="hover:underline">Terms & Conditions</a></li>
-              <li><a href="#" className="hover:underline">Privacy Policy</a></li>
-              <li><a href="#" className="hover:underline">Cookies Policy</a></li>
+              <li><a href="/terms" className="hover:underline">Terms of Service</a></li>
+              <li><a href="/privacy-policy" className="hover:underline">Privacy Policy</a></li>
+              <li><a href="/cookie-policy" className="hover:underline">Cookie Policy</a></li>
               {/* <li><a href="#" className="hover:underline">Reclean Guarantee</a></li> */}
               <li><a href="#" className="hover:underline">Sitemap</a></li>
             </ul>
             <h3 className="font-bold text-lg mb-4 text-brand-primary mt-6">FOR CLEANERS</h3>
             <ul className="space-y-2">
               {/* <li><a href="#" className="hover:underline">Join Us</a></li> */}
+            </ul>
+          </DropdownHeader>
+        </div>
+        {/* Payments Section */}
+        <div className="lg:col-span-1">
+          <DropdownHeader title="PAYMENTS" dropdownName="payments">
+            <ul className="space-y-2 pb-4 lg:pb-0">
+              <li><a href="/payment-policy" className="hover:underline">Payment Policy</a></li>
             </ul>
           </DropdownHeader>
         </div>

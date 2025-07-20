@@ -9,7 +9,12 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.response.use(
   response => response,
   error => {
-    const message = error.response?.data?.message || error.message || 'An error occurred';
+    let message;
+    if (error.code === 'ERR_NETWORK' || error.message === 'Network Error') {
+      message = 'Network error: Please check your internet connection or try again later.';
+    } else {
+      message = error.response?.data?.message || error.message || 'An error occurred';
+    }
     // Use setTimeout to avoid Zustand hook call in render
     setTimeout(() => {
       useErrorStore.getState().setError(message);

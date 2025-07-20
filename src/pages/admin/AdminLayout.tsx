@@ -8,6 +8,7 @@ import {
   FaTachometerAlt,
   FaTimes,
   FaUsers,
+  FaCreditCard,
 } from "react-icons/fa";
 import { FiBell, FiSearch } from "react-icons/fi";
 import { Link, useLocation } from "react-router-dom";
@@ -18,7 +19,8 @@ interface AdminLayoutProps {
 
 const navItems = [
   { label: "Dashboard", icon: <FaTachometerAlt />, path: "/admin" },
-  { label: "Pricing", icon: <FaBoxOpen />, path: "/admin/pricing" },
+  // { label: "Pricing", icon: <FaBoxOpen />, path: "/admin/pricing" },
+  { label: "Payment Records", icon: <FaCreditCard />, path: "/admin/payments" },
   { label: "Calendar", icon: <FaCalendarAlt />, path: "/admin/calendar" },
   { label: "Bookings", icon: <FaUsers />, path: "/admin/bookings" },
   // { label: 'Product', icon: <FaBoxOpen />, path: '/admin/product' },
