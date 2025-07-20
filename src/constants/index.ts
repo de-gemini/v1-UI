@@ -9,4 +9,3 @@ export const API_BASE_URL = window.location.protocol === 'https:'
 
 
   
-  // export const API_BASE_URL = "https://v1-api-6rdd.onrender.com"
