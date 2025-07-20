@@ -9,7 +9,7 @@ const defaultFAQ = {
     {
       id: 1,
       question: "Do cleaners provide equipment / products?",
-      answer: "If you do not have your own equipment/ products, please request a cleaner to the equipmentor products. You will be charged additionally for an order with the equipment/products.",
+      answer: "If you don’t have your own equipment or cleaning products, please request that your cleaner bring them. An additional charge will apply for bookings that include equipment or products.",
     },
     {
       id: 2,

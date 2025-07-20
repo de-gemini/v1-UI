@@ -31,21 +31,30 @@ export const Footer: React.FC = () => {
         <div className="lg:col-span-1">
           <DropdownHeader title="CLEANER LOCATIONS" dropdownName="cleanerLocations">
             <ul className="space-y-2 pb-4 lg:pb-0">
-              <li><a href="#" className="hover:underline">Edinburgh Birmingham</a></li>
-              <li><a href="#" className="hover:underline">Manchester St Albans</a></li>
-              <li><a href="#" className="hover:underline">Glasgow Leeds Bradford</a></li>
-              <li><a href="#" className="hover:underline">Liverpool Central London</a></li>
-              <li><a href="#" className="hover:underline">North London South London</a></li>
-              <li><a href="#" className="hover:underline">West London East London</a></li>
-              <li><a href="#" className="hover:underline">Watford Greenwich</a></li>
-              <li><a href="#" className="hover:underline">Croydon</a></li>
-              <li><a href="#" className="hover:underline">Kensington & Chelsea</a></li>
-              <li><a href="#" className="hover:underline">Bromley Islington</a></li>
-              <li><a href="#" className="hover:underline">Wimbledon Barking</a></li>
-              <li><a href="#" className="hover:underline">Kingston Fulham Richmond</a></li>
-              <li><a href="#" className="hover:underline">Clapham Romford Ealing</a></li>
-              <li><a href="#" className="hover:underline">Walthamstow Battersea</a></li>
-              <li><a href="#" className="hover:underline">Canary Wharf</a></li>
+              <li><a href="#" className="hover:underline">Barton-upon-Humber</a></li>
+              <li><a href="#" className="hover:underline">Boston</a></li>
+              <li><a href="#" className="hover:underline">Bourne</a></li>
+              <li><a href="#" className="hover:underline">Brigg</a></li>
+              <li><a href="#" className="hover:underline">Broughton</a></li>
+              <li><a href="#" className="hover:underline">Caistor</a></li>
+              <li><a href="#" className="hover:underline">Crowland</a></li>
+              <li><a href="#" className="hover:underline">Gainsborough</a></li>
+              <li><a href="#" className="hover:underline">Grantham</a></li>
+              <li><a href="#" className="hover:underline">Louth</a></li>
+              <li><a href="#" className="hover:underline">Mablethorpe</a></li>
+              <li><a href="#" className="hover:underline">Market Deeping</a></li>
+              <li><a href="#" className="hover:underline">Market Rasen</a></li>
+              <li><a href="#" className="hover:underline">North Hykeham</a></li>
+              <li><a href="#" className="hover:underline">Scunthorpe</a></li>
+              <li><a href="#" className="hover:underline">Skegness</a></li>
+              <li><a href="#" className="hover:underline">Sleaford</a></li>
+              <li><a href="#" className="hover:underline">Spalding</a></li>
+              <li><a href="#" className="hover:underline">Stamford</a></li>
+              <li><a href="#" className="hover:underline">Wainfleet All Saints</a></li>
+              <li><a href="#" className="hover:underline">Waltham</a></li>
+              <li><a href="#" className="hover:underline">Winterton</a></li>
+              <li><a href="#" className="hover:underline">Winterton</a></li>
+              <li><a href="#" className="hover:underline">Woodhall Spa</a></li>
             </ul>
           </DropdownHeader>
         </div>
@@ -54,12 +63,12 @@ export const Footer: React.FC = () => {
         <div className="lg:col-span-1">
           <DropdownHeader title="FOR CUSTOMERS" dropdownName="forCustomers">
             <ul className="space-y-2 pb-4 lg:pb-0">
-              <li><a href="#" className="hover:underline">Pricing</a></li>
+              <li><a href="/pricing-house-cleaning" className="hover:underline">Pricing</a></li>
               <li><a href="#" className="hover:underline">What's included</a></li>
-              <li><a href="#" className="hover:underline">Blog</a></li>
+              <li><a href="/blog" className="hover:underline">Blog</a></li>
               <li><a href="#" className="hover:underline">Booking Policy</a></li>
               <li><a href="/cancellation-policy" className="hover:underline">Cancellation Policy</a></li>
-              <li><a href="#" className="hover:underline">Terms & Conditions</a></li>
+              <li><a href="/terms-and-conditions" className="hover:underline">Terms & Conditions</a></li>
               <li><a href="/terms" className="hover:underline">Terms of Service</a></li>
               <li><a href="/privacy-policy" className="hover:underline">Privacy Policy</a></li>
               <li><a href="/cookie-policy" className="hover:underline">Cookie Policy</a></li>
@@ -85,19 +94,19 @@ export const Footer: React.FC = () => {
         <div className="lg:col-span-1">
           <DropdownHeader title="De Gemini SERVICE" dropdownName="deGeminiService">
             <ul className="space-y-2 pb-4 lg:pb-0">
-              <li><a href="#" className="hover:underline">Regular cleaning</a></li>
-              <li><a href="#" className="hover:underline">Deep cleaning</a></li>
-              <li><a href="#" className="hover:underline">Office cleaning</a></li>
-              <li><a href="#" className="hover:underline">End of Tenancy cleaning</a></li>
-              <li><a href="#" className="hover:underline">Carpet cleaning</a></li>
-              <li><a href="#" className="hover:underline">Upholstery cleaning</a></li>
-              <li><a href="#" className="hover:underline">Same Day cleaning</a></li>
-              <li><a href="#" className="hover:underline">Kitchen Deep Cleaning</a></li>
-              <li><a href="#" className="hover:underline">Rug Cleaning</a></li>
-              <li><a href="#" className="hover:underline">Move in cleaning</a></li>
-              <li><a href="#" className="hover:underline">Bathroom cleaning</a></li>
-              <li><a href="#" className="hover:underline">Mattress cleaning</a></li>
-              <li><a href="#" className="hover:underline">Spring cleaning</a></li>
+              <li><a href="//services-regular-cleaning" className="hover:underline">Regular cleaning</a></li>
+              <li><a href="/services-deep-cleaning" className="hover:underline">Deep cleaning</a></li>
+              <li><a href="/services-office-cleaning" className="hover:underline">Office cleaning</a></li>
+              <li><a href="/services/end-tenancy-cleaning" className="hover:underline">End of Tenancy cleaning</a></li>
+              <li><a href="/services-carpet-cleaning" className="hover:underline">Carpet cleaning</a></li>
+              <li><a href="/services--cleaning" className="hover:underline">Upholstery cleaning</a></li>
+              <li><a href="/services/same-day-cleaning" className="hover:underline">Same Day cleaning</a></li>
+              <li><a href="/services/kitchen-deep-cleaning" className="hover:underline">Kitchen Deep Cleaning</a></li>
+              <li><a href="/services-rug-cleaning" className="hover:underline">Rug Cleaning</a></li>
+              <li><a href="/services/move-in-cleaning" className="hover:underline">Move in cleaning</a></li>
+              <li><a href="/services-bathroom-cleaning" className="hover:underline">Bathroom cleaning</a></li>
+              <li><a href="/services-mattress-cleaning" className="hover:underline">Mattress cleaning</a></li>
+              <li><a href="/services-spring-cleaning" className="hover:underline">Spring cleaning</a></li>
             </ul>
           </DropdownHeader>
           

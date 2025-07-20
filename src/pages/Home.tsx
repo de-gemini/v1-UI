@@ -186,8 +186,8 @@ const Home = () => {
     SmallIconComponent?: React.ElementType;
   }> = [
     {
-      title: "Bedroom, living, dining, office rooms",
-      description: "Our cleaning England services include:",
+      title: "Bedroom, Living Room, Dining Room, and Office Cleaning",
+      description: "Our cleaning services in England include:",
       services: [
         "Dusting and wiping of all accessible surfaces.",
         "Vacuuming carpets and mopping hard floors.",

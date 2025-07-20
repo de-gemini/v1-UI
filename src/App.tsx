@@ -82,6 +82,7 @@ const SpringCleaning = lazy(() => import("./pages/services/SpringCleaning"));
 const Checkout = lazy(() => import("./pages/Checkout"));
 const Signup = lazy(() => import("./pages/Signup"));
 const PaymentRecords = lazy(() => import("./pages/admin/PaymentRecords"));
+const TermsandConditions = lazy(() => import("./pages/Terms"));
 
 
 function App() {
@@ -199,7 +200,7 @@ function App() {
                 }
               />
               <Route
-                path="/prcing-house-cleaning"
+                path="/pricing-house-cleaning"
                 element={
                     <Layout>
                       <HouseCleaning />
@@ -207,7 +208,7 @@ function App() {
                 }
               />
               <Route
-                path="/prcing-deep-cleaning"
+                path="/pricing-deep-cleaning"
                 element={
                     <Layout>
                       <DeepCleaningService />
@@ -215,7 +216,7 @@ function App() {
                 }
               />
               <Route
-                path="/prcing-office-cleaning"
+                path="/pricing-office-cleaning"
                 element={
                     <Layout>
                       <OfficeCleaning />
@@ -223,7 +224,7 @@ function App() {
                 }
               />
               <Route
-                path="/prcing-tenancy-cleaning"
+                path="/pricing-tenancy-cleaning"
                 element={
                     <Layout>
                       <EndTenancy />
@@ -231,7 +232,7 @@ function App() {
                 }
               />
               <Route
-                path="/prcing-carpet-cleaning"
+                path="/pricing-carpet-cleaning"
                 element={
                     <Layout>
                       <CarpetCleaning />
@@ -239,7 +240,7 @@ function App() {
                 }
               />
               <Route
-                path="/prcing-upholstery-cleaning"
+                path="/pricing-upholstery-cleaning"
                 element={
                     <Layout>
                       <Upholstery />
@@ -351,6 +352,7 @@ function App() {
                 </Layout>
                 } />
               <Route path="/test-stripe-processor" element={<StripeTestPage />} />
+              <Route path="/terms-and-conditions" element={<Layout><TermsandConditions /></Layout>} />
               <Route path="/subscriptions" element={<StripeSubscriptionPage />} />
               <Route path="/payment-success" element={<PaymentSuccessPage />} />
               <Route path="/terms" element={<Layout><TermsOfService /></Layout>} />

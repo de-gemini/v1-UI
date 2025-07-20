@@ -24,12 +24,12 @@ const servicesLinks: Links[] = [
 ];
 
 const pricingLinks: Links[] = [
-  { name: 'House cleaning', href: '/prcing-house-cleaning' },
-  { name: 'Office cleaning', href: '/prcing-office-cleaning' },
-  { name: 'Deep cleaning', href: '/prcing-deep-cleaning' },
-  { name: 'End of Tenancy cleaning', href: '/prcing-tenancy-cleaning' },
-  { name: 'Carpet cleaning', href: '/prcing-carpet-cleaning' },
-  { name: 'Upholstery cleaning', href: '/prcing-upholstery-cleaning' },
+  { name: 'House cleaning', href: '/pricing-house-cleaning' },
+  { name: 'Office cleaning', href: '/pricing-office-cleaning' },
+  { name: 'Deep cleaning', href: '/pricing-deep-cleaning' },
+  { name: 'End of Tenancy cleaning', href: '/pricing-tenancy-cleaning' },
+  { name: 'Carpet cleaning', href: '/priicing-carpet-cleaning' },
+  { name: 'Upholstery cleaning', href: '/pricing-upholstery-cleaning' },
 ];
 
 const Navbar = () => {

@@ -1,6 +1,6 @@
 import axiosInstance from './axiosInstance';
 
-export const trackVisitor = (path) => {
+export const trackVisitor = (path: any) => {
   let sessionId = localStorage.getItem('sessionId');
   if (!sessionId) {
     sessionId = Math.random().toString(36).substring(2);
