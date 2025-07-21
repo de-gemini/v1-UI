@@ -1,67 +1,43 @@
 import React from "react";
-import PolicyTemplate from "./PolicyTemplate";
-
-const sections = [
-  {
-    heading: "Introduction",
-    content: (
-      <p>
-        This Cancellation Policy explains how cancellations are handled for bookings made through our platform. By booking with us, you agree to this policy.
-      </p>
-    ),
-  },
-  {
-    heading: "Cancellation by Customer",
-    content: (
-      <p>
-        Customers may cancel their booking up to a specified time before the scheduled service. Cancellations made after this period may incur a fee or be non-refundable.
-      </p>
-    ),
-  },
-  {
-    heading: "Cancellation by Company",
-    content: (
-      <p>
-        We reserve the right to cancel bookings in certain circumstances, such as unavailability of cleaners or safety concerns. Customers will be notified as soon as possible.
-      </p>
-    ),
-  },
-  {
-    heading: "Refunds",
-    content: (
-      <p>
-        Refunds for cancellations are processed according to our refund policy. Please refer to our Payment Policy for more details.
-      </p>
-    ),
-  },
-  {
-    heading: "How to Cancel",
-    content: (
-      <p>
-        To cancel a booking, please contact our support team. We will assist you with the cancellation process.
-      </p>
-    ),
-  },
-  {
-    heading: "Changes to This Policy",
-    content: (
-      <p>
-        We may update this Cancellation Policy from time to time. Please review it regularly for any changes.
-      </p>
-    ),
-  },
-  {
-    heading: "Contact",
-    content: (
-      <p>
-        If you have questions about this Cancellation Policy, please contact us using the information provided on our website.
-      </p>
-    ),
-  },
-];
+import PolicyTable from "../components/PolicyTable";
 
 const CancellationPolicy: React.FC = () => (
-  <PolicyTemplate title="Cancellation Policy" sections={sections} />
-);
+  <div className="bg-gray-50 min-h-screen font-sans">
+      <div className="container mx-auto px-4 py-8 md:py-12">
+        <div className="max-w-4xl mx-auto bg-white p-6 md:p-10 rounded-xl shadow-sm">
+          
+          {/* Page Header */}
+          <header>
+            <h1 className="text-3xl md:text-4xl font-bold text-brand-primary">
+              Cancellation Policy
+            </h1>
+          </header>
 
+          
+          <main className="mt-6 text-gray-600 leading-relaxed space-y-4">
+            <p>
+              Time is valuable for both clients and De-gemini. That is why we have introduced a <strong className="font-semibold text-gray-700">Cancellation Policy</strong> for both clients and De-gemini, which also covers rescheduling. By accepting our terms and conditions you accept the conditions set out in this cancellation policy.
+            </p>
+            <p>
+              If a client cancels a job less than 12 hours before the start time or at the last minute, our De-gemini lose their income and it messes with their schedule. Clients' cancellation fees cover De-gemini' time and the eMop platform's costs.
+            </p>
+          </main>
+
+          
+          <PolicyTable />
+
+          
+          <footer className="mt-8 text-sm text-gray-500 space-y-2">
+            <p>
+              * Fee applied only if an eMopper reported the case to eMop and provided a print screen with unanswered calls to the client and pictures of the door of the client's property.
+            </p>
+            <p className="font-medium">
+              Updated 27.09.2024
+            </p>
+          </footer>
+
+        </div>
+      </div>
+    </div>
+);
 export default CancellationPolicy; 

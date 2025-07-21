@@ -7,144 +7,185 @@ import { useLocation } from 'react-router-dom';
 import { trackVisitor } from '../api/visitors';
 
 export const Footer: React.FC = () => {
-  const location = useLocation();
-  useEffect(() => {
-    trackVisitor(location.pathname);
-  }, [location]);
-  return (
-    <footer className="relative bg-transparent text-gray-600 py-12 px-6 sm:px-16 overflow-hidden">
-        <div className="w- top-0 absolute ">
-          <svg viewBox="0 0 1440 320" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-24 sm:h-32 md:h-40 lg:h-48" style={{ opacity: 0.08 }}>
-            <path fill="#42337E" d="M0,256L60,229.3C120,203,240,149,360,154.7C480,160,600,224,720,229.3C840,235,960,181,1080,176C1200,171,1320,213,1380,234.7L1440,256L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z" />
-        </svg>
-        </div>
-      {/* Subtle SVG Background only behind headline */}
-      <div className='mb-12'>
-        <h1 className="  text-brand-primary  font-extrabold text-3xl sm:text-6xl lg:text-7xl  mb-6">
-          Clean, <span className='editorial'>Fresh, </span> Gemini.
-        </h1>
-        <p className="text-brand-primary text-xl sm:text-xl font-bold tracking-wide mb-2">Your Instant Cleaning Service In England.</p>
-      </div>
+ const location = useLocation();
+ useEffect(() => {
+ trackVisitor(location.pathname);
+ }, [location]);
+ return (
+ <footer className="relative bg-transparent text-gray-600 py-12 px-6 sm:px-16 overflow-hidden">
+ <div className="w- top-0 absolute ">
+  <svg viewBox="0 0 1440 320" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-24 sm:h-32 md:h-40 lg:h-48" style={{ opacity: 0.08 }}>
+  <path fill="#42337E" d="M0,256L60,229.3C120,203,240,149,360,154.7C480,160,600,224,720,229.3C840,235,960,181,1080,176C1200,171,1320,213,1380,234.7L1440,256L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z" />
+ </svg>
+ </div>
+ {/* Subtle SVG Background only behind headline */}
+ <div className='mb-12'>
+ <h1 className="  text-brand-primary  font-extrabold text-3xl sm:text-6xl lg:text-7xl  mb-6">
+  Clean, <span className='editorial'>Fresh, </span> Gemini.
+ </h1>
+ <p className="text-brand-primary text-xl sm:text-xl font-bold tracking-wide mb-2">Your Instant Cleaning Service In England.</p>
+ </div>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-y-10 gap-x-12 text-base relative z-10">
-        {/* Locations */}
-        <div className="lg:col-span-1">
-          <DropdownHeader title="CLEANER LOCATIONS" dropdownName="cleanerLocations">
-            <ul className="space-y-2 pb-4 lg:pb-0">
-              <li><a href="#" className="hover:underline">Barton-upon-Humber</a></li>
-              <li><a href="#" className="hover:underline">Boston</a></li>
-              <li><a href="#" className="hover:underline">Bourne</a></li>
-              <li><a href="#" className="hover:underline">Brigg</a></li>
-              <li><a href="#" className="hover:underline">Broughton</a></li>
-              <li><a href="#" className="hover:underline">Caistor</a></li>
-              <li><a href="#" className="hover:underline">Crowland</a></li>
-              <li><a href="#" className="hover:underline">Gainsborough</a></li>
-              <li><a href="#" className="hover:underline">Grantham</a></li>
-              <li><a href="#" className="hover:underline">Louth</a></li>
-              <li><a href="#" className="hover:underline">Mablethorpe</a></li>
-              <li><a href="#" className="hover:underline">Market Deeping</a></li>
-              <li><a href="#" className="hover:underline">Market Rasen</a></li>
-              <li><a href="#" className="hover:underline">North Hykeham</a></li>
-              <li><a href="#" className="hover:underline">Scunthorpe</a></li>
-              <li><a href="#" className="hover:underline">Skegness</a></li>
-              <li><a href="#" className="hover:underline">Sleaford</a></li>
-              <li><a href="#" className="hover:underline">Spalding</a></li>
-              <li><a href="#" className="hover:underline">Stamford</a></li>
-              <li><a href="#" className="hover:underline">Wainfleet All Saints</a></li>
-              <li><a href="#" className="hover:underline">Waltham</a></li>
-              <li><a href="#" className="hover:underline">Winterton</a></li>
-              <li><a href="#" className="hover:underline">Winterton</a></li>
-              <li><a href="#" className="hover:underline">Woodhall Spa</a></li>
-            </ul>
-          </DropdownHeader>
-        </div>
-
-        {/* For Customers & For Cleaners */}
-        <div className="lg:col-span-1">
-          <DropdownHeader title="FOR CUSTOMERS" dropdownName="forCustomers">
-            <ul className="space-y-2 pb-4 lg:pb-0">
-              <li><a href="/pricing-house-cleaning" className="hover:underline">Pricing</a></li>
-              <li><a href="#" className="hover:underline">What's included</a></li>
-              <li><a href="/blog" className="hover:underline">Blog</a></li>
-              <li><a href="#" className="hover:underline">Booking Policy</a></li>
-              <li><a href="/cancellation-policy" className="hover:underline">Cancellation Policy</a></li>
-              <li><a href="/terms-and-conditions" className="hover:underline">Terms & Conditions</a></li>
-              <li><a href="/terms" className="hover:underline">Terms of Service</a></li>
-              <li><a href="/privacy-policy" className="hover:underline">Privacy Policy</a></li>
-              <li><a href="/cookie-policy" className="hover:underline">Cookie Policy</a></li>
-              {/* <li><a href="#" className="hover:underline">Reclean Guarantee</a></li> */}
-              <li><a href="#" className="hover:underline">Sitemap</a></li>
-            </ul>
-            <h3 className="font-bold text-lg mb-4 text-brand-primary mt-6">FOR CLEANERS</h3>
-            <ul className="space-y-2">
-              {/* <li><a href="#" className="hover:underline">Join Us</a></li> */}
-            </ul>
-          </DropdownHeader>
-        </div>
-        {/* Payments Section */}
-        <div className="lg:col-span-1">
-          <DropdownHeader title="PAYMENTS" dropdownName="payments">
-            <ul className="space-y-2 pb-4 lg:pb-0">
-              <li><a href="/payment-policy" className="hover:underline">Payment Policy</a></li>
-            </ul>
-          </DropdownHeader>
-        </div>
-
-        {/* De Gemini Service & Who We Are */}
-        <div className="lg:col-span-1">
-          <DropdownHeader title="De Gemini SERVICE" dropdownName="deGeminiService">
-            <ul className="space-y-2 pb-4 lg:pb-0">
-              <li><a href="//services-regular-cleaning" className="hover:underline">Regular cleaning</a></li>
-              <li><a href="/services-deep-cleaning" className="hover:underline">Deep cleaning</a></li>
-              <li><a href="/services-office-cleaning" className="hover:underline">Office cleaning</a></li>
-              <li><a href="/services/end-tenancy-cleaning" className="hover:underline">End of Tenancy cleaning</a></li>
-              <li><a href="/services-carpet-cleaning" className="hover:underline">Carpet cleaning</a></li>
-              <li><a href="/services--cleaning" className="hover:underline">Upholstery cleaning</a></li>
-              <li><a href="/services/same-day-cleaning" className="hover:underline">Same Day cleaning</a></li>
-              <li><a href="/services/kitchen-deep-cleaning" className="hover:underline">Kitchen Deep Cleaning</a></li>
-              <li><a href="/services-rug-cleaning" className="hover:underline">Rug Cleaning</a></li>
-              <li><a href="/services/move-in-cleaning" className="hover:underline">Move in cleaning</a></li>
-              <li><a href="/services-bathroom-cleaning" className="hover:underline">Bathroom cleaning</a></li>
-              <li><a href="/services-mattress-cleaning" className="hover:underline">Mattress cleaning</a></li>
-              <li><a href="/services-spring-cleaning" className="hover:underline">Spring cleaning</a></li>
-            </ul>
-          </DropdownHeader>
-          
-        </div>
-        <div className="lg:col-span-1">
-          <DropdownHeader title="WHO WE ARE" dropdownName="whoWeAre">
-            <ul className="space-y-2 pb-4 lg:pb-0">
-              <li><a href="#" className="hover:underline">About us</a></li>
-              <li><a href="#" className="hover:underline">Contact us</a></li>
-            </ul>
-          </DropdownHeader>
-        </div>
-
-        {/* Social Media - Modern, Centered on Mobile */}
-        <div className="lg:col-span-1 flex flex-col items-center lg:items-end justify-end mt-8 lg:mt-0">
-          <h3 className="font-bold text-lg mb-2 text-brand-primary tracking-wide">SOCIAL MEDIA</h3>
-          <div className="flex space-x-4 mb-2">
-            <a href="https://www.instagram.com/de_gemini_services?igsh=dGFqbmFrZTMxcGI1" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <Instagram className="h-7 w-7 text-brand-primary hover:text-blue-500 transition duration-300" />
-            </a>
-            <a href="https://www.facebook.com/share/1Axqo294Wx/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <Facebook className="h-7 w-7 text-brand-primary hover:text-blue-500 transition duration-300" />
-            </a>
-            <a href="https://www.tiktok.com/@de.gemini.services?_t=ZS-8xiqay0oCet&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-              <AiFillTikTok className="h-7 w-7 text-brand-primary hover:text-blue-500 transition duration-300" />
-            </a>
+ <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-y-10 gap-x-12 text-base relative z-10">
+        <div className="lg:col-span-1 hidden lg:block">
+          <h3 className="font-bold text-lg mb-4 text-brand-primary">CLEANER LOCATIONS</h3>
+          <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+        <a href="#" className="hover:underline">Alford</a>
+<a href="#" className="hover:underline">Barton-upon-Humber</a>
+<a href="#" className="hover:underline">Boston</a>
+<a href="#" className="hover:underline">Bourne</a>
+<a href="#" className="hover:underline">Brigg</a>
+<a href="#" className="hover:underline">Broughton</a>
+<a href="#" className="hover:underline">Caistor</a>
+<a href="#" className="hover:underline">Crowland</a>
+<a href="#" className="hover:underline">Gainsborough</a>
+<a href="#" className="hover:underline">Grantham</a>
+<a href="#" className="hover:underline">Louth</a>
+<a href="#" className="hover:underline">Mablethorpe</a>
+<a href="#" className="hover:underline">Market Deeping</a>
+<a href="#" className="hover:underline">Market Rasen</a>
+<a href="#" className="hover:underline">North Hykeham</a>
+<a href="#" className="hover:underline">Scunthorpe</a>
+<a href="#" className="hover:underline">Skegness</a>
+<a href="#" className="hover:underline">Sleaford</a>
+<a href="#" className="hover:underline">Spalding</a>
+<a href="#" className="hover:underline">Stamford</a>
+<a href="#" className="hover:underline">Wainfleet All Saints</a>
+<a href="#" className="hover:underline">Waltham</a>
+<a href="#" className="hover:underline">Winterton</a>
+<a href="#" className="hover:underline">Winterton</a>
+<a href="#" className="hover:underline">Woodhall Spa</a>
           </div>
+          <a href="#" className="text-blue-500 hover:underline mt-4 block text-sm">See more locations in London</a>
+        </div>
+
+
+   {/* Locations (Mobile - Dropdown) */}
+   <div className="lg:col-span-1 lg:hidden">
+     <DropdownHeader title="CLEANER LOCATIONS" dropdownName="cleanerLocations">
+ <ul className="space-y-2 pb-4 lg:pb-0">
+ <li><a href="#" className="hover:underline">Alford</a></li>
+ <li><a href="#" className="hover:underline">Barton-upon-Humber</a></li>
+ <li><a href="#" className="hover:underline">Boston</a></li>
+ <li><a href="#" className="hover:underline">Bourne</a></li>
+ <li><a href="#" className="hover:underline">Brigg</a></li>
+ <li><a href="#" className="hover:underline">Broughton</a></li>
+ <li><a href="#" className="hover:underline">Caistor</a></li>
+ <li><a href="#" className="hover:underline">Crowland</a></li>
+ <li><a href="#" className="hover:underline">Gainsborough</a></li>
+ <li><a href="#" className="hover:underline">Grantham</a></li>
+ <li><a href="#" className="hover:underline">Louth</a></li>
+ <li><a href="#" className="hover:underline">Mablethorpe</a></li>
+ <li><a href="#" className="hover:underline">Market Deeping</a></li>
+ <li><a href="#" className="hover:underline">Market Rasen</a></li>
+ <li><a href="#" className="hover:underline">North Hykeham</a></li>
+ <li><a href="#" className="hover:underline">Scunthorpe</a></li>
+ <li><a href="#" className="hover:underline">Skegness</a></li>
+ <li><a href="#" className="hover:underline">Sleaford</a></li>
+ <li><a href="#" className="hover:underline">Spalding</a></li>
+ <li><a href="#" className="hover:underline">Stamford</a></li>
+ <li><a href="#" className="hover:underline">Wainfleet All Saints</a></li>
+ <li><a href="#" className="hover:underline">Waltham</a></li>
+ <li><a href="#" className="hover:underline">Winterton</a></li>
+ <li><a href="#" className="hover:underline">Winterton</a></li>
+ <li><a href="#" className="hover:underline">Woodhall Spa</a></li>
+  </ul>
+     </DropdownHeader>
+   </div>
+
+   {/* For Customers */}
+   <div className="lg:col-span-1">
+     <DropdownHeader title="FOR CUSTOMERS" dropdownName="forCustomers">
+  <ul className="space-y-2 pb-4 lg:pb-0">
+ <li><a href="/pricing-house-cleaning" className="hover:underline">Pricing</a></li>
+ <li><a href="#" className="hover:underline">What's included</a></li>
+ <li><a href="/blog" className="hover:underline">Blog</a></li>
+ <li><a href="#" className="hover:underline">Booking Policy</a></li>
+ <li><a href="/cancellation-policy" className="hover:underline">Cancellation Policy</a></li>
+ <li><a href="/terms-and-conditions" className="hover:underline">Terms & Conditions</a></li>
+ <li><a href="/privacy-policy" className="hover:underline">Privacy Policy</a></li>
+ <li><a href="/cookie-policy" className="hover:underline">Cookies Policy</a></li>
+              <li><a href="#" className="hover:underline">Reclean Guarantee</a></li>
+ <li><a href="#" className="hover:underline">Sitemap</a></li>
+  </ul>
+     </DropdownHeader>
+          {/* <DropdownHeader title="FOR CLEANERS" dropdownName="forCleaners">
+            <ul className="space-y-2 pb-4 lg:pb-0">
+              <li><a href="#" className="hover:underline">Become an De-geminiper</a></li>
+            </ul>
+          </DropdownHeader> */}
+   </div>
+
+   {/* De-gemini Service */}
+   <div className="lg:col-span-1">
+     <DropdownHeader title="De-gemini SERVICE" dropdownName="De-geminiService">
+  <ul className="space-y-2 pb-4 lg:pb-0">
+ <li><a href="//services-regular-cleaning" className="hover:underline">Regular cleaning</a></li>
+ <li><a href="/services-deep-cleaning" className="hover:underline">Deep cleaning</a></li>
+ <li><a href="/services-office-cleaning" className="hover:underline">Office cleaning</a></li>
+ <li><a href="/services/end-tenancy-cleaning" className="hover:underline">End of Tenancy cleaning</a></li>
+ <li><a href="/services-carpet-cleaning" className="hover:underline">Carpet cleaning</a></li>
+ <li><a href="/services--cleaning" className="hover:underline">Upholstery cleaning</a></li>
+ <li><a href="/services/same-day-cleaning" className="hover:underline">Same Day cleaning</a></li>
+ <li><a href="/services/kitchen-deep-cleaning" className="hover:underline">Kitchen Deep Cleaning</a></li>
+ <li><a href="/services-rug-cleaning" className="hover:underline">Rug Cleaning</a></li>
+ <li><a href="/services/move-in-cleaning" className="hover:underline">Move in cleaning</a></li>
+ <li><a href="/services-bathroom-cleaning" className="hover:underline">Bathroom cleaning</a></li>
+ <li><a href="/services-mattress-cleaning" className="hover:underline">Mattress cleaning</a></li>
+ <li><a href="/services-spring-cleaning" className="hover:underline">Spring cleaning</a></li>
+  </ul>
+     </DropdownHeader>
+   </div>
+
+   {/* Who We Are */}
+   <div className="lg:col-span-1">
+     <DropdownHeader title="WHO WE ARE" dropdownName="whoWeAre">
+  <ul className="space-y-2 pb-4 lg:pb-0">
+ <li><a href="#" className="hover:underline">About us</a></li>
+ <li><a href="#" className="hover:underline">Contact us</a></li>
+              <li><a href="#" className="hover:underline">Reviews</a></li>
+  </ul>
+     </DropdownHeader>
+   </div>
+
+   {/* Social Media - Modern, Centered on Mobile */}
+   <div className="lg:col-span-1 flex flex-col items-center lg:items-end justify-end mt-8 lg:mt-0">
+     <h3 className="font-bold text-lg mb-2 text-brand-primary tracking-wide">SOCIAL MEDIA</h3>
+     <div className="flex space-x-4 mb-2">
+  <a href="https://www.instagram.com/de_gemini_services?igsh=dGFqbmFrZTMxcGI1" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+ <Instagram className="h-7 w-7 text-brand-primary hover:text-blue-500 transition duration-300" />
+  </a>
+  <a href="https://www.facebook.com/share/1Axqo294Wx/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+ <Facebook className="h-7 w-7 text-brand-primary hover:text-blue-500 transition duration-300" />
+  </a>
+  <a href="https://www.tiktok.com/@de.gemini.services?_t=ZS-8xiqay0oCet&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+ <AiFillTikTok className="h-7 w-7 text-brand-primary hover:text-blue-500 transition duration-300" />
+  </a>
+     </div>
+   </div>
+ </div>
+      <div className="max-w-7xl mx-auto mt-8 text-xs text-gray-500 flex flex-col sm:flex-row justify-between items-center relative z-10">
+        <div className="flex space-x-4 mb-2 sm:mb-0">
+          <span><a href='https://de-gemini.netlify.app'>www.De-gemini.co.uk</a></span>
+          <span>Copyright © De-gemini 2025</span>
+          <span>support@De-gemini.world</span>
+          <span>Phone: 07867247413</span>
+        </div>
+        <div className="text-center sm:text-right">
+          Registered office address:<br/>
+          Suite 5 3rd Floor, Sovereign House, 1 Albert<br/>
+          Place, London, England, N31QB
         </div>
       </div>
 
-      {/* Floating Call Button */}
-      <a 
-        href="tel:+1234567890"
-        className="fixed bottom-6 right-6 md:bottom-10 md:right-10 bg-brand-primary hover:bg-brand-primary text-brand-secondary rounded-full p-4 shadow-lg transition duration-300 ease-in-out transform hover:scale-110 z-50"
-        aria-label="Call us"
-      >
-        <Phone className="h-7 w-7" />
-      </a>
-    </footer>
-  );
+ {/* Floating Call Button */}
+ <a 
+ href="tel:+1234567890"
+ className="fixed bottom-6 right-6 md:bottom-10 md:right-10 bg-brand-primary hover:bg-brand-primary text-brand-secondary rounded-full p-4 shadow-lg transition duration-300 ease-in-out transform hover:scale-110 z-50"
+ aria-label="Call us"
+ >
+ <Phone className="h-7 w-7" />
+ </a>
+ </footer>
+ );
 };

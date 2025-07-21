@@ -5,6 +5,8 @@ import React from 'react';
 import WhyChooseCard from './WhyChooseCard'; 
 import whychoose1 from '../assets/images/whychoose1-removebg-preview.png'
 import whychoose2 from '../assets/images/whychoose2-removebg-preview.png'
+import whyChoose3 from '../assets/images/whyChoose3.png'
+import whyChoose4 from '../assets/images/whyChoose4.png'
 
 
 
@@ -20,12 +22,12 @@ const whyChooseData = [
     description: "You can choose which rooms you wish us to clean and book only the services you need.",
   },
   {
-    imageSrc: "https://www.emop.co.uk/static/images/best2.svg",
+    imageSrc: whyChoose3,
     title: "Pay as You Go",
     description: "We charge clients only for the actual time a cleaner spends at your property.",
   },
   {
-    imageSrc: "https://www.emop.co.uk/static/images/last_minute.svg",
+    imageSrc: whyChoose4,
     title: "Last minute cleaning",
     description: "Need urgent cleaning? You can make a booking 4 hours in advance.",
   },
@@ -33,7 +35,7 @@ const whyChooseData = [
 
 const WhyChooseSection: React.FC = () => {
   return (
-    <section className="py-16"> {/* Removed responsive padding */}
+    <section className="py-16">
       <h2 className="text-center text-brand-primary nunito-sans-heading text-[32px] font-[800] mb-12">
         Why choose De Gemini cleaning service in England?
       </h2>
