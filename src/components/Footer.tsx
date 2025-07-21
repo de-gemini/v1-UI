@@ -60,9 +60,9 @@ export const Footer: React.FC = () => {
         </div>
 
 
-   {/* Locations (Mobile - Dropdown) */}
-   <div className="lg:col-span-1 lg:hidden">
-     <DropdownHeader title="CLEANER LOCATIONS" dropdownName="cleanerLocations">
+{/* Locations (Mobile - Dropdown) */}
+<div className="lg:col-span-1 lg:hidden">
+<DropdownHeader title="CLEANER LOCATIONS" dropdownName="cleanerLocations">
  <ul className="space-y-2 pb-4 lg:pb-0">
  <li><a href="#" className="hover:underline">Alford</a></li>
  <li><a href="#" className="hover:underline">Barton-upon-Humber</a></li>
@@ -90,35 +90,34 @@ export const Footer: React.FC = () => {
  <li><a href="#" className="hover:underline">Winterton</a></li>
  <li><a href="#" className="hover:underline">Woodhall Spa</a></li>
   </ul>
-     </DropdownHeader>
-   </div>
+</DropdownHeader>
+</div>
 
-   {/* For Customers */}
-   <div className="lg:col-span-1">
-     <DropdownHeader title="FOR CUSTOMERS" dropdownName="forCustomers">
+{/* For Customers */}
+<div className="lg:col-span-1">
+<DropdownHeader title="FOR CUSTOMERS" dropdownName="forCustomers">
   <ul className="space-y-2 pb-4 lg:pb-0">
  <li><a href="/pricing-house-cleaning" className="hover:underline">Pricing</a></li>
  <li><a href="#" className="hover:underline">What's included</a></li>
  <li><a href="/blog" className="hover:underline">Blog</a></li>
- <li><a href="#" className="hover:underline">Booking Policy</a></li>
+ <li><a href="/booking-policy" className="hover:underline">Booking Policy</a></li>
  <li><a href="/cancellation-policy" className="hover:underline">Cancellation Policy</a></li>
  <li><a href="/terms-and-conditions" className="hover:underline">Terms & Conditions</a></li>
  <li><a href="/privacy-policy" className="hover:underline">Privacy Policy</a></li>
  <li><a href="/cookie-policy" className="hover:underline">Cookies Policy</a></li>
-              <li><a href="#" className="hover:underline">Reclean Guarantee</a></li>
- <li><a href="#" className="hover:underline">Sitemap</a></li>
+ {/* <li><a href="#" className="hover:underline">Sitemap</a></li> */}
   </ul>
-     </DropdownHeader>
+</DropdownHeader>
           {/* <DropdownHeader title="FOR CLEANERS" dropdownName="forCleaners">
             <ul className="space-y-2 pb-4 lg:pb-0">
               <li><a href="#" className="hover:underline">Become an De-geminiper</a></li>
             </ul>
           </DropdownHeader> */}
-   </div>
+</div>
 
-   {/* De-gemini Service */}
-   <div className="lg:col-span-1">
-     <DropdownHeader title="De-gemini SERVICE" dropdownName="De-geminiService">
+{/* De-gemini Service */}
+<div className="lg:col-span-1">
+<DropdownHeader title="De-gemini SERVICE" dropdownName="De-geminiService">
   <ul className="space-y-2 pb-4 lg:pb-0">
  <li><a href="//services-regular-cleaning" className="hover:underline">Regular cleaning</a></li>
  <li><a href="/services-deep-cleaning" className="hover:underline">Deep cleaning</a></li>
@@ -134,24 +133,24 @@ export const Footer: React.FC = () => {
  <li><a href="/services-mattress-cleaning" className="hover:underline">Mattress cleaning</a></li>
  <li><a href="/services-spring-cleaning" className="hover:underline">Spring cleaning</a></li>
   </ul>
-     </DropdownHeader>
-   </div>
+</DropdownHeader>
+</div>
 
-   {/* Who We Are */}
-   <div className="lg:col-span-1">
-     <DropdownHeader title="WHO WE ARE" dropdownName="whoWeAre">
+{/* Who We Are */}
+ <div className="lg:col-span-1">
+ <DropdownHeader title="WHO WE ARE" dropdownName="whoWeAre">
   <ul className="space-y-2 pb-4 lg:pb-0">
- <li><a href="#" className="hover:underline">About us</a></li>
+ <li><a href="/about" target='_blank' className="hover:underline">About us</a></li>
  <li><a href="#" className="hover:underline">Contact us</a></li>
-              <li><a href="#" className="hover:underline">Reviews</a></li>
+<li><a href="#" className="hover:underline">Reviews</a></li>
   </ul>
-     </DropdownHeader>
-   </div>
+</DropdownHeader>
+</div>
 
-   {/* Social Media - Modern, Centered on Mobile */}
-   <div className="lg:col-span-1 flex flex-col items-center lg:items-end justify-end mt-8 lg:mt-0">
-     <h3 className="font-bold text-lg mb-2 text-brand-primary tracking-wide">SOCIAL MEDIA</h3>
-     <div className="flex space-x-4 mb-2">
+{/* Social Media - Modern, Centered on Mobile */}
+<div className="lg:col-span-1 flex flex-col items-center lg:items-end justify-end mt-8 lg:mt-0">
+<h3 className="font-bold text-lg mb-2 text-brand-primary tracking-wide">SOCIAL MEDIA</h3>
+<div className="flex space-x-4 mb-2">
   <a href="https://www.instagram.com/de_gemini_services?igsh=dGFqbmFrZTMxcGI1" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
  <Instagram className="h-7 w-7 text-brand-primary hover:text-blue-500 transition duration-300" />
   </a>
@@ -161,8 +160,8 @@ export const Footer: React.FC = () => {
   <a href="https://www.tiktok.com/@de.gemini.services?_t=ZS-8xiqay0oCet&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
  <AiFillTikTok className="h-7 w-7 text-brand-primary hover:text-blue-500 transition duration-300" />
   </a>
-     </div>
-   </div>
+</div>
+</div>
  </div>
       <div className="max-w-7xl mx-auto mt-8 text-xs text-gray-500 flex flex-col sm:flex-row justify-between items-center relative z-10">
         <div className="flex space-x-4 mb-2 sm:mb-0">

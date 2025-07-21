@@ -83,6 +83,9 @@ const Checkout = lazy(() => import("./pages/Checkout"));
 const Signup = lazy(() => import("./pages/Signup"));
 const PaymentRecords = lazy(() => import("./pages/admin/PaymentRecords"));
 const TermsandConditions = lazy(() => import("./pages/Terms"));
+const About = lazy(() => import("./pages/About"));
+const BookingPolicy = lazy(() => import("./pages/BookingPolicy"));
+
 
 
 function App() {
@@ -353,6 +356,8 @@ function App() {
                 } />
               <Route path="/test-stripe-processor" element={<StripeTestPage />} />
               <Route path="/terms-and-conditions" element={<Layout><TermsandConditions /></Layout>} />
+              <Route path="/about" element={<Layout><About /></Layout>} />
+              <Route path="/booking-policy" element={<Layout><BookingPolicy /></Layout>} />
               <Route path="/subscriptions" element={<StripeSubscriptionPage />} />
               <Route path="/payment-success" element={<PaymentSuccessPage />} />
               <Route path="/terms" element={<Layout><TermsOfService /></Layout>} />
