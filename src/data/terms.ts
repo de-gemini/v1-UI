@@ -193,7 +193,7 @@ const termsData: TermSection[] = [
       {
         point: "7.2",
         content: [
-          "We expressly reserve all intellectual property rights on our website, app and platform, including the eMop domain name and all related domains and sub-domains, the name “eMop”, our logo device, service marks, trading names and/or trademarks. Other trademarks and product/company names mentioned on eMop platform may be trademarks of their respective owners or licensors and the rights in such marks are reserved to them.",
+          "We expressly reserve all intellectual property rights on our website, app and platform, including the Degemini domain name and all related domains and sub-domains, the name “Degemini”, our logo device, service marks, trading names and/or trademarks. Other trademarks and product/company names mentioned on Degemini platform may be trademarks of their respective owners or licensors and the rights in such marks are reserved to them.",
         ],
       },
       {
@@ -233,7 +233,7 @@ export const policyData: TermSection[] = [
         {
           point: "1.1",
           content: [
-            "Please read these Booking Terms and Conditions carefully before you submit your booking to eMop Ltd (“eMop” “we” “us”). These terms tell you how we will provide services to you (“Customer”), how you or eMop may change or end the contract, what to do if there is a problem and other important information. ",
+            "Please read these Booking Terms and Conditions carefully before you submit your booking to Degemini Ltd (“Degemini” “we” “us”). These terms tell you how we will provide services to you (“Customer”), how you or Degemini may change or end the contract, what to do if there is a problem and other important information. ",
           ],
         },
         {
@@ -248,7 +248,7 @@ export const policyData: TermSection[] = [
         {
           point: "1.3",
           content: [
-            " By making a booking via the eMop platform, you confirm that you accept these terms and conditions, and that you agree to comply with them. If you think that there is a mistake in these Booking Terms and Conditions please contact us to discuss the issue. If there is anything you do not agree with in these Booking Terms and Conditions, please do not make a booking. If there is anything you do not understand in these Booking Terms and Conditions, then please contact us at support@emop.world and we will do our best to assist you.",
+            " By making a booking via the Degemini platform, you confirm that you accept these terms and conditions, and that you agree to comply with them. If you think that there is a mistake in these Booking Terms and Conditions please contact us to discuss the issue. If there is anything you do not agree with in these Booking Terms and Conditions, please do not make a booking. If there is anything you do not understand in these Booking Terms and Conditions, then please contact us at support@Degemini.world and we will do our best to assist you.",
           ],
         },
       ],
@@ -267,7 +267,7 @@ export const policyData: TermSection[] = [
         {
           point: "",
           content: [
-            "We, eMop Ltd, are not a cleaning company. We simply provide a platform where Customers can order cleaning services",
+            "We, Degemini Ltd, are not a cleaning company. We simply provide a platform where Customers can order cleaning services",
             { text: `(“Service”)`, bold: true },
             "; we administer the booking and collect payment.)",
           ],
@@ -275,13 +275,13 @@ export const policyData: TermSection[] = [
         {
             point: "",
             content: [
-              "Cleaning services ordered via the eMop platform are performed by “eMoppers”, self-employed cleaners who have registered on our website. When a service is accepted by an eMopper, the customer will enter into a separate contract with the eMopper.",
+              "Cleaning services ordered via the Degemini platform are performed by “Degeminipers”, self-employed cleaners who have registered on our website. When a service is accepted by an Degeminiper, the customer will enter into a separate contract with the Degeminiper.",
             ],
           },
           {
             point: "",
             content: [
-              "We are not responsible for the performance of service provided by eMoppers, however in some cases we rearrange the service to ensure customer satisfaction.",
+              "We are not responsible for the performance of service provided by Degeminipers, however in some cases we rearrange the service to ensure customer satisfaction.",
             ],
           },
           {
@@ -410,7 +410,7 @@ export const policyData: TermSection[] = [
         {
           point: "7.2",
           content: [
-            "We expressly reserve all intellectual property rights on our website, app and platform, including the eMop domain name and all related domains and sub-domains, the name “eMop”, our logo device, service marks, trading names and/or trademarks. Other trademarks and product/company names mentioned on eMop platform may be trademarks of their respective owners or licensors and the rights in such marks are reserved to them.",
+            "We expressly reserve all intellectual property rights on our website, app and platform, including the Degemini domain name and all related domains and sub-domains, the name “Degemini”, our logo device, service marks, trading names and/or trademarks. Other trademarks and product/company names mentioned on Degemini platform may be trademarks of their respective owners or licensors and the rights in such marks are reserved to them.",
           ],
         },
         {

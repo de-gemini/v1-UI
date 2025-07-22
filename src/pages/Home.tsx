@@ -91,7 +91,7 @@ const Home = () => {
       name: "Ritchter Belmont",
       date: "13th of June, 2025",
       avatar: "https://lh3.googleusercontent.com/a-/ALV-UjXCgM-XZ5mAU0bxL8SErlHjjgIA6HyaHgwXz5KsmvnTjfMOnuQ=s120-c-rp-mo-br100",
-      review: "I booked a deep cleaning for the kitchen with Emop and was really impressed. The cleaner arrived on time, worked efficiently, and did an amazing job. Highly recommended!",
+      review: "I booked a deep cleaning for the kitchen with De-gemini and was really impressed. The cleaner arrived on time, worked efficiently, and did an amazing job. Highly recommended!",
       rating: 5,
     },
     {

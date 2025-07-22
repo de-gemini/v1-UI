@@ -427,10 +427,10 @@ export default function Emoppers() {
               </ul>
             </div>
 
-            {/* Column 4: EMOP SERVICE */}
+            {/* Column 4: De-gemini SERVICE */}
             <div className="lg:col-span-1">
               <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">
-                EMOP SERVICE
+              De-gemini SERVICE
               </h3>
               <ul className="space-y-2">
                 <li>

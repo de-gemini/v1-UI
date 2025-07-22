@@ -209,7 +209,7 @@ export default function BecomeCleaner() {
         </div>
       </section>
 
-      {/* What is Emop */}
+      {/* What is De-gemini */}
       <section className="bg-[#f5f9fc] min-h-screen flex flex-col items-center py-12 text-center">
         <h1 className="text-brand-primary text-[30px] font-[800]">
           What is De gemini?

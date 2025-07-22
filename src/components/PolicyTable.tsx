@@ -10,16 +10,16 @@ interface PolicyItem {
 
 const policyData: PolicyItem[] = [
   {
-    action: "Cancellation/Rescheduling between 6-24 hours before the start time if eMopper is assigned",
+    action: "Cancellation/Rescheduling between 6-24 hours before the start time if De-gemini is assigned",
     fee: "£30",
   },
   {
-    action: "Cancellation/Rescheduling 6 hours less than the start time if eMopper is assigned",
+    action: "Cancellation/Rescheduling 6 hours less than the start time if De-gemini is assigned",
     fee: "£50",
   },
   {
     action: "No Show Up.",
-    details: "If eMopper arrives, but the client is not reachable within 30 minutes and the eMopper cannot access the client's property.*",
+    details: "If De-gemini arrives, but the client is not reachable within 30 minutes and the De-gemini cannot access the client's property.*",
     fee: "£50",
   },
   {

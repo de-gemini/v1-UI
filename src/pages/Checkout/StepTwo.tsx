@@ -1,6 +1,7 @@
 import React, { useLayoutEffect } from 'react';
 import BookingSummary from './BookingSummary';
 import type { Dispatch, SetStateAction } from 'react';
+import {FAQSection2} from '../../data/questions'
 import {
   roomTypes,
   addOns,
@@ -128,7 +129,7 @@ const StepTwo: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-7xl flex flex-col lg:flex-row gap-8">
+    <div className="w-full flex flex-col lg:flex-row gap-8">
       {/* Main form */}
       <div className="flex-1 bg-white rounded-xl shadow-lg p-4 sm:p-6 md:p-8 mt-4 flex flex-col gap-10">
         {/* Room selection */}
@@ -354,7 +355,8 @@ const StepTwo: React.FC = () => {
         </div>
         
       </div>
-      {/* Booking Summary */}
+      {/* Booking Summary and Questions*/}
+      <div className=''>
       <div className="w-full max-w-md mx-auto mb-8">
         <div className="flex justify-between items-center bg-gray-50 rounded-xl px-6 py-4 mb-4 shadow">
           <div>
@@ -382,6 +384,10 @@ const StepTwo: React.FC = () => {
             NEXT
           </button>
         </div>
+      </div>
+      <div>
+        <FAQSection2/>
+      </div>
       </div>
     </div>
   );

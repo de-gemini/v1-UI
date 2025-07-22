@@ -4,6 +4,7 @@ import { useCheckoutStore, useEstimatedHours, useEstimatedMinutes, useEstimatedP
 import { useAuthStore } from '../../store/authStore';
 import { frequencyOptions, roomTypes, addOns, calculatePrice, PRICING_CONFIG, Frequency, frequencyBackendValues } from './ckeckoutData';
 import { useNavigate } from 'react-router-dom';
+import { FAQSection3 } from '../../data/questions';
 import { toast } from 'react-toastify';
 import { fetchWithAuth } from '../../utils/helper';
 import { isTokenValid } from '../../utils/isTokenValid';
@@ -337,9 +338,9 @@ const StepThree: React.FC = () => {
   }, []);
 
   return (
-    <div className="w-full max-w-7xl flex flex-col lg:flex-row gap-8">
+    <div className="w-full flex flex-col lg:flex-row gap-8">
       {/* Main form */}
-      <div className="flex-1 bg-white rounded-xl  p-4 sm:p-6 md:p-8 mt-4 flex flex-col gap-10">
+      <div className="flex-1 bg-white rounded-xl p-4 sm:p-6 md:p-8 mt-4 flex flex-col gap-10">
         {/* Contact details */}
         <div>
           <div className="flex items-center mb-6">
@@ -433,9 +434,8 @@ const StepThree: React.FC = () => {
         
       </div>
       {/* Booking Summary */}
-      <div className="w-full lg:w-[350px] lg:sticky lg:top-8 h-fit">
+      <div className="w-full lg:max-w-2xl lg:sticky lg:top-8 h-fit">
         <BookingSummary />
-      </div>
       {/* Final action button */}
       <div className="flex items-center justify-center gap-[10px] mt-8">
           <button
@@ -460,6 +460,11 @@ const StepThree: React.FC = () => {
             )}
           </button>
         </div>
+
+        <div>
+          <FAQSection3 />
+        </div>
+      </div>
 
       {/* Auth Modal */}
       {showAuthModal && (

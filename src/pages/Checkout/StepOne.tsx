@@ -10,6 +10,7 @@ import {
 } from './ckeckoutData';
 import { useCalendarStore } from '../../store/calendarStore';
 import { useCheckoutStore } from '../../store/checkoutStore';
+import FAQSection from '../../data/questions';
 import {
   FrequencyOption,
   PlanButton,
@@ -261,7 +262,7 @@ const StepOne: React.FC = () => {
 
 
   return (
-    <div className="w-full flex flex-col items-center md:items-center lg:items-start">
+    <div className="w-full flex flex-col md:flex-col lg:flex-row items-center md:items-center lg:items-start">
           {step1View === 0 && (
             <div className="w-full max-w-3xl bg-white border border-gray-200 rounded-lg p-6 sm:p-8 mt-4">
             <div className="flex items-center mb-6">
@@ -467,6 +468,13 @@ const StepOne: React.FC = () => {
           <NavigationButtons setStep1View={v => set({ step1View: v })} onNext={handleNextStep} isNextDisabled={timeIsInvalid} />
             </div>
           )}
+
+          {step1View === 1 && (
+         <div>
+            <FAQSection />
+          </div>
+          )}
+
         </div>
   )
 }
