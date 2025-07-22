@@ -1,5 +1,12 @@
 import ServicePageTemplate from "./ServicePageTemplate";
 import { originalFaq } from '../../components/commons/CommonFAQ';
+import example from '../../assets/images/Services/SittingRoom/10.avif'
+import example1 from '../../assets/images/Services/Kitchen/2.jpg'
+import example2 from '../../assets/images/Services/Kitchen/1.png'
+import example3 from '../../assets/images/Services/Office/1.png'
+
+
+
 
 export const deepCleaningPageData = {
   banner: { title: "Deep Cleaning Services in England" },
@@ -73,7 +80,7 @@ export const deepCleaningPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/1.jpg",
+      image: example,
       imageAlt: "Cleaner wiping window sill",
       heading: "Where We Focus During a Deep Clean",
       text: null,
@@ -85,7 +92,7 @@ export const deepCleaningPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/2.jpg",
+      image: example1,
       imageAlt: "Cleaner sanitising kitchen",
       heading: "Kitchen & Bathroom Attention",
       text: null,
@@ -97,7 +104,7 @@ export const deepCleaningPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/3.jpg",
+      image: example2,
       imageAlt: "Cleaner dusting high shelf",
       heading: "Tailored Deep Cleaning Options",
       text: "Get exactly what your home needs.",
@@ -109,7 +116,7 @@ export const deepCleaningPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/4.jpg",
+      image: example3,
       imageAlt: "Professional cleaning team",
       heading: "We Clean Homes and Offices",
       text: null,

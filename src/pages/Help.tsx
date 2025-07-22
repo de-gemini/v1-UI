@@ -90,7 +90,7 @@ export default function Help() {
 
         {/* Bottom Text */}
         <div className="mt-16 text-center text-gray-700 text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
-          Need help? <a href="mailto:info@emop.co.uk" className="text-brand-primary font-semibold hover:underline">Click here to email us</a> — For urgent issues, we aim to respond within minutes. Apart from that please navigate yourself through our FAQ pages.
+          Need help? <a href="mailto:Kellynwaodo@gmail.com" className="text-brand-primary font-semibold hover:underline">Click here to email us</a> — For urgent issues, we aim to respond within minutes. Apart from that please navigate yourself through our FAQ pages.
         </div>
       </div>
 
@@ -208,7 +208,7 @@ export default function Help() {
           <div className="mt-8 w-full border-t border-gray-200 pt-8 text-center text-xs text-gray-600 flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0">
             <p className="order-2 md:order-1"></p>
           <p className="order-1 md:order-2">Copyright © Degemini {myYear}</p>
-            <p className="order-3 md:order-3">Registered office address: Suite 5 3rd Floor, Sovereign House 1 Albert Place, London, England, N1 0BQ</p>
+            {/* <p className="order-3 md:order-3">Registered office address: Suite 5 3rd Floor, Sovereign House 1 Albert Place, London, England, N1 0BQ</p> */}
           </div>
         </div>
       </footer>

@@ -7,22 +7,18 @@ const sections = [
     content: (
       <div className="flex flex-col gap-2">
         <p>
-          De-gemini is a powerful England based online platform that connects
-          customers and cleaners.
+        At De Gemini Services, we provide professional cleaning solutions for both residential and commercial spaces across England. Whether it’s a home, office, retail unit, or workspace, we deliver spotless results with precision, reliability, and discretion.
         </p>
 
         <p>
-          We ensure the quality of services, peace of mind and safety for both
-          customers and cleaners alike.
+        We understand that every space has its own standards. That’s why our team is made up of thoroughly vetted, DBS-checked professionals who are trained not just to clean, but to care for the spaces we’re trusted with.
         </p>
 
         <p>
-          We make our cleaning service affordable for everyone by letting you
-          choose according to your exact needs with a “pay as you go” model.
+        What sets us apart? We focus on consistent quality, flexible scheduling, and transparent communication. No rushed jobs. No shortcuts. Just honest, high-standard service every time.
         </p>
         <p>
-          The quick, simple and secure booking process allows you to have a
-          high-quality bespoke cleaning service, 24/7.
+        Whether you need a one-off deep clean, regular upkeep, or tailored services for your property or business, De Gemini Services is ready to handle it with professionalism you can count on.
         </p>
 
         <h1 className="m-2 font-bold text-xl text-brand-primary">
@@ -68,8 +64,8 @@ const About: React.FC = () => (
     
     <div className="w-full flex items-center justify-center mt-6">
     <button>
-        <a href="https://www.de-gemini.com" className="text-white bg-brand-primary hover:bg-blue-600 focus:ring-4 focus:ring-brand-secondary font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-            Go to De-gemini
+        <a href="https://de-gemini.netlify.app" className="text-white bg-brand-primary hover:bg-blue-600 focus:ring-4 focus:ring-brand-secondary font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+            Quote me
         </a>
     </button>
     </div>

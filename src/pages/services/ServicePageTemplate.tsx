@@ -381,6 +381,10 @@ export default function ServicePageTemplate({ pageData }: ServicePageTemplatePro
             {section.type === "professionals" && <StaticWowSection1 {...(pageData.wowSection1 || defaultWow1)} />}
         </React.Fragment>
         ))}
+        {/* Why choose?? */}
+      <div className="mt-[3rem]">
+        <WhyChooseSection/>
+      </div>
     </div>
   );
 } 

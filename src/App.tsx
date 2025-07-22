@@ -120,7 +120,7 @@ function App() {
                 <Login />
                 </Layout>
                 } />
-              <Route path="/contact" element={<Contact />} />
+              <Route path="/contact" element={<Layout><Contact /></Layout>} />
               <Route
                 path="/dashboard"
                 element={

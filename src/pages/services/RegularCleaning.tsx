@@ -1,5 +1,8 @@
 import ServicePageTemplate from "./ServicePageTemplate";
 import { originalFaq } from '../../components/commons/CommonFAQ';
+import example from '../../assets/images/Services/Bedroom/1.jpg'
+import example2 from '../../assets/images/Services/Bedroom/2.png'
+
 
 export const regularCleaningPageData = {
   banner: { title: "Regular Home Cleaning Services in England" },
@@ -24,7 +27,7 @@ export const regularCleaningPageData = {
     heading: "Flexible Schedules. Trusted Cleaners.",
     subheading: "Your Routine, Our Responsibility",
     text: "Book a reliable cleaner at a frequency that suits your lifestyle. All our professionals are background-checked and trained to deliver spotless results—every single time.",
-    image: "https://images.unsplash.com/photo-1616627454970-766f7b9f96b9?auto=format&fit=crop&w=600&q=80",
+    image: "https://media.gettyimages.com/id/518333440/photo/office-cleaning-contractors.jpg?s=612x612&w=0&k=20&c=8L42nfzmz10Bge74TGq5ZR9HuW37Z-3izzHYzg-rAS8=",
     imageAlt: "Professional cleaner working in modern home",
     list: [
       "🧽 Choose from weekly, fortnightly, or monthly visits",
@@ -72,7 +75,7 @@ export const regularCleaningPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/2.jpg",
+      image: example,
       imageAlt: "Cleaner wiping surface in kitchen",
       heading: "Same Cleaner, Same High Standards",
       list: [
@@ -83,7 +86,7 @@ export const regularCleaningPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/3.jpg",
+      image: example2,
       imageAlt: "Cleaner vacuuming a modern hallway",
       heading: "Custom Cleaning Tasks Available",
       list: [

@@ -29,7 +29,7 @@ import card3 from '../assets/images/card-3.jpg'
 import card4 from '../assets/images/card-4.jpg';
 import card5 from '../assets/images/card-5.png';
 import card6 from '../assets/images/card-6.jpg';
-import home from '../assets/images/main-banner-removebg-preview.png'
+import home from '../assets/images/home-page1-removebg.png'
 import office from '../assets/images/office-cleaning.png'
 import 'react-toastify/dist/ReactToastify.css';
 import CommonPostcodeInput from '../components/commons/CommonPostcodeInput';
@@ -169,8 +169,8 @@ const Home = () => {
     // Add more services if needed to match a full grid or if you have more.
     // For now, I'm replicating what's clearly visible in the screenshot's grid.
     {
-      icon: "https://www.emop.co.uk/img/linens-icon.png", // Assuming this last icon represents something like "Mattress cleaning" or similar, based on common cleaning services
-      title: "Mattress cleaning", // Example title, adjust if you know the actual service
+      icon: "https://www.emop.co.uk/img/linens-icon.png",
+      title: "Mattress cleaning", 
     },
   ];
 

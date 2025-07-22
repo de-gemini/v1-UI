@@ -56,7 +56,6 @@ export const Footer: React.FC = () => {
 <a href="#" className="hover:underline">Winterton</a>
 <a href="#" className="hover:underline">Woodhall Spa</a>
           </div>
-          <a href="#" className="text-blue-500 hover:underline mt-4 block text-sm">See more locations in London</a>
         </div>
 
 
@@ -119,19 +118,19 @@ export const Footer: React.FC = () => {
 <div className="lg:col-span-1">
 <DropdownHeader title="De-gemini SERVICE" dropdownName="De-geminiService">
   <ul className="space-y-2 pb-4 lg:pb-0">
- <li><a href="//services-regular-cleaning" className="hover:underline">Regular cleaning</a></li>
+ <li><a href="/regular-cleaning" className="hover:underline">Regular cleaning</a></li>
  <li><a href="/services-deep-cleaning" className="hover:underline">Deep cleaning</a></li>
  <li><a href="/services-office-cleaning" className="hover:underline">Office cleaning</a></li>
  <li><a href="/services/end-tenancy-cleaning" className="hover:underline">End of Tenancy cleaning</a></li>
  <li><a href="/services-carpet-cleaning" className="hover:underline">Carpet cleaning</a></li>
- <li><a href="/services--cleaning" className="hover:underline">Upholstery cleaning</a></li>
+ {/* <li><a href="/services--cleaning" className="hover:underline">Upholstery cleaning</a></li> */}
  <li><a href="/services/same-day-cleaning" className="hover:underline">Same Day cleaning</a></li>
  <li><a href="/services/kitchen-deep-cleaning" className="hover:underline">Kitchen Deep Cleaning</a></li>
  <li><a href="/services-rug-cleaning" className="hover:underline">Rug Cleaning</a></li>
  <li><a href="/services/move-in-cleaning" className="hover:underline">Move in cleaning</a></li>
- <li><a href="/services-bathroom-cleaning" className="hover:underline">Bathroom cleaning</a></li>
- <li><a href="/services-mattress-cleaning" className="hover:underline">Mattress cleaning</a></li>
- <li><a href="/services-spring-cleaning" className="hover:underline">Spring cleaning</a></li>
+ <li><a href="/services/bathroom-cleaning" className="hover:underline">Bathroom cleaning</a></li>
+ <li><a href="/services/mattress-cleaning" className="hover:underline">Mattress cleaning</a></li>
+ <li><a href="/services/spring-cleaning" className="hover:underline">Spring cleaning</a></li>
   </ul>
 </DropdownHeader>
 </div>
@@ -142,7 +141,7 @@ export const Footer: React.FC = () => {
   <ul className="space-y-2 pb-4 lg:pb-0">
  <li><a href="/about" target='_blank' className="hover:underline">About us</a></li>
  <li><a href="#" className="hover:underline">Contact us</a></li>
-<li><a href="#" className="hover:underline">Reviews</a></li>
+{/* <li><a href="#" className="hover:underline">Reviews</a></li> */}
   </ul>
 </DropdownHeader>
 </div>
@@ -168,18 +167,18 @@ export const Footer: React.FC = () => {
           <span><a href='https://de-gemini.netlify.app'>www.De-gemini.co.uk</a></span>
           <span>Copyright © De-gemini 2025</span>
           <span>support@De-gemini.world</span>
-          <span>Phone: 07867247413</span>
+          <span>Phone: 07399 487 915</span>
         </div>
         <div className="text-center sm:text-right">
-          Registered office address:<br/>
+          {/* Registered office address:<br/>
           Suite 5 3rd Floor, Sovereign House, 1 Albert<br/>
-          Place, London, England, N31QB
+          Place, London, England, N31QB */}
         </div>
       </div>
 
  {/* Floating Call Button */}
  <a 
- href="tel:+1234567890"
+ href="tel:07867388142"
  className="fixed bottom-6 right-6 md:bottom-10 md:right-10 bg-brand-primary hover:bg-brand-primary text-brand-secondary rounded-full p-4 shadow-lg transition duration-300 ease-in-out transform hover:scale-110 z-50"
  aria-label="Call us"
  >

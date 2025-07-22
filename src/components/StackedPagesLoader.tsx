@@ -1,5 +1,5 @@
 import React from 'react';
-import mopGif from '../assets/images/Services/mop.gif';
+import mopGif from '../assets/images/Services/mopGif.gif';
 
 interface StackedPagesLoaderProps {
   text?: string;

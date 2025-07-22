@@ -59,7 +59,7 @@ export default function Reclean() {
           id: "booking-reclean",
           question: "How to book a reclean?",
           answer:
-            "Please email us at support@emop.world or get in touch via live chat feature on our website within 48 hours of the cleaning being completed with a full description of the issues together with any supporting evidence. Our support team will review your email and get in touch with you ASAP.",
+            "Please email us at support@de-gemini.world or get in touch via live chat feature on our website within 48 hours of the cleaning being completed with a full description of the issues together with any supporting evidence. Our support team will review your email and get in touch with you ASAP.",
         },
         {
           id: "hire-per-week",

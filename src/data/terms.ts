@@ -211,7 +211,7 @@ const termsData: TermSection[] = [
       {
         point: "7.5",
         content: [
-          "YSubject to your compliance with these terms we grant you a limited, non-exclusive, non-transferable, non-sublicensable licence to access and make use of our website. This licence does not include any resale or commercial use of our website.",
+          "Subject to your compliance with these terms we grant you a limited, non-exclusive, non-transferable, non-sublicensable licence to access and make use of our website. This licence does not include any resale or commercial use of our website.",
         ],
       },
       {
@@ -428,7 +428,7 @@ export const policyData: TermSection[] = [
         {
           point: "7.5",
           content: [
-            "YSubject to your compliance with these terms we grant you a limited, non-exclusive, non-transferable, non-sublicensable licence to access and make use of our website. This licence does not include any resale or commercial use of our website.",
+            "Subject to your compliance with these terms we grant you a limited, non-exclusive, non-transferable, non-sublicensable licence to access and make use of our website. This licence does not include any resale or commercial use of our website.",
           ],
         },
         {
