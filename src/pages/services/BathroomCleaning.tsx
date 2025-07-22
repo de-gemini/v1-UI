@@ -1,4 +1,17 @@
 import ServicePageTemplate from "./ServicePageTemplate";
+import example from '../../assets/images/Services/Bathroom/4.avif'
+import example1 from '../../assets/images/Services/Bathroom/5.avif'
+import example2 from '../../assets/images/Services/Bathroom/6.avif'
+import example3 from '../../assets/images/Services/Bathroom/7.avif'
+import example4 from '../../assets/images/Services/Bathroom/8.avif'
+import example5 from '../../assets/images/Services/Bathroom/9.avif'
+import example6 from '../../assets/images/Services/Bathroom/3.jpg'
+
+
+
+
+
+
 
 export const bathroomDeepPageData = {
   banner: { title: "Bathroom Deep Cleaning Services in England" },
@@ -23,7 +36,7 @@ export const bathroomDeepPageData = {
     heading: "A Bathroom You’ll Love to Use—",
     subheading: "And Show Off",
     text: "Imagine a bathroom that always feels fresh and inviting. We don’t just clean—we restore comfort and peace of mind, so you can relax and recharge.",
-    image: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=600&q=80",
+    image: example4,
     imageAlt: "Family enjoying clean bathroom",
     list: [
       "🧼 Perfect for families and guests",
@@ -76,7 +89,7 @@ export const bathroomDeepPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+      image: example,
       imageAlt: "Sparkling bathroom ready for guests",
       heading: "First Impressions for Your Bathroom",
       text: null,
@@ -88,7 +101,7 @@ export const bathroomDeepPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=600&q=80",
+      image: example1,
       imageAlt: "Deep cleaning bathroom tiles and fixtures",
       heading: "Priority Areas for Bathroom Cleaning",
       text: null,
@@ -100,7 +113,7 @@ export const bathroomDeepPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80",
+      image: example2,
       imageAlt: "Customised bathroom cleaning",
       heading: "Customised Bathroom Cleaning Service",
       text: "We tailor our cleaning to your bathroom’s unique needs.",
@@ -112,7 +125,7 @@ export const bathroomDeepPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=600&q=80",
+      image: example3,
       imageAlt: "Extra bathroom cleaning services",
       heading: "We Also Provide Extra Bathroom Services",
       text: null,

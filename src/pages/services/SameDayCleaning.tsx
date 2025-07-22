@@ -1,5 +1,9 @@
 import ServicePageTemplate from "./ServicePageTemplate";
 import { originalFaq } from '../../components/commons/CommonFAQ';
+import example from '../../assets/images/Services/Bedroom/2.png'
+import example1 from '../../assets/images/Services/Office/7.avif'
+import banner from '../../assets/images/Services/SittingRoom/8.avif'
+
 
 export const sameDayCleaningPageData = {
   banner: { title: "Same Day Cleaning Services in England" },
@@ -24,7 +28,7 @@ export const sameDayCleaningPageData = {
     heading: "Flexible, Reliable, Professional",
     subheading: "Your Emergency is Our Priority",
     text: "Our vetted cleaners are trained to handle tight deadlines without compromising on quality. Whether it’s your home or office, we’ll leave it fresh, tidy, and guest-ready in just hours.",
-    image: "https://images.unsplash.com/photo-1581579185169-cb7b9b25c1e1?auto=format&fit=crop&w=600&q=80",
+    image: banner,
     imageAlt: "Happy client after urgent cleaning",
     list: [
       "📍 Available across England with short notice",
@@ -72,7 +76,7 @@ export const sameDayCleaningPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/4.jpg",
+      image: example,
       imageAlt: "Cleaner preparing room quickly",
       heading: "How Fast is Same Day?",
       list: [
@@ -83,7 +87,7 @@ export const sameDayCleaningPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/2.jpg",
+      image: example1,
       imageAlt: "Cleaner rushing with supplies",
       heading: "What You’ll Get",
       list: [

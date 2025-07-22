@@ -138,7 +138,7 @@ export const FrequencyOption: React.FC<{
         </label>
       </div>
       <span className="ml-2 text-xs text-brand-primary">
-        Please check our Check-list <a href="#" className="underline">here</a> ( Additional £{PRICING_CONFIG.additionalServices.endOfTenancy} )
+        Please check our Check-list <a href="/help/end-of-tenancy" target="_blank" className="underline">here</a> ( Additional £{PRICING_CONFIG.additionalServices.endOfTenancy} )
       </span>
     </div>
   );

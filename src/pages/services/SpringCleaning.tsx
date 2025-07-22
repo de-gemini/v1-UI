@@ -1,5 +1,8 @@
 import ServicePageTemplate from "./ServicePageTemplate";
 import { originalFaq } from '../../components/commons/CommonFAQ';
+import example from '../../assets/images/Services/Upholstery/1.avif'
+import example1 from '../../assets/images/Services/Office/6.avif'
+import banner from '../../assets/images/Services/Bedroom/9.avif'
 
 export const springCleaningPageData = {
   banner: { title: "Spring Cleaning Services in England" },
@@ -24,7 +27,7 @@ export const springCleaningPageData = {
     heading: "Thorough, Seasonal, Stress-Free",
     subheading: "Spring Cleaning Made Simple",
     text: "Our spring cleaning goes beyond routine tidying. We target the forgotten corners, the overlooked shelves, and the buildup that winter left behind—so you can enjoy a home that feels brand new.",
-    image: "https://images.unsplash.com/photo-1616627982300-82d8cfd75e26?auto=format&fit=crop&w=600&q=80",
+    image: banner,
     imageAlt: "Cleaner dusting spring flowers on table",
     list: [
       "🧹 Behind and under furniture",
@@ -72,7 +75,7 @@ export const springCleaningPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/3.jpg",
+      image: example,
       imageAlt: "Spring cleaning in living room",
       heading: "Spring Cleaning = Healthier Living",
       list: [
@@ -83,7 +86,7 @@ export const springCleaningPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/5.jpg",
+      image: example1,
       imageAlt: "Organised and clean kitchen",
       heading: "Add-On Options",
       list: [

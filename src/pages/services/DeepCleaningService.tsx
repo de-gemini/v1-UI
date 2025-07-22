@@ -4,7 +4,7 @@ import example from '../../assets/images/Services/SittingRoom/10.avif'
 import example1 from '../../assets/images/Services/Kitchen/2.jpg'
 import example2 from '../../assets/images/Services/Kitchen/1.png'
 import example3 from '../../assets/images/Services/Office/1.png'
-
+import banner from '../../assets/images/Services/Kitchen/4.avif'
 
 
 
@@ -31,7 +31,7 @@ export const deepCleaningPageData = {
     heading: "Fresh Start for Your Entire Home",
     subheading: "Feel the Difference of True Cleanliness",
     text: "We don’t just tidy up—we remove built-up grime, allergens, and dirt you didn’t even know were there. Ideal for occasional resets, moving, or post-renovation recovery.",
-    image: "https://images.unsplash.com/photo-1597091294206-5c7222c8d1c5?auto=format&fit=crop&w=600&q=80",
+    image: banner,
     imageAlt: "Clean house interior",
     list: [
       "🏡 Suitable for houses, flats, and apartments",

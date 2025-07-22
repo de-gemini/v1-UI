@@ -1,5 +1,15 @@
 import ServicePageTemplate from "./ServicePageTemplate";
 import { originalFaq } from '../../components/commons/CommonFAQ';
+import example from '../../assets/images/Services/Kitchen/8.avif'
+import example1 from '../../assets/images/Services/Kitchen/7.avif'
+import example2 from '../../assets/images/Services/Kitchen/6.avif'
+import example3 from '../../assets/images/Services/Kitchen/4.avif'
+import example4 from '../../assets/images/Services/Kitchen/5.avif'
+import banner from '../../assets/images/Services/Kitchen/1.png'
+
+
+
+
 
 export const kitchenDeepPageData = {
   banner: { title: "Kitchen Deep Cleaning Services in England" },
@@ -24,7 +34,7 @@ export const kitchenDeepPageData = {
     heading: "A Kitchen You’ll Love to Show Off—",
     subheading: "And Cook In",
     text: "Imagine hosting friends and family in a kitchen that radiates freshness and order. We don’t just clean—we restore the space that brings people together around food and warmth.",
-    image: "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=600&q=80",
+    image: example3,
     imageAlt: "Family enjoying clean kitchen",
     list: [
       "👨‍👩‍👧‍👦 Perfect for home chefs and busy households",
@@ -73,7 +83,7 @@ export const kitchenDeepPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/1.jpg",
+      image: example,
       imageAlt: "Cleaning services in living room",
       heading: "First Impressions Start in the Kitchen",
       text: null,
@@ -85,7 +95,7 @@ export const kitchenDeepPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/2.jpg",
+      image: example1,
       imageAlt: "Cleaning services in living room",
       heading: "Focus Areas in Every Kitchen Clean",
       text: null,
@@ -97,7 +107,7 @@ export const kitchenDeepPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/3.jpg",
+      image: example2,
       imageAlt: "Cleaning services in living room",
       heading: "Customised Kitchen Cleaning Service",
       text: "Tailored to your appliances and layout.",
@@ -109,7 +119,7 @@ export const kitchenDeepPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/4.jpg",
+      image: example3,
       imageAlt: "Cleaning services in living room",
       heading: "Add-On Services Available",
       text: null,
@@ -121,7 +131,7 @@ export const kitchenDeepPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/5.jpg",
+      image: example4,
       imageAlt: "Cleaning services in living room",
       heading: "Office Kitchen? We Clean Those Too",
       text: null,

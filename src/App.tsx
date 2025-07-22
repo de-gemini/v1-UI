@@ -85,6 +85,7 @@ const PaymentRecords = lazy(() => import("./pages/admin/PaymentRecords"));
 const TermsandConditions = lazy(() => import("./pages/Terms"));
 const About = lazy(() => import("./pages/About"));
 const BookingPolicy = lazy(() => import("./pages/BookingPolicy"));
+const CheckList = lazy(() => import('./pages/Checklist'))
 
 
 
@@ -361,6 +362,7 @@ function App() {
               <Route path="/subscriptions" element={<StripeSubscriptionPage />} />
               <Route path="/payment-success" element={<PaymentSuccessPage />} />
               <Route path="/terms" element={<Layout><TermsOfService /></Layout>} />
+              <Route path="/help/end-of-tenancy" element={<CheckList />} />
               <Route path="/payment-policy" element={<Layout><PaymentPolicy /></Layout>} />
               <Route path="/privacy-policy" element={<Layout><PrivacyPolicy /></Layout>} />
               <Route path="/cookie-policy" element={<Layout><CookiePolicy /></Layout>} />

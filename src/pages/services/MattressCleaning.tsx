@@ -1,5 +1,13 @@
 import ServicePageTemplate from "./ServicePageTemplate";
 import { originalFaq } from '../../components/commons/CommonFAQ';
+import example from '../../assets/images/Services/Mattress/1.avif'
+import example1 from '../../assets/images/Services/Mattress/2.avif'
+import example2 from '../../assets/images/Services/Mattress/3.avif'
+import example3 from '../../assets/images/Services/Mattress/4.avif'
+import example4 from '../../assets/images/Services/Mattress/5.avif'
+
+
+
 
 export const mattressCleaningPageData = {
   banner: { title: "Professional Mattress Cleaning in England" },
@@ -24,7 +32,7 @@ export const mattressCleaningPageData = {
     heading: "A Deep Clean for Deep Sleep",
     subheading: "Because Clean Mattresses Matter",
     text: "Whether it's a seasonal refresh or stain removal after spills, we treat each mattress with care. Feel the difference in your sleep quality and wake up truly refreshed.",
-    image: "https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?auto=format&fit=crop&w=600&q=80",
+    image: example4,
     imageAlt: "Person relaxing on a clean bed",
     list: [
       "🧽 Safe for memory foam and traditional mattresses",
@@ -73,7 +81,7 @@ export const mattressCleaningPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/1.jpg",
+      image: example,
       imageAlt: "Professional mattress cleaning equipment",
       heading: "Why Clean Your Mattress?",
       text: null,
@@ -86,7 +94,7 @@ export const mattressCleaningPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/2.jpg",
+      image: example1,
       imageAlt: "Cleaning in action",
       heading: "What Makes Our Service Different?",
       text: null,
@@ -94,6 +102,34 @@ export const mattressCleaningPageData = {
         { text: "Eco-friendly, safe cleaning products" },
         { text: "Quick drying techniques" },
         { text: "No strong chemical smell left behind" },
+      ],
+    },
+    {
+      type: "custom",
+      customType: "twoColumnImageText",
+      image: example2,
+      imageAlt: "Cleaning in action",
+      heading: "Our proven mattress cleaning methods",
+      text: null,
+      list: [
+        { text: "High-powered vacuuming" },
+        { text: "Special cleaning solution" },
+        { text: "Absorption" },
+        { text: "Rapid drying" },
+      ],
+    },
+    {
+      type: "custom",
+      customType: "twoColumnImageText",
+      image: example3,
+      imageAlt: "Cleaning in action",
+      heading: "How often should you freshen up your mattress?",
+      text: null,
+      list: [
+        { text: "It's recommended that you clean your mattress every six months to keep your sleeping space clean and healthy." },
+        { text: "To encourage even wear, the mattress must be vacuumed to get rid of dust and allergens, turned or flipped, and any stains should be spot cleaned with a light detergent solution." },
+        { text: "Try rotating your mattress 180 degrees if you are unable to flip it. In addition, using a mattress protector may require you to wash your mattress more often than normal." },
+        { text: "Rapid drying" },
       ],
     },
     {

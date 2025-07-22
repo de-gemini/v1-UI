@@ -13,7 +13,7 @@ export const FAQSection: React.FC = () => {
       answer: (
         <>
           Our standards include everything to make a house clean.{" "}
-          <a href="/" target='_blank' className="text-blue-600 hover:underline">
+          <a href="/" className="text-blue-600 hover:underline">
             Here
           </a>{" "}
           you can find details of what is exactly included in the service room by

@@ -1,5 +1,15 @@
 import ServicePageTemplate from "./ServicePageTemplate";
 import { originalFaq } from '../../components/commons/CommonFAQ';
+import example from '../../assets/images/Services/Carpet/1.avif'
+import example1 from '../../assets/images/Services/Carpet/2.avif'
+import example2 from '../../assets/images/Services/Carpet/3.avif'
+import example3 from '../../assets/images/Services/Carpet/4.avif'
+import example4 from '../../assets/images/Services/Carpet/5.avif'
+import banner from '../../assets/images/Services/Carpet/6.avif'
+
+
+
+
 
 export const carpetCleaningPageData = {
   banner: { title: "Carpet Cleaning Services in England" },
@@ -24,7 +34,7 @@ export const carpetCleaningPageData = {
     heading: "Comfort That Feels Like New",
     subheading: "Because Clean Carpets Matter",
     text: "Whether you're preparing for guests or just want to refresh your home, our expert carpet cleaning gives your flooring that just-installed feel, without the replacement cost.",
-    image: "https://images.unsplash.com/photo-1598300053180-88f6fca5dc97?auto=format&fit=crop&w=600&q=80",
+    image: banner,
     imageAlt: "Living room with clean carpet",
     list: [
       "🛋️ Ideal for living rooms, bedrooms, and hallways",
@@ -73,7 +83,7 @@ export const carpetCleaningPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/1.jpg",
+      image: example,
       imageAlt: "Technician cleaning carpet",
       heading: "Why Carpet Deep Cleaning Matters",
       text: null,
@@ -85,7 +95,7 @@ export const carpetCleaningPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/2.jpg",
+      image: example1,
       imageAlt: "Cleaning with vacuum",
       heading: "What Areas Do We Clean?",
       text: null,
@@ -97,7 +107,7 @@ export const carpetCleaningPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/3.jpg",
+      image: example2,
       imageAlt: "Stain removal in progress",
       heading: "Stain & Odour Treatments",
       text: "Every stain tells a story—we help erase it.",
@@ -109,7 +119,7 @@ export const carpetCleaningPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/4.jpg",
+      image: example3,
       imageAlt: "After-clean soft carpet",
       heading: "Add-On Services Available",
       text: null,
@@ -121,7 +131,7 @@ export const carpetCleaningPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/5.jpg",
+      image: example4,
       imageAlt: "Office space carpet cleaning",
       heading: "We Clean Office Carpets Too",
       text: null,

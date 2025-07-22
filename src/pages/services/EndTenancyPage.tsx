@@ -1,5 +1,12 @@
 import ServicePageTemplate from "./ServicePageTemplate";
 import { originalFaq } from '../../components/commons/CommonFAQ';
+import example from '../../assets/images/Services/Bedroom/8.avif'
+import example1 from '../../assets/images/Services/Kitchen/4.avif'
+import example2 from '../../assets/images/Services/SittingRoom/5.avif'
+import banner from '../../assets/images/Services/Upholstery/3.avif'
+
+
+
 
 export const endOfTenancyPageData = {
   banner: { title: "End of Tenancy Cleaning Services in England" },
@@ -24,7 +31,7 @@ export const endOfTenancyPageData = {
     heading: "Leave the Place Better Than You Found It",
     subheading: "Ready for Inspection",
     text: "Our professional cleaners handle every detail, from limescale and stains to carpets and cupboards. Whether you're a tenant or a landlord preparing for new occupants, we’ve got it covered.",
-    image: "https://images.unsplash.com/photo-1593441115152-c9ad45c01dc0?auto=format&fit=crop&w=600&q=80",
+    image: banner,
     imageAlt: "Cleaner preparing apartment",
     list: [
       "🏠 Ideal for tenants, landlords, estate agents, and property managers",
@@ -73,7 +80,7 @@ export const endOfTenancyPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/2.jpg",
+      image: example,
       imageAlt: "Cleaning bathroom fixtures",
       heading: "We Clean What Others Miss",
       text: null,
@@ -85,7 +92,7 @@ export const endOfTenancyPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/1.jpg",
+      image: example1,
       imageAlt: "Cleaner scrubbing oven",
       heading: "Specialised Kitchen & Bathroom Focus",
       text: null,
@@ -97,7 +104,7 @@ export const endOfTenancyPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/5.jpg",
+      image: example2,
       imageAlt: "Cleaner polishing windows",
       heading: "Optional Add-ons Available",
       text: "Tailor the clean to your specific needs.",

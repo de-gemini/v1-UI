@@ -1,5 +1,10 @@
 import ServicePageTemplate from "./ServicePageTemplate";
 import { originalFaq } from '../../components/commons/CommonFAQ';
+import example from '../../assets/images/Services/Office/6.avif'
+import example1 from '../../assets/images/Services/Office/8.avif'
+import example2 from '../../assets/images/Services/Office/5.avif'
+
+
 
 export const officeCleaningPageData = {
   banner: { title: "Office Cleaning Services in England" },
@@ -73,14 +78,43 @@ export const officeCleaningPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/4.jpg",
+      image: example,
       imageAlt: "Cleaner wiping down office desk",
-      heading: "Why Choose Us?",
+      heading: "More reasons you should use our reliable service",
       text: null,
       list: [
-        { text: "Fully vetted, uniformed professional cleaners" },
-        { text: "Flexible scheduling to suit your business hours" },
-        { text: "Daily checklist to ensure no corner is missed" },
+        { text: "Because of our high standards and quality service, we have a very high client retention rate" },
+        { text: "We provide dependable, quality office cleaning service with several convenient payment methods" },
+        { text: "The majority of our customers come to us after a trusted referral from a previous customer" },
+        { text: "Our office cleaning services are reasonably, competitively priced, and provide excellent value" },
+      ],
+    },
+    {
+      type: "custom",
+      customType: "twoColumnImageText",
+      image: example1,
+      imageAlt: "Cleaner wiping down office desk",
+      heading: "Easily customised commercial cleaning service",
+      text: null,
+      list: [
+        { text: "Office equipment cleaning" },
+        { text: "Bathroom washing and sanitizing" },
+        { text: "Kitchen cleaning" },
+      ],
+    },
+    {
+      type: "custom",
+      customType: "twoColumnImageText",
+      image: example2,
+      imageAlt: "Cleaner wiping down office desk",
+      heading: "We also provide",
+      text: null,
+      list: [
+        { text: "Stain removal with professional equipment" },
+        { text: "Interior & exterior window cleaning" },
+        { text: "Balcony cleaning" },
+        { text: "Cleaning floors, vacuuming the carpets, mopping the floors, and wiping skirting boards" },
+
       ],
     },
     {

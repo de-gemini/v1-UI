@@ -1,5 +1,10 @@
 import ServicePageTemplate from "./ServicePageTemplate";
 import { originalFaq } from '../../components/commons/CommonFAQ';
+import example from '../../assets/images/Services/Rug/1.avif'
+import example1 from '../../assets/images/Services/Rug/2.avif'
+import banner from '../../assets/images/Services/Rug/3.avif'
+
+
 
 export const rugCleaningPageData = {
   banner: { title: "Expert Rug Cleaning Services in England" },
@@ -24,7 +29,7 @@ export const rugCleaningPageData = {
     heading: "Extend the Life of Your Rugs",
     subheading: "Clean. Soft. Long-Lasting.",
     text: "Routine rug cleaning not only enhances the look and feel of your home, but also protects your health. Our professional care helps prevent premature wear, fibre damage, and dust mite build-up.",
-    image: "https://images.unsplash.com/photo-1616587895178-5a872c5e45d2?auto=format&fit=crop&w=600&q=80",
+    image: banner,
     imageAlt: "Modern clean rug in living room",
     list: [
       "🧽 Tailored techniques for wool, silk, and synthetic blends",
@@ -72,7 +77,7 @@ export const rugCleaningPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/4.jpg",
+      image: example,
       imageAlt: "Specialist rug technician cleaning by hand",
       heading: "Handled With Specialist Knowledge",
       list: [
@@ -83,7 +88,7 @@ export const rugCleaningPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/5.jpg",
+      image: example1,
       imageAlt: "Rug being dried after wash",
       heading: "Fast Drying & Fresh Results",
       list: [
