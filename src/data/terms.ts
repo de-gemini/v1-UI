@@ -60,14 +60,8 @@ const termsData: TermSection[] = [
         ],
       },
       {
-        point: "1.4",
-        content: [
-          "Our registered office is: 11-13 Bayley street, London, WC1B3HD. Our company registration number is 10643724.",
-        ],
-      },
-      {
         subTitle: "What we do",
-        point: "1.5",
+        point: "1.4",
         content: [
           "De-gemini provides an online platform to facilitate the introduction of self-employed domestic cleaners (“De-gemini”) and customers who require domestic cleaning.",
         ],
