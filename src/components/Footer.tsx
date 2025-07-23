@@ -140,7 +140,7 @@ export const Footer: React.FC = () => {
  <DropdownHeader title="WHO WE ARE" dropdownName="whoWeAre">
   <ul className="space-y-2 pb-4 lg:pb-0">
  <li><a href="/about" target='_blank' className="hover:underline">About us</a></li>
- <li><a href="#" className="hover:underline">Contact us</a></li>
+ <li><a href="/contact" className="hover:underline">Contact us</a></li>
 {/* <li><a href="#" className="hover:underline">Reviews</a></li> */}
   </ul>
 </DropdownHeader>

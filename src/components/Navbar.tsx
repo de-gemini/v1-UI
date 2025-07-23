@@ -321,7 +321,7 @@ const Navbar = () => {
           <li><a onClick={toggleMobileMenu} href="/home/registercleaner" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Become a cleaner</a></li>
           */}
           <li className="w-full pt-4">
-            <a onClick={toggleMobileMenu} href="#" className="block w-full text-center px-5 py-3 border border-brand-primary text-brand-primary rounded-lg hover:bg-brand-primary hover:text-white transition duration-300 ease-in-out text-lg">
+            <a onClick={toggleMobileMenu} href="/login" className="block w-full text-center px-5 py-3 border border-brand-primary text-brand-primary rounded-lg hover:bg-brand-primary hover:text-white transition duration-300 ease-in-out text-lg">
               Sign In
             </a>
           </li>

@@ -34,17 +34,6 @@ const sections = [
     ),
   },
   {
-    heading: "Our Story",
-    content: (
-      <ul className="pl-6 flex flex-col gap-4">
-        <li className="text-xs">De-gemini’s co-founder, Julia Ponomareva, always loved to do the cleaning. Julia believes that if there is chaos in your mind, the best way to put your thoughts in order is to do the cleaning. She thought to launch a cleaning service one day.</li>
-        <li className="text-xs">In 2017, these ideas led to the creation of the De-gemini platform when Julia shared her student experience with Denis Gromov, who now leads the company’s IT operations. The two combined their backgrounds and enthusiasm to create De-gemini.</li>
-        <li className="text-xs">They believe everyone can make an impact that can change other people’s lives. By creating a fair, bespoke and eco-friendly service, they changed how cleaning services are delivered to you.</li>
-        <li className="text-xs">De-gemini’s simple and secure booking process allows you to have a high-quality bespoke cleaning service, 24/7.</li>
-      </ul>
-    ),
-  },
-  {
     heading: "Our Team",
     content: (
       <ul className="flex flex-col gap-4 pl-6">
