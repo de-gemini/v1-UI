@@ -122,7 +122,7 @@ export const Footer: React.FC = () => {
  <li><a href="/services-deep-cleaning" className="hover:underline">Deep cleaning</a></li>
  <li><a href="/services-office-cleaning" className="hover:underline">Office cleaning</a></li>
  <li><a href="/services/end-tenancy-cleaning" className="hover:underline">End of Tenancy cleaning</a></li>
- <li><a href="/services-carpet-cleaning" className="hover:underline">Carpet cleaning</a></li>
+ <li><a href="/services/carpet-cleaning" className="hover:underline">Carpet cleaning</a></li>
  {/* <li><a href="/services--cleaning" className="hover:underline">Upholstery cleaning</a></li> */}
  <li><a href="/services/same-day-cleaning" className="hover:underline">Same Day cleaning</a></li>
  <li><a href="/services/kitchen-deep-cleaning" className="hover:underline">Kitchen Deep Cleaning</a></li>
