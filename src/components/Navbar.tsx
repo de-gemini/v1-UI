@@ -8,46 +8,58 @@ interface Links {
 
 // --- NEW: Data for the Locations dropdown, structured in columns as per the screenshot ---
 const locationColumns: { id: number; links: Links[] }[] = [
-    { id: 1, links: [
-        { name: 'Edinburgh', href: '/locations/edinburgh' },
-        { name: 'Birmingham', href: '/locations/birmingham' },
-        { name: 'Manchester', href: '/locations/manchester' },
-        { name: 'St Albans', href: '/locations/st-albans' },
-        { name: 'Glasgow', href: '/locations/glasgow' },
-        { name: 'Leeds', href: '/locations/leeds' },
-    ]},
-    { id: 2, links: [
-        { name: 'Bradford', href: '/locations/bradford' },
-        { name: 'Liverpool', href: '/locations/liverpool' },
-        { name: 'Central London', href: '/locations/central-london' },
-        { name: 'North London', href: '/locations/north-london' },
-        { name: 'South London', href: '/locations/south-london' },
-        { name: 'West London', href: '/locations/west-london' },
-    ]},
-    { id: 3, links: [
-        { name: 'East London', href: '/locations/east-london' },
-        { name: 'Watford', href: '/locations/watford' },
-        { name: 'Greenwich', href: '/locations/greenwich' },
-        { name: 'Croydon', href: '/locations/croydon' },
-        { name: 'Kensington & Chelsea', href: '/locations/kensington-chelsea' },
-        { name: 'Bromley', href: '/locations/bromley' },
-    ]},
-    { id: 4, links: [
-        { name: 'Islington', href: '/locations/islington' },
-        { name: 'Wimbledon', href: '/locations/wimbledon' },
-        { name: 'Barking', href: '/locations/barking' },
-        { name: 'Kingston', href: '/locations/kingston' },
-        { name: 'Fulham', href: '/locations/fulham' },
-        { name: 'Richmond', href: '/locations/richmond' },
-    ]},
-    { id: 5, links: [
-        { name: 'Clapham', href: '/locations/clapham' },
-        { name: 'Romford', href: '/locations/romford' },
-        { name: 'Ealing', href: '/locations/ealing' },
-        { name: 'Walthamstow', href: '/locations/walthamstow' },
-        { name: 'Battersea', href: '/locations/battersea' },
-        { name: 'Canary Wharf', href: '/locations/canary-wharf' },
-    ]},
+  {
+    id: 1,
+    links: [
+      { name: 'Alford', href: '/locations/alford' },
+      { name: 'Barton-upon-Humber', href: '/locations/barton-upon-humber' },
+      { name: 'Boston', href: '/locations/boston' },
+      { name: 'Bourne', href: '/locations/bourne' },
+      { name: 'Brigg', href: '/locations/brigg' },
+      { name: 'Broughton', href: '/locations/broughton' },
+    ],
+  },
+  {
+    id: 2,
+    links: [
+      { name: 'Caistor', href: '/locations/caistor' },
+      { name: 'Crowland', href: '/locations/crowland' },
+      { name: 'Gainsborough', href: '/locations/gainsborough' },
+      { name: 'Grantham', href: '/locations/grantham' },
+      { name: 'Grimsby', href: '/locations/grimsby' },
+      { name: 'Horncastle', href: '/locations/horncastle' },
+    ],
+  },
+  {
+    id: 3,
+    links: [
+      { name: 'Immingham', href: '/locations/immingham' },
+      { name: 'Louth', href: '/locations/louth' },
+      { name: 'Mablethorpe', href: '/locations/mablethorpe' },
+      { name: 'Market Deeping', href: '/locations/market-deeping' },
+      { name: 'Market Rasen', href: '/locations/market-rasen' },
+      { name: 'North Hykeham', href: '/locations/north-hykeham' },
+    ],
+  },
+  {
+    id: 4,
+    links: [
+      { name: 'Scunthorpe', href: '/locations/scunthorpe' },
+      { name: 'Skegness', href: '/locations/skegness' },
+      { name: 'Sleaford', href: '/locations/sleaford' },
+      { name: 'Spalding', href: '/locations/spalding' },
+      { name: 'Stamford', href: '/locations/stamford' },
+      { name: 'Wainfleet All Saints', href: '/locations/wainfleet-all-saints' },
+    ],
+  },
+  {
+    id: 5,
+    links: [
+      { name: 'Waltham', href: '/locations/waltham' },
+      { name: 'Winterton', href: '/locations/winterton' },
+      { name: 'Woodhall Spa', href: '/locations/woodhall-spa' },
+    ],
+  },
 ];
 
 
@@ -251,9 +263,7 @@ const Navbar = () => {
                 ))}
               </div>
               <div className="mt-6 text-center">
-                  <a href="/locations/london" className="text-green-600 hover:text-green-800 text-sm font-semibold transition">
-                      See more locations in London
-                  </a>
+                  
               </div>
             </div>
           </li>
@@ -355,9 +365,9 @@ const Navbar = () => {
                   </li>
                 ))}
                  <li>
-                    <a onClick={toggleMobileMenu} href="/locations/london" className="block text-green-600 font-semibold text-base py-1 hover:bg-gray-100 w-full rounded-md transition duration-200">
+                    {/* <a onClick={toggleMobileMenu} href="/locations/london" className="block text-green-600 font-semibold text-base py-1 hover:bg-gray-100 w-full rounded-md transition duration-200">
                       See more locations in London
-                    </a>
+                    </a> */}
                  </li>
               </ul>
             </div>
