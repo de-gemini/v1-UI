@@ -97,7 +97,6 @@ export const Footer: React.FC = () => {
 <DropdownHeader title="FOR CUSTOMERS" dropdownName="forCustomers">
   <ul className="space-y-2 pb-4 lg:pb-0">
  <li><a href="/pricing-house-cleaning" className="hover:underline">Pricing</a></li>
- <li><a href="#" className="hover:underline">What's included</a></li>
  <li><a href="/blog" className="hover:underline">Blog</a></li>
  <li><a href="/booking-policy" className="hover:underline">Booking Policy</a></li>
  <li><a href="/cancellation-policy" className="hover:underline">Cancellation Policy</a></li>

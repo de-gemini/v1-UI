@@ -5,6 +5,8 @@ import example1 from '../../assets/images/Services/SittingRoom/10.avif'
 import example2 from '../../assets/images/Services/SittingRoom/6.avif'
 import example3 from '../../assets/images/Services/Bathroom/5.avif'
 import example4 from '../../assets/images/Services/Bathroom/6.avif'
+import banner from '../../assets/images/Services/SittingRoom/10.avif'
+
 
 
 
@@ -34,7 +36,7 @@ export const moveInCleaningPageData = {
     heading: "Walk Into a Home That Feels Brand New",
     subheading: "Let Us Handle the Dirt",
     text: "You have enough to think about during a move—let us take care of the cleaning. We’ll deep clean your entire home so you can settle in comfortably from day one.",
-    image: "https://images.unsplash.com/photo-1586798131444-d0ef0d663dd8?auto=format&fit=crop&w=600&q=80",
+    image: banner,
     imageAlt: "Clean, empty apartment ready to move into",
     list: [
       "🏡 Suitable for flats, houses, and studios",
