@@ -9,6 +9,7 @@ import {
   Facebook,
   Pin,
 } from "lucide-react"; // Icons for search, dropdown, and sidebar arrow
+import SecondFooter from "../components/SecondFooter";
 
 // Define interfaces for data structures
 interface FAQItemData {
@@ -53,7 +54,7 @@ Cleaners work as independent cleaning partners. They access the De-Gemini platfo
           id: "general-4",
           question: "How can I contact De-Gemini?",
           answer:
-            "At De-Gemini our best way of communication is via Text or an email [email@mail.com]. Before reaching out to us, please have a look at our FAQs for Degemini on the website or in your Mobile App. It’s possible you may find your answer without having to wait for our response.",
+            "At De-Gemini our best way of communication is via Text or an email Support@Degeminiservices.co.uk. Before reaching out to us, please have a look at our FAQs for Degemini on the website or in your Mobile App. It’s possible you may find your answer without having to wait for our response.",
         },
         {
           id: "general-5",
@@ -86,7 +87,7 @@ Cleaners work as independent cleaning partners. They access the De-Gemini platfo
         {
           id: "booking-3",
           question: "How can I reschedule a booking?",
-          answer: `TIf you need to reschedule your booking for whatever reason, you can do it in My Account – and go to the Upcoming booking section, on our website.
+          answer: `If you need to reschedule your booking for whatever reason, you can do it in My Account – and go to the Upcoming booking section, on our website.
 
 Please be aware that you may be required to pay a fee for late rescheduling. Please see our Cancellation policy.`,
         },
@@ -132,7 +133,7 @@ However, please note that as soon as the booking is confirmed, the estimated amo
           {
             id: "payment-2",
             question: "Can I pay for cleaning by cash?",
-            answer: `We accept debit and credit cards only. Cash is not accepted in order to make the process safe and transparent.`,
+            answer: `Yes you can, we acccept all forms of payment. Cash is accepted in order to make the process safe and transparent.`,
           },
           {
             id: "payment-3",
@@ -148,7 +149,7 @@ However, please note that as soon as the booking is confirmed, the estimated amo
           {
             id: "issues-1",
             question: "My cleaner never arrived",
-            answer: `n this case, we will try to arrange a new booking at your convenience. In addition, a compensation will be added to your account automatically for the inconvenience.`,
+            answer: `In this case, we will try to arrange a new booking at your convenience. In addition, a compensation will be added to your account automatically for the inconvenience.`,
           },
           {
             id: "issues-2",
@@ -389,222 +390,7 @@ If you are not home at the end of cleaning it might be more difficult to prove t
             </div>
           </div>
     
-          {/* footer */}
-          <footer
-            className="relative text-gray-800 py-12 px-4 sm:px-6 lg:px-8"
-            style={{
-              backgroundImage: `url('https://www.emop.co.uk/static/images/Combined_Shape.png')`,
-              backgroundSize: "cover",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center",
-            }}>
-            <div className="max-w-7xl mx-auto flex flex-col items-center lg:items-stretch">
-              {/* Top Footer Section: Columns */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-y-10 gap-x-8 w-full text-center md:text-left">
-                {/* Column 1: Logo (Left aligned on desktop) */}
-                <div className="lg:col-span-1 flex justify-center md:justify-start">
-                <a href="/" className="flex items-center">
-          <h1 className='text-brand-primary  text-[40px]'>
-          De Gemini Services LTD
-          </h1>
-        </a>
-                </div>
-    
-                {/* Column 2: FOR CUSTOMERS */}
-                <div className="lg:col-span-1">
-                  <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">
-                    FOR CUSTOMERS
-                  </h3>
-                  <ul className="space-y-2">
-                    <li>
-                      <a href="#" className="hover:underline text-gray-700">
-                        Booking T&C
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="hover:underline text-gray-700">
-                        Cancellation Policy
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="hover:underline text-gray-700">
-                        Terms & Conditions
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="hover:underline text-gray-700">
-                        Privacy Policy
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="hover:underline text-gray-700">
-                        Cookie Policy
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="hover:underline text-gray-700">
-                        Pricing
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="hover:underline text-gray-700">
-                        Blog
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="hover:underline text-gray-700">
-                        Sitemap
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-    
-                {/* Column 3: FOR CLEANERS & WHO WE ARE */}
-                <div className="lg:col-span-1">
-                  <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">
-                    FOR CLEANERS
-                  </h3>
-                  <ul className="space-y-2 mb-8">
-                    <li>
-                      <a href="#" className="hover:underline text-gray-700">
-                        Become a cleaner
-                      </a>
-                    </li>
-                  </ul>
-                  <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">
-                    WHO WE ARE
-                  </h3>
-                  <ul className="space-y-2">
-                    <li>
-                      <a href="#" className="hover:underline text-gray-700">
-                        About Us
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="hover:underline text-gray-700">
-                        Contact Us
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-    
-                {/* Column 4: De-gemini SERVICE */}
-                <div className="lg:col-span-1">
-                  <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">
-                  De-gemini SERVICE
-                  </h3>
-                  <ul className="space-y-2">
-                    <li>
-                      <a href="#" className="hover:underline text-gray-700">
-                        Domestic cleaning
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="hover:underline text-gray-700">
-                        Regular cleaning
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="hover:underline text-gray-700">
-                        Deep cleaning
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="hover:underline text-gray-700">
-                        Office cleaning
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-    
-                {/* Column 5: SUBSCRIBE TO OUR NEWSLETTER & Social Media */}
-                <div className="lg:col-span-1 flex flex-col items-center md:items-start lg:items-stretch">
-                  <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">
-                    SUBSCRIBE TO OUR NEWSLETTER
-                  </h3>
-                  <div className="w-full mb-4">
-                    <input
-                      type="email"
-                      placeholder="Enter your email"
-                      className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-700"
-                    />
-                  </div>
-                  <button className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out">
-                    SUBSCRIBE NOW
-                  </button>
-    
-                  <div className="mt-8">
-                    <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">
-                      SOCIAL MEDIA
-                    </h3>
-                    <div className="flex justify-center md:justify-start space-x-4">
-                      <a
-                        href="#"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="Pinterest">
-                        {/* Using Pin icon as a placeholder for Pinterest, as Pinterest icon is not directly available in lucide-react */}
-                        <Pin className="h-7 w-7 text-gray-600 hover:text-purple-600 transition duration-300" />
-                      </a>
-                      <a
-                        href="#"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="Instagram">
-                        <Instagram className="h-7 w-7 text-gray-600 hover:text-purple-600 transition duration-300" />
-                      </a>
-                      <a
-                        href="#"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="Facebook">
-                        <Facebook className="h-7 w-7 text-gray-600 hover:text-purple-600 transition duration-300" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-    
-              {/* Cleaner Locations Section (Full Width) */}
-              <div className="mt-12 w-full border-t border-gray-200 pt-8 text-center">
-                <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">
-                  CLEANER LOCATIONS
-                </h3>
-                <p className="text-gray-700 text-sm leading-relaxed">
-                  <span className="mr-2">East London</span>{" "}
-                  <span className="mr-2">North London</span>{" "}
-                  <span className="mr-2">South London</span> |{" "}
-                  <span className="mr-2">West London</span> |{" "}
-                  <span className="mr-2">Balham</span>{" "}
-                  <span className="mr-2">Islington</span>{" "}
-                  <span className="mr-2">Watford</span>{" "}
-                  <span className="mr-2">Bromley</span> |{" "}
-                  <span className="mr-2">Tooting</span>{" "}
-                  <span className="mr-2">Wimbledon</span> |{" "}
-                  <span className="mr-2">Kingston</span> |{" "}
-                  <span className="mr-2">Ealing</span>{" "}
-                  <span className="mr-2">Harrow</span>{" "}
-                  <span className="mr-2">Surbiton</span> |{" "}
-                  <span className="mr-2">Angel</span>{" "}
-                  <span className="mr-2">Croydon</span>{" "}
-                  <span className="mr-2">Clapham</span> |{" "}
-                  <span className="mr-2">Greenwich</span> |{" "}
-                  <span className="mr-2">Richmond</span>{" "}
-                  <span className="mr-2">Southwark</span>
-                </p>
-              </div>
-    
-              {/* Bottom Copyright and Address */}
-              <div className="mt-8 w-full border-t border-gray-200 pt-8 text-center text-xs text-gray-600 flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0">
-                <p className="order-2 md:order-1">www.emop.co.uk</p>
-                <p className="order-1 md:order-2">Copyright © De-Gemini 2024</p>
-                <p className="order-3 md:order-3">
-                  Registered office address: Suite 5 3rd Floor, Sovereign House 1
-                  Albert Place, London, England, N1 0BQ
-                </p>
-              </div>
-            </div>
-          </footer>
+          <SecondFooter/>
         </div>
       );
 };

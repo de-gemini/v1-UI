@@ -3,7 +3,7 @@
 import { Instagram, Facebook, Pin } from 'lucide-react';
 import { AiFillTikTok } from 'react-icons/ai';
 import { Link } from "react-router-dom";
-
+import LocationLinks from './LocationLinks';
 export default function SecondFooter () {
     const myYear = new Date().getFullYear()
 
@@ -98,14 +98,7 @@ style={{
       {/* Cleaner Locations Section (Full Width) */}
       <div className="mt-12 w-full border-t border-gray-200 pt-8 text-center">
         <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">CLEANER LOCATIONS</h3>
-        <p className="text-gray-700 text-sm leading-relaxed">
-          <span className="mr-2">East London</span> <span className="mr-2">North London</span> <span className="mr-2">South London</span> |{' '}
-          <span className="mr-2">West London</span> | <span className="mr-2">Balham</span> <span className="mr-2">Islington</span> <span className="mr-2">Watford</span> <span className="mr-2">Bromley</span> |{' '}
-          <span className="mr-2">Tooting</span> <span className="mr-2">Wimbledon</span> | <span className="mr-2">Kingston</span> |{' '}
-          <span className="mr-2">Ealing</span> <span className="mr-2">Harrow</span> <span className="mr-2">Surbiton</span> |{' '}
-          <span className="mr-2">Angel</span> <span className="mr-2">Croydon</span> <span className="mr-2">Clapham</span> |{' '}
-          <span className="mr-2">Greenwich</span> | <span className="mr-2">Richmond</span> <span className="mr-2">Southwark</span>
-        </p>
+        <LocationLinks variant='inline'/>
       </div>
 
       {/* Bottom Copyright and Address */}

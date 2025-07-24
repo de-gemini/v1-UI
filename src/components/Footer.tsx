@@ -5,6 +5,7 @@ import { AiFillTikTok } from "react-icons/ai";
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { trackVisitor } from '../api/visitors';
+import LocationLinks from './LocationLinks';
 
 export const Footer: React.FC = () => {
  const location = useLocation();
@@ -30,7 +31,8 @@ export const Footer: React.FC = () => {
         <div className="lg:col-span-1 hidden lg:block">
           <h3 className="font-bold text-lg mb-4 text-brand-primary">CLEANER LOCATIONS</h3>
           <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
-        <a href="#" className="hover:underline">Alford</a>
+            <LocationLinks variant='list'/>
+        {/* <a href="#" className="hover:underline">Alford</a>
 <a href="#" className="hover:underline">Barton-upon-Humber</a>
 <a href="#" className="hover:underline">Boston</a>
 <a href="#" className="hover:underline">Bourne</a>
@@ -54,7 +56,7 @@ export const Footer: React.FC = () => {
 <a href="#" className="hover:underline">Waltham</a>
 <a href="#" className="hover:underline">Winterton</a>
 <a href="#" className="hover:underline">Winterton</a>
-<a href="#" className="hover:underline">Woodhall Spa</a>
+<a href="#" className="hover:underline">Woodhall Spa</a> */}
           </div>
         </div>
 
@@ -160,7 +162,9 @@ export const Footer: React.FC = () => {
         <div className="flex space-x-4 mb-2 sm:mb-0">
           <span><a href='https://de-gemini.netlify.app'>www.De-gemini.co.uk</a></span>
           <span>Copyright © De-gemini 2025</span>
-          <span>support@De-gemini.world</span>
+          <a href='mailto:Kellynwaodo@gmail.com'>
+          <span>Support@Degeminiservices.co.uk </span>
+          </a>
           <span>Phone: 07399 487 915</span>
         </div>
         <div className="text-center sm:text-right">

@@ -37,6 +37,7 @@ import PaymentPolicy from "./pages/PaymentPolicy";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import CookiePolicy from "./pages/CookiePolicy";
 import CancellationPolicy from "./pages/CancellationPolicy";
+import LocationPage from "./pages/LocationPage";
 
 // Protected Route wrapper component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -357,6 +358,7 @@ function App() {
                   <Signup />
                 </Layout>
                 } />
+                <Route path="/locations/:locationName" element={<Layout><LocationPage /></Layout>} />
               <Route path="/test-stripe-processor" element={<StripeTestPage />} />
               <Route path="/terms-and-conditions" element={<Layout><TermsandConditions /></Layout>} />
               <Route path="/reviews" element={<Layout><Reviews /></Layout>} />

@@ -19,7 +19,7 @@ export const bathroomDeepPageData = {
     heading: "Experience the Sparkle of a Pristine Bathroom",
     subheading: "Where Freshness Begins",
     text: "Step into a bathroom that feels brand new. Our deep cleaning service eliminates limescale, soap scum, and hidden germs, making your bathroom a true sanctuary—spotless, hygienic, and relaxing.",
-    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+    image: example5,
     imageAlt: "Sparkling modern bathroom",
     list: [
       "🛁 Sanitized tubs, showers, and sinks",
