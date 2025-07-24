@@ -64,7 +64,9 @@ export const Footer: React.FC = () => {
 {/* Locations (Mobile - Dropdown) */}
 <div className="lg:col-span-1 lg:hidden">
 <DropdownHeader title="CLEANER LOCATIONS" dropdownName="cleanerLocations">
- <ul className="space-y-2 pb-4 lg:pb-0">
+<LocationLinks variant='list'/>
+
+ {/* <ul className="space-y-2 pb-4 lg:pb-0">
  <li><a href="#" className="hover:underline">Alford</a></li>
  <li><a href="#" className="hover:underline">Barton-upon-Humber</a></li>
  <li><a href="#" className="hover:underline">Boston</a></li>
@@ -90,7 +92,7 @@ export const Footer: React.FC = () => {
  <li><a href="#" className="hover:underline">Winterton</a></li>
  <li><a href="#" className="hover:underline">Winterton</a></li>
  <li><a href="#" className="hover:underline">Woodhall Spa</a></li>
-  </ul>
+  </ul> */}
 </DropdownHeader>
 </div>
 
