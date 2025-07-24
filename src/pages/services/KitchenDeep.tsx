@@ -156,9 +156,9 @@ export const kitchenDeepPageData = {
       customType: "imageSlider",
       title: "Before & After Kitchen Results",
       slides: [
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/1-1.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/1-1.jpg" },
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/2-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/2-1.jpg" },
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/3-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/3-1.jpg" },
+        { before: example, after: example1 },
+        { before: example2, after: example3 },
+        { before: example4, after: example },
       ],
     },
     {

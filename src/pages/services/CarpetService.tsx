@@ -156,9 +156,8 @@ export const carpetCleaningPageData = {
       customType: "imageSlider",
       title: "Before & After Carpet Cleaning",
       slides: [
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/4-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/4-1.jpg" },
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/5-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/5-1.jpg" },
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/6-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/6-1.jpg" },
+        { before: example, after: example1 },
+        { before: example2, after: example3 },
       ],
     },
     {

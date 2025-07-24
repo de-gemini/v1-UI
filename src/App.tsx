@@ -86,6 +86,8 @@ const TermsandConditions = lazy(() => import("./pages/Terms"));
 const About = lazy(() => import("./pages/About"));
 const BookingPolicy = lazy(() => import("./pages/BookingPolicy"));
 const CheckList = lazy(() => import('./pages/Checklist'))
+const Reviews = lazy(() => import('./pages/Review'))
+
 
 
 
@@ -357,6 +359,7 @@ function App() {
                 } />
               <Route path="/test-stripe-processor" element={<StripeTestPage />} />
               <Route path="/terms-and-conditions" element={<Layout><TermsandConditions /></Layout>} />
+              <Route path="/reviews" element={<Layout><Reviews /></Layout>} />
               <Route path="/about" element={<Layout><About /></Layout>} />
               <Route path="/booking-policy" element={<Layout><BookingPolicy /></Layout>} />
               <Route path="/subscriptions" element={<StripeSubscriptionPage />} />

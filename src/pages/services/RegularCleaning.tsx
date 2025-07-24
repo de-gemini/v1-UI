@@ -2,6 +2,10 @@ import ServicePageTemplate from "./ServicePageTemplate";
 import { originalFaq } from '../../components/commons/CommonFAQ';
 import example from '../../assets/images/Services/Bedroom/1.jpg'
 import example2 from '../../assets/images/Services/Bedroom/2.png'
+import example3 from '../../assets/images/Services/Bedroom/3.avif'
+import example4 from '../../assets/images/Services/Bedroom/3.avif'
+
+
 
 
 export const regularCleaningPageData = {

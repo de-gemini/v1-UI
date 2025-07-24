@@ -107,11 +107,6 @@ export const Footer: React.FC = () => {
  {/* <li><a href="#" className="hover:underline">Sitemap</a></li> */}
   </ul>
 </DropdownHeader>
-          {/* <DropdownHeader title="FOR CLEANERS" dropdownName="forCleaners">
-            <ul className="space-y-2 pb-4 lg:pb-0">
-              <li><a href="#" className="hover:underline">Become an De-geminiper</a></li>
-            </ul>
-          </DropdownHeader> */}
 </div>
 
 {/* De-gemini Service */}
@@ -141,7 +136,7 @@ export const Footer: React.FC = () => {
   <ul className="space-y-2 pb-4 lg:pb-0">
  <li><a href="/about" target='_blank' className="hover:underline">About us</a></li>
  <li><a href="/contact" className="hover:underline">Contact us</a></li>
-{/* <li><a href="#" className="hover:underline">Reviews</a></li> */}
+<li><a href="/reviews" className="hover:underline">Reviews</a></li>
   </ul>
 </DropdownHeader>
 </div>

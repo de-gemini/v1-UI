@@ -2,6 +2,11 @@ import ServicePageTemplate from "./ServicePageTemplate";
 import { originalFaq } from '../../components/commons/CommonFAQ';
 import example from '../../assets/images/Services/Upholstery/1.avif'
 import example1 from '../../assets/images/Services/Office/6.avif'
+import example2 from '../../assets/images/Services/Office/8.avif'
+import example3 from '../../assets/images/Services/Bathroom/6.avif'
+import example4 from '../../assets/images/Services/Bathroom/5.avif'
+
+
 import banner from '../../assets/images/Services/Bedroom/9.avif'
 
 export const springCleaningPageData = {
@@ -110,9 +115,8 @@ export const springCleaningPageData = {
       customType: "imageSlider",
       title: "Spring Cleaning: Before & After",
       slides: [
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/4-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/4-1.jpg" },
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/6-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/6-1.jpg" },
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/2-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/2-1.jpg" },
+        { before: example1, after: example2 },
+        { before: example3, after: example4 },
       ],
     },
     {

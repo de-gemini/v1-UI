@@ -3,6 +3,14 @@ import { originalFaq } from '../../components/commons/CommonFAQ';
 import example from '../../assets/images/Services/Office/6.avif'
 import example1 from '../../assets/images/Services/Office/8.avif'
 import example2 from '../../assets/images/Services/Office/5.avif'
+import example3 from '../../assets/images/Services/Office/1.png'
+import example4 from '../../assets/images/Services/Office/2.png'
+import example5 from '../../assets/images/Services/Office/9.avif'
+import example6 from '../../assets/images/Services/Office/4.avif'
+
+
+
+
 
 
 
@@ -133,9 +141,8 @@ export const officeCleaningPageData = {
       customType: "imageSlider",
       title: "Before & After Office Cleaning Results",
       slides: [
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/3-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/3-1.jpg" },
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/4-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/4-1.jpg" },
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/2-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/2-1.jpg" },
+        { before: example3, after: example4 },
+        { before: example5, after: example6 },
       ],
     },
     {

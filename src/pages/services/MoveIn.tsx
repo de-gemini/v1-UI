@@ -1,5 +1,15 @@
 import ServicePageTemplate from "./ServicePageTemplate";
 import { originalFaq } from '../../components/commons/CommonFAQ';
+import example from '../../assets/images/Services/SittingRoom/3.avif'
+import example1 from '../../assets/images/Services/SittingRoom/10.avif'
+import example2 from '../../assets/images/Services/SittingRoom/6.avif'
+import example3 from '../../assets/images/Services/Bathroom/5.avif'
+import example4 from '../../assets/images/Services/Bathroom/6.avif'
+
+
+
+
+
 
 export const moveInCleaningPageData = {
   banner: { title: "Move-In Cleaning Services in England" },
@@ -73,7 +83,7 @@ export const moveInCleaningPageData = {
     {
       type: "custom",
       customType: "twoColumnImageText",
-      image: "https://www.emop.co.uk/static/redesign/images/services/regular/3.jpg",
+      image: example,
       imageAlt: "Professional cleaner preparing room",
       heading: "Add-On Services Available",
       text: null,
@@ -99,9 +109,8 @@ export const moveInCleaningPageData = {
       customType: "imageSlider",
       title: "Before & After Move-In Cleaning Results",
       slides: [
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/5-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/5-1.jpg" },
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/4-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/4-1.jpg" },
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/6-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/6-1.jpg" },
+        { before: example1, after: example2 },
+        { before: example3, after: example4 },
       ],
     },
     {

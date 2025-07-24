@@ -2,9 +2,11 @@ import ServicePageTemplate from "./ServicePageTemplate";
 import { originalFaq } from '../../components/commons/CommonFAQ';
 import example from '../../assets/images/Services/SittingRoom/10.avif'
 import example1 from '../../assets/images/Services/Kitchen/2.jpg'
-import example2 from '../../assets/images/Services/Kitchen/1.png'
-import example3 from '../../assets/images/Services/Office/1.png'
-import banner from '../../assets/images/Services/Kitchen/4.avif'
+import example2 from '../../assets/images/Services/Kitchen/6.avif'
+import example3 from '../../assets/images/Services/Office/5.avif'
+import example4 from '../../assets/images/Services/Office/4.avif'
+import example5 from '../../assets/images/Services/Office/1.png'
+import banner from '../../assets/images/Services/Kitchen/8.avif'
 
 
 
@@ -141,9 +143,8 @@ export const deepCleaningPageData = {
       customType: "imageSlider",
       title: "Before & After Deep Clean Results",
       slides: [
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/7-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/7-1.jpg" },
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/8-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/8-1.jpg" },
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/9-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/9-1.jpg" },
+        { before: example4, after: example1 },
+        { before: example2, after: example5 },
       ],
     },
     {

@@ -3,9 +3,10 @@ import { originalFaq } from '../../components/commons/CommonFAQ';
 import example from '../../assets/images/Services/Bedroom/8.avif'
 import example1 from '../../assets/images/Services/Kitchen/4.avif'
 import example2 from '../../assets/images/Services/SittingRoom/5.avif'
+import example3 from '../../assets/images/Services/SittingRoom/10.avif'
+import example4 from '../../assets/images/Services/SittingRoom/7.avif'
+import example5 from '../../assets/images/Services/SittingRoom/5.avif'
 import banner from '../../assets/images/Services/Upholstery/3.avif'
-
-
 
 
 export const endOfTenancyPageData = {
@@ -129,9 +130,9 @@ export const endOfTenancyPageData = {
       customType: "imageSlider",
       title: "Before & After End of Tenancy Cleans",
       slides: [
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/4-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/4-1.jpg" },
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/5-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/5-1.jpg" },
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/6-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/6-1.jpg" },
+        { before: example4, after: example5 },
+        { before: example, after: example2 },
+        { before: example3, after: example2 },
       ],
     },
     {

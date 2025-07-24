@@ -150,8 +150,8 @@ export const bathroomDeepPageData = {
       customType: "imageSlider",
       title: "Bathroom Cleaning Results",
       slides: [
-        { before: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80", after: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80" },
-        { before: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80", after: "https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=600&q=80" },
+        { before: example, after: example1 },
+        { before: example2, after: example3 },
       ],
     },
     {

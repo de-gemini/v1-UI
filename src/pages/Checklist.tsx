@@ -5,7 +5,7 @@ import PolicyTemplate from "./PolicyTemplate";
 
 const sections = [
   {
-    heading: ".",
+    heading: "",
     content: (
       <p>
         De-gemini professional end of tenancy cleaners follow strict company procedures and checklists to ensure you receive the highest level of service. De-gemini cleaning list includes the areas/rooms our expert team cleans while at your property. Our end of tenancy cleaning checklist is as follows:

@@ -5,6 +5,10 @@ import example1 from '../../assets/images/Services/Mattress/2.avif'
 import example2 from '../../assets/images/Services/Mattress/3.avif'
 import example3 from '../../assets/images/Services/Mattress/4.avif'
 import example4 from '../../assets/images/Services/Mattress/5.avif'
+import example5 from '../../assets/images/Services/Mattress/6.avif'
+import example6 from '../../assets/images/Services/Mattress/7.avif'
+
+
 
 
 
@@ -148,9 +152,9 @@ export const mattressCleaningPageData = {
       customType: "imageSlider",
       title: "Before & After Mattress Results",
       slides: [
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/7-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/7-1.jpg" },
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/8-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/8-1.jpg" },
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/9-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/9-1.jpg" },
+        { before: example, after: example3 },
+        { before: example4, after: example5 },
+        { before: example2, after: example6 },
       ],
     },
     {
