@@ -143,7 +143,7 @@ const Contact = () => {
               <Icon path={ICONS.email} className="w-6 h-6 text-gray-500 mt-1" />
               <div>
                 <h3 className="font-semibold text-gray-800">E-mail</h3>
-                <a href="mailto:Kellynwaodo@gmail.com" className="text-blue-600 hover:underline text-sm">Support@Degeminiservices.co.uk</a>
+                <a href="mailto:Support@Degeminiservices.co.uk" className="text-blue-600 hover:underline text-sm">Support@Degeminiservices.co.uk</a>
               </div>
             </div>
           </div>
@@ -248,7 +248,7 @@ const Contact = () => {
               <div>
                 <h3 className="font-bold text-gray-800 mb-2">Business queries</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
-                For press, partnership, marketing enquiries, please contact us at <a href="mailto:Kellynwaodo@gmail.com" className="text-blue-600 hover:underline">Support@Degeminiservices.co.uk</a>
+                For press, partnership, marketing enquiries, please contact us at <a href="mailto:Support@Degeminiservices.co.uk" className="text-blue-600 hover:underline">Support@Degeminiservices.co.uk</a>
                 </p>
               </div>
             </div>
@@ -257,7 +257,7 @@ const Contact = () => {
               <div>
                 <h3 className="font-bold text-gray-800 mb-2">GENERAL QUERIES</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
-                  Didn't find any relevant subject? Write us to <a href="mailto:Kellynwaodo@gmail.com" className="text-blue-600 hover:underline">Support@Degeminiservices.co.uk </a>
+                  Didn't find any relevant subject? Write us to <a href="mailto:Support@Degeminiservices.co.uk" className="text-blue-600 hover:underline">Support@Degeminiservices.co.uk </a>
                 </p>
               </div>
             </div>

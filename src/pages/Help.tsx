@@ -90,7 +90,7 @@ export default function Help() {
 
         {/* Bottom Text */}
         <div className="mt-16 text-center text-gray-700 text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
-          Need help? <a href="mailto:Kellynwaodo@gmail.com" className="text-brand-primary font-semibold hover:underline">Click here to email us</a> — For urgent issues, we aim to respond within minutes. Apart from that please navigate yourself through our FAQ pages.
+          Need help? <a href="mailto:Support@Degeminiservices.co.uk" className="text-brand-primary font-semibold hover:underline">Click here to email us</a> — For urgent issues, we aim to respond within minutes. Apart from that please navigate yourself through our FAQ pages.
         </div>
       </div>
 

@@ -32,31 +32,6 @@ export const Footer: React.FC = () => {
           <h3 className="font-bold text-lg mb-4 text-brand-primary">CLEANER LOCATIONS</h3>
           <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
             <LocationLinks variant='list'/>
-        {/* <a href="#" className="hover:underline">Alford</a>
-<a href="#" className="hover:underline">Barton-upon-Humber</a>
-<a href="#" className="hover:underline">Boston</a>
-<a href="#" className="hover:underline">Bourne</a>
-<a href="#" className="hover:underline">Brigg</a>
-<a href="#" className="hover:underline">Broughton</a>
-<a href="#" className="hover:underline">Caistor</a>
-<a href="#" className="hover:underline">Crowland</a>
-<a href="#" className="hover:underline">Gainsborough</a>
-<a href="#" className="hover:underline">Grantham</a>
-<a href="#" className="hover:underline">Louth</a>
-<a href="#" className="hover:underline">Mablethorpe</a>
-<a href="#" className="hover:underline">Market Deeping</a>
-<a href="#" className="hover:underline">Market Rasen</a>
-<a href="#" className="hover:underline">North Hykeham</a>
-<a href="#" className="hover:underline">Scunthorpe</a>
-<a href="#" className="hover:underline">Skegness</a>
-<a href="#" className="hover:underline">Sleaford</a>
-<a href="#" className="hover:underline">Spalding</a>
-<a href="#" className="hover:underline">Stamford</a>
-<a href="#" className="hover:underline">Wainfleet All Saints</a>
-<a href="#" className="hover:underline">Waltham</a>
-<a href="#" className="hover:underline">Winterton</a>
-<a href="#" className="hover:underline">Winterton</a>
-<a href="#" className="hover:underline">Woodhall Spa</a> */}
           </div>
         </div>
 
@@ -65,34 +40,6 @@ export const Footer: React.FC = () => {
 <div className="lg:col-span-1 lg:hidden">
 <DropdownHeader title="CLEANER LOCATIONS" dropdownName="cleanerLocations">
 <LocationLinks variant='list'/>
-
- {/* <ul className="space-y-2 pb-4 lg:pb-0">
- <li><a href="#" className="hover:underline">Alford</a></li>
- <li><a href="#" className="hover:underline">Barton-upon-Humber</a></li>
- <li><a href="#" className="hover:underline">Boston</a></li>
- <li><a href="#" className="hover:underline">Bourne</a></li>
- <li><a href="#" className="hover:underline">Brigg</a></li>
- <li><a href="#" className="hover:underline">Broughton</a></li>
- <li><a href="#" className="hover:underline">Caistor</a></li>
- <li><a href="#" className="hover:underline">Crowland</a></li>
- <li><a href="#" className="hover:underline">Gainsborough</a></li>
- <li><a href="#" className="hover:underline">Grantham</a></li>
- <li><a href="#" className="hover:underline">Louth</a></li>
- <li><a href="#" className="hover:underline">Mablethorpe</a></li>
- <li><a href="#" className="hover:underline">Market Deeping</a></li>
- <li><a href="#" className="hover:underline">Market Rasen</a></li>
- <li><a href="#" className="hover:underline">North Hykeham</a></li>
- <li><a href="#" className="hover:underline">Scunthorpe</a></li>
- <li><a href="#" className="hover:underline">Skegness</a></li>
- <li><a href="#" className="hover:underline">Sleaford</a></li>
- <li><a href="#" className="hover:underline">Spalding</a></li>
- <li><a href="#" className="hover:underline">Stamford</a></li>
- <li><a href="#" className="hover:underline">Wainfleet All Saints</a></li>
- <li><a href="#" className="hover:underline">Waltham</a></li>
- <li><a href="#" className="hover:underline">Winterton</a></li>
- <li><a href="#" className="hover:underline">Winterton</a></li>
- <li><a href="#" className="hover:underline">Woodhall Spa</a></li>
-  </ul> */}
 </DropdownHeader>
 </div>
 
@@ -107,7 +54,7 @@ export const Footer: React.FC = () => {
  <li><a href="/terms-and-conditions" className="hover:underline">Terms & Conditions</a></li>
  <li><a href="/privacy-policy" className="hover:underline">Privacy Policy</a></li>
  <li><a href="/cookie-policy" className="hover:underline">Cookies Policy</a></li>
- {/* <li><a href="#" className="hover:underline">Sitemap</a></li> */}
+ <li><a href="/reclean-guarantee" className="hover:underline">Reclaean Guarante</a></li>
   </ul>
 </DropdownHeader>
 </div>
@@ -161,11 +108,11 @@ export const Footer: React.FC = () => {
 </div>
  </div>
       <div className="max-w-7xl mx-auto mt-8 text-xs text-gray-500 flex flex-col sm:flex-row justify-between items-center relative z-10">
-        <div className="flex space-x-4 mb-2 sm:mb-0">
+        <div className="flex gap-3 mb-2 sm:mb-0 flex-col md:flex-row lg:flex-row">
           <span><a href='https://de-gemini.netlify.app'>www.De-gemini.co.uk</a></span>
           <span>Copyright © De-gemini 2025</span>
-          <a href='mailto:Kellynwaodo@gmail.com'>
-          <span>Support@Degeminiservices.co.uk </span>
+          <a href='mailto:Support@Degeminiservices.co.uk'>
+          <span>Support@Degeminiservices.co.uk</span>
           </a>
           <span>Phone: 07399 487 915</span>
         </div>

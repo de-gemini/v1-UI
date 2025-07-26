@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
+import background from '../assets/images/main-removebg.png'
 import {
   Search,
   ChevronDown,
@@ -49,7 +50,7 @@ export default function Emoppers() {
           id: "general-4",
           question: "How can I contact De-Gemini?",
           answer:
-            "At De-Gemini our best way of communication is via Text or an email [email@mail.com]. Before reaching out to us, please have a look at our FAQs for Degemini on the website or in your Mobile App. It’s possible you may find your answer without having to wait for our response.",
+            "At De-Gemini our best way of communication is via Text or an email [Support@Degeminiservices.co.uk]. Before reaching out to us, please have a look at our FAQs for Degemini on the website or in your Mobile App. It’s possible you may find your answer without having to wait for our response.",
         },
         {
           id: "general-5",
@@ -72,7 +73,7 @@ export default function Emoppers() {
         {
           id: "prospective-1",
           question: "How do I become a cleaner with De-Gemini",
-          answer: `Before you can start working with De-Gemini, you will need to provide a list of documents. You will need to register and upload a photo of your documents on the website www.emop.co.uk
+          answer: `Before you can start working with De-Gemini, you will need to provide a list of documents. You will need to register and upload a photo of your documents on the website www.de-gemini.co.uk
   
   After the interview, you will have your first test job. If the customer is happy with the cleaning, it is paid and you can have an access to all the cleaning bookings on the App. If we receive a negative feedback, you are not paid for the job and you will be deactivated from the platform. Its as simple as that. Customer satisfaction is key to all our success.`,
         },
@@ -94,7 +95,7 @@ export default function Emoppers() {
         {
           id: "prospective-3",
           question: "How long does the application process take?",
-          answer: `The process usually takes 1-4 days from the date of the interview. If you would like an update on your application please contact the De-Gemini office via email. [email@mail.com].`,
+          answer: `The process usually takes 1-4 days from the date of the interview. If you would like an update on your application please contact the De-Gemini office via email. [Support@Degeminiservices.co.uk].`,
         },
         {
           id: "prospective-4",
@@ -105,28 +106,24 @@ export default function Emoppers() {
       ],
     },
   ];
-  // State for search input
+
   const [searchTerm, setSearchTerm] = useState<string>("");
-  // State for active category in sidebar (for scroll-based highlighting)
   const [activeCategory, setActiveCategory] = useState<string>("general");
-  // State to manage open FAQ item
   const [openFAQId, setOpenFAQId] = useState<string | null>(null);
 
-  // Refs for each content section
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
 
   // Setup Intersection Observer for scroll-based active state
   useEffect(() => {
     const observerOptions: IntersectionObserverInit = {
-      root: null, // relative to the viewport
-      rootMargin: "-50% 0px -50% 0px", // When the middle of the section is in viewport
-      threshold: 0, // Trigger callback as soon as the element is visible
+      root: null,
+      rootMargin: "-50% 0px -50% 0px",
+      threshold: 0,
     };
 
     const observerCallback: IntersectionObserverCallback = (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting && entry.intersectionRatio > 0) {
-          // If the element is intersecting and its midpoint is near the center of the viewport
           setActiveCategory(entry.target.id);
         }
       });
@@ -137,7 +134,6 @@ export default function Emoppers() {
       observerOptions
     );
 
-    // Observe all relevant sections
     faqCategories.forEach((category) => {
       const sectionElement = sectionRefs.current[category.id];
       if (sectionElement) {
@@ -145,7 +141,7 @@ export default function Emoppers() {
       }
     });
 
-    // Clean up observer on component unmount
+
     return () => {
       faqCategories.forEach((category) => {
         const sectionElement = sectionRefs.current[category.id];
@@ -155,22 +151,32 @@ export default function Emoppers() {
       });
       observer.disconnect();
     };
-  }, [faqCategories]); // Re-run if categories change (though unlikely for static data)
+  }, [faqCategories]);
 
-  // Filter FAQs based on search term (if implemented)
-  const filteredFaqCategories = faqCategories.map((category) => ({
-    ...category,
-    faqs: category.faqs.filter(
-      (faq) =>
-        faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        faq.answer.toLowerCase().includes(searchTerm.toLowerCase())
-    ),
-  }));
+  const filteredCategories = useMemo(() => {
+    if (!searchTerm.trim()) {
+      return faqCategories;
+    }
+
+    const lowercasedSearchTerm = searchTerm.toLowerCase();
+
+    return faqCategories
+      .map(category => {
+        const filteredFaqs = category.faqs.filter(
+          faq =>
+            faq.question.toLowerCase().includes(lowercasedSearchTerm) ||
+            faq.answer.toLowerCase().includes(lowercasedSearchTerm)
+        );
+
+        return { ...category, faqs: filteredFaqs };
+      })
+      
+      .filter(category => category.faqs.length > 0);
+
+  }, [searchTerm]);
 
   const handleSearch = () => {
-    // In a real application, you might trigger a search API call here
     console.log("Searching for:", searchTerm);
-    // For this example, filtering is already done reactively
   };
 
   const toggleFAQ = (id: string) => {
@@ -180,12 +186,11 @@ export default function Emoppers() {
   const scrollToCategory = (categoryId: string) => {
     const element = sectionRefs.current[categoryId];
     if (element) {
-      // Scrolls to the element, slightly offset from the top to account for fixed header
       window.scrollTo({
-        top: element.offsetTop - 100, // Adjust 100px based on your header height
+        top: element.offsetTop - 100,
         behavior: "smooth",
       });
-      setActiveCategory(categoryId); // Manually set active when clicked
+      setActiveCategory(categoryId);
     }
   };
 
@@ -209,7 +214,7 @@ export default function Emoppers() {
         className="relative bg-gradient-to-br from-purple-700 to-indigo-800 py-20 px-4 sm:px-6 lg:px-8 text-white overflow-hidden"
         style={{
           backgroundImage:
-            'url("https://www.emop.co.uk/help/wp-content/themes/emop_faq/static/images/general/bg.jpg")', // Placeholder background image
+            `url(${background})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}>
@@ -271,7 +276,7 @@ export default function Emoppers() {
 
         {/* Right Content Area: FAQs */}
         <div className="md:w-3/4 lg:w-4/5 md:pl-10 mt-8 md:mt-0">
-          {filteredFaqCategories.map((category) => (
+          {filteredCategories.map((category) => (
             <section
               key={category.id}
               id={category.id}

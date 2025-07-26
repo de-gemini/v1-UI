@@ -23,12 +23,12 @@ import slide3 from '../assets/images/slide-3.png'
 import slide4 from '../assets/images/slide-4.png'
 import slide5 from '../assets/images/slide-5.png'
 import slide6 from '../assets/images/card-7.png'
-import card1 from '../assets/images/card-1.jpg'
-import card2 from '../assets/images/card-2.jpg'
-import card3 from '../assets/images/card-3.jpg'
-import card4 from '../assets/images/card-4.jpg';
-import card5 from '../assets/images/card-5.png';
-import card6 from '../assets/images/card-6.jpg';
+import card1 from '../assets/images/Services/Kitchen/4.avif'
+import card2 from '../assets/images/Services/Kitchen/6.avif'
+import card3 from '../assets/images/Services/Bathroom/4.avif'
+import card4 from '../assets/images/Services/Bathroom/6.avif';
+import card5 from '../assets/images/Services/SittingRoom/4.avif';
+import card6 from '../assets/images/Services/SittingRoom/7.avif';
 import home from '../assets/images/main-removebg.png'
 import office from '../assets/images/office-cleaning.png'
 import 'react-toastify/dist/ReactToastify.css';

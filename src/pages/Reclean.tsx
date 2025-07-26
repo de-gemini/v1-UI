@@ -4,6 +4,7 @@ import axiosInstance from '../api/axiosInstance';
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from "../constants";
+import banner from '../assets/images/main-removebg.png'
 import CommonPostcodeInput from '../components/commons/CommonPostcodeInput';
 
 export default function Reclean() {
@@ -120,7 +121,7 @@ export default function Reclean() {
 
           <div className="w-full lg:w-1/2 flex justify-center">
             <img
-              src="https://www.emop.co.uk/static/images/reclean-employer.png"
+              src={banner}
               alt=""
               className="max-w-full h-auto object-contain"
             />

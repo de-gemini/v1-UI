@@ -1,6 +1,7 @@
 
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
+import background from '../assets/images/main-removebg.png'
 import {
   Search,
   ChevronDown,
@@ -8,7 +9,7 @@ import {
   Instagram,
   Facebook,
   Pin,
-} from "lucide-react"; // Icons for search, dropdown, and sidebar arrow
+} from "lucide-react";
 import SecondFooter from "../components/SecondFooter";
 
 // Define interfaces for data structures
@@ -26,7 +27,6 @@ interface FAQCategoryData {
 
 
 export default function Clients() {
-    
   const faqCategories: FAQCategoryData[] = [
     {
       id: "general",
@@ -77,7 +77,7 @@ Cleaners work as independent cleaning partners. They access the De-Gemini platfo
         {
           id: "booking-1",
           question: "How do I make a booking?",
-          answer: `Bookings can only be completed via our website www.emop.co.uk and the payment is made via our secure payment provider. The booking process is very simple and only takes a few minutes to complete. To make a booking, we ask for some personal details (your name, phone number, your address) and your payment information (we accept payment by credit or debit card only). Please be aware that we will only charge you when the cleaning has been completed. However, when you make a booking, we will block out the estimated amount on your card to be sure your payment will be processed. After the cleaning, the final cost is charged to your card details, and the difference between the estimated and factual amount will be reflected as a refund or extra charge on your account.`,
+          answer: `Bookings can only be completed via our website www.de-gemini.co.uk and the payment is made via our secure payment provider. The booking process is very simple and only takes a few minutes to complete. To make a booking, we ask for some personal details (your name, phone number, your address) and your payment information (we accept payment by credit or debit card only). Please be aware that we will only charge you when the cleaning has been completed. However, when you make a booking, we will block out the estimated amount on your card to be sure your payment will be processed. After the cleaning, the final cost is charged to your card details, and the difference between the estimated and factual amount will be reflected as a refund or extra charge on your account.`,
         },
         {
           id: "booking-2",
@@ -154,10 +154,7 @@ However, please note that as soon as the booking is confirmed, the estimated amo
           {
             id: "issues-2",
             question: "I am not satisfied with the cleaning service",
-            answer: `We do our best to make our clients happy and keep working on improving the quality of our service. However, if you are not satisfied with how your home was cleaned, please, let us know as soon as possible and tell us what exactly went wrong. Please write to our Support Desk, and attach photos to show us exactly what was wrong. Be advised that we cannot accept complaints later than 48 hours after the cleaning took place. After the investigation of the case, we may send one of our supervisors to re-clean the missed areas for free. De-Gemini doesn’t provide any refunds for our service, that is why we strongly recommend:
-
-If you are at home during the cleaning, always check how the job was done at the end of the cleaning. The cleaner will clean the places that you thought were not cleaned well enough again at your request.
-If you are not home at the end of cleaning it might be more difficult to prove that the job was done incorrectly. Please be sure someone can check how the cleaning was done before the cleaner leaves your home.`,
+            answer: `We do our best to make our clients happy and keep working on improving the quality of our service. However, if you are not satisfied with how your home was cleaned, please, let us know as soon as possible and tell us what exactly went wrong. Please write to our Support Desk, and attach photos to show us exactly what was wrong.`,
           },
           {
             id: "issues-3",
@@ -167,28 +164,23 @@ If you are not home at the end of cleaning it might be more difficult to prove t
         ],
       }
   ];
-      // State for search input
       const [searchTerm, setSearchTerm] = useState<string>("");
-      // State for active category in sidebar (for scroll-based highlighting)
+     
       const [activeCategory, setActiveCategory] = useState<string>("general");
-      // State to manage open FAQ item
       const [openFAQId, setOpenFAQId] = useState<string | null>(null);
-    
-      // Refs for each content section
       const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
     
-      // Setup Intersection Observer for scroll-based active state
+
       useEffect(() => {
         const observerOptions: IntersectionObserverInit = {
-          root: null, // relative to the viewport
-          rootMargin: "-50% 0px -50% 0px", // When the middle of the section is in viewport
-          threshold: 0, // Trigger callback as soon as the element is visible
+          root: null,
+          rootMargin: "-50% 0px -50% 0px",
+          threshold: 0,
         };
     
         const observerCallback: IntersectionObserverCallback = (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting && entry.intersectionRatio > 0) {
-              // If the element is intersecting and its midpoint is near the center of the viewport
               setActiveCategory(entry.target.id);
             }
           });
@@ -199,7 +191,7 @@ If you are not home at the end of cleaning it might be more difficult to prove t
           observerOptions
         );
     
-        // Observe all relevant sections
+        
         faqCategories.forEach((category) => {
           const sectionElement = sectionRefs.current[category.id];
           if (sectionElement) {
@@ -207,7 +199,7 @@ If you are not home at the end of cleaning it might be more difficult to prove t
           }
         });
     
-        // Clean up observer on component unmount
+       
         return () => {
           faqCategories.forEach((category) => {
             const sectionElement = sectionRefs.current[category.id];
@@ -217,23 +209,29 @@ If you are not home at the end of cleaning it might be more difficult to prove t
           });
           observer.disconnect();
         };
-      }, [faqCategories]); // Re-run if categories change (though unlikely for static data)
+      }, [faqCategories]);
     
-      // Filter FAQs based on search term (if implemented)
-      const filteredFaqCategories = faqCategories.map((category) => ({
-        ...category,
-        faqs: category.faqs.filter(
-          (faq) =>
-            faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            faq.answer.toLowerCase().includes(searchTerm.toLowerCase())
-        ),
-      }));
+      const filteredCategories = useMemo(() => {
+        if (!searchTerm.trim()) {
+          return faqCategories;
+        }
     
-      const handleSearch = () => {
-        // In a real application, you might trigger a search API call here
-        console.log("Searching for:", searchTerm);
-        // For this example, filtering is already done reactively
-      };
+        const lowercasedSearchTerm = searchTerm.toLowerCase();
+    
+        return faqCategories
+          .map(category => {
+            const filteredFaqs = category.faqs.filter(
+              faq =>
+                faq.question.toLowerCase().includes(lowercasedSearchTerm) ||
+                faq.answer.toLowerCase().includes(lowercasedSearchTerm)
+            );
+    
+            return { ...category, faqs: filteredFaqs };
+          })
+          
+          .filter(category => category.faqs.length > 0);
+    
+      }, [searchTerm]);
     
       const toggleFAQ = (id: string) => {
         setOpenFAQId(openFAQId === id ? null : id);
@@ -242,12 +240,11 @@ If you are not home at the end of cleaning it might be more difficult to prove t
       const scrollToCategory = (categoryId: string) => {
         const element = sectionRefs.current[categoryId];
         if (element) {
-          // Scrolls to the element, slightly offset from the top to account for fixed header
           window.scrollTo({
-            top: element.offsetTop - 100, // Adjust 100px based on your header height
+            top: element.offsetTop - 100,
             behavior: "smooth",
           });
-          setActiveCategory(categoryId); // Manually set active when clicked
+          setActiveCategory(categoryId);
         }
       };
       return (
@@ -271,7 +268,7 @@ If you are not home at the end of cleaning it might be more difficult to prove t
             className="relative bg-gradient-to-br from-purple-700 to-indigo-800 py-20 px-4 sm:px-6 lg:px-8 text-white overflow-hidden"
             style={{
               backgroundImage:
-                'url("https://www.emop.co.uk/help/wp-content/themes/emop_faq/static/images/general/bg.jpg")', // Placeholder background image
+                `url(${background})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}>
@@ -282,21 +279,22 @@ If you are not home at the end of cleaning it might be more difficult to prove t
                 FAQ FOR CLIENTS
               </h1>
               <div className="flex w-full max-w-xl mx-auto rounded-lg overflow-hidden shadow-xl">
-                <input
-                  type="text"
-                  placeholder="Search FAQ for help"
-                  className="flex-grow p-4 text-lg text-gray-800 focus:outline-none rounded-l-lg"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  aria-label="Search FAQ"
-                />
-                <button
-                  onClick={handleSearch}
-                  className="bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold p-4 text-lg rounded-r-lg transition duration-300"
-                  aria-label="Search">
-                  <Search className="w-6 h-6" />
-                </button>
-              </div>
+            <input
+              type="text"
+              placeholder="Search FAQ for help"
+              className="flex-grow p-4 text-lg text-gray-800 focus:outline-none rounded-l-lg"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              aria-label="Search FAQ"
+            />
+            <button
+              onClick={() => { /* The button is now mostly for show, as search is live */ }}
+              className="bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold p-4 text-lg rounded-r-lg transition duration-300"
+              aria-label="Search"
+            >
+              <Search className="w-6 h-6" />
+            </button>
+          </div>
             </div>
           </section>
     
@@ -333,7 +331,8 @@ If you are not home at the end of cleaning it might be more difficult to prove t
     
             {/* Right Content Area: FAQs */}
             <div className="md:w-3/4 lg:w-4/5 md:pl-10 mt-8 md:mt-0">
-              {filteredFaqCategories.map((category) => (
+            
+              {filteredCategories.map((category) => (
                 <section
                   key={category.id}
                   id={category.id}
@@ -387,6 +386,7 @@ If you are not home at the end of cleaning it might be more difficult to prove t
                   </div>
                 </section>
               ))}
+
             </div>
           </div>
     
