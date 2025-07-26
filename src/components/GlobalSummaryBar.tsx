@@ -9,15 +9,23 @@ const GlobalSummaryBar: React.FC = () => {
 
   const getMinimumPrice = () => {
     switch(selectedType) {
+      case ServiceType.END_OF_TENANCY:
+        // For End of Tenancy, we don't compare with minimum price
+        return 0;
       case ServiceType.REGULAR_ONE_OFF:
         return PRICING_CONFIG.minimumPrices.regularCleaning;
-      case ServiceType.END_OF_TENANCY:
-        return PRICING_CONFIG.minimumPrices.endOfTenancy;
       case ServiceType.CARPET_UPHOLSTERY:
         return PRICING_CONFIG.minimumPrices.carpetUpholstery;
       default:
         return PRICING_CONFIG.minimumPrices.regularCleaning;
     }
+  };
+
+  const getBasePrice = () => {
+    if (selectedType === ServiceType.END_OF_TENANCY) {
+      return PRICING_CONFIG.minimumPrices.endOfTenancy;
+    }
+    return 0;
   };
 
   return (
@@ -31,10 +39,17 @@ const GlobalSummaryBar: React.FC = () => {
           <div className="flex flex-col">
             {/* <span className="text-sm text-gray-500">Estimated Price</span> */}
           </div>
-          {estimatedPrice<getMinimumPrice()&&<div className="flex items-center gap-2">
-            <span className="text-xs  text-gray-500">Minimum Price</span>
-            <span className="font-semibold">£{getMinimumPrice().toFixed(2)}</span>
-          </div>}
+          {selectedType === ServiceType.END_OF_TENANCY ? (
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-gray-500">Base Price</span>
+              <span className="font-semibold">£{PRICING_CONFIG.minimumPrices.endOfTenancy.toFixed(2)}</span>
+            </div>
+          ) : estimatedPrice < getMinimumPrice() && (
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-gray-500">Minimum Price</span>
+              <span className="font-semibold">£{getMinimumPrice().toFixed(2)}</span>
+            </div>
+          )}
         </div>
         <div className="flex items-center gap-4">
           <button 
@@ -43,7 +58,11 @@ const GlobalSummaryBar: React.FC = () => {
           >
             View Summary
           </button>
-          <span className="font-semibold text-brand-primary">£{estimatedPrice.toFixed(2)}</span>
+          <span className="font-semibold text-brand-primary">
+            £{(selectedType === ServiceType.END_OF_TENANCY ? 
+              estimatedPrice + PRICING_CONFIG.minimumPrices.endOfTenancy : 
+              estimatedPrice).toFixed(2)}
+          </span>
         </div>
       </div>
     </div>

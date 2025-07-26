@@ -22,9 +22,9 @@ export const PRICING_CONFIG = {
   
   // Minimum prices for each service type
   minimumPrices: {
-    regularCleaning: 129,     // Regular/One-off cleaning minimum
-    endOfTenancy: 159,       // End of Tenancy minimum
-    carpetUpholstery: 108,   // Carpet & Upholstery minimum
+    regularCleaning: 60,     // Regular/One-off cleaning minimum
+    endOfTenancy: 145,       // End of Tenancy minimum
+    carpetUpholstery: 96,   // Carpet & Upholstery minimum
   } as MinimumPrices,
 
   // Frequency discounts (as percentages)
@@ -262,21 +262,20 @@ export const pricingService = {
 
     // Apply minimum price based on service type
     if (options.serviceType !== undefined) {
-      let minimumPrice;
       switch (options.serviceType) {
-        case ServiceType.REGULAR_ONE_OFF:
-          minimumPrice = PRICING_CONFIG.minimumPrices.regularCleaning;
-          break;
         case ServiceType.END_OF_TENANCY:
-          minimumPrice = PRICING_CONFIG.minimumPrices.endOfTenancy;
+          // For End of Tenancy, always add minimum price to selections
+          totalPrice += PRICING_CONFIG.minimumPrices.endOfTenancy;
           break;
+        case ServiceType.REGULAR_ONE_OFF:
         case ServiceType.CARPET_UPHOLSTERY:
-          minimumPrice = PRICING_CONFIG.minimumPrices.carpetUpholstery;
-          break;
         default:
-          minimumPrice = PRICING_CONFIG.minimumPrices.regularCleaning;
+          // For other services, use the greater of calculated price or minimum price
+          const minimumPrice = options.serviceType === ServiceType.CARPET_UPHOLSTERY
+            ? PRICING_CONFIG.minimumPrices.carpetUpholstery
+            : PRICING_CONFIG.minimumPrices.regularCleaning;
+          totalPrice = Math.max(totalPrice, minimumPrice);
       }
-      totalPrice = Math.max(totalPrice, minimumPrice);
     }
     
     return totalPrice;
@@ -518,21 +517,25 @@ export class PricingCalculator {
       calculatedPrice = calculatePrice.applyDirtLevelMultiplier(calculatedPrice, dirtLevel);
     }
 
-    // Get minimum price based on service type
+    // Handle minimum price and final price based on service type
     let minimumPrice = PRICING_CONFIG.minimumPrices.regularCleaning;
+    let finalPrice = calculatedPrice;
+
     if (serviceType !== undefined) {
       switch (serviceType) {
         case ServiceType.END_OF_TENANCY:
+          // For End of Tenancy, always add minimum price to selections
           minimumPrice = PRICING_CONFIG.minimumPrices.endOfTenancy;
+          finalPrice = calculatedPrice + minimumPrice;
           break;
         case ServiceType.CARPET_UPHOLSTERY:
           minimumPrice = PRICING_CONFIG.minimumPrices.carpetUpholstery;
+          finalPrice = Math.max(calculatedPrice, minimumPrice);
           break;
+        default:
+          finalPrice = Math.max(calculatedPrice, minimumPrice);
       }
     }
-
-    // Final price is the higher of calculated price or minimum price
-    const finalPrice = Math.max(calculatedPrice, minimumPrice);
     
     return {
       basePrice: calculatePrice.formatPrice(basePrice),
