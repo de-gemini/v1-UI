@@ -151,7 +151,23 @@ export const FrequencyOption: React.FC<{
     incrementMinute: () => void;
     decrementMinute: () => void;
     pad: (n: number) => string;
-  }> = ({ hour, minute, incrementHour, decrementHour, incrementMinute, decrementMinute, pad }) => (
+    isIncrementHourDisabled?: boolean;
+    isDecrementHourDisabled?: boolean;
+    isIncrementMinuteDisabled?: boolean;
+    isDecrementMinuteDisabled?: boolean;
+  }> = ({ 
+    hour, 
+    minute, 
+    incrementHour, 
+    decrementHour, 
+    incrementMinute, 
+    decrementMinute, 
+    pad,
+    isIncrementHourDisabled = false,
+    isDecrementHourDisabled = false,
+    isIncrementMinuteDisabled = false,
+    isDecrementMinuteDisabled = false
+  }) => (
     <div className="flex flex-col items-center bg-white rounded-md border border-gray-200 p-4 w-fit">
       <h3 className="text-lg font-semibold mb-4">Choose start time</h3>
       <div className="flex items-center gap-2 mb-2">
@@ -159,7 +175,12 @@ export const FrequencyOption: React.FC<{
         <div className="flex flex-col items-center">
           <button
             onClick={incrementHour}
-            className="text-gray-600 hover:text-brand-primary focus:outline-none"
+            disabled={isIncrementHourDisabled}
+            className={`focus:outline-none ${
+              isIncrementHourDisabled 
+                ? 'text-gray-300 cursor-not-allowed' 
+                : 'text-gray-600 hover:text-brand-primary'
+            }`}
             aria-label="Increase hour"
           >
             ▲
@@ -169,7 +190,12 @@ export const FrequencyOption: React.FC<{
           </div>
           <button
             onClick={decrementHour}
-            className="text-gray-600 hover:text-brand-primary focus:outline-none"
+            disabled={isDecrementHourDisabled}
+            className={`focus:outline-none ${
+              isDecrementHourDisabled 
+                ? 'text-gray-300 cursor-not-allowed' 
+                : 'text-gray-600 hover:text-brand-primary'
+            }`}
             aria-label="Decrease hour"
           >
             ▼
@@ -180,7 +206,12 @@ export const FrequencyOption: React.FC<{
         <div className="flex flex-col items-center">
           <button
             onClick={incrementMinute}
-            className="text-gray-600 hover:text-brand-primary focus:outline-none"
+            disabled={isIncrementMinuteDisabled}
+            className={`focus:outline-none ${
+              isIncrementMinuteDisabled 
+                ? 'text-gray-300 cursor-not-allowed' 
+                : 'text-gray-600 hover:text-brand-primary'
+            }`}
             aria-label="Increase minute"
           >
             ▲
@@ -190,7 +221,12 @@ export const FrequencyOption: React.FC<{
           </div>
           <button
             onClick={decrementMinute}
-            className="text-gray-600 hover:text-brand-primary focus:outline-none"
+            disabled={isDecrementMinuteDisabled}
+            className={`focus:outline-none ${
+              isDecrementMinuteDisabled 
+                ? 'text-gray-300 cursor-not-allowed' 
+                : 'text-gray-600 hover:text-brand-primary'
+            }`}
             aria-label="Decrease minute"
           >
             ▼

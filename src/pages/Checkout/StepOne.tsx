@@ -53,6 +53,51 @@ const StepOne: React.FC = () => {
     fetchAvailability(selectedDate.getFullYear(), selectedDate.getMonth() + 1);
   }, [selectedDate, fetchAvailability]);
 
+  // Initialize time to be rounded to the nearest hour on component mount
+  useEffect(() => {
+    const now = new Date();
+    const selectedDateTime = new Date(selectedDate);
+    selectedDateTime.setHours(hour, minute, 0, 0);
+    
+    const diffMs = selectedDateTime.getTime() - now.getTime();
+    const diffHours = diffMs / (1000 * 60 * 60);
+    
+    // If it's today and less than 4 hours from now, round to nearest hour after 4 hours
+    if (selectedDate.toDateString() === now.toDateString() && diffHours < 4) {
+      const minTime = new Date(now.getTime() + 4 * 60 * 60 * 1000);
+      const minHour = minTime.getHours();
+      const roundedHour = minTime.getMinutes() >= 30 ? (minHour + 1) % 24 : minHour;
+      set({ hour: roundedHour, minute: 0 });
+    } else if (minute !== 0) {
+      // For any other case, just round to the nearest hour
+      const roundedHour = minute >= 30 ? (hour + 1) % 24 : hour;
+      set({ hour: roundedHour, minute: 0 });
+    }
+  }, []); // Only run on mount
+
+  // Auto-adjust time to be at least 4 hours from now when date changes
+  useEffect(() => {
+    const now = new Date();
+    const selectedDateTime = new Date(selectedDate);
+    selectedDateTime.setHours(hour, minute, 0, 0);
+    
+    const diffMs = selectedDateTime.getTime() - now.getTime();
+    const diffHours = diffMs / (1000 * 60 * 60);
+    
+    // If the selected time is less than 4 hours from now and it's today
+    if (selectedDate.toDateString() === now.toDateString() && diffHours < 4) {
+      // Calculate the minimum time (4 hours from now) and round to the nearest hour
+      const minTime = new Date(now.getTime() + 4 * 60 * 60 * 1000);
+      const minHour = minTime.getHours();
+      
+      // Round to the nearest hour (always set minutes to 00)
+      const roundedHour = minTime.getMinutes() >= 30 ? (minHour + 1) % 24 : minHour;
+      
+      // Update the time to the rounded minimum allowed time
+      set({ hour: roundedHour, minute: 0 });
+    }
+  }, [selectedDate, hour, minute, set]);
+
   // State to track current calendar view month
   const [currentViewMonth, setCurrentViewMonth] = useState(() => ({
     year: selectedDate.getFullYear(),
@@ -456,15 +501,112 @@ const StepOne: React.FC = () => {
                 </div>
                 
                 <div className="flex-1 flex justify-center items-center md:block">
-                  <TimePicker
-                    hour={hour}
-                    minute={minute}
-                    incrementHour={() => set({ hour: (hour + 1) % 24 })}
-                    decrementHour={() => set({ hour: hour === 0 ? 23 : hour - 1 })}
-                    incrementMinute={() => set({ minute: (minute + 1) % 60 })}
-                    decrementMinute={() => set({ minute: minute === 0 ? 59 : minute - 1 })}
-                    pad={pad}
-                  />
+                  {(() => {
+                    const now = new Date();
+                    const isToday = selectedDate.toDateString() === now.toDateString();
+                    
+                    // Calculate which buttons should be disabled
+                    const testIncrementHour = (hour + 1) % 24;
+                    const testDecrementHour = hour === 0 ? 23 : hour - 1;
+                    const testIncrementMinute = (minute + 1) % 60;
+                    const testDecrementMinute = minute === 0 ? 59 : minute - 1;
+                    
+                    const isIncrementHourDisabled = isToday && (() => {
+                      const testDate = new Date(selectedDate);
+                      testDate.setHours(testIncrementHour, minute, 0, 0);
+                      const diffMs = testDate.getTime() - now.getTime();
+                      const diffHours = diffMs / (1000 * 60 * 60);
+                      return diffHours < 4;
+                    })();
+                    
+                    const isDecrementHourDisabled = isToday && (() => {
+                      const testDate = new Date(selectedDate);
+                      testDate.setHours(testDecrementHour, minute, 0, 0);
+                      const diffMs = testDate.getTime() - now.getTime();
+                      const diffHours = diffMs / (1000 * 60 * 60);
+                      return diffHours < 4;
+                    })();
+                    
+                    const isIncrementMinuteDisabled = isToday && (() => {
+                      const testDate = new Date(selectedDate);
+                      testDate.setHours(hour, testIncrementMinute, 0, 0);
+                      const diffMs = testDate.getTime() - now.getTime();
+                      const diffHours = diffMs / (1000 * 60 * 60);
+                      return diffHours < 4;
+                    })();
+                    
+                    const isDecrementMinuteDisabled = isToday && (() => {
+                      const testDate = new Date(selectedDate);
+                      testDate.setHours(hour, testDecrementMinute, 0, 0);
+                      const diffMs = testDate.getTime() - now.getTime();
+                      const diffHours = diffMs / (1000 * 60 * 60);
+                      return diffHours < 4;
+                    })();
+                    
+                    return (
+                      <TimePicker
+                        hour={hour}
+                        minute={minute}
+                        incrementHour={() => {
+                          const newHour = (hour + 1) % 24;
+                          const testDate = new Date(selectedDate);
+                          testDate.setHours(newHour, minute, 0, 0);
+                          const now = new Date();
+                          const diffMs = testDate.getTime() - now.getTime();
+                          const diffHours = diffMs / (1000 * 60 * 60);
+                          
+                          // Only allow increment if it's at least 4 hours from now
+                          if (diffHours >= 4 || testDate.toDateString() !== now.toDateString()) {
+                            set({ hour: newHour });
+                          }
+                        }}
+                        decrementHour={() => {
+                          const newHour = hour === 0 ? 23 : hour - 1;
+                          const testDate = new Date(selectedDate);
+                          testDate.setHours(newHour, minute, 0, 0);
+                          const now = new Date();
+                          const diffMs = testDate.getTime() - now.getTime();
+                          const diffHours = diffMs / (1000 * 60 * 60);
+                          
+                          // Only allow decrement if it's at least 4 hours from now
+                          if (diffHours >= 4 || testDate.toDateString() !== now.toDateString()) {
+                            set({ hour: newHour });
+                          }
+                        }}
+                        incrementMinute={() => {
+                          const newMinute = (minute + 1) % 60;
+                          const testDate = new Date(selectedDate);
+                          testDate.setHours(hour, newMinute, 0, 0);
+                          const now = new Date();
+                          const diffMs = testDate.getTime() - now.getTime();
+                          const diffHours = diffMs / (1000 * 60 * 60);
+                          
+                          // Only allow increment if it's at least 4 hours from now
+                          if (diffHours >= 4 || testDate.toDateString() !== now.toDateString()) {
+                            set({ minute: newMinute });
+                          }
+                        }}
+                        decrementMinute={() => {
+                          const newMinute = minute === 0 ? 59 : minute - 1;
+                          const testDate = new Date(selectedDate);
+                          testDate.setHours(hour, newMinute, 0, 0);
+                          const now = new Date();
+                          const diffMs = testDate.getTime() - now.getTime();
+                          const diffHours = diffMs / (1000 * 60 * 60);
+                          
+                          // Only allow decrement if it's at least 4 hours from now
+                          if (diffHours >= 4 || testDate.toDateString() !== now.toDateString()) {
+                            set({ minute: newMinute });
+                          }
+                        }}
+                        isIncrementHourDisabled={isIncrementHourDisabled}
+                        isDecrementHourDisabled={isDecrementHourDisabled}
+                        isIncrementMinuteDisabled={isIncrementMinuteDisabled}
+                        isDecrementMinuteDisabled={isDecrementMinuteDisabled}
+                        pad={pad}
+                      />
+                    );
+                  })()}
                 </div>
               </div>
       </div>
