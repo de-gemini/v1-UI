@@ -4,9 +4,14 @@ import { formatDate } from '../utils/dateUtils';
 import { PRICING_CONFIG, ServiceType } from '../pages/Checkout/ckeckoutData';
 
 const GlobalSummaryBar: React.FC = () => {
-  const { selectedDate, selectedType } = useCheckoutStore();
+  const { selectedDate, selectedType, step } = useCheckoutStore();
   const finalTotalPrice = useFinalTotalPrice();
   const pricingBreakdown = usePricingBreakdown();
+
+  // Only show the summary bar after Step 1
+  if (step <= 1) {
+    return null;
+  }
 
   const getMinimumPrice = () => {
     switch(selectedType) {
