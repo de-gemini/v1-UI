@@ -447,7 +447,7 @@ const StepThree: React.FC = () => {
           <button
             className="px-8 py-3 bg-brand-primary hover:bg-brand-primary/80 text-white font-bold rounded-md text-lg transition flex items-center justify-center"
             onClick={handleGetAQuote}
-            disabled={isSubmitting || Object.values(roomCounts).reduce((sum, count) => sum + count, 0) === 0}
+            // disabled={isSubmitting || Object.values(roomCounts).reduce((sum, count) => sum + count, 0) === 0}
             style={isSubmitting || Object.values(roomCounts).reduce((sum, count) => sum + count, 0) === 0 ? { opacity: 0.5, cursor: 'not-allowed' } : {}}
           >
             {isSubmitting ? (

@@ -22,7 +22,7 @@ export const PRICING_CONFIG = {
   
   // Minimum prices for each service type
   minimumPrices: {
-    regularCleaning: 60,     // Regular/One-off cleaning minimum
+    regularCleaning: 87,     // Regular/One-off cleaning minimum
     endOfTenancy: 145,       // End of Tenancy minimum
     carpetUpholstery: 96,   // Carpet & Upholstery minimum
   } as MinimumPrices,
