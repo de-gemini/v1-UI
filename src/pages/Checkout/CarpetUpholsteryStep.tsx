@@ -7,50 +7,65 @@ import {
   UPHOLSTERY_ITEMS,
   CARPET_ADDONS
 } from './ckeckoutData';
+import BookingSummary from './BookingSummary';
+import { useCheckoutStore, useCarpetCleaningState } from '../../store/checkoutStore';
 
-const formatPrice = (price: number) => `£${price}`;
+interface CarpetUpholsteryStepProps {
+  isEndOfTenancy?: boolean;
+}
+import Tooltip from '../../components/Tooltip';
 
-const CarpetUpholsteryStep: React.FC = () => {
-  const [selectedMaterial, setSelectedMaterial] = React.useState(CARPET_MATERIAL_TYPES[0].key);
-  const [selectedRooms, setSelectedRooms] = React.useState<{ [roomKey: string]: number }>({});
-  const [selectedRugs, setSelectedRugs] = React.useState<{ [rugKey: string]: number }>({});
-  const [selectedUpholsteryMaterial, setSelectedUpholsteryMaterial] = React.useState(UPHOLSTERY_MATERIAL_TYPES[0].key);
-  const [selectedUpholstery, setSelectedUpholstery] = React.useState<{ [itemKey: string]: number }>({});
-  const [addons, setAddons] = React.useState<{ [addonKey: string]: boolean }>({});
+const CarpetUpholsteryStep: React.FC<CarpetUpholsteryStepProps> = ({ isEndOfTenancy = false }) => {
+  const carpetCleaning = useCarpetCleaningState();
+  const { set } = useCheckoutStore();
+
+  const formatPrice = (price: number) => `£${price}`;
 
   // Handlers
-  const handleRoomChange = (roomKey: string, delta: number) => {
-    setSelectedRooms(prev => ({ ...prev, [roomKey]: Math.max(0, (prev[roomKey] || 0) + delta) }));
-  };
-  const handleRugChange = (rugKey: string, delta: number) => {
-    setSelectedRugs(prev => ({ ...prev, [rugKey]: Math.max(0, (prev[rugKey] || 0) + delta) }));
-  };
-  const handleUpholsteryChange = (itemKey: string, delta: number) => {
-    setSelectedUpholstery(prev => ({ ...prev, [itemKey]: Math.max(0, (prev[itemKey] || 0) + delta) }));
-  };
-  const handleAddonToggle = (addonKey: string) => {
-    setAddons(prev => ({ ...prev, [addonKey]: !prev[addonKey] }));
+  const handleMaterialChange = (key: string) => {
+    set({ carpetCleaning: { ...carpetCleaning, selectedMaterial: key } });
   };
 
-  // Summary (simple for now)
-  const summaryItems = [
-    ...Object.entries(selectedRooms).filter(([_, v]) => v > 0).map(([k, v]) => {
-      const room = CARPET_ROOMS.find(r => r.key === k);
-      return room ? `${room.label}: ${v}` : `${k}: ${v}`;
-    }),
-    ...Object.entries(selectedRugs).filter(([_, v]) => v > 0).map(([k, v]) => {
-      const rug = CARPET_RUGS.find(r => r.key === k);
-      return rug ? `${rug.label}: ${v}` : `${k}: ${v}`;
-    }),
-    ...Object.entries(selectedUpholstery).filter(([_, v]) => v > 0).map(([k, v]) => {
-      const item = UPHOLSTERY_ITEMS.find(i => i.key === k);
-      return item ? `${item.label}: ${v}` : `${k}: ${v}`;
-    }),
-    ...Object.entries(addons).filter(([_, v]) => v).map(([k]) => {
-      const addon = CARPET_ADDONS.find(a => a.key === k);
-      return addon ? addon.label : k;
-    })
-  ];
+  const handleUpholsteryMaterialToggle = (key: string) => {
+    const isCurrentlySelected = carpetCleaning.selectedUpholsteryMaterials[key];
+    
+    // If we're deselecting, reset all quantities for items of this material type
+    const newUpholsteryQuantities = isCurrentlySelected
+      ? Object.fromEntries(
+          Object.entries(carpetCleaning.selectedUpholstery).map(([itemKey, value]) => [itemKey, 0])
+        )
+      : carpetCleaning.selectedUpholstery;
+
+    set({
+      carpetCleaning: {
+        ...carpetCleaning,
+        selectedUpholsteryMaterials: {
+          ...carpetCleaning.selectedUpholsteryMaterials,
+          [key]: !isCurrentlySelected 
+        },
+        selectedUpholstery: newUpholsteryQuantities,
+      }
+    });
+  };
+
+  const handleRoomChange = (roomKey: string, delta: number) => {
+    const newCount = Math.max(0, (carpetCleaning.selectedRooms[roomKey] || 0) + delta);
+    set({ carpetCleaning: { ...carpetCleaning, selectedRooms: { ...carpetCleaning.selectedRooms, [roomKey]: newCount } } });
+  };
+  
+  const handleRugChange = (rugKey: string, delta: number) => {
+    const newCount = Math.max(0, (carpetCleaning.selectedRugs[rugKey] || 0) + delta);
+    set({ carpetCleaning: { ...carpetCleaning, selectedRugs: { ...carpetCleaning.selectedRugs, [rugKey]: newCount } } });
+  };
+  
+  const handleUpholsteryChange = (itemKey: string, delta: number) => {
+    const newCount = Math.max(0, (carpetCleaning.selectedUpholstery[itemKey] || 0) + delta);
+    set({ carpetCleaning: { ...carpetCleaning, selectedUpholstery: { ...carpetCleaning.selectedUpholstery, [itemKey]: newCount } } });
+  };
+  
+  const handleAddonToggle = (addonKey: string) => {
+    set({ carpetCleaning: { ...carpetCleaning, addons: { ...carpetCleaning.addons, [addonKey]: !carpetCleaning.addons[addonKey] } } });
+  };
 
   return (
     <div className="w-full flex flex-col lg:flex-row gap-8">
@@ -59,18 +74,18 @@ const CarpetUpholsteryStep: React.FC = () => {
         {/* Material Type Selection */}
         <div>
           <div className="flex items-center mb-6">
-            <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-[#a78bfa] text-[#a78bfa] font-bold mr-3">1</div>
+            <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-brand-primary text-brand-primary font-bold mr-3">1</div>
             <h2 className="text-xl font-semibold text-gray-800">What fibers are your carpets/rugs made off?</h2>
           </div>
           <div className="flex gap-4 mb-6">
             {CARPET_MATERIAL_TYPES.map(type => (
               <button
                 key={type.key}
-                className={`flex items-center gap-2 px-4 py-3 rounded-lg border-2 ${selectedMaterial === type.key ? 'border-purple-500 bg-purple-50' : 'border-gray-200 bg-white'} font-medium`}
-                onClick={() => setSelectedMaterial(type.key)}
+                className={`flex items-center gap-2 px-4 py-3 rounded-lg border-2 ${carpetCleaning.selectedMaterial === type.key ? 'border-brand-primary bg-blue-50' : 'border-gray-200 bg-white'} font-medium`}
+                onClick={() => handleMaterialChange(type.key)}
               >
                 {type.label}
-                <span className="ml-1 text-xs text-gray-400 cursor-pointer" title={type.info}>ℹ️</span>
+                <span className="ml-1"><Tooltip text={type.info} /></span>
               </button>
             ))}
           </div>
@@ -78,7 +93,7 @@ const CarpetUpholsteryStep: React.FC = () => {
         {/* Carpeted Rooms Selection */}
         <div>
           <div className="flex items-center mb-6">
-            <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-[#a78bfa] text-[#a78bfa] font-bold mr-3">2</div>
+            <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-brand-primary text-brand-primary font-bold mr-3">2</div>
             <h3 className="text-lg font-semibold text-gray-800">Please choose number of rooms with carpets</h3>
           </div>
           <div className="flex flex-col gap-4">
@@ -90,9 +105,9 @@ const CarpetUpholsteryStep: React.FC = () => {
                   <span className="ml-2 text-xs text-gray-500 font-semibold">{formatPrice(room.price)}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <button className="w-8 h-8 rounded-full bg-gray-100 text-xl font-bold flex items-center justify-center hover:bg-purple-100" onClick={() => handleRoomChange(room.key, -1)}>-</button>
-                  <span className="w-8 text-center text-lg">{selectedRooms[room.key] || 0}</span>
-                  <button className="w-8 h-8 rounded-full bg-gray-100 text-xl font-bold flex items-center justify-center hover:bg-purple-100" onClick={() => handleRoomChange(room.key, 1)}>+</button>
+                  <button className="w-8 h-8 rounded-full bg-gray-100 text-xl font-bold flex items-center justify-center hover:bg-blue-50 hover:text-brand-primary" onClick={() => handleRoomChange(room.key, -1)}>-</button>
+                  <span className="w-8 text-center text-lg font-bold text-brand-primary">{carpetCleaning.selectedRooms[room.key] || 0}</span>
+                  <button className="w-8 h-8 rounded-full bg-gray-100 text-xl font-bold flex items-center justify-center hover:bg-blue-50 hover:text-brand-primary" onClick={() => handleRoomChange(room.key, 1)}>+</button>
                 </div>
               </div>
             ))}
@@ -101,64 +116,74 @@ const CarpetUpholsteryStep: React.FC = () => {
         {/* Rugs Selection */}
         <div>
           <div className="flex items-center mb-6">
-            <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-[#a78bfa] text-[#a78bfa] font-bold mr-3">3</div>
+            <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-brand-primary text-brand-primary font-bold mr-3">3</div>
             <h3 className="text-lg font-semibold text-gray-800">Please choose number and size of rugs</h3>
           </div>
           <div className="flex flex-col gap-4">
             {CARPET_RUGS.map(rug => (
               <div key={rug.key} className="flex items-center justify-between bg-white border border-gray-200 rounded-lg px-4 py-3 shadow-sm">
                 <div className="flex items-center gap-3">
-                  <img src={rug.icon} alt={rug.label} className="w-8 h-8" />
+                  {/* <img src={rug.icon} alt={rug.label} className="w-8 h-8" /> */}
                   <span className="font-medium">{rug.label}</span>
                   <span className="ml-2 text-xs text-gray-500 font-semibold">{formatPrice(rug.price)}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <button className="w-8 h-8 rounded-full bg-gray-100 text-xl font-bold flex items-center justify-center hover:bg-purple-100" onClick={() => handleRugChange(rug.key, -1)}>-</button>
-                  <span className="w-8 text-center text-lg">{selectedRugs[rug.key] || 0}</span>
-                  <button className="w-8 h-8 rounded-full bg-gray-100 text-xl font-bold flex items-center justify-center hover:bg-purple-100" onClick={() => handleRugChange(rug.key, 1)}>+</button>
+                  <button className="w-8 h-8 rounded-full bg-gray-100 text-xl font-bold flex items-center justify-center hover:bg-blue-50 hover:text-brand-primary" onClick={() => handleRugChange(rug.key, -1)}>-</button>
+                  <span className="w-8 text-center text-lg font-bold text-brand-primary">{carpetCleaning.selectedRugs[rug.key] || 0}</span>
+                  <button className="w-8 h-8 rounded-full bg-gray-100 text-xl font-bold flex items-center justify-center hover:bg-blue-50 hover:text-brand-primary" onClick={() => handleRugChange(rug.key, 1)}>+</button>
                 </div>
               </div>
             ))}
           </div>
         </div>
-        {/* Upholstery Material Type Selection */}
+        {/* Upholstery Material Type Selection with Items */}
         <div>
           <div className="flex items-center mb-6">
-            <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-[#a78bfa] text-[#a78bfa] font-bold mr-3">4</div>
-            <h3 className="text-lg font-semibold text-gray-800">What material is your upholstery?</h3>
+            <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-brand-primary text-brand-primary font-bold mr-3">4</div>
+            <h3 className="text-lg font-semibold text-gray-800">Select upholstery items by material type</h3>
           </div>
-          <div className="flex gap-4 mb-6">
+          <div className="flex flex-col gap-6">
             {UPHOLSTERY_MATERIAL_TYPES.map(type => (
-              <button
-                key={type.key}
-                className={`flex items-center gap-2 px-4 py-3 rounded-lg border-2 ${selectedUpholsteryMaterial === type.key ? 'border-purple-500 bg-purple-50' : 'border-gray-200 bg-white'} font-medium`}
-                onClick={() => setSelectedUpholsteryMaterial(type.key)}
-              >
-                {type.label}
-                <span className="ml-1 text-xs text-gray-400 cursor-pointer" title={type.info}>ℹ️</span>
-              </button>
-            ))}
-          </div>
-        </div>
-        {/* Upholstery Items Selection */}
-        <div>
-          <div className="flex items-center mb-6">
-            <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-[#a78bfa] text-[#a78bfa] font-bold mr-3">5</div>
-            <h3 className="text-lg font-semibold text-gray-800">Please choose upholstery items</h3>
-          </div>
-          <div className="flex flex-col gap-4">
-            {UPHOLSTERY_ITEMS.map(item => (
-              <div key={item.key} className="flex items-center justify-between bg-white border border-gray-200 rounded-lg px-4 py-3 shadow-sm">
-                <div className="flex items-center gap-3">
-                  <img src={item.icon} alt={item.label} className="w-8 h-8" />
-                  <span className="font-medium">{item.label}</span>
-                  <span className="ml-2 text-xs text-gray-500 font-semibold">{formatPrice(item.price)}</span>
+              <div key={type.key} className="bg-white rounded-lg border-2 overflow-hidden">
+                {/* Material Type Header */}
+                <div
+                  className={`w-full flex items-center gap-2 px-4 py-3 ${
+                    carpetCleaning.selectedUpholsteryMaterials[type.key]
+                    ? 'bg-blue-50 border-brand-primary' 
+                    : 'bg-gray-50 border-gray-200'
+                  }`}
+                >
+                  <label className="flex items-center gap-3 cursor-pointer flex-1">
+                    <input
+                      type="checkbox"
+                      checked={carpetCleaning.selectedUpholsteryMaterials[type.key]}
+                      onChange={() => handleUpholsteryMaterialToggle(type.key)}
+                      className="w-5 h-5 accent-brand-primary"
+                    />
+                    <span className="font-medium">{type.label}</span>
+                  </label>
+                  <span className="ml-1"><Tooltip text={type.info} /></span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <button className="w-8 h-8 rounded-full bg-gray-100 text-xl font-bold flex items-center justify-center hover:bg-purple-100" onClick={() => handleUpholsteryChange(item.key, -1)}>-</button>
-                  <span className="w-8 text-center text-lg">{selectedUpholstery[item.key] || 0}</span>
-                  <button className="w-8 h-8 rounded-full bg-gray-100 text-xl font-bold flex items-center justify-center hover:bg-purple-100" onClick={() => handleUpholsteryChange(item.key, 1)}>+</button>
-                </div>
+                
+                {/* Items for this material type */}
+                {carpetCleaning.selectedUpholsteryMaterials[type.key] && (
+                  <div className="p-4 flex flex-col gap-4 bg-white">
+                    {UPHOLSTERY_ITEMS.map(item => (
+                      <div key={item.key} className="flex items-center justify-between bg-white border border-gray-100 rounded-lg px-4 py-3 shadow-sm">
+                        <div className="flex items-center gap-3">
+                          {/* <img src={item.icon} alt={item.label} className="w-8 h-8" /> */}
+                          <span className="font-medium">{item.label}</span>
+                          <span className="ml-2 text-xs text-gray-500 font-semibold">{formatPrice(item.price)}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <button className="w-8 h-8 rounded-full bg-gray-100 text-xl font-bold flex items-center justify-center hover:bg-blue-50 hover:text-brand-primary" onClick={() => handleUpholsteryChange(item.key, -1)}>-</button>
+                          <span className="w-8 text-center text-lg font-bold text-brand-primary">{carpetCleaning.selectedUpholstery[item.key] || 0}</span>
+                          <button className="w-8 h-8 rounded-full bg-gray-100 text-xl font-bold flex items-center justify-center hover:bg-blue-50 hover:text-brand-primary" onClick={() => handleUpholsteryChange(item.key, 1)}>+</button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -166,40 +191,48 @@ const CarpetUpholsteryStep: React.FC = () => {
         {/* Add-ons Section */}
         <div>
           <div className="flex items-center mb-6">
-            <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-[#a78bfa] text-[#a78bfa] font-bold mr-3">6</div>
+            <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-brand-primary text-brand-primary font-bold mr-3">6</div>
             <h3 className="text-lg font-semibold text-gray-800">Additional Options</h3>
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {CARPET_ADDONS.map(addon => (
-              <label key={addon.key} className="flex items-center gap-3 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={!!addons[addon.key]}
-                  onChange={() => handleAddonToggle(addon.key)}
-                  className="accent-brand-primary w-5 h-5"
-                />
-                <span className="font-medium text-gray-700">{addon.label}</span>
-              </label>
+              <div key={addon.key} className="flex items-center justify-between bg-white border border-gray-200 rounded-lg px-4 py-3 shadow-sm">
+                <div className="flex items-center gap-3">
+                  <span className="font-medium">{addon.label}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    className={`px-4 py-1 rounded-md border font-bold ${!carpetCleaning.addons[addon.key] ? 'bg-brand-primary text-white border-brand-primary' : 'bg-white border-brand-primary text-brand-primary'}`}
+                    onClick={() => handleAddonToggle(addon.key)}
+                  >
+                    No
+                  </button>
+                  <button
+                    className={`px-4 py-1 rounded-md border font-bold ${carpetCleaning.addons[addon.key] ? 'bg-brand-primary text-white border-brand-primary' : 'bg-white border-brand-primary text-brand-primary'}`}
+                    onClick={() => handleAddonToggle(addon.key)}
+                  >
+                    Yes
+                  </button>
+                </div>
+              </div>
             ))}
           </div>
         </div>
         {/* Summary and Next Button */}
         <div className="mt-8 flex flex-col gap-4">
-          <div className="bg-blue-50 border border-blue-200 rounded p-4 text-blue-900 text-sm font-medium">
-            <h4 className="font-semibold mb-2">Summary</h4>
-            {summaryItems.length === 0 ? (
-              <span>No items selected yet.</span>
-            ) : (
-              <ul className="list-disc pl-6">
-                {summaryItems.map((item, idx) => (
-                  <li key={idx}>{item}</li>
-                ))}
-              </ul>
-            )}
-          </div>
-          <div className="flex justify-end">
-            <button className="bg-brand-primary text-white px-6 py-2 rounded font-semibold hover:bg-blue-900 transition">Next</button>
-          </div>
+          {!isEndOfTenancy && (
+            <>
+              <BookingSummary />
+              <div className="flex justify-end">
+                <button 
+                  className="bg-brand-primary text-white px-6 py-2 rounded font-semibold hover:bg-blue-900 transition"
+                  onClick={() => set({ step: 3 })}
+                >
+                  Next
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

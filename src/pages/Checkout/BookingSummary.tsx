@@ -1,6 +1,15 @@
 import React from 'react';
-import { roomTypes, addOns as addOnsList, frequencyOptions, PRICING_CONFIG } from './ckeckoutData';
-import { useCheckoutStore, useEstimatedHours, useEstimatedPrice, usePricingBreakdown } from '../../store/checkoutStore';
+import { 
+  roomTypes, 
+  addOns as addOnsList, 
+  frequencyOptions, 
+  PRICING_CONFIG,
+  CARPET_ROOMS,
+  CARPET_RUGS,
+  UPHOLSTERY_ITEMS,
+  CARPET_ADDONS
+} from './ckeckoutData';
+import { useCheckoutStore, useEstimatedHours, useEstimatedPrice, usePricingBreakdown, useCarpetCleaningPrice, useCarpetCleaningState } from '../../store/checkoutStore';
 
 const BookingSummary: React.FC = () => {
   // Get all data from store hooks
@@ -28,6 +37,7 @@ const BookingSummary: React.FC = () => {
   } = useCheckoutStore();
 
   const pricingBreakdown = usePricingBreakdown();
+  const carpetCleaning = useCarpetCleaningState();
 
   const pad = (n: number) => n.toString().padStart(2, '0');
 
@@ -238,10 +248,176 @@ const BookingSummary: React.FC = () => {
         {/* Financial summary */}
         <div className="mt-6 border-t pt-4">
           <div className="font-bold text-lg mb-2 text-brand-primary">Financial Summary</div>
-          <div className="flex justify-between text-md mb-1"><span>Base Price</span><span>{pricingBreakdown?.["Base Calculation"]?.["Base Price"] || 'N/A'}</span></div>
+          <div className="flex justify-between text-md mb-1"><span>Base Price</span><span>{pricingBreakdown?.basePrice || 'N/A'}</span></div>
           <div className="flex justify-between text-md mb-1"><span>Add-ons & Services</span><span>{pricingBreakdown?.["Additional Services"]?.["Total Additional"] || 'N/A'}</span></div>
           <div className="flex justify-between text-md mb-1"><span>Dirt Level Multiplier</span><span>{pricingBreakdown?.["Dirt Level"]?.["Multiplier"] || 'N/A'}</span></div>
-          <div className="flex justify-between text-lg font-bold mt-2"><span>Total</span><span>{pricingBreakdown?.["TOTAL"]?.["Final Total"] || 'N/A'}</span></div>
+          
+          {/* Carpet & Upholstery Section */}
+          {pricingBreakdown?.["Carpet & Upholstery"] && (
+            <>
+              <div className="h-px bg-gray-200 my-2"></div>
+              <div className="mb-2 font-semibold">Carpet & Upholstery Services</div>
+              
+              {/* Carpeted Rooms */}
+              {pricingBreakdown["Carpet & Upholstery"]["Selected Rooms"].length > 0 && (
+                <div>
+                  <div className="font-medium mb-2">Carpeted Rooms:</div>
+                  <div className="grid grid-cols-1 gap-2">
+                    {Object.entries(carpetCleaning.selectedRooms).map(([roomKey, count]) => {
+                      if (count > 0) {
+                        const room = CARPET_ROOMS.find(r => r.key === roomKey);
+                        if (room) {
+                          return (
+                            <div key={roomKey} className="flex items-center gap-3 bg-gray-50 rounded-lg px-3 py-2 shadow-sm">
+                              <img src={room.icon} alt={room.label} className="w-7 h-7" />
+                              <span className="font-medium text-gray-700">{room.label}</span>
+                              <div className="ml-auto flex items-center gap-2">
+                                <button
+                                  className="w-6 h-6 rounded-full bg-gray-200 text-sm font-bold flex items-center justify-center hover:bg-red-100 hover:text-red-600"
+                                  onClick={() => set({ carpetCleaning: { ...carpetCleaning, selectedRooms: { ...carpetCleaning.selectedRooms, [roomKey]: Math.max(0, count - 1) } } })}
+                                >-</button>
+                                <span className="font-bold text-brand-primary text-lg min-w-[20px] text-center">{count}</span>
+                                <button
+                                  className="w-6 h-6 rounded-full bg-gray-200 text-sm font-bold flex items-center justify-center hover:bg-green-100 hover:text-green-600"
+                                  onClick={() => set({ carpetCleaning: { ...carpetCleaning, selectedRooms: { ...carpetCleaning.selectedRooms, [roomKey]: count + 1 } } })}
+                                >+</button>
+                              </div>
+                            </div>
+                          );
+                        }
+                      }
+                      return null;
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Rugs */}
+              {pricingBreakdown["Carpet & Upholstery"]["Selected Rugs"].length > 0 && (
+                <div className="mt-4">
+                  <div className="font-medium mb-2">Rugs:</div>
+                  <div className="grid grid-cols-1 gap-2">
+                    {Object.entries(carpetCleaning.selectedRugs).map(([rugKey, count]) => {
+                      if (count > 0) {
+                        const rug = CARPET_RUGS.find(r => r.key === rugKey);
+                        if (rug) {
+                          return (
+                            <div key={rugKey} className="flex items-center gap-3 bg-gray-50 rounded-lg px-3 py-2 shadow-sm">
+                              {/* <img src={rug.icon} alt={rug.label} className="w-7 h-7" /> */}
+                              <span className="font-medium text-gray-700">{rug.label}</span>
+                              <div className="ml-auto flex items-center gap-2">
+                                <button
+                                  className="w-6 h-6 rounded-full bg-gray-200 text-sm font-bold flex items-center justify-center hover:bg-red-100 hover:text-red-600"
+                                  onClick={() => set({ carpetCleaning: { ...carpetCleaning, selectedRugs: { ...carpetCleaning.selectedRugs, [rugKey]: Math.max(0, count - 1) } } })}
+                                >-</button>
+                                <span className="font-bold text-brand-primary text-lg min-w-[20px] text-center">{count}</span>
+                                <button
+                                  className="w-6 h-6 rounded-full bg-gray-200 text-sm font-bold flex items-center justify-center hover:bg-green-100 hover:text-green-600"
+                                  onClick={() => set({ carpetCleaning: { ...carpetCleaning, selectedRugs: { ...carpetCleaning.selectedRugs, [rugKey]: count + 1 } } })}
+                                >+</button>
+                              </div>
+                            </div>
+                          );
+                        }
+                      }
+                      return null;
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Upholstery Items */}
+              {pricingBreakdown["Carpet & Upholstery"]["Selected Upholstery"].length > 0 && (
+                <div className="mt-4">
+                  <div className="font-medium mb-2">Upholstery Items:</div>
+                  <div className="grid grid-cols-1 gap-2">
+                    {Object.entries(carpetCleaning.selectedUpholstery).map(([itemKey, count]) => {
+                      if (count > 0) {
+                        const item = UPHOLSTERY_ITEMS.find(i => i.key === itemKey);
+                        if (item) {
+                          return (
+                            <div key={itemKey} className="flex items-center gap-3 bg-gray-50 rounded-lg px-3 py-2 shadow-sm">
+                              {/* <img src={item.icon} alt={item.label} className="w-7 h-7" /> */}
+                              <span className="font-medium text-gray-700">{item.label}</span>
+                              <div className="ml-auto flex items-center gap-2">
+                                <button
+                                  className="w-6 h-6 rounded-full bg-gray-200 text-sm font-bold flex items-center justify-center hover:bg-red-100 hover:text-red-600"
+                                  onClick={() => set({ carpetCleaning: { ...carpetCleaning, selectedUpholstery: { ...carpetCleaning.selectedUpholstery, [itemKey]: Math.max(0, count - 1) } } })}
+                                >-</button>
+                                <span className="font-bold text-brand-primary text-lg min-w-[20px] text-center">{count}</span>
+                                <button
+                                  className="w-6 h-6 rounded-full bg-gray-200 text-sm font-bold flex items-center justify-center hover:bg-green-100 hover:text-green-600"
+                                  onClick={() => set({ carpetCleaning: { ...carpetCleaning, selectedUpholstery: { ...carpetCleaning.selectedUpholstery, [itemKey]: count + 1 } } })}
+                                >+</button>
+                              </div>
+                            </div>
+                          );
+                        }
+                      }
+                      return null;
+                    })}
+                  </div>
+                </div>
+              )}
+
+              <div className="text-sm mb-1">
+                <div className="font-medium">Materials:</div>
+                <div>Carpet: {pricingBreakdown["Carpet & Upholstery"]["Material Types"].carpet}</div>
+                <div>Upholstery: {pricingBreakdown["Carpet & Upholstery"]["Material Types"].upholstery}</div>
+              </div>
+
+              {/* Carpet Add-ons */}
+              {pricingBreakdown["Carpet & Upholstery"]["Add-ons"].length > 0 && (
+                <div className="mt-4">
+                  <div className="font-medium mb-2">Add-ons:</div>
+                  <div className="flex flex-wrap gap-2">
+                    {Object.entries(carpetCleaning.addons).map(([addonKey, enabled]) => {
+                      if (enabled) {
+                        const addon = CARPET_ADDONS.find(a => a.key === addonKey);
+                        if (addon) {
+                          return (
+                            <span key={addonKey} className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-2">
+                              {addon.label}
+                              <button
+                                className="w-4 h-4 rounded-full bg-purple-200 text-purple-700 text-xs font-bold hover:bg-red-200 hover:text-red-700"
+                                onClick={() => set({ carpetCleaning: { ...carpetCleaning, addons: { ...carpetCleaning.addons, [addonKey]: false } } })}
+                                title={`Remove ${addon.label.toLowerCase()}`}
+                              >×</button>
+                            </span>
+                          );
+                        }
+                      }
+                      return null;
+                    })}
+                  </div>
+                </div>
+              )}
+
+              <div className="flex justify-between text-md mt-2">
+                <span>Carpet & Upholstery Total</span>
+                <span>{pricingBreakdown["Carpet & Upholstery"]["Total"] ? `£${pricingBreakdown["Carpet & Upholstery"]["Total"].toFixed(2)}` : 'N/A'}</span>
+              </div>
+            </>
+          )}
+
+          <div className="h-px bg-gray-200 my-2"></div>
+          <div className="flex justify-between text-md mb-1">
+            <span>Calculated Price</span>
+            <span>{pricingBreakdown?.calculatedPrice || 'N/A'}</span>
+          </div>
+          <div className="flex justify-between text-md mb-1">
+            <span>Minimum Service Price</span>
+            <span>{pricingBreakdown?.minimumPrice || 'N/A'}</span>
+          </div>
+          {pricingBreakdown?.breakdown?.isMinimumPriceApplied && (
+            <div className="text-sm text-gray-500 mb-2">
+              Minimum price has been applied as calculated total was lower
+            </div>
+          )}
+          <div className="flex justify-between text-lg font-bold mt-2">
+            <span>Final Total</span>
+            <span>{pricingBreakdown?.finalPrice || 'N/A'}</span>
+          </div>
         </div>
       </div>
     </div>

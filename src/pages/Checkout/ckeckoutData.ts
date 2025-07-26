@@ -6,6 +6,13 @@ export enum DirtLevel {
 }
 
 
+// Define minimum price type
+interface MinimumPrices {
+  regularCleaning: number;
+  endOfTenancy: number;
+  carpetUpholstery: number;
+}
+
 export const PRICING_CONFIG = {
   // Base hourly rates
   baseHourlyRate: 19,
@@ -13,6 +20,13 @@ export const PRICING_CONFIG = {
   // Minimum hours for booking (easily configurable)
   minimumHours: 1,
   
+  // Minimum prices for each service type
+  minimumPrices: {
+    regularCleaning: 129,     // Regular/One-off cleaning minimum
+    endOfTenancy: 159,       // End of Tenancy minimum
+    carpetUpholstery: 108,   // Carpet & Upholstery minimum
+  } as MinimumPrices,
+
   // Frequency discounts (as percentages)
   frequencyDiscounts: {
     weekly: 0.15,      // 15% discount
@@ -219,6 +233,7 @@ export const pricingService = {
     havePets?: boolean;
     keyPickup?: boolean;
     dirtLevel?: DirtLevel;
+    serviceType?: ServiceType; // Add service type to determine minimum price
   }) => {
     // Get base price
     let totalPrice = calculatePrice.getBasePrice(options.frequency, options.hours || 2);
@@ -244,6 +259,25 @@ export const pricingService = {
     if (options.dirtLevel) {
       totalPrice = calculatePrice.applyDirtLevelMultiplier(totalPrice, options.dirtLevel);
     }
+
+    // Apply minimum price based on service type
+    if (options.serviceType !== undefined) {
+      let minimumPrice;
+      switch (options.serviceType) {
+        case ServiceType.REGULAR_ONE_OFF:
+          minimumPrice = PRICING_CONFIG.minimumPrices.regularCleaning;
+          break;
+        case ServiceType.END_OF_TENANCY:
+          minimumPrice = PRICING_CONFIG.minimumPrices.endOfTenancy;
+          break;
+        case ServiceType.CARPET_UPHOLSTERY:
+          minimumPrice = PRICING_CONFIG.minimumPrices.carpetUpholstery;
+          break;
+        default:
+          minimumPrice = PRICING_CONFIG.minimumPrices.regularCleaning;
+      }
+      totalPrice = Math.max(totalPrice, minimumPrice);
+    }
     
     return totalPrice;
   },
@@ -264,6 +298,7 @@ export const pricingService = {
     havePets?: boolean;
     keyPickup?: boolean;
     dirtLevel?: DirtLevel;
+    serviceType?: ServiceType;
   }) => {
     const basePrice = calculatePrice.getBasePrice(options.frequency, options.hours || 2);
     const additionalServicesCost = calculatePrice.getAdditionalServicesCost({
@@ -280,17 +315,36 @@ export const pricingService = {
       keyPickup: options.keyPickup,
     });
     
-    let finalPrice = basePrice + additionalServicesCost;
+    let calculatedPrice = basePrice + additionalServicesCost;
     
     if (options.dirtLevel) {
-      finalPrice = calculatePrice.applyDirtLevelMultiplier(finalPrice, options.dirtLevel);
+      calculatedPrice = calculatePrice.applyDirtLevelMultiplier(calculatedPrice, options.dirtLevel);
     }
+
+    // Get minimum price based on service type
+    let minimumPrice = PRICING_CONFIG.minimumPrices.regularCleaning;
+    if (options.serviceType !== undefined) {
+      switch (options.serviceType) {
+        case ServiceType.END_OF_TENANCY:
+          minimumPrice = PRICING_CONFIG.minimumPrices.endOfTenancy;
+          break;
+        case ServiceType.CARPET_UPHOLSTERY:
+          minimumPrice = PRICING_CONFIG.minimumPrices.carpetUpholstery;
+          break;
+      }
+    }
+
+    // Final price is the higher of calculated price or minimum price
+    const finalPrice = Math.max(calculatedPrice, minimumPrice);
     
     return {
       basePrice: calculatePrice.formatPrice(basePrice),
       additionalServices: calculatePrice.formatPrice(additionalServicesCost),
       dirtLevelMultiplier: options.dirtLevel ? `${((PRICING_CONFIG.dirtLevelMultipliers[options.dirtLevel] - 1) * 100).toFixed(0)}%` : '0%',
+      minimumPrice: calculatePrice.formatPrice(minimumPrice),
+      calculatedPrice: calculatePrice.formatPrice(calculatedPrice),
       totalPrice: calculatePrice.formatPrice(finalPrice),
+      isMinimumPriceApplied: finalPrice === minimumPrice,
       breakdown: {
         basePrice,
         additionalServicesCost,
@@ -326,6 +380,24 @@ export const pricingService = {
 };
 
 // Dedicated Pricing Calculator Class
+interface DetailedBreakdown {
+  basePrice: string;
+  additionalServicesCost: string;
+  dirtLevelAdjustment: string;
+  minimumPrice: string;
+  calculatedPrice: string;
+  finalPrice: string;
+  breakdown: {
+    basePrice: number;
+    additionalServicesCost: number;
+    dirtLevelMultiplier: number;
+    minimumPrice: number;
+    calculatedPrice: number;
+    finalPrice: number;
+    isMinimumPriceApplied: boolean;
+  };
+}
+
 export class PricingCalculator {
   /**
    * Calculate total minutes from rooms and add-ons only
@@ -434,27 +506,49 @@ export class PricingCalculator {
       havePets?: boolean;
       keyPickup?: boolean;
     },
-    dirtLevel?: DirtLevel
-  ) {
+    dirtLevel?: DirtLevel,
+    serviceType?: ServiceType
+  ): DetailedBreakdown {
     const basePrice = this.calculateBasePrice(frequency, hours);
     const additionalServicesCost = this.calculateAdditionalServicesCost(additionalServices);
     
-    let finalPrice = basePrice + additionalServicesCost;
+    let calculatedPrice = basePrice + additionalServicesCost;
     
     if (dirtLevel) {
-      finalPrice = calculatePrice.applyDirtLevelMultiplier(finalPrice, dirtLevel);
+      calculatedPrice = calculatePrice.applyDirtLevelMultiplier(calculatedPrice, dirtLevel);
     }
+
+    // Get minimum price based on service type
+    let minimumPrice = PRICING_CONFIG.minimumPrices.regularCleaning;
+    if (serviceType !== undefined) {
+      switch (serviceType) {
+        case ServiceType.END_OF_TENANCY:
+          minimumPrice = PRICING_CONFIG.minimumPrices.endOfTenancy;
+          break;
+        case ServiceType.CARPET_UPHOLSTERY:
+          minimumPrice = PRICING_CONFIG.minimumPrices.carpetUpholstery;
+          break;
+      }
+    }
+
+    // Final price is the higher of calculated price or minimum price
+    const finalPrice = Math.max(calculatedPrice, minimumPrice);
     
     return {
       basePrice: calculatePrice.formatPrice(basePrice),
       additionalServicesCost: calculatePrice.formatPrice(additionalServicesCost),
       dirtLevelAdjustment: dirtLevel ? calculatePrice.formatPrice(finalPrice - basePrice - additionalServicesCost) : '£0.00',
+      minimumPrice: calculatePrice.formatPrice(minimumPrice),
+      calculatedPrice: calculatePrice.formatPrice(calculatedPrice),
       finalPrice: calculatePrice.formatPrice(finalPrice),
       breakdown: {
         basePrice,
         additionalServicesCost,
         dirtLevelMultiplier: dirtLevel ? PRICING_CONFIG.dirtLevelMultipliers[dirtLevel] : 1,
-        finalPrice
+        minimumPrice,
+        calculatedPrice,
+        finalPrice,
+        isMinimumPriceApplied: finalPrice === minimumPrice
       }
     };
   }

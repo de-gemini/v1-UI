@@ -2,8 +2,7 @@ import React, { useLayoutEffect } from 'react';
 import BookingSummary from './BookingSummary';
 import type { Dispatch, SetStateAction } from 'react';
 import {FAQSection2} from '../../data/questions'
-
-
+import Toggle from '../../components/ui/Toggle';
 
 import {
   roomTypes,
@@ -75,6 +74,7 @@ const StepTwo: React.FC = () => {
   const endOfTenancy = useCheckoutStore(state => state.endOfTenancy);
   const expressStudio = useCheckoutStore(state => state.expressStudio);
   const checkJob = useCheckoutStore(state => state.checkJob);
+  const endOfTenancyCarpet = useCheckoutStore(state => state.endOfTenancyCarpet);
   const set = useCheckoutStore(state => state.set);
 
   // Use reactive selector hooks for derived state
@@ -87,6 +87,11 @@ const StepTwo: React.FC = () => {
   React.useEffect(() => {
     console.log('💰 StepTwo Pricing Breakdown:', pricingBreakdown);
   }, [pricingBreakdown]);
+
+  // Set endOfTenancy to true by default since we're in the end of tenancy flow
+  React.useEffect(() => {
+    set({ endOfTenancy: true });
+  }, [set]);
 
   // Ensure roomCounts is always the correct length
   React.useEffect(() => {
@@ -138,11 +143,6 @@ const StepTwo: React.FC = () => {
   if (selectedType === ServiceType.CARPET_UPHOLSTERY) {
     return <CarpetUpholsteryStep />;
   }
-
-
-  if (selectedType === ServiceType.CARPET_UPHOLSTERY) {
-    return <CarpetUpholsteryStep />;
-  }
   return (
     <div className="w-full flex flex-col lg:flex-row gap-8">
       {/* Main form */}
@@ -150,7 +150,7 @@ const StepTwo: React.FC = () => {
         {/* Room selection */}
         <div>
           <div className="flex items-center mb-6">
-            <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-[#a78bfa] text-[#a78bfa] font-bold mr-3">2</div>
+            <div className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-brand-primary text-brand-primary font-bold mr-3">2</div>
             <h2 className="text-xl font-semibold text-gray-800">Please choose the rooms to clean to get an estimated price</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 mb-8">
@@ -197,15 +197,15 @@ const StepTwo: React.FC = () => {
                   <div>
                     <span className="font-bold text-brand-primary block">{addon.label}</span>
                     {addon.estimatedTime > 0 && <span className="text-xs text-gray-500">≈{addon.estimatedTime}min</span>}
-                    {addon.price && <span className="text-xs text-[#a78bfa] ml-2">(Additional {formatPrice(addon.price)})</span>}
-                    {addon.key === 'laundry' && <span className="text-xs text-[#a78bfa] ml-2">(Additional £{PRICING_CONFIG.additionalServices.laundry})</span>}
-                    {addon.key === 'outdoor' && <span className="text-xs text-[#a78bfa] ml-2">(Additional £{PRICING_CONFIG.additionalServices.outdoorCleaning})</span>}
+                    {addon.price && <span className="text-xs text-brand-primary ml-2">(Additional {formatPrice(addon.price)})</span>}
+                    {addon.key === 'laundry' && <span className="text-xs text-brand-primary ml-2">(Additional £{PRICING_CONFIG.additionalServices.laundry})</span>}
+                    {addon.key === 'outdoor' && <span className="text-xs text-brand-primary ml-2">(Additional £{PRICING_CONFIG.additionalServices.outdoorCleaning})</span>}
                   </div>
                 </div>
                 {addon.yesNo ? (
                   <div className="flex gap-2">
                     <button
-                      className={`px-4 py-1 rounded-md border font-bold ${(addon.key === 'outdoor' ? outdoorCleaning : addon.key === 'laundry' ? laundry : selectedAddOns[addon.key]) === (addon.key === 'outdoor' || addon.key === 'laundry' ? true : 1) ? 'bg-[#a78bfa] text-white border-[#a78bfa]' : 'bg-white border-[#a78bfa] text-[#a78bfa]'}`}
+                      className={`px-4 py-1 rounded-md border font-bold ${(addon.key === 'outdoor' ? outdoorCleaning : addon.key === 'laundry' ? laundry : selectedAddOns[addon.key]) === (addon.key === 'outdoor' || addon.key === 'laundry' ? true : 1) ? 'bg-brand-primary text-white border-brand-primary' : 'bg-white border-brand-primary text-brand-primary'}`}
                       onClick={() => {
                         if (addon.key === 'outdoor') {
                           set({ outdoorCleaning: true });
@@ -219,7 +219,7 @@ const StepTwo: React.FC = () => {
                       Yes
                     </button>
                     <button
-                      className={`px-4 py-1 rounded-md border font-bold ${(addon.key === 'outdoor' ? outdoorCleaning : addon.key === 'laundry' ? laundry : selectedAddOns[addon.key]) === (addon.key === 'outdoor' || addon.key === 'laundry' ? false : 0) ? 'bg-[#a78bfa] text-white border-[#a78bfa]' : 'bg-white border-[#a78bfa] text-[#a78bfa]'}`}
+                      className={`px-4 py-1 rounded-md border font-bold ${(addon.key === 'outdoor' ? outdoorCleaning : addon.key === 'laundry' ? laundry : selectedAddOns[addon.key]) === (addon.key === 'outdoor' || addon.key === 'laundry' ? false : 0) ? 'bg-brand-primary text-white border-brand-primary' : 'bg-white border-brand-primary text-brand-primary'}`}
                       onClick={() => {
                         if (addon.key === 'outdoor') {
                           set({ outdoorCleaning: false });
@@ -262,16 +262,16 @@ const StepTwo: React.FC = () => {
         <div className="flex flex-col gap-6">
           {/* Eco-friendly */}
           <div className="flex items-center gap-4">
-            <span className="font-semibold">Do you need Eco-friendly cleaning products? <span className="text-[#a78bfa]">( Additional £{PRICING_CONFIG.additionalServices.ecoFriendly} )</span></span>
-            <button className={`px-4 py-1 rounded-md border font-bold ${!ecoFriendly ? 'bg-[#a78bfa] text-white border-[#a78bfa]' : 'bg-white border-[#a78bfa] text-[#a78bfa]'}`} onClick={() => set({ ecoFriendly: false })}>No</button>
-            <button className={`px-4 py-1 rounded-md border font-bold ${ecoFriendly ? 'bg-[#a78bfa] text-white border-[#a78bfa]' : 'bg-white border-[#a78bfa] text-[#a78bfa]'}`} onClick={() => set({ ecoFriendly: true })}>Yes</button>
+            <span className="font-semibold">Do you need Eco-friendly cleaning products? <span className="text-brand-primary">( Additional £{PRICING_CONFIG.additionalServices.ecoFriendly} )</span></span>
+            <button className={`px-4 py-1 rounded-md border font-bold ${!ecoFriendly ? 'bg-brand-primary text-white border-brand-primary' : 'bg-white border-brand-primary text-brand-primary'}`} onClick={() => set({ ecoFriendly: false })}>No</button>
+            <button className={`px-4 py-1 rounded-md border font-bold ${ecoFriendly ? 'bg-brand-primary text-white border-brand-primary' : 'bg-white border-brand-primary text-brand-primary'}`} onClick={() => set({ ecoFriendly: true })}>Yes</button>
             <span className="ml-2"><img src="https://www.emop.co.uk/static/images/ecover_svg_mob.svg" alt="ecover" className="inline w-8 h-8" /></span>
           </div>
           {/* Hoover & Mop */}
           <div className="flex items-center gap-4">
-            <span className="font-semibold">Do you need a Hoover and a Mop? <span className="text-[#a78bfa]">(Additional £{PRICING_CONFIG.additionalServices.hooverMop})</span></span>
-            <button className={`px-4 py-1 rounded-md border font-bold ${!hooverMop ? 'bg-[#a78bfa] text-white border-[#a78bfa]' : 'bg-white border-[#a78bfa] text-[#a78bfa]'}`} onClick={() => set({ hooverMop: false })}>No</button>
-            <button className={`px-4 py-1 rounded-md border font-bold ${hooverMop ? 'bg-[#a78bfa] text-white border-[#a78bfa]' : 'bg-white border-[#a78bfa] text-[#a78bfa]'}`} onClick={() => set({ hooverMop: true })}>Yes</button>
+            <span className="font-semibold">Do you need a Hoover and a Mop? <span className="text-brand-primary">(Additional £{PRICING_CONFIG.additionalServices.hooverMop})</span></span>
+            <button className={`px-4 py-1 rounded-md border font-bold ${!hooverMop ? 'bg-brand-primary text-white border-brand-primary' : 'bg-white border-brand-primary text-brand-primary'}`} onClick={() => set({ hooverMop: false })}>No</button>
+            <button className={`px-4 py-1 rounded-md border font-bold ${hooverMop ? 'bg-brand-primary text-white border-brand-primary' : 'bg-white border-brand-primary text-brand-primary'}`} onClick={() => set({ hooverMop: true })}>Yes</button>
           </div>
           {/* Disinfection recommendation */}
           <div className="bg-green-50 border-l-4 border-green-400 p-4 flex items-center gap-3 rounded-md">
@@ -293,33 +293,42 @@ const StepTwo: React.FC = () => {
           </div>
           {/* Check Job */}
           <div className="flex items-center gap-4">
-            <span className="font-semibold">Do you want a check job? <span className="text-[#a78bfa]">(Additional £15)</span></span>
-            <button className={`px-4 py-1 rounded-md border font-bold ${!checkJob ? 'bg-[#a78bfa] text-white border-[#a78bfa]' : 'bg-white border-[#a78bfa] text-[#a78bfa]'}`} onClick={() => set({ checkJob: false })}>No</button>
-            <button className={`px-4 py-1 rounded-md border font-bold ${checkJob ? 'bg-[#a78bfa] text-white border-[#a78bfa]' : 'bg-white border-[#a78bfa] text-[#a78bfa]'}`} onClick={() => set({ checkJob: true })}>Yes</button>
+            <span className="font-semibold">Do you want a check job? <span className="text-brand-primary">(Additional £15)</span></span>
+            <button className={`px-4 py-1 rounded-md border font-bold ${!checkJob ? 'bg-brand-primary text-white border-brand-primary' : 'bg-white border-brand-primary text-brand-primary'}`} onClick={() => set({ checkJob: false })}>No</button>
+            <button className={`px-4 py-1 rounded-md border font-bold ${checkJob ? 'bg-brand-primary text-white border-brand-primary' : 'bg-white border-brand-primary text-brand-primary'}`} onClick={() => set({ checkJob: true })}>Yes</button>
           </div>
           {/* Have Pets */}
           <div className="flex items-center gap-4">
-            <span className="font-semibold">Do you have pets? <span className="text-[#a78bfa]">(Additional £10)</span></span>
-            <button className={`px-4 py-1 rounded-md border font-bold ${!havePets ? 'bg-[#a78bfa] text-white border-[#a78bfa]' : 'bg-white border-[#a78bfa] text-[#a78bfa]'}`} onClick={() => set({ havePets: false })}>No</button>
-            <button className={`px-4 py-1 rounded-md border font-bold ${havePets ? 'bg-[#a78bfa] text-white border-[#a78bfa]' : 'bg-white border-[#a78bfa] text-[#a78bfa]'}`} onClick={() => set({ havePets: true })}>Yes</button>
+            <span className="font-semibold">Do you have pets? <span className="text-brand-primary">(Additional £10)</span></span>
+            <button className={`px-4 py-1 rounded-md border font-bold ${!havePets ? 'bg-brand-primary text-white border-brand-primary' : 'bg-white border-brand-primary text-brand-primary'}`} onClick={() => set({ havePets: false })}>No</button>
+            <button className={`px-4 py-1 rounded-md border font-bold ${havePets ? 'bg-brand-primary text-white border-brand-primary' : 'bg-white border-brand-primary text-brand-primary'}`} onClick={() => set({ havePets: true })}>Yes</button>
           </div>
           {/* Key Pickup */}
           <div className="flex items-center gap-4">
-            <span className="font-semibold">Do you need key pickup? <span className="text-[#a78bfa]">(Additional £5)</span></span>
-            <button className={`px-4 py-1 rounded-md border font-bold ${!keyPickup ? 'bg-[#a78bfa] text-white border-[#a78bfa]' : 'bg-white border-[#a78bfa] text-[#a78bfa]'}`} onClick={() => set({ keyPickup: false })}>No</button>
-            <button className={`px-4 py-1 rounded-md border font-bold ${keyPickup ? 'bg-[#a78bfa] text-white border-[#a78bfa]' : 'bg-white border-[#a78bfa] text-[#a78bfa]'}`} onClick={() => set({ keyPickup: true })}>Yes</button>
+            <span className="font-semibold">Do you need key pickup? <span className="text-brand-primary">(Additional £5)</span></span>
+            <button className={`px-4 py-1 rounded-md border font-bold ${!keyPickup ? 'bg-brand-primary text-white border-brand-primary' : 'bg-white border-brand-primary text-brand-primary'}`} onClick={() => set({ keyPickup: false })}>No</button>
+            <button className={`px-4 py-1 rounded-md border font-bold ${keyPickup ? 'bg-brand-primary text-white border-brand-primary' : 'bg-white border-brand-primary text-brand-primary'}`} onClick={() => set({ keyPickup: true })}>Yes</button>
           </div>
-          {/* End of Tenancy */}
-          <div className="flex items-center gap-4">
-            <span className="font-semibold">Is this an end of tenancy clean? <span className="text-[#a78bfa]">(Additional £39)</span></span>
-            <button className={`px-4 py-1 rounded-md border font-bold ${!endOfTenancy ? 'bg-[#a78bfa] text-white border-[#a78bfa]' : 'bg-white border-[#a78bfa] text-[#a78bfa]'}`} onClick={() => set({ endOfTenancy: false })}>No</button>
-            <button className={`px-4 py-1 rounded-md border font-bold ${endOfTenancy ? 'bg-[#a78bfa] text-white border-[#a78bfa]' : 'bg-white border-[#a78bfa] text-[#a78bfa]'}`} onClick={() => set({ endOfTenancy: true })}>Yes</button>
+          {/* Carpet cleaning option for End of Tenancy */}
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-4">
+              <span className="font-semibold">Would you like carpet and upholstery cleaning? <span className="text-brand-primary">(Additional charges apply)</span></span>
+              <button className={`px-4 py-1 rounded-md border font-bold ${!endOfTenancyCarpet ? 'bg-brand-primary text-white border-brand-primary' : 'bg-white border-brand-primary text-brand-primary'}`} onClick={() => set({ endOfTenancyCarpet: false })}>No</button>
+              <button className={`px-4 py-1 rounded-md border font-bold ${endOfTenancyCarpet ? 'bg-brand-primary text-white border-brand-primary' : 'bg-white border-brand-primary text-brand-primary'}`} onClick={() => set({ endOfTenancyCarpet: true })}>Yes</button>
+            </div>
+            
+            {/* Carpet & Upholstery Section */}
+            {endOfTenancyCarpet && (
+              <div className="mt-6 border-t border-gray-200 pt-6">
+                <CarpetUpholsteryStep isEndOfTenancy={true} />
+              </div>
+            )}
           </div>
           {/* Express Studio */}
           <div className="flex items-center gap-4">
-            <span className="font-semibold">Express Studio clean? <span className="text-[#a78bfa]">(Additional £25)</span></span>
-            <button className={`px-4 py-1 rounded-md border font-bold ${!expressStudio ? 'bg-[#a78bfa] text-white border-[#a78bfa]' : 'bg-white border-[#a78bfa] text-[#a78bfa]'}`} onClick={() => set({ expressStudio: false })}>No</button>
-            <button className={`px-4 py-1 rounded-md border font-bold ${expressStudio ? 'bg-[#a78bfa] text-white border-[#a78bfa]' : 'bg-white border-[#a78bfa] text-[#a78bfa]'}`} onClick={() => set({ expressStudio: true })}>Yes</button>
+            <span className="font-semibold">Express Studio clean? <span className="text-brand-primary">(Additional £25)</span></span>
+            <button className={`px-4 py-1 rounded-md border font-bold ${!expressStudio ? 'bg-brand-primary text-white border-brand-primary' : 'bg-white border-brand-primary text-brand-primary'}`} onClick={() => set({ expressStudio: false })}>No</button>
+            <button className={`px-4 py-1 rounded-md border font-bold ${expressStudio ? 'bg-brand-primary text-white border-brand-primary' : 'bg-white border-brand-primary text-brand-primary'}`} onClick={() => set({ expressStudio: true })}>Yes</button>
           </div>
           {/* Dirt Level UI */}
           <div className="mt-8">
