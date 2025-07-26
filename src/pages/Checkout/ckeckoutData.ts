@@ -666,4 +666,65 @@ export function getOneOffDetail(selectedDate: Date, hour: number, minute: number
   // Default: Standard
   return safeFind("Standard");
 }
-  
+ 
+
+// ... existing code ...
+
+// Centralized data for Carpet & Upholstery flow
+export const CARPET_MATERIAL_TYPES = [
+  {
+    key: 'standard',
+    label: 'Only Standard',
+    info: 'Standard: Synthetic, Mixed, Polyester Wool, Man made, Microfibre',
+  },
+  {
+    key: 'delicate',
+    label: 'Standard & Delicate',
+    info: 'Delicate: Cotton, Seagrass, or any other Organic Material',
+  },
+];
+
+export const CARPET_ROOMS = [
+  { key: 'single_bedroom', label: 'Single Bedroom', price: 24, icon: 'https://www.emop.co.uk/static/images/steps_booking/bedroom.svg' },
+  { key: 'double_bedroom', label: 'Double Bedroom', price: 32, icon: 'https://www.emop.co.uk/static/images/steps_booking/bedroom.svg' },
+  { key: 'living_room', label: 'Living room', price: 32, icon: 'https://www.emop.co.uk/static/images/steps_booking/living_dining.svg' },
+  { key: 'dining_room', label: 'Dining room', price: 32, icon: 'https://www.emop.co.uk/static/images/steps_booking/living_dining.svg' },
+  { key: 'office', label: 'Office', price: 32, icon: 'https://www.emop.co.uk/static/images/steps_booking/office.svg' },
+  { key: 'hall', label: 'Hall', price: 16, icon: 'https://www.emop.co.uk/static/images/steps_booking/hall.svg' },
+  { key: 'toilet', label: 'Toilet', price: 16, icon: 'https://www.emop.co.uk/static/images/steps_booking/toilet.svg' },
+  { key: 'bathroom', label: 'Bathroom', price: 24, icon: 'https://www.emop.co.uk/static/images/steps_booking/bathroom.svg' },
+  { key: 'through_lounge', label: 'Through lounge', price: 32, icon: 'https://www.emop.co.uk/static/images/steps_booking/living_dining.svg' },
+  { key: 'staircase', label: 'Staircase', price: 24, icon: 'https://www.emop.co.uk/static/images/steps_booking/stairs.svg' },
+];
+
+export const CARPET_RUGS = [
+  { key: 'small_rug', label: 'Small Rug', price: 16, icon: 'https://www.emop.co.uk/static/images/steps_booking/rug.svg' },
+  { key: 'medium_rug', label: 'Medium Rug', price: 24, icon: 'https://www.emop.co.uk/static/images/steps_booking/rug.svg' },
+  { key: 'large_rug', label: 'Large Rug', price: 32, icon: 'https://www.emop.co.uk/static/images/steps_booking/rug.svg' },
+];
+
+export const UPHOLSTERY_MATERIAL_TYPES = [
+  { key: 'standard', label: 'Standard', info: 'Synthetic, Mixed, Polyester Wool, Man made, Microfibre' },
+  { key: 'delicate', label: 'Delicate', info: 'Cotton, Seagrass, or any other Organic Material' },
+  { key: 'leather', label: 'Leather', info: 'Leather material' },
+];
+
+export const UPHOLSTERY_ITEMS = [
+  { key: 'two_seater_sofa', label: '2 seater sofa', price: 32, icon: 'https://www.emop.co.uk/static/images/steps_booking/sofa.svg' },
+  { key: 'three_seater_sofa', label: '3 seater sofa', price: 40, icon: 'https://www.emop.co.uk/static/images/steps_booking/sofa.svg' },
+  { key: 'four_seater_sofa', label: '4 seater sofa', price: 48, icon: 'https://www.emop.co.uk/static/images/steps_booking/sofa.svg' },
+  { key: 'armchair', label: 'Armchair', price: 16, icon: 'https://www.emop.co.uk/static/images/steps_booking/armchair.svg' },
+  { key: 'single_mattress', label: 'Single Mattress', price: 24, icon: 'https://www.emop.co.uk/static/images/steps_booking/mattress.svg' },
+  { key: 'double_mattress', label: 'Double Mattress', price: 32, icon: 'https://www.emop.co.uk/static/images/steps_booking/mattress.svg' },
+  { key: 'king_mattress', label: 'King Mattress', price: 40, icon: 'https://www.emop.co.uk/static/images/steps_booking/mattress.svg' },
+  { key: 'half_length_curtain', label: 'Half Length Curtain', price: 16, icon: 'https://www.emop.co.uk/static/images/steps_booking/curtain.svg' },
+  { key: 'full_length_curtain', label: 'Full Length Curtain', price: 24, icon: 'https://www.emop.co.uk/static/images/steps_booking/curtain.svg' },
+];
+
+export const CARPET_ADDONS = [
+  { key: 'cleaning_products', label: 'Cleaning products include sprays and cloths.', type: 'boolean' },
+  { key: 'job_check', label: 'Can you check the job at the end?', type: 'boolean' },
+  { key: 'have_pets', label: 'Do you have pets?', type: 'boolean' },
+  { key: 'key_pickup', label: 'Does a cleaner need to pick up a key?', type: 'boolean' },
+];
+// ... existing code ...

@@ -2,16 +2,21 @@ import React, { useLayoutEffect } from 'react';
 import BookingSummary from './BookingSummary';
 import type { Dispatch, SetStateAction } from 'react';
 import {FAQSection2} from '../../data/questions'
+
+
+
 import {
   roomTypes,
   addOns,
   frequencyOptions,
   calculatePrice,
   PRICING_CONFIG,
-  DirtLevel
+  DirtLevel,
+  ServiceType
 } from './ckeckoutData';
 import { useCheckoutStore, useEstimatedHours, useEstimatedMinutes, useEstimatedPrice, usePricingBreakdown } from '../../store/checkoutStore';
 import { toast } from 'react-toastify';
+import CarpetUpholsteryStep from './CarpetUpholsteryStep';
 
 const formatPrice = (price: number) => `£${price}/h`;
 const pad = (n: number) => n.toString().padStart(2, '0');
@@ -128,6 +133,16 @@ const StepTwo: React.FC = () => {
     set({ step: 3 });
   };
 
+  const selectedType = useCheckoutStore(state => state.selectedType);
+
+  if (selectedType === ServiceType.CARPET_UPHOLSTERY) {
+    return <CarpetUpholsteryStep />;
+  }
+
+
+  if (selectedType === ServiceType.CARPET_UPHOLSTERY) {
+    return <CarpetUpholsteryStep />;
+  }
   return (
     <div className="w-full flex flex-col lg:flex-row gap-8">
       {/* Main form */}

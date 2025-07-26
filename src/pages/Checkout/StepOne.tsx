@@ -355,14 +355,29 @@ const StepOne: React.FC = () => {
                       : calculatePrice.getHourlyRateDisplay(3)}
                   </span>
                 </div>
-                {selectedFrequency === 3 && oneOffDetailToShow && (
-                  <div className={`flex flex-col border border-neutral-300 rounded-md p-2 text-xs bg-white ${isToday && timeIsInvalid ? 'opacity-50' : ''}`}>
-                    <span className={`font-bold ${isToday && timeIsInvalid ? 'text-gray-400' : 'text-brand-primary'}`}>{oneOffDetailToShow.label}</span>
-                    <span>{oneOffDetailToShow.desc}</span>
-                    <span className={`font-bold ${isToday && timeIsInvalid ? 'text-gray-400' : ''}`}>{formatPrice(oneOffDetailToShow.price)}</span>
-                    {isToday && timeIsInvalid && (
-                      <span className="text-red-500 font-semibold mt-1">Time unavailable. Please select a time at least 4 hours from now.</span>
-                    )}
+                {selectedFrequency === 3 && frequencyOptions[3]?.oneOffDetails && (
+                  <div>
+                    {frequencyOptions[3].oneOffDetails.map((detail) => {
+                      const isSelected = oneOffDetailToShow && oneOffDetailToShow.label === detail.label;
+                      const isDisabled = isToday && timeIsInvalid && isSelected;
+                      return (
+                        <div
+                          key={detail.label}
+                          className={`flex flex-col border rounded-md p-2 text-xs bg-white ${isDisabled ? 'opacity-50' : isSelected ? 'border-brand-primary' : ''}`}
+                        >
+                          <span className={`font-bold ${isDisabled ? 'text-gray-400' : ""}`}>
+                            {detail.label}
+                          </span>
+                          <span>{detail.desc}</span>
+                          <span className={`font-bold ${isDisabled ? 'text-gray-400' : ''}`}>{formatPrice(detail.price)}</span>
+                          {isDisabled && (
+                            <span className="text-red-500 font-semibold mt-1">
+                              Time unavailable. Please select a time at least 4 hours from now.
+                            </span>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
               </div>
@@ -444,10 +459,10 @@ const StepOne: React.FC = () => {
                   <TimePicker
                     hour={hour}
                     minute={minute}
-                    incrementHour={() => set({ hour: hour + 1 })}
-                    decrementHour={() => set({ hour: hour - 1 })}
-                    incrementMinute={() => set({ minute: minute + 1 })}
-                    decrementMinute={() => set({ minute: minute - 1 })}
+                    incrementHour={() => set({ hour: (hour + 1) % 24 })}
+                    decrementHour={() => set({ hour: hour === 0 ? 23 : hour - 1 })}
+                    incrementMinute={() => set({ minute: (minute + 1) % 60 })}
+                    decrementMinute={() => set({ minute: minute === 0 ? 59 : minute - 1 })}
                     pad={pad}
                   />
                 </div>
