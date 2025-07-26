@@ -1,11 +1,12 @@
 import React from 'react';
-import { useCheckoutStore, useFinalTotalPrice } from '../store/checkoutStore';
+import { useCheckoutStore, useFinalTotalPrice, usePricingBreakdown } from '../store/checkoutStore';
 import { formatDate } from '../utils/dateUtils';
 import { PRICING_CONFIG, ServiceType } from '../pages/Checkout/ckeckoutData';
 
 const GlobalSummaryBar: React.FC = () => {
   const { selectedDate, selectedType } = useCheckoutStore();
   const finalTotalPrice = useFinalTotalPrice();
+  const pricingBreakdown = usePricingBreakdown();
 
   const getMinimumPrice = () => {
     switch(selectedType) {
@@ -48,6 +49,14 @@ const GlobalSummaryBar: React.FC = () => {
             <div className="flex items-center gap-2">
               <span className="text-xs text-gray-500">Minimum Price</span>
               <span className="font-semibold">£{getMinimumPrice().toFixed(2)}</span>
+            </div>
+          )}
+          {/* Show total selections when different from final price */}
+          {pricingBreakdown && pricingBreakdown.calculatedPrice && 
+           pricingBreakdown.calculatedPrice !== pricingBreakdown.finalPrice && (
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-gray-500">Total Selections</span>
+              <span className="font-semibold">{pricingBreakdown.calculatedPrice}</span>
             </div>
           )}
         </div>
