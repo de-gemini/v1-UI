@@ -117,46 +117,6 @@ export const useCheckoutStore = create<CheckoutState>((set, get) => ({
   reset: () => set(initialState),
 }));
 
-// Utility function to calculate total carpet cleaning price
-const calculateCarpetPrice = (state: CarpetCleaningState): number => {
-  let total = 0;
-
-  // Calculate room prices
-  Object.entries(state.selectedRooms).forEach(([key, count]) => {
-    const room = CARPET_ROOMS.find(r => r.key === key);
-    if (room) {
-      total += (room.price * 100) * count; // Convert pounds to pence
-    }
-  });
-
-  // Calculate rug prices
-  Object.entries(state.selectedRugs).forEach(([key, count]) => {
-    const rug = CARPET_RUGS.find(r => r.key === key);
-    if (rug) {
-      total += (rug.price * 100) * count; // Convert pounds to pence
-    }
-  });
-
-  // Calculate upholstery prices
-  Object.entries(state.selectedUpholstery).forEach(([key, count]) => {
-    const item = UPHOLSTERY_ITEMS.find(i => i.key === key);
-    if (item) {
-      total += (item.price * 100) * count; // Convert pounds to pence
-    }
-  });
-
-  // Apply material type multiplier if needed
-  // if (state.selectedMaterial === 'delicate' || state.selectedUpholsteryMaterial === 'delicate') {
-  //   total *= 1.2; // 20% increase for delicate materials
-  // } else if (state.selectedUpholsteryMaterial === 'leather') {
-  //   total *= 1.3; // 30% increase for leather
-  // }
-
-  // Compare with minimum price (convert minimum price to pence for comparison)
-  const minimumPriceInPence = PRICING_CONFIG.minimumPrices.carpetUpholstery * 100;
-  return Math.max(total, minimumPriceInPence);
-};
-
 // Utility function to calculate total minutes (eliminates duplication)
 const calculateTotalMinutes = (state: CheckoutState): number => {
   return PricingCalculator.calculateTotalMinutes(
@@ -178,7 +138,19 @@ export const useCarpetCleaningState = () => {
 };
 
 export const useCarpetCleaningPrice = () => {
-  return useCheckoutStore(state => calculateCarpetPrice(state.carpetCleaning));
+  return useCheckoutStore(state => {
+    // Use PricingCalculator for carpet-only calculation
+    return PricingCalculator.calculateTotalPrice({
+      frequency: Frequency.ONE_OFF,
+      hours: 0,
+      serviceType: ServiceType.CARPET_UPHOLSTERY,
+      carpetCleaning: {
+        selectedRooms: state.carpetCleaning.selectedRooms,
+        selectedRugs: state.carpetCleaning.selectedRugs,
+        selectedUpholstery: state.carpetCleaning.selectedUpholstery
+      }
+    });
+  });
 };
 
 export const useEstimatedHours = () => {
@@ -194,52 +166,58 @@ export const useEstimatedPrice = () => {
     const totalMinutes = calculateTotalMinutes(state);
     const totalHours = PricingCalculator.calculateTotalHours(totalMinutes);
     
-    return PricingCalculator.calculateTotalPrice(
-      state.selectedFrequency ?? Frequency.ONE_OFF,
-      totalHours,
-      {
-        endOfTenancy: state.endOfTenancy,
-        expressStudio: state.expressStudio,
-        ecoFriendly: state.ecoFriendly,
-        hooverMop: state.hooverMop,
-        disinfection: state.disinfection,
-        outdoorCleaning: state.outdoorCleaning,
-        laundry: state.laundry,
-        errandHours: state.errandHours,
-        checkJob: state.checkJob,
-        havePets: state.havePets,
-        keyPickup: state.keyPickup,
-      },
-      state.dirtLevel
-    );
+    return PricingCalculator.calculateTotalPrice({
+      frequency: state.selectedFrequency ?? Frequency.ONE_OFF,
+      hours: totalHours,
+      endOfTenancy: state.endOfTenancy,
+      expressStudio: state.expressStudio,
+      ecoFriendly: state.ecoFriendly,
+      hooverMop: state.hooverMop,
+      disinfection: state.disinfection,
+      outdoorCleaning: state.outdoorCleaning,
+      laundry: state.laundry,
+      errandHours: state.errandHours,
+      checkJob: state.checkJob,
+      havePets: state.havePets,
+      keyPickup: state.keyPickup,
+      dirtLevel: state.dirtLevel,
+      serviceType: state.selectedType ?? undefined,
+      carpetCleaning: state.selectedType === ServiceType.CARPET_UPHOLSTERY ? {
+        selectedRooms: state.carpetCleaning.selectedRooms,
+        selectedRugs: state.carpetCleaning.selectedRugs,
+        selectedUpholstery: state.carpetCleaning.selectedUpholstery
+      } : undefined
+    });
   });
 };
-
 // Centralized pricing breakdown using PricingCalculator class
 export const usePricingBreakdown = () => {
   return useCheckoutStore(state => {
     const totalMinutes = calculateTotalMinutes(state);
     const totalHours = PricingCalculator.calculateTotalHours(totalMinutes);
     
-    const breakdown = PricingCalculator.getDetailedBreakdown(
-      state.selectedFrequency ?? Frequency.ONE_OFF,
-      totalHours,
-      {
-        endOfTenancy: state.endOfTenancy,
-        expressStudio: state.expressStudio,
-        ecoFriendly: state.ecoFriendly,
-        hooverMop: state.hooverMop,
-        disinfection: state.disinfection,
-        outdoorCleaning: state.outdoorCleaning,
-        laundry: state.laundry,
-        errandHours: state.errandHours,
-        checkJob: state.checkJob,
-        havePets: state.havePets,
-        keyPickup: state.keyPickup,
-      },
-      state.dirtLevel,
-      state.selectedType as ServiceType
-    );
+    const breakdown = PricingCalculator.getDetailedBreakdown({
+      frequency: state.selectedFrequency ?? Frequency.ONE_OFF,
+      hours: totalHours,
+      endOfTenancy: state.endOfTenancy,
+      expressStudio: state.expressStudio,
+      ecoFriendly: state.ecoFriendly,
+      hooverMop: state.hooverMop,
+      disinfection: state.disinfection,
+      outdoorCleaning: state.outdoorCleaning,
+      laundry: state.laundry,
+      errandHours: state.errandHours,
+      checkJob: state.checkJob,
+      havePets: state.havePets,
+      keyPickup: state.keyPickup,
+      dirtLevel: state.dirtLevel,
+      serviceType: state.selectedType as ServiceType,
+      carpetCleaning: state.selectedType === ServiceType.CARPET_UPHOLSTERY ? {
+        selectedRooms: state.carpetCleaning.selectedRooms,
+        selectedRugs: state.carpetCleaning.selectedRugs,
+        selectedUpholstery: state.carpetCleaning.selectedUpholstery
+      } : undefined
+    });
     
     // Build selected rooms object
     const selectedRooms = Object.entries(state.roomCounts)
@@ -260,7 +238,17 @@ export const usePricingBreakdown = () => {
       }, {} as Record<string, string>);
 
     // Calculate carpet cleaning items and total
-    const carpetTotal = calculateCarpetPrice(state.carpetCleaning);
+    const carpetTotal = state.selectedType === ServiceType.CARPET_UPHOLSTERY ? 
+      PricingCalculator.calculateTotalPrice({
+        frequency: Frequency.ONE_OFF,
+        hours: 0,
+        serviceType: ServiceType.CARPET_UPHOLSTERY,
+        carpetCleaning: {
+          selectedRooms: state.carpetCleaning.selectedRooms,
+          selectedRugs: state.carpetCleaning.selectedRugs,
+          selectedUpholstery: state.carpetCleaning.selectedUpholstery
+        }
+      }) : 0;
     const carpetItems = {
       rooms: Object.entries(state.carpetCleaning.selectedRooms)
         .filter(([_, count]) => count > 0)
@@ -295,20 +283,6 @@ export const usePricingBreakdown = () => {
         })
     };
 
-    // Get minimum price based on service type
-    const getMinimumPrice = () => {
-      switch(state.selectedType) {
-        case ServiceType.REGULAR_ONE_OFF:
-          return calculatePrice.formatPrice(PRICING_CONFIG.minimumPrices.regularCleaning);
-        case ServiceType.END_OF_TENANCY:
-          return calculatePrice.formatPrice(PRICING_CONFIG.minimumPrices.endOfTenancy);
-        case ServiceType.CARPET_UPHOLSTERY:
-          return calculatePrice.formatPrice(PRICING_CONFIG.minimumPrices.carpetUpholstery);
-        default:
-          return calculatePrice.formatPrice(PRICING_CONFIG.minimumPrices.regularCleaning);
-      }
-    };
-
     return {
       basePrice: breakdown.basePrice,
       additionalServicesCost: breakdown.additionalServicesCost,
@@ -323,7 +297,7 @@ export const usePricingBreakdown = () => {
         "Selected Upholstery": carpetItems.upholstery,
         "Material Types": carpetItems.materials,
         "Add-ons": carpetItems.addons,
-        "Total": carpetTotal / 100 // Convert back to pounds from pence
+        "Subtotal": calculatePrice.formatPrice(carpetTotal)
       } : null,
       "Additional Services": {
         "End of Tenancy": state.endOfTenancy ? `£${PRICING_CONFIG.additionalServices.endOfTenancy}` : "Not selected",
@@ -348,9 +322,61 @@ export const usePricingBreakdown = () => {
         "Base Price": breakdown.basePrice,
         "Additional Services": breakdown.additionalServicesCost,
         "Dirt Level Adjustment": breakdown.dirtLevelAdjustment,
-        "Carpet & Upholstery": state.selectedType === ServiceType.CARPET_UPHOLSTERY ? carpetTotal / 100 : 0, // Only include if carpet service is selected
-        "Final Total": breakdown.finalPrice + (state.selectedType === ServiceType.CARPET_UPHOLSTERY ? carpetTotal / 100 : 0) // Only add carpet total if service is selected
+        "Carpet & Upholstery": state.selectedType === ServiceType.CARPET_UPHOLSTERY ? calculatePrice.formatPrice(carpetTotal) : '£0.00',
+        "Final Total": breakdown.finalPrice
       }
     };
+  });
+}; 
+
+// Single source of truth for final total price
+export const useFinalTotalPrice = () => {
+  return useCheckoutStore(state => {
+    const breakdown = PricingCalculator.getDetailedBreakdown({
+      frequency: state.selectedFrequency ?? Frequency.ONE_OFF,
+      hours: PricingCalculator.calculateTotalHours(calculateTotalMinutes(state)),
+      endOfTenancy: state.endOfTenancy,
+      expressStudio: state.expressStudio,
+      ecoFriendly: state.ecoFriendly,
+      hooverMop: state.hooverMop,
+      disinfection: state.disinfection,
+      outdoorCleaning: state.outdoorCleaning,
+      laundry: state.laundry,
+      errandHours: state.errandHours,
+      checkJob: state.checkJob,
+      havePets: state.havePets,
+      keyPickup: state.keyPickup,
+      dirtLevel: state.dirtLevel,
+      serviceType: state.selectedType as ServiceType,
+      carpetCleaning: state.selectedType === ServiceType.CARPET_UPHOLSTERY ? {
+        selectedRooms: state.carpetCleaning.selectedRooms,
+        selectedRugs: state.carpetCleaning.selectedRugs,
+        selectedUpholstery: state.carpetCleaning.selectedUpholstery
+      } : undefined
+    });
+    
+    // Return the raw number instead of formatted string
+    return PricingCalculator.calculateTotalPrice({
+      frequency: state.selectedFrequency ?? Frequency.ONE_OFF,
+      hours: PricingCalculator.calculateTotalHours(calculateTotalMinutes(state)),
+      endOfTenancy: state.endOfTenancy,
+      expressStudio: state.expressStudio,
+      ecoFriendly: state.ecoFriendly,
+      hooverMop: state.hooverMop,
+      disinfection: state.disinfection,
+      outdoorCleaning: state.outdoorCleaning,
+      laundry: state.laundry,
+      errandHours: state.errandHours,
+      checkJob: state.checkJob,
+      havePets: state.havePets,
+      keyPickup: state.keyPickup,
+      dirtLevel: state.dirtLevel,
+      serviceType: state.selectedType as ServiceType,
+      carpetCleaning: state.selectedType === ServiceType.CARPET_UPHOLSTERY ? {
+        selectedRooms: state.carpetCleaning.selectedRooms,
+        selectedRugs: state.carpetCleaning.selectedRugs,
+        selectedUpholstery: state.carpetCleaning.selectedUpholstery
+      } : undefined
+    });
   });
 }; 

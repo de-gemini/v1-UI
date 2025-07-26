@@ -234,6 +234,11 @@ export const pricingService = {
     keyPickup?: boolean;
     dirtLevel?: DirtLevel;
     serviceType?: ServiceType; // Add service type to determine minimum price
+    carpetCleaning?: {
+      selectedRooms: { [key: string]: number };
+      selectedRugs: { [key: string]: number };
+      selectedUpholstery: { [key: string]: number };
+    };
   }) => {
     // Get base price
     let totalPrice = calculatePrice.getBasePrice(options.frequency, options.hours || 2);
@@ -254,6 +259,33 @@ export const pricingService = {
     });
     
     totalPrice += additionalServicesCost;
+
+    // Add carpet and upholstery prices if available
+    if (options.carpetCleaning) {
+      // Calculate room prices
+      Object.entries(options.carpetCleaning.selectedRooms).forEach(([key, count]) => {
+        const room = CARPET_ROOMS.find(r => r.key === key);
+        if (room) {
+          totalPrice += room.price * count;
+        }
+      });
+
+      // Calculate rug prices
+      Object.entries(options.carpetCleaning.selectedRugs).forEach(([key, count]) => {
+        const rug = CARPET_RUGS.find(r => r.key === key);
+        if (rug) {
+          totalPrice += rug.price * count;
+        }
+      });
+
+      // Calculate upholstery prices
+      Object.entries(options.carpetCleaning.selectedUpholstery).forEach(([key, count]) => {
+        const item = UPHOLSTERY_ITEMS.find(i => i.key === key);
+        if (item) {
+          totalPrice += item.price * count;
+        }
+      });
+    }
     
     // Apply dirt level multiplier
     if (options.dirtLevel) {
@@ -459,9 +491,9 @@ export class PricingCalculator {
    * Calculate total price with all components
    */
   static calculateTotalPrice(
-    frequency: Frequency,
-    hours: number,
-    additionalServices: {
+    options: {
+      frequency: Frequency,
+      hours: number,
       endOfTenancy?: boolean;
       expressStudio?: boolean;
       ecoFriendly?: boolean;
@@ -473,14 +505,65 @@ export class PricingCalculator {
       checkJob?: boolean;
       havePets?: boolean;
       keyPickup?: boolean;
-    },
-    dirtLevel?: DirtLevel
+      dirtLevel?: DirtLevel;
+      serviceType?: ServiceType;
+      carpetCleaning?: {
+        selectedRooms: { [key: string]: number };
+        selectedRugs: { [key: string]: number };
+        selectedUpholstery: { [key: string]: number };
+      };
+    }
   ): number {
-    let totalPrice = this.calculateBasePrice(frequency, hours);
-    totalPrice += this.calculateAdditionalServicesCost(additionalServices);
+    let totalPrice = this.calculateBasePrice(options.frequency, options.hours);
+    totalPrice += this.calculateAdditionalServicesCost(options);
     
-    if (dirtLevel) {
-      totalPrice = calculatePrice.applyDirtLevelMultiplier(totalPrice, dirtLevel);
+    if (options.dirtLevel) {
+      totalPrice = calculatePrice.applyDirtLevelMultiplier(totalPrice, options.dirtLevel);
+    }
+
+    // Add carpet and upholstery prices if it's a carpet service
+    if (options.serviceType === ServiceType.CARPET_UPHOLSTERY && options.carpetCleaning) {
+      // Calculate room prices
+      Object.entries(options.carpetCleaning.selectedRooms).forEach(([key, count]) => {
+        const room = CARPET_ROOMS.find(r => r.key === key);
+        if (room) {
+          totalPrice += room.price * count;
+        }
+      });
+
+      // Calculate rug prices
+      Object.entries(options.carpetCleaning.selectedRugs).forEach(([key, count]) => {
+        const rug = CARPET_RUGS.find(r => r.key === key);
+        if (rug) {
+          totalPrice += rug.price * count;
+        }
+      });
+
+      // Calculate upholstery prices
+      Object.entries(options.carpetCleaning.selectedUpholstery).forEach(([key, count]) => {
+        const item = UPHOLSTERY_ITEMS.find(i => i.key === key);
+        if (item) {
+          totalPrice += item.price * count;
+        }
+      });
+    }
+    
+    // Apply minimum price based on service type
+    if (options.serviceType !== undefined) {
+      switch (options.serviceType) {
+        case ServiceType.END_OF_TENANCY:
+          // For End of Tenancy, always add minimum price to selections
+          totalPrice += PRICING_CONFIG.minimumPrices.endOfTenancy;
+          break;
+        case ServiceType.CARPET_UPHOLSTERY:
+          // For Carpet & Upholstery, use the greater of calculated price or minimum price
+          totalPrice = Math.max(totalPrice, PRICING_CONFIG.minimumPrices.carpetUpholstery);
+          break;
+        case ServiceType.REGULAR_ONE_OFF:
+        default:
+          // For other services, use the greater of calculated price or minimum price
+          totalPrice = Math.max(totalPrice, PRICING_CONFIG.minimumPrices.regularCleaning);
+      }
     }
     
     return totalPrice;
@@ -490,9 +573,9 @@ export class PricingCalculator {
    * Get detailed pricing breakdown
    */
   static getDetailedBreakdown(
-    frequency: Frequency,
-    hours: number,
-    additionalServices: {
+    options: {
+      frequency: Frequency;
+      hours?: number;
       endOfTenancy?: boolean;
       expressStudio?: boolean;
       ecoFriendly?: boolean;
@@ -504,25 +587,60 @@ export class PricingCalculator {
       checkJob?: boolean;
       havePets?: boolean;
       keyPickup?: boolean;
-    },
-    dirtLevel?: DirtLevel,
-    serviceType?: ServiceType
+      dirtLevel?: DirtLevel;
+      serviceType?: ServiceType;
+      carpetCleaning?: {
+        selectedRooms: { [key: string]: number };
+        selectedRugs: { [key: string]: number };
+        selectedUpholstery: { [key: string]: number };
+      };
+    }
   ): DetailedBreakdown {
-    const basePrice = this.calculateBasePrice(frequency, hours);
-    const additionalServicesCost = this.calculateAdditionalServicesCost(additionalServices);
+    const basePrice = this.calculateBasePrice(options.frequency, options.hours || 0);
+    const additionalServicesCost = this.calculateAdditionalServicesCost(options);
     
     let calculatedPrice = basePrice + additionalServicesCost;
     
-    if (dirtLevel) {
-      calculatedPrice = calculatePrice.applyDirtLevelMultiplier(calculatedPrice, dirtLevel);
+    // Add carpet and upholstery prices if it's a carpet service
+    let carpetUpholsteryCost = 0;
+    if (options.serviceType === ServiceType.CARPET_UPHOLSTERY && options.carpetCleaning) {
+      // Calculate room prices
+      Object.entries(options.carpetCleaning.selectedRooms).forEach(([key, count]) => {
+        const room = CARPET_ROOMS.find(r => r.key === key);
+        if (room) {
+          carpetUpholsteryCost += room.price * count;
+        }
+      });
+
+      // Calculate rug prices
+      Object.entries(options.carpetCleaning.selectedRugs).forEach(([key, count]) => {
+        const rug = CARPET_RUGS.find(r => r.key === key);
+        if (rug) {
+          carpetUpholsteryCost += rug.price * count;
+        }
+      });
+
+      // Calculate upholstery prices
+      Object.entries(options.carpetCleaning.selectedUpholstery).forEach(([key, count]) => {
+        const item = UPHOLSTERY_ITEMS.find(i => i.key === key);
+        if (item) {
+          carpetUpholsteryCost += item.price * count;
+        }
+      });
+      
+      calculatedPrice += carpetUpholsteryCost;
+    }
+    
+    if (options.dirtLevel) {
+      calculatedPrice = calculatePrice.applyDirtLevelMultiplier(calculatedPrice, options.dirtLevel);
     }
 
     // Handle minimum price and final price based on service type
     let minimumPrice = PRICING_CONFIG.minimumPrices.regularCleaning;
     let finalPrice = calculatedPrice;
 
-    if (serviceType !== undefined) {
-      switch (serviceType) {
+    if (options.serviceType !== undefined) {
+      switch (options.serviceType) {
         case ServiceType.END_OF_TENANCY:
           // For End of Tenancy, always add minimum price to selections
           minimumPrice = PRICING_CONFIG.minimumPrices.endOfTenancy;
@@ -540,14 +658,14 @@ export class PricingCalculator {
     return {
       basePrice: calculatePrice.formatPrice(basePrice),
       additionalServicesCost: calculatePrice.formatPrice(additionalServicesCost),
-      dirtLevelAdjustment: dirtLevel ? calculatePrice.formatPrice(finalPrice - basePrice - additionalServicesCost) : '£0.00',
+      dirtLevelAdjustment: options.dirtLevel ? calculatePrice.formatPrice(finalPrice - basePrice - additionalServicesCost - carpetUpholsteryCost) : '£0.00',
       minimumPrice: calculatePrice.formatPrice(minimumPrice),
       calculatedPrice: calculatePrice.formatPrice(calculatedPrice),
       finalPrice: calculatePrice.formatPrice(finalPrice),
       breakdown: {
         basePrice,
         additionalServicesCost,
-        dirtLevelMultiplier: dirtLevel ? PRICING_CONFIG.dirtLevelMultipliers[dirtLevel] : 1,
+        dirtLevelMultiplier: options.dirtLevel ? PRICING_CONFIG.dirtLevelMultipliers[options.dirtLevel] : 1,
         minimumPrice,
         calculatedPrice,
         finalPrice,
@@ -588,26 +706,129 @@ export class PricingCalculator {
     );
     
     const totalHours = this.calculateTotalHours(totalMinutes);
-    const totalPrice = this.calculateTotalPrice(
-      Frequency.ONE_OFF,
-      totalHours,
-      { ecoFriendly: true, disinfection: true },
-      DirtLevel.MEDIUM
-    );
+    const totalPrice = this.calculateTotalPrice({
+      frequency: Frequency.ONE_OFF,
+      hours: totalHours,
+      ecoFriendly: true,
+      disinfection: true,
+      dirtLevel: DirtLevel.MEDIUM
+    });
     
     console.log('🧪 PricingCalculator Test Results:', {
       totalMinutes,
       totalHours,
       totalPrice,
-      breakdown: this.getDetailedBreakdown(
-        Frequency.ONE_OFF,
-        totalHours,
-        { ecoFriendly: true, disinfection: true },
-        DirtLevel.MEDIUM
-      )
+      breakdown: this.getDetailedBreakdown({
+        frequency: Frequency.ONE_OFF,
+        hours: totalHours,
+        ecoFriendly: true,
+        disinfection: true,
+        dirtLevel: DirtLevel.MEDIUM
+      })
     });
     
     return { totalMinutes, totalHours, totalPrice };
+  }
+
+  static testCarpetPricingLogic() {
+    console.log('🧪 Testing Carpet & Upholstery Pricing Logic...');
+    
+    // Test Case 1: Carpet service with selections below minimum price
+    const testCase1 = {
+      serviceType: ServiceType.CARPET_UPHOLSTERY,
+      carpetCleaning: {
+        selectedRooms: { 'bedroom': 1 }, // Assuming bedroom carpet costs £30
+        selectedRugs: {},
+        selectedUpholstery: {}
+      }
+    };
+    
+    const price1 = this.calculateTotalPrice({
+      frequency: Frequency.ONE_OFF,
+      hours: 0,
+      serviceType: ServiceType.CARPET_UPHOLSTERY,
+      carpetCleaning: testCase1.carpetCleaning
+    });
+    
+    const breakdown1 = this.getDetailedBreakdown({
+      frequency: Frequency.ONE_OFF,
+      hours: 0,
+      serviceType: ServiceType.CARPET_UPHOLSTERY,
+      carpetCleaning: testCase1.carpetCleaning
+    });
+    
+    console.log('Test Case 1 - Below minimum price:', {
+      carpetSelections: testCase1.carpetCleaning,
+      calculatedPrice: price1,
+      minimumPrice: PRICING_CONFIG.minimumPrices.carpetUpholstery,
+      finalPrice: breakdown1.finalPrice,
+      isMinimumApplied: breakdown1.breakdown.isMinimumPriceApplied
+    });
+    
+    // Test Case 2: Carpet service with selections above minimum price
+    const testCase2 = {
+      serviceType: ServiceType.CARPET_UPHOLSTERY,
+      carpetCleaning: {
+        selectedRooms: { 'bedroom': 3, 'living_room': 2 }, // More selections
+        selectedRugs: { 'large_rug': 2 },
+        selectedUpholstery: { 'sofa': 1, 'armchair': 2 }
+      }
+    };
+    
+    const price2 = this.calculateTotalPrice({
+      frequency: Frequency.ONE_OFF,
+      hours: 0,
+      serviceType: ServiceType.CARPET_UPHOLSTERY,
+      carpetCleaning: testCase2.carpetCleaning
+    });
+    
+    const breakdown2 = this.getDetailedBreakdown({
+      frequency: Frequency.ONE_OFF,
+      hours: 0,
+      serviceType: ServiceType.CARPET_UPHOLSTERY,
+      carpetCleaning: testCase2.carpetCleaning
+    });
+    
+    console.log('Test Case 2 - Above minimum price:', {
+      carpetSelections: testCase2.carpetCleaning,
+      calculatedPrice: price2,
+      minimumPrice: PRICING_CONFIG.minimumPrices.carpetUpholstery,
+      finalPrice: breakdown2.finalPrice,
+      isMinimumApplied: breakdown2.breakdown.isMinimumPriceApplied
+    });
+    
+    // Test Case 3: Regular cleaning with minimum price
+    const testCase3 = {
+      serviceType: ServiceType.REGULAR_ONE_OFF,
+      roomCounts: { bedroom: 1 }, // Small selection
+      addOns: {}
+    };
+    
+    const price3 = this.calculateTotalPrice({
+      frequency: Frequency.ONE_OFF,
+      hours: 1, // 1 hour
+      serviceType: ServiceType.REGULAR_ONE_OFF
+    });
+    
+    const breakdown3 = this.getDetailedBreakdown({
+      frequency: Frequency.ONE_OFF,
+      hours: 1,
+      serviceType: ServiceType.REGULAR_ONE_OFF
+    });
+    
+    console.log('Test Case 3 - Regular cleaning minimum price:', {
+      serviceType: 'Regular One-Off',
+      calculatedPrice: price3,
+      minimumPrice: PRICING_CONFIG.minimumPrices.regularCleaning,
+      finalPrice: breakdown3.finalPrice,
+      isMinimumApplied: breakdown3.breakdown.isMinimumPriceApplied
+    });
+    
+    return {
+      testCase1: { price: price1, breakdown: breakdown1 },
+      testCase2: { price: price2, breakdown: breakdown2 },
+      testCase3: { price: price3, breakdown: breakdown3 }
+    };
   }
 }
 

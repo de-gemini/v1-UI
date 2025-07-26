@@ -360,7 +360,7 @@ const StepOne: React.FC = () => {
                     {frequencyOptions[3].oneOffDetails.map((detail) => {
                       const isSelected = oneOffDetailToShow && oneOffDetailToShow.label === detail.label;
                       const isDisabled = isToday && timeIsInvalid && isSelected;
-                      return (
+                      return (  
                         <div
                           key={detail.label}
                           className={`flex flex-col border rounded-md p-2 text-xs bg-white ${isDisabled ? 'opacity-50' : isSelected ? 'border-brand-primary' : ''}`}

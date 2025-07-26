@@ -9,7 +9,7 @@ import {
   UPHOLSTERY_ITEMS,
   CARPET_ADDONS
 } from './ckeckoutData';
-import { useCheckoutStore, useEstimatedHours, useEstimatedPrice, usePricingBreakdown, useCarpetCleaningPrice, useCarpetCleaningState } from '../../store/checkoutStore';
+import { useCheckoutStore, useEstimatedHours, useEstimatedPrice, usePricingBreakdown, useCarpetCleaningPrice, useCarpetCleaningState, useFinalTotalPrice } from '../../store/checkoutStore';
 
 const BookingSummary: React.FC = () => {
   // Get all data from store hooks
@@ -38,6 +38,7 @@ const BookingSummary: React.FC = () => {
 
   const pricingBreakdown = usePricingBreakdown();
   const carpetCleaning = useCarpetCleaningState();
+  const finalTotalPrice = useFinalTotalPrice();
 
   const pad = (n: number) => n.toString().padStart(2, '0');
 
@@ -395,7 +396,7 @@ const BookingSummary: React.FC = () => {
 
               <div className="flex justify-between text-md mt-2">
                 <span>Carpet & Upholstery Total</span>
-                <span>{pricingBreakdown["Carpet & Upholstery"]["Total"] ? `£${pricingBreakdown["Carpet & Upholstery"]["Total"].toFixed(2)}` : 'N/A'}</span>
+                <span>{pricingBreakdown["TOTAL"]["Carpet & Upholstery"] || 'N/A'}</span>
               </div>
             </>
           )}
@@ -416,7 +417,7 @@ const BookingSummary: React.FC = () => {
           )}
           <div className="flex justify-between text-lg font-bold mt-2">
             <span>Final Total</span>
-            <span>{pricingBreakdown?.finalPrice || 'N/A'}</span>
+            <span>£{finalTotalPrice ? finalTotalPrice.toFixed(2) : 'N/A'}</span>
           </div>
         </div>
       </div>

@@ -1,11 +1,11 @@
 import React from 'react';
-import { useCheckoutStore, useEstimatedPrice } from '../store/checkoutStore';
+import { useCheckoutStore, useFinalTotalPrice } from '../store/checkoutStore';
 import { formatDate } from '../utils/dateUtils';
 import { PRICING_CONFIG, ServiceType } from '../pages/Checkout/ckeckoutData';
 
 const GlobalSummaryBar: React.FC = () => {
   const { selectedDate, selectedType } = useCheckoutStore();
-  const estimatedPrice = useEstimatedPrice();
+  const finalTotalPrice = useFinalTotalPrice();
 
   const getMinimumPrice = () => {
     switch(selectedType) {
@@ -44,7 +44,7 @@ const GlobalSummaryBar: React.FC = () => {
               <span className="text-xs text-gray-500">Base Price</span>
               <span className="font-semibold">£{PRICING_CONFIG.minimumPrices.endOfTenancy.toFixed(2)}</span>
             </div>
-          ) : estimatedPrice < getMinimumPrice() && (
+          ) : finalTotalPrice < getMinimumPrice() && (
             <div className="flex items-center gap-2">
               <span className="text-xs text-gray-500">Minimum Price</span>
               <span className="font-semibold">£{getMinimumPrice().toFixed(2)}</span>
@@ -59,9 +59,7 @@ const GlobalSummaryBar: React.FC = () => {
             View Summary
           </button>
           <span className="font-semibold text-brand-primary">
-            £{(selectedType === ServiceType.END_OF_TENANCY ? 
-              estimatedPrice + PRICING_CONFIG.minimumPrices.endOfTenancy : 
-              estimatedPrice).toFixed(2)}
+            £{finalTotalPrice.toFixed(2)}
           </span>
         </div>
       </div>
