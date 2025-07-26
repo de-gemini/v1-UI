@@ -125,7 +125,7 @@ const calculateCarpetPrice = (state: CarpetCleaningState): number => {
   Object.entries(state.selectedRooms).forEach(([key, count]) => {
     const room = CARPET_ROOMS.find(r => r.key === key);
     if (room) {
-      total += room.price * count;
+      total += (room.price * 100) * count; // Convert pounds to pence
     }
   });
 
@@ -133,7 +133,7 @@ const calculateCarpetPrice = (state: CarpetCleaningState): number => {
   Object.entries(state.selectedRugs).forEach(([key, count]) => {
     const rug = CARPET_RUGS.find(r => r.key === key);
     if (rug) {
-      total += rug.price * count;
+      total += (rug.price * 100) * count; // Convert pounds to pence
     }
   });
 
@@ -141,7 +141,7 @@ const calculateCarpetPrice = (state: CarpetCleaningState): number => {
   Object.entries(state.selectedUpholstery).forEach(([key, count]) => {
     const item = UPHOLSTERY_ITEMS.find(i => i.key === key);
     if (item) {
-      total += item.price * count;
+      total += (item.price * 100) * count; // Convert pounds to pence
     }
   });
 
@@ -152,7 +152,9 @@ const calculateCarpetPrice = (state: CarpetCleaningState): number => {
   //   total *= 1.3; // 30% increase for leather
   // }
 
-  return total;
+  // Compare with minimum price (convert minimum price to pence for comparison)
+  const minimumPriceInPence = PRICING_CONFIG.minimumPrices.carpetUpholstery * 100;
+  return Math.max(total, minimumPriceInPence);
 };
 
 // Utility function to calculate total minutes (eliminates duplication)
@@ -315,14 +317,14 @@ export const usePricingBreakdown = () => {
       minimumPrice: breakdown.minimumPrice,
       finalPrice: breakdown.finalPrice,
       breakdown: breakdown.breakdown,
-      "Carpet & Upholstery": {
+      "Carpet & Upholstery": state.selectedType === ServiceType.CARPET_UPHOLSTERY ? {
         "Selected Rooms": carpetItems.rooms,
         "Selected Rugs": carpetItems.rugs,
         "Selected Upholstery": carpetItems.upholstery,
         "Material Types": carpetItems.materials,
         "Add-ons": carpetItems.addons,
-        "Total": carpetTotal
-      },
+        "Total": carpetTotal / 100 // Convert back to pounds from pence
+      } : null,
       "Additional Services": {
         "End of Tenancy": state.endOfTenancy ? `£${PRICING_CONFIG.additionalServices.endOfTenancy}` : "Not selected",
         "Express Studio": state.expressStudio ? `£${PRICING_CONFIG.additionalServices.expressStudio}` : "Not selected",
@@ -346,8 +348,8 @@ export const usePricingBreakdown = () => {
         "Base Price": breakdown.basePrice,
         "Additional Services": breakdown.additionalServicesCost,
         "Dirt Level Adjustment": breakdown.dirtLevelAdjustment,
-        "Carpet & Upholstery": carpetTotal,
-        "Final Total": breakdown.finalPrice + carpetTotal
+        "Carpet & Upholstery": state.selectedType === ServiceType.CARPET_UPHOLSTERY ? carpetTotal / 100 : 0, // Only include if carpet service is selected
+        "Final Total": breakdown.finalPrice + (state.selectedType === ServiceType.CARPET_UPHOLSTERY ? carpetTotal / 100 : 0) // Only add carpet total if service is selected
       }
     };
   });

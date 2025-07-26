@@ -88,10 +88,16 @@ const StepTwo: React.FC = () => {
     console.log('💰 StepTwo Pricing Breakdown:', pricingBreakdown);
   }, [pricingBreakdown]);
 
-  // Set endOfTenancy to true by default since we're in the end of tenancy flow
+  // Set endOfTenancy and related settings
   React.useEffect(() => {
-    set({ endOfTenancy: true });
-  }, [set]);
+    if (endOfTenancy) {
+      // Set maximum dirt level and prevent unselection
+      set({ 
+        endOfTenancy: true,
+        dirtLevel: DirtLevel.HEAVY
+      });
+    }
+  }, [endOfTenancy, set]);
 
   // Ensure roomCounts is always the correct length
   React.useEffect(() => {
@@ -334,21 +340,46 @@ const StepTwo: React.FC = () => {
           <div className="mt-8">
             <div className={`flex items-center mb-4 border-l-4 pl-2 ${dirtLevel === 'light' ? 'border-green-500' : dirtLevel === 'medium' ? 'border-yellow-400' : 'border-red-500'}`}> 
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={dirtLevel === 'light' ? '#22c55e' : dirtLevel === 'medium' ? '#eab308' : '#ef4444'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2"><circle cx="12" cy="12" r="10" /><path d="M9 12l2 2 4-4" /></svg>
-              <h3 className={`text-lg font-semibold ${dirtLevel === 'light' ? 'text-green-600' : dirtLevel === 'medium' ? 'text-yellow-600' : 'text-red-500'}`}>Let us know the level of dirt at your property</h3>
+              <h3 className={`text-lg font-semibold ${dirtLevel === 'light' ? 'text-green-600' : dirtLevel === 'medium' ? 'text-yellow-600' : 'text-red-500'}`}>
+                {endOfTenancy ? (
+                  <div className="flex items-center gap-2">
+                    Level of dirt at your property
+                    <span className="inline-block">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                      </svg>
+                    </span>
+                    <span className="text-sm text-gray-500">(Locked for End of Tenancy)</span>
+                  </div>
+                ) : (
+                  "Let us know the level of dirt at your property"
+                )}
+              </h3>
             </div>
             <div className="flex border rounded-lg overflow-hidden w-full max-w-xl mb-4">
               {['light', 'medium', 'heavy'].map(level => (
                 <button
                   key={level}
-                  onClick={() => set({ dirtLevel: level as DirtLevel })}
-                  className={`flex-1 py-4 text-lg font-semibold transition-all border-none outline-none focus:z-10
+                  onClick={() => !endOfTenancy && set({ dirtLevel: level as DirtLevel })}
+                  disabled={endOfTenancy && level !== 'heavy'}
+                  className={`flex-1 py-4 text-lg font-semibold transition-all border-none outline-none focus:z-10 relative
                     ${dirtLevel === level
                       ? `${level === 'light' ? 'text-green-600 border-green-500' : level === 'medium' ? 'text-yellow-600 border-yellow-400' : 'text-red-500 border-red-500'} bg-white border`
                       : 'text-gray-700 bg-white hover:bg-gray-50'}
-                    ${level === 'light' ? 'rounded-l-lg' : ''} ${level === 'heavy' ? 'rounded-r-lg' : ''}`}
+                    ${level === 'light' ? 'rounded-l-lg' : ''} ${level === 'heavy' ? 'rounded-r-lg' : ''}
+                    ${endOfTenancy && level !== 'heavy' ? 'opacity-50 cursor-not-allowed' : ''}`}
                   style={{ borderRight: level !== 'heavy' ? '1px solid #eee' : undefined }}
                 >
                   {level.charAt(0).toUpperCase() + level.slice(1)}
+                  {endOfTenancy && level === 'heavy' && (
+                    <span className="absolute right-2 top-1/2 -translate-y-1/2">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                      </svg>
+                    </span>
+                  )}
                 </button>
               ))}
             </div>

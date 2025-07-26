@@ -7,6 +7,7 @@ import {
   UPHOLSTERY_ITEMS,
   CARPET_ADDONS
 } from './ckeckoutData';
+import FixedSummaryBar from '../../components/FixedSummaryBar';
 import BookingSummary from './BookingSummary';
 import { useCheckoutStore, useCarpetCleaningState } from '../../store/checkoutStore';
 
@@ -19,7 +20,7 @@ const CarpetUpholsteryStep: React.FC<CarpetUpholsteryStepProps> = ({ isEndOfTena
   const carpetCleaning = useCarpetCleaningState();
   const { set } = useCheckoutStore();
 
-  const formatPrice = (price: number) => `£${price}`;
+  const formatPrice = (price: number) => `£${price.toFixed(2)}`;
 
   // Handlers
   const handleMaterialChange = (key: string) => {
@@ -68,9 +69,11 @@ const CarpetUpholsteryStep: React.FC<CarpetUpholsteryStepProps> = ({ isEndOfTena
   };
 
   return (
-    <div className="w-full flex flex-col lg:flex-row gap-8">
-      {/* Main form */}
-      <div className="flex-1 bg-white rounded-xl shadow-lg p-4 sm:p-6 md:p-8 mt-4 flex flex-col gap-10">
+    <div>
+      <FixedSummaryBar />
+      <div className="w-full flex flex-col lg:flex-row gap-8 mt-20">
+        {/* Main form */}
+        <div className="flex-1 bg-white rounded-xl shadow-lg p-4 sm:p-6 md:p-8 mt-4 flex flex-col gap-10">
         {/* Material Type Selection */}
         <div>
           <div className="flex items-center mb-6">
