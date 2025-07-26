@@ -100,6 +100,7 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
   const [isCharging, setIsCharging] = useState(false);
   const [paymentStatusFilter, setPaymentStatusFilter] = useState('paid');
   const [showConfirmCharge, setShowConfirmCharge] = useState(false);
+  const [viewMode, setViewMode] = useState<'summary' | 'diary'>('summary'); // Default to summary view
   const MAX_EXTRA_CHARGE = 200;
 
   const today = new Date();
@@ -113,6 +114,7 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
     pagination,
     fetchSchedules,
     updateScheduleStatus,
+    updateScheduleStatusAdmin,
     setError,
   } = useBookingScheduleStore();
 
@@ -134,8 +136,18 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    for (let dayIdx = 0; dayIdx < allDays.length; dayIdx++) {
-      const date = allDays[dayIdx];
+    const daysToCheck = viewMode === 'summary' 
+      ? allDays.filter(date => {
+          const daySchedules = getSchedulesForDate(date);
+          const filteredByStatus = filterSchedulesByStatus(daySchedules, filters.status);
+          const filteredByPaymentStatus = filterSchedulesByPaymentStatus(filteredByStatus, paymentStatusFilter);
+          const filteredSchedules = filterSchedulesBySearch(filteredByPaymentStatus, searchTerm);
+          return filteredSchedules.length > 0;
+        })
+      : allDays;
+
+    for (let dayIdx = 0; dayIdx < daysToCheck.length; dayIdx++) {
+      const date = daysToCheck[dayIdx];
       if (!date || date < today) continue; // skip past days
 
       const daySchedules = getSchedulesForDate(date);
@@ -159,7 +171,7 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
         break;
     }
     }
-  }, [schedules, loading, paymentStatusFilter, filters.status, searchTerm, allDays]);
+  }, [schedules, loading, paymentStatusFilter, filters.status, searchTerm, allDays, viewMode]);
 
   const handleStatusUpdate = async (
     scheduleId: string,
@@ -169,6 +181,19 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
       await updateScheduleStatus(scheduleId, newStatus);
     } catch (error) {
       console.error("Failed to update status:", error);
+    }
+  };
+
+  const handleScheduleStatusUpdate = async (
+    scheduleId: string,
+    newStatus: "pending" | "confirmed" | "completed" | "cancelled"
+  ) => {
+    try {
+      await updateScheduleStatusAdmin(scheduleId, newStatus);
+      toast.success(`Schedule status updated to ${newStatus}`);
+      setShowDetailsModal(false); // Close modal after successful update
+    } catch (error) {
+      toast.error("Failed to update schedule status");
     }
   };
 
@@ -283,7 +308,7 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
   };
 
   return (
-    <div className={`space-y-4   sm:space-y-6 ${className}`}>
+    <div className={`space-y-4   sm:space-y-6 ${className} relative`}>
       <div className="py-16">
         <Header
           head="Schedule Management"
@@ -303,7 +328,7 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
         </div>
       )}
 
-      <div className="bg-white p-4 sm:p-6 rounded-lg shadow">
+      <div className="bg-white  left-0 right-0 top-0 z-10 p-4 sm:p-6 rounded-lg shadow">
         {/* Month navigation and display */}
         <div className="flex items-center gap-4 mb-4">
           <button
@@ -323,6 +348,32 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
           >
             <FaChevronRight className="text-gray-600" />
           </button>
+        </div>
+
+        {/* View Mode Toggle */}
+        <div className="flex items-center justify-center mb-4">
+          <div className="bg-gray-100 rounded-lg p-1 flex">
+            <button
+              onClick={() => setViewMode('summary')}
+              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                viewMode === 'summary'
+                  ? 'bg-white text-brand-primary shadow-sm'
+                  : 'text-gray-600 hover:text-gray-800'
+              }`}
+            >
+              Summary
+            </button>
+            <button
+              onClick={() => setViewMode('diary')}
+              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                viewMode === 'diary'
+                  ? 'bg-white text-brand-primary shadow-sm'
+                  : 'text-gray-600 hover:text-gray-800'
+              }`}
+            >
+              Diary
+            </button>
+          </div>
         </div>
         {/* Filter bar */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-4 sm:mb-6 flex-wrap">
@@ -377,7 +428,16 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
           </div>
           <div className="flex flex-col items-start justify-center w-auto mt-4 sm:mt-0">
             <span className="font-bold text-red-400 text-3xl sm:text-5xl md:text-6xl lg:text-7xl leading-none">
-              {allDays.reduce((acc, date) => {
+              {(viewMode === 'summary' 
+                ? allDays.filter(date => {
+                    const daySchedules = getSchedulesForDate(date);
+                    const filteredByStatus = filterSchedulesByStatus(daySchedules, filters.status);
+                    const filteredByPaymentStatus = filterSchedulesByPaymentStatus(filteredByStatus, paymentStatusFilter);
+                    const filteredSchedules = filterSchedulesBySearch(filteredByPaymentStatus, searchTerm);
+                    return filteredSchedules.length > 0;
+                  })
+                : allDays
+              ).reduce((acc, date) => {
                 const daySchedules = getSchedulesForDate(date);
                 const filteredByStatus = filterSchedulesByStatus(
                   daySchedules,
@@ -395,7 +455,16 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
               }, 0)}
             </span>
             <span className="text-base sm:text-lg font-bold text-gray-400 mt-1">
-              {allDays.reduce((acc, date) => {
+              {(viewMode === 'summary' 
+                ? allDays.filter(date => {
+                    const daySchedules = getSchedulesForDate(date);
+                    const filteredByStatus = filterSchedulesByStatus(daySchedules, filters.status);
+                    const filteredByPaymentStatus = filterSchedulesByPaymentStatus(filteredByStatus, paymentStatusFilter);
+                    const filteredSchedules = filterSchedulesBySearch(filteredByPaymentStatus, searchTerm);
+                    return filteredSchedules.length > 0;
+                  })
+                : allDays
+              ).reduce((acc, date) => {
                 const daySchedules = getSchedulesForDate(date);
                 const filteredByStatus = filterSchedulesByStatus(
                   daySchedules,
@@ -423,7 +492,16 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
           </div>
         ) : (
           <div className="divide-y divide-gray-200">
-            {allDays.map((date, dayIdx) => {
+            {(viewMode === 'summary' 
+              ? allDays.filter(date => {
+                  const daySchedules = getSchedulesForDate(date);
+                  const filteredByStatus = filterSchedulesByStatus(daySchedules, filters.status);
+                  const filteredByPaymentStatus = filterSchedulesByPaymentStatus(filteredByStatus, paymentStatusFilter);
+                  const filteredSchedules = filterSchedulesBySearch(filteredByPaymentStatus, searchTerm);
+                  return filteredSchedules.length > 0;
+                })
+              : allDays
+            ).map((date, dayIdx) => {
               const daySchedules = getSchedulesForDate(date);
               // Apply status filter first, then search filter
               const filteredByStatus = filterSchedulesByStatus(
@@ -449,12 +527,24 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
               const isPast = date < new Date(new Date().setHours(0, 0, 0, 0));
 
               // Check if this is the first day with schedules
+              const currentDaysList = viewMode === 'summary' 
+                ? allDays.filter(date => {
+                    const daySchedules = getSchedulesForDate(date);
+                    const filteredByStatus = filterSchedulesByStatus(daySchedules, filters.status);
+                    const filteredByPaymentStatus = filterSchedulesByPaymentStatus(filteredByStatus, paymentStatusFilter);
+                    const filteredSchedules = filterSchedulesBySearch(filteredByPaymentStatus, searchTerm);
+                    return filteredSchedules.length > 0;
+                  })
+                : allDays;
+              
+              const currentDayIndex = currentDaysList.findIndex(d => d?.toDateString() === date.toDateString());
+              
               const isEarliestFutureWithSchedules =
                 date &&
                 date >= today &&
                 filteredSchedules.length > 0 &&
-                allDays
-                  .slice(0, dayIdx)
+                currentDaysList
+                  .slice(0, currentDayIndex)
                   .every(
                     (prevDate) =>
                       !prevDate ||
@@ -473,25 +563,36 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
                   key={date.toISOString()}
                   ref={isEarliestFutureWithSchedules ? firstScheduleRef : null}
                   className={
-                    `p-4 sm:p-6 transition-colors ` +
+                    `p-4 sm:p-6 transition-all duration-200 relative ` +
                     (isToday
                       ? "bg-blue-50 border-l-4 border-blue-500 "
                       : isPast
-                        ? "bg-gray-100 opacity-60 "
-                        : "hover:bg-gray-50 ") +
+                        ? "bg-gray-50 border-l-4 border-gray-300 "
+                        : "hover:bg-gray-50 border-l-4 border-transparent ") +
                     (isEarliestFutureWithSchedules ? "ring-2 ring-brand-primary ring-opacity-50 " : "")
                   }
                 >
+                  {/* Past date indicator */}
+                  {isPast && (
+                    <div className="absolute top-2 right-2 flex items-center gap-1">
+                      <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
+                      <span className="text-xs text-gray-500 font-medium">COMPLETED</span>
+                    </div>
+                  )}
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 sm:mb-4 gap-2">
                     <div className="flex items-center gap-3 sm:gap-4">
                       <div
                         className={`text-2xl sm:text-4xl font-bold ${
-                          isToday ? "text-blue-600" : "text-gray-800"
+                          isToday 
+                            ? "text-blue-600" 
+                            : isPast 
+                              ? "text-gray-400 line-through" 
+                              : "text-gray-800"
                         }`}
                       >
                         {date.getDate()}
                       </div>
-                      <div className="text-gray-600">
+                      <div className={`${isPast ? "text-gray-400" : "text-gray-600"}`}>
                         <div className="font-medium text-sm sm:text-base">
                           {daysOfWeek[date.getDay()]}
                         </div>
@@ -518,8 +619,8 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
                   </div>
 
                   {filteredSchedules.length === 0 ? (
-                    <div className="text-gray-400 italic text-sm">
-                      No bookings for this day
+                    <div className={`italic text-sm ${isPast ? "text-gray-300" : "text-gray-400"}`}>
+                      {isPast ? "No bookings were scheduled" : "No bookings for this day"}
                     </div>
                   ) : (
                     <div className="space-y-3">
@@ -530,7 +631,11 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
                         return (
                           <div
                             key={schedule._id}
-                            className="p-5 hover:shadow-md transition-shadow rounded-lg"
+                            className={`p-5 transition-all duration-200 rounded-lg ${
+                              isPast 
+                                ? "opacity-75 hover:opacity-90" 
+                                : "hover:shadow-md"
+                            }`}
                             style={{
                               background: color.bg,
                               borderLeft: `6px solid ${color.border}`,
@@ -783,6 +888,60 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
                           <div className="text-gray-500 italic">No rooms specified.</div>
                     )}
                   </div>
+                </div>
+
+                {/* Status Update Section */}
+                <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+                  <h4 className="text-sm font-semibold text-gray-700 mb-3">Update Schedule Status</h4>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      onClick={() => handleScheduleStatusUpdate(selectedSchedule._id, 'pending')}
+                      disabled={selectedSchedule.status === 'pending'}
+                      className={`px-3 py-2 text-xs font-medium rounded-md transition-colors ${
+                        selectedSchedule.status === 'pending'
+                          ? 'bg-yellow-100 text-yellow-700 cursor-not-allowed'
+                          : 'bg-yellow-500 text-white hover:bg-yellow-600'
+                      }`}
+                    >
+                      Set Pending
+                    </button>
+                    <button
+                      onClick={() => handleScheduleStatusUpdate(selectedSchedule._id, 'confirmed')}
+                      disabled={selectedSchedule.status === 'confirmed'}
+                      className={`px-3 py-2 text-xs font-medium rounded-md transition-colors ${
+                        selectedSchedule.status === 'confirmed'
+                          ? 'bg-green-100 text-green-700 cursor-not-allowed'
+                          : 'bg-green-500 text-white hover:bg-green-600'
+                      }`}
+                    >
+                      Set Confirmed
+                    </button>
+                    <button
+                      onClick={() => handleScheduleStatusUpdate(selectedSchedule._id, 'completed')}
+                      disabled={selectedSchedule.status === 'completed'}
+                      className={`px-3 py-2 text-xs font-medium rounded-md transition-colors ${
+                        selectedSchedule.status === 'completed'
+                          ? 'bg-blue-100 text-blue-700 cursor-not-allowed'
+                          : 'bg-blue-500 text-white hover:bg-blue-600'
+                      }`}
+                    >
+                      Set Completed
+                    </button>
+                    <button
+                      onClick={() => handleScheduleStatusUpdate(selectedSchedule._id, 'cancelled')}
+                      disabled={selectedSchedule.status === 'cancelled'}
+                      className={`px-3 py-2 text-xs font-medium rounded-md transition-colors ${
+                        selectedSchedule.status === 'cancelled'
+                          ? 'bg-red-100 text-red-700 cursor-not-allowed'
+                          : 'bg-red-500 text-white hover:bg-red-600'
+                      }`}
+                    >
+                      Set Cancelled
+                    </button>
+                  </div>
+                  <p className="text-xs text-gray-500 mt-2">
+                    Current status: <span className={`font-medium ${getStatusColor(selectedSchedule.status)}`}>{getStatusText(selectedSchedule.status)}</span>
+                  </p>
                 </div>
               </div>
             </div>

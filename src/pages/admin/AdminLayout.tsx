@@ -1,3 +1,4 @@
+import { section } from "framer-motion/client";
 import { useState } from "react";
 import {
   FaBars,
@@ -51,7 +52,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       {/* Mobile Overlay */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          className="fixed inset-0 bg-black bg-opacity-50 z-100 lg:hidden"
           onClick={toggleSidebar}
         />
       )}
@@ -123,54 +124,57 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       </aside>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col lg:ml-0">
+      <div className="flex-1 relative flex flex-col lg:ml-0">
         {/* Top Bar */}
-        <header className="flex items-center justify-between px-4 sm:px-8 py-4 bg-white shadow-sm">
-          <div className="flex items-center gap-4">
-            <button
-              onClick={toggleSidebar}
-              className="lg:hidden p-2 hover:bg-gray-100 rounded-lg"
-            >
-              <FaBars className="text-gray-600" />
-            </button>
-            <div className="hidden sm:flex items-center gap-4 w-full max-w-md">
-              <div className="relative w-full">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className="w-full pl-10 pr-4 py-2 rounded-lg border border-background-300 focus:outline-none focus:ring-2 focus:ring-brand-primary text-sm"
-                />
-                <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-background-400" />
+        
+        <section className=" top-0 bg-white shadow-sm ">
+          <header className="flex w-full items-center justify-between z-100 px-4 sm:px-8 py-4 bg-white shadow-sm">
+            <div className="flex items-center gap-4">
+              <button
+                onClick={toggleSidebar}
+                className="lg:hidden p-2 hover:bg-gray-100 rounded-lg"
+              >
+                <FaBars className="text-gray-600" />
+              </button>
+              <div className="hidden sm:flex items-center gap-4 w-full max-w-md">
+                <div className="relative w-full">
+                  <input
+                    type="text"
+                    placeholder="Search"
+                    className="w-full pl-10 pr-4 py-2 rounded-lg border border-background-300 focus:outline-none focus:ring-2 focus:ring-brand-primary text-sm"
+                  />
+                  <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-background-400" />
+                </div>
               </div>
             </div>
-          </div>
-          <div className="flex items-center gap-3 sm:gap-6">
-            <button className="relative">
-              <FiBell className="text-xl sm:text-2xl text-background-500" />
-              {/* Notification badge example */}
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1">
-                3
-              </span>
-            </button>
-            <img
-              src="https://randomuser.me/api/portraits/men/32.jpg"
-              alt="Profile"
-              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-brand-primary"
-            />
-          </div>
-        </header>
-
-        {/* Mobile Search Bar */}
-        <div className="sm:hidden px-4 py-3 bg-white border-b border-gray-200">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Search"
-              className="w-full pl-10 pr-4 py-2 rounded-lg border border-background-300 focus:outline-none focus:ring-2 focus:ring-brand-primary text-sm"
-            />
-            <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-background-400" />
-          </div>
-        </div>
+            <div className="flex items-center gap-3 sm:gap-6">
+              <button className="relative">
+                <FiBell className="text-xl sm:text-2xl text-background-500" />
+                {/* Notification badge example */}
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1">
+                  3
+                </span>
+              </button>
+              <img
+                src="https://randomuser.me/api/portraits/men/32.jpg"
+                alt="Profile"
+                className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-brand-primary"
+              />
+            </div>
+          </header>
+          
+          {/* Mobile Search Bar */}
+          {/* <div className="sm:hidden px-4 py-3 bg-white border-b border-gray-200">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search"
+                className="w-full pl-10 pr-4 py-2 rounded-lg border border-background-300 focus:outline-none focus:ring-2 focus:ring-brand-primary text-sm"
+              />
+              <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-background-400" />
+            </div>
+          </div> */}
+        </section>
 
         {/* Main Dashboard Content */}
         <main className="flex-1 bg-neutral-100 p-4 sm:p-8 overflow-y-auto">

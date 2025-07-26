@@ -544,9 +544,9 @@ const StepOne: React.FC = () => {
                     })();
                     
                     return (
-                      <TimePicker
-                        hour={hour}
-                        minute={minute}
+                  <TimePicker
+                    hour={hour}
+                    minute={minute}
                         incrementHour={() => {
                           const newHour = (hour + 1) % 24;
                           const testDate = new Date(selectedDate);
@@ -603,8 +603,8 @@ const StepOne: React.FC = () => {
                         isDecrementHourDisabled={isDecrementHourDisabled}
                         isIncrementMinuteDisabled={isIncrementMinuteDisabled}
                         isDecrementMinuteDisabled={isDecrementMinuteDisabled}
-                        pad={pad}
-                      />
+                    pad={pad}
+                  />
                     );
                   })()}
                 </div>

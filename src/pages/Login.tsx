@@ -22,7 +22,7 @@ const Login = () => {
       if (isAdmin) {
         navigate('/admin');
       } else {
-        navigate('/');
+        navigate('/dashboard');
       }
     } catch (err) {
       setError('Invalid credentials. Please try again.');

@@ -44,6 +44,10 @@ interface BookingScheduleState {
     scheduleId: string,
     status: "pending" | "confirmed" | "completed" | "cancelled"
   ) => Promise<void>;
+  updateScheduleStatusAdmin: (
+    scheduleId: string,
+    status: "pending" | "confirmed" | "completed" | "cancelled"
+  ) => Promise<void>;
   fetchScheduleStats: (params?: {
     year?: number;
     month?: number;
@@ -146,6 +150,45 @@ export const useBookingScheduleStore = create<BookingScheduleState>(
           schedules: state.schedules.map((schedule) =>
             schedule._id === scheduleId
               ? { ...schedule, status, updatedAt: response.payload.updatedAt }
+              : schedule
+          ),
+          selectedSchedule:
+            state.selectedSchedule?._id === scheduleId
+              ? {
+                  ...state.selectedSchedule,
+                  status,
+                  updatedAt: response.payload.updatedAt,
+                }
+              : state.selectedSchedule,
+          loading: false,
+        }));
+      } catch (error: any) {
+        set({
+          error:
+            error?.response?.data?.message ||
+            "Failed to update schedule status",
+          loading: false,
+        });
+      }
+    },
+
+    updateScheduleStatusAdmin: async (scheduleId, status) => {
+      set({ loading: true, error: null });
+      try {
+        const response = await bookingScheduleService.updateScheduleStatusAdmin(
+          scheduleId,
+          status
+        );
+
+        // Update the specific schedule status
+        set((state) => ({
+          schedules: state.schedules.map((schedule) =>
+            schedule._id === scheduleId
+              ? { 
+                  ...schedule, 
+                  status,
+                  updatedAt: response.payload.updatedAt 
+                }
               : schedule
           ),
           selectedSchedule:

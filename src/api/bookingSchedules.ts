@@ -204,4 +204,17 @@ export const bookingScheduleService = {
     );
     return response.data;
   },
+
+  // Admin: Update schedule status
+  async updateScheduleStatusAdmin(
+    scheduleId: string,
+    status: "pending" | "confirmed" | "completed" | "cancelled"
+  ): Promise<ScheduleResponse> {
+    const response = await axiosInstance.patch(
+      `${API_BASE_URL}/bookings/admin/schedule/${scheduleId}/status`,
+      { status },
+      { headers: getAuthHeader() }
+    );
+    return response.data;
+  },
 };

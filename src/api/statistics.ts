@@ -27,4 +27,7 @@ export const fetchTopCustomers = (limit = 5) =>
   axiosInstance.get(`/admin/statistics/top-customers?limit=${limit}`, { headers: getAuthHeader() });
 
 export const fetchTopServices = (limit = 5) =>
-  axiosInstance.get(`/admin/statistics/top-services?limit=${limit}`, { headers: getAuthHeader() }); 
+  axiosInstance.get(`/admin/statistics/top-services?limit=${limit}`, { headers: getAuthHeader() });
+
+export const fetchUpcomingBookings = (limit = 10) =>
+  axiosInstance.get(`/admin/statistics/upcoming-bookings?limit=${limit}`, { headers: getAuthHeader() }); 

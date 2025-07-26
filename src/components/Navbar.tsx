@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { useAuthStore } from '../store/authStore';
 
 interface Links {
   name: string;
@@ -88,6 +90,8 @@ const pricingLinks: Links[] = [
 ];
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const { user } = useAuthStore();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState<boolean>(false);
   const [isPricingDropdownOpen, setIsPricingDropdownOpen] = useState<boolean>(false);
@@ -180,6 +184,17 @@ const Navbar = () => {
       if (isServicesDropdownOpen) setIsServicesDropdownOpen(false);
       // --- NEW: Close locations dropdown when pricing is clicked ---
       if (isLocationsDropdownOpen) setIsLocationsDropdownOpen(false);
+    }
+  };
+
+  const handleSignInClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (user) {
+      // User is logged in, redirect to dashboard
+      navigate('/dashboard');
+    } else {
+      // User is not logged in, redirect to login page
+      navigate('/login');
     }
   };
 
@@ -330,8 +345,12 @@ const Navbar = () => {
           <li><a href="/reclean-guarantee" className="text-gray-700 text-[16px] font-semibold hover:text-brand-primary transition duration-300 ease-in-out">Reclean Guarantee</a></li>
           <li><a href="/help" className="text-gray-700 text-[16px] font-semibold hover:text-brand-primary transition duration-300 ease-in-out">Help</a></li>
           <li>
-            <a href="/login" className="px-5 py-2 border border-brand-primary text-brand-primary rounded-md hover:bg-brand-primary hover:text-white transition duration-300 ease-in-out">
-              Sign In
+            <a 
+              href="#" 
+              onClick={handleSignInClick}
+              className="px-5 py-2 border border-brand-primary text-brand-primary rounded-md hover:bg-brand-primary hover:text-white transition duration-300 ease-in-out cursor-pointer"
+            >
+              {user ? 'Dashboard' : 'Sign In'}
             </a>
           </li>
         </ul>
@@ -426,8 +445,15 @@ const Navbar = () => {
           <li><a onClick={toggleMobileMenu} href="/blog" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Blog</a></li>
           <li><a onClick={toggleMobileMenu} href="/help" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Help</a></li>
           <li className="w-full pt-4">
-            <a onClick={toggleMobileMenu} href="/login" className="block w-full text-center px-5 py-3 border border-brand-primary text-brand-primary rounded-lg hover:bg-brand-primary hover:text-white transition duration-300 ease-in-out text-lg">
-              Sign In
+            <a 
+              onClick={(e) => {
+                toggleMobileMenu();
+                handleSignInClick(e);
+              }} 
+              href="#" 
+              className="block w-full text-center px-5 py-3 border border-brand-primary text-brand-primary rounded-lg hover:bg-brand-primary hover:text-white transition duration-300 ease-in-out text-lg cursor-pointer"
+            >
+              {user ? 'Dashboard' : 'Sign In'}
             </a>
           </li>
         </ul>
