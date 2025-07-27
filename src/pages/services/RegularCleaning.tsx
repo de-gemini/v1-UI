@@ -3,7 +3,11 @@ import { originalFaq } from '../../components/commons/CommonFAQ';
 import example from '../../assets/images/Services/Bedroom/1.jpg'
 import example2 from '../../assets/images/Services/Bedroom/2.png'
 import example3 from '../../assets/images/Services/Bedroom/3.avif'
+import dirty2 from '../../assets/images/Services/Bedroom/dirty-bedroom.jpg'
 import example4 from '../../assets/images/Services/Bedroom/3.avif'
+import example5 from '../../assets/images/Services/SittingRoom/8.avif'
+import dirty3 from '../../assets/images/Services/SittingRoom/dirty-sittingRoom.jpg'
+import dirty from '../../assets/images/Services/Bathroom/dirty-bathroom.jpg'
 
 
 
@@ -114,9 +118,9 @@ export const regularCleaningPageData = {
       customType: "imageSlider",
       title: "Real Homes. Real Results.",
       slides: [
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/2-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/2-1.jpg" },
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/5-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/5-1.jpg" },
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/1-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/1-1.jpg" },
+        { before: example4, after: dirty },
+        { before: example3, after: dirty2 },
+        { before: example5, after: dirty3 },
       ],
     },
     {

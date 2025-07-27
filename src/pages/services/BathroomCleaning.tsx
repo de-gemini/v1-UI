@@ -5,7 +5,8 @@ import example2 from '../../assets/images/Services/Bathroom/6.avif'
 import example3 from '../../assets/images/Services/Bathroom/7.avif'
 import example4 from '../../assets/images/Services/Bathroom/8.avif'
 import example5 from '../../assets/images/Services/Bathroom/9.avif'
-import example6 from '../../assets/images/Services/Bathroom/3.jpg'
+import dirty from '../../assets/images/Services/Bathroom/dirty-bathroom.jpg'
+import dirty2 from '../../assets/images/Services/Bathroom/dirty-bathroom2.jpg'
 
 
 export const bathroomDeepPageData = {
@@ -145,8 +146,8 @@ export const bathroomDeepPageData = {
       customType: "imageSlider",
       title: "Bathroom Cleaning Results",
       slides: [
-        { before: example, after: example1 },
-        { before: example2, after: example3 },
+        { before: example, after: dirty },
+        { before: example2, after: dirty2 },
       ],
     },
     {
