@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useMemo } from "react";
-import background from '../assets/images/main-removebg.png'
+import background from "../assets/images/main-removebg.png";
 import {
   Search,
   ChevronDown,
@@ -8,6 +8,8 @@ import {
   Facebook,
   Pin,
 } from "lucide-react"; // Icons for search, dropdown, and sidebar arrow
+import LocationLinks from "../components/LocationLinks";
+import { AiFillTikTok } from "react-icons/ai";
 
 // Define interfaces for data structures
 interface FAQItemData {
@@ -22,7 +24,6 @@ interface FAQCategoryData {
   faqs: FAQItemData[];
 }
 export default function Emoppers() {
-  
   const faqCategories: FAQCategoryData[] = [
     {
       id: "general",
@@ -141,7 +142,6 @@ export default function Emoppers() {
       }
     });
 
-
     return () => {
       faqCategories.forEach((category) => {
         const sectionElement = sectionRefs.current[category.id];
@@ -161,18 +161,17 @@ export default function Emoppers() {
     const lowercasedSearchTerm = searchTerm.toLowerCase();
 
     return faqCategories
-      .map(category => {
+      .map((category) => {
         const filteredFaqs = category.faqs.filter(
-          faq =>
+          (faq) =>
             faq.question.toLowerCase().includes(lowercasedSearchTerm) ||
             faq.answer.toLowerCase().includes(lowercasedSearchTerm)
         );
 
         return { ...category, faqs: filteredFaqs };
       })
-      
-      .filter(category => category.faqs.length > 0);
 
+      .filter((category) => category.faqs.length > 0);
   }, [searchTerm]);
 
   const handleSearch = () => {
@@ -196,25 +195,20 @@ export default function Emoppers() {
 
   return (
     <div className="font-sans antialiased bg-gray-50 text-gray-800">
-        <nav className="bg-white p-8 flex items-center justify-center w-full">
-
-
-<div className=" w-[4rem] md:w-[5rem] lg:w-[7rem]">
-<a href="/" className="flex items-center">
-          <h1 className='text-brand-primary text-[10px] md:text-[15px] lg:text-[20px]'>
-          De Gemini Services LTD
-          </h1>
-        </a>
-</div>
-
-
-</nav>
+      <nav className="bg-white p-8 flex items-center justify-center w-full">
+        <div className=" w-[4rem] md:w-[5rem] lg:w-[7rem]">
+          <a href="/" className="flex items-center">
+            <h1 className="text-brand-primary text-[10px] md:text-[15px] lg:text-[20px]">
+              De Gemini Services LTD
+            </h1>
+          </a>
+        </div>
+      </nav>
       {/* Header Section */}
       <section
         className="relative bg-gradient-to-br from-purple-700 to-indigo-800 py-20 px-4 sm:px-6 lg:px-8 text-white overflow-hidden"
         style={{
-          backgroundImage:
-            `url(${background})`,
+          backgroundImage: `url(${background})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}>
@@ -347,11 +341,11 @@ export default function Emoppers() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-y-10 gap-x-8 w-full text-center md:text-left">
             {/* Column 1: Logo (Left aligned on desktop) */}
             <div className="lg:col-span-1 flex justify-center md:justify-start">
-            <a href="/" className="flex items-center">
-          <h1 className='text-brand-primary  text-[40px]'>
-          De Gemini Services LTD
-          </h1>
-        </a>
+              <a href="/" className="flex items-center">
+                <h1 className="text-brand-primary  text-[40px]">
+                  De Gemini Services LTD
+                </h1>
+              </a>
             </div>
 
             {/* Column 2: FOR CUSTOMERS */}
@@ -435,26 +429,21 @@ export default function Emoppers() {
             {/* Column 4: De-gemini SERVICE */}
             <div className="lg:col-span-1">
               <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">
-              De-gemini SERVICE
+                De-gemini SERVICE
               </h3>
               <ul className="space-y-2">
                 <li>
-                  <a href="#" className="hover:underline text-gray-700">
-                    Domestic cleaning
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:underline text-gray-700">
+                  <a
+                    href="/regular-clening"
+                    className="hover:underline text-gray-700">
                     Regular cleaning
                   </a>
                 </li>
+                <li></li>
                 <li>
-                  <a href="#" className="hover:underline text-gray-700">
-                    Deep cleaning
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:underline text-gray-700">
+                  <a
+                    href="/services-office-cleaning"
+                    className="hover:underline text-gray-700">
                     Office cleaning
                   </a>
                 </li>
@@ -483,76 +472,47 @@ export default function Emoppers() {
                 </h3>
                 <div className="flex justify-center md:justify-start space-x-4">
                   <a
-                    href="#"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Pinterest">
-                    {/* Using Pin icon as a placeholder for Pinterest, as Pinterest icon is not directly available in lucide-react */}
-                    <Pin className="h-7 w-7 text-gray-600 hover:text-brand-primary transition duration-300" />
-                  </a>
-                  <a
-                    href="#"
+                    href="https://www.instagram.com/de_gemini_services?igsh=dGFqbmFrZTMxcGI1"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Instagram">
-                    <Instagram className="h-7 w-7 text-gray-600 hover:text-brand-primary transition duration-300" />
+                    <Instagram className="h-7 w-7 text-brand-primary hover:text-blue-500 transition duration-300" />
                   </a>
                   <a
-                    href="#"
+                    href="https://www.facebook.com/share/1Axqo294Wx/?mibextid=wwXIfr"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Facebook">
-                    <Facebook className="h-7 w-7 text-gray-600 hover:text-brand-primary transition duration-300" />
+                    <Facebook className="h-7 w-7 text-brand-primary hover:text-blue-500 transition duration-300" />
+                  </a>
+                  <a
+                    href="https://www.tiktok.com/@de.gemini.services?_t=ZS-8xiqay0oCet&_r=1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="TikTok">
+                    <AiFillTikTok className="h-7 w-7 text-brand-primary hover:text-blue-500 transition duration-300" />
                   </a>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Cleaner Locations Section (Full Width) */}
           <div className="mt-12 w-full border-t border-gray-200 pt-8 text-center">
             <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">
               CLEANER LOCATIONS
             </h3>
-            <p className="text-gray-700 text-sm leading-relaxed">
-              <span className="mr-2">East London</span>{" "}
-              <span className="mr-2">North London</span>{" "}
-              <span className="mr-2">South London</span> |{" "}
-              <span className="mr-2">West London</span> |{" "}
-              <span className="mr-2">Balham</span>{" "}
-              <span className="mr-2">Islington</span>{" "}
-              <span className="mr-2">Watford</span>{" "}
-              <span className="mr-2">Bromley</span> |{" "}
-              <span className="mr-2">Tooting</span>{" "}
-              <span className="mr-2">Wimbledon</span> |{" "}
-              <span className="mr-2">Kingston</span> |{" "}
-              <span className="mr-2">Ealing</span>{" "}
-              <span className="mr-2">Harrow</span>{" "}
-              <span className="mr-2">Surbiton</span> |{" "}
-              <span className="mr-2">Angel</span>{" "}
-              <span className="mr-2">Croydon</span>{" "}
-              <span className="mr-2">Clapham</span> |{" "}
-              <span className="mr-2">Greenwich</span> |{" "}
-              <span className="mr-2">Richmond</span>{" "}
-              <span className="mr-2">Southwark</span>
-            </p>
+            <LocationLinks variant="inline" />
           </div>
 
           {/* Bottom Copyright and Address */}
           <div className="mt-8 w-full border-t border-gray-200 pt-8 text-center text-xs text-gray-600 flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0">
-            <p className="order-2 md:order-1">www.emop.co.uk</p>
-            <p className="order-1 md:order-2">Copyright © De-Gemini 2024</p>
-            <p className="order-3 md:order-3">
-              Registered office address: Suite 5 3rd Floor, Sovereign House 1
-              Albert Place, London, England, N1 0BQ
-            </p>
+            <a href="">
+              <p className="order-2 md:order-1">www.De-gemini.co.uk</p>
+            </a>
+            <p className="order-1 md:order-2">Copyright © De-Gemini 2025</p>
           </div>
         </div>
       </footer>
     </div>
   );
 }
-
-
-
-

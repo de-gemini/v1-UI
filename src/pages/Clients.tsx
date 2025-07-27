@@ -16,7 +16,7 @@ import SecondFooter from "../components/SecondFooter";
 interface FAQItemData {
   id: string;
   question: string;
-  answer: string;
+  answer: string | JSX.Element;
 }
 
 interface FAQCategoryData {
@@ -77,7 +77,11 @@ Cleaners work as independent cleaning partners. They access the De-Gemini platfo
         {
           id: "booking-1",
           question: "How do I make a booking?",
-          answer: `Bookings can only be completed via our website www.de-gemini.co.uk and the payment is made via our secure payment provider. The booking process is very simple and only takes a few minutes to complete. To make a booking, we ask for some personal details (your name, phone number, your address) and your payment information (we accept payment by credit or debit card only). Please be aware that we will only charge you when the cleaning has been completed. However, when you make a booking, we will block out the estimated amount on your card to be sure your payment will be processed. After the cleaning, the final cost is charged to your card details, and the difference between the estimated and factual amount will be reflected as a refund or extra charge on your account.`,
+          answer: (
+            <p>
+              Bookings can only be completed via our website <a href="https://de-gemini.netlify.app">www.de-gemini.co.uk</a> and the payment is made via our secure payment provider. The booking process is very simple and only takes a few minutes to complete. To make a booking, we ask for some personal details (your name, phone number, your address) and your payment information (we accept payment by credit or debit card only). Please be aware that we will only charge you when the cleaning has been completed. However, when you make a booking, we will block out the estimated amount on your card to be sure your payment will be processed. After the cleaning, the final cost is charged to your card details, and the difference between the estimated and factual amount will be reflected as a refund or extra charge on your account.
+            </p>
+          ),
         },
         {
           id: "booking-2",
@@ -386,7 +390,6 @@ However, please note that as soon as the booking is confirmed, the estimated amo
                   </div>
                 </section>
               ))}
-
             </div>
           </div>
     

@@ -59,7 +59,6 @@ style={{
           <ul className="space-y-2">
             <li><a href="/services/end-tenancy-cleaning" className="hover:underline text-gray-700">Domestic cleaning</a></li>
             <li><a href="/regular-cleaning" className="hover:underline text-gray-700">Regular cleaning</a></li>
-            <li><a href="/services-deep-cleaning" className="hover:underline text-gray-700">Deep cleaning</a></li>
             <li><a href="/services-office-cleaning" className="hover:underline text-gray-700">Office cleaning</a></li>
           </ul>
         </div>

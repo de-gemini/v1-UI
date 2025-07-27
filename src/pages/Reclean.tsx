@@ -46,7 +46,7 @@ export default function Reclean() {
     interface FAQItemData {
         id: string;
         question: string;
-        answer: string;
+        answer: string | JSX.Element;
       }
     
       const faqData: FAQItemData[] = [
@@ -54,19 +54,31 @@ export default function Reclean() {
           id: "packages",
           question: "What is included in De-Gemini cleaning service?",
           answer:
-            `You can review what is included in the cleaning here`,
+            (
+              <p>
+                You can review what is included in the cleaning <a href="/what-cleaning" className="text-blue-500">here</a>
+              </p>
+            ),
         },
         {
           id: "booking-reclean",
           question: "How to book a reclean?",
           answer:
-            "Please email us at support@de-gemini.world or get in touch via live chat feature on our website within 48 hours of the cleaning being completed with a full description of the issues together with any supporting evidence. Our support team will review your email and get in touch with you ASAP.",
+            (
+              <p>
+                Please email us at <a href="mailto:Support@Degeminiservices.co.uk" className="text-blue-500">Support@Degeminiservices.co.uk</a> or get in touch via live chat feature on our website within 48 hours of the cleaning being completed with a full description of the issues together with any supporting evidence. Our support team will review your email and get in touch with you ASAP.
+              </p>
+            ),
         },
         {
           id: "hire-per-week",
           question: "What is De-Gemini complaint procedure?",
           answer:
-            "Please read more about De-Gemini complaints procedure here",
+            (
+              <p>
+                Please read more about De-Gemini complaints procedure <a href="/help/Clients" className="text-blue-500">here</a>.
+              </p>
+            ),
         },
       ];
 

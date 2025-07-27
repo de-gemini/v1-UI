@@ -8,12 +8,7 @@ import CommonPostcodeInput from '../../components/commons/CommonPostcodeInput';
 import ImageSlider from "../../components/ImageSlider";
 import { DeepPriceCard } from "../../components/DeepPriceCard";
 import WhyChooseSection from "../../components/WhyChooseSection";
-import { FaSprayCan, FaBroom, FaLeaf, FaEye, FaHandshake, FaClock, FaSmile, FaRecycle } from 'react-icons/fa';
 import { MdOutlineLightbulb, MdOutlineStar, MdOutlineCheckCircle, MdOutlineCloud, MdOutlineSecurity, MdOutlineAccessTime } from 'react-icons/md';
-// Remove local image imports for tips
-import clockImg from "../../assets/images/office-cleaning.png";
-import smileImg from "../../assets/images/card-5.png";
-import recycleImg from "../../assets/images/card-6.jpg";
 import CommonFAQ from '../../components/commons/CommonFAQ';
 
 // Add types for SectionRenderer props and map callbacks

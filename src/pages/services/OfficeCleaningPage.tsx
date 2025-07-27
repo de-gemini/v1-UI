@@ -7,6 +7,11 @@ import example3 from '../../assets/images/Services/Office/1.png'
 import example4 from '../../assets/images/Services/Office/2.png'
 import example5 from '../../assets/images/Services/Office/9.avif'
 import example6 from '../../assets/images/Services/Office/4.avif'
+import dirtyOffice from '../../assets/images/Services/Office/dirty-office.jpg'
+import dirtyOffice2 from '../../assets/images/Services/Office/dirty-offfice2.jpg'
+import dirtyOffice3 from '../../assets/images/Services/Office/dirty-office3.jpg'
+
+
 
 
 
@@ -141,8 +146,8 @@ export const officeCleaningPageData = {
       customType: "imageSlider",
       title: "Before & After Office Cleaning Results",
       slides: [
-        { before: example3, after: example4 },
-        { before: example5, after: example6 },
+        { before: example3, after: dirtyOffice },
+        { before: example5, after: dirtyOffice2 },
       ],
     },
     {

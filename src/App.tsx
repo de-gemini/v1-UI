@@ -89,6 +89,9 @@ const About = lazy(() => import("./pages/About"));
 const BookingPolicy = lazy(() => import("./pages/BookingPolicy"));
 const CheckList = lazy(() => import('./pages/Checklist'))
 const Reviews = lazy(() => import('./pages/Review'))
+const WhatCleaning = lazy(() => import('./pages/WhatisIncluded'))
+
+
 
 
 
@@ -358,6 +361,14 @@ function App() {
                 element={
                     <Layout>
                       <SpringCleaning />
+                    </Layout>
+                }
+              />
+              <Route
+                path="/what-cleaning"
+                element={
+                    <Layout>
+                      <WhatCleaning />
                     </Layout>
                 }
               />

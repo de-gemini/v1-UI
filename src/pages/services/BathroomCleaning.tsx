@@ -8,11 +8,6 @@ import example5 from '../../assets/images/Services/Bathroom/9.avif'
 import example6 from '../../assets/images/Services/Bathroom/3.jpg'
 
 
-
-
-
-
-
 export const bathroomDeepPageData = {
   banner: { title: "Bathroom Deep Cleaning Services in England" },
   wowSection1: {

@@ -2,7 +2,14 @@ import ServicePageTemplate from "./ServicePageTemplate";
 import { originalFaq } from '../../components/commons/CommonFAQ';
 import example from '../../assets/images/Services/Rug/1.avif'
 import example1 from '../../assets/images/Services/Rug/2.avif'
+import example2 from '../../assets/images/Services/Rug/3.avif'
+
 import banner from '../../assets/images/Services/Rug/3.avif'
+import dirtyRug from '../../assets/images/Services/Rug/dity-rug.jpg'
+import dirtyRug2 from '../../assets/images/Services/Rug/dirty-rug2.jpg'
+import dirtyRug3 from '../../assets/images/Services/Rug/dirty-rug3.jpg'
+
+
 
 
 
@@ -112,9 +119,9 @@ export const rugCleaningPageData = {
       customType: "imageSlider",
       title: "Before & After Rug Transformations",
       slides: [
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/4-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/4-1.jpg" },
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/6-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/6-1.jpg" },
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/7-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/7-1.jpg" },
+        { before: example, after: dirtyRug },
+        { before: example1, after: dirtyRug2 },
+        { before: example2 , after: dirtyRug3 },
       ],
     },
     {

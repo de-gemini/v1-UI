@@ -6,6 +6,9 @@ import example2 from '../../assets/images/Services/Carpet/3.avif'
 import example3 from '../../assets/images/Services/Carpet/4.avif'
 import example4 from '../../assets/images/Services/Carpet/5.avif'
 import banner from '../../assets/images/Services/Carpet/6.avif'
+import dirtyCarpet from '../../assets/images/Services/Carpet/dirty-carpet.avif'
+import dirtyCarpet2 from '../../assets/images/Services/Carpet/dirty-carpet2.jpg'
+
 
 
 
@@ -156,8 +159,8 @@ export const carpetCleaningPageData = {
       customType: "imageSlider",
       title: "Before & After Carpet Cleaning",
       slides: [
-        { before: example, after: example1 },
-        { before: example2, after: example3 },
+        { before: example, after: dirtyCarpet },
+        { before: example2, after: dirtyCarpet2 },
       ],
     },
     {

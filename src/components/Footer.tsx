@@ -50,6 +50,7 @@ export const Footer: React.FC = () => {
  <li><a href="/pricing-house-cleaning" className="hover:underline">Pricing</a></li>
  <li><a href="/blog" className="hover:underline">Blog</a></li>
  <li><a href="/booking-policy" className="hover:underline">Booking Policy</a></li>
+ <li><a href="/what-cleaning" className="hover:underline">What's included</a></li>
  <li><a href="/cancellation-policy" className="hover:underline">Cancellation Policy</a></li>
  <li><a href="/terms-and-conditions" className="hover:underline">Terms & Conditions</a></li>
  <li><a href="/privacy-policy" className="hover:underline">Privacy Policy</a></li>
@@ -64,7 +65,6 @@ export const Footer: React.FC = () => {
 <DropdownHeader title="De-gemini SERVICE" dropdownName="De-geminiService">
   <ul className="space-y-2 pb-4 lg:pb-0">
  <li><a href="/regular-cleaning" className="hover:underline">Regular cleaning</a></li>
- <li><a href="/services-deep-cleaning" className="hover:underline">Deep cleaning</a></li>
  <li><a href="/services-office-cleaning" className="hover:underline">Office cleaning</a></li>
  <li><a href="/services/end-tenancy-cleaning" className="hover:underline">End of Tenancy cleaning</a></li>
  <li><a href="/services/carpet-cleaning" className="hover:underline">Carpet cleaning</a></li>

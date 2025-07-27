@@ -24,8 +24,8 @@ import slide4 from '../assets/images/slide-4.png'
 import slide5 from '../assets/images/slide-5.png'
 import slide6 from '../assets/images/card-7.png'
 import card1 from '../assets/images/Services/Kitchen/4.avif'
-import card2 from '../assets/images/Services/Kitchen/6.avif'
-import card3 from '../assets/images/Services/Bathroom/4.avif'
+import card2 from '../assets/images/Services/Office/4.avif'
+import card3 from '../assets/images/Services/Kitchen/4.avif'
 import card4 from '../assets/images/Services/Bathroom/6.avif';
 import card5 from '../assets/images/Services/SittingRoom/4.avif';
 import card6 from '../assets/images/Services/SittingRoom/7.avif';
@@ -36,6 +36,10 @@ import CommonPostcodeInput from '../components/commons/CommonPostcodeInput';
 import HomeHeroSection from '../components/HomeHeroSection';
 import CommonFAQ from "../components/commons/CommonFAQ";
 import BeforeAfterSlider from "../components/BeforeAfterSlider";
+import dirtyKitchen from '../assets/images/Services/Kitchen/dirty-kitchen.jpg'
+import dirtBathroom from '../assets/images/Services/Bathroom/dirty-bathroom.jpg'
+import dirtySittingroom from '../assets/images/Services/SittingRoom/dirty-sittingRoom.jpg'
+
 
 const Home = () => {
   const features = [
@@ -528,20 +532,20 @@ const Home = () => {
           subtitle="We make your space look absolutely sparkling"
           slides={[
             {
-              before: card1,
-              after: card2,
+              before: card3,
+              after: dirtyKitchen,
               title: 'Kitchen Deep Clean',
               description: 'Spotless kitchen after our deep cleaning service.'
             },
             {
-              before: card3,
-              after: card4,
+              before: card4,
+              after: dirtBathroom,
               title: 'Bathroom Transformation',
               description: 'A sparkling bathroom, every time.'
             },
             {
-              before: card5,
-              after: card6,
+              before: card6,
+              after: dirtySittingroom,
               title: 'Living Room Refresh',
               description: 'Enjoy a fresh, clean living space.'
             },
