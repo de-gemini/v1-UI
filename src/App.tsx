@@ -20,6 +20,7 @@ import PricingManagement from "./pages/admin/PricingManagement";
 import ErrorAlert from "./components/ErrorAlert";
 import SuccessAlert from "./components/SuccessAlert";
 import ScheduleManagement from "./pages/admin/ScheduleManagement";
+import ChatManagement from "./components/admin/ChatManagement";
 import StripeTestPage from './pages/StripeTestPage';
 import StripeCardPaymentPage from './pages/StripeCardPaymentPage';
 import PaymentSuccessPage from './pages/PaymentSuccessPage';
@@ -192,6 +193,16 @@ function App() {
                   <AdminRoute>
                     <AdminLayout>
                       <ScheduleManagement />
+                    </AdminLayout>
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="/admin/chat"
+                element={
+                  <AdminRoute>
+                    <AdminLayout>
+                      <ChatManagement />
                     </AdminLayout>
                   </AdminRoute>
                 }

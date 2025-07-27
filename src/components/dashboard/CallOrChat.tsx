@@ -23,7 +23,7 @@ const CallOrChat = () => {
         </svg>
       ),
       action: 'Call Now',
-      value: '+44 20 1234 5678',
+      value: '07867388142',
       color: 'from-green-500 to-emerald-600'
     },
     {
@@ -48,7 +48,7 @@ const CallOrChat = () => {
         </svg>
       ),
       action: 'Send Email',
-      value: 'support@geminicleaning.com',
+      value: 'support@degeminiservices.co.uk',
       color: 'from-purple-500 to-pink-600'
     }
   ];

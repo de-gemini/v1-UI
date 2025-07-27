@@ -5,8 +5,9 @@ import Bookings from '../components/dashboard/Bookings';
 import Profile from '../components/dashboard/Profile';
 import ReferFriends from '../components/dashboard/ReferFriends';
 import CallOrChat from '../components/dashboard/CallOrChat';
+import Chat from '../components/dashboard/Chat';
 
-type TabType = 'bookings' | 'profile' | 'refer' | 'support';
+type TabType = 'bookings' | 'profile' | 'refer' | 'support' | 'chat';
 
 export const DecorativeBackground = () => {
   return(
@@ -129,6 +130,15 @@ const Dashboard = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.25a9.75 9.75 0 100 19.5 9.75 9.75 0 000-19.5z" />
         </svg>
       )
+    },
+    {
+      id: 'chat' as TabType,
+      label: 'Chat with Support',
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+        </svg>
+      )
     }
   ];
 
@@ -142,6 +152,8 @@ const Dashboard = () => {
         return <ReferFriends />;
       case 'support':
         return <CallOrChat />;
+      case 'chat':
+        return <Chat />;
       default:
         return <Bookings />;
     }

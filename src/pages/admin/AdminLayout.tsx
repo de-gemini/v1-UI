@@ -10,6 +10,7 @@ import {
   FaTimes,
   FaUsers,
   FaCreditCard,
+  FaComments,
 } from "react-icons/fa";
 import { FiBell, FiSearch } from "react-icons/fi";
 import { Link, useLocation } from "react-router-dom";
@@ -24,6 +25,7 @@ const navItems = [
   { label: "Payment Records", icon: <FaCreditCard />, path: "/admin/payments" },
   { label: "Calendar", icon: <FaCalendarAlt />, path: "/admin/calendar" },
   { label: "Bookings", icon: <FaUsers />, path: "/admin/bookings" },
+  { label: "Chat Management", icon: <FaComments />, path: "/admin/chat" },
   // { label: 'Product', icon: <FaBoxOpen />, path: '/admin/product' },
   // { label: 'Inventory', icon: <FaBoxes />, path: '/admin/inventory' },
   // { label: 'Customers', icon: <FaUsers />, path: '/admin/customers' },
