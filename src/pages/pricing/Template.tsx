@@ -1,4 +1,5 @@
-// CleaningPageTemplate.tsx
+
+
 import { Check, ChevronDown, MapPin } from "lucide-react";
 import { FaBroom, FaRegCalendarCheck, FaRegCreditCard, FaRegSmile } from "react-icons/fa";
 import { CostCard } from "../../components/Postcode";
@@ -10,6 +11,7 @@ import { API_BASE_URL } from "../../constants";
 import { useNavigate } from "react-router-dom";
 import CommonFAQ from "../../components/commons/CommonFAQ";
 import CommonPostcodeInput from "../../components/commons/CommonPostcodeInput";
+import type { FaqData } from "../../data/faqData";
 
 interface CleaningPageTemplateProps {
   title: string;
@@ -23,6 +25,7 @@ interface CleaningPageTemplateProps {
   houseCleaning: string[];
   allCleaningServices: string[];
   images: string[];
+  faqData: FaqData;
   finalCTAHeading?: string;
 }
 
@@ -40,6 +43,7 @@ export default function CleaningPageTemplate({
   allCleaningServices,
   images,
   finalCTAHeading = "Cleaning Is No Longer Your Burden",
+  faqData
 }: CleaningPageTemplateProps) {
   const [postcode, setPostcode] = useState<string>("");
   const [showAll, setShowAll] = useState(false);
@@ -211,7 +215,7 @@ export default function CleaningPageTemplate({
       </section>
 
       {/* FAQ */}
-      <CommonFAQ/>
+      <CommonFAQ faqData={faqData}/>
 
     </div>
   );

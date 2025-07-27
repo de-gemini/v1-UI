@@ -7,6 +7,7 @@ import example4 from '../../assets/images/Services/Bathroom/8.avif'
 import example5 from '../../assets/images/Services/Bathroom/9.avif'
 import dirty from '../../assets/images/Services/Bathroom/dirty-bathroom.jpg'
 import dirty2 from '../../assets/images/Services/Bathroom/dirty-bathroom2.jpg'
+import { serviceBathroom } from "../../data/faqData";
 
 
 export const bathroomDeepPageData = {
@@ -186,5 +187,5 @@ export const bathroomDeepPageData = {
 };
 
 export default function BathroomCleaning() {
-  return <ServicePageTemplate pageData={bathroomDeepPageData} />;
+  return <ServicePageTemplate pageData={bathroomDeepPageData} faqData={serviceBathroom} />;
 }

@@ -1,5 +1,5 @@
 import ServicePageTemplate from "./ServicePageTemplate";
-import { originalFaq } from '../../components/commons/CommonFAQ';
+import { serviceRug } from "../../data/faqData";
 import example from '../../assets/images/Services/Rug/1.avif'
 import example1 from '../../assets/images/Services/Rug/2.avif'
 import example2 from '../../assets/images/Services/Rug/3.avif'
@@ -126,11 +126,11 @@ export const rugCleaningPageData = {
     },
     {
       type: "faq",
-      ...originalFaq,
+      serviceRug,
     },
   ],
 };
 
 export default function RugCleaning() {
-  return <ServicePageTemplate pageData={rugCleaningPageData} />;
+  return <ServicePageTemplate pageData={rugCleaningPageData} faqData={serviceRug} />;
 }

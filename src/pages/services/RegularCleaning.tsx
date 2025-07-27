@@ -1,5 +1,5 @@
 import ServicePageTemplate from "./ServicePageTemplate";
-import { originalFaq } from '../../components/commons/CommonFAQ';
+import { serviceRegular } from "../../data/faqData";
 import example from '../../assets/images/Services/Bedroom/1.jpg'
 import example2 from '../../assets/images/Services/Bedroom/2.png'
 import example3 from '../../assets/images/Services/Bedroom/3.avif'
@@ -125,11 +125,11 @@ export const regularCleaningPageData = {
     },
     {
       type: "faq",
-      ...originalFaq,
+      serviceRegular,
     },
   ],
 };
 
 export default function RegularCleaning() {
-  return <ServicePageTemplate pageData={regularCleaningPageData} />;
+  return <ServicePageTemplate pageData={regularCleaningPageData} faqData={serviceRegular} />;
 }

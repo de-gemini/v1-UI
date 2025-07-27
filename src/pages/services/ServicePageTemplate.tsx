@@ -10,15 +10,16 @@ import { DeepPriceCard } from "../../components/DeepPriceCard";
 import WhyChooseSection from "../../components/WhyChooseSection";
 import { MdOutlineLightbulb, MdOutlineStar, MdOutlineCheckCircle, MdOutlineCloud, MdOutlineSecurity, MdOutlineAccessTime } from 'react-icons/md';
 import CommonFAQ from '../../components/commons/CommonFAQ';
-
+import { type FaqData } from "../../data/faqData";
 // Add types for SectionRenderer props and map callbacks
 interface SectionRendererProps {
   section: any;
   state: any;
   setState: React.Dispatch<React.SetStateAction<any>>;
+  faqData: FaqData;
 }
 
-function SectionRenderer({ section, state, setState }: SectionRendererProps) {
+function SectionRenderer({ section, state, setState, faqData }: SectionRendererProps) {
   switch (section.type) {
     case "carousel":
       return (
@@ -170,7 +171,7 @@ function SectionRenderer({ section, state, setState }: SectionRendererProps) {
       }
       break;
     case "faq":
-      return <CommonFAQ />;
+      return <CommonFAQ faqData={faqData} />;
     case "whyChoose":
       return <div className="mt-[2rem]"><WhyChooseSection {...section.whyChooseProps} /></div>;
     // Add more cases for all other section types as needed
@@ -187,6 +188,7 @@ interface WowSectionProps {
   image: string;
   imageAlt?: string;
   list?: string[];
+  faqData?: FaqData
   buttonText?: string;
   buttonLink?: string;
   testimonial?: {
@@ -282,9 +284,10 @@ function StaticWowSection2(props: WowSectionProps) {
 
 interface ServicePageTemplateProps {
   pageData: any;
+  faqData: FaqData
 }
 
-export default function ServicePageTemplate({ pageData }: ServicePageTemplateProps) {
+export default function ServicePageTemplate({ pageData, faqData }: ServicePageTemplateProps) {
   const [state, setState] = useState<any>({ openFAQ: null });
   // Default wow section data
   const defaultWow1 = {
@@ -370,7 +373,7 @@ export default function ServicePageTemplate({ pageData }: ServicePageTemplatePro
             {/* Insert the second wow section BEFORE FAQ */}
             {section.type === "faq" && <StaticWowSection2 {...(pageData.wowSection2 || defaultWow2)} />}
             <div className="px-6 md:px-16">
-              <SectionRenderer section={section} state={state} setState={setState} />
+              <SectionRenderer section={section} state={state} setState={setState} faqData={faqData} />
             </div>
             {/* Insert the first wow section after professionals */}
             {section.type === "professionals" && <StaticWowSection1 {...(pageData.wowSection1 || defaultWow1)} />}

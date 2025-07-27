@@ -1,5 +1,5 @@
 import ServicePageTemplate from "./ServicePageTemplate";
-import { originalFaq } from '../../components/commons/CommonFAQ';
+import { serviceRegular } from "../../data/faqData";
 import example from '../../assets/images/Services/SittingRoom/10.avif'
 import example1 from '../../assets/images/Services/Kitchen/2.jpg'
 import example2 from '../../assets/images/Services/Kitchen/6.avif'
@@ -149,11 +149,11 @@ export const deepCleaningPageData = {
     },
     {
       type: "faq",
-      ...originalFaq
+      serviceRegular
     },
   ],
 };
 
 export default function DeepCleaningService() {
-  return <ServicePageTemplate pageData={deepCleaningPageData} />;
+  return <ServicePageTemplate pageData={deepCleaningPageData} faqData={serviceRegular} />;
 }

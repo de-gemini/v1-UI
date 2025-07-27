@@ -1,5 +1,5 @@
 import ServicePageTemplate from "./ServicePageTemplate";
-import { originalFaq } from '../../components/commons/CommonFAQ';
+import { serviceSpring } from "../../data/faqData";
 import example from '../../assets/images/Services/Upholstery/1.avif'
 import example1 from '../../assets/images/Services/Office/6.avif'
 import example2 from '../../assets/images/Services/Office/8.avif'
@@ -124,11 +124,11 @@ export const springCleaningPageData = {
     },
     {
       type: "faq",
-      ...originalFaq,
+      serviceSpring,
     },
   ],
 };
 
 export default function SpringCleaning() {
-  return <ServicePageTemplate pageData={springCleaningPageData} />;
+  return <ServicePageTemplate pageData={springCleaningPageData} faqData={serviceSpring} />;
 }

@@ -1,5 +1,5 @@
 import ServicePageTemplate from "./ServicePageTemplate";
-import { originalFaq } from '../../components/commons/CommonFAQ';
+import { serviceCarpet } from "../../data/faqData";
 import example from '../../assets/images/Services/Carpet/1.avif'
 import example1 from '../../assets/images/Services/Carpet/2.avif'
 import example2 from '../../assets/images/Services/Carpet/3.avif'
@@ -165,11 +165,11 @@ export const carpetCleaningPageData = {
     },
     {
       type: "faq",
-      ...originalFaq
+      serviceCarpet
     },
   ],
 };
 
 export default function CarpetService() {
-  return <ServicePageTemplate pageData={carpetCleaningPageData} />;
+  return <ServicePageTemplate pageData={carpetCleaningPageData} faqData={serviceCarpet} />;
 }

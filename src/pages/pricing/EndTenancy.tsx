@@ -1,6 +1,7 @@
 // v1-UI/src/pages/pricing/TenancyCleaning.tsx
 
 import CleaningPageTemplate from "./Template";
+import { priceEnd } from "../../data/faqData";
 
 export default function TenancyCleaning() {
   const features = [
@@ -63,6 +64,7 @@ export default function TenancyCleaning() {
       houseCleaning={houseCleaning}
       allCleaningServices={allCleaningServices}
       images={images}
+      faqData={priceEnd}
     />
   );
 }

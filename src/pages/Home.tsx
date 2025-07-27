@@ -39,6 +39,7 @@ import BeforeAfterSlider from "../components/BeforeAfterSlider";
 import dirtyKitchen from '../assets/images/Services/Kitchen/dirty-kitchen.jpg'
 import dirtBathroom from '../assets/images/Services/Bathroom/dirty-bathroom.jpg'
 import dirtySittingroom from '../assets/images/Services/SittingRoom/dirty-sittingRoom.jpg'
+import { defaultFAQ } from "../data/faqData";
 
 
 const Home = () => {
@@ -634,7 +635,7 @@ const Home = () => {
       </section>
 
       
-        <CommonFAQ/>
+        <CommonFAQ faqData={defaultFAQ} />
 
         </div>
       

@@ -1,6 +1,7 @@
 // v1-UI/src/pages/pricing/DeepCleaning.tsx
 
 import CleaningPageTemplate from "./Template";
+import { priceDeep } from "../../data/faqData";
 
 export default function DeepCleaning() {
   const features = [
@@ -61,6 +62,7 @@ export default function DeepCleaning() {
       houseCleaning={houseCleaning}
       allCleaningServices={allCleaningServices}
       images={images}
+      faqData={priceDeep}
     />
   );
 }

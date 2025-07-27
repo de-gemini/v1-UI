@@ -1,6 +1,7 @@
 // v1-UI/src/pages/pricing/OfficeCleaning.tsx
 
 import CleaningPageTemplate from "./Template";
+import { priceOffice } from "../../data/faqData";
 
 export default function OfficeCleaning() {
   const features = [
@@ -66,6 +67,7 @@ export default function OfficeCleaning() {
       houseCleaning={houseCleaning}
       allCleaningServices={allCleaningServices}
       images={images}
+      faqData={priceOffice}
     />
   );
 }

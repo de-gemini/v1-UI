@@ -1,5 +1,5 @@
 import ServicePageTemplate from "./ServicePageTemplate";
-import { originalFaq } from '../../components/commons/CommonFAQ';
+import { serviceKitchenDeep } from "../../data/faqData";
 import example from '../../assets/images/Services/Kitchen/8.avif'
 import example1 from '../../assets/images/Services/Kitchen/7.avif'
 import example2 from '../../assets/images/Services/Kitchen/6.avif'
@@ -168,11 +168,11 @@ export const kitchenDeepPageData = {
     },
     {
       type: "faq",
-      ...originalFaq
+      serviceKitchenDeep
     },
   ],
 };
 
 export default function KitchenDeep() {
-  return <ServicePageTemplate pageData={kitchenDeepPageData} />;
+  return <ServicePageTemplate pageData={kitchenDeepPageData} faqData={serviceKitchenDeep} />;
 }

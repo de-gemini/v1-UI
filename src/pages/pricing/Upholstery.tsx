@@ -1,6 +1,7 @@
 // v1-UI/src/pages/pricing/UpholsteryCleaning.tsx
 
 import CleaningPageTemplate from "./Template";
+import { priceUpholstery } from "../../data/faqData";
 
 export default function UpholsteryCleaning() {
   const features = [
@@ -59,6 +60,7 @@ export default function UpholsteryCleaning() {
       houseCleaning={houseCleaning}
       allCleaningServices={allCleaningServices}
       images={images}
+      faqData={priceUpholstery}
     />
   );
 }

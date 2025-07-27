@@ -1,6 +1,7 @@
 // v1-UI/src/pages/pricing/HouseCleaning.tsx
 
 import CleaningPageTemplate from "./Template";
+import {priceHome} from '../../data/faqData'
 
 export default function HouseCleaning() {
   const features = [
@@ -79,6 +80,7 @@ export default function HouseCleaning() {
       houseCleaning={houseCleaning}
       allCleaningServices={allCleaningServices}
       images={images}
+      faqData={priceHome}
       finalCTAHeading="Cleaning Is No Longer Your Burden"
     />
   );

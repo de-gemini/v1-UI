@@ -1,5 +1,5 @@
 import ServicePageTemplate from "./ServicePageTemplate";
-import { originalFaq } from '../../components/commons/CommonFAQ';
+import { serviceEnd } from "../../data/faqData";
 import example from '../../assets/images/Services/Bedroom/8.avif'
 import dirty3 from '../../assets/images/Services/Bedroom/dirty-bedroom2.jpg'
 import example1 from '../../assets/images/Services/Kitchen/4.avif'
@@ -140,11 +140,11 @@ export const endOfTenancyPageData = {
     },
     {
       type: "faq",
-      ...originalFaq
+      serviceEnd
     },
   ],
 };
 
 export default function EndTenancyService() {
-  return <ServicePageTemplate pageData={endOfTenancyPageData} />;
+  return <ServicePageTemplate pageData={endOfTenancyPageData} faqData={serviceEnd} />;
 }

@@ -1,5 +1,5 @@
 import ServicePageTemplate from "./ServicePageTemplate";
-import { originalFaq } from '../../components/commons/CommonFAQ';
+import { serviceOffice } from "../../data/faqData";
 import example from '../../assets/images/Services/Office/6.avif'
 import example1 from '../../assets/images/Services/Office/8.avif'
 import example2 from '../../assets/images/Services/Office/5.avif'
@@ -152,11 +152,11 @@ export const officeCleaningPageData = {
     },
     {
       type: "faq",
-      ...originalFaq,
+      serviceOffice,
     },
   ],
 };
 
 export default function OfficeCleaningPage() {
-  return <ServicePageTemplate pageData={officeCleaningPageData} />;
+  return <ServicePageTemplate pageData={officeCleaningPageData} faqData={serviceOffice} />;
 }

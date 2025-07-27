@@ -1,5 +1,5 @@
 import ServicePageTemplate from "./ServicePageTemplate";
-import { originalFaq } from '../../components/commons/CommonFAQ';
+import { serviceMove } from "../../data/faqData";
 import example from '../../assets/images/Services/SittingRoom/3.avif'
 import dirty from '../../assets/images/Services/SittingRoom/dirty-sittingRoom.jpg'
 import dirty2 from '../../assets/images/Services/Bathroom/dirty-bathroom.jpg'
@@ -120,11 +120,11 @@ export const moveInCleaningPageData = {
     },
     {
       type: "faq",
-      ...originalFaq
+      serviceMove
     },
   ],
 };
 
 export default function MoveIn() {
-  return <ServicePageTemplate pageData={moveInCleaningPageData} />;
+  return <ServicePageTemplate pageData={moveInCleaningPageData} faqData={serviceMove} />;
 }

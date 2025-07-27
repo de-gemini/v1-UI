@@ -1,5 +1,5 @@
 import ServicePageTemplate from "./ServicePageTemplate";
-import { originalFaq } from '../../components/commons/CommonFAQ';
+import { serviceMattress } from "../../data/faqData";
 import example from '../../assets/images/Services/Mattress/1.avif'
 import example1 from '../../assets/images/Services/Mattress/2.avif'
 import example2 from '../../assets/images/Services/Mattress/3.avif'
@@ -161,11 +161,11 @@ export const mattressCleaningPageData = {
     },
     {
       type: "faq",
-      ...originalFaq
+      serviceMattress
     },
   ],
 };
 
 export default function MattressCleaningService() {
-  return <ServicePageTemplate pageData={mattressCleaningPageData} />;
+  return <ServicePageTemplate pageData={mattressCleaningPageData} faqData={serviceMattress} />;
 }

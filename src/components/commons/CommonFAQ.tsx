@@ -1,48 +1,15 @@
 import React from 'react';
 import { Minus, Plus } from 'lucide-react';
+import type { FaqData } from '../../data/faqData';
 
-// Default FAQ data (self-contained)
-const defaultFAQ = {
-  title: "Frequently asked questions",
-  subtitle: "Find answers to the most common questions about our services, process, and support. If you need more help, feel free to contact us.",
-  items: [
-    {
-      id: 1,
-      question: "Do cleaners provide equipment / products?",
-      answer: "If you don’t have your own equipment or cleaning products, please request that your cleaner bring them. An additional charge will apply for bookings that include equipment or products.",
-    },
-    {
-      id: 2,
-      question: "Why is the estimated price for the cleaning more than what I chose?",
-      answer:
-        "The minimum duration of the job is 3 hours. If the cleaner finishes early, please give them another task.",
-    },
-    {
-      id: 3,
-      question: "I need a quotation for end of tenancy / one off / carpet (combined) order",
-      answer:
-        "Please request a quote on our website simply entering your postcode. Please add all items you need to be cleaned and you will receive the quotation for the service.",
-    },
-    {
-      id: 4,
-      question: "Is there a guarantee of a refund if the job isn't done up to standard?",
-      answer:
-        "According to De-Gemini policy we do not provide any refunds. However, in case of any complaint, we will investigate the case, review the evidence and get back to you with a proposed solution in accordance with De-Gemini policy. The full description of the complaint followed by picture evidence will be requested.",
-    },
-    {
-      id: 5,
-      question: "When will I get confirmation for my booking?",
-      answer:
-        "As soon as you make a booking it becomes available to all cleaners in the De-Gemini platform. The time of the booking confirmation depends on the availability of the cleaners in the area and the type of the cleaning you request. De-Gemini team will contact you if there is no availability for the chosen time and offer you the closest available time of the cleaning.",
-    },
-  ],
-};
 
-export const originalFaq = defaultFAQ;
+interface CommonFAQProps {
+  faqData: FaqData;
+}
 
-const CommonFAQ: React.FC = () => {
+const CommonFAQ: React.FC<CommonFAQProps> = ({faqData }) => {
   const [openFAQ, setOpenFAQ] = React.useState<string | number | null>(null);
-  const { title, subtitle, items } = defaultFAQ;
+  const { title, subtitle, items } = faqData;
 
   return (
     <div className="relative bg-white max-w-3xl mx-auto mt-12 mb-20">

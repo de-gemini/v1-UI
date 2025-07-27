@@ -1,6 +1,7 @@
 // v1-UI/src/pages/pricing/CarpetCleaning.tsx
 
 import CleaningPageTemplate from "./Template";
+import { priceCarpet } from "../../data/faqData";
 
 export default function CarpetCleaning() {
   const features = [
@@ -60,6 +61,7 @@ export default function CarpetCleaning() {
       houseCleaning={houseCleaning}
       allCleaningServices={allCleaningServices}
       images={images}
+      faqData={priceCarpet}
     />
   );
 }
