@@ -12,8 +12,15 @@ export interface BeforeAfterSlide {
   alt?: string;
 }
 
+export interface SingleImageSlide {
+  image: string;
+  title?: string;
+  description?: string;
+  alt?: string;
+}
+
 export interface BeforeAfterSliderProps {
-  slides: BeforeAfterSlide[];
+  slides: BeforeAfterSlide[] | SingleImageSlide[];
   title?: string;
   subtitle?: string;
   showNavigation?: boolean;
@@ -21,6 +28,7 @@ export interface BeforeAfterSliderProps {
   autoPlay?: boolean;
   autoPlayInterval?: number;
   className?: string;
+  mode?: 'compare' | 'single';
 }
 
 const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
@@ -32,6 +40,7 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
   autoPlay = false,
   autoPlayInterval = 5000,
   className = '',
+  mode = 'compare',
 }) => {
   const [currentSlide, setCurrentSlide] = React.useState(0);
   const [loaded, setLoaded] = React.useState(false);
@@ -93,14 +102,26 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
             <div key={idx} className="keen-slider__slide p-4">
               <div className="bg-white rounded-xl shadow-lg overflow-hidden">
                 <div className="relative">
-                  <CompareSlider beforeSrc={slide.before} afterSrc={slide.after} alt={slide.alt} />
+                  {mode === 'compare' ? (
+                    <CompareSlider 
+                      beforeSrc={(slide as BeforeAfterSlide).before} 
+                      afterSrc={(slide as BeforeAfterSlide).after} 
+                      alt={slide.alt} 
+                    />
+                  ) : (
+                    <img 
+                      src={(slide as SingleImageSlide).image} 
+                      alt={slide.alt || slide.title || `Slide ${idx + 1}`} 
+                      className="w-full h-64 object-cover"
+                    />
+                  )}
                   {(slide.title || slide.description) && (
                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
                       {slide.title && (
-                        <h3 className="text-white font-semibold text-lg mb-1">{slide.title}</h3>
+                        <h3 className="text-white hidden font-semibold text-lg mb-1">{slide.title}</h3>
                       )}
                       {slide.description && (
-                        <p className="text-white/90 text-sm">{slide.description}</p>
+                        <p className="text-white/90 hidden text-sm">{slide.description}</p>
                       )}
                     </div>
                   )}

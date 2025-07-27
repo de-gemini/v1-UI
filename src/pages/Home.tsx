@@ -36,9 +36,9 @@ import CommonPostcodeInput from '../components/commons/CommonPostcodeInput';
 import HomeHeroSection from '../components/HomeHeroSection';
 import CommonFAQ from "../components/commons/CommonFAQ";
 import BeforeAfterSlider from "../components/BeforeAfterSlider";
-import dirtyKitchen from '../assets/images/Services/Kitchen/dirty-kitchen.jpg'
-import dirtBathroom from '../assets/images/Services/Bathroom/dirty-bathroom.jpg'
-import dirtySittingroom from '../assets/images/Services/SittingRoom/dirty-sittingRoom.jpg'
+import before1 from '../assets/images/before.jpeg'
+import before2 from '../assets/images/before2.jpeg'
+import before3 from '../assets/images/before3.jpeg'
 
 
 const Home = () => {
@@ -525,27 +525,28 @@ const Home = () => {
       ))}
     </section>
       
+
+
       {/* Before/After Slider Section */}
+      {/* Single Image Slider Section */}
       <section className="w-full mt-[2rem]">
         <BeforeAfterSlider
           title="See the Difference"
           subtitle="We make your space look absolutely sparkling"
+          mode="single"
           slides={[
             {
-              before: card3,
-              after: dirtyKitchen,
+              image: before1,
               title: 'Kitchen Deep Clean',
               description: 'Spotless kitchen after our deep cleaning service.'
             },
             {
-              before: card4,
-              after: dirtBathroom,
+              image: before2,
               title: 'Bathroom Transformation',
               description: 'A sparkling bathroom, every time.'
             },
             {
-              before: card6,
-              after: dirtySittingroom,
+              image: before3,
               title: 'Living Room Refresh',
               description: 'Enjoy a fresh, clean living space.'
             },

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Instagram, Facebook, Phone } from 'lucide-react';
+import { Instagram, Facebook, Phone, MessageCircle } from 'lucide-react';
 import { DropdownHeader } from './DropdownHeader';
 import { AiFillTikTok } from "react-icons/ai";
 import { useEffect } from 'react';
@@ -122,6 +122,17 @@ export const Footer: React.FC = () => {
           Place, London, England, N31QB */}
         </div>
       </div>
+
+ {/* Floating WhatsApp Button */}
+ <a 
+ href="https://wa.me/07399487915"
+ target="_blank"
+ rel="noopener noreferrer"
+ className="fixed bottom-24 right-6 md:bottom-28 md:right-10 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg transition duration-300 ease-in-out transform hover:scale-110 z-50"
+ aria-label="WhatsApp us"
+ >
+ <MessageCircle className="h-7 w-7" />
+ </a>
 
  {/* Floating Call Button */}
  <a 
