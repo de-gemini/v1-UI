@@ -47,7 +47,7 @@ const CommonFAQ: React.FC = () => {
   return (
     <div className="relative bg-white max-w-3xl mx-auto mt-12 mb-20">
       {/* Grid line background */}
-      <div className="absolute inset-0 pointer-events-none" style={{zIndex: 0}}>
+      <div className="absolute hidden inset-0 pointer-events-none" style={{zIndex: 0}}>
         <svg width="100%" height="100%" style={{display: 'block'}}>
           <defs>
             <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">

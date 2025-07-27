@@ -89,7 +89,7 @@ const StepOne: React.FC = () => {
     // If the selected time is less than 4 hours from now and it's today
     if (selectedDate.toDateString() === now.toDateString() && diffHours < 4) {
       // Calculate the minimum time (4 hours from now) and round to the nearest hour
-      const minTime = new Date(now.getTime() + 4 * 60 * 60 * 1000);
+      const minTime = new Date(now.getTime() + 5 * 60 * 60 * 1000);
       const minHour = minTime.getHours();
       
       // Round to the nearest hour (always set minutes to 00)
