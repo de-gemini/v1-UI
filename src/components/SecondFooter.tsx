@@ -36,6 +36,7 @@ style={{
             <li><a href="/booking-policy" className="hover:underline text-gray-700">Booking T&C</a></li>
             <li><a href="/cancellation-policy" className="hover:underline text-gray-700">Cancellation Policy</a></li>
             <li><a href="/terms-and-conditions" className="hover:underline text-gray-700">Terms & Conditions</a></li>
+            <li><a href="/what-cleaning" className="hover:underline text-gray-700">What's included</a></li>
             <li><a href="/privacy-policy" className="hover:underline text-gray-700">Privacy Policy</a></li>
             <li><a href="/cookie-policy" className="hover:underline text-gray-700">Cookie Policy</a></li>
             <li><a href="/pricing-house-cleaning" className="hover:underline text-gray-700">Pricing</a></li>
