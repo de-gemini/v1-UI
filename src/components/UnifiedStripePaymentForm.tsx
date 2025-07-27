@@ -4,7 +4,7 @@ import { Elements, CardElement, useStripe, useElements } from '@stripe/react-str
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { STRIPE_PUBLISHABLE_KEY } from '../constants';
-import { createStripePaymentIntent, createDynamicStripeSubscription } from '../api/stripePayment';
+import { createStripePaymentIntent, createDynamicStripeSubscription, updateBookingPaymentMethod } from '../api/stripePayment';
 import axiosInstance from '../api/axiosInstance';
 const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 
@@ -210,7 +210,7 @@ const UnifiedPaymentForm: React.FC<UnifiedStripePaymentFormProps> = ({
         // Save payment info for off-session
         if (confirmedIntent && bookingId) {
           // No need to send payment method to backend; webhook will handle it
-          const stripeCustomerId = confirmedIntent.customer;
+          const stripeCustomerId = (confirmedIntent as any).customer;
           const stripePaymentMethodId = confirmedIntent.payment_method;
           console.log('[Save Payment Method] bookingId:', bookingId);
           console.log('[Save Payment Method] stripeCustomerId:', stripeCustomerId);
@@ -365,6 +365,37 @@ const UnifiedPaymentForm: React.FC<UnifiedStripePaymentFormProps> = ({
               className="w-full bg-blue-600 text-white py-3 px-4 rounded-md font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               {processing ? 'Processing Payment...' : 'Pay Now'}
+            </button>
+            
+            {/* Pay with Cash Button */}
+            <button
+              type="button"
+              disabled={processing}
+              onClick={async () => {
+                if (!bookingId) {
+                  setError('Booking ID is required for cash payment');
+                  return;
+                }
+                
+                setProcessing(true);
+                try {
+                  await updateBookingPaymentMethod(bookingId, 'cash');
+                  toast.success('Cash payment method selected!');
+                  if (onClose) onClose();
+                  navigate('/cash-payment-instructions', {
+                    state: { bookingId }
+                  });
+                } catch (err: any) {
+                  const errorMessage = err.response?.data?.message || err.message || 'Failed to update payment method';
+                  setError(errorMessage);
+                  toast.error(errorMessage);
+                } finally {
+                  setProcessing(false);
+                }
+              }}
+              className="w-full bg-green-600 text-white py-3 px-4 rounded-md font-medium hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors mt-3"
+            >
+              {processing ? 'Processing...' : 'Pay with Cash'}
             </button>
             <div className="text-xs text-gray-500 bg-gray-50 border border-gray-200 rounded-md p-3">
               <strong>Test card:</strong> 4242 4242 4242 4242 (any future date, any CVC)

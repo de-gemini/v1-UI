@@ -24,6 +24,7 @@ import ChatManagement from "./components/admin/ChatManagement";
 import StripeTestPage from './pages/StripeTestPage';
 import StripeCardPaymentPage from './pages/StripeCardPaymentPage';
 import PaymentSuccessPage from './pages/PaymentSuccessPage';
+import CashPaymentInstructions from './pages/CashPaymentInstructions';
 import StripeSubscriptionPage from './pages/StripeSubscriptionPage';
 import { useEffect, useState } from "react";
 import { isTokenValid } from "./utils/isTokenValid";
@@ -388,6 +389,7 @@ function App() {
               <Route path="/booking-policy" element={<Layout><BookingPolicy /></Layout>} />
               <Route path="/subscriptions" element={<StripeSubscriptionPage />} />
               <Route path="/payment-success" element={<PaymentSuccessPage />} />
+              <Route path="/cash-payment-instructions" element={<CashPaymentInstructions />} />
               <Route path="/terms" element={<Layout><TermsOfService /></Layout>} />
               <Route path="/help/end-of-tenancy" element={<CheckList />} />
               <Route path="/payment-policy" element={<Layout><PaymentPolicy /></Layout>} />

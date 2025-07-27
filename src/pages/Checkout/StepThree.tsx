@@ -51,11 +51,8 @@ const StepThree: React.FC = () => {
   const navigate = useNavigate();
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [pendingBookingBody, setPendingBookingBody] = useState<any>(null);
-  const [addressSuggestions, setAddressSuggestions] = useState<any[]>([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
   const [showPaymentFlow, setShowPaymentFlow] = useState(false);
   const [currentBookingId, setCurrentBookingId] = useState<string>('');
-  const debounceTimeout = useRef<number | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   
   // Zustand store hooks
@@ -133,40 +130,7 @@ const StepThree: React.FC = () => {
     });
   }, [pricingBreakdown, endOfTenancy, expressStudio, ecoFriendly, hooverMop, disinfection, outdoorCleaning, laundry, checkJob, havePets, keyPickup, errandHours]);
 
-  // Fetch address suggestions from Nominatim
-  const fetchAddressSuggestions = (query: string) => {
-    if (!query || query.length < 3) {
-      setAddressSuggestions([]);
-      return;
-    }
-    fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&addressdetails=1&limit=5&countrycodes=gb`, {
-      headers: {
-        'Accept-Language': 'en',
-        'User-Agent': 'GeminiCleaning/1.0 (info@geminicleaning.com)'
-      }
-    })
-      .then(res => res.json())
-      .then(data => setAddressSuggestions(data))
-      .catch(() => setAddressSuggestions([]));
-  };
 
-  // Handle address input change with debounce
-  const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    set({ address: value });
-    setShowSuggestions(true);
-    if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
-    debounceTimeout.current = setTimeout(() => {
-      fetchAddressSuggestions(value);
-    }, 400);
-  };
-
-  // Handle suggestion click
-  const handleSuggestionClick = (suggestion: any) => {
-    set({ address: suggestion.display_name });
-    setShowSuggestions(false);
-    setAddressSuggestions([]);
-  };
 
   // Full quote handler with backend submission
   const handleGetAQuote = async () => {
@@ -379,37 +343,13 @@ const StepThree: React.FC = () => {
           </div>
           <div className="mb-6">
             <label className="block text-gray-700 font-semibold mb-1">Address</label>
-            <div className="relative">
-              <input
-                type="text"
-                className="w-full border border-gray-300 rounded-md px-4 py-2 text-lg"
-                value={address}
-                onChange={handleAddressChange}
-                onFocus={() => address && setShowSuggestions(true)}
-                placeholder="Address"
-                autoComplete="off"
-              />
-              {showSuggestions && addressSuggestions.length > 0 && (
-                <ul className="absolute z-20 left-0 right-0 bg-white border border-gray-200 rounded-md mt-1 max-h-56 overflow-y-auto shadow-lg">
-                  {addressSuggestions.map((suggestion, idx) => (
-                    <React.Fragment key={suggestion.place_id}>
-                      <li
-                        className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-sm"
-                        onClick={() => handleSuggestionClick(suggestion)}
-                      >
-                        {suggestion.display_name}
-                      </li>
-                      {addressSuggestions.length > 2 && idx < addressSuggestions.length - 1 && (
-                        <hr className="border-t border-gray-200 mx-2" />
-                      )}
-                    </React.Fragment>
-                  ))}
-                </ul>
-              )}
-            </div>
-          </div>
-          <div className="bg-yellow-50 border-l-4 border-yellow-400 p-3 mb-4 rounded">
-            If you didn't find your address in the list, please provide it in comments below
+            <input
+              type="text"
+              className="w-full border border-gray-300 rounded-md px-4 py-2 text-lg"
+              value={address}
+              onChange={e => set({ address: e.target.value })}
+              placeholder="Enter your full address"
+            />
           </div>
           <div className="mb-6">
             <label className="block text-gray-700 font-semibold mb-1">Comments</label>
