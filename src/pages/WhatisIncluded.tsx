@@ -7,6 +7,7 @@ import kitchenBg from '../assets/images/Services/Kitchen/5.avif';
 import bedroomBg from '../assets/images/Services/SittingRoom/4.avif';
 import hallsBg from '../assets/images/Services/Office/8.avif';
 import officeBg from '../assets/images/Services/Office/6.avif';
+import AdditionalServices from '../components/AdditionalServices'
 
 type HomeCategories = "Bathroom" | "Kitchen" | "Bedroom" | "Halls";
 
@@ -134,7 +135,7 @@ export default function WhatisIncluded() {
           <div className="bg-white/90 p-6 rounded shadow grid grid-cols-1 md:grid-cols-2 gap-4">
             {getHomeContent().map((item, idx) => (
               <div key={idx} className="flex items-start gap-2">
-                <FaCheckCircle className="text-purple-600 mt-1" />
+                <FaCheckCircle className="text-brand-primary mt-1" />
                 <span>{item}</span>
               </div>
             ))}
@@ -152,7 +153,7 @@ export default function WhatisIncluded() {
         <div className="max-w-3xl mx-auto bg-white/90 p-6 rounded shadow grid grid-cols-1 md:grid-cols-2 gap-4">
           {content.office.map((item, idx) => (
             <div key={idx} className="flex items-start gap-2">
-              <FaCheckCircle className="text-purple-600 mt-1" />
+              <FaCheckCircle className="text-brand-primary mt-1" />
               <span>{item}</span>
             </div>
           ))}
@@ -164,6 +165,8 @@ export default function WhatisIncluded() {
           </div>
         </div>
       )}
+
+      <AdditionalServices/>
     </div>
   );
 }
