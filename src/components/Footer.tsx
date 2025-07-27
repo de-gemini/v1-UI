@@ -127,13 +127,13 @@ export const Footer: React.FC = () => {
 
  {/* Floating WhatsApp Button */}
  <a 
- href="https://wa.me/+447399487915"
- target="_blank"
- rel="noopener noreferrer"
- className="fixed bottom-24 right-6 md:bottom-28 md:right-10 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg transition duration-300 ease-in-out transform hover:scale-110 z-50"
- aria-label="WhatsApp us"
+   href="https://wa.me/+447399487915?text=Hello%2C%20I%20am%20chatting%20from%20your%20website"
+   target="_blank"
+   rel="noopener noreferrer"
+   className="fixed bottom-24 right-6 md:bottom-28 md:right-10 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg transition duration-300 ease-in-out transform hover:scale-110 z-50"
+   aria-label="WhatsApp us"
  >
- <MessageCircle className="h-7 w-7" />
+   <MessageCircle className="h-7 w-7" />
  </a>
 
  {/* Floating Call Button */}

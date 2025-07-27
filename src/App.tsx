@@ -32,30 +32,94 @@ import { PendingBookingModal } from "./components/PendingBookingModal";
 import ScrollToTop from "./components/ScrollToTop";
 import { PageLoader } from "./components/LoadingSpinner";
 import StackedPagesLoader from "./components/StackedPagesLoader";
-import { ToastContainer, Zoom } from 'react-toastify';
+import { ToastContainer, Zoom, toast } from 'react-toastify';
 import VisitorTracker from './components/VisitorTracker';
 import TermsOfService from "./pages/TermsOfService";
 import PaymentPolicy from "./pages/PaymentPolicy";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import CookiePolicy from "./pages/CookiePolicy";
 import CancellationPolicy from "./pages/CancellationPolicy";
+import { NotificationProvider } from "./contexts/NotificationContext";
 import LocationPage from "./pages/LocationPage";
+import { useAuthValidation, validateAdminToken } from "./utils/auth";
 
 // Protected Route wrapper component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  return isAuthenticated ? <>{children}</> : <Navigate to="/login" />;
+  const { isAuthenticated, isValidating } = useAuthValidation('/login');
+
+  if (isValidating) {
+    return <StackedPagesLoader fullScreen text="Validating authentication..." />;
+  }
+
+  // Show loading or redirect if not authenticated
+  if (!isAuthenticated) {
+    return <Navigate to="/login" />;
+  }
+
+  return <>{children}</>;
 };
 
 // Admin Route wrapper component
 const AdminRoute = ({ children }: { children: React.ReactNode }) => {
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  const isAdmin = useAuthStore((state) => state.isAdmin);
-  return isAuthenticated && isAdmin ? (
-    <>{children}</>
-  ) : (
-    <Navigate to="/login" />
-  );
+  const { isAuthenticated, isValidating, isAdmin } = useAuthValidation('/login');
+  const user = useAuthStore((state) => state.user);
+  const logout = useAuthStore((state) => state.logout);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Additional admin-specific validation
+    if (!isValidating) {
+      const adminValidation = validateAdminToken();
+      
+      if (!adminValidation.isValid) {
+        logout();
+        
+        switch (adminValidation.reason) {
+          case 'token_expired':
+            toast.error('Admin session expired. Please login again with admin credentials.');
+            break;
+          case 'not_admin':
+            toast.error('Access denied. Admin privileges required.');
+            break;
+          case 'no_user_data':
+          case 'invalid_user_data':
+            toast.error('Invalid session data. Please login again.');
+            break;
+        }
+        
+        navigate('/login');
+      }
+    }
+  }, [isValidating, logout, navigate]);
+
+  if (isValidating) {
+    return <StackedPagesLoader fullScreen text="Validating admin access..." />;
+  }
+
+  // Check if user is authenticated but not admin
+  if (isAuthenticated && !isAdmin) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-red-600 mb-4">Access Denied</h1>
+          <p className="text-gray-600 mb-4">You don't have admin privileges to access this page.</p>
+          <button 
+            onClick={() => window.location.href = '/dashboard'}
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          >
+            Go to Dashboard
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Show loading or redirect if not authenticated
+  if (!isAuthenticated) {
+    return <Navigate to="/login" />;
+  }
+
+  return <>{children}</>;
 };
 
 const Help = lazy(() => import("./pages/Help"));
@@ -165,9 +229,11 @@ function App() {
                 path="/admin"
                 element={
                   <AdminRoute>
-                    <AdminLayout>
-                      <AdminDashboard />
-                    </AdminLayout>
+                    <NotificationProvider>
+                      <AdminLayout>
+                        <AdminDashboard />
+                      </AdminLayout>
+                    </NotificationProvider>
                   </AdminRoute>
                 }
               />
@@ -175,9 +241,11 @@ function App() {
                 path="/admin/pricing"
                 element={
                   <AdminRoute>
-                    <AdminLayout>
-                      <PricingManagement />
-                    </AdminLayout>
+                    <NotificationProvider>
+                      <AdminLayout>
+                        <PricingManagement />
+                      </AdminLayout>
+                    </NotificationProvider>
                   </AdminRoute>
                 }
               />
@@ -185,9 +253,11 @@ function App() {
                 path="/admin/calendar"
                 element={
                   <AdminRoute>
-                    <AdminLayout>
-                      <CalendarAvailability />
-                    </AdminLayout>
+                    <NotificationProvider>
+                      <AdminLayout>
+                        <CalendarAvailability />
+                      </AdminLayout>
+                    </NotificationProvider>
                   </AdminRoute>
                 }
               />
@@ -195,9 +265,11 @@ function App() {
                 path="/admin/bookings"
                 element={
                   <AdminRoute>
-                    <AdminLayout>
-                      <ScheduleManagement />
-                    </AdminLayout>
+                    <NotificationProvider>
+                      <AdminLayout>
+                        <ScheduleManagement />
+                      </AdminLayout>
+                    </NotificationProvider>
                   </AdminRoute>
                 }
               />
@@ -205,9 +277,11 @@ function App() {
                 path="/admin/chat"
                 element={
                   <AdminRoute>
-                    <AdminLayout>
-                      <ChatManagement />
-                    </AdminLayout>
+                    <NotificationProvider>
+                      <AdminLayout>
+                        <ChatManagement />
+                      </AdminLayout>
+                    </NotificationProvider>
                   </AdminRoute>
                 }
               />
@@ -215,9 +289,11 @@ function App() {
                 path="/admin/payments"
                 element={
                   <AdminRoute>
-                    <AdminLayout>
-                      <PaymentRecords />
-                    </AdminLayout>
+                    <NotificationProvider>
+                      <AdminLayout>
+                        <PaymentRecords />
+                      </AdminLayout>
+                    </NotificationProvider>
                   </AdminRoute>
                 }
               />
