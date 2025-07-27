@@ -67,7 +67,7 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
   }, [autoPlay, autoPlayInterval, instanceRef]);
 
   return (
-    <div className={`w-full max-w-4xl mx-auto ${className}`}>
+    <div className={`w-full  max-w-4xl mx-auto ${className}`}>
       {(title || subtitle) && (
         <div className="text-center mb-8">
           {title && (

@@ -38,7 +38,13 @@ import CommonFAQ from "../components/commons/CommonFAQ";
 import BeforeAfterSlider from "../components/BeforeAfterSlider";
 import before1 from '../assets/images/before.jpeg'
 import before2 from '../assets/images/before2.jpeg'
-import before3 from '../assets/images/before3.jpeg'
+import before3 from '../assets/images/before3.jpg'
+import before4 from '../assets/images/before4.jpg'
+import before5 from '../assets/images/before5.jpg'
+import before6 from '../assets/images/before3.jpeg'
+import before7 from '../assets/images/before7.jpg'
+import before8 from '../assets/images/before8.jpg'
+import before9 from '../assets/images/before9.jpg'
 
 
 const Home = () => {
@@ -549,6 +555,36 @@ const Home = () => {
               image: before3,
               title: 'Living Room Refresh',
               description: 'Enjoy a fresh, clean living space.'
+            },
+            {
+              image: before4,
+              title: 'Bedroom Makeover',
+              description: 'Transform your bedroom into a peaceful sanctuary.'
+            },
+            {
+              image: before5,
+              title: 'Office Space Clean',
+              description: 'Professional cleaning for your workspace.'
+            },
+            {
+              image: before6,
+              title: 'Carpet Deep Clean',
+              description: 'Revitalize your carpets with our deep cleaning service.'
+            },
+            {
+              image: before7,
+              title: 'Upholstery Refresh',
+              description: 'Restore your furniture to its original beauty.'
+            },
+            {
+              image: before8,
+              title: 'Window Cleaning',
+              description: 'Crystal clear windows for a brighter home.'
+            },
+            {
+              image: before9,
+              title: 'Complete Home Transformation',
+              description: 'Comprehensive cleaning for your entire home.'
             },
           ]}
         />
