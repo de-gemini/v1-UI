@@ -3,6 +3,12 @@ import { originalFaq } from '../../components/commons/CommonFAQ';
 import example from '../../assets/images/Services/Bedroom/2.png'
 import example1 from '../../assets/images/Services/Office/7.avif'
 import banner from '../../assets/images/Services/SittingRoom/8.avif'
+import example2 from '../../assets/images/Services/Bedroom/2.png'
+import dirty2 from '../../assets/images/Services/Bedroom/dirty-bedroom.jpg'
+import example4 from '../../assets/images/Services/Bedroom/3.avif'
+import example5 from '../../assets/images/Services/SittingRoom/8.avif'
+import dirty3 from '../../assets/images/Services/SittingRoom/dirty-sittingRoom.jpg'
+import dirty from '../../assets/images/Services/Office/dirty-offfice2.jpg'
 
 
 export const sameDayCleaningPageData = {
@@ -111,9 +117,8 @@ export const sameDayCleaningPageData = {
       customType: "imageSlider",
       title: "Real Before & After Same-Day Jobs",
       slides: [
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/5-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/5-1.jpg" },
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/6-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/6-1.jpg" },
-        { before: "https://www.emop.co.uk/static/redesign/images/comparison/3-2.jpg", after: "https://www.emop.co.uk/static/redesign/images/comparison/3-1.jpg" },
+        { before: example1, after: dirty },
+        { before: example, after: dirty2 },
       ],
     },
     {

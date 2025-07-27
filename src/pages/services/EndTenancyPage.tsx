@@ -1,11 +1,14 @@
 import ServicePageTemplate from "./ServicePageTemplate";
 import { originalFaq } from '../../components/commons/CommonFAQ';
 import example from '../../assets/images/Services/Bedroom/8.avif'
+import dirty3 from '../../assets/images/Services/Bedroom/dirty-bedroom2.jpg'
 import example1 from '../../assets/images/Services/Kitchen/4.avif'
 import example2 from '../../assets/images/Services/SittingRoom/5.avif'
 import example3 from '../../assets/images/Services/SittingRoom/10.avif'
 import example4 from '../../assets/images/Services/SittingRoom/7.avif'
 import example5 from '../../assets/images/Services/SittingRoom/5.avif'
+import dirty from '../../assets/images/Services/SittingRoom/dirty-sittingRoom.jpg'
+import dirty2 from '../../assets/images/Services/Kitchen/dirty-kitchen2.jpg'
 import banner from '../../assets/images/Services/Upholstery/3.avif'
 
 
@@ -130,9 +133,9 @@ export const endOfTenancyPageData = {
       customType: "imageSlider",
       title: "Before & After End of Tenancy Cleans",
       slides: [
-        { before: example4, after: example5 },
-        { before: example, after: example2 },
-        { before: example3, after: example2 },
+        { before: example4, after: dirty },
+        { before: example1, after: dirty2 },
+        { before: example, after: dirty3 },
       ],
     },
     {
