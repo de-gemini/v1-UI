@@ -36,9 +36,9 @@ const Chat = () => {
     loadChat();
   }, []);
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [chat?.messages]);
+//   useEffect(() => {
+//     scrollToBottom();
+//   }, [chat?.messages]);
 
   const loadChat = async () => {
     try {
@@ -166,8 +166,8 @@ const Chat = () => {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center">
-        <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mr-4">
-          <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mr-4">
+          <svg className="w-6 h-6 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
           </svg>
         </div>
@@ -175,29 +175,29 @@ const Chat = () => {
           <h2 className="text-2xl font-bold text-gray-900">Chat with Support</h2>
           <p className="text-sm text-gray-500">Get help from our support team</p>
         </div>
-             </div>
+      </div>
 
-       {/* Debug Info */}
-       <div className="bg-yellow-50 border hidden border-yellow-200 rounded-md p-3 text-sm">
-         <p><strong>🔍 Debug Info:</strong></p>
-         <p>User ID: {user?.id || 'None'}</p>
-         <p>Chat ID: {chat?._id || 'None'}</p>
-         <p>Messages Count: {chat?.messages?.length || 0}</p>
-         <p>Is Resolved: {chat?.isResolved ? 'Yes' : 'No'}</p>
-         <p>Loading: {loading ? 'Yes' : 'No'}</p>
-         <p>Sending: {sending ? 'Yes' : 'No'}</p>
-         <button 
-           onClick={loadChat} 
-           className="mt-2 px-3 py-1 bg-blue-500 text-white rounded text-xs"
-         >
-           🔄 Refresh Chat
-         </button>
-       </div>
+      {/* Debug Info */}
+      <div className="bg-yellow-50 border hidden border-yellow-200 rounded-md p-3 text-sm">
+        <p><strong>🔍 Debug Info:</strong></p>
+        <p>User ID: {user?.id || 'None'}</p>
+        <p>Chat ID: {chat?._id || 'None'}</p>
+        <p>Messages Count: {chat?.messages?.length || 0}</p>
+        <p>Is Resolved: {chat?.isResolved ? 'Yes' : 'No'}</p>
+        <p>Loading: {loading ? 'Yes' : 'No'}</p>
+        <p>Sending: {sending ? 'Yes' : 'No'}</p>
+        <button 
+          onClick={loadChat} 
+          className="mt-2 px-3 py-1 bg-blue-500 text-white rounded text-xs"
+        >
+          🔄 Refresh Chat
+        </button>
+      </div>
 
-       {/* Chat Container */}
+      {/* Chat Container */}
       <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
         {/* Chat Header */}
-        <div className="bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-4">
+        <div className="bg-blue-600 px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <div className="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-3">

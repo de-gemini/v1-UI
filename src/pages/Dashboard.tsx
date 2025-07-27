@@ -38,45 +38,45 @@ export const DecorativeBackground = () => {
         <defs>
           <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#3B82F6" />
-            <stop offset="100%" stopColor="#8B5CF6" />
+            <stop offset="100%" stopColor="#3B82F6" />
           </linearGradient>
           <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#8B5CF6" />
-            <stop offset="100%" stopColor="#EC4899" />
+            <stop offset="100%" stopColor="#8B5CF6" />
           </linearGradient>
           <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#06B6D4" />
-            <stop offset="100%" stopColor="#3B82F6" />
+            <stop offset="100%" stopColor="#06B6D4" />
           </linearGradient>
           <linearGradient id="gradient4" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#F59E0B" />
-            <stop offset="100%" stopColor="#EF4444" />
+            <stop offset="100%" stopColor="#F59E0B" />
           </linearGradient>
           <linearGradient id="gradient5" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#10B981" />
-            <stop offset="100%" stopColor="#3B82F6" />
+            <stop offset="100%" stopColor="#10B981" />
           </linearGradient>
           <linearGradient id="gradient6" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#F97316" />
-            <stop offset="100%" stopColor="#8B5CF6" />
+            <stop offset="100%" stopColor="#F97316" />
           </linearGradient>
           <linearGradient id="gradient7" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#EC4899" />
-            <stop offset="100%" stopColor="#F59E0B" />
+            <stop offset="100%" stopColor="#EC4899" />
           </linearGradient>
           <linearGradient id="gradient8" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#06B6D4" />
-            <stop offset="100%" stopColor="#10B981" />
+            <stop offset="100%" stopColor="#06B6D4" />
           </linearGradient>
           <linearGradient id="gradient9" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#3B82F6" />
-            <stop offset="50%" stopColor="#8B5CF6" />
-            <stop offset="100%" stopColor="#EC4899" />
+            <stop offset="50%" stopColor="#3B82F6" />
+            <stop offset="100%" stopColor="#3B82F6" />
           </linearGradient>
           <linearGradient id="gradient10" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#F59E0B" />
-            <stop offset="50%" stopColor="#EF4444" />
-            <stop offset="100%" stopColor="#8B5CF6" />
+            <stop offset="50%" stopColor="#F59E0B" />
+            <stop offset="100%" stopColor="#F59E0B" />
           </linearGradient>
         </defs>
       </svg>
@@ -151,7 +151,7 @@ const Dashboard = () => {
       case 'refer':
         return <ReferFriends />;
       case 'support':
-        return <CallOrChat />;
+        return <CallOrChat onTabChange={setActiveTab} />;
       case 'chat':
         return <Chat />;
       default:
@@ -160,7 +160,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 relative overflow-hidden">
+    <div className="min-h-screen bg-gray-50 relative overflow-hidden">
       {/* Background Illustration */}
       <DecorativeBackground/>
 

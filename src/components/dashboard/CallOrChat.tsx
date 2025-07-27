@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 
-const CallOrChat = () => {
+interface CallOrChatProps {
+  onTabChange?: (tab: 'chat') => void;
+}
+
+const CallOrChat: React.FC<CallOrChatProps> = ({ onTabChange }) => {
   const [selectedMethod, setSelectedMethod] = useState<'call' | 'chat' | 'email'>('call');
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [chatMessage, setChatMessage] = useState('');
@@ -24,7 +28,8 @@ const CallOrChat = () => {
       ),
       action: 'Call Now',
       value: '07867388142',
-      color: 'from-green-500 to-emerald-600'
+      bgColor: 'bg-green-50',
+      iconColor: 'text-green-700'
     },
     {
       id: 'chat',
@@ -36,7 +41,8 @@ const CallOrChat = () => {
         </svg>
       ),
       action: 'Start Chat',
-      color: 'from-blue-500 to-indigo-600'
+      bgColor: 'bg-blue-50',
+      iconColor: 'text-blue-700'
     },
     {
       id: 'email',
@@ -49,13 +55,16 @@ const CallOrChat = () => {
       ),
       action: 'Send Email',
       value: 'support@degeminiservices.co.uk',
-      color: 'from-purple-500 to-pink-600'
+      bgColor: 'bg-purple-50',
+      iconColor: 'text-purple-700'
     }
   ];
 
   const handleMethodSelect = (method: 'call' | 'chat' | 'email') => {
     setSelectedMethod(method);
-    if (method === 'chat') {
+    if (method === 'chat' && onTabChange) {
+      onTabChange('chat');
+    } else if (method === 'chat') {
       setIsChatOpen(true);
     }
   };
@@ -100,13 +109,13 @@ const CallOrChat = () => {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center">
-        <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-600 rounded-full flex items-center justify-center mr-4">
-          <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="w-12 h-12 bg-orange-50 rounded-full flex items-center justify-center mr-4">
+          <svg className="w-6 h-6 text-orange-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.25a9.75 9.75 0 100 19.5 9.75 9.75 0 000-19.5z" />
           </svg>
         </div>
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Call or Chat</h2>
+          <h2 className="text-2xl font-bold text-gray-900">Call or Mail</h2>
           <p className="text-sm text-gray-500">Get help from our support team</p>
         </div>
       </div>
@@ -123,8 +132,10 @@ const CallOrChat = () => {
             }`}
             onClick={() => handleMethodSelect(method.id as 'call' | 'chat' | 'email')}
           >
-            <div className={`w-12 h-12 bg-gradient-to-r ${method.color} rounded-full flex items-center justify-center mb-4`}>
-              {method.icon}
+            <div className={`w-12 h-12 ${method.bgColor} rounded-full flex items-center justify-center mb-4`}>
+              <div className={method.iconColor}>
+                {method.icon}
+              </div>
             </div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">{method.title}</h3>
             <p className="text-sm text-gray-600 mb-4">{method.description}</p>
@@ -141,7 +152,11 @@ const CallOrChat = () => {
                 e.stopPropagation();
                 if (method.id === 'call') handleCall();
                 else if (method.id === 'email') handleEmail();
-                else if (method.id === 'chat') setIsChatOpen(true);
+                else if (method.id === 'chat' && onTabChange) {
+                  onTabChange('chat');
+                } else if (method.id === 'chat') {
+                  setIsChatOpen(true);
+                }
               }}
             >
               {method.action}
@@ -151,8 +166,8 @@ const CallOrChat = () => {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-100">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
+              <div className="bg-blue-50 rounded-xl p-6 border border-blue-100">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <button
             onClick={() => window.open('https://wa.me/442012345678', '_blank')}
@@ -186,7 +201,7 @@ const CallOrChat = () => {
           
           <button
             onClick={() => window.open('https://instagram.com/geminicleaning', '_blank')}
-            className="flex items-center p-3 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded-lg transition-colors duration-200"
+            className="flex items-center p-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors duration-200"
           >
             <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.447s.49-2.448 1.418-3.323c.875-.807 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.928.875 1.418 2.026 1.418 3.323s-.49 2.448-1.418 3.244c-.875.807-2.026 1.297-3.323 1.297zm7.83-9.781c-.49 0-.928-.175-1.297-.49-.368-.315-.49-.753-.49-1.243 0-.49.122-.928.49-1.243.369-.315.807-.49 1.297-.49s.928.175 1.297.49c.368.315.49.753.49 1.243 0 .49-.122.928-.49 1.243-.369.315-.807.49-1.297.49z"/>
