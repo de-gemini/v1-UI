@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { getAllChats, getChatById, sendAdminMessage, resolveChat } from '../../api/chat';
+import { useNotificationContext } from '../../contexts/NotificationContext';
 
 interface ChatMessage {
   senderId: string;
@@ -21,12 +22,13 @@ interface ChatData {
 }
 
 const ChatManagement = () => {
+  const { refreshNotificationCount } = useNotificationContext();
   const [chats, setChats] = useState<ChatData[]>([]);
   const [selectedChat, setSelectedChat] = useState<ChatData | null>(null);
   const [newMessage, setNewMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [sending, setSending] = useState(false);
-  const [filter, setFilter] = useState<'all' | 'active'>('active');
+  const [filter, setFilter] = useState<'all' | 'pending' | 'resolved'>('pending');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -46,19 +48,16 @@ const ChatManagement = () => {
       setLoading(true);
       console.log('🔄 [Admin] Loading chats with filter:', filter);
       
-      const response = filter === 'active' 
-        ? await getAllChats() // We'll filter active chats on frontend
-        : await getAllChats();
+      const response = await getAllChats();
       
       console.log('🔄 [Admin] Chats response:', response);
       
       if (response.success || response.statusCode === 200) {
-        let filteredChats = response.payload || response.data;
-        if (filter === 'active') {
-          filteredChats = (response.payload || response.data).filter((chat: ChatData) => !chat.isResolved);
-        }
-        console.log('✅ [Admin] Setting chats:', filteredChats.length, 'chats');
-        setChats(filteredChats);
+        const allChats = response.payload || response.data;
+        console.log('✅ [Admin] Setting chats:', allChats.length, 'chats');
+        setChats(allChats);
+        // Refresh notification count to keep it in sync
+        refreshNotificationCount();
       } else {
         console.log('❌ [Admin] Failed to load chats:', response);
       }
@@ -68,6 +67,18 @@ const ChatManagement = () => {
       setLoading(false);
     }
   };
+
+  // Calculate counts from full dataset
+  const allChatsCount = chats.length;
+  const pendingChatsCount = chats.filter(chat => !chat.isResolved).length;
+  const resolvedChatsCount = chats.filter(chat => chat.isResolved).length;
+
+  // Filter chats based on current filter
+  const filteredChats = chats.filter(chat => {
+    if (filter === 'pending') return !chat.isResolved;
+    if (filter === 'resolved') return chat.isResolved;
+    return true; // 'all'
+  });
 
   const selectChat = async (chatId: string) => {
     try {
@@ -96,6 +107,8 @@ const ChatManagement = () => {
         setNewMessage('');
         // Refresh chat list to update last message time
         loadChats();
+        // Refresh notification count in case it affects unresolved chat count
+        refreshNotificationCount();
       } else {
         console.log('❌ [Admin] Failed to send message:', response);
       }
@@ -114,6 +127,8 @@ const ChatManagement = () => {
       if (response.success || response.statusCode === 200) {
         setSelectedChat(response.payload || response.data);
         loadChats();
+        // Refresh notification count when chat is resolved
+        refreshNotificationCount();
       }
     } catch (error) {
       console.error('Error resolving chat:', error);
@@ -160,7 +175,7 @@ const ChatManagement = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-6 items-center justify-between">
         <div className="flex items-center">
           <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-teal-600 rounded-full flex items-center justify-center mr-4">
             <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -176,14 +191,24 @@ const ChatManagement = () => {
         {/* Filter Tabs */}
         <div className="flex space-x-2">
           <button
-            onClick={() => setFilter('active')}
-            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
-              filter === 'active'
+            onClick={() => setFilter('pending')}
+            className={`px-4 py-2 rounded-md text-xs font-medium transition-colors duration-200 ${
+              filter === 'pending'
                 ? 'bg-blue-500 text-white'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
-            Active ({chats.filter(chat => !chat.isResolved).length})
+            Pending ({pendingChatsCount})
+          </button>
+          <button
+            onClick={() => setFilter('resolved')}
+            className={`px-4 py-2 rounded-md text-xs font-medium transition-colors duration-200 ${
+              filter === 'resolved'
+                ? 'bg-blue-500 text-white'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            }`}
+          >
+            Resolved ({resolvedChatsCount})
           </button>
           <button
             onClick={() => setFilter('all')}
@@ -193,7 +218,7 @@ const ChatManagement = () => {
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
-            All ({chats.length})
+            All ({allChatsCount})
           </button>
         </div>
       </div>
@@ -206,12 +231,12 @@ const ChatManagement = () => {
               <h3 className="font-semibold text-gray-900">Chats</h3>
             </div>
             <div className="max-h-96 overflow-y-auto">
-              {chats.length === 0 ? (
+              {filteredChats.length === 0 ? (
                 <div className="p-4 text-center text-gray-500">
                   No chats found
                 </div>
               ) : (
-                chats.map((chat) => (
+                filteredChats.map((chat) => (
                   <div
                     key={chat._id}
                     onClick={() => selectChat(chat._id)}
@@ -251,7 +276,7 @@ const ChatManagement = () => {
           {selectedChat ? (
             <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
               {/* Chat Header */}
-              <div className="bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-4">
+              <div className="bg-gradient-to-r from-teal-500 to-teal-600 px-6 py-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-3">
@@ -260,23 +285,23 @@ const ChatManagement = () => {
                       </svg>
                     </div>
                     <div>
-                      <h3 className="text-white font-semibold">{selectedChat.userName}</h3>
-                      <p className="text-blue-100 text-sm">{selectedChat.userEmail}</p>
+                      <h3 className="text-white text-sm font-semibold">{selectedChat.userName}</h3>
+                      <p className="text-blue-100 text-[10px]">{selectedChat.userEmail}</p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-2">
                     {!selectedChat.isResolved && (
                       <button
                         onClick={handleResolveChat}
-                        className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md text-sm font-medium transition-colors duration-200"
+                        className="bg-green-500 hover:bg-green-600 mr-2 text-white px-3 py-1 rounded-md text-[10px] font-medium transition-colors duration-200"
                       >
-                        Resolve
+                        Mark as resolved?
                       </button>
                     )}
-                    <span className={`text-white px-2 py-1 rounded-full text-xs font-medium ${
-                      selectedChat.isResolved ? 'bg-green-500' : 'bg-yellow-500'
+                    <span className={`text-white px-2  py-1 rounded-full text-xs font-medium ${
+                      selectedChat.isResolved ? 'bg-green-500' : ''
                     }`}>
-                      {selectedChat.isResolved ? 'Resolved' : 'Active'}
+                      {selectedChat.isResolved ? 'Resolved' : ''}
                     </span>
                   </div>
                 </div>

@@ -100,6 +100,8 @@ export interface AddOn {
   icon: string;
 }
 
+// COMMENTED OUT - UNUSED INTERFACE
+/*
 export interface PricingState {
   frequency: Frequency;
   hours: number;
@@ -115,6 +117,7 @@ export interface PricingState {
   keyPickup?: boolean;
   dirtLevel?: DirtLevel;
 }
+*/
 
 // Helper functions for calculations
 export const calculatePrice = {
@@ -216,6 +219,8 @@ export const calculatePrice = {
 };
 
 // Comprehensive pricing service for total calculations
+// COMMENTED OUT - UNUSED CODE
+/*
 export const pricingService = {
   // Calculate total price for a booking
   calculateTotalPrice: (options: {
@@ -409,6 +414,7 @@ export const pricingService = {
     return errors;
   }
 };
+*/
 
 // Dedicated Pricing Calculator Class
 interface DetailedBreakdown {
@@ -677,6 +683,8 @@ export class PricingCalculator {
   /**
    * Validate pricing state
    */
+  // COMMENTED OUT - UNUSED METHOD
+  /*
   static validatePricingState(state: PricingState): string[] {
     const errors: string[] = [];
     
@@ -690,10 +698,13 @@ export class PricingCalculator {
     
     return errors;
   }
+  */
 
   /**
    * Test function to verify calculations work correctly
    */
+  // COMMENTED OUT - TEST FUNCTIONS (NOT USED IN PRODUCTION)
+  /*
   static testCalculations() {
     const testRoomCounts = { bedroom: 2, bathroom: 1 };
     const testAddOns = { deep_cleaning: 1 };
@@ -830,6 +841,7 @@ export class PricingCalculator {
       testCase3: { price: price3, breakdown: breakdown3 }
     };
   }
+  */
 }
 
 export const cleaningTypes = [
@@ -838,11 +850,14 @@ export const cleaningTypes = [
     "Carpet&Upholstery only",
   ];
   
-  export interface DayAvailabilityResponse {
-    statusCode: number;
-    message: string;
-    payload: string[] | null;
-  }
+  // COMMENTED OUT - UNUSED INTERFACE
+/*
+export interface DayAvailabilityResponse {
+  statusCode: number;
+  message: string;
+  payload: string[] | null;
+}
+*/
   
   export const frequencyOptions = [
     {

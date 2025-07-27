@@ -36,10 +36,22 @@ import CommonPostcodeInput from '../components/commons/CommonPostcodeInput';
 import HomeHeroSection from '../components/HomeHeroSection';
 import CommonFAQ from "../components/commons/CommonFAQ";
 import BeforeAfterSlider from "../components/BeforeAfterSlider";
+<<<<<<< HEAD
 import dirtyKitchen from '../assets/images/Services/Kitchen/dirty-kitchen.jpg'
 import dirtBathroom from '../assets/images/Services/Bathroom/dirty-bathroom.jpg'
 import dirtySittingroom from '../assets/images/Services/SittingRoom/dirty-sittingRoom.jpg'
 import { defaultFAQ } from "../data/faqData";
+=======
+import before1 from '../assets/images/before.jpeg'
+import before2 from '../assets/images/before2.jpeg'
+import before3 from '../assets/images/before3.jpg'
+import before4 from '../assets/images/before4.jpg'
+import before5 from '../assets/images/before5.jpg'
+import before6 from '../assets/images/before3.jpeg'
+import before7 from '../assets/images/before7.jpg'
+import before8 from '../assets/images/before8.jpg'
+import before9 from '../assets/images/before9.jpg'
+>>>>>>> 9afc48f2937dfc8af3ced0a85910e62520939944
 
 
 const Home = () => {
@@ -526,29 +538,60 @@ const Home = () => {
       ))}
     </section>
       
+
+
       {/* Before/After Slider Section */}
+      {/* Single Image Slider Section */}
       <section className="w-full mt-[2rem]">
         <BeforeAfterSlider
           title="See the Difference"
           subtitle="We make your space look absolutely sparkling"
+          mode="single"
           slides={[
             {
-              before: card3,
-              after: dirtyKitchen,
+              image: before1,
               title: 'Kitchen Deep Clean',
               description: 'Spotless kitchen after our deep cleaning service.'
             },
             {
-              before: card4,
-              after: dirtBathroom,
+              image: before2,
               title: 'Bathroom Transformation',
               description: 'A sparkling bathroom, every time.'
             },
             {
-              before: card6,
-              after: dirtySittingroom,
+              image: before3,
               title: 'Living Room Refresh',
               description: 'Enjoy a fresh, clean living space.'
+            },
+            {
+              image: before4,
+              title: 'Bedroom Makeover',
+              description: 'Transform your bedroom into a peaceful sanctuary.'
+            },
+            {
+              image: before5,
+              title: 'Office Space Clean',
+              description: 'Professional cleaning for your workspace.'
+            },
+            {
+              image: before6,
+              title: 'Carpet Deep Clean',
+              description: 'Revitalize your carpets with our deep cleaning service.'
+            },
+            {
+              image: before7,
+              title: 'Upholstery Refresh',
+              description: 'Restore your furniture to its original beauty.'
+            },
+            {
+              image: before8,
+              title: 'Window Cleaning',
+              description: 'Crystal clear windows for a brighter home.'
+            },
+            {
+              image: before9,
+              title: 'Complete Home Transformation',
+              description: 'Comprehensive cleaning for your entire home.'
             },
           ]}
         />

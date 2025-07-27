@@ -32,6 +32,11 @@ export const getActiveChats = async () => {
   return response.data;
 };
 
+export const getUnresolvedChatCount = async () => {
+  const response = await axiosInstance.get('/chat/admin/unresolved-count', { headers: getAuthHeader() });
+  return response.data;
+};
+
 export const getChatById = async (chatId: string) => {
   const response = await axiosInstance.get(`/chat/admin/${chatId}`, { headers: getAuthHeader() });
   return response.data;

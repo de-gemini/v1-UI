@@ -57,10 +57,10 @@ export const DeepPriceCard: React.FC<PriceCardProps> = ({
       </div>
 
       <h2 className="text-center text-2xl md:text-3xl font-extrabold text-gray-800 mt-8 mb-2">
-        Prices for deep cleaning in England
+        Prices for our cleaning services
       </h2>
       <p className="text-brand-primary text-3xl font-bold mb-8 text-center">
-        from £19/h
+        in England.
       </p>
 
       {/* Price List Table */}

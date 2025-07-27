@@ -13,7 +13,8 @@ import {
   FaComments,
 } from "react-icons/fa";
 import { FiBell, FiSearch } from "react-icons/fi";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useNotificationContext } from "../../contexts/NotificationContext";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -42,11 +43,17 @@ const accountItems = [
 
 const AdminLayout = ({ children }: AdminLayoutProps) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const { unresolvedChatCount, loadingChatCount } = useNotificationContext();
   const isActive = (path: string) => location.pathname === path;
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const handleNotificationClick = () => {
+    navigate('/admin/chat');
   };
 
   return (
@@ -150,12 +157,18 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
               </div>
             </div>
             <div className="flex items-center gap-3 sm:gap-6">
-              <button className="relative">
-                <FiBell className="text-xl sm:text-2xl text-background-500" />
-                {/* Notification badge example */}
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1">
-                  3
-                </span>
+              <button 
+                className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors duration-200 group" 
+                onClick={handleNotificationClick}
+                title={`${unresolvedChatCount > 0 ? `${unresolvedChatCount} unresolved chat${unresolvedChatCount !== 1 ? 's' : ''}` : 'No unresolved chats'}`}
+              >
+                <FiBell className={`text-xl sm:text-2xl text-background-500 group-hover:text-brand-primary transition-colors duration-200 ${unresolvedChatCount > 0 ? 'animate-bell-shake' : ''}`} style={{ transformOrigin: 'top center' }} />
+                {/* Notification badge - only show if there are unresolved chats */}
+                {unresolvedChatCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5 min-w-[18px] flex items-center justify-center font-medium">
+                    {loadingChatCount ? "..." : unresolvedChatCount}
+                  </span>
+                )}
               </button>
               <img
                 src="https://randomuser.me/api/portraits/men/32.jpg"
