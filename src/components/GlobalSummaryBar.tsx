@@ -4,7 +4,7 @@ import { formatDate } from '../utils/dateUtils';
 import { PRICING_CONFIG, ServiceType } from '../pages/Checkout/ckeckoutData';
 
 const GlobalSummaryBar: React.FC = () => {
-  const { selectedDate, selectedType, step } = useCheckoutStore();
+  const { selectedDate, selectedType, step , hour,minute} = useCheckoutStore();
   const finalTotalPrice = useFinalTotalPrice();
   const pricingBreakdown = usePricingBreakdown();
 
@@ -39,7 +39,7 @@ const GlobalSummaryBar: React.FC = () => {
       <div className=" mx-auto px-4 py-3 flex flex-col items-end">
         <div className="flex flex-col items-end text-blue-900 ">
           <div className="flex flex-col">
-            <span className="font-semibold text-sm">{formatDate(selectedDate)}</span>
+            <span className="font-semibold text-sm">{formatDate(selectedDate)}, {hour}:{minute < 10 ? `0${minute}` : minute}</span>
             {/* <span className="text-xs text-gray-500">Selected Date</span> */}
           </div>
           <div className="flex flex-col">

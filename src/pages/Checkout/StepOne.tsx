@@ -23,6 +23,8 @@ import {
   NavigationButtons,
   formatPrice
 } from './components/StepOne';
+import { section } from 'framer-motion/client';
+import { Link } from 'react-router-dom';
 
 
 const StepOne: React.FC = () => {
@@ -189,7 +191,10 @@ const StepOne: React.FC = () => {
 
   // Render plan buttons
   const renderPlanButtons = () => (
-    <div className="flex  gap-3 mt-6">
+    <section>
+      <h3 className='font-bold'>How long do you want to subscribe with us?</h3>
+      <div className="flex  gap-3 mt-6">
+
       {PRICING_CONFIG.plans.map((plan) => (
         <PlanButton
           key={plan.months}
@@ -199,6 +204,8 @@ const StepOne: React.FC = () => {
         />
       ))}
     </div>
+    <p className='text-sm text-neutral-600 mt-2'>*Cashback terms and conditions available <Link className='underline' to={'/payment-policy'}>here</Link>.</p>
+    </section>
   );
 
   // Render extra options based on frequency

@@ -44,9 +44,9 @@ export const PRICING_CONFIG = {
     outdoorCleaning: 30, // fixed
     laundry: 9, // fixed service
     errandHours: 25, // per hour
-    checkJob: 15,
-    havePets: 10,
-    keyPickup: 5,
+    checkJob: 0,
+    havePets: 0,
+    keyPickup: 0,
   },
   
   // Dirt level multipliers

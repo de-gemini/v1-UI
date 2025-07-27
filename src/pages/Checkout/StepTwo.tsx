@@ -299,19 +299,19 @@ const StepTwo: React.FC = () => {
           </div>
           {/* Check Job */}
           <div className="flex items-center gap-4">
-            <span className="font-semibold">Do you want a check job? <span className="text-brand-primary">(Additional £15)</span></span>
+            <span className="font-semibold">Do you want a check job? <span className="text-brand-primary"></span></span>
             <button className={`px-4 py-1 rounded-md border font-bold ${!checkJob ? 'bg-brand-primary text-white border-brand-primary' : 'bg-white border-brand-primary text-brand-primary'}`} onClick={() => set({ checkJob: false })}>No</button>
             <button className={`px-4 py-1 rounded-md border font-bold ${checkJob ? 'bg-brand-primary text-white border-brand-primary' : 'bg-white border-brand-primary text-brand-primary'}`} onClick={() => set({ checkJob: true })}>Yes</button>
           </div>
           {/* Have Pets */}
           <div className="flex items-center gap-4">
-            <span className="font-semibold">Do you have pets? <span className="text-brand-primary">(Additional £10)</span></span>
+            <span className="font-semibold">Do you have pets? <span className="text-brand-primary"></span></span>
             <button className={`px-4 py-1 rounded-md border font-bold ${!havePets ? 'bg-brand-primary text-white border-brand-primary' : 'bg-white border-brand-primary text-brand-primary'}`} onClick={() => set({ havePets: false })}>No</button>
             <button className={`px-4 py-1 rounded-md border font-bold ${havePets ? 'bg-brand-primary text-white border-brand-primary' : 'bg-white border-brand-primary text-brand-primary'}`} onClick={() => set({ havePets: true })}>Yes</button>
           </div>
           {/* Key Pickup */}
           <div className="flex items-center gap-4">
-            <span className="font-semibold">Do you need key pickup? <span className="text-brand-primary">(Additional £5)</span></span>
+            <span className="font-semibold">Do you need key pickup? <span className="text-brand-primary"></span></span>
             <button className={`px-4 py-1 rounded-md border font-bold ${!keyPickup ? 'bg-brand-primary text-white border-brand-primary' : 'bg-white border-brand-primary text-brand-primary'}`} onClick={() => set({ keyPickup: false })}>No</button>
             <button className={`px-4 py-1 rounded-md border font-bold ${keyPickup ? 'bg-brand-primary text-white border-brand-primary' : 'bg-white border-brand-primary text-brand-primary'}`} onClick={() => set({ keyPickup: true })}>Yes</button>
           </div>
