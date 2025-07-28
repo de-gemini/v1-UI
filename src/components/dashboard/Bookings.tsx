@@ -1,60 +1,94 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import axiosInstance from '../../api/axiosInstance';
+import { FaCalendarAlt, FaMapMarkerAlt, FaPoundSign } from 'react-icons/fa';
 
 const getAuthHeader = () => {
   const token = localStorage.getItem('token');
   return { Authorization: `Bearer ${token}` };
 };
 
-// Add a Booking type for the dashboard list
-interface Booking {
+// Updated interface to match Schedule data structure
+interface Schedule {
   _id: string;
-  serviceType?: string;
-  scheduledDate?: string;
-  address?: string;
-  paymentStatus?: string;
-  booking?: {
-    serviceType?: string;
-    scheduledDate?: string;
-    address?: string;
-    paymentStatus?: string;
+  status: 'pending' | 'confirmed' | 'completed' | 'cancelled';
+  startDate: string;
+  time: string;
+  frequency: string;
+  booking: {
+    _id: string;
+    serviceType: string;
+    address: string;
+    paymentStatus: string;
+    estimatedPrice: number;
+    estimatedDuration: number;
+    user: {
+      _id: string;
+      name: string;
+      email: string;
+    };
   };
 }
 
 type FilterType = 'upcoming' | 'history';
 
 const Bookings = () => {
-  const [bookings, setBookings] = useState<Booking[]>([]);
+  const [schedules, setSchedules] = useState<Schedule[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState<FilterType>('upcoming');
+  const [copiedId, setCopiedId] = useState<string | null>(null);
 
   useEffect(() => {
-    axiosInstance.get('/bookings', { headers: getAuthHeader() })
-      .then(res => setBookings(res.data.payload || res.data.data || res.data || []))
-      .catch(() => setBookings([]))
+    axiosInstance.get('/bookings/schedules', { headers: getAuthHeader() })
+      .then(res => setSchedules(res.data.payload || res.data.data || res.data || []))
+      .catch(() => setSchedules([]))
       .finally(() => setLoading(false));
   }, []);
 
-  // Filter bookings based on date
-  const filteredBookings = useMemo(() => {
+  // Filter schedules based on date
+  const filteredSchedules = useMemo(() => {
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     
-    return bookings.filter(booking => {
-      const bookingDate = new Date(booking.scheduledDate || booking.booking?.scheduledDate || '');
-      const bookingDateOnly = new Date(bookingDate.getFullYear(), bookingDate.getMonth(), bookingDate.getDate());
+    return schedules.filter(schedule => {
+      const scheduleDate = new Date(schedule.startDate);
+      const scheduleDateOnly = new Date(scheduleDate.getFullYear(), scheduleDate.getMonth(), scheduleDate.getDate());
       
       if (activeFilter === 'upcoming') {
-        return bookingDateOnly >= today;
+        return scheduleDateOnly >= today;
       } else {
-        return bookingDateOnly < today;
+        return scheduleDateOnly < today;
       }
     }).sort((a, b) => {
-      const dateA = new Date(a.scheduledDate || a.booking?.scheduledDate || '');
-      const dateB = new Date(b.scheduledDate || b.booking?.scheduledDate || '');
+      const dateA = new Date(a.startDate);
+      const dateB = new Date(b.startDate);
       return activeFilter === 'upcoming' ? dateA.getTime() - dateB.getTime() : dateB.getTime() - dateA.getTime();
     });
-  }, [bookings, activeFilter]);
+  }, [schedules, activeFilter]);
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'pending':
+        return 'bg-yellow-100 text-yellow-800';
+      case 'confirmed':
+        return 'bg-blue-100 text-blue-800';
+      case 'completed':
+        return 'bg-green-100 text-green-800';
+      case 'cancelled':
+        return 'bg-red-100 text-red-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
+    }
+  };
+
+  const copyToClipboard = async (text: string, bookingId: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedId(bookingId);
+      setTimeout(() => setCopiedId(null), 2000);
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -66,8 +100,8 @@ const Bookings = () => {
           </svg>
         </div>
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">My Bookings</h2>
-          <p className="text-sm text-gray-500">Manage your cleaning appointments</p>
+          <h2 className="text-2xl font-bold text-gray-900">My Cleaning Appointments</h2>
+          <p className="text-sm text-gray-500">Manage your cleaning sessions</p>
         </div>
       </div>
       
@@ -86,11 +120,11 @@ const Bookings = () => {
           </svg>
           Upcoming
           <span className="ml-2 bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full text-xs">
-            {bookings.filter(b => {
-              const bookingDate = new Date(b.scheduledDate || b.booking?.scheduledDate || '');
+            {schedules.filter(s => {
+              const scheduleDate = new Date(s.startDate);
               const today = new Date();
               today.setHours(0, 0, 0, 0);
-              return bookingDate >= today;
+              return scheduleDate >= today;
             }).length}
           </span>
         </button>
@@ -107,11 +141,11 @@ const Bookings = () => {
           </svg>
           History
           <span className="ml-2 bg-purple-100 text-purple-600 px-2 py-0.5 rounded-full text-xs">
-            {bookings.filter(b => {
-              const bookingDate = new Date(b.scheduledDate || b.booking?.scheduledDate || '');
+            {schedules.filter(s => {
+              const scheduleDate = new Date(s.startDate);
               const today = new Date();
               today.setHours(0, 0, 0, 0);
-              return bookingDate < today;
+              return scheduleDate < today;
             }).length}
           </span>
         </button>
@@ -124,20 +158,20 @@ const Bookings = () => {
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
-            Loading your bookings...
+            Loading your appointments...
           </div>
         </div>
-      ) : bookings.length === 0 ? (
+      ) : schedules.length === 0 ? (
         <div className="text-center py-12">
           <div className="w-24 h-24 mx-auto mb-4 bg-gradient-to-r from-gray-200 to-gray-300 rounded-full flex items-center justify-center">
             <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
             </svg>
           </div>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">No bookings found</h3>
+          <h3 className="text-lg font-medium text-gray-900 mb-2">No appointments found</h3>
           <p className="text-gray-500">You haven't made any bookings yet. Start by exploring our services!</p>
         </div>
-      ) : filteredBookings.length === 0 ? (
+      ) : filteredSchedules.length === 0 ? (
         <div className="text-center py-12">
           <div className="w-24 h-24 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
             <svg className="w-12 h-12 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -145,101 +179,150 @@ const Bookings = () => {
             </svg>
           </div>
           <h3 className="text-lg font-medium text-gray-900 mb-2">
-            No {activeFilter === 'upcoming' ? 'upcoming' : 'past'} bookings
+            No {activeFilter === 'upcoming' ? 'upcoming' : 'past'} appointments
           </h3>
           <p className="text-gray-500">
             {activeFilter === 'upcoming' 
-              ? "You don't have any upcoming bookings. Book a cleaning service to get started!"
-              : "You don't have any past bookings yet."
+              ? "You don't have any upcoming appointments. Book a cleaning service to get started!"
+              : "You don't have any past appointments yet."
             }
           </p>
         </div>
       ) : (
         <div className="space-y-4">
-          {filteredBookings.map((b, idx) => {
-            const bookingDate = new Date(b.scheduledDate || b.booking?.scheduledDate || '');
+          {filteredSchedules.map((schedule, idx) => {
+            const scheduleDate = new Date(schedule.startDate);
             const today = new Date();
             today.setHours(0, 0, 0, 0);
-            const isPast = bookingDate < today;
+            const isPast = scheduleDate < today;
             
             return (
-              <div
-                key={b._id}
-                className={`p-6 rounded-xl border transition-all duration-200 hover:shadow-md ${
-                  isPast 
-                    ? 'bg-gray-50 border-gray-200 opacity-75' 
-                    : idx % 2 === 0 
-                      ? 'bg-blue-50 border-blue-100' 
-                      : 'bg-purple-50 border-purple-100'
-                }`}
-              >
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between">
-                  <div className="flex-1">
-                    <div className="flex items-center mb-2">
-                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center mr-3 ${
-                        isPast 
-                          ? 'bg-gray-500' 
-                          : 'bg-blue-600'
-                      }`}>
-                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                        </svg>
-                      </div>
-                      <div className="flex items-center">
-                        <h3 className={`font-semibold text-lg ${
-                          isPast ? 'text-gray-600 line-through' : 'text-gray-900'
-                        }`}>
-                          {b.serviceType || b.booking?.serviceType}
-                        </h3>
-                        {isPast && (
-                          <span className="ml-2 px-2 py-1 bg-gray-200 text-gray-600 text-xs rounded-full">
-                            Completed
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                    <div className="ml-11 space-y-1">
-                      <div className="flex items-center text-sm text-gray-600">
-                        <svg className="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        {bookingDate.toLocaleDateString('en-US', { 
-                          weekday: 'long', 
-                          year: 'numeric', 
-                          month: 'long', 
-                          day: 'numeric' 
-                        })}
-                      </div>
-                      <div className="flex items-center text-sm text-gray-600">
-                        <svg className="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                        {b.address || b.booking?.address}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mt-4 sm:mt-0 sm:ml-6">
-                    <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
-                      b.paymentStatus === 'succeeded' || b.paymentStatus === 'completed'
-                        ? 'bg-green-100 text-green-800'
-                        : b.paymentStatus === 'pending'
-                        ? 'bg-yellow-100 text-yellow-800'
-                        : 'bg-gray-100 text-gray-800'
-                    }`}>
-                      <span className={`w-2 h-2 rounded-full mr-2 ${
-                        b.paymentStatus === 'succeeded' || b.paymentStatus === 'completed'
-                          ? 'bg-green-400'
-                          : b.paymentStatus === 'pending'
-                          ? 'bg-yellow-400'
-                          : 'bg-gray-400'
-                      }`}></span>
-                      {b.paymentStatus ? b.paymentStatus.charAt(0).toUpperCase() + b.paymentStatus.slice(1) : 'Unknown'}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            );
+  <div
+    key={schedule._id}
+    className={`p-6 rounded-2xl border shadow-sm transition-all duration-200 ${
+      isPast
+        ? 'bg-gray-50 border-gray-200 opacity-70'
+        : 'bg-white border-gray-100'
+    } hover:shadow-md`}
+  >
+    <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
+      {/* Left Section */}
+      <div className="flex-1 space-y-4">
+        {/* Header: Icon + Service Type + Status */}
+        <div className="flex items-start gap-4">
+          <div
+            className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+              isPast ? 'bg-gray-400' : 'bg-blue-600'
+            }`}
+          >
+            <svg
+              className="w-6 h-6 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+              />
+            </svg>
+          </div>
+          <div>
+            <h3
+              className={`text-lg font-semibold ${
+                isPast ? 'text-gray-500 line-through' : 'text-gray-900'
+              }`}
+            >
+              {schedule.booking.serviceType}
+            </h3>
+            
+          </div>
+        </div>
+
+        {/* Booking ID */}
+        <div className="flex  items-center justify-between bg-gray-50 p-4 rounded-lg border border-gray-200">
+          <div className="flex flex-col md:flex-row items-center gap-2">
+            <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V4a2 2 0 114 0v2m-4 0a2 2 0 104 0" />
+            </svg>
+            <span className="text-xs text-gray-500">Booking ID</span>
+            <span className="text-sm font-mono text-gray-800">{schedule.booking._id}</span>
+          </div>
+          <button
+            onClick={() => copyToClipboard(schedule.booking._id, schedule.booking._id)}
+            title="Copy Booking ID"
+            className="p-1.5 rounded hover:bg-gray-200 transition"
+          >
+            {copiedId === schedule.booking._id ? (
+              <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+            ) : (
+              <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+            )}
+          </button>
+        </div>
+
+        {/* Booking Details */}
+        <div className="grid gap-2 text-sm text-gray-600">
+          <div className="flex items-center gap-3">
+            <FaCalendarAlt className="text-gray-400 w-4 h-4" />
+            <span>{scheduleDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at {schedule.time}</span>
+          </div>
+          <div className="flex items-start gap-3">
+            <FaMapMarkerAlt className="text-gray-400 w-4 h-4 mt-0.5" />
+            <span>{schedule.booking.address}</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <FaPoundSign className="text-gray-400 w-4 h-4" />
+            <span>£{schedule.booking.estimatedPrice}</span>
+          </div>
+        </div>
+      </div>
+      <div className="flex  items-start lg:items-end gap-4">
+      {/* Right Section - Payment Status */}
+      <div className="flex flex-col items-start lg:items-end gap-2">
+        <p className="text-sm font-medium text-gray-500">Payment Status</p>
+        <span
+          className={`inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium shadow-sm ${
+            schedule.booking.paymentStatus === 'succeeded' || schedule.booking.paymentStatus === 'completed'
+              ? 'bg-green-100 text-green-800'
+              : schedule.booking.paymentStatus === 'pending'
+              ? 'bg-yellow-100 text-yellow-800'
+              : 'bg-gray-100 text-gray-800'
+          }`}
+        >
+          <span
+            className={`w-2 h-2 mr-2 rounded-full ${
+              schedule.booking.paymentStatus === 'succeeded' || schedule.booking.paymentStatus === 'completed'
+                ? 'bg-green-500'
+                : schedule.booking.paymentStatus === 'pending'
+                ? 'bg-yellow-500'
+                : 'bg-gray-400'
+            }`}
+          ></span>
+          {schedule.booking.paymentStatus
+            ? schedule.booking.paymentStatus.charAt(0).toUpperCase() + schedule.booking.paymentStatus.slice(1)
+            : 'Unknown'}
+        </span>
+      </div>
+      <div>
+      <p className='text-gray-500 text-sm font-medium'>Booking status</p>
+      <span className={`mt-2 my-8 inline-block text-sm px-3 py-1 rounded-full font-medium ${getStatusColor(schedule.status)}`}>
+              {schedule.status.charAt(0).toUpperCase() + schedule.status.slice(1)}
+      </span>
+    </div>
+    </div>
+    </div>
+    <p className='text-gray-500 text-[10px]'>*All terms and conditions apply</p>
+  </div>
+
+)
+
           })}
         </div>
       )}
