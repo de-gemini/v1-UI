@@ -94,7 +94,7 @@ export default function WhatisIncluded() {
       style={{ backgroundImage: `url(${currentBg})` }}
     >
       <div className="text-center py-8">
-        <h2 className="text-2xl font-bold">What is included in eMop cleaning?</h2>
+        <h2 className="text-2xl font-bold">What is included in our cleaning?</h2>
         <div className="flex justify-center gap-6 mt-4 text-sm font-medium">
           <button
             className={`${

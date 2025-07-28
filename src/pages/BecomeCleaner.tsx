@@ -196,7 +196,7 @@ export default function BecomeCleaner() {
             </h1>
 
             <p className="font-[600] text-[16px] md:text-[20px] lg:text-[28px] text-brand-primary max-w-[360px]">
-              Part time flexible cleaning role with £15/h average monthly rate
+              Part time flexible cleaning role with £19/h average monthly rate
               or full time role with £1800+/month
             </p>
 

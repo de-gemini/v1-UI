@@ -19,13 +19,13 @@ export interface FaqItem {
     {
       id: 1,
       question: "How do I get good cleaners in London?",
-      answer: "First, ask for recommendations from friends or family living in the city. They can help you identify good options. Second, check online directories and review sites to see what others have said about different cleaners in London. That can give you a good idea of who to contact and who to avoid. Finally, you can also contact a trusted company like eMop and choose from our top-rated professionals.",
+      answer: "First, ask for recommendations from friends or family living in the city. They can help you identify good options. Second, check online directories and review sites to see what others have said about different cleaners in London. That can give you a good idea of who to contact and who to avoid. Finally, you can also contact a trusted company like our and choose from our top-rated professionals.",
     },
     {
       id: 2,
       question: "How much do UK cleaners cost?",
       answer:
-        "The price of hiring a home professional in the UK will range between £8 to £20 per hour. eMop offers great prices, and that's why it's economical for you to go with us. When you hire through eMop, we guarantee that all our employees are highly trained and vetted for your safety and peace of mind. The average hourly rate for a general service in eMop is £17 per hour. This covers tasks such as tidying, dusting, vacuuming, wiping down surfaces and carpets, and cleaning toilets. However, it's always best to check with the cleaners beforehand to see what is included in their package.",
+        "The price of hiring a home professional in the UK will range between £19 to £25 per hour. our offers competitive prices while maintaining high quality standards. When you hire through our service, we guarantee that all our employees are highly trained and vetted for your safety and peace of mind. The average hourly rate for a general service is £22 per hour. This covers tasks such as tidying, dusting, vacuuming, wiping down surfaces and carpets, and cleaning toilets. However, it's always best to check with the cleaners beforehand to see what is included in their package.",
     },
     {
       id: 3,
@@ -37,7 +37,7 @@ export interface FaqItem {
       id: 4,
       question: "Should I clean before a cleaner comes?",
       answer:
-        "It is not necessary to clean before a cleaner arrives. eMop cleaners are used to working in homes that are not perfectly clean, and they will be able to adjust their approach accordingly.",
+        "It is not necessary to clean before a cleaner arrives. our cleaners are used to working in homes that are not perfectly clean, and they will be able to adjust their approach accordingly.",
     },
   ]
   }
@@ -49,13 +49,13 @@ export interface FaqItem {
     {
       id: 1,
       question: "What do most house cleaners charge per hour?",
-      answer: "House cleaners charge from £19/h for one-off cleanings and from £17/h for regular cleanings in London.",
+      answer: "House cleaners charge from £19/h for one-off cleanings and from £19/h for regular cleanings in London.",
     },
     {
       id: 2,
       question: "How much does it cost to hire a house cleaner in London?",
       answer:
-        "The cost of hiring a house cleaner in London depends on factors such as the type of service,location, experience and additional tasks. For basic cleaning you can expect to pay £16-£20 per hour or £16-£80 per visit for a flat or house. Prices are higher for one-off deep cleanings.",
+        "The cost of hiring a house cleaner in London depends on factors such as the type of service, location, experience and additional tasks. For basic cleaning you can expect to pay £19-£25 per hour or £19-£100 per visit for a flat or house. Prices are higher for one-off deep cleanings.",
     },
     {
       id: 3,
@@ -266,13 +266,13 @@ export interface FaqItem {
       id: 4,
       question: "Is there a guarantee of a refund if the job is not done up to standard?",
       answer:
-        "According to eMop policy we do not provide any refunds. However, in case of any complaint, we will investigate the case, review the evidence and get back to you with a proposed solution in accordance with eMop policy. The full description of the complaint followed by picture evidence will be requested.",
+        "According to our policy we do not provide any refunds. However, in case of any complaint, we will investigate the case, review the evidence and get back to you with a proposed solution in accordance with our policy. The full description of the complaint followed by picture evidence will be requested.",
     },
     {
         id: 5,
         question: "When will I get confirmation for my booking?",
         answer:
-          "As soon as you make a booking it becomes available to all cleaners in the eMop platform. The time of the booking confirmation depends on the availability of the cleaners in the area and the type of the cleaning you request. eMop team will contact you if there is no availability for the chosen time and offer you the closest available time of the cleaning.",
+          "As soon as you make a booking it becomes available to all cleaners in the our platform. The time of the booking confirmation depends on the availability of the cleaners in the area and the type of the cleaning you request. our team will contact you if there is no availability for the chosen time and offer you the closest available time of the cleaning.",
       },
   ]
   }
@@ -283,13 +283,13 @@ export interface FaqItem {
     {
       id: 1,
       question: "How much is a professional cleaner in London?",
-      answer: "One-time deep cleaning services in London would cost between £14 per hour and £25 per hour, with the average hourly rate for house cleaning in London being between £12 and £13. Get the best office cleaning prices and excellent quality by requesting a quote from eMop.",
+      answer: "One-time deep cleaning services in London would cost between £19 per hour and £25 per hour, with the average hourly rate for house cleaning in London being between £19 and £22. Get the best office cleaning prices and excellent quality by requesting a quote from our service.",
     },
     {
       id: 2,
       question: "How much do office cleaners charge per hour in England?",
       answer:
-        "A business office cleaning should cost, on average, between £15-£25 per hour depending on the cleaning company. Between £10 and £20 per hour is a conservative estimate for the cost of commercial cleaning services. This is a fairly typical charge for one-on-one cleaners who might have more experience with routinely cleaning homes than huge commercial premises.",
+        "A business office cleaning should cost, on average, between £19-£25 per hour depending on the cleaning company. Between £19 and £25 per hour is a conservative estimate for the cost of commercial cleaning services. This is a fairly typical charge for professional cleaners who have experience with routinely cleaning commercial premises.",
     },
     {
       id: 3,
@@ -377,7 +377,7 @@ export interface FaqItem {
       id: 2,
       question: "How much does it cost to clean 2 rooms of carpet?",
       answer:
-        "For this service, you might have to pay a carpet cleaner anywhere from £50 to £150 or more. Contact eMop carpet cleaning services in London and ask for a free quote based on your unique needs in order to receive an exact and current estimate.",
+        "For this service, you might have to pay a carpet cleaner anywhere from £75 to £150 or more. Contact our carpet cleaning services in London and ask for a free quote based on your unique needs in order to receive an exact and current estimate.",
     },
     {
       id: 3,
@@ -395,7 +395,7 @@ export interface FaqItem {
         id: 5,
         question: "How much does it cost to wash a carpet?",
         answer:
-          "Depending on the size, carpet cleaning procedure, and location, a carpet cleaning cost may vary. The typical cost of getting a carpet professionally cleaned in London is between £20 and £50.",
+          "Depending on the size, carpet cleaning procedure, and location, a carpet cleaning cost may vary. The typical cost of getting a carpet professionally cleaned in London is between £25 and £50.",
       },
   ]
   }
@@ -545,7 +545,7 @@ export interface FaqItem {
     {
       id: 1,
       question: "How much does it cost to wash a mattress?",
-      answer: "The price of cleaning a mattress might vary from £50 to £200, based on the circumstances. This pricing differential is contingent upon several factors, including the dimensions of the mattress, the intensity of the stains, and the particular cleaning techniques applied. The cost of cleaning a mattress could go up if you need extra service in London, such as stain or smell removal.",
+      answer: "The price of cleaning a mattress might vary from £75 to £200, based on the circumstances. This pricing differential is contingent upon several factors, including the dimensions of the mattress, the intensity of the stains, and the particular cleaning techniques applied. The cost of cleaning a mattress could go up if you need extra service in London, such as stain or smell removal.",
     },
     {
       id: 2,
@@ -557,7 +557,7 @@ export interface FaqItem {
       id: 3,
       question: "Can you get a mattress deep cleaned?",
       answer:
-      "Yes, eMop can help with thorough mattress cleaning. Using specialised tools and solutions, our expert cleaning services are made to attack and get rid of allergens, stains, and deep-seated grime. The method used by eMop guarantees a deep clean that can revitalise your mattress and improve its comfort and hygiene."
+      "Yes, our can help with thorough mattress cleaning. Using specialised tools and solutions, our expert cleaning services are made to attack and get rid of allergens, stains, and deep-seated grime. The method used by our guarantees a deep clean that can revitalise your mattress and improve its comfort and hygiene."
     },
     {
       id: 4,

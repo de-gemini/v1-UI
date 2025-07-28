@@ -340,7 +340,7 @@ const Navbar = () => {
             </div>
           </li>
 
-          <li><a href="/giftVoucher" className="text-gray-700 text-[16px] font-semibold hover:text-brand-primary transition duration-300 ease-in-out">Gifts</a></li>
+          {/* <li><a href="/giftVoucher" className="text-gray-700 text-[16px] font-semibold hover:text-brand-primary transition duration-300 ease-in-out">Gifts</a></li> */}
           <li><a href="/blog" className="text-gray-700 text-[16px] font-semibold hover:text-brand-primary transition duration-300 ease-in-out">Blog</a></li>
           <li><a href="/reclean-guarantee" className="text-gray-700 text-[16px] font-semibold hover:text-brand-primary transition duration-300 ease-in-out">Reclean Guarantee</a></li>
           <li><a href="/help" className="text-gray-700 text-[16px] font-semibold hover:text-brand-primary transition duration-300 ease-in-out">Help</a></li>
@@ -441,7 +441,7 @@ const Navbar = () => {
             </div>
           </li>
 
-          <li><a onClick={toggleMobileMenu} href="/giftVoucher" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Gifts</a></li>
+          {/* <li><a onClick={toggleMobileMenu} href="/giftVoucher" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Gifts</a></li> */}
           <li><a onClick={toggleMobileMenu} href="/blog" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Blog</a></li>
           <li><a onClick={toggleMobileMenu} href="/help" className="block text-gray-800 text-lg py-2 hover:bg-gray-100 w-full rounded-md transition duration-200">Help</a></li>
           <li className="w-full pt-4">

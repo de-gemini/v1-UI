@@ -15,6 +15,7 @@ import {
 import { FiBell, FiSearch } from "react-icons/fi";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useNotificationContext } from "../../contexts/NotificationContext";
+import { useAuthStore } from "../../store/authStore";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -46,6 +47,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { unresolvedChatCount, loadingChatCount } = useNotificationContext();
+  const { logout } = useAuthStore();
   const isActive = (path: string) => location.pathname === path;
 
   const toggleSidebar = () => {
@@ -54,6 +56,12 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
 
   const handleNotificationClick = () => {
     navigate('/admin/chat');
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+    setIsSidebarOpen(false);
   };
 
   return (
@@ -125,7 +133,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
           </nav>
         </div>
         <button
-          onClick={() => setIsSidebarOpen(false)}
+          onClick={handleLogout}
           className="flex items-center px-6 py-3 text-sm gap-3 text-red-600 hover:bg-red-50 transition-colors mb-6"
         >
           <FaSignOutAlt /> Logout
@@ -169,6 +177,14 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                     {loadingChatCount ? "..." : unresolvedChatCount}
                   </span>
                 )}
+              </button>
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                title="Logout"
+              >
+                <FaSignOutAlt className="text-sm" />
+                <span className="inline">Logout</span>
               </button>
               <img
                 src="https://randomuser.me/api/portraits/men/32.jpg"

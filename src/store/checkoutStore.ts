@@ -46,6 +46,7 @@ export interface CheckoutState {
   checkJob: boolean;
   havePets: boolean;
   keyPickup: boolean;
+  keyPickupLocation: string;
   dirtLevel: DirtLevel;
   endOfTenancy: boolean;
   endOfTenancyCarpet: boolean;
@@ -97,6 +98,7 @@ const initialState: Omit<CheckoutState, 'set' | 'reset'> = {
   checkJob: false,
   havePets: false,
   keyPickup: false,
+  keyPickupLocation: '',
   dirtLevel: DirtLevel.LIGHT,
   endOfTenancy: false,
   endOfTenancyCarpet: false,

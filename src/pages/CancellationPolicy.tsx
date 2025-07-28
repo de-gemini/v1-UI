@@ -29,10 +29,10 @@ const CancellationPolicy: React.FC = () => (
           
           <footer className="mt-8 text-sm text-gray-500 space-y-2">
             <p>
-              * Fee applied only if an De-geminiper reported the case to De-gemini and provided a print screen with unanswered calls to the client and pictures of the door of the client's property.
+              * Fee applied only if a cleaner reported the case to De-gemini and provided a print screen with unanswered calls to the client and pictures of the door of the client's property.
             </p>
             <p className="font-medium">
-              Updated 27.09.2024
+              Updated 27.07.2025
             </p>
           </footer>
 

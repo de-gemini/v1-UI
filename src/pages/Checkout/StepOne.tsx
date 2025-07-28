@@ -24,7 +24,7 @@ import {
   formatPrice
 } from './components/StepOne';
 import { section } from 'framer-motion/client';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 
 const StepOne: React.FC = () => {
@@ -41,6 +41,9 @@ const StepOne: React.FC = () => {
     step1View,
     set,
   } = useCheckoutStore();
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // Local scroll to top implementation
   useLayoutEffect(() => {
@@ -99,6 +102,27 @@ const StepOne: React.FC = () => {
       set({ hour: roundedHour, minute: 0 });
     }
   }, [selectedDate, hour, minute, set]);
+
+  // Update URL with ?eot=true when End of Tenancy is selected
+  useEffect(() => {
+    // ServiceType.END_OF_TENANCY is usually the last index in cleaningTypes
+    const eotIdx = cleaningTypes.findIndex(
+      t => t.toLowerCase().includes('tenancy')
+    );
+    if (selectedType === eotIdx) {
+      const params = new URLSearchParams(location.search);
+      if (params.get('eot') !== 'true') {
+        params.set('eot', 'true');
+        navigate({ search: params.toString() }, { replace: true });
+      }
+    } else {
+      const params = new URLSearchParams(location.search);
+      if (params.get('eot')) {
+        params.delete('eot');
+        navigate({ search: params.toString() }, { replace: true });
+      }
+    }
+  }, [selectedType, location.search, navigate]);
 
   // State to track current calendar view month
   const [currentViewMonth, setCurrentViewMonth] = useState(() => ({

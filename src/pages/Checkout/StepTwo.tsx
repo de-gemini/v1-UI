@@ -1,8 +1,9 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useEffect } from 'react';
 import BookingSummary from './BookingSummary';
 import type { Dispatch, SetStateAction } from 'react';
 import {FAQSection2} from '../../data/questions'
 import Toggle from '../../components/ui/Toggle';
+import { useLocation } from 'react-router-dom';
 
 import {
   roomTypes,
@@ -70,12 +71,22 @@ const StepTwo: React.FC = () => {
   const errandHours = useCheckoutStore(state => state.errandHours);
   const havePets = useCheckoutStore(state => state.havePets);
   const keyPickup = useCheckoutStore(state => state.keyPickup);
+  const keyPickupLocation = useCheckoutStore(state => state.keyPickupLocation);
   const dirtLevel = useCheckoutStore(state => state.dirtLevel);
   const endOfTenancy = useCheckoutStore(state => state.endOfTenancy);
   const expressStudio = useCheckoutStore(state => state.expressStudio);
   const checkJob = useCheckoutStore(state => state.checkJob);
   const endOfTenancyCarpet = useCheckoutStore(state => state.endOfTenancyCarpet);
   const set = useCheckoutStore(state => state.set);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get('eot') === 'true') {
+      set({ endOfTenancy: true });
+    }
+  }, [location.search, set]);
 
   // Use reactive selector hooks for derived state
   const estimatedHours = useEstimatedHours();
@@ -203,7 +214,7 @@ const StepTwo: React.FC = () => {
                   <div>
                     <span className="font-bold text-brand-primary block">{addon.label}</span>
                     {addon.estimatedTime > 0 && <span className="text-xs text-gray-500">≈{addon.estimatedTime}min</span>}
-                    {addon.price && <span className="text-xs text-brand-primary ml-2">(Additional {formatPrice(addon.price)})</span>}
+                    {addon.price && <span className="text-xs text-brand-primary ml-2">(Additional £{addon.price})</span>}
                     {addon.key === 'laundry' && <span className="text-xs text-brand-primary ml-2">(Additional £{PRICING_CONFIG.additionalServices.laundry})</span>}
                     {addon.key === 'outdoor' && <span className="text-xs text-brand-primary ml-2">(Additional £{PRICING_CONFIG.additionalServices.outdoorCleaning})</span>}
                   </div>
@@ -312,9 +323,19 @@ const StepTwo: React.FC = () => {
           {/* Key Pickup */}
           <div className="flex items-center gap-4">
             <span className="font-semibold">Do you need key pickup? <span className="text-brand-primary"></span></span>
-            <button className={`px-4 py-1 rounded-md border font-bold ${!keyPickup ? 'bg-brand-primary text-white border-brand-primary' : 'bg-white border-brand-primary text-brand-primary'}`} onClick={() => set({ keyPickup: false })}>No</button>
+            <button className={`px-4 py-1 rounded-md border font-bold ${!keyPickup ? 'bg-brand-primary text-white border-brand-primary' : 'bg-white border-brand-primary text-brand-primary'}`} onClick={() => set({ keyPickup: false, keyPickupLocation: '' })}>No</button>
             <button className={`px-4 py-1 rounded-md border font-bold ${keyPickup ? 'bg-brand-primary text-white border-brand-primary' : 'bg-white border-brand-primary text-brand-primary'}`} onClick={() => set({ keyPickup: true })}>Yes</button>
           </div>
+            {keyPickup && (
+              <input
+                type="text"
+                className="border-neutral-400 px-3 py-2 border block rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary"
+                placeholder="Where do you want the key to be picked up?"
+                value={keyPickupLocation}
+                onChange={e => set({ keyPickupLocation: e.target.value })}
+                style={{ minWidth: 260 }}
+              />
+            )}
           {/* Carpet cleaning option for End of Tenancy */}
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-4">

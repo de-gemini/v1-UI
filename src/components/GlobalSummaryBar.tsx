@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useCheckoutStore, useFinalTotalPrice, usePricingBreakdown } from '../store/checkoutStore';
 import { formatDate } from '../utils/dateUtils';
 import { PRICING_CONFIG, ServiceType } from '../pages/Checkout/ckeckoutData';
+import BookingSummary from '../pages/Checkout/BookingSummary';
 
 const GlobalSummaryBar: React.FC = () => {
   const { selectedDate, selectedType, step , hour,minute} = useCheckoutStore();
   const finalTotalPrice = useFinalTotalPrice();
   const pricingBreakdown = usePricingBreakdown();
+  const [showSummary, setShowSummary] = useState(false);
 
   // Only show the summary bar after Step 1
   if (step <= 1) {
@@ -35,49 +37,65 @@ const GlobalSummaryBar: React.FC = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-white to-orange-100 shadow-md border-b border-gray-200">
-      <div className=" mx-auto px-4 py-3 flex flex-col items-end">
-        <div className="flex flex-col items-end text-blue-900 ">
-          <div className="flex flex-col">
-            <span className="font-semibold text-sm">{formatDate(selectedDate)}, {hour}:{minute < 10 ? `0${minute}` : minute}</span>
-            {/* <span className="text-xs text-gray-500">Selected Date</span> */}
+    <>
+      <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-white to-orange-100 shadow-md border-b border-gray-200">
+        <div className=" mx-auto px-4 py-3 flex flex-col items-end">
+          <div className="flex flex-col items-end text-blue-900 ">
+            <div className="flex flex-col">
+              <span className="font-semibold text-sm">{formatDate(selectedDate)}, {hour}:{minute < 10 ? `0${minute}` : minute}</span>
+            </div>
+            <div className="flex flex-col"></div>
+            {selectedType === ServiceType.END_OF_TENANCY ? (
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-gray-500">Base Price</span>
+                <span className="font-semibold">£{PRICING_CONFIG.minimumPrices.endOfTenancy.toFixed(2)}</span>
+              </div>
+            ) : finalTotalPrice < getMinimumPrice() && (
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-gray-500">Minimum Price</span>
+                <span className="font-semibold">£{getMinimumPrice().toFixed(2)}</span>
+              </div>
+            )}
+            {pricingBreakdown && pricingBreakdown.calculatedPrice && 
+             pricingBreakdown.calculatedPrice !== pricingBreakdown.finalPrice && (
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-gray-500">Total Selections</span>
+                <span className="font-semibold">{pricingBreakdown.calculatedPrice}</span>
+              </div>
+            )}
           </div>
-          <div className="flex flex-col">
-            {/* <span className="text-sm text-gray-500">Estimated Price</span> */}
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={() => setShowSummary(true)}
+              className="text-brand-primary hover:text-blue-700 font-medium"
+            >
+              View Details
+            </button>
+            {pricingBreakdown && pricingBreakdown.calculatedPrice && 
+             pricingBreakdown.calculatedPrice !== pricingBreakdown.finalPrice&&<p className='text-xs text-gray-500'>Min time price</p>}
+            <span className="font-semibold text-brand-primary">
+              £{finalTotalPrice.toFixed(2)}
+            </span>
           </div>
-          {selectedType === ServiceType.END_OF_TENANCY ? (
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-gray-500">Base Price</span>
-              <span className="font-semibold">£{PRICING_CONFIG.minimumPrices.endOfTenancy.toFixed(2)}</span>
-            </div>
-          ) : finalTotalPrice < getMinimumPrice() && (
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-gray-500">Minimum Price</span>
-              <span className="font-semibold">£{getMinimumPrice().toFixed(2)}</span>
-            </div>
-          )}
-          {/* Show total selections when different from final price */}
-          {pricingBreakdown && pricingBreakdown.calculatedPrice && 
-           pricingBreakdown.calculatedPrice !== pricingBreakdown.finalPrice && (
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-gray-500">Total Selections</span>
-              <span className="font-semibold">{pricingBreakdown.calculatedPrice}</span>
-            </div>
-          )}
-        </div>
-        <div className="flex items-center gap-4">
-          <button 
-            onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}
-            className="text-brand-primary hover:text-blue-700 font-medium"
-          >
-            View Summary
-          </button>
-          <span className="font-semibold text-brand-primary">
-            £{finalTotalPrice.toFixed(2)}
-          </span>
         </div>
       </div>
-    </div>
+      {showSummary && (
+        <div className="fixed inset-0 z-[9999] bg-black bg-opacity-60 flex items-center justify-center">
+          <div className="bg-white w-full h-full max-w-full max-h-full overflow-y-auto flex flex-col relative">
+            <button
+              className="absolute top-4 right-4 z-10 rounded-lg text-yellow-700 flex items-center justify-center shadow-lg  bg-yellow-50  p-2 text-xl"
+              onClick={() => setShowSummary(false)}
+              aria-label="Close summary"
+            >
+              close
+            </button>
+            <div className="flex-1 flex flex-col items-center justify-center ">
+              <BookingSummary />
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

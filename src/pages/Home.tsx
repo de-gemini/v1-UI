@@ -36,12 +36,12 @@ import CommonPostcodeInput from '../components/commons/CommonPostcodeInput';
 import HomeHeroSection from '../components/HomeHeroSection';
 import CommonFAQ from "../components/commons/CommonFAQ";
 import BeforeAfterSlider from "../components/BeforeAfterSlider";
-<<<<<<< HEAD
+
 import dirtyKitchen from '../assets/images/Services/Kitchen/dirty-kitchen.jpg'
 import dirtBathroom from '../assets/images/Services/Bathroom/dirty-bathroom.jpg'
 import dirtySittingroom from '../assets/images/Services/SittingRoom/dirty-sittingRoom.jpg'
 import { defaultFAQ } from "../data/faqData";
-=======
+
 import before1 from '../assets/images/before.jpeg'
 import before2 from '../assets/images/before2.jpeg'
 import before3 from '../assets/images/before3.jpg'
@@ -51,8 +51,6 @@ import before6 from '../assets/images/before3.jpeg'
 import before7 from '../assets/images/before7.jpg'
 import before8 from '../assets/images/before8.jpg'
 import before9 from '../assets/images/before9.jpg'
->>>>>>> 9afc48f2937dfc8af3ced0a85910e62520939944
-
 
 const Home = () => {
   const features = [
@@ -62,6 +60,7 @@ const Home = () => {
     "Pay as You Go",
   ];
 
+  
   const navigate = useNavigate();
 
   interface FAQItemData {
@@ -81,13 +80,13 @@ const Home = () => {
       id: "uk-cleaners-cost",
       question: "How much do UK cleaners cost?",
       answer:
-        "The price of hiring a home professional in the UK will range between £8 to £20 per hour. De-Gemini offers great prices, and that's why it's economical for you to go with us. When you hire through De-Gemini, we guarantee that all our employees are highly trained and vetted for your safety and peace of mind. The average hourly rate for a general service in De-Gemini is £17 per hour. This covers tasks such as tidying, dusting, vacuuming, wiping down surfaces and carpets, and cleaning toilets. However, it's always best to check with the cleaners beforehand to see what is included in their package.",
+        "The price of hiring a home professional in the UK will range between £19 to £25 per hour. De-Gemini offers competitive prices while maintaining high quality standards. When you hire through De-Gemini, we guarantee that all our employees are highly trained and vetted for your safety and peace of mind. The average hourly rate for a general service in De-Gemini is £22 per hour. This covers tasks such as tidying, dusting, vacuuming, wiping down surfaces and carpets, and cleaning toilets. However, it's always best to check with the cleaners beforehand to see what is included in their package.",
     },
     {
       id: "hire-per-week",
       question: "How much is it to hire someone per week in the UK?",
       answer:
-        "A weekly cleanse for a home costs in the range of £48 to £92 for a four-hour service. You can check the average cost for a four-hour session done by a cleaner from De-Gemini here, though it varies depending on your location and property size. Many cleaners, whether they work for a prominent company or are self-employed, extend discounts to those who avail of their service regularly.",
+        "A weekly cleanse for a home costs in the range of £76 to £100 for a four-hour service. You can check the average cost for a four-hour session done by a cleaner from De-Gemini here, though it varies depending on your location and property size. Many cleaners, whether they work for a prominent company or are self-employed, extend discounts to those who avail of their service regularly.",
     },
     {
       id: "What can a cleaner do in three hours?",
@@ -494,7 +493,7 @@ const Home = () => {
             </div>
             <CostCard
               title="Regular house cleaning"
-              price="from £17/h"
+              price="from £19/h"
               
               inputPlaceholder="Enter your full post code here"
               buttonText="QUOTE ME"
@@ -549,7 +548,7 @@ const Home = () => {
           mode="single"
           slides={[
             {
-              image: before1,
+              image: before7,
               title: 'Kitchen Deep Clean',
               description: 'Spotless kitchen after our deep cleaning service.'
             },
@@ -579,7 +578,7 @@ const Home = () => {
               description: 'Revitalize your carpets with our deep cleaning service.'
             },
             {
-              image: before7,
+              image: before1,
               title: 'Upholstery Refresh',
               description: 'Restore your furniture to its original beauty.'
             },

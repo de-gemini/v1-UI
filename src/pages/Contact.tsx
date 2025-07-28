@@ -2,8 +2,9 @@ import React, {useState, useEffect, useRef} from 'react';
 
 const Contact = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -11,7 +12,6 @@ const Contact = () => {
       setSelectedFile(file);
     }
   };
-
 
   const handleRemoveFile = () => {
     setSelectedFile(null);
@@ -106,10 +106,55 @@ const Contact = () => {
   const [message, setMessage] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [bookingId, setBookingId] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Message sent! We will get back to you soon.');
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      // Create FormData for file upload
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('message', message);
+      formData.append('inquiry_type', selectedOption.value);
+      formData.append('booking_id', bookingId);
+      
+      if (selectedFile) {
+        formData.append('attachment', selectedFile);
+      }
+
+      // Replace 'YOUR_FORMSPREE_ENDPOINT' with your actual Formspree endpoint
+      const response = await fetch('https://formspree.io/f/YOUR_ACTUAL_ENDPOINT_HERE', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        // Reset form
+        setName('');
+        setEmail('');
+        setMessage('');
+        setBookingId('');
+        setSelectedFile(null);
+        if (fileInputRef.current) {
+          fileInputRef.current.value = '';
+        }
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -132,14 +177,7 @@ const Contact = () => {
                 <p className="text-gray-600 text-sm">Support team is available from 7am to 9pm</p>
               </div>
             </div>
-            {/* <div className="flex items-start space-x-3">
-              <Icon path={ICONS.location} className="w-6 h-6 text-gray-500 mt-1" />
-              <div>
-                <h3 className="font-semibold text-gray-800">Registered office address</h3>
-                <p className="text-gray-600 text-sm">Suite 5 3rd Floor, Sovereign House, 1 Albert Place, London, England, N31QB</p>
-              </div>
-            </div> */}
-             <div className="flex items-start space-x-3 md:col-start-2 lg:col-start-auto">
+            <div className="flex items-start space-x-3 md:col-start-2 lg:col-start-auto">
               <Icon path={ICONS.email} className="w-6 h-6 text-gray-500 mt-1" />
               <div>
                 <h3 className="font-semibold text-gray-800">E-mail</h3>
@@ -148,11 +186,30 @@ const Contact = () => {
             </div>
           </div>
 
+          {/* Success/Error Messages */}
+          {submitStatus === 'success' && (
+            <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
+              Thank you! Your message has been sent successfully. We'll get back to you soon.
+            </div>
+          )}
+          
+          {submitStatus === 'error' && (
+            <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+              Sorry, there was an error sending your message. Please try again or contact us directly.
+            </div>
+          )}
+
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <CustomSelect selected={selectedOption} setSelected={setSelectedOption} />
-                <input type="text" placeholder="Booking ID (Optional)" className="w-full bg-white border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm h-11" />
+                <input 
+                  type="text" 
+                  placeholder="Booking ID (Optional)" 
+                  className="w-full bg-white border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm h-11"
+                  value={bookingId}
+                  onChange={(e) => setBookingId(e.target.value)}
+                />
                 <div className="md:col-span-2 lg:col-span-1 lg:row-span-2">
                    <textarea
                     placeholder="Your Message"
@@ -160,6 +217,7 @@ const Contact = () => {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     maxLength={500}
+                    required
                   />
                   <p className="text-right text-xs text-gray-500 mt-1">{message.length}/500</p>
                 </div>
@@ -216,8 +274,16 @@ const Contact = () => {
         </button>
       )}
     </div>
-                <button onClick={handleSubmit} type="submit" className="w-full md:w-auto bg-brand-primary text-white font-bold px-12 py-3 rounded-md hover:bg-blue-600 transition-colors shadow-lg">
-                  SEND
+                <button 
+                  type="submit" 
+                  disabled={isSubmitting}
+                  className={`w-full md:w-auto font-bold px-12 py-3 rounded-md transition-colors shadow-lg ${
+                    isSubmitting 
+                      ? 'bg-gray-400 cursor-not-allowed' 
+                      : 'bg-brand-primary text-white hover:bg-blue-600'
+                  }`}
+                >
+                  {isSubmitting ? 'SENDING...' : 'SEND'}
                 </button>
               </div>
             </div>

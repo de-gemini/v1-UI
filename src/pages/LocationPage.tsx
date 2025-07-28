@@ -4,6 +4,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import ServicePageTemplate from './services/ServicePageTemplate';
+import { defaultFAQ } from '../data/faqData';
 import example from '../assets/images/Services/SittingRoom/3.avif'
 
 
@@ -71,7 +72,7 @@ const LocationPage = () => {
   };
 
 
-  return <ServicePageTemplate pageData={dynamicPageData} />;
+  return <ServicePageTemplate pageData={dynamicPageData} faqData={defaultFAQ} />;
 };
 
 export default LocationPage;

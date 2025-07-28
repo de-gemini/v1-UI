@@ -54,7 +54,7 @@ style={{
           </ul>
         </div>
 
-        {/* Column 4: EMOP SERVICE */}
+        {/* Column 4: our SERVICE */}
         <div className="lg:col-span-1">
           <h3 className="font-bold text-base sm:text-lg mb-4 text-brand-primary uppercase">Degemini SERVICE</h3>
           <ul className="space-y-2">

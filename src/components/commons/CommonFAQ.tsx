@@ -9,7 +9,14 @@ interface CommonFAQProps {
 
 const CommonFAQ: React.FC<CommonFAQProps> = ({faqData }) => {
   const [openFAQ, setOpenFAQ] = React.useState<string | number | null>(null);
-  const { title, subtitle, items } = faqData;
+  
+  // Safety check for undefined faqData
+  if (!faqData) {
+    console.warn('CommonFAQ: faqData is undefined');
+    return null;
+  }
+  
+  const { title, subtitle, items = [] } = faqData;
 
   return (
     <div className="relative bg-white max-w-3xl mx-auto mt-12 mb-20">
@@ -33,7 +40,7 @@ const CommonFAQ: React.FC<CommonFAQProps> = ({faqData }) => {
         {subtitle}
       </p>
       <div className="" style={{position: 'relative', zIndex: 1}}>
-        {items.map((item, idx) => {
+        {Array.isArray(items) && items.map((item, idx) => {
           const isOpen = openFAQ === item.id;
           return (
             <div

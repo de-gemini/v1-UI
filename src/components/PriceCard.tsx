@@ -60,7 +60,7 @@ export const PriceCard: React.FC<PriceCardProps> = ({
         Prices for regular cleaning in England
       </h2>
       <p className="text-brand-primary text-2xl md:text-3xl font-bold mb-8">
-        from £17/h
+        from £19/h
       </p>
 
       {/* Price List Items */}
@@ -68,19 +68,19 @@ export const PriceCard: React.FC<PriceCardProps> = ({
         {/* Weekly */}
         <div className="flex justify-between items-center pb-4 border-b border-gray-200">
           <span className="text-gray-700 text-lg">Weekly</span>
-          <span className="text-brand-primary font-semibold text-lg">£17/h</span>
+          <span className="text-brand-primary font-semibold text-lg">£19/h</span>
         </div>
 
         {/* Fortnightly */}
         <div className="flex justify-between items-center pb-4 border-b border-gray-200">
           <span className="text-gray-700 text-lg">Fortnightly</span>
-          <span className="text-brand-primary font-semibold text-lg">£18/h</span>
+          <span className="text-brand-primary font-semibold text-lg">£20/h</span>
         </div>
 
         {/* Monthly - no bottom border on last item */}
         <div className="flex justify-between items-center">
           <span className="text-gray-700 text-lg">Monthly</span>
-          <span className="text-brand-primary font-semibold text-lg">£19/h</span>
+          <span className="text-brand-primary font-semibold text-lg">£21/h</span>
         </div>
       </div>
 
