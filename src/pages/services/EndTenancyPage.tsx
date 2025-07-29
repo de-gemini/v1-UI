@@ -133,9 +133,7 @@ export const endOfTenancyPageData = {
       customType: "imageSlider",
       title: "Before & After End of Tenancy Cleans",
       slides: [
-        { before: example4, after: dirty },
-        { before: example1, after: dirty2 },
-        { before: example, after: dirty3 },
+        { before: "https://i.pinimg.com/1200x/cd/9e/20/cd9e205f09a742b3ee3557d736a23ea1.jpg" },
       ],
     },
     {

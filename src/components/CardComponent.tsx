@@ -8,6 +8,7 @@ import "../index.css";
 
 // Import Swiper modules
 import { Pagination, Navigation, A11y } from "swiper/modules";
+import { FaBullseye } from "react-icons/fa";
 
 // --- Interfaces for Typing ---
 interface ServiceCardProps {
@@ -30,6 +31,12 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   price,
   description,
 }) => {
+  const handleWhatsAppEnquiry = () => {
+    const message = encodeURIComponent(`Hello I want to make enquiries about your ${title} services`);
+    const whatsappUrl = `https://wa.me/+447399487915?text=${message}`;
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <div className="bg-brand-blue rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl flex flex-col h-full">
       {/* Image */}
@@ -50,7 +57,16 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       {/* Content */}
       <div className="p-4 flex flex-col flex-grow">
         <h3 className="text-xl font-bold text-gray-800 mb-2">{title}</h3>
-        <p className="text-brand-primary text-lg font-semibold mb-3">{price}</p>
+        {price ? (
+          <p className="text-brand-primary text-lg font-semibold mb-3">{price}</p>
+        ) : (
+          <button
+            onClick={handleWhatsAppEnquiry}
+            className="text-yellow-600  border text-left text-lg font-semibold mb-3 underline transition-colors duration-200"
+          >
+            Make Enquiry
+          </button>
+        )}
         <p className="text-gray-700 text-sm leading-relaxed flex-grow">
           {description}
         </p>
@@ -94,7 +110,7 @@ export const ServiceCarousel: React.FC<ServiceCarouselProps> = ({
         slidesPerView={1}
         navigation={{ prevEl: prevRef.current, nextEl: nextRef.current }}
         pagination={{ clickable: true }}
-        loop={true}
+        loop={false}
         className="mySwiper !pb-10"
         onInit={(swiper) => {
           // @ts-ignore

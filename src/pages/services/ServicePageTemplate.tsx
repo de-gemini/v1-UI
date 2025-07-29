@@ -5,7 +5,7 @@ import { ProfessionalsCarousel } from "../../components/Professional";
 import { HowItWorksSection } from "../../components/HowItWorks";
 import { MapPin, Star, ChevronDown } from "lucide-react";
 import CommonPostcodeInput from '../../components/commons/CommonPostcodeInput';
-import ImageSlider from "../../components/ImageSlider";
+import BeforeAfterSlider from "../../components/BeforeAfterSlider";
 import { DeepPriceCard } from "../../components/DeepPriceCard";
 import WhyChooseSection from "../../components/WhyChooseSection";
 import { MdOutlineLightbulb, MdOutlineStar, MdOutlineCheckCircle, MdOutlineCloud, MdOutlineSecurity, MdOutlineAccessTime } from 'react-icons/md';
@@ -53,10 +53,21 @@ function SectionRenderer({ section, state, setState, faqData }: SectionRendererP
       );
     case "custom":
       if (section.customType === "imageSlider") {
+        // Transform before/after slides to single image slides
+        const singleImageSlides = section.slides.map((slide: any) => ({
+          image: slide.before, // Use the 'before' image as the single image
+          alt: `Cleaning service result`
+        }));
+        
         return (
           <div className="p-6 sm:py-10 sm:px-16 max-w-5xl mx-auto mt-[4rem]">
             <h1 className="text-2xl font-bold text-brand-primary mb-4">{section.title}</h1>
-            <ImageSlider slides={section.slides} />
+            <BeforeAfterSlider 
+              slides={singleImageSlides} 
+              mode="single"
+              showNavigation={true}
+              showDots={true}
+            />
           </div>
         );
       }

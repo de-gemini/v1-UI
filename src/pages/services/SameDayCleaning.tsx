@@ -117,8 +117,7 @@ export const sameDayCleaningPageData = {
       customType: "imageSlider",
       title: "Real Before & After Same-Day Jobs",
       slides: [
-        { before: example1, after: dirty },
-        { before: example, after: dirty2 },
+        { before: "https://i.pinimg.com/736x/21/27/41/2127410c52c44267c14667ea833ade84.jpg" },
       ],
     },
     {

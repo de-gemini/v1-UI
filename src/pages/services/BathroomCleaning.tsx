@@ -147,8 +147,7 @@ export const bathroomDeepPageData = {
       customType: "imageSlider",
       title: "Bathroom Cleaning Results",
       slides: [
-        { before: example, after: dirty },
-        { before: example2, after: dirty2 },
+        { before: "https://i.pinimg.com/736x/aa/ef/92/aaef9211e04e9fec7d3c8c28cb5e266a.jpg" },
       ],
     },
     {

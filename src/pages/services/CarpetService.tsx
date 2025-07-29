@@ -159,8 +159,8 @@ export const carpetCleaningPageData = {
       customType: "imageSlider",
       title: "Before & After Carpet Cleaning",
       slides: [
-        { before: example, after: dirtyCarpet },
-        { before: example2, after: dirtyCarpet2 },
+        { before: "https://i.pinimg.com/736x/26/32/03/2632037f7059e6cfacf02ca1f9d91e7c.jpg" },
+        { before: "https://i.pinimg.com/736x/e4/4c/b6/e44cb67893a39f0f4e96bce3da288964.jpg" },
       ],
     },
     {

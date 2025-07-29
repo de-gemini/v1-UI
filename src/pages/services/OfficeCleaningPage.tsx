@@ -146,8 +146,7 @@ export const officeCleaningPageData = {
       customType: "imageSlider",
       title: "Before & After Office Cleaning Results",
       slides: [
-        { before: example3, after: dirtyOffice },
-        { before: example5, after: dirtyOffice2 },
+        { before: "https://i.pinimg.com/1200x/3d/5b/82/3d5b822c54c94144ce1ecbec77f09455.jpg" },
       ],
     },
     {

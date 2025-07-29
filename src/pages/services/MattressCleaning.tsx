@@ -7,8 +7,6 @@ import example3 from '../../assets/images/Services/Mattress/4.avif'
 import example4 from '../../assets/images/Services/Mattress/5.avif'
 import example5 from '../../assets/images/Services/Mattress/6.avif'
 import example6 from '../../assets/images/Services/Mattress/7.avif'
-import dirty from '../../assets/images/Services/Mattress/dirty-mattress.jpg'
-import dirty2 from '../../assets/images/Services/Mattress/dirty-mattress2.jpg'
 
 
 
@@ -155,8 +153,7 @@ export const mattressCleaningPageData = {
       customType: "imageSlider",
       title: "Before & After Mattress Results",
       slides: [
-        { before: example, after: dirty },
-        { before: example4, after: dirty2 },
+        { before: "https://i.pinimg.com/736x/fd/d4/e3/fdd4e3d051ef314197546dcb990f9aee.jpg" },
       ],
     },
     {

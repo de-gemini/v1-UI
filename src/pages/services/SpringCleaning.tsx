@@ -118,8 +118,7 @@ export const springCleaningPageData = {
       customType: "imageSlider",
       title: "Spring Cleaning: Before & After",
       slides: [
-        { before: example1, after: dirty2 },
-        { before: example3, after: dirty },
+        { before: "https://i.pinimg.com/1200x/de/3d/01/de3d01912195340eeae49add36873415.jpg" },
       ],
     },
     {

@@ -1,9 +1,6 @@
 import ServicePageTemplate from "./ServicePageTemplate";
 import { serviceMove } from "../../data/faqData";
 import example from '../../assets/images/Services/SittingRoom/3.avif'
-import dirty from '../../assets/images/Services/SittingRoom/dirty-sittingRoom.jpg'
-import dirty2 from '../../assets/images/Services/Bathroom/dirty-bathroom.jpg'
-
 import example1 from '../../assets/images/Services/SittingRoom/10.avif'
 import example2 from '../../assets/images/Services/SittingRoom/6.avif'
 import example3 from '../../assets/images/Services/Bathroom/5.avif'
@@ -114,8 +111,8 @@ export const moveInCleaningPageData = {
       customType: "imageSlider",
       title: "Before & After Move-In Cleaning Results",
       slides: [
-        { before: example, after: dirty },
-        { before: example3, after: dirty2 },
+        { before: "https://i.pinimg.com/1200x/aa/96/c9/aa96c98dcaf60759f9a5225df5623d3b.jpg" },
+      
       ],
     },
     {

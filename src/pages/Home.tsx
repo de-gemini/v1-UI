@@ -426,6 +426,23 @@ const Home = () => {
       description:
         "Keep your workspace professional and hygienic. From desks to restrooms, we offer flexible cleaning plans for offices of all sizes across England.",
     },
+    {
+      imageSrc: "https://media.gettyimages.com/id/2172863431/photo/classroom-cleaning-crew.jpg?s=612x612&w=0&k=20&c=wIdNK92jKA9d6wBJ_nRczPLV7nGdR4mzykX12aqiedo=",
+      altText: "School Cleaning",
+      title: "School Cleaning",
+      price: "",
+      description:
+        "Ensure a safe and healthy environment for students and staff. Our trusted school cleaning services cover classrooms, restrooms, and common areas—tailored to your schedule.",
+    },
+    {
+      imageSrc: "https://media.gettyimages.com/id/1226174497/photo/owner-in-the-bookstore-during-covid.jpg?s=612x612&w=0&k=20&c=bt5lBzhNYv9AxOMHOGj8-t6v0qN3fd8RMNGOkZXy0o4=",
+      altText: "Retail Cleaning",
+      title: "Retail Cleaning",
+      price: "",
+      description:
+        "Make a lasting impression on customers with spotless retail spaces. From shop floors to fitting rooms, our flexible cleaning solutions keep your store looking its best.",
+    }
+    
   ];
   
 
@@ -591,6 +608,59 @@ const Home = () => {
               image: before9,
               title: 'Complete Home Transformation',
               description: 'Comprehensive cleaning for your entire home.'
+            },
+            {
+              image: "https://i.pinimg.com/736x/a1/68/d8/a168d8b06f7d88b31c2124f3390fab9f.jpg",
+              title: 'Regular Cleaning',
+              description: 'Professional regular cleaning service for your home.'
+            },
+            {
+              image: "https://i.pinimg.com/736x/aa/ef/92/aaef9211e04e9fec7d3c8c28cb5e266a.jpg",
+              title: 'Bathroom & Regular Cleaning',
+              description: 'Comprehensive bathroom and regular cleaning services.'
+            },
+            {
+              image: "https://i.pinimg.com/1200x/aa/96/c9/aa96c98dcaf60759f9a5225df5623d3b.jpg",
+              title: 'Upholstery Cleaning',
+              description: 'Professional upholstery cleaning and restoration.'
+            },
+            {
+              image: "https://i.pinimg.com/736x/fd/d4/e3/fdd4e3d051ef314197546dcb990f9aee.jpg",
+              title: 'Mattress Cleaning',
+              description: 'Deep mattress cleaning for a healthier sleep environment.'
+            },
+           
+            {
+              image: "https://i.pinimg.com/1200x/aa/96/c9/aa96c98dcaf60759f9a5225df5623d3b.jpg",
+              title: 'Move-in Cleaning',
+              description: 'Complete move-in cleaning service for new homes.'
+            },
+            {
+              image: "https://i.pinimg.com/736x/1e/14/d8/1e14d80935abe7f8aea12b15aac1c6fd.jpg",
+              title: 'Deep Cleaning Service',
+              description: 'Comprehensive deep cleaning for your entire property.'
+            },
+          
+            {
+              image: "https://i.pinimg.com/1200x/cd/9e/20/cd9e205f09a742b3ee3557d736a23ea1.jpg",
+              title: 'End of Tenancy Cleaning',
+              description: 'Thorough end of tenancy cleaning service.'
+            },
+            
+            {
+              image: "https://i.pinimg.com/736x/e4/4c/b6/e44cb67893a39f0f4e96bce3da288964.jpg",
+              title: 'Carpet Deep Clean',
+              description: 'Deep carpet cleaning and restoration service.'
+            },
+            {
+              image: "https://i.pinimg.com/1200x/de/3d/01/de3d01912195340eeae49add36873415.jpg",
+              title: 'Spring Cleaning',
+              description: 'Comprehensive spring cleaning service.'
+            },
+            {
+              image: "https://i.pinimg.com/736x/21/27/41/2127410c52c44267c14667ea833ade84.jpg",
+              title: 'Same Day Cleaning',
+              description: 'Fast and efficient same day cleaning service.'
             },
           ]}
         />

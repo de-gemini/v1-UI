@@ -5,11 +5,6 @@ import example1 from '../../assets/images/Services/Kitchen/7.avif'
 import example2 from '../../assets/images/Services/Kitchen/6.avif'
 import example3 from '../../assets/images/Services/Kitchen/4.avif'
 import example4 from '../../assets/images/Services/Kitchen/5.avif'
-import dirty from '../../assets/images/Services/Kitchen/dirty-kitchen.jpg'
-import dirty2 from '../../assets/images/Services/Kitchen/dirty-kitchen2.jpg'
-import dirty3 from '../../assets/images/Services/Kitchen/dirt-kitchen3.jpg'
-
-
 import banner from '../../assets/images/Services/Kitchen/1.png'
 
 
@@ -161,9 +156,7 @@ export const kitchenDeepPageData = {
       customType: "imageSlider",
       title: "Before & After Kitchen Results",
       slides: [
-        { before: example, after: dirty },
-        { before: example2, after: dirty2 },
-        { before: example4, after: dirty3 },
+        { before: "https://i.pinimg.com/736x/5f/e7/49/5fe749a33342dc55ae4bb1c867d436a6.jpg" },
       ],
     },
     {

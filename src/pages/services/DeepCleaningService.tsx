@@ -143,8 +143,7 @@ export const deepCleaningPageData = {
       customType: "imageSlider",
       title: "Before & After Deep Clean Results",
       slides: [
-        { before: example4, after: example1 },
-        { before: example2, after: example5 },
+        { before: "https://i.pinimg.com/736x/1e/14/d8/1e14d80935abe7f8aea12b15aac1c6fd.jpg" },
       ],
     },
     {

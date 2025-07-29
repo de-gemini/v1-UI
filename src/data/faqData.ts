@@ -18,8 +18,8 @@ export interface FaqItem {
   items: [
     {
       id: 1,
-      question: "How do I get good cleaners in London?",
-      answer: "First, ask for recommendations from friends or family living in the city. They can help you identify good options. Second, check online directories and review sites to see what others have said about different cleaners in London. That can give you a good idea of who to contact and who to avoid. Finally, you can also contact a trusted company like our and choose from our top-rated professionals.",
+      question: "How do I get good cleaners in England?",
+      answer: "First, ask for recommendations from friends or family living in the city. They can help you identify good options. Second, check online directories and review sites to see what others have said about different cleaners in England. That can give you a good idea of who to contact and who to avoid. Finally, you can also contact a trusted company like our and choose from our top-rated professionals.",
     },
     {
       id: 2,
@@ -49,19 +49,19 @@ export interface FaqItem {
     {
       id: 1,
       question: "What do most house cleaners charge per hour?",
-      answer: "House cleaners charge from £19/h for one-off cleanings and from £19/h for regular cleanings in London.",
+      answer: "House cleaners charge from £19/h for one-off cleanings and from £19/h for regular cleanings in England.",
     },
     {
       id: 2,
-      question: "How much does it cost to hire a house cleaner in London?",
+      question: "How much does it cost to hire a house cleaner in England?",
       answer:
-        "The cost of hiring a house cleaner in London depends on factors such as the type of service, location, experience and additional tasks. For basic cleaning you can expect to pay £19-£25 per hour or £19-£100 per visit for a flat or house. Prices are higher for one-off deep cleanings.",
+        "The cost of hiring a house cleaner in England depends on factors such as the type of service, location, experience and additional tasks. For basic cleaning you can expect to pay £19-£25 per hour or £19-£100 per visit for a flat or house. Prices are higher for one-off deep cleanings.",
     },
     {
       id: 3,
       question: "How much money does it cost to hire a house cleaner in England?",
       answer:
-        "For a full house cleaning in London, a reasonable rate is £100-£200 for an average sized house requiring standard cleaning services. Larger homes, additional services such as laundry or windows, and poor condition requiring extensive cleaning can significantly increase the expected rate.",
+        "For a full house cleaning in England, a reasonable rate is £100-£200 for an average sized house requiring standard cleaning services. Larger homes, additional services such as laundry or windows, and poor condition requiring extensive cleaning can significantly increase the expected rate.",
     },
     {
       id: 4,
@@ -282,8 +282,8 @@ export interface FaqItem {
   items: [
     {
       id: 1,
-      question: "How much is a professional cleaner in London?",
-      answer: "One-time deep cleaning services in London would cost between £19 per hour and £25 per hour, with the average hourly rate for house cleaning in London being between £19 and £22. Get the best office cleaning prices and excellent quality by requesting a quote from our service.",
+      question: "How much is a professional cleaner in England?",
+      answer: "One-time deep cleaning services in England would cost between £19 per hour and £25 per hour, with the average hourly rate for house cleaning in England being between £19 and £22. Get the best office cleaning prices and excellent quality by requesting a quote from our service.",
     },
     {
       id: 2,
@@ -377,7 +377,7 @@ export interface FaqItem {
       id: 2,
       question: "How much does it cost to clean 2 rooms of carpet?",
       answer:
-        "For this service, you might have to pay a carpet cleaner anywhere from £75 to £150 or more. Contact our carpet cleaning services in London and ask for a free quote based on your unique needs in order to receive an exact and current estimate.",
+        "For this service, you might have to pay a carpet cleaner anywhere from £75 to £150 or more. Contact our carpet cleaning services in England and ask for a free quote based on your unique needs in order to receive an exact and current estimate.",
     },
     {
       id: 3,
@@ -395,7 +395,7 @@ export interface FaqItem {
         id: 5,
         question: "How much does it cost to wash a carpet?",
         answer:
-          "Depending on the size, carpet cleaning procedure, and location, a carpet cleaning cost may vary. The typical cost of getting a carpet professionally cleaned in London is between £25 and £50.",
+          "Depending on the size, carpet cleaning procedure, and location, a carpet cleaning cost may vary. The typical cost of getting a carpet professionally cleaned in England is between £25 and £50.",
       },
   ]
   }
@@ -545,7 +545,7 @@ export interface FaqItem {
     {
       id: 1,
       question: "How much does it cost to wash a mattress?",
-      answer: "The price of cleaning a mattress might vary from £75 to £200, based on the circumstances. This pricing differential is contingent upon several factors, including the dimensions of the mattress, the intensity of the stains, and the particular cleaning techniques applied. The cost of cleaning a mattress could go up if you need extra service in London, such as stain or smell removal.",
+      answer: "The price of cleaning a mattress might vary from £75 to £200, based on the circumstances. This pricing differential is contingent upon several factors, including the dimensions of the mattress, the intensity of the stains, and the particular cleaning techniques applied. The cost of cleaning a mattress could go up if you need extra service in England, such as stain or smell removal.",
     },
     {
       id: 2,

@@ -87,7 +87,7 @@ style={{
   <a href="https://www.facebook.com/share/1Axqo294Wx/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
  <Facebook className="h-7 w-7 text-brand-primary hover:text-blue-500 transition duration-300" />
   </a>
-  <a href="https://www.tiktok.com/@de.gemini.services?_t=ZS-8xiqay0oCet&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+  <a href="https://www.tiktok.com/@degeminiservices?_t=ZN-8yPh1xg1Lz4&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
  <AiFillTikTok className="h-7 w-7 text-brand-primary hover:text-blue-500 transition duration-300" />
   </a>
             </div>
