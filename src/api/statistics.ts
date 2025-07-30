@@ -20,6 +20,9 @@ export const fetchTotalRevenue = () =>
 export const fetchNewCustomers = () =>
   axiosInstance.get('/admin/statistics/new-customers', { headers: getAuthHeader() });
 
+export const fetchPendingConfirmationBookings = (limit = 10) =>
+  axiosInstance.get(`/admin/statistics/pending-confirmation-bookings?limit=${limit}`, { headers: getAuthHeader() });
+
 export const fetchRecentBookings = (limit = 10) =>
   axiosInstance.get(`/admin/statistics/recent-bookings?limit=${limit}`, { headers: getAuthHeader() });
 
@@ -30,4 +33,7 @@ export const fetchTopServices = (limit = 5) =>
   axiosInstance.get(`/admin/statistics/top-services?limit=${limit}`, { headers: getAuthHeader() });
 
 export const fetchUpcomingBookings = (limit = 10) =>
-  axiosInstance.get(`/admin/statistics/upcoming-bookings?limit=${limit}`, { headers: getAuthHeader() }); 
+  axiosInstance.get(`/admin/statistics/upcoming-bookings?limit=${limit}`, { headers: getAuthHeader() });
+
+export const fetchDailyVisitors = () =>
+  axiosInstance.get('/admin/statistics/daily-visitors', { headers: getAuthHeader() }); 

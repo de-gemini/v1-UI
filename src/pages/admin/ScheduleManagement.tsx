@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useLocation, useSearchParams } from "react-router-dom";
 import {
   FaEye,
   FaCheck,
@@ -16,13 +17,31 @@ import {
   FaCalendarAlt,
   FaStickyNote,
   FaPoundSign,
+  FaDownload,
 } from "react-icons/fa";
+import { createScheduleManagementPDF, type PDFSchedule } from '../../utils/pdfUtils';
 import { Header } from "./components/Header";
+import { FilterBar } from "./components/FilterBar";
+import { MonthNavigation } from "./components/MonthNavigation";
+import { ScheduleCard } from "./components/ScheduleCard";
+import { OffSessionChargeModal } from "./components/OffSessionChargeModal";
+import { ScheduleDetailsModal } from "./components/ScheduleDetailsModal";
 import { useBookingScheduleStore } from "../../store/bookingScheduleStore";
 import { Countdown } from "../../components/shared/Countdown";
 import type { Schedule } from "../../api/bookingSchedules";
+import { bookingScheduleService } from "../../api/bookingSchedules";
 import axiosInstance from '../../api/axiosInstance';
 import { toast } from 'react-toastify';
+import {
+  getDaysInMonth,
+  getSchedulesForDate,
+  filterSchedulesByStatus,
+  filterSchedulesBySearch,
+  filterSchedulesByPaymentStatus,
+  getStatusColor,
+  getStatusText,
+  calculateScheduleCount,
+} from "../../utils/scheduleUtils";
 
 interface ScheduleManagementProps {
   className?: string;
@@ -72,15 +91,9 @@ function getPastelColorFromId(id: string) {
 const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
   className = "",
 }) => {
-  // Utility and date helpers at the very top
-  const getDaysInMonth = (year: number, month: number) => {
-    const daysInMonth = new Date(year, month, 0).getDate();
-    const days = [];
-    for (let day = 1; day <= daysInMonth; day++) {
-      days.push(new Date(year, month - 1, day));
-    }
-    return days;
-  };
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
+  
   const [filters, setFilters] = useState({
     status: "" as string,
     year: new Date().getFullYear(),
@@ -92,16 +105,10 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
   );
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const firstScheduleRef = useRef<HTMLDivElement>(null);
-  const [showChargeModal, setShowChargeModal] = useState(false);
-  const [chargeAmount, setChargeAmount] = useState('');
-  const [chargeReason, setChargeReason] = useState('');
-  const [chargingSchedule, setChargingSchedule] = useState<any>(null);
-  const [paymentLink, setPaymentLink] = useState('');
-  const [isCharging, setIsCharging] = useState(false);
+  const [chargingSchedule, setChargingSchedule] = useState<Schedule | null>(null);
   const [paymentStatusFilter, setPaymentStatusFilter] = useState('paid');
-  const [showConfirmCharge, setShowConfirmCharge] = useState(false);
   const [viewMode, setViewMode] = useState<'summary' | 'diary'>('summary'); // Default to summary view
-  const MAX_EXTRA_CHARGE = 200;
+  const [hideExpired, setHideExpired] = useState(true); // Default to hiding expired dates
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -118,6 +125,82 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
     setError,
   } = useBookingScheduleStore();
 
+  // Handle URL parameters for initial filter setup
+  useEffect(() => {
+    const filterParam = searchParams.get('filter');
+    if (filterParam) {
+      let statusFilter = "";
+      let paymentStatusFilter = 'all';
+      let filterMessage = "";
+      let shouldShowExpired = false; // Default to hiding expired
+      
+      switch (filterParam) {
+        case 'all':
+          statusFilter = "";
+          paymentStatusFilter = 'all';
+          filterMessage = "Showing all bookings";
+          shouldShowExpired = true; // Show expired for "all" view
+          break;
+        case 'completed':
+          statusFilter = "completed";
+          paymentStatusFilter = 'paid';
+          filterMessage = "Showing completed bookings";
+          shouldShowExpired = true; // Show expired for completed view
+          break;
+        case 'pending':
+          statusFilter = "pending";
+          paymentStatusFilter = 'unpaid';
+          filterMessage = "Showing pending bookings";
+          shouldShowExpired = true; // Show expired for pending view
+          break;
+        case 'confirmed':
+          statusFilter = "confirmed";
+          paymentStatusFilter = 'all';
+          filterMessage = "Showing confirmed bookings";
+          shouldShowExpired = true; // Show expired for confirmed view
+          break;
+        case 'cancelled':
+          statusFilter = "cancelled";
+          paymentStatusFilter = 'all';
+          filterMessage = "Showing cancelled bookings";
+          shouldShowExpired = true; // Show expired for cancelled view
+          break;
+        case 'new-customers':
+          // For new customers, we might want to show recent bookings
+          statusFilter = "";
+          paymentStatusFilter = 'all';
+          filterMessage = "Showing all bookings";
+          shouldShowExpired = true; // Show expired for new customers view
+          break;
+        case 'revenue':
+          // For revenue, show paid bookings
+          statusFilter = "";
+          paymentStatusFilter = 'paid';
+          filterMessage = "Showing paid bookings";
+          shouldShowExpired = true; // Show expired for revenue view
+          break;
+        case 'visitors':
+          // For visitors, show all bookings
+          statusFilter = "";
+          paymentStatusFilter = 'all';
+          filterMessage = "Showing all bookings";
+          shouldShowExpired = true; // Show expired for visitors view
+          break;
+        default:
+          statusFilter = "";
+          paymentStatusFilter = 'all';
+          filterMessage = "Showing all bookings";
+          shouldShowExpired = true; // Show expired for default view
+      }
+      
+      setFilters(prev => ({ ...prev, status: statusFilter }));
+      setPaymentStatusFilter(paymentStatusFilter);
+      setHideExpired(!shouldShowExpired); // Set to false to show expired
+      
+      
+    }
+  }, [searchParams]);
+
   useEffect(() => {
     fetchSchedules({
       year: filters.year,
@@ -126,52 +209,6 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
       limit: 100,
     });
   }, [filters.year, filters.month, fetchSchedules]);
-
-  // Auto-scroll to first schedule when schedules are loaded
-  useEffect(() => {
-    if (!schedules || loading) return;
-
-    // Find the first day with visible schedules that is today or in the future
-    let found = false;
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    const daysToCheck = viewMode === 'summary' 
-      ? allDays.filter(date => {
-          const daySchedules = getSchedulesForDate(date);
-          const filteredByStatus = filterSchedulesByStatus(daySchedules, filters.status);
-          const filteredByPaymentStatus = filterSchedulesByPaymentStatus(filteredByStatus, paymentStatusFilter);
-          const filteredSchedules = filterSchedulesBySearch(filteredByPaymentStatus, searchTerm);
-          return filteredSchedules.length > 0;
-        })
-      : allDays;
-
-    for (let dayIdx = 0; dayIdx < daysToCheck.length; dayIdx++) {
-      const date = daysToCheck[dayIdx];
-      if (!date || date < today) continue; // skip past days
-
-      const daySchedules = getSchedulesForDate(date);
-      const filteredByStatus = filterSchedulesByStatus(daySchedules, filters.status);
-      const filteredByPaymentStatus = filterSchedulesByPaymentStatus(filteredByStatus, paymentStatusFilter);
-      const filteredSchedules = filterSchedulesBySearch(filteredByPaymentStatus, searchTerm);
-
-      if (filteredSchedules.length > 0 && !found) {
-      setTimeout(() => {
-        if (firstScheduleRef.current) {
-            console.log('Scrolling to earliest visible schedule (today or future)');
-          firstScheduleRef.current.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
-          } else {
-            console.log('No firstScheduleRef found (today or future)');
-        }
-      }, 500);
-        found = true;
-        break;
-    }
-    }
-  }, [schedules, loading, paymentStatusFilter, filters.status, searchTerm, allDays, viewMode]);
 
   const handleStatusUpdate = async (
     scheduleId: string,
@@ -191,95 +228,42 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
     try {
       await updateScheduleStatusAdmin(scheduleId, newStatus);
       toast.success(`Schedule status updated to ${newStatus}`);
-      setShowDetailsModal(false); // Close modal after successful update
+      
+      // Update the selectedSchedule with the new status
+      if (selectedSchedule && selectedSchedule._id === scheduleId) {
+        setSelectedSchedule({
+          ...selectedSchedule,
+          status: newStatus
+        });
+      }
+      
+      // Modal stays open after status update
     } catch (error) {
       toast.error("Failed to update schedule status");
     }
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "confirmed":
-        return "green-500";
-      case "completed":
-        return "blue-500";
-      case "cancelled":
-        return "red-500";
-      case "pending":
-        return "yellow-300";
-      default:
-        return "gray-500";
+  const handleSchedulePaymentStatusUpdate = async (
+    scheduleId: string,
+    newPaymentStatus: "pending" | "paid" | "failed"
+  ) => {
+    try {
+      await bookingScheduleService.updateSchedulePaymentStatusAdmin(scheduleId, newPaymentStatus);
+      toast.success(`Payment status updated to ${newPaymentStatus}`);
+      
+      // Update the selectedSchedule with the new payment status
+      if (selectedSchedule && selectedSchedule._id === scheduleId) {
+        setSelectedSchedule({
+          ...selectedSchedule,
+          paymentStatus: newPaymentStatus
+        });
+      }
+      
+      // Modal stays open after status update
+    } catch (error) {
+      toast.error("Failed to update payment status");
     }
   };
-
-  const getStatusText = (status: string) => {
-    switch (status) {
-      case "confirmed":
-        return "Confirmed";
-      case "completed":
-        return "Completed";
-      case "cancelled":
-        return "Cancelled";
-      case "pending":
-        return "Pending";
-      default:
-        return status;
-    }
-  };
-
-  const getSchedulesForDate = (date: Date) => {
-    if (!schedules) return [];
-
-    return schedules.filter((schedule) => {
-      const scheduleDate = new Date(schedule.startDate);
-      const isSame =
-        scheduleDate.getFullYear() === date.getFullYear() &&
-        scheduleDate.getMonth() === date.getMonth() &&
-        scheduleDate.getDate() === date.getDate();
-      return isSame;
-    });
-  };
-
-  // --- Filtering helpers ---
-  const filterSchedulesByStatus = (schedules: any[], status: string) => {
-    if (!status) return schedules;
-    return schedules.filter((schedule) => schedule.booking?.status === status);
-  };
-
-  const filterSchedulesBySearch = (schedules: any[], searchTerm: string) => {
-    if (!searchTerm) return schedules;
-    return schedules.filter(
-      (schedule) =>
-        schedule.booking.user.name
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase()) ||
-        schedule.booking.address
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase())
-    );
-  };
-
-  const filterSchedulesByPaymentStatus = (schedules: any[], filter: string) => {
-    if (filter === 'all') return schedules;
-    if (filter === 'paid') return schedules.filter(s => ['completed', 'succeeded'].includes(s.booking?.paymentStatus));
-    if (filter === 'unpaid') return schedules.filter(s => !['completed', 'succeeded'].includes(s.booking?.paymentStatus));
-    return schedules;
-  };
-
-  const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
 
   const daysOfWeek = [
     "Sunday",
@@ -307,6 +291,62 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
     });
   };
 
+  const handleViewDetails = (schedule: Schedule) => {
+    setSelectedSchedule(schedule);
+    setShowDetailsModal(true);
+  };
+
+  const handleExtraCharge = (schedule: Schedule) => {
+    setChargingSchedule(schedule);
+  };
+
+  const handleExportPDF = () => {
+    // Get all filtered schedules for the current view
+    const allFilteredSchedules: PDFSchedule[] = [];
+    
+    allDays.forEach((date) => {
+      if (date) {
+        const daySchedules = getSchedulesForDate(schedules || [], date);
+        const filteredByStatus = filterSchedulesByStatus(daySchedules, filters.status);
+        const filteredByPaymentStatus = filterSchedulesByPaymentStatus(filteredByStatus, paymentStatusFilter);
+        const filteredSchedules = filterSchedulesBySearch(filteredByPaymentStatus, searchTerm);
+        
+        // Filter out expired dates if hideExpired is true
+        if (hideExpired && date < today) {
+          return;
+        }
+        
+        allFilteredSchedules.push(...filteredSchedules);
+      }
+    });
+
+    if (allFilteredSchedules.length === 0) {
+      toast.warning("No schedules to export");
+      return;
+    }
+
+    // Use the utility function to create PDF
+    createScheduleManagementPDF(
+      allFilteredSchedules,
+      filters,
+      viewMode,
+      paymentStatusFilter,
+      searchTerm
+    );
+  };
+
+  // Calculate schedule count for FilterBar
+  const scheduleCount = calculateScheduleCount(
+    allDays,
+    schedules || [],
+    viewMode,
+    hideExpired,
+    filters,
+    paymentStatusFilter,
+    searchTerm,
+    today
+  );
+
   return (
     <div className={`space-y-4   sm:space-y-6 ${className} relative`}>
       <div className="py-16">
@@ -330,179 +370,59 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
 
       <div className="bg-white  left-0 right-0 top-0 z-10 p-4 sm:p-6 rounded-lg shadow">
         {/* Month navigation and display */}
-        <div className="flex items-center gap-4 mb-4">
-          <button
-            onClick={handlePreviousMonth}
-            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-            aria-label="Previous Month"
-          >
-            <FaChevronLeft className="text-gray-600" />
-          </button>
-          <h2 className="text-lg sm:text-2xl font-bold text-gray-800 text-center">
-            {monthNames[filters.month - 1]} {filters.year}
-          </h2>
-          <button
-            onClick={handleNextMonth}
-            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-            aria-label="Next Month"
-          >
-            <FaChevronRight className="text-gray-600" />
-          </button>
-        </div>
+        <MonthNavigation
+          filters={filters}
+          onPreviousMonth={handlePreviousMonth}
+          onNextMonth={handleNextMonth}
+        />
 
-        {/* View Mode Toggle */}
-        <div className="flex items-center justify-center mb-4">
-          <div className="bg-gray-100 rounded-lg p-1 flex">
-            <button
-              onClick={() => setViewMode('summary')}
-              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                viewMode === 'summary'
-                  ? 'bg-white text-brand-primary shadow-sm'
-                  : 'text-gray-600 hover:text-gray-800'
-              }`}
-            >
-              Summary
-            </button>
-            <button
-              onClick={() => setViewMode('diary')}
-              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                viewMode === 'diary'
-                  ? 'bg-white text-brand-primary shadow-sm'
-                  : 'text-gray-600 hover:text-gray-800'
-              }`}
-            >
-              Diary
-            </button>
-          </div>
-        </div>
-        {/* Filter bar */}
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-4 sm:mb-6 flex-wrap">
-          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto flex-1">
-            <div className="flex-1 min-w-[180px]">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Status Filter
-              </label>
-              <select
-                value={filters.status}
-                onChange={(e) =>
-                  setFilters({ ...filters, status: e.target.value })
-                }
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary text-sm"
-              >
-                <option value="">All Statuses</option>
-                <option value="pending">Pending</option>
-                <option value="confirmed">Confirmed</option>
-                <option value="completed">Completed</option>
-                <option value="cancelled">Cancelled</option>
-              </select>
-            </div>
-            <div className="flex-1 min-w-[180px]">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Payment Status
-              </label>
-              <select
-                value={paymentStatusFilter}
-                onChange={e => setPaymentStatusFilter(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary text-sm"
-              >
-                <option value="paid">Paid</option>
-                <option value="unpaid">Unpaid</option>
-                <option value="all">All</option>
-              </select>
-            </div>
-            <div className="flex-1 min-w-[220px]">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Search
-              </label>
-              <div className="relative">
-                <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Search by name or address..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary text-sm"
-                />
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col items-start justify-center w-auto mt-4 sm:mt-0">
-            <span className="font-bold text-red-400 text-3xl sm:text-5xl md:text-6xl lg:text-7xl leading-none">
-              {(viewMode === 'summary' 
-                ? allDays.filter(date => {
-                    const daySchedules = getSchedulesForDate(date);
-                    const filteredByStatus = filterSchedulesByStatus(daySchedules, filters.status);
-                    const filteredByPaymentStatus = filterSchedulesByPaymentStatus(filteredByStatus, paymentStatusFilter);
-                    const filteredSchedules = filterSchedulesBySearch(filteredByPaymentStatus, searchTerm);
-                    return filteredSchedules.length > 0;
-                  })
-                : allDays
-              ).reduce((acc, date) => {
-                const daySchedules = getSchedulesForDate(date);
-                const filteredByStatus = filterSchedulesByStatus(
-                  daySchedules,
-                  filters.status
-                );
-                const filteredByPaymentStatus = filterSchedulesByPaymentStatus(
-                  filteredByStatus,
-                  paymentStatusFilter
-                );
-                const filteredSchedules = filterSchedulesBySearch(
-                  filteredByPaymentStatus,
-                  searchTerm
-                );
-                return acc + filteredSchedules.length;
-              }, 0)}
-            </span>
-            <span className="text-base sm:text-lg font-bold text-gray-400 mt-1">
-              {(viewMode === 'summary' 
-                ? allDays.filter(date => {
-                    const daySchedules = getSchedulesForDate(date);
-                    const filteredByStatus = filterSchedulesByStatus(daySchedules, filters.status);
-                    const filteredByPaymentStatus = filterSchedulesByPaymentStatus(filteredByStatus, paymentStatusFilter);
-                    const filteredSchedules = filterSchedulesBySearch(filteredByPaymentStatus, searchTerm);
-                    return filteredSchedules.length > 0;
-                  })
-                : allDays
-              ).reduce((acc, date) => {
-                const daySchedules = getSchedulesForDate(date);
-                const filteredByStatus = filterSchedulesByStatus(
-                  daySchedules,
-                  filters.status
-                );
-                const filteredByPaymentStatus = filterSchedulesByPaymentStatus(
-                  filteredByStatus,
-                  paymentStatusFilter
-                );
-                const filteredSchedules = filterSchedulesBySearch(
-                  filteredByPaymentStatus,
-                  searchTerm
-                );
-                return acc + filteredSchedules.length;
-              }, 0) > 1 ? "schedules." : "schedule"}
-            </span>
-          </div>
-        </div>
+        <FilterBar
+          filters={filters}
+          setFilters={setFilters}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          paymentStatusFilter={paymentStatusFilter}
+          setPaymentStatusFilter={setPaymentStatusFilter}
+          viewMode={viewMode}
+          setViewMode={setViewMode}
+          hideExpired={hideExpired}
+          setHideExpired={setHideExpired}
+          scheduleCount={scheduleCount}
+          onExportPDF={handleExportPDF}
+        />
       </div>
 
       <div className="bg-white rounded-lg shadow overflow-hidden">
         {loading ? (
-          <div className="flex items-center justify-center h-32 sm:h-64">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-primary"></div>
+          <div className="text-center py-12">
+            <div className="inline-flex items-center px-4 py-2 font-semibold leading-6 text-gray-500">
+              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Loading your appointments...
+            </div>
           </div>
         ) : (
           <div className="divide-y divide-gray-200">
             {(viewMode === 'summary' 
               ? allDays.filter(date => {
-                  const daySchedules = getSchedulesForDate(date);
+                  // Filter out expired dates if hideExpired is true
+                  if (hideExpired && date && date < today) {
+                    return false;
+                  }
+                  
+                  const daySchedules = getSchedulesForDate(schedules || [], date);
                   const filteredByStatus = filterSchedulesByStatus(daySchedules, filters.status);
                   const filteredByPaymentStatus = filterSchedulesByPaymentStatus(filteredByStatus, paymentStatusFilter);
                   const filteredSchedules = filterSchedulesBySearch(filteredByPaymentStatus, searchTerm);
                   return filteredSchedules.length > 0;
                 })
-              : allDays
+              : hideExpired 
+                ? allDays.filter(date => !date || date >= today) // Filter out expired dates in diary view too
+                : allDays
             ).map((date, dayIdx) => {
-              const daySchedules = getSchedulesForDate(date);
+              const daySchedules = getSchedulesForDate(schedules || [], date);
               // Apply status filter first, then search filter
               const filteredByStatus = filterSchedulesByStatus(
                 daySchedules,
@@ -519,8 +439,8 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
               // Sort paid first by default
               if (paymentStatusFilter === 'all') {
                 filteredSchedules = [
-                  ...filteredSchedules.filter(s => ['completed', 'succeeded'].includes(s.booking?.paymentStatus)),
-                  ...filteredSchedules.filter(s => !['completed', 'succeeded'].includes(s.booking?.paymentStatus)),
+                  ...filteredSchedules.filter(s => ['completed', 'succeeded'].includes(s.paymentStatus)),
+                  ...filteredSchedules.filter(s => !['completed', 'succeeded'].includes(s.paymentStatus)),
                 ];
               }
               const isToday = date.toDateString() === new Date().toDateString();
@@ -529,13 +449,20 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
               // Check if this is the first day with schedules
               const currentDaysList = viewMode === 'summary' 
                 ? allDays.filter(date => {
-                    const daySchedules = getSchedulesForDate(date);
+                    // Filter out expired dates if hideExpired is true
+                    if (hideExpired && date && date < today) {
+                      return false;
+                    }
+                    
+                    const daySchedules = getSchedulesForDate(schedules || [], date);
                     const filteredByStatus = filterSchedulesByStatus(daySchedules, filters.status);
                     const filteredByPaymentStatus = filterSchedulesByPaymentStatus(filteredByStatus, paymentStatusFilter);
                     const filteredSchedules = filterSchedulesBySearch(filteredByPaymentStatus, searchTerm);
                     return filteredSchedules.length > 0;
                   })
-                : allDays;
+                : hideExpired 
+                  ? allDays.filter(date => !date || date >= today)
+                  : allDays;
               
               const currentDayIndex = currentDaysList.findIndex(d => d?.toDateString() === date.toDateString());
               
@@ -551,7 +478,7 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
                       prevDate < today ||
                       filterSchedulesBySearch(
                         filterSchedulesByPaymentStatus(
-                          filterSchedulesByStatus(getSchedulesForDate(prevDate), filters.status),
+                          filterSchedulesByStatus(getSchedulesForDate(schedules || [], prevDate), filters.status),
                           paymentStatusFilter
                         ),
                         searchTerm
@@ -576,7 +503,7 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
                   {isPast && (
                     <div className="absolute top-2 right-2 flex items-center gap-1">
                       <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-                      <span className="text-xs text-gray-500 font-medium">COMPLETED</span>
+                      <span className="text-xs text-gray-500 font-medium">PAST DATE</span>
                     </div>
                   )}
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 sm:mb-4 gap-2">
@@ -629,139 +556,17 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
                         const color =
                           CARD_COLORS[(dayIdx * 2 + idx) % CARD_COLORS.length];
                         return (
-                          <div
+                          <ScheduleCard
                             key={schedule._id}
-                            className={`p-5 transition-all duration-200 rounded-lg ${
-                              isPast 
-                                ? "opacity-75 hover:opacity-90" 
-                                : "hover:shadow-md"
-                            }`}
-                            style={{
-                              background: color.bg,
-                              borderLeft: `6px solid ${color.border}`,
-                              borderTop: "1px solid #e5e7eb",
-                              borderBottom: "1px solid #e5e7eb",
-                              borderRight: "1px solid #e5e7eb",
-                            }}
-                          >
-                            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-                              <div className="flex-1">
-                                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-2">
-                                  <div className="flex text-brand-primary items-center gap-2">
-                                    <FaClock className=" text-sm sm:text-base" />
-                                    <span className="font-medium text-base sm:text-lg">
-                                      {(() => {
-                                        // Convert "HH:mm" to 12-hour format with AM/PM
-                                        const [hourStr, minuteStr] =
-                                          schedule.time.split(":");
-                                        let hour = parseInt(hourStr, 10);
-                                        const minute = parseInt(minuteStr, 10);
-                                        const ampm = hour >= 12 ? "PM" : "AM";
-                                        hour = hour % 12 || 12;
-                                        return `${hour}:${minute
-                                          .toString()
-                                          .padStart(2, "0")}${ampm}`;
-                                      })()}
-                                    </span>
-                                    <Countdown
-                                      className="text-neutral-400"
-                                      target={(() => {
-                                        // Use the first schedule's date and time for countdown
-                                        const sched = filteredSchedules[0];
-                                        // Combine date (YYYY-MM-DD) and time (HH:mm) into ISO string
-                                        const d = new Date(date);
-                                        const [h, m] = sched.time.split(":");
-                                        d.setHours(Number(h), Number(m), 0, 0);
-                                        return d;
-                                      })()}
-                                    />
-                                  </div>
-                                  <span
-                                    className={`flex items-center gap-1 text-xs font-medium w-fit text-green-400
-                                  `}
-                                  >
-                                    <FaCheckCircle
-                                      className={`
-                                        text-${getStatusColor(schedule.status)}
-                                      `}
-                                      title={getStatusText(schedule.status)}
-                                    />
-                                    <span>
-                                      {getStatusText(schedule.status)}
-                                    </span>
-                                  </span>
-                                </div>
-
-                                <div className="space-y-2">
-                                  <div className="flex text-blue-400 items-center gap-2">
-                                    <FaUser className=" text-sm" />
-                                    <span className="font-medium  text-sm sm:text-base">
-                                      {schedule.booking?.user?.name ||
-                                        "Unknown Customer"}
-                                    </span>
-                                  </div>
-
-                                  <div className="flex items-start text-pink-400 pb-3 gap-2">
-                                    <FaMapMarkerAlt className=" mt-0.5 text-sm flex-shrink-0" />
-                                    <span className=" text-xs sm:text-sm">
-                                      {schedule.booking?.address ||
-                                        "No address provided"}
-                                    </span>
-                                  </div>
-
-                                  <div className="flex flex-wrap gap-2 mt-2">
-                                    <div className="flex items-center gap-1 bg-neutral-100 rounded px-2 py-1 text-xs text-neutral-700">
-                                      <FaCalendarAlt className="text-neutral-400 text-sm" />
-                                      <span className="font-medium">
-                                        {schedule.booking?.frequency
-                                          ? schedule.booking.frequency
-                                              .charAt(0)
-                                              .toUpperCase() +
-                                            schedule.booking.frequency.slice(1)
-                                          : "Not specified"}
-                                      </span>
-                                    </div>
-                                  </div>
-                                  {schedule.booking?.notes && (
-                                    <div className="flex items-center gap-1 text-xs text-neutral-700 mt-1 py-2 px-2">
-                                      <FaStickyNote className="text-neutral-400 text-sm" />
-                                      <span className="italic">
-                                        {schedule.booking.notes}
-                                      </span>
-                                    </div>
-                                  )}
-                                </div>
-                              </div>
-
-                              <div className="flex justify-end sm:flex-col sm:space-y-2 sm:space-x-0 space-x-2">
-                                <button
-                                  onClick={() => {
-                                    setSelectedSchedule(schedule);
-                                    setShowDetailsModal(true);
-                                  }}
-                                  className="w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 text-white hover:bg-blue-600 focus:outline-none shadow transition"
-                                  title="View Details"
-                                >
-                                  <FaEye className="text-lg" />
-                                </button>
-                                {schedule.booking?.stripeCustomerId && schedule.booking?.stripePaymentMethodId && (
-                                  <button
-                                    onClick={() => {
-                                      setChargingSchedule(schedule);
-                                      setShowChargeModal(true);
-                                      setChargeAmount('');
-                                      setChargeReason('');
-                                      setPaymentLink('');
-                                    }}
-                                    className="w-9 h-9 flex items-center justify-center rounded-full bg-yellow-400 text-white hover:bg-yellow-500 focus:outline-none shadow transition"
-                                    title="Extra Charge"
-                                  >
-                                    <FaPoundSign className="text-lg" />
-                                  </button>
-                                )}
-                              </div>
-                            </div>
-                          </div>
+                            schedule={schedule}
+                            date={date}
+                            isPast={isPast}
+                            isToday={isToday}
+                            color={color}
+                            onViewDetails={handleViewDetails}
+                            onExtraCharge={handleExtraCharge}
+                            filteredSchedules={filteredSchedules}
+                          />
                         );
                       })}
                     </div>
@@ -773,343 +578,21 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
         )}
       </div>
 
-      {showDetailsModal && selectedSchedule && selectedSchedule.booking && (
-        (() => {
-          const b = selectedSchedule.booking;
-          const details = [
-            ["Name", b.user?.name],
-            ["Email", b.user?.email],
-            ["Phone", b.user?.phoneNumber],
-            ["Service Type", (b as any)['serviceType']],
-            ["Date", b.scheduledDate ? new Date(b.scheduledDate).toLocaleDateString() : ''],
-            ["Scheduled Day of Week", (b as any)['scheduledDayOfWeek']],
-            ["Scheduled Day of Month", (b as any)['scheduledDayOfMonth']],
-            ["Time", selectedSchedule.time || (b as any)['scheduledTime']],
-            ["DateTime", (b as any)['scheduledDateTime'] ? new Date((b as any)['scheduledDateTime']).toLocaleString() : ''],
-            ["Address", b.address],
-            ["Status",
-              <span
-                className={`ml-2 px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(selectedSchedule.status)} text-white`}
-              >
-                {getStatusText(selectedSchedule.status)}
-              </span>
-            ],
-            ["Notes", b.notes],
-            ["Estimated Price", (b as any)['estimatedPrice']],
-            ["Estimated Duration (min)", (b as any)['estimatedDuration']],
-            ["Payment Intent ID", (b as any)['paymentIntentId']],
-            ["Stripe Customer ID", (b as any)['stripeCustomerId']],
-            ["Payment Status", (b as any)['paymentStatus']],
-            ["Actual Duration (min)", (b as any)['actualDuration']],
-            ["Actual Price", (b as any)['actualPrice']],
-            ["Completed At", (b as any)['completedAt'] ? new Date((b as any)['completedAt']).toLocaleString() : ''],
-            ["Frequency", b.frequency],
-            ["End of Tenancy", (b as any)['endOftenancy'] ? "Yes" : "No"],
-            ["Express Studio", (b as any)['expressStudio'] ? "Yes" : "No"],
-            ["Eco-friendly Products", (b as any)['ecofriendlyProduct'] ? "Yes" : "No"],
-            ["Errand Hours", (b as any)['errandHours']],
-            ["Has Pets", (b as any)['havePets'] ? "Yes" : "No"],
-            ["Where to Pick Key", (b as any)['whereToPickKey']],
-            ["Subscription Months", (b as any)['subscriptionMonths']],
-            ["Schedules Count", (b as any)['schedulesCount']],
-            ["Is Subscription", (b as any)['isSubscription'] ? "Yes" : "No"],
-            ["Subscription ID", (b as any)['subscriptionId']],
-            ["Stripe Payment Method ID", (b as any)['stripePaymentMethodId']],
-            ["Server Price", (b as any)['serverPrice']],
-            ["Client Price", (b as any)['clientPrice']],
-          ];
-          return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-            <div className="p-4 sm:p-6">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold">Schedule Details</h3>
-                <button
-                  onClick={() => setShowDetailsModal(false)}
-                  className="text-gray-400 hover:text-gray-600 p-1"
-                >
-                  <FaTimes size={20} />
-                </button>
-              </div>
-              <div className="space-y-4">
-                    <div className="divide-y divide-gray-200 rounded-lg overflow-hidden border border-gray-100">
-                      {details.filter(([label, value]) => value !== undefined && value !== null && value !== "").map(([label, value], idx) => {
-                        // Add mismatch flag for Client Price
-                        if (label === "Client Price") {
-                          const serverPrice = (b as any)['serverPrice'];
-                          const clientPrice = (b as any)['clientPrice'];
-                          const mismatch = serverPrice !== undefined && clientPrice !== undefined && serverPrice !== clientPrice;
-                          return (
-                            <div key={label as string} className={`flex items-start px-4 py-3 ${idx % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}>
-                              <div className="w-48 min-w-[120px] font-medium text-gray-700 text-xs sm:text-sm pt-0.5">{label}:</div>
-                              <div className="flex-1 text-neutral-600 text-xs sm:text-sm break-all flex items-center gap-2">
-                                {value}
-                                {mismatch && (
-                                  <span className="ml-2 px-2 py-0.5 bg-yellow-100 text-yellow-700 rounded text-[10px] cursor-help" title="Client price and server price do not match. This may indicate a calculation or sync issue.">
-                                    Mismatch?
-                      </span>
-                                )}
-                  </div>
-                </div>
-                          );
-                        }
-                        return (
-                          <div key={label as string} className={`flex items-start px-4 py-3 ${idx % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}>
-                            <div className="w-48 min-w-[120px] font-medium text-gray-700 text-xs sm:text-sm pt-0.5">{label}:</div>
-                            <div className="flex-1 text-neutral-600 text-xs sm:text-sm break-all">{value}</div>
-                          </div>
-                        );
-                      })}
-                      {/* Rooms section */}
-                      <div className="px-4 py-3 bg-white">
-                        <div className="font-medium text-gray-700 text-sm sm:text-base mb-2">Rooms:</div>
-                        {/* @ts-ignore */}
-                        {Array.isArray((b as any)['rooms']) && (b as any)['rooms'].length > 0 ? (
-                          <table className="min-w-full text-xs sm:text-sm border border-gray-200 rounded">
-                            <thead>
-                              <tr className="bg-gray-50">
-                                <th className="px-2 py-1 border-b text-left">Type</th>
-                                <th className="px-2 py-1 border-b text-left">Quantity</th>
-                                <th className="px-2 py-1 border-b text-left">Estimated Time (min)</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {/* @ts-ignore */}
-                              {(b as any)['rooms'].map((room, i) => (
-                                <tr key={i} className={i % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
-                                  <td className="px-2 py-1 border-b">{room.type}</td>
-                                  <td className="px-2 py-1 border-b">{room.quantity}</td>
-                                  <td className="px-2 py-1 border-b">{room.estimatedTime}</td>
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
-                        ) : (
-                          <div className="text-gray-500 italic">No rooms specified.</div>
-                    )}
-                  </div>
-                </div>
+      {/* Schedule Details Modal */}
+      <ScheduleDetailsModal
+        isOpen={showDetailsModal}
+        onClose={() => setShowDetailsModal(false)}
+        schedule={selectedSchedule}
+        onStatusUpdate={handleScheduleStatusUpdate}
+        onPaymentStatusUpdate={handleSchedulePaymentStatusUpdate}
+      />
 
-                {/* Status Update Section */}
-                <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-                  <h4 className="text-sm font-semibold text-gray-700 mb-3">Update Schedule Status</h4>
-                  <div className="flex flex-wrap gap-2">
-                    <button
-                      onClick={() => handleScheduleStatusUpdate(selectedSchedule._id, 'pending')}
-                      disabled={selectedSchedule.status === 'pending'}
-                      className={`px-3 py-2 text-xs font-medium rounded-md transition-colors ${
-                        selectedSchedule.status === 'pending'
-                          ? 'bg-yellow-100 text-yellow-700 cursor-not-allowed'
-                          : 'bg-yellow-500 text-white hover:bg-yellow-600'
-                      }`}
-                    >
-                      Set Pending
-                    </button>
-                    <button
-                      onClick={() => handleScheduleStatusUpdate(selectedSchedule._id, 'confirmed')}
-                      disabled={selectedSchedule.status === 'confirmed'}
-                      className={`px-3 py-2 text-xs font-medium rounded-md transition-colors ${
-                        selectedSchedule.status === 'confirmed'
-                          ? 'bg-green-100 text-green-700 cursor-not-allowed'
-                          : 'bg-green-500 text-white hover:bg-green-600'
-                      }`}
-                    >
-                      Set Confirmed
-                    </button>
-                    <button
-                      onClick={() => handleScheduleStatusUpdate(selectedSchedule._id, 'completed')}
-                      disabled={selectedSchedule.status === 'completed'}
-                      className={`px-3 py-2 text-xs font-medium rounded-md transition-colors ${
-                        selectedSchedule.status === 'completed'
-                          ? 'bg-blue-100 text-blue-700 cursor-not-allowed'
-                          : 'bg-blue-500 text-white hover:bg-blue-600'
-                      }`}
-                    >
-                      Set Completed
-                    </button>
-                    <button
-                      onClick={() => handleScheduleStatusUpdate(selectedSchedule._id, 'cancelled')}
-                      disabled={selectedSchedule.status === 'cancelled'}
-                      className={`px-3 py-2 text-xs font-medium rounded-md transition-colors ${
-                        selectedSchedule.status === 'cancelled'
-                          ? 'bg-red-100 text-red-700 cursor-not-allowed'
-                          : 'bg-red-500 text-white hover:bg-red-600'
-                      }`}
-                    >
-                      Set Cancelled
-                    </button>
-                  </div>
-                  <p className="text-xs text-gray-500 mt-2">
-                    Current status: <span className={`font-medium ${getStatusColor(selectedSchedule.status)}`}>{getStatusText(selectedSchedule.status)}</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-          );
-        })()
-      )}
-
-      {/* Extra Charge Modal */}
-      {showChargeModal && chargingSchedule && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-          <div className="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full">
-            <h2 className="text-lg font-bold mb-2">Extra Charge</h2>
-            <div className="mb-4">
-              <label className="block text-sm font-medium mb-1">Amount (£)</label>
-              <input
-                type="number"
-                min="0.01"
-                max={MAX_EXTRA_CHARGE}
-                step="0.01"
-                value={chargeAmount}
-                onChange={e => setChargeAmount(e.target.value)}
-                className="w-full border border-gray-300 rounded px-3 py-2"
-              />
-              <div className="text-xs text-gray-500 mt-1">Maximum allowed extra charge is £{MAX_EXTRA_CHARGE}.</div>
-            </div>
-            <div className="mb-4">
-              <label className="block text-sm font-medium mb-1">Reason <span className="text-red-500">*</span></label>
-              <input
-                type="text"
-                value={chargeReason}
-                onChange={e => setChargeReason(e.target.value)}
-                className="w-full border border-gray-300 rounded px-3 py-2"
-                required
-              />
-            </div>
-            {paymentLink && (
-              <div className="mb-4 bg-yellow-50 border border-yellow-300 rounded p-3">
-                <div className="mb-2 text-yellow-800 font-medium">Off-session charge failed. Copy and send this payment link to the client:</div>
-                <div className="flex items-center gap-2">
-                  <input
-                    type="text"
-                    value={paymentLink}
-                    readOnly
-                    className="flex-1 border border-gray-300 rounded px-2 py-1 text-xs"
-                    onFocus={e => e.target.select()}
-                  />
-                  <button
-                    onClick={() => {navigator.clipboard.writeText(paymentLink); toast.info('Link copied!')}}
-                    className="px-2 py-1 bg-blue-600 text-white rounded text-xs"
-                  >Copy</button>
-                </div>
-              </div>
-            )}
-            <div className="text-xs text-gray-600 bg-gray-50 border border-gray-200 rounded p-3 mt-4 mb-2">
-               Off-session charges are subject to Stripe's strict 
-               compliance and anti-fraud policies. 
-               Abuse or excessive use of off-session charges would 
-               result in account suspension, legal action, 
-               and loss of payment processing privileges. 
-               Only use this feature for legitimate, customer-authorized extra work 
-               (e.g., extra minutes not due to cleaner's fault). 
-               All actions are logged and would be audited by Stripe.
-               
-            </div>
-            <div className="text-xs text-red-500 mb-2 p-3 bg-red-50 rounded border-red-200">Misuse of off-session charges can result in legal liability and permanent loss of your Stripe account.</div>
-            <div className="flex justify-end gap-2 mt-4">
-              <button
-                onClick={() => { setShowChargeModal(false); setChargingSchedule(null); setPaymentLink(''); }}
-                className="px-4 py-2 bg-gray-200 rounded"
-                disabled={isCharging}
-              >Cancel</button>
-              <button
-                onClick={() => {
-                  if (!chargeAmount || isNaN(Number(chargeAmount)) || Number(chargeAmount) <= 0) {
-                    toast.error('Enter a valid amount.');
-                    return;
-                  }
-                  if (Number(chargeAmount) > MAX_EXTRA_CHARGE) {
-                    toast.error(`Amount cannot exceed £${MAX_EXTRA_CHARGE}.`);
-                    return;
-                  }
-                  if (!chargeReason.trim()) {
-                    toast.error('Please provide a reason for the extra charge.');
-                    return;
-                  }
-                  setShowConfirmCharge(true);
-                }}
-                className="px-4 py-2 bg-blue-600 text-white rounded"
-                disabled={isCharging}
-              >
-                {isCharging ? 'Charging...' : 'Charge'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-      {/* Confirmation Modal for Extra Charge */}
-      {showConfirmCharge && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-          <div className="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full">
-            <h2 className="text-lg font-bold mb-4">Confirm Extra Charge</h2>
-            <div className="mb-2 text-gray-700">You are about to charge <span className="font-bold">£{chargeAmount}</span> to the customer.</div>
-            {chargeReason && <div className="mb-2 text-gray-600">Reason: <span className="italic">{chargeReason}</span></div>}
-            <div className="text-xs text-gray-600 bg-gray-50 border border-gray-200 rounded p-3 mt-2 mb-2">
-              <strong>Compliance Notice:</strong> Off-session charges are subject to Stripe's strict compliance and anti-fraud policies. Abuse or excessive use of off-session charges can result in account suspension, legal action, and loss of payment processing privileges. Only use this feature for legitimate, customer-authorized extra work (e.g., extra minutes not due to cleaner's fault). All actions are logged and may be audited by Stripe.
-            </div>
-            <div className="text-xs text-red-500 mb-2">Misuse of off-session charges can result in legal liability and permanent loss of your Stripe account.</div>
-            <div className="flex justify-end gap-2 mt-4">
-              <button
-                onClick={() => setShowConfirmCharge(false)}
-                className="px-4 py-2 bg-gray-200 rounded"
-                disabled={isCharging}
-              >Cancel</button>
-              <button
-                onClick={async () => {
-                  setIsCharging(true);
-                  setPaymentLink('');
-                  setShowConfirmCharge(false);
-                  try {
-                    const token = localStorage.getItem('token');
-                    const res = await axiosInstance.patch(
-                      `/payments/extra-charge/${chargingSchedule.booking._id}`,
-                      {
-                        amount: Number(chargeAmount),
-                        reason: chargeReason,
-                        scheduleId: chargingSchedule._id,
-                      },
-                      {
-                        headers: {
-                          Authorization: `Bearer ${token}`,
-                        },
-                      }
-                    );
-                    const pi = res.data?.paymentIntent || res.data?.data?.paymentIntent;
-                    if (pi && pi.status === 'succeeded') {
-                      toast.success('Off-session charge succeeded!');
-                      setShowChargeModal(false);
-                      setChargingSchedule(null);
-                    } else if (pi && pi.next_action && pi.next_action.type === 'use_stripe_sdk' && pi.next_action.use_stripe_sdk?.stripe_js) {
-                      setPaymentLink(pi.next_action.use_stripe_sdk.stripe_js);
-                      toast.warn('Off-session charge requires customer action. Send them the link.');
-                    } else if (res.data?.paymentLink) {
-                      setPaymentLink(res.data.paymentLink);
-                      toast.warn('Off-session charge failed. Send the payment link to the client.');
-                    } else {
-                      toast.error('Charge failed or requires customer action.');
-                    }
-                  } catch (err: any) {
-                    if (err.response?.data?.paymentLink) {
-                      setPaymentLink(err.response.data.paymentLink);
-                      toast.warn('Off-session charge failed. Send the payment link to the client.');
-                    } else {
-                      toast.error(err.response?.data?.message || err.message || 'Charge failed.');
-                    }
-                  }
-                  setIsCharging(false);
-                }}
-                className="px-4 py-2 bg-blue-600 text-white rounded"
-                disabled={isCharging}
-              >
-                {isCharging ? 'Charging...' : 'Confirm & Charge'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Off-Session Charge Modal */}
+      <OffSessionChargeModal
+        isOpen={!!chargingSchedule}
+        onClose={() => setChargingSchedule(null)}
+        schedule={chargingSchedule}
+      />
     </div>
   );
 };

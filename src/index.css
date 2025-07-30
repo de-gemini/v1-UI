@@ -99,14 +99,37 @@
 /* Remove custom styles for .react-calendar and related classes to revert to default and allow Tailwind styling in the component. */
 /* Vanilla CSS overrides for react-calendar */
 .react-calendar {
-  background: #f9fafb;
-  /* border-radius: 1rem; */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  /* background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 50%, #e5e7eb 100%); */
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.1);
   border-top: dashed 4px gray !important;
   padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.react-calendar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 80%),
+    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 60%),
+    radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.react-calendar > * {
+  position: relative;
+  z-index: 1;
 }
 .react-calendar__navigation {
-  background: #fff;
+  background: transparent;
   border-bottom: 1px solid #e5e7eb;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
@@ -202,4 +225,42 @@
   font-family: 'Playfair Display', serif;
   font-variation-settings: "wght" 500;
   font-style: italic;
+} 
+
+/* Custom animation for chart loading bars */
+@keyframes loadingBar {
+  0% {
+    height: 50px;
+    opacity: 0.6;
+  }
+  50% {
+    height: 120px;
+    opacity: 1;
+  }
+  100% {
+    height: 50px;
+    opacity: 0.6;
+  }
+}
+
+/* Animation for growing bars from zero height */
+@keyframes growBar {
+  0% {
+    transform: scaleY(0);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+/* Animation for fading in text */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 } 

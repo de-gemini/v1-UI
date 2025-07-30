@@ -21,6 +21,7 @@ import ErrorAlert from "./components/ErrorAlert";
 import SuccessAlert from "./components/SuccessAlert";
 import ScheduleManagement from "./pages/admin/ScheduleManagement";
 import ChatManagement from "./components/admin/ChatManagement";
+import Settings from "./pages/admin/Settings";
 import StripeTestPage from './pages/StripeTestPage';
 import StripeCardPaymentPage from './pages/StripeCardPaymentPage';
 import PaymentSuccessPage from './pages/PaymentSuccessPage';
@@ -292,6 +293,18 @@ function App() {
                     <NotificationProvider>
                       <AdminLayout>
                         <PaymentRecords />
+                      </AdminLayout>
+                    </NotificationProvider>
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="/admin/settings"
+                element={
+                  <AdminRoute>
+                    <NotificationProvider>
+                      <AdminLayout>
+                        <Settings />
                       </AdminLayout>
                     </NotificationProvider>
                   </AdminRoute>

@@ -19,6 +19,7 @@ const BookingCalendar: React.FC<BookingCalendarProps> = ({
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedSchedule, setSelectedSchedule] = useState<any>(null);
   const [showScheduleModal, setShowScheduleModal] = useState(false);
+  const [hideExpired, setHideExpired] = useState(true); // Default to hiding expired dates
 
   const { calendarMonth, loading, error, fetchCalendarMonth, setError } =
     useBookingScheduleStore();
@@ -124,10 +125,20 @@ const BookingCalendar: React.FC<BookingCalendarProps> = ({
     "December",
   ];
 
-  const days = getDaysInMonth(
+  const allDays = getDaysInMonth(
     currentDate.getFullYear(),
     currentDate.getMonth() + 1
   );
+
+  // Filter out expired dates if hideExpired is true
+  const days = hideExpired 
+    ? allDays.filter(day => {
+        if (!day) return true; // Keep empty cells
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        return day >= today;
+      })
+    : allDays;
 
   return (
     <div className={`space-y-6 ${className}`}>
@@ -150,6 +161,36 @@ const BookingCalendar: React.FC<BookingCalendarProps> = ({
 
       {/* Calendar Header */}
       <div className="bg-white p-6 rounded-lg shadow">
+        {/* Hide/Show Expired Toggle */}
+        <div className="flex items-center justify-between mb-6">
+          <span className="font-semibold text-gray-700">
+            Hide Expired
+            <span className="text-brand-primary ml-1">Dates</span>
+          </span>
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={() => setHideExpired(false)}
+              className={`px-4 py-1 rounded-md border font-bold ${
+                !hideExpired 
+                  ? 'bg-brand-primary text-white border-brand-primary' 
+                  : 'bg-white border-brand-primary text-brand-primary'
+              }`}
+            >
+              Show Expired
+            </button>
+            <button 
+              onClick={() => setHideExpired(true)}
+              className={`px-4 py-1 rounded-md border font-bold ${
+                hideExpired 
+                  ? 'bg-brand-primary text-white border-brand-primary' 
+                  : 'bg-white border-brand-primary text-brand-primary'
+              }`}
+            >
+              Hide Expired
+            </button>
+          </div>
+        </div>
+
         <div className="flex items-center justify-between mb-6">
           <button
             onClick={handlePreviousMonth}

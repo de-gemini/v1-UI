@@ -4,6 +4,7 @@ import "react-calendar/dist/Calendar.css";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useCalendarStore } from "../../store/calendarStore";
 import { Header } from "./components/Header";
+import { DecorativeBackground } from "../Dashboard";
 
 const today = new Date();
 
@@ -96,12 +97,13 @@ const CalendarAvailability = () => {
   };
 
   return (
-    <div className="flex items-center justify-center mt-12 flex-col">
+    <div className="flex items-center justify-center mt-12 flex-col relative">
+      <DecorativeBackground />
       <Header
         head="Manage Calendar Availability"
         subtitle="Toggle days as available or unavailable for bookings"
       />
-      <div className="my-8">
+      <div className="my-8 relative z-10">
         {error && <div className="mb-4 text-red-600">{error}</div>}
 
         {loading ? (

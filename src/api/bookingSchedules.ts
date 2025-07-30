@@ -53,12 +53,15 @@ export interface Schedule {
     estimatedPrice: number;
     estimatedDuration: number;
     paymentStatus: string;
+    stripeCustomerId?: string;
+    stripePaymentMethodId?: string;
   };
   frequency: string;
   startDate: string;
   dayOfWeek: number;
   time: string;
   status: "pending" | "confirmed" | "completed" | "cancelled";
+  paymentStatus: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -213,6 +216,19 @@ export const bookingScheduleService = {
     const response = await axiosInstance.patch(
       `${API_BASE_URL}/bookings/admin/schedule/${scheduleId}/status`,
       { status },
+      { headers: getAuthHeader() }
+    );
+    return response.data;
+  },
+
+  // Admin: Update schedule payment status
+  async updateSchedulePaymentStatusAdmin(
+    scheduleId: string,
+    paymentStatus: "pending" | "paid" | "failed"
+  ): Promise<ScheduleResponse> {
+    const response = await axiosInstance.patch(
+      `${API_BASE_URL}/bookings/admin/schedule/${scheduleId}/payment-status`,
+      { paymentStatus },
       { headers: getAuthHeader() }
     );
     return response.data;

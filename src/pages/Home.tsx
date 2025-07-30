@@ -629,24 +629,28 @@ const Home = () => {
               title: 'Mattress Cleaning',
               description: 'Deep mattress cleaning for a healthier sleep environment.'
             },
-           
             {
-              image: "https://i.pinimg.com/1200x/aa/96/c9/aa96c98dcaf60759f9a5225df5623d3b.jpg",
-              title: 'Move-in Cleaning',
-              description: 'Complete move-in cleaning service for new homes.'
+              image: "https://i.pinimg.com/736x/5f/e7/49/5fe749a33342dc55ae4bb1c867d436a6.jpg",
+              title: 'Kitchen Deep Cleaning',
+              description: 'Thorough kitchen deep cleaning service.'
             },
+            
+            
             {
-              image: "https://i.pinimg.com/736x/1e/14/d8/1e14d80935abe7f8aea12b15aac1c6fd.jpg",
-              title: 'Deep Cleaning Service',
-              description: 'Comprehensive deep cleaning for your entire property.'
+              image: "https://i.pinimg.com/1200x/3d/5b/82/3d5b822c54c94144ce1ecbec77f09455.jpg",
+              title: 'Office Cleaning',
+              description: 'Professional office cleaning services.'
             },
-          
             {
               image: "https://i.pinimg.com/1200x/cd/9e/20/cd9e205f09a742b3ee3557d736a23ea1.jpg",
               title: 'End of Tenancy Cleaning',
               description: 'Thorough end of tenancy cleaning service.'
             },
-            
+            {
+              image: "https://i.pinimg.com/736x/26/32/03/2632037f7059e6cfacf02ca1f9d91e7c.jpg",
+              title: 'Carpet Cleaning',
+              description: 'Professional carpet cleaning and stain removal.'
+            },
             {
               image: "https://i.pinimg.com/736x/e4/4c/b6/e44cb67893a39f0f4e96bce3da288964.jpg",
               title: 'Carpet Deep Clean',

@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { fetchPaymentRecords } from '../../api/stripePayment';
 import { DecorativeBackground } from '../Dashboard';
 
 const PaymentRecords: React.FC = () => {
+  const [searchParams] = useSearchParams();
   const [payments, setPayments] = useState<any[] | null>(null);
+  const [filteredPayments, setFilteredPayments] = useState<any[] | null>(null);
+  const [allUniquePayments, setAllUniquePayments] = useState<any[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState(1);
@@ -11,29 +15,100 @@ const PaymentRecords: React.FC = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [total, setTotal] = useState(0);
 
+  // Check if we should show unique customers only
+  const showUniqueCustomers = searchParams.get('filter') === 'unique-customers';
+
+  // Calculate pagination for unique customers
+  const getPaginatedUniquePayments = () => {
+    if (!allUniquePayments) return [];
+    const startIndex = (page - 1) * limit;
+    const endIndex = startIndex + limit;
+    return allUniquePayments.slice(startIndex, endIndex);
+  };
+
   useEffect(() => {
     setLoading(true);
     setError(null);
-    fetchPaymentRecords(page, limit)
-      .then((res) => {
-        console.log('PaymentRecords API response:', res); // Debug log
-        const data = res?.payload || {};
-        setPayments(data.payments || []);
-        setTotalPages(data.totalPages || 1);
-        setTotal(data.total || 0);
-      })
-      .catch((err) => {
-        setError(err?.response?.data?.message || err.message || 'Failed to fetch payment records');
-        setPayments([]);
-      })
-      .finally(() => setLoading(false));
-  }, [page, limit]);
+    
+    // For unique customers, fetch all data once
+    if (showUniqueCustomers && !allUniquePayments) {
+      fetchPaymentRecords(1, 1000) // Fetch all data
+        .then((res) => {
+          console.log('PaymentRecords API response:', res);
+          const data = res?.payload || {};
+          const allPayments = data.payments || [];
+          
+          console.log('Total payments fetched:', allPayments.length);
+          
+          // Create a map to track unique customers
+          const uniqueCustomersMap = new Map();
+          const uniqueCustomerPayments: any[] = [];
+          
+          allPayments.forEach((payment: any) => {
+            const customerId = payment.user?._id || payment.user?.email || payment.customerId;
+            
+            if (customerId && !uniqueCustomersMap.has(customerId)) {
+              uniqueCustomersMap.set(customerId, true);
+              uniqueCustomerPayments.push(payment);
+            }
+          });
+          
+          console.log('Unique customers found:', uniqueCustomerPayments.length);
+          console.log('Unique customer IDs:', Array.from(uniqueCustomersMap.keys()));
+          
+          setAllUniquePayments(uniqueCustomerPayments);
+          setTotal(uniqueCustomerPayments.length);
+          setTotalPages(Math.ceil(uniqueCustomerPayments.length / limit));
+          setFilteredPayments(getPaginatedUniquePayments());
+        })
+        .catch((err) => {
+          setError(err?.response?.data?.message || err.message || 'Failed to fetch payment records');
+          setAllUniquePayments([]);
+          setFilteredPayments([]);
+        })
+        .finally(() => setLoading(false));
+    } else if (!showUniqueCustomers) {
+      // Regular pagination for normal view
+      fetchPaymentRecords(page, limit)
+        .then((res) => {
+          console.log('PaymentRecords API response:', res);
+          const data = res?.payload || {};
+          const allPayments = data.payments || [];
+          
+          setPayments(allPayments);
+          setFilteredPayments(allPayments);
+          setTotalPages(data.totalPages || 1);
+          setTotal(data.total || 0);
+        })
+        .catch((err) => {
+          setError(err?.response?.data?.message || err.message || 'Failed to fetch payment records');
+          setPayments([]);
+          setFilteredPayments([]);
+        })
+        .finally(() => setLoading(false));
+    } else {
+      // For unique customers, just update pagination
+      setFilteredPayments(getPaginatedUniquePayments());
+      setLoading(false);
+    }
+  }, [page, limit, showUniqueCustomers, allUniquePayments]);
 
-  
+  // Use filtered payments for display
+  const displayPayments = showUniqueCustomers ? filteredPayments : payments;
+
   return (
     <div className="p-2 sm:p-8">
       {/* <DecorativeBackground /> */}
-      <h1 className="text-xl sm:text-2xl font-bold mb-4">Payment Records</h1>
+      <div className="flex items-center justify-between mb-4">
+        <h1 className="text-xl sm:text-2xl font-bold">
+          {showUniqueCustomers ? 'Unique Customer Payments' : 'Payment Records'}
+        </h1>
+        {showUniqueCustomers && (
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+            Unique Customers Only
+          </span>
+        )}
+      </div>
       {error && <div className="text-red-500 mb-4">{error}</div>}
       <div className="w-full relative overflow-x-auto">
         <table className="min-w-[320px] w-full  border border-gray-200 rounded-lg text-xs sm:text-sm">
@@ -47,10 +122,10 @@ const PaymentRecords: React.FC = () => {
           <tbody>
             {loading ? (
               <tr><td colSpan={3} className="text-center py-8">Loading...</td></tr>
-            ) : payments && payments.length === 0 ? (
+            ) : displayPayments && displayPayments.length === 0 ? (
               <tr><td colSpan={3} className="text-center py-8">No payment records found.</td></tr>
-            ) : payments ? (
-              payments.map((p) => {
+            ) : displayPayments ? (
+              displayPayments.map((p) => {
                 const date = p.paidAt ? new Date(p.paidAt).toISOString().slice(0, 10) : '-';
                 const name = p.user?.name ? p.user.name : 'Anonymous';
                 return (

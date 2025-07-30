@@ -69,16 +69,31 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       {/* Mobile Overlay */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-100 lg:hidden"
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          style={{ 
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 40
+          }}
           onClick={toggleSidebar}
         />
       )}
 
       {/* Sidebar */}
       <aside
-        className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-white shadow-lg flex flex-col justify-between transform transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-xl flex flex-col justify-between transform transition-transform duration-300 ease-in-out ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
+        style={{ 
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          height: '100vh',
+          zIndex: 50
+        }}
       >
         <div>
           <div className="flex items-center justify-between p-6">
@@ -141,11 +156,11 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       </aside>
 
       {/* Main Content */}
-      <div className="flex-1 relative flex flex-col lg:ml-0">
+      <div className="flex-1 relative flex flex-col lg:ml-64">
         {/* Top Bar */}
         
-        <section className=" top-0 bg-white shadow-sm ">
-          <header className="flex w-full items-center justify-between z-100 px-4 sm:px-8 py-4 bg-white shadow-sm">
+        <section className="sticky top-0 bg-white shadow-sm z-30">
+          <header className="flex w-full items-center justify-between px-4 sm:px-8 py-4 bg-white shadow-sm">
             <div className="flex items-center gap-4">
               <button
                 onClick={toggleSidebar}

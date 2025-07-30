@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import axiosInstance from '../../api/axiosInstance';
-import { FaCalendarAlt, FaMapMarkerAlt, FaPoundSign } from 'react-icons/fa';
+import { FaCalendarAlt, FaMapMarkerAlt, FaPoundSign, FaDownload } from 'react-icons/fa';
+import { createBookingsPDF, type PDFBooking } from '../../utils/pdfUtils';
 
 const getAuthHeader = () => {
   const token = localStorage.getItem('token');
@@ -14,11 +15,11 @@ interface Schedule {
   startDate: string;
   time: string;
   frequency: string;
+  paymentStatus: string; // Payment status from Schedule document
   booking: {
     _id: string;
     serviceType: string;
     address: string;
-    paymentStatus: string;
     estimatedPrice: number;
     estimatedDuration: number;
     user: {
@@ -38,7 +39,7 @@ const Bookings = () => {
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
   useEffect(() => {
-    axiosInstance.get('/bookings/schedules', { headers: getAuthHeader() })
+    axiosInstance.get('/bookings/client-schedules/all', { headers: getAuthHeader() })
       .then(res => setSchedules(res.data.payload || res.data.data || res.data || []))
       .catch(() => setSchedules([]))
       .finally(() => setLoading(false));
@@ -90,19 +91,49 @@ const Bookings = () => {
     }
   };
 
+  const handleExportPDF = () => {
+    // Convert schedules to PDFBooking format
+    const pdfBookings: PDFBooking[] = filteredSchedules.map(schedule => ({
+      _id: schedule._id,
+      user: schedule.booking.user,
+      scheduledDate: schedule.startDate,
+      status: schedule.status,
+      address: schedule.booking.address,
+      estimatedPrice: schedule.booking.estimatedPrice,
+      estimatedDuration: schedule.booking.estimatedDuration,
+      paymentStatus: schedule.paymentStatus,
+    }));
+
+    // Use the utility function to create PDF
+    createBookingsPDF(pdfBookings, activeFilter);
+  };
+
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center">
-        <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mr-4">
-          <svg className="w-6 h-6 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-          </svg>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center">
+          <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mr-4">
+            <svg className="w-6 h-6 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+          </div>
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">My Cleaning Appointments</h2>
+            <p className="text-sm text-gray-500">Manage your cleaning sessions</p>
+          </div>
         </div>
-        <div>
-          <h2 className="text-2xl font-bold text-gray-900">My Cleaning Appointments</h2>
-          <p className="text-sm text-gray-500">Manage your cleaning sessions</p>
-        </div>
+        
+        {/* Export Button */}
+        {filteredSchedules.length > 0 && (
+          <button
+            onClick={handleExportPDF}
+            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+          >
+            <FaDownload className="text-sm" />
+            <span>Export as PDF</span>
+          </button>
+        )}
       </div>
       
       {/* Filter Tabs */}
@@ -289,24 +320,24 @@ const Bookings = () => {
         <p className="text-sm font-medium text-gray-500">Payment Status</p>
         <span
           className={`inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium shadow-sm ${
-            schedule.booking.paymentStatus === 'succeeded' || schedule.booking.paymentStatus === 'completed'
+            schedule.paymentStatus === 'succeeded' || schedule.paymentStatus === 'completed'
               ? 'bg-green-100 text-green-800'
-              : schedule.booking.paymentStatus === 'pending'
+              : schedule.paymentStatus === 'pending'
               ? 'bg-yellow-100 text-yellow-800'
               : 'bg-gray-100 text-gray-800'
           }`}
         >
           <span
             className={`w-2 h-2 mr-2 rounded-full ${
-              schedule.booking.paymentStatus === 'succeeded' || schedule.booking.paymentStatus === 'completed'
+              schedule.paymentStatus === 'succeeded' || schedule.paymentStatus === 'completed'
                 ? 'bg-green-500'
-                : schedule.booking.paymentStatus === 'pending'
+                : schedule.paymentStatus === 'pending'
                 ? 'bg-yellow-500'
                 : 'bg-gray-400'
             }`}
           ></span>
-          {schedule.booking.paymentStatus
-            ? schedule.booking.paymentStatus.charAt(0).toUpperCase() + schedule.booking.paymentStatus.slice(1)
+          {schedule.paymentStatus
+            ? schedule.paymentStatus.charAt(0).toUpperCase() + schedule.paymentStatus.slice(1)
             : 'Unknown'}
         </span>
       </div>

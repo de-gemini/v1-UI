@@ -67,7 +67,7 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
   }, [autoPlay, autoPlayInterval, instanceRef]);
 
   return (
-    <div className={`w-full  max-w-4xl mx-auto ${className}`}>
+    <div className={`w-full  max-w-3xl mx-auto ${className}`}>
       {(title || subtitle) && (
         <div className="text-center mb-8">
           {title && (
@@ -112,7 +112,7 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
                     <img 
                       src={(slide as SingleImageSlide).image} 
                       alt={slide.alt || slide.title || `Slide ${idx + 1}`} 
-                      className="w-full h-64 object-cover"
+                      className="w-full h-80 md:h-[500px] object-cover"
                     />
                   )}
                   {(slide.title || slide.description) && (

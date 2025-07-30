@@ -19,6 +19,7 @@ interface BookingsListProps {
   loading: boolean;
   viewAllLink?: string;
   emptyMessage?: string;
+  onBookingClick?: (booking: Booking) => void;
 }
 
 const BookingsList: React.FC<BookingsListProps> = ({
@@ -26,7 +27,8 @@ const BookingsList: React.FC<BookingsListProps> = ({
   bookings,
   loading,
   viewAllLink,
-  emptyMessage = "No bookings found."
+  emptyMessage = "No bookings found.",
+  onBookingClick
 }) => {
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -72,7 +74,11 @@ const BookingsList: React.FC<BookingsListProps> = ({
             ) : bookings.length === 0 ? (
               <tr><td colSpan={4} className="text-center py-4 text-gray-500">{emptyMessage}</td></tr>
             ) : bookings.map((booking) => (
-              <tr key={booking._id} className="border-b border-gray-100">
+              <tr 
+                key={booking._id} 
+                className={`border-b border-gray-100 ${onBookingClick ? 'cursor-pointer hover:bg-gray-50 transition-colors' : ''}`}
+                onClick={() => onBookingClick?.(booking)}
+              >
                 <td className="py-3">{booking.serviceType}</td>
                 <td className="py-3 text-brand-primary">{booking.user?.name || booking.user?.email || 'N/A'}</td>
                 <td className="py-3">{new Date(booking.scheduledDate).toLocaleDateString()}</td>
@@ -94,7 +100,11 @@ const BookingsList: React.FC<BookingsListProps> = ({
         ) : bookings.length === 0 ? (
           <div className="text-center py-4 text-gray-500">{emptyMessage}</div>
         ) : bookings.map((booking) => (
-          <div key={booking._id} className="border border-gray-200 rounded-lg p-4 space-y-2">
+          <div 
+            key={booking._id} 
+            className={`border border-gray-200 rounded-lg p-4 space-y-2 ${onBookingClick ? 'cursor-pointer hover:bg-gray-50 transition-colors' : ''}`}
+            onClick={() => onBookingClick?.(booking)}
+          >
             <div className="flex justify-between items-start">
               <div className="flex-1">
                 <h3 className="font-medium text-gray-900 text-sm">{booking.serviceType}</h3>

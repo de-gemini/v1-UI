@@ -264,7 +264,7 @@ const items = [
       </div>
 
       {/* Infinite Marquee Section */}
-    <div className="absolute w-screen  bottom-0 left-0 right-0 z-[10000] bg-blue-600 backdrop-blur-sm py-2 overflow-hidd transform -rotate-2">
+    <div className="absolute w-screen bottom-0 left-[49%] transform -translate-x-1/2 z-[10000] bg-blue-600 backdrop-blur-sm py-2 overflow-hidden -rotate-2">
       <div className="marquee">
         <div className="marquee__group">
           {items.concat(items).map((item, i) => (
