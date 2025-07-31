@@ -19,7 +19,7 @@ interface CostCardProps {
 
 export const CostCard: React.FC<CostCardProps> = ({
   title = 'Cleaning Service',
-  price = 'from £19/h',
+  price = 'from £17.99/h',
   text = 'Get a fast, free quote for your cleaning needs. Enter your postcode to see prices and availability.',
   inputPlaceholder = 'Enter your post code',
   buttonText = 'QUOTE ME',

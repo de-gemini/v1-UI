@@ -85,7 +85,7 @@ const pricingLinks: Links[] = [
   { name: 'Office cleaning', href: '/pricing-office-cleaning' },
   { name: 'Deep cleaning', href: '/pricing-deep-cleaning' },
   { name: 'End of Tenancy cleaning', href: '/pricing-tenancy-cleaning' },
-  { name: 'Carpet cleaning', href: '/priicing-carpet-cleaning' },
+  { name: 'Carpet cleaning', href: '/pricing-carpet-cleaning' },
   { name: 'Upholstery cleaning', href: '/pricing-upholstery-cleaning' },
 ];
 

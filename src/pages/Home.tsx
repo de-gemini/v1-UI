@@ -366,7 +366,7 @@ const Home = () => {
       imageSrc: slide1,
       altText: "Domestic Cleaning",
       title: "Domestic Cleaning",
-      price: "from £19/h",
+      price: "from £17.99/h",
       description:
         "Experience a sparkling clean home with our tailored domestic cleaning services. Whether it’s a one-time tidy or scheduled upkeep, we adapt to your lifestyle and home needs.",
     },
@@ -374,7 +374,7 @@ const Home = () => {
       imageSrc: slide2,
       altText: "Upholstery Cleaning",
       title: "Upholstery Cleaning",
-      price: "from £19/h",
+      price: "from £17.99/h",
       description:
         "Revive your sofas, armchairs, and other upholstered items with our advanced stain and odor removal treatment. Ideal for homes with kids or pets.",
     },
@@ -382,7 +382,7 @@ const Home = () => {
       imageSrc: slide3,
       altText: "Regular Cleaning",
       title: "Regular Cleaning",
-      price: "from £19/h",
+      price: "from £17.99/h",
       description:
         "Our recurring cleaning plans ensure your home stays fresh week after week. We follow your preferred routine with a reliable, friendly cleaner.",
     },
@@ -390,7 +390,7 @@ const Home = () => {
       imageSrc: "https://media.gettyimages.com/id/1417035212/photo/soaking-and-washing-furniture.jpg?s=612x612&w=0&k=20&c=9yTjWw7rPP2DP6fdqmEpxHImWIZEi79RB1UZtp0Qmco=",
       altText: "Deep Cleaning",
       title: "Deep Cleaning",
-      price: "from £19/h",
+      price: "from £17.99/h",
       description:
         "Get your home ready for the season with our deep cleaning service. Perfect for decluttering and removing dust build-up in hard-to-reach places.",
     },
@@ -398,7 +398,7 @@ const Home = () => {
       imageSrc: slide5,
       altText: "End of Tenancy Cleaning",
       title: "End of Tenancy Cleaning",
-      price: "from £19/h",
+      price: "from £17.99/h",
       description:
         "Secure your deposit with our detailed move-out cleaning. Our team follows a landlord-approved checklist to ensure your place is spotless and inspection-ready.",
     },
@@ -406,7 +406,7 @@ const Home = () => {
       imageSrc:"https://media.gettyimages.com/id/2158719646/photo/janitors-cleaning-the-floor-in-school-hallway.jpg?s=612x612&w=0&k=20&c=-XG-hNji6xZzsjrvEqHpwWN7V76iqrpfRx1bET1UMdM=",
       altText: "Commercial Cleaning",
       title: "Commercial Cleaning",
-      price: "from £19/h",
+      price: "from £17.99/h",
       description:
         "Maintain a pristine and productive business environment with our commercial cleaning services. We tailor our solutions for offices, retail spaces, and more—ensuring a spotless, hygienic workplace that leaves a lasting impression on clients and staff.",
     },
@@ -414,7 +414,7 @@ const Home = () => {
       imageSrc: "https://media.gettyimages.com/id/1659313537/photo/young-woman-vacuuming-her-apartment.jpg?s=612x612&w=0&k=20&c=yvp7xobRlLrR6kqzwXNccQrqC2RT7EQbut0VSb6oXG8=",
       altText: "Carpet cleaning",
       title: "Carpet Cleaning",
-      price: "from £19/h",
+      price: "from £17.99/h",
       description:
         "Post-renovation mess? We’ll handle it. Our after-builders cleaning service clears dust, paint, and debris so your property looks brand new again.",
     },
@@ -422,7 +422,7 @@ const Home = () => {
       imageSrc: office,
       altText: "Office Cleaning",
       title: "Office Cleaning",
-      price: "from £19/h",
+      price: "from £17.99/h",
       description:
         "Keep your workspace professional and hygienic. From desks to restrooms, we offer flexible cleaning plans for offices of all sizes across England.",
     },
@@ -510,7 +510,7 @@ const Home = () => {
             </div>
             <CostCard
               title="Regular house cleaning"
-              price="from £19/h"
+              price="from £17.99/h"
               
               inputPlaceholder="Enter your full post code here"
               buttonText="QUOTE ME"
@@ -520,7 +520,7 @@ const Home = () => {
 
           <CostCard
             title="One-off domestic cleaning"
-            price="from £19/h"
+            price="from £17.99/h"
             
             inputPlaceholder="Enter your full post code here"
             buttonText="QUOTE ME"

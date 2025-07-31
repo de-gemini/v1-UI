@@ -25,7 +25,7 @@ export interface FaqItem {
       id: 2,
       question: "How much do UK cleaners cost?",
       answer:
-        "The price of hiring a home professional in the UK will range between £19 to £25 per hour. our offers competitive prices while maintaining high quality standards. When you hire through our service, we guarantee that all our employees are highly trained and vetted for your safety and peace of mind. The average hourly rate for a general service is £22 per hour. This covers tasks such as tidying, dusting, vacuuming, wiping down surfaces and carpets, and cleaning toilets. However, it's always best to check with the cleaners beforehand to see what is included in their package.",
+        "The price of hiring a home professional in the UK will range between £17.99 to £25 per hour. our offers competitive prices while maintaining high quality standards. When you hire through our service, we guarantee that all our employees are highly trained and vetted for your safety and peace of mind. The average hourly rate for a general service is £17.99 per hour. This covers tasks such as tidying, dusting, vacuuming, wiping down surfaces and carpets, and cleaning toilets. However, it's always best to check with the cleaners beforehand to see what is included in their package.",
     },
     {
       id: 3,
@@ -49,13 +49,13 @@ export interface FaqItem {
     {
       id: 1,
       question: "What do most house cleaners charge per hour?",
-      answer: "House cleaners charge from £19/h for one-off cleanings and from £19/h for regular cleanings in England.",
+      answer: "House cleaners charge from £17.99/h for one-off cleanings and from £17.99/h for regular cleanings in England.",
     },
     {
       id: 2,
       question: "How much does it cost to hire a house cleaner in England?",
       answer:
-        "The cost of hiring a house cleaner in England depends on factors such as the type of service, location, experience and additional tasks. For basic cleaning you can expect to pay £19-£25 per hour or £19-£100 per visit for a flat or house. Prices are higher for one-off deep cleanings.",
+        "The cost of hiring a house cleaner in England depends on factors such as the type of service, location, experience and additional tasks. For basic cleaning you can expect to pay £17.99-£25 per hour or £17.99-£100 per visit for a flat or house. Prices are higher for one-off deep cleanings.",
     },
     {
       id: 3,

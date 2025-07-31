@@ -531,8 +531,6 @@ const AdminDashboard = () => {
         onStatusUpdate={handleScheduleStatusUpdate}
         onPaymentStatusUpdate={handleSchedulePaymentStatusUpdate}
       />
-      
-   
     </div>
   );
 };
