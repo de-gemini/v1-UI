@@ -219,20 +219,20 @@ const CarpetUpholsteryStep: React.FC<CarpetUpholsteryStepProps> = ({ isEndOfTena
                 {/* Items for this material type */}
                 {carpetCleaning.selectedUpholsteryMaterials[type.key] && (
                   <div className="p-4 flex flex-col gap-4 bg-white">
-                                         {UPHOLSTERY_ITEMS.map(item => (
-                       <div key={item.key} className="flex items-center justify-between bg-white border border-gray-100 rounded-lg px-4 py-3 shadow-sm">
-                         <div className="flex items-center gap-3">
-                           {/* <img src={item.icon} alt={item.label} className="w-8 h-8" /> */}
-                           <span className="font-medium">{item.label}</span>
-                           <span className="ml-2 text-xs text-gray-500 font-semibold">{formatPrice(item.price)}</span>
-                         </div>
-                         <div className="flex items-center gap-2">
+                    {UPHOLSTERY_ITEMS.map(item => (
+                      <div key={item.key} className="flex items-center justify-between bg-white border border-gray-100 rounded-lg px-4 py-3 shadow-sm">
+                        <div className="flex items-center gap-3">
+                          {/* <img src={item.icon} alt={item.label} className="w-8 h-8" /> */}
+                          <span className="font-medium">{item.label}</span>
+                          <span className="ml-2 text-xs text-gray-500 font-semibold">{formatPrice(item.price)}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
                            <button className="w-8 h-8 rounded-full bg-gray-100 text-xl font-bold flex items-center justify-center hover:bg-blue-50 hover:text-brand-primary" onClick={() => handleUpholsteryChange(type.key, item.key, -1)}>-</button>
                            <span className="w-8 text-center text-lg font-bold text-brand-primary">{carpetCleaning.selectedUpholstery[type.key]?.[item.key] || 0}</span>
                            <button className="w-8 h-8 rounded-full bg-gray-100 text-xl font-bold flex items-center justify-center hover:bg-blue-50 hover:text-brand-primary" onClick={() => handleUpholsteryChange(type.key, item.key, 1)}>+</button>
-                         </div>
-                       </div>
-                     ))}
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 )}
               </div>

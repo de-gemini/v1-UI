@@ -320,7 +320,7 @@ export const usePricingBreakdown = () => {
       upholstery: Object.entries(state.carpetCleaning.selectedUpholstery)
         .flatMap(([materialType, items]) => 
           Object.entries(items)
-            .filter(([_, count]) => count > 0)
+        .filter(([_, count]) => count > 0)
             .map(([itemKey, count]) => {
               const item = upholsteryItemLookup.get(itemKey);
               const materialTypeLabel = UPHOLSTERY_MATERIAL_TYPES.find(t => t.key === materialType)?.label || materialType;

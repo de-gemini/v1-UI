@@ -381,7 +381,15 @@ const StepOne: React.FC = () => {
     
             <button
               className="w-full bg-brand-primary hover:bg-blue-900 text-white font-semibold py-3 rounded-md text-base sm:text-lg transition"
-            onClick={() => set({ step1View: 1 })}
+            onClick={() => {
+              // For End of Tenancy and Carpet & Upholstery, skip frequency selection
+              if (selectedType === 1 || selectedType === 2) {
+                // Set default frequency to ONE_OFF (3) for these services
+                set({ selectedFrequency: 3, step1View: 1 });
+              } else {
+                set({ step1View: 1 });
+              }
+            }}
             >
               NEXT
             </button>
@@ -391,76 +399,78 @@ const StepOne: React.FC = () => {
           {step1View === 1 && (
             <div className="w-full max-w-6xl bg-white border border-gray-300 p-8 mt-4">
               <div className="flex flex-col md:flex-row gap-8">
-                {/* Frequency/One-Off selection */}
-                <div className="flex-1 flex flex-col gap-4">
-                  <div className="flex items-center gap-2 mb-2">
-                <span className="bg-yellow-200 text-yellow-800 font-bold px-3 py-1 rounded-full text-xs">
-                  Cashback up to £150
-                </span>
-                  </div>
-              
-              {renderFrequencyOptions()}
-              
-                  {/* One-Off special card */}
-              <div 
-                className={`border-2 rounded-lg p-4 mt-2 transition-all duration-200 cursor-pointer ${
-                  selectedFrequency === 3 
-                    ? 'border-brand-primary bg-[#fafaff] shadow-lg scale-[1.02] ring-2 ring-brand-primary/20' 
-                    : ' bg-white hover:bg-gray-50'
-                }`} 
-                onClick={() => set({ selectedFrequency: 3 })}
-              > 
+                {/* Frequency/One-Off selection - Hidden for End of Tenancy and Carpet & Upholstery */}
+                {selectedType !== 1 && selectedType !== 2 && (
+                  <div className="flex-1 flex flex-col gap-4">
                     <div className="flex items-center gap-2 mb-2">
-                  <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
-                    selectedFrequency === 3
-                      ? 'border-brand-primary bg-brand-primary'
-                      : 'border-brand-primary bg-white'
-                  }`}>
-                    {selectedFrequency === 3 && (
-                      <div className="w-2 h-2 bg-white rounded-full"></div>
-                    )}
-                  </div>
-                  <span className={`font-bold text-lg transition-colors ${
-                    selectedFrequency === 3 ? 'text-brand-primary' : 'text-gray-800'
-                  }`}>
-                    One – Off
-                  </span>
-                  <span className="ml-auto font-bold text-brand-primary">
-                    {selectedFrequency === 3 && oneOffDetailToShow
-                      ? formatPrice(oneOffDetailToShow.price)
-                      : calculatePrice.getHourlyRateDisplay(3)}
-                  </span>
-                </div>
-                {selectedFrequency === 3 && frequencyOptions[3]?.oneOffDetails && (
-                  <div>
-                    {frequencyOptions[3].oneOffDetails.map((detail) => {
-                      const isSelected = oneOffDetailToShow && oneOffDetailToShow.label === detail.label;
-                      const isDisabled = isToday && timeIsInvalid && isSelected;
-                      return (  
-                        <div
-                          key={detail.label}
-                          className={`flex flex-col border rounded-md p-2 text-xs bg-white ${isDisabled ? 'opacity-50' : isSelected ? 'border-brand-primary' : ''}`}
-                        >
-                          <span className={`font-bold ${isDisabled ? 'text-gray-400' : ""}`}>
-                            {detail.label}
-                          </span>
-                          <span>{detail.desc}</span>
-                          <span className={`font-bold ${isDisabled ? 'text-gray-400' : ''}`}>{formatPrice(detail.price)}</span>
-                          {isDisabled && (
-                            <span className="text-red-500 font-semibold mt-1">
-                              Time unavailable. Please select a time at least 4 hours from now.
-                            </span>
+                      <span className="bg-yellow-200 text-yellow-800 font-bold px-3 py-1 rounded-full text-xs">
+                        Cashback up to £150
+                      </span>
+                    </div>
+                    
+                    {renderFrequencyOptions()}
+                    
+                    {/* One-Off special card */}
+                    <div 
+                      className={`border-2 rounded-lg p-4 mt-2 transition-all duration-200 cursor-pointer ${
+                        selectedFrequency === 3 
+                          ? 'border-brand-primary bg-[#fafaff] shadow-lg scale-[1.02] ring-2 ring-brand-primary/20' 
+                          : ' bg-white hover:bg-gray-50'
+                      }`} 
+                      onClick={() => set({ selectedFrequency: 3 })}
+                    > 
+                      <div className="flex items-center gap-2 mb-2">
+                        <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
+                          selectedFrequency === 3
+                            ? 'border-brand-primary bg-brand-primary'
+                            : 'border-brand-primary bg-white'
+                        }`}>
+                          {selectedFrequency === 3 && (
+                            <div className="w-2 h-2 bg-white rounded-full"></div>
                           )}
                         </div>
-                      );
-                    })}
+                        <span className={`font-bold text-lg transition-colors ${
+                          selectedFrequency === 3 ? 'text-brand-primary' : 'text-gray-800'
+                        }`}>
+                          One – Off
+                        </span>
+                        <span className="ml-auto font-bold text-brand-primary">
+                          {selectedFrequency === 3 && oneOffDetailToShow
+                            ? formatPrice(oneOffDetailToShow.price)
+                            : calculatePrice.getHourlyRateDisplay(3)}
+                        </span>
+                      </div>
+                      {selectedFrequency === 3 && frequencyOptions[3]?.oneOffDetails && (
+                        <div>
+                          {frequencyOptions[3].oneOffDetails.map((detail) => {
+                            const isSelected = oneOffDetailToShow && oneOffDetailToShow.label === detail.label;
+                            const isDisabled = isToday && timeIsInvalid && isSelected;
+                            return (  
+                              <div
+                                key={detail.label}
+                                className={`flex flex-col border rounded-md p-2 text-xs bg-white ${isDisabled ? 'opacity-50' : isSelected ? 'border-brand-primary' : ''}`}
+                              >
+                                <span className={`font-bold ${isDisabled ? 'text-gray-400' : ""}`}>
+                                  {detail.label}
+                                </span>
+                                <span>{detail.desc}</span>
+                                <span className={`font-bold ${isDisabled ? 'text-gray-400' : ''}`}>{formatPrice(detail.price)}</span>
+                                {isDisabled && (
+                                  <span className="text-red-500 font-semibold mt-1">
+                                    Time unavailable. Please select a time at least 4 hours from now.
+                                  </span>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 )}
-              </div>
-            </div>
             
                 {/* Date/Time picker */}
-                <div className="flex-1 flex flex-col gap-6">
+                <div className={`${selectedType !== 1 && selectedType !== 2 ? 'flex-1' : 'w-full'} flex flex-col gap-6`}>
                   <div className="flex flex-col md:flex-row gap-6">
                     <div className="flex-1">
                       <h3 className="text-lg font-semibold mb-2">Choose date</h3>

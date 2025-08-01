@@ -164,6 +164,18 @@ const BookingSummary: React.FC = () => {
                 >×</button>
               </span>
             )}
+            {endOfTenancy && (
+              <div className="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                <div className="text-sm font-semibold text-blue-800 mb-2">End of Tenancy includes:</div>
+                <div className="grid grid-cols-1 gap-1 text-xs text-blue-700">
+                  <div>• Windows (inside) - 2 items</div>
+                  <div>• Microwave (inside) - 1 item</div>
+                  <div>• Kitchen (inside) - 1 item</div>
+                  <div>• Fridge (inside) - 1 item</div>
+                  <div>• Oven - 1 item</div>
+                </div>
+              </div>
+            )}
             {expressStudio && (
               <span className="bg-pink-100 text-pink-700 px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-2">
                 Express Studio (£{PRICING_CONFIG.additionalServices.expressStudio})
