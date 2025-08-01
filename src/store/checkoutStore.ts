@@ -22,7 +22,7 @@ export interface CarpetCleaningState {
   selectedRooms: { [key: string]: number };
   selectedRugs: { [key: string]: number };
   selectedUpholsteryMaterials: { [key: string]: boolean }; // Changed to support multiple selections
-  selectedUpholstery: { [key: string]: number };
+  selectedUpholstery: { [materialType: string]: { [itemKey: string]: number } }; // Changed to track per material type
   addons: { [key: string]: boolean };
 }
 
@@ -76,7 +76,12 @@ const initialCarpetCleaning: CarpetCleaningState = {
   selectedRooms: Object.fromEntries(CARPET_ROOMS.map(room => [room.key, 0])),
   selectedRugs: Object.fromEntries(CARPET_RUGS.map(rug => [rug.key, 0])),
   selectedUpholsteryMaterials: Object.fromEntries(UPHOLSTERY_MATERIAL_TYPES.map(type => [type.key, false])),
-  selectedUpholstery: Object.fromEntries(UPHOLSTERY_ITEMS.map(item => [item.key, 0])),
+  selectedUpholstery: Object.fromEntries(
+    UPHOLSTERY_MATERIAL_TYPES.map(type => [
+      type.key, 
+      Object.fromEntries(UPHOLSTERY_ITEMS.map(item => [item.key, 0]))
+    ])
+  ),
   addons: Object.fromEntries(CARPET_ADDONS.map(addon => [addon.key, false])),
 };
 
@@ -157,6 +162,9 @@ const buildPricingOptions = (state: CheckoutState) => {
   const options = {
     frequency: state.selectedFrequency ?? Frequency.ONE_OFF,
     hours: totalHours,
+    selectedDate: state.selectedDate,
+    hour: state.hour,
+    minute: state.minute,
     endOfTenancy: state.endOfTenancy,
     expressStudio: state.expressStudio,
     ecoFriendly: state.ecoFriendly,
@@ -191,8 +199,8 @@ const calculatePricing = (state: CheckoutState) => {
   console.log('🔍 [DEBUG] calculatePricing - Starting calculation');
   
   const options = buildPricingOptions(state);
-  const totalPrice = PricingCalculator.calculateTotalPrice(options);
-  const breakdown = PricingCalculator.getDetailedBreakdown(options);
+  const totalPrice = PricingCalculator.calculateTotalPrice(options, state.selectedAddOns);
+  const breakdown = PricingCalculator.getDetailedBreakdown(options, state.selectedAddOns);
   
   console.log('🔍 [DEBUG] calculatePricing - Results:', {
     totalPrice,
@@ -310,11 +318,15 @@ export const usePricingBreakdown = () => {
           return rug ? `${rug.label} (${count}x)` : `${key} (${count}x)`;
         }),
       upholstery: Object.entries(state.carpetCleaning.selectedUpholstery)
-        .filter(([_, count]) => count > 0)
-        .map(([key, count]) => {
-          const item = upholsteryItemLookup.get(key);
-          return item ? `${item.label} (${count}x)` : `${key} (${count}x)`;
-        }),
+        .flatMap(([materialType, items]) => 
+          Object.entries(items)
+            .filter(([_, count]) => count > 0)
+            .map(([itemKey, count]) => {
+              const item = upholsteryItemLookup.get(itemKey);
+              const materialTypeLabel = UPHOLSTERY_MATERIAL_TYPES.find(t => t.key === materialType)?.label || materialType;
+              return item ? `${item.label} (${materialTypeLabel}) (${count}x)` : `${itemKey} (${materialTypeLabel}) (${count}x)`;
+            })
+        ),
       materials: {
         carpet: CARPET_MATERIAL_TYPES.find(m => m.key === state.carpetCleaning.selectedMaterial)?.label || '',
         upholstery: UPHOLSTERY_MATERIAL_TYPES

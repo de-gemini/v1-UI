@@ -38,9 +38,9 @@ export const PRICING_CONFIG = {
   additionalServices: {
     endOfTenancy: 39,
     expressStudio: 25, // fixed
-    ecoFriendly: 15,
-    hooverMop: 10,
-    disinfection: 20,
+    ecoFriendly: 6,
+    hooverMop: 15,
+    disinfection: 10,
     outdoorCleaning: 30, // fixed
     laundry: 9, // fixed service
     errandHours: 29, // per hour
@@ -104,6 +104,9 @@ export interface AddOn {
 export interface PricingOptions {
   frequency: Frequency;
   hours: number;
+  selectedDate?: Date;
+  hour?: number;
+  minute?: number;
   endOfTenancy?: boolean;
   expressStudio?: boolean;
   ecoFriendly?: boolean;
@@ -120,7 +123,7 @@ export interface PricingOptions {
   carpetCleaning?: {
     selectedRooms: { [key: string]: number };
     selectedRugs: { [key: string]: number };
-    selectedUpholstery: { [key: string]: number };
+    selectedUpholstery: { [materialType: string]: { [itemKey: string]: number } };
   };
 }
 
@@ -146,7 +149,7 @@ export interface DetailedBreakdown {
 // Helper functions for calculations
 export const calculatePrice = {
   // Calculate base price for frequency
-  getBasePrice: (frequency: Frequency, hours: number = 2) => {
+  getBasePrice: (frequency: Frequency, hours: number = 2, selectedDate?: Date, hour?: number, minute?: number) => {
     const basePrice = PRICING_CONFIG.baseHourlyRate * hours;
     
     switch (frequency) {
@@ -157,6 +160,11 @@ export const calculatePrice = {
       case Frequency.MONTHLY:
         return basePrice * (1 - PRICING_CONFIG.frequencyDiscounts.monthly);
       case Frequency.ONE_OFF:
+        // For one-off, use the special pricing based on date and time
+        if (selectedDate && hour !== undefined && minute !== undefined) {
+          const oneOffDetail = getOneOffDetail(selectedDate, hour, minute);
+          return oneOffDetail.price * hours;
+        }
         return basePrice;
       default:
         return basePrice;
@@ -254,7 +262,7 @@ export const calculatePrice = {
     }, 0);
     
     const addOnMinutes = Object.entries(selectedAddOns).reduce((sum, [key, count]) => {
-      // Skip outdoor cleaning as it's now handled as a boolean
+      // Skip outdoor cleaning as it's handled as a boolean service
       if (key === 'outdoor') return sum;
       const addOn = addOnsList.find(a => a.key === key);
       return sum + count * (addOn?.estimatedTime || 0);
@@ -268,19 +276,56 @@ export const calculatePrice = {
     return Math.round(totalMinutes / 60 * 10) / 10;
   },
 
+  // Calculate add-on prices
+  calculateAddOnPrices: (selectedAddOns: { [key: string]: number }): number => {
+    let total = 0;
+    
+    Object.entries(selectedAddOns).forEach(([key, count]) => {
+      if (count > 0) {
+        const addOn = addOns.find(a => a.key === key);
+        if (addOn && addOn.price) {
+          total += addOn.price * count;
+          console.log('🔍 [DEBUG] calculateAddOnPrices - Add-on cost:', key, count, addOn.price * count);
+        }
+      }
+    });
+    
+    return total;
+  },
+
   // Calculate total price with all components
-  calculateTotalPrice: (options: PricingOptions): number => {
+  calculateTotalPrice: (options: PricingOptions, selectedAddOns?: { [key: string]: number }): number => {
     console.log('🔍 [DEBUG] calculateTotalPrice - Starting calculation with options:', {
       serviceType: options.serviceType,
       carpetCleaning: options.carpetCleaning,
       frequency: options.frequency,
-      hours: options.hours
+      hours: options.hours,
+      selectedAddOns
     });
     
-    let totalPrice = calculatePrice.getBasePrice(options.frequency, options.hours);
-    totalPrice += calculatePrice.getAdditionalServicesCost(options);
+    let totalPrice = calculatePrice.getBasePrice(options.frequency, options.hours, options.selectedDate, options.hour, options.minute);
+    totalPrice += calculatePrice.getAdditionalServicesCost({
+      endOfTenancy: options.endOfTenancy,
+      expressStudio: options.expressStudio,
+      ecoFriendly: options.ecoFriendly,
+      hooverMop: options.hooverMop,
+      disinfection: options.disinfection,
+      outdoorCleaning: options.outdoorCleaning,
+      laundry: options.laundry,
+      errandHours: options.errandHours,
+      checkJob: options.checkJob,
+      havePets: options.havePets,
+      keyPickup: options.keyPickup,
+    });
     
-    console.log('🔍 [DEBUG] calculateTotalPrice - Base price + additional services:', totalPrice);
+    // Add add-on prices if selectedAddOns is provided
+    if (selectedAddOns) {
+      const addOnPrices = calculatePrice.calculateAddOnPrices(selectedAddOns);
+      totalPrice += addOnPrices;
+      console.log('🔍 [DEBUG] calculateTotalPrice - Add-on prices added:', addOnPrices);
+    }
+    
+    console.log('🔍 [DEBUG] calculateTotalPrice - Base price + additional services + add-ons:', totalPrice);
     
     if (options.dirtLevel) {
       totalPrice = calculatePrice.applyDirtLevelMultiplier(totalPrice, options.dirtLevel);
@@ -313,13 +358,15 @@ export const calculatePrice = {
       });
 
       // Calculate upholstery prices
-      Object.entries(options.carpetCleaning.selectedUpholstery).forEach(([key, count]) => {
-        const item = UPHOLSTERY_ITEMS.find(i => i.key === key);
-        if (item && count > 0) {
-          const itemCost = item.price * count;
-          carpetCost += itemCost;
-          console.log('🔍 [DEBUG] calculateTotalPrice - Upholstery cost:', key, count, itemCost);
-        }
+      Object.entries(options.carpetCleaning.selectedUpholstery).forEach(([materialType, items]) => {
+        Object.entries(items).forEach(([itemKey, count]) => {
+          const item = UPHOLSTERY_ITEMS.find(i => i.key === itemKey);
+          if (item && count > 0) {
+            const itemCost = item.price * count;
+            carpetCost += itemCost;
+            console.log('🔍 [DEBUG] calculateTotalPrice - Upholstery cost:', materialType, itemKey, count, itemCost);
+          }
+        });
       });
       
       totalPrice += carpetCost;
@@ -353,13 +400,33 @@ export const calculatePrice = {
   },
 
   // Get detailed pricing breakdown
-  getDetailedBreakdown: (options: PricingOptions): DetailedBreakdown => {
+  getDetailedBreakdown: (options: PricingOptions, selectedAddOns?: { [key: string]: number }): DetailedBreakdown => {
     console.log('🔍 [DEBUG] getDetailedBreakdown - Starting breakdown calculation');
     
-    const basePrice = calculatePrice.getBasePrice(options.frequency, options.hours || 0);
-    const additionalServicesCost = calculatePrice.getAdditionalServicesCost(options);
+    const basePrice = calculatePrice.getBasePrice(options.frequency, options.hours || 0, options.selectedDate, options.hour, options.minute);
+    const additionalServicesCost = calculatePrice.getAdditionalServicesCost({
+      endOfTenancy: options.endOfTenancy,
+      expressStudio: options.expressStudio,
+      ecoFriendly: options.ecoFriendly,
+      hooverMop: options.hooverMop,
+      disinfection: options.disinfection,
+      outdoorCleaning: options.outdoorCleaning,
+      laundry: options.laundry,
+      errandHours: options.errandHours,
+      checkJob: options.checkJob,
+      havePets: options.havePets,
+      keyPickup: options.keyPickup,
+    });
     
     let calculatedPrice = basePrice + additionalServicesCost;
+    
+    // Add add-on prices if selectedAddOns is provided
+    let addOnPrices = 0;
+    if (selectedAddOns) {
+      addOnPrices = calculatePrice.calculateAddOnPrices(selectedAddOns);
+      calculatedPrice += addOnPrices;
+      console.log('🔍 [DEBUG] getDetailedBreakdown - Add-on prices added:', addOnPrices);
+    }
     
     // Add carpet and upholstery prices if carpetCleaning is provided (regardless of service type)
     let carpetUpholsteryCost = 0;
@@ -385,12 +452,14 @@ export const calculatePrice = {
       });
 
       // Calculate upholstery prices
-      Object.entries(options.carpetCleaning.selectedUpholstery).forEach(([key, count]) => {
-        const item = UPHOLSTERY_ITEMS.find(i => i.key === key);
-        if (item && count > 0) {
-          carpetUpholsteryCost += item.price * count;
-          console.log('🔍 [DEBUG] getDetailedBreakdown - Upholstery cost:', key, count, item.price * count);
-        }
+      Object.entries(options.carpetCleaning.selectedUpholstery).forEach(([materialType, items]) => {
+        Object.entries(items).forEach(([itemKey, count]) => {
+          const item = UPHOLSTERY_ITEMS.find(i => i.key === itemKey);
+          if (item && count > 0) {
+            carpetUpholsteryCost += item.price * count;
+            console.log('🔍 [DEBUG] getDetailedBreakdown - Upholstery cost:', materialType, itemKey, count, item.price * count);
+          }
+        });
       });
       
       calculatedPrice += carpetUpholsteryCost;
@@ -478,8 +547,8 @@ export class PricingCalculator {
   /**
    * Calculate base price for given frequency and hours
    */
-  static calculateBasePrice(frequency: Frequency, hours: number): number {
-    return calculatePrice.getBasePrice(frequency, hours);
+  static calculateBasePrice(frequency: Frequency, hours: number, selectedDate?: Date, hour?: number, minute?: number): number {
+    return calculatePrice.getBasePrice(frequency, hours, selectedDate, hour, minute);
   }
 
   /**
@@ -492,6 +561,8 @@ export class PricingCalculator {
     hooverMop?: boolean;
     disinfection?: boolean;
     outdoorCleaning?: boolean;
+    oven?: boolean;
+    ovenGrill?: boolean;
     laundry?: boolean;
     errandHours?: number;
     checkJob?: boolean;
@@ -504,15 +575,15 @@ export class PricingCalculator {
   /**
    * Calculate total price with all components
    */
-  static calculateTotalPrice(options: PricingOptions): number {
-    return calculatePrice.calculateTotalPrice(options);
+  static calculateTotalPrice(options: PricingOptions, selectedAddOns?: { [key: string]: number }): number {
+    return calculatePrice.calculateTotalPrice(options, selectedAddOns);
   }
 
   /**
    * Get detailed pricing breakdown
    */
-  static getDetailedBreakdown(options: PricingOptions): DetailedBreakdown {
-    return calculatePrice.getDetailedBreakdown(options);
+  static getDetailedBreakdown(options: PricingOptions, selectedAddOns?: { [key: string]: number }): DetailedBreakdown {
+    return calculatePrice.getDetailedBreakdown(options, selectedAddOns);
   }
 }
 
@@ -596,8 +667,8 @@ export const cleaningTypes = [
     { key: "kitchen_inside", label: "Kitchen (inside)", estimatedTime: 60, icon: "https://www.emop.co.uk/static/images/steps_booking/kitchen_inside.svg" },
     { key: "bed_making", label: "Bed making", estimatedTime: 10, icon: "https://www.emop.co.uk/static/images/steps_booking/bed_making.svg" },
     { key: "bookcase", label: "Bookcase", estimatedTime: 25, icon: "https://www.emop.co.uk/static/images/steps_booking/bookcase.svg" },
-    { key: "oven", label: "Oven", estimatedTime: 30, icon: "https://www.emop.co.uk/static/images/steps_booking/Oven.svg", price: 25, yesNo: true },
-    { key: "oven_grill", label: "Oven & Grill", estimatedTime: 45, icon: "https://www.emop.co.uk/static/images/steps_booking/Ovenandgrill.svg", price: 35, yesNo: true },
+    { key: "oven", label: "Oven", estimatedTime: 0, icon: "https://www.emop.co.uk/static/images/steps_booking/Oven.svg", price: 20 },
+    { key: "oven_grill", label: "Oven & Grill", estimatedTime: 0, icon: "https://www.emop.co.uk/static/images/steps_booking/Ovenandgrill.svg", price: 30 },
     { key: "outdoor", label: "Outdoor cleaning", estimatedTime: 0, icon: "https://www.emop.co.uk/static/images/bookAgain/Outdoor_cleaning.svg", yesNo: true },
   ];
 

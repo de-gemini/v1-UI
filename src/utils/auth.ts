@@ -71,3 +71,16 @@ export const useAuthValidation = (redirectTo: string = '/login') => {
 
   return { isAuthenticated, isValidating, isAdmin };
 };
+
+// Function to check authentication before proceeding to step 3
+export const checkAuthBeforeStep3 = (setShowAuthModal: (show: boolean) => void, currentState: any) => {
+  const token = localStorage.getItem("token");
+  if (!isTokenValid(token)) {
+    // Save current form state to localStorage
+    console.log('💾 Saving pending booking data:', currentState);
+    localStorage.setItem("pendingBooking", JSON.stringify(currentState));
+    setShowAuthModal(true);
+    return false; // Don't proceed to step 3
+  }
+  return true; // Proceed to step 3
+};

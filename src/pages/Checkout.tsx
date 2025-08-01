@@ -75,7 +75,10 @@ const getUserFromLS = ()=>{
         if (!name && d.name) set({ name: d.name });
         if (!surname && d.surname) set({ surname: d.surname });
         if (!address && d.address) set({ address: d.address });
-        if (!phone && d.phone) set({ phone: d.phone });
+        // Check for both phone and phoneNumber fields from backend
+        if (!phone && (d.phone || d.phoneNumber)) {
+          set({ phone: d.phone || d.phoneNumber });
+        }
       }
 }
 
@@ -86,6 +89,16 @@ useEffect(() => {
     const pending = localStorage.getItem("pendingBooking");
     if (pending) {
       const bookingData = JSON.parse(pending);
+      console.log('🔄 Restoring pending booking data:', bookingData);
+      console.log('🔄 Room counts being restored:', bookingData.roomCounts);
+      console.log('🔄 User before restoration:', localStorage.getItem("user"));
+      
+      // Preserve current user data
+      const currentUser = localStorage.getItem("user");
+      const currentToken = localStorage.getItem("token");
+      const currentRole = localStorage.getItem("role");
+      
+
       // Restore form state and go to step 3
       set({ selectedType: bookingData.selectedType ?? 0 });
       // Robust selectedFrequency restore
@@ -101,12 +114,17 @@ useEffect(() => {
       }
       set({ selectedFrequency: restoredFrequency });
       // Robust roomCounts restore
-      if (Array.isArray(bookingData.roomCounts) && bookingData.roomCounts.length === roomTypes.length) {
+      if (typeof bookingData.roomCounts === 'object' && bookingData.roomCounts !== null) {
+        // roomCounts is already an object, restore directly
+        set({ roomCounts: bookingData.roomCounts });
+      } else if (Array.isArray(bookingData.roomCounts) && bookingData.roomCounts.length === roomTypes.length) {
+        // Legacy format: array of objects with type and quantity
         set({ roomCounts: Object.fromEntries(roomTypes.map(rt => {
           const found = bookingData.roomCounts.find((r: any) => r.type === rt.type);
           return [rt.type, found ? found.quantity : 0];
         })) });
       } else if (Array.isArray(bookingData.rooms)) {
+        // Legacy format: rooms array
         set({
           roomCounts: Object.fromEntries(
             roomTypes.map(rt => {
@@ -116,6 +134,7 @@ useEffect(() => {
           )
         });
       } else {
+        // Default: initialize with zeros
         set({ roomCounts: Object.fromEntries(roomTypes.map(rt => [rt.type, 0])) });
       }
       
@@ -128,6 +147,7 @@ useEffect(() => {
         set({ selectedAddOns: {} });
       }
       
+      // Restore additional fields that might be saved
       set({ address: bookingData.address || "" });
       set({ name: bookingData.name || "" });
       set({ surname: bookingData.surname || "" });
@@ -140,7 +160,47 @@ useEffect(() => {
       set({ errandHours: bookingData.errandHours || 0 });
       set({ havePets: !!bookingData.havePets });
       set({ keyPickup: !!bookingData.keyPickup });
+      set({ outdoorCleaning: !!bookingData.outdoorCleaning });
+      set({ laundry: !!bookingData.laundry });
+      set({ checkJob: !!bookingData.checkJob });
+      set({ endOfTenancy: !!bookingData.endOfTenancy });
+      set({ expressStudio: !!bookingData.expressStudio });
+      
+      // Restore selectedType if available
+      if (typeof bookingData.selectedType === 'number') {
+        set({ selectedType: bookingData.selectedType });
+      }
+      
+      // Restore date and time if available
+      if (bookingData.selectedDate) {
+        set({ selectedDate: new Date(bookingData.selectedDate) });
+      }
+      if (typeof bookingData.hour === 'number') {
+        set({ hour: bookingData.hour });
+      }
+      if (typeof bookingData.minute === 'number') {
+        set({ minute: bookingData.minute });
+      }
+      if (typeof bookingData.selectedDuration === 'number') {
+        set({ selectedDuration: bookingData.selectedDuration });
+      }
+      
+      // Restore carpet cleaning data if available (for carpet/upholstery service)
+      if (bookingData.carpetCleaning) {
+        set({ carpetCleaning: bookingData.carpetCleaning });
+      }
+      
       set({ step: 3 }); // Go to step 3
+      
+      // Restore user data if it was cleared
+      if (currentUser && !localStorage.getItem("user")) {
+        localStorage.setItem("user", currentUser);
+        localStorage.setItem("token", currentToken || "");
+        localStorage.setItem("role", currentRole || "");
+        console.log('🔄 Restored user data after it was cleared');
+      }
+      
+      console.log('🔄 User after restoration:', localStorage.getItem("user"));
     } else {
       // If no pending booking, prefill from userDetails if fields are empty
       getUserFromLS()

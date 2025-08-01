@@ -48,6 +48,7 @@ interface StepThreeProps {
 
 const StepThree: React.FC = () => {
   const user = useAuthStore(state => state.user);
+  const fetchUserProfile = useAuthStore(state => state.fetchUserProfile);
   const navigate = useNavigate();
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [pendingBookingBody, setPendingBookingBody] = useState<any>(null);
@@ -129,6 +130,20 @@ const StepThree: React.FC = () => {
       errandHours
     });
   }, [pricingBreakdown, endOfTenancy, expressStudio, ecoFriendly, hooverMop, disinfection, outdoorCleaning, laundry, checkJob, havePets, keyPickup, errandHours]);
+
+  // Fetch latest user profile data when component mounts
+  React.useEffect(() => {
+    if (user?.id) {
+      fetchUserProfile().catch(console.error);
+    }
+  }, [fetchUserProfile]);
+
+  // Prefill phone number from user data if available and phone field is empty
+  React.useEffect(() => {
+    if (user && (!phone || phone.trim() === '') && (user.phone || user.phoneNumber)) {
+      set({ phone: user.phone || user.phoneNumber });
+    }
+  }, [user, phone, set]);
 
 
 

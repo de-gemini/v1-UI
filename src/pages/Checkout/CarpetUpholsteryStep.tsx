@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   CARPET_MATERIAL_TYPES,
   CARPET_ROOMS,
@@ -9,6 +9,9 @@ import {
 } from './ckeckoutData';
 import BookingSummary from './BookingSummary';
 import { useCheckoutStore, useCarpetCleaningState } from '../../store/checkoutStore';
+import { checkAuthBeforeStep3 } from '../../utils/auth';
+import AuthModal from '../../components/AuthModal';
+import { useNavigate } from 'react-router-dom';
 
 interface CarpetUpholsteryStepProps {
   isEndOfTenancy?: boolean;
@@ -16,8 +19,23 @@ interface CarpetUpholsteryStepProps {
 import Tooltip from '../../components/Tooltip';
 
 const CarpetUpholsteryStep: React.FC<CarpetUpholsteryStepProps> = ({ isEndOfTenancy = false }) => {
+  const navigate = useNavigate();
+  const [showAuthModal, setShowAuthModal] = useState(false);
   const carpetCleaning = useCarpetCleaningState();
-  const { set } = useCheckoutStore();
+  const { 
+    set,
+    name,
+    surname,
+    address,
+    phone,
+    comments,
+    selectedType,
+    selectedFrequency,
+    selectedDate,
+    hour,
+    minute,
+    selectedDuration
+  } = useCheckoutStore();
 
   const formatPrice = (price: number) => `£${price.toFixed(2)}`;
 
@@ -29,13 +47,8 @@ const CarpetUpholsteryStep: React.FC<CarpetUpholsteryStepProps> = ({ isEndOfTena
   const handleUpholsteryMaterialToggle = (key: string) => {
     const isCurrentlySelected = carpetCleaning.selectedUpholsteryMaterials[key];
     
-    // If we're deselecting, reset all quantities for items of this material type
-    const newUpholsteryQuantities = isCurrentlySelected
-      ? Object.fromEntries(
-          Object.entries(carpetCleaning.selectedUpholstery).map(([itemKey, value]) => [itemKey, 0])
-        )
-      : carpetCleaning.selectedUpholstery;
-
+    // If we're deselecting, we don't need to reset quantities since all items are available for all material types
+    // The user can still see and modify their selections even if a material type is deselected
     set({
       carpetCleaning: {
         ...carpetCleaning,
@@ -43,7 +56,8 @@ const CarpetUpholsteryStep: React.FC<CarpetUpholsteryStepProps> = ({ isEndOfTena
           ...carpetCleaning.selectedUpholsteryMaterials,
           [key]: !isCurrentlySelected 
         },
-        selectedUpholstery: newUpholsteryQuantities,
+        // Keep existing upholstery quantities unchanged
+        selectedUpholstery: carpetCleaning.selectedUpholstery,
       }
     });
   };
@@ -58,13 +72,50 @@ const CarpetUpholsteryStep: React.FC<CarpetUpholsteryStepProps> = ({ isEndOfTena
     set({ carpetCleaning: { ...carpetCleaning, selectedRugs: { ...carpetCleaning.selectedRugs, [rugKey]: newCount } } });
   };
   
-  const handleUpholsteryChange = (itemKey: string, delta: number) => {
-    const newCount = Math.max(0, (carpetCleaning.selectedUpholstery[itemKey] || 0) + delta);
-    set({ carpetCleaning: { ...carpetCleaning, selectedUpholstery: { ...carpetCleaning.selectedUpholstery, [itemKey]: newCount } } });
+  const handleUpholsteryChange = (materialType: string, itemKey: string, delta: number) => {
+    const currentItems = carpetCleaning.selectedUpholstery[materialType] || {};
+    const newCount = Math.max(0, (currentItems[itemKey] || 0) + delta);
+    set({ 
+      carpetCleaning: { 
+        ...carpetCleaning, 
+        selectedUpholstery: { 
+          ...carpetCleaning.selectedUpholstery, 
+          [materialType]: { 
+            ...currentItems, 
+            [itemKey]: newCount 
+          } 
+        } 
+      } 
+    });
   };
   
   const handleAddonToggle = (addonKey: string) => {
     set({ carpetCleaning: { ...carpetCleaning, addons: { ...carpetCleaning.addons, [addonKey]: !carpetCleaning.addons[addonKey] } } });
+  };
+
+  const handleNextStep = () => {
+    // Check authentication before proceeding to step 3
+    const currentState = {
+      carpetCleaning,
+      selectedType,
+      selectedFrequency,
+      selectedDate,
+      hour,
+      minute,
+      selectedDuration,
+      name,
+      surname,
+      address,
+      phone,
+      comments,
+    };
+    
+    if (!checkAuthBeforeStep3(setShowAuthModal, currentState)) {
+      return; // Don't proceed if not authenticated
+    }
+    
+    // Navigate to step 3
+    set({ step: 3 });
   };
 
   return (
@@ -168,20 +219,20 @@ const CarpetUpholsteryStep: React.FC<CarpetUpholsteryStepProps> = ({ isEndOfTena
                 {/* Items for this material type */}
                 {carpetCleaning.selectedUpholsteryMaterials[type.key] && (
                   <div className="p-4 flex flex-col gap-4 bg-white">
-                    {UPHOLSTERY_ITEMS.map(item => (
-                      <div key={item.key} className="flex items-center justify-between bg-white border border-gray-100 rounded-lg px-4 py-3 shadow-sm">
-                        <div className="flex items-center gap-3">
-                          {/* <img src={item.icon} alt={item.label} className="w-8 h-8" /> */}
-                          <span className="font-medium">{item.label}</span>
-                          <span className="ml-2 text-xs text-gray-500 font-semibold">{formatPrice(item.price)}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <button className="w-8 h-8 rounded-full bg-gray-100 text-xl font-bold flex items-center justify-center hover:bg-blue-50 hover:text-brand-primary" onClick={() => handleUpholsteryChange(item.key, -1)}>-</button>
-                          <span className="w-8 text-center text-lg font-bold text-brand-primary">{carpetCleaning.selectedUpholstery[item.key] || 0}</span>
-                          <button className="w-8 h-8 rounded-full bg-gray-100 text-xl font-bold flex items-center justify-center hover:bg-blue-50 hover:text-brand-primary" onClick={() => handleUpholsteryChange(item.key, 1)}>+</button>
-                        </div>
-                      </div>
-                    ))}
+                                         {UPHOLSTERY_ITEMS.map(item => (
+                       <div key={item.key} className="flex items-center justify-between bg-white border border-gray-100 rounded-lg px-4 py-3 shadow-sm">
+                         <div className="flex items-center gap-3">
+                           {/* <img src={item.icon} alt={item.label} className="w-8 h-8" /> */}
+                           <span className="font-medium">{item.label}</span>
+                           <span className="ml-2 text-xs text-gray-500 font-semibold">{formatPrice(item.price)}</span>
+                         </div>
+                         <div className="flex items-center gap-2">
+                           <button className="w-8 h-8 rounded-full bg-gray-100 text-xl font-bold flex items-center justify-center hover:bg-blue-50 hover:text-brand-primary" onClick={() => handleUpholsteryChange(type.key, item.key, -1)}>-</button>
+                           <span className="w-8 text-center text-lg font-bold text-brand-primary">{carpetCleaning.selectedUpholstery[type.key]?.[item.key] || 0}</span>
+                           <button className="w-8 h-8 rounded-full bg-gray-100 text-xl font-bold flex items-center justify-center hover:bg-blue-50 hover:text-brand-primary" onClick={() => handleUpholsteryChange(type.key, item.key, 1)}>+</button>
+                         </div>
+                       </div>
+                     ))}
                   </div>
                 )}
               </div>
@@ -226,7 +277,7 @@ const CarpetUpholsteryStep: React.FC<CarpetUpholsteryStepProps> = ({ isEndOfTena
               <div className="flex justify-end">
                 <button 
                   className="bg-brand-primary text-white px-6 py-2 rounded font-semibold hover:bg-blue-900 transition"
-                  onClick={() => set({ step: 3 })}
+                  onClick={handleNextStep}
                 >
                   Next
                 </button>
@@ -235,6 +286,22 @@ const CarpetUpholsteryStep: React.FC<CarpetUpholsteryStepProps> = ({ isEndOfTena
           )}
         </div>
       </div>
+      
+      {/* Auth Modal */}
+      {showAuthModal && (
+        <AuthModal
+          title="Session Expired"
+          message="Your session has expired or you are not logged in. Please login or signup to continue."
+          onClose={() => {
+            setShowAuthModal(false);
+            navigate("/login");
+          }}
+          actions={[
+            { label: "Login", onClick: () => navigate("/login") },
+            { label: "Signup", onClick: () => navigate("/register") },
+          ]}
+        />
+      )}
     </div>
   );
 };

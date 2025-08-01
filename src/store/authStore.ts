@@ -10,6 +10,7 @@ export interface User {
   role: string;
   isActive: boolean;
   phone?: string;
+  phoneNumber?: string; // Backend field name
   surname?: string;
   address?: string;
 }
@@ -21,6 +22,7 @@ interface AuthState {
   token: string | null;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
+  fetchUserProfile: () => Promise<void>;
   register: (data: {
     name: string;
     email: string;
@@ -70,6 +72,9 @@ export const useAuthStore = create<AuthState>((set) => {
       try {
         const res = await axios.post(`${API_BASE_URL}/auth/login`, { email, password });
         const { access_token, user } = res.data.payload;
+        if (!user) {
+          throw new Error('No user data received from login');
+        }
         localStorage.setItem('token', access_token);
         localStorage.setItem('user', JSON.stringify(user));
         localStorage.setItem('role', user.role);
@@ -92,6 +97,28 @@ export const useAuthStore = create<AuthState>((set) => {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       localStorage.removeItem('role');
+    },
+    fetchUserProfile: async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          throw new Error('No token available');
+        }
+        
+        const res = await axios.get(`${API_BASE_URL}/auth/profile`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        
+        const userData = res.data.payload;
+        if (!userData) {
+          throw new Error('No user data received from server');
+        }
+        localStorage.setItem('user', JSON.stringify(userData));
+        set({ user: userData });
+      } catch (error) {
+        console.error('Failed to fetch user profile:', error);
+        throw error;
+      }
     },
     register: async (data) => {
       try {

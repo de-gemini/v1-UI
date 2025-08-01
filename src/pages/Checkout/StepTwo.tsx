@@ -1,9 +1,11 @@
-import React, { useLayoutEffect, useEffect } from 'react';
+import React, { useLayoutEffect, useEffect, useState } from 'react';
 import BookingSummary from './BookingSummary';
 import type { Dispatch, SetStateAction } from 'react';
 import {FAQSection2} from '../../data/questions'
 import Toggle from '../../components/ui/Toggle';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { checkAuthBeforeStep3 } from '../../utils/auth';
+import AuthModal from '../../components/AuthModal';
 
 import {
   roomTypes,
@@ -55,6 +57,9 @@ interface StepTwoProps {
 }
 
 const StepTwo: React.FC = () => {
+  const navigate = useNavigate();
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  
   // Zustand store hooks
   const selectedFrequency = useCheckoutStore(state => state.selectedFrequency);
   const selectedDate = useCheckoutStore(state => state.selectedDate);
@@ -77,6 +82,11 @@ const StepTwo: React.FC = () => {
   const expressStudio = useCheckoutStore(state => state.expressStudio);
   const checkJob = useCheckoutStore(state => state.checkJob);
   const endOfTenancyCarpet = useCheckoutStore(state => state.endOfTenancyCarpet);
+  const name = useCheckoutStore(state => state.name);
+  const surname = useCheckoutStore(state => state.surname);
+  const address = useCheckoutStore(state => state.address);
+  const phone = useCheckoutStore(state => state.phone);
+  const comments = useCheckoutStore(state => state.comments);
   const set = useCheckoutStore(state => state.set);
 
   const location = useLocation();
@@ -132,6 +142,40 @@ const StepTwo: React.FC = () => {
       toast.error('Please select at least one room.');
       return;
     }
+    
+    // Check authentication before proceeding to step 3
+    const currentState = {
+      roomCounts,
+      selectedAddOns,
+      ecoFriendly,
+      hooverMop,
+      disinfection,
+      outdoorCleaning,
+      laundry,
+      errandHours,
+      checkJob,
+      havePets,
+      keyPickup,
+      endOfTenancy,
+      expressStudio,
+      dirtLevel,
+      selectedFrequency,
+      selectedDate,
+      hour,
+      minute,
+      selectedDuration,
+      selectedType,
+      name,
+      surname,
+      address,
+      phone,
+      comments,
+    };
+    
+    if (!checkAuthBeforeStep3(setShowAuthModal, currentState)) {
+      return; // Don't proceed if not authenticated
+    }
+    
     console.log('Moving to Step 3 with current selections:', {
       roomCounts,
       selectedAddOns,
@@ -465,6 +509,22 @@ const StepTwo: React.FC = () => {
         <FAQSection2/>
       </div>
       </div>
+      
+      {/* Auth Modal */}
+      {showAuthModal && (
+        <AuthModal
+          title="Session Expired"
+          message="Your session has expired or you are not logged in. Please login or signup to continue."
+          onClose={() => {
+            setShowAuthModal(false);
+            navigate("/login");
+          }}
+          actions={[
+            { label: "Login", onClick: () => navigate("/login") },
+            { label: "Signup", onClick: () => navigate("/register") },
+          ]}
+        />
+      )}
     </div>
   );
 };
