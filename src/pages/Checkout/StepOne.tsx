@@ -45,6 +45,14 @@ const StepOne: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Check for eot=true in URL and auto-select End of Tenancy
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get('eot') === 'true' && !endOfTenancy) {
+      set({ endOfTenancy: true });
+    }
+  }, [location.search, endOfTenancy, set]);
+
   // Local scroll to top implementation
   useLayoutEffect(() => {
     window.scrollTo(0, 0);

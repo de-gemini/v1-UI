@@ -136,12 +136,14 @@ const EndTenancy = lazy(() => import("./pages/pricing/EndTenancy"));
 const CarpetCleaning = lazy(() => import("./pages/pricing/CarpetCleaning"));
 const Upholstery = lazy(() => import("./pages/pricing/Upholstery"));
 const RegularCleaning = lazy(() => import("./pages/services/RegularCleaning"));
+const DomesticCleaning = lazy(() => import("./pages/services/DomesticCleaning"));
 const OfficeCleaningPage = lazy(() => import("./pages/services/OfficeCleaningPage"));
 const DeepCleaningService = lazy(() => import("./pages/services/DeepCleaningService"));
 const SameDayCleaning = lazy(() => import("./pages/services/SameDayCleaning"));
 const KitchenDeepCleaning = lazy(() => import("./pages/services/KitchenDeep"));
 const EndTenancyService = lazy(() => import("./pages/services/EndTenancyPage"));
 const CarpetService = lazy(() => import("./pages/services/CarpetService"));
+const UpholsteryCleaning = lazy(() => import("./pages/pricing/Upholstery"));
 const RugCleaning = lazy(() => import("./pages/services/RugCleaning"));
 const MoveInCleaning = lazy(() => import("./pages/services/MoveIn"));
 const BathroomCleaning = lazy(() => import("./pages/services/BathroomCleaning"));
@@ -367,6 +369,14 @@ function App() {
                 }
               />
               <Route
+                path="/services/domestic-cleaning"
+                element={
+                    <Layout>
+                      <DomesticCleaning />
+                    </Layout>
+                }
+              />
+              <Route
                 path="/services-office-cleaning"
                 element={
                     <Layout>
@@ -411,6 +421,14 @@ function App() {
                 element={
                     <Layout>
                       <CarpetService />
+                    </Layout>
+                }
+              />
+              <Route
+                path="/services/upholstery-cleaning"
+                element={
+                    <Layout>
+                      <UpholsteryCleaning />
                     </Layout>
                 }
               />

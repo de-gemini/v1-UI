@@ -3,6 +3,7 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import "../index.css";
 
@@ -31,14 +32,41 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   price,
   description,
 }) => {
+  const navigate = useNavigate();
+  
   const handleWhatsAppEnquiry = () => {
     const message = encodeURIComponent(`Hello I want to make enquiries about your ${title} services`);
     const whatsappUrl = `https://wa.me/+447399487915?text=${message}`;
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   };
 
+  // Function to get the appropriate route based on service title
+  const getServiceRoute = (serviceTitle: string) => {
+    const routeMap: { [key: string]: string } = {
+      'Domestic Cleaning': '/services/domestic-cleaning',
+      'Upholstery Cleaning': '/pricing-upholstery-cleaning',
+      'Regular Cleaning': '/regular-cleaning',
+      'Deep Cleaning': '/services-deep-cleaning',
+      'End of Tenancy Cleaning': '/services/end-tenancy-cleaning',
+      'Carpet Cleaning': '/services/carpet-cleaning',
+      'Office Cleaning': '/services-office-cleaning',
+    };
+    return routeMap[serviceTitle] || null;
+  };
+
+  const serviceRoute = getServiceRoute(title);
+
+  const handleCardClick = () => {
+    if (serviceRoute) {
+      navigate(serviceRoute);
+    }
+  };
+
   return (
-    <div className="bg-brand-blue rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl flex flex-col h-full">
+    <div 
+      className={`bg-brand-blue rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl flex flex-col h-full ${serviceRoute ? 'cursor-pointer' : ''}`}
+      onClick={serviceRoute ? handleCardClick : undefined}
+    >
       {/* Image */}
       <div className="h-48 w-full overflow-hidden">
         <img

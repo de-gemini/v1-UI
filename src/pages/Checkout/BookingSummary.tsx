@@ -43,7 +43,7 @@ const BookingSummary: React.FC = () => {
   const pad = (n: number) => n.toString().padStart(2, '0');
 
   return (
-    <div className="bg-gray-100 rounded-2xl p-6 sm:p-8 md:p-10 mt-4 flex flex-col gap-6 border border-gray-200">
+    <div className="bg-gray-100  p-6 sm:p-8 md:p-10 mt-4 flex flex-col gap-6 border w-full border-gray-200">
       <div className="flex items-center justify-between mb-2">
         <span className="font-bold text-2xl text-brand-primary tracking-tight">Booking Summary</span>
         <span className="text-2xl text-gray-300">&#8964;</span>
@@ -94,6 +94,20 @@ const BookingSummary: React.FC = () => {
           </div>
         </div>
         {/* Add-ons grid */}
+        {endOfTenancy && (
+              <div className="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                <div className="text-sm font-semibold text-blue-800 mb-2">End of Tenancy includes:</div>
+                <div className="grid grid-cols-1 gap-1 text-xs text-blue-700">
+                  <div>• Bedroom - 1 room</div>
+                  <div>• Living Room - 1 room</div>
+                  <div>• Kitchen - 1 room</div>
+                  <div>• Bathroom - 1 room</div>
+                  <div>• Toilet - 1 room</div>
+                  <div>• Hoover and Mop - included</div>
+                  <div>• End of Tenancy Service - £39</div>
+                </div>
+              </div>
+            )}
         <div>
           <span className="block font-semibold text-lg mb-1">Add-ons</span>
           <div className="grid grid-cols-1 gap-2">
@@ -154,28 +168,18 @@ const BookingSummary: React.FC = () => {
                 >×</button>
               </span>
             )}
+            
             {endOfTenancy && (
               <span className="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-2">
-                End of Tenancy (£{PRICING_CONFIG.additionalServices.endOfTenancy})
-                <button
+                End of Tenancy
+                {/* <button
                   className="w-4 h-4 rounded-full bg-yellow-200 text-yellow-700 text-xs font-bold hover:bg-red-200 hover:text-red-700"
                   onClick={() => set({ endOfTenancy: false })}
                   title="Remove end of tenancy"
-                >×</button>
+                >×</button> */}
               </span>
             )}
-            {endOfTenancy && (
-              <div className="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                <div className="text-sm font-semibold text-blue-800 mb-2">End of Tenancy includes:</div>
-                <div className="grid grid-cols-1 gap-1 text-xs text-blue-700">
-                  <div>• Windows (inside) - 2 items</div>
-                  <div>• Microwave (inside) - 1 item</div>
-                  <div>• Kitchen (inside) - 1 item</div>
-                  <div>• Fridge (inside) - 1 item</div>
-                  <div>• Oven - 1 item</div>
-                </div>
-              </div>
-            )}
+            
             {expressStudio && (
               <span className="bg-pink-100 text-pink-700 px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-2">
                 Express Studio (£{PRICING_CONFIG.additionalServices.expressStudio})
@@ -344,31 +348,54 @@ const BookingSummary: React.FC = () => {
                 <div className="mt-4">
                   <div className="font-medium mb-2">Upholstery Items:</div>
                   <div className="grid grid-cols-1 gap-2">
-                    {Object.entries(carpetCleaning.selectedUpholstery).map(([itemKey, count]) => {
-                      if (count > 0) {
-                        const item = UPHOLSTERY_ITEMS.find(i => i.key === itemKey);
-                        if (item) {
-                          return (
-                            <div key={itemKey} className="flex items-center gap-3 bg-gray-50 rounded-lg px-3 py-2 shadow-sm">
-                              {/* <img src={item.icon} alt={item.label} className="w-7 h-7" /> */}
-                              <span className="font-medium text-gray-700">{item.label}</span>
-                              <div className="ml-auto flex items-center gap-2">
-                                <button
-                                  className="w-6 h-6 rounded-full bg-gray-200 text-sm font-bold flex items-center justify-center hover:bg-red-100 hover:text-red-600"
-                                  onClick={() => set({ carpetCleaning: { ...carpetCleaning, selectedUpholstery: { ...carpetCleaning.selectedUpholstery, [itemKey]: Math.max(0, count - 1) } } })}
-                                >-</button>
-                                <span className="font-bold text-brand-primary text-lg min-w-[20px] text-center">{count}</span>
-                                <button
-                                  className="w-6 h-6 rounded-full bg-gray-200 text-sm font-bold flex items-center justify-center hover:bg-green-100 hover:text-green-600"
-                                  onClick={() => set({ carpetCleaning: { ...carpetCleaning, selectedUpholstery: { ...carpetCleaning.selectedUpholstery, [itemKey]: count + 1 } } })}
-                                >+</button>
+                    {Object.entries(carpetCleaning.selectedUpholstery).map(([materialType, items]) => 
+                      Object.entries(items).map(([itemKey, count]) => {
+                        if (count > 0) {
+                          const item = UPHOLSTERY_ITEMS.find(i => i.key === itemKey);
+                          if (item) {
+                            return (
+                              <div key={`${materialType}-${itemKey}`} className="flex items-center gap-3 bg-gray-50 rounded-lg px-3 py-2 shadow-sm">
+                                <span className="font-medium text-gray-700">{item.label} ({materialType})</span>
+                                <div className="ml-auto flex items-center gap-2">
+                                  <button
+                                    className="w-6 h-6 rounded-full bg-gray-200 text-sm font-bold flex items-center justify-center hover:bg-red-100 hover:text-red-600"
+                                    onClick={() => set({ 
+                                      carpetCleaning: { 
+                                        ...carpetCleaning, 
+                                        selectedUpholstery: { 
+                                          ...carpetCleaning.selectedUpholstery, 
+                                          [materialType]: { 
+                                            ...carpetCleaning.selectedUpholstery[materialType], 
+                                            [itemKey]: Math.max(0, count - 1) 
+                                          } 
+                                        } 
+                                      } 
+                                    })}
+                                  >-</button>
+                                  <span className="font-bold text-brand-primary text-lg min-w-[20px] text-center">{count}</span>
+                                  <button
+                                    className="w-6 h-6 rounded-full bg-gray-200 text-sm font-bold flex items-center justify-center hover:bg-green-100 hover:text-green-600"
+                                    onClick={() => set({ 
+                                      carpetCleaning: { 
+                                        ...carpetCleaning, 
+                                        selectedUpholstery: { 
+                                          ...carpetCleaning.selectedUpholstery, 
+                                          [materialType]: { 
+                                            ...carpetCleaning.selectedUpholstery[materialType], 
+                                            [itemKey]: count + 1 
+                                          } 
+                                        } 
+                                      } 
+                                    })}
+                                  >+</button>
+                                </div>
                               </div>
-                            </div>
-                          );
+                            );
+                          }
                         }
-                      }
-                      return null;
-                    })}
+                        return null;
+                      })
+                    )}
                   </div>
                 </div>
               )}

@@ -80,7 +80,7 @@ const GlobalSummaryBar: React.FC = () => {
         </div>
       </div>
       {showSummary && (
-        <div className="fixed inset-0 z-[9999] bg-black bg-opacity-60 flex items-center justify-center">
+        <div className="fixed inset-0 z-[9999] bg-black bg-opacity-60 flex items-center w-screen justify-center">
           <div className="bg-white w-full h-full max-w-full max-h-full overflow-y-auto flex flex-col relative">
             <button
               className="absolute top-4 right-4 z-10 rounded-lg text-yellow-700 flex items-center justify-center shadow-lg  bg-yellow-50  p-2 text-xl"
@@ -89,7 +89,7 @@ const GlobalSummaryBar: React.FC = () => {
             >
               close
             </button>
-            <div className="flex-1 flex flex-col items-center justify-center ">
+            <div className="flex-1 flex flex-col items-center w-full  justify-center ">
               <BookingSummary />
             </div>
           </div>
