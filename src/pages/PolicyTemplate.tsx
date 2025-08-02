@@ -1,7 +1,7 @@
 import React from "react";
 
 interface PolicySection {
-  heading: string;
+  heading: React.ReactNode;
   content: React.ReactNode;
 }
 

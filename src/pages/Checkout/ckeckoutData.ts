@@ -23,7 +23,7 @@ export const PRICING_CONFIG = {
   // Minimum prices for each service type - Updated to Gemini pricing
   minimumPrices: {
     regularCleaning: 50,      // Regular/One-off cleaning minimum - Changed from 87 to 50
-    endOfTenancy: 150,        // End of Tenancy minimum - Changed from 130 to 150
+    endOfTenancy: 189,        // End of Tenancy minimum - Changed from 130 to 150
     carpetUpholstery: 80,     // Carpet & Upholstery minimum - Changed from 96 to 80
   } as MinimumPrices,
 

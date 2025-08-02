@@ -53,6 +53,7 @@ const Checkout = () => {
 
 
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showPendingBookingModal, setShowPendingBookingModal] = useState(false);
 
 
   const baseRate = selectedFrequency !== null ? 
@@ -208,9 +209,15 @@ useEffect(() => {
   }
 }, [showAuthModal]);
 
-// On mount, prefill from userDetails if fields are empty
+// On mount, check for pending booking and show modal if exists
 useEffect(() => {
-  getUserFromLS()
+  const pendingBooking = localStorage.getItem("pendingBooking");
+  if (pendingBooking) {
+    setShowPendingBookingModal(true);
+  } else {
+    // If no pending booking, prefill from userDetails if fields are empty
+    getUserFromLS();
+  }
 }, []);
 
   const isStepDone = (idx: number): boolean => {
@@ -245,7 +252,7 @@ useEffect(() => {
       <StepThree/>
       )}
 
-      {showAuthModal && (
+            {showAuthModal && (
         <AuthModal
           title="Session Expired"
           message="Your session has expired or you are not logged in. Please login or signup to continue."
@@ -255,9 +262,106 @@ useEffect(() => {
           }}
           actions={[
             { label: "Login", onClick: () => navigate("/login") },
-          { label: "Signup", onClick: () => navigate("/register") },
+            { label: "Signup", onClick: () => navigate("/register") },
           ]}
         />
+      )}
+
+      {/* Pending Booking Modal */}
+      {showPendingBookingModal && (
+        <div 
+          className="fixed inset-0 z-[9999] bg-black bg-opacity-50 flex items-center justify-center p-4"
+          onClick={() => setShowPendingBookingModal(false)}
+        >
+          <div 
+            className="bg-white rounded-lg shadow-xl max-w-md w-full p-6"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="text-center">
+              <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 mb-4">
+                <svg className="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">
+                Continue Your Booking?
+              </h3>
+              <p className="text-sm text-gray-500 mb-6">
+                We found a previous booking in progress. Would you like to continue where you left off or start fresh?
+              </p>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => {
+                    setShowPendingBookingModal(false);
+                    // Clear localStorage and start fresh
+                    localStorage.removeItem("pendingBooking");
+                    set({ step: 1 });
+                    getUserFromLS();
+                  }}
+                  className="flex-1 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                >
+                  Start Over
+                </button>
+                <button
+                  onClick={() => {
+                    setShowPendingBookingModal(false);
+                    // Continue with pending booking - go to step 2
+                    set({ step: 2 });
+                    // Restore the pending booking data
+                    const pendingBooking = localStorage.getItem("pendingBooking");
+                    if (pendingBooking) {
+                      const bookingData = JSON.parse(pendingBooking);
+                      // Restore all the booking data (same logic as before but without going to step 3)
+                      set({ selectedType: bookingData.selectedType ?? 0 });
+                      // ... restore all other fields
+                      if (typeof bookingData.roomCounts === 'object' && bookingData.roomCounts !== null) {
+                        set({ roomCounts: bookingData.roomCounts });
+                      }
+                      if (typeof bookingData.selectedAddOns === 'object' && bookingData.selectedAddOns !== null) {
+                        set({ selectedAddOns: bookingData.selectedAddOns });
+                      }
+                      set({ address: bookingData.address || "" });
+                      set({ name: bookingData.name || "" });
+                      set({ surname: bookingData.surname || "" });
+                      set({ phone: bookingData.phone || "" });
+                      set({ comments: bookingData.comments || "" });
+                      set({ dirtLevel: bookingData.dirtLevel || 'medium' });
+                      set({ ecoFriendly: !!bookingData.ecoFriendly });
+                      set({ hooverMop: !!bookingData.hooverMop });
+                      set({ disinfection: !!bookingData.disinfection });
+                      set({ errandHours: bookingData.errandHours || 0 });
+                      set({ havePets: !!bookingData.havePets });
+                      set({ keyPickup: !!bookingData.keyPickup });
+                      set({ outdoorCleaning: !!bookingData.outdoorCleaning });
+                      set({ laundry: !!bookingData.laundry });
+                      set({ checkJob: !!bookingData.checkJob });
+                      set({ endOfTenancy: !!bookingData.endOfTenancy });
+                      set({ expressStudio: !!bookingData.expressStudio });
+                      if (bookingData.selectedDate) {
+                        set({ selectedDate: new Date(bookingData.selectedDate) });
+                      }
+                      if (typeof bookingData.hour === 'number') {
+                        set({ hour: bookingData.hour });
+                      }
+                      if (typeof bookingData.minute === 'number') {
+                        set({ minute: bookingData.minute });
+                      }
+                      if (typeof bookingData.selectedDuration === 'number') {
+                        set({ selectedDuration: bookingData.selectedDuration });
+                      }
+                      if (bookingData.carpetCleaning) {
+                        set({ carpetCleaning: bookingData.carpetCleaning });
+                      }
+                    }
+                  }}
+                  className="flex-1 px-4 py-2 text-sm font-medium text-white bg-brand-primary border border-transparent rounded-md hover:bg-brand-primary/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-primary"
+                >
+                  Continue
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
