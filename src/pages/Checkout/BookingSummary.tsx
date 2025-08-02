@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   roomTypes, 
   addOns as addOnsList, 
@@ -12,6 +12,8 @@ import {
 import { useCheckoutStore, useEstimatedHours, useEstimatedPrice, usePricingBreakdown, useCarpetCleaningPrice, useCarpetCleaningState, useFinalTotalPrice } from '../../store/checkoutStore';
 
 const BookingSummary: React.FC = () => {
+  const [showPriceInfo, setShowPriceInfo] = useState(false);
+  
   // Get all data from store hooks
   const {
     selectedFrequency,
@@ -90,7 +92,7 @@ const BookingSummary: React.FC = () => {
               }
               return null;
             })}
-            {Object.values(roomCounts).every(count => count === 0) && <span className="text-gray-400">No rooms selected</span>}
+            {Object.values(roomCounts).every(count => count === 0) && !endOfTenancy && <span className="text-gray-400">No rooms selected</span>}
           </div>
         </div>
         {/* Add-ons grid */}
@@ -267,7 +269,7 @@ const BookingSummary: React.FC = () => {
           <div className="font-bold text-lg mb-2 text-brand-primary">Financial Summary</div>
           <div className="flex justify-between text-md mb-1"><span>Base Price</span><span>{pricingBreakdown?.basePrice || 'N/A'}</span></div>
           <div className="flex justify-between text-md mb-1"><span>Add-ons & Services</span><span>{pricingBreakdown?.["Additional Services"]?.["Total Additional"] || 'N/A'}</span></div>
-          <div className="flex justify-between text-md mb-1"><span>Dirt Level Multiplier</span><span>{pricingBreakdown?.["Dirt Level"]?.["Multiplier"] || 'N/A'}</span></div>
+          {/* <div className="flex justify-between text-md  mb-1"><span>Dirt Level Multiplier</span><span>{pricingBreakdown?.["Dirt Level"]?.["Multiplier"] || 'N/A'}</span></div> */}
           
           {/* Carpet & Upholstery Section */}
           {pricingBreakdown?.["Carpet & Upholstery"] && (
@@ -455,11 +457,90 @@ const BookingSummary: React.FC = () => {
             </div>
           )}
           <div className="flex justify-between text-lg font-bold mt-2">
-            <span>Final Total</span>
+            <div className="flex items-center gap-2">
+              <span>Final Total</span>
+              <button
+                onClick={() => setShowPriceInfo(true)}
+                className="text-gray-400 hover:text-brand-primary transition-colors"
+                title="Learn about our pricing"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                  <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+              </button>
+            </div>
             <span>£{finalTotalPrice ? finalTotalPrice.toFixed(2) : 'N/A'}</span>
           </div>
         </div>
       </div>
+      
+      {/* Price Information Modal */}
+      {showPriceInfo && (
+        <div 
+          className="fixed inset-0 z-[9999] bg-black bg-opacity-50 flex items-center justify-center p-4"
+          onClick={() => setShowPriceInfo(false)}
+        >
+          <div 
+            className="bg-white rounded-lg shadow-xl max-w-md w-full p-6"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-bold text-gray-800">Understanding Our Pricing</h3>
+              <button
+                onClick={() => setShowPriceInfo(false)}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+            
+            <div className="space-y-4 text-sm">
+              <div className="bg-blue-50 p-3 rounded-lg">
+                <h4 className="font-semibold text-blue-800 mb-2">🕒 Time-Based Pricing</h4>
+                <p className="text-blue-700">Our base rate is calculated by the time needed to clean your space. More rooms and add-ons require more time, which affects the final cost.</p>
+              </div>
+              
+              <div className="bg-green-50 p-3 rounded-lg">
+                <h4 className="font-semibold text-green-800 mb-2">📅 Frequency Discounts</h4>
+                <p className="text-green-700">Regular customers enjoy discounted rates. Weekly bookings offer the highest savings, followed by fortnightly and monthly schedules.</p>
+              </div>
+              
+              <div className="bg-yellow-50 p-3 rounded-lg">
+                <h4 className="font-semibold text-yellow-800 mb-2">⚡ Special Rates</h4>
+                <ul className="text-yellow-700 space-y-1">
+                  <li>• Same-day bookings may incur additional charges</li>
+                  <li>• Peak hours (evening slots) typically cost more</li>
+                  <li>• Night cleaning services have premium rates</li>
+                </ul>
+              </div>
+              
+              <div className="bg-purple-50 p-3 rounded-lg">
+                <h4 className="font-semibold text-purple-800 mb-2">🧹 Service-Specific Pricing</h4>
+                <p className="text-purple-700">Different services have different pricing structures. End of tenancy cleaning, carpet & upholstery services, and regular cleaning each have their own minimum pricing requirements.</p>
+              </div>
+              
+              <div className="bg-orange-50 p-3 rounded-lg">
+                <h4 className="font-semibold text-orange-800 mb-2">🎯 Why Prices Vary</h4>
+                <p className="text-orange-700">Your final price reflects the complexity of your cleaning needs, timing preferences, and service frequency. We ensure fair pricing for every unique situation.</p>
+              </div>
+            </div>
+            
+            <div className="mt-6 flex justify-end">
+              <button
+                onClick={() => setShowPriceInfo(false)}
+                className="px-4 py-2 bg-brand-primary text-white rounded-md hover:bg-brand-primary/80 transition-colors"
+              >
+                Got it!
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

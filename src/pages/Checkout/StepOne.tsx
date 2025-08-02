@@ -7,7 +7,8 @@ import {
   frequencyOptions,
   PRICING_CONFIG,
   calculatePrice,
-  getOneOffDetail
+  getOneOffDetail,
+  ServiceType
 } from './ckeckoutData';
 import { useCalendarStore } from '../../store/calendarStore';
 import { useCheckoutStore } from '../../store/checkoutStore';
@@ -270,7 +271,9 @@ const StepOne: React.FC = () => {
       case 3: // One-Off
         return (
           <div className="flex flex-col gap-4">
-            <EndOfTenancyOption endOfTenancy={endOfTenancy} setEndOfTenancy={v => set({ endOfTenancy: v })} />
+            {selectedType === ServiceType.END_OF_TENANCY && (
+              <EndOfTenancyOption endOfTenancy={endOfTenancy} setEndOfTenancy={v => set({ endOfTenancy: v })} />
+            )}
             <ExpressStudioOption expressStudio={expressStudio} setExpressStudio={v => set({ expressStudio: v })} />
           </div>
         );

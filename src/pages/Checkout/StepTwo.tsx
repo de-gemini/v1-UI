@@ -138,10 +138,10 @@ const StepTwo: React.FC = () => {
   const handleNextStep = () => {
     // Only include add-ons with value > 0
     const totalRooms = Object.values(roomCounts).reduce((sum, count) => sum + count, 0);
-    if (totalRooms === 0) {
-      toast.error('Please select at least one room.');
-      return;
-    }
+    // if (totalRooms === 0) {
+    //   toast.error('Please select at least one room');
+    //   return;
+    // }
     
     // Check authentication before proceeding to step 3
     const currentState = {

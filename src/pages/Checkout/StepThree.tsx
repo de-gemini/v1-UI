@@ -180,11 +180,11 @@ const StepThree: React.FC = () => {
       }))
       .filter((addon: any) => addon.quantity > 0);
 
-    if (rooms.length === 0) {
-      toast.error('Please select at least one room.');
-      setIsSubmitting(false);
-      return;
-    }
+    // if (rooms.length === 0) {
+    //   toast.error('Please select at least one room.');
+    //   setIsSubmitting(false);
+    //   return;
+    // }
     if (selectedFrequency === null) {
       toast.error('Please select a frequency.');
       setIsSubmitting(false);

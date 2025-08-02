@@ -37,7 +37,7 @@ export const PRICING_CONFIG = {
   // Additional service costs
   additionalServices: {
     endOfTenancy: 0,
-    expressStudio: 25, // fixed
+    expressStudio: 60, // fixed
     ecoFriendly: 6,
     hooverMop: 15,
     disinfection: 10,
@@ -361,11 +361,11 @@ export const calculatePrice = {
       Object.entries(options.carpetCleaning.selectedUpholstery).forEach(([materialType, items]) => {
         Object.entries(items).forEach(([itemKey, count]) => {
           const item = UPHOLSTERY_ITEMS.find(i => i.key === itemKey);
-          if (item && count > 0) {
-            const itemCost = item.price * count;
-            carpetCost += itemCost;
+        if (item && count > 0) {
+          const itemCost = item.price * count;
+          carpetCost += itemCost;
             console.log('🔍 [DEBUG] calculateTotalPrice - Upholstery cost:', materialType, itemKey, count, itemCost);
-          }
+        }
         });
       });
       
@@ -455,10 +455,10 @@ export const calculatePrice = {
       Object.entries(options.carpetCleaning.selectedUpholstery).forEach(([materialType, items]) => {
         Object.entries(items).forEach(([itemKey, count]) => {
           const item = UPHOLSTERY_ITEMS.find(i => i.key === itemKey);
-          if (item && count > 0) {
-            carpetUpholsteryCost += item.price * count;
+        if (item && count > 0) {
+          carpetUpholsteryCost += item.price * count;
             console.log('🔍 [DEBUG] getDetailedBreakdown - Upholstery cost:', materialType, itemKey, count, item.price * count);
-          }
+        }
         });
       });
       
