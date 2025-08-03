@@ -290,15 +290,15 @@ const Bookings = () => {
             <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V4a2 2 0 114 0v2m-4 0a2 2 0 104 0" />
             </svg>
-            <span className="text-xs text-gray-500">Booking ID</span>
-            <span className="text-sm font-mono text-gray-800">{schedule.booking._id}</span>
+            <span className="text-xs text-gray-500">Schedule ID</span>
+            <span className="text-sm font-mono text-gray-800">{schedule._id}</span>
           </div>
           <button
-            onClick={() => copyToClipboard(schedule.booking._id, schedule.booking._id)}
-            title="Copy Booking ID"
+            onClick={() => copyToClipboard(schedule._id, schedule._id)}
+            title="Copy Schedule ID"
             className="p-1.5 rounded hover:bg-gray-200 transition"
           >
-            {copiedId === schedule.booking._id ? (
+            {copiedId === schedule._id ? (
               <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
@@ -331,7 +331,7 @@ const Bookings = () => {
         // {!isPast && (schedule.paymentStatus === 'succeeded' || schedule.paymentStatus === 'completed') && (
           <div className="flex flex-col sm:flex-row gap-2 pt-2">
             <button
-              onClick={() => handleCancelBooking(schedule.booking._id)}
+              onClick={() => handleCancelBooking(schedule._id)}
               className="flex items-center justify-center gap-2 px-4 py-2 bg-red-50 text-red-700 border border-red-200 rounded-lg hover:bg-red-100 transition-colors text-sm font-medium"
               title="Cancel this booking"
             >
@@ -339,7 +339,7 @@ const Bookings = () => {
               Cancel Booking
             </button>
             <button
-              onClick={() => handleRefundBooking(schedule.booking._id)}
+              onClick={() => handleRefundBooking(schedule._id)}
               className="flex items-center justify-center gap-2 px-4 py-2 bg-orange-50 text-orange-700 border border-orange-200 rounded-lg hover:bg-orange-100 transition-colors text-sm font-medium"
               title="Request refund for this booking"
             >

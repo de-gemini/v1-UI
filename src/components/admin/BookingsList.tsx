@@ -11,6 +11,7 @@ interface Booking {
   };
   scheduledDate: string;
   status: 'pending' | 'confirmed' | 'completed' | 'cancelled';
+  estimatedPrice?: number;
 }
 
 interface BookingsListProps {
@@ -65,6 +66,7 @@ const BookingsList: React.FC<BookingsListProps> = ({
               <th className="text-left py-2">Service</th>
               <th className="text-left py-2">Customer</th>
               <th className="text-left py-2">Date</th>
+              <th className="text-left py-2">Price</th>
               <th className="text-left py-2">Status</th>
             </tr>
           </thead>
@@ -72,7 +74,7 @@ const BookingsList: React.FC<BookingsListProps> = ({
             {loading ? (
               <tr><td colSpan={4} className="text-center py-4 text-gray-500">Loading...</td></tr>
             ) : bookings.length === 0 ? (
-              <tr><td colSpan={4} className="text-center py-4 text-gray-500">{emptyMessage}</td></tr>
+              <tr><td colSpan={5} className="text-center py-4 text-gray-500">{emptyMessage}</td></tr>
             ) : bookings.map((booking) => (
               <tr 
                 key={booking._id} 
@@ -82,6 +84,7 @@ const BookingsList: React.FC<BookingsListProps> = ({
                 <td className="py-3">{booking.serviceType}</td>
                 <td className="py-3 text-brand-primary">{booking.user?.name || booking.user?.email || 'N/A'}</td>
                 <td className="py-3">{new Date(booking.scheduledDate).toLocaleDateString()}</td>
+                <td className="py-3 font-medium">£{booking.estimatedPrice?.toFixed(2) || 'N/A'}</td>
                 <td className="py-3">
                   <span className={`px-2 py-1 rounded text-xs font-medium ${getStatusColor(booking.status)}`}>
                     {booking.status}
@@ -114,8 +117,9 @@ const BookingsList: React.FC<BookingsListProps> = ({
                 {booking.status}
               </span>
             </div>
-            <div className="text-xs text-gray-500">
-              {new Date(booking.scheduledDate).toLocaleDateString()}
+            <div className="flex justify-between items-center text-xs text-gray-500">
+              <span>{new Date(booking.scheduledDate).toLocaleDateString()}</span>
+              <span className="font-medium text-gray-900">£{booking.estimatedPrice?.toFixed(2) || 'N/A'}</span>
             </div>
           </div>
         ))}

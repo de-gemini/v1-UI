@@ -204,7 +204,7 @@ const Navbar = () => {
         {/* Logo */}
         <a href="/" className="flex items-center">
           <img 
-            src="/src/assets/LOGO-COLOR.png" 
+                          src="/src/assets/logo-color.png" 
             alt="De-Gemini Cleaning Logo" 
             className="h-8 w-auto"
           />

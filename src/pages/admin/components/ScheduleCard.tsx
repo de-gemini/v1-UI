@@ -36,6 +36,14 @@ export const ScheduleCard: React.FC<ScheduleCardProps> = ({
   onExtraCharge,
   filteredSchedules,
 }) => {
+  // Debug: Log schedule data to see what's available
+  console.log('🔍 [DEBUG] ScheduleCard - schedule:', {
+    id: schedule._id,
+    booking: schedule.booking,
+    user: schedule.booking?.user,
+    userName: schedule.booking?.user?.name,
+    userEmail: schedule.booking?.user?.email
+  });
   const formatTime = (time: string) => {
     // Convert "HH:mm" to 12-hour format with AM/PM
     const [hourStr, minuteStr] = time.split(":");
@@ -114,14 +122,30 @@ export const ScheduleCard: React.FC<ScheduleCardProps> = ({
             <div className="flex text-blue-400 items-center gap-2">
               <FaUser className="text-sm" />
               <span className={`font-medium text-sm sm:text-base ${isPast ? "line-through" : ""}`}>
-                {schedule.booking?.user?.name || "Unknown Customer"}
+                {schedule.booking?.user?.name || schedule.booking?.user?.email || "Unknown Customer"}
               </span>
             </div>
 
-            <div className="flex items-start text-pink-400 pb-3 gap-2">
+            <div className="flex items-start text-pink-400 gap-2">
               <FaMapMarkerAlt className="mt-0.5 text-sm flex-shrink-0" />
               <span className={`text-xs sm:text-sm ${isPast ? "line-through" : ""}`}>
                 {schedule.booking?.address || "No address provided"}
+              </span>
+            </div>
+
+            <div className="flex items-center text-green-600 gap-2">
+              <FaPoundSign className="text-sm flex-shrink-0" />
+              <span className={`font-medium text-sm sm:text-base ${isPast ? "line-through" : ""}`}>
+                £{schedule.booking?.estimatedPrice?.toFixed(2) || 'N/A'}
+              </span>
+            </div>
+
+            <div className="flex items-center text-gray-600 gap-2">
+              <svg className="w-3 h-3 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V4a2 2 0 114 0v2m-4 0a2 2 0 104 0" />
+              </svg>
+              <span className={`text-xs font-mono ${isPast ? "line-through" : ""}`}>
+                ID: {schedule._id}
               </span>
             </div>
 

@@ -36,6 +36,12 @@ export const filterSchedulesBySearch = (schedules: Schedule[], searchTerm: strin
         .includes(searchTerm.toLowerCase()) ||
       schedule.booking.address
         .toLowerCase()
+        .includes(searchTerm.toLowerCase()) ||
+      schedule._id
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase()) ||
+      schedule.booking._id
+        .toLowerCase()
         .includes(searchTerm.toLowerCase())
   );
 };

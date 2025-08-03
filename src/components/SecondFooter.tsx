@@ -24,7 +24,7 @@ style={{
         <div className="lg:col-span-1 flex justify-center md:justify-start">
         <a href="/" className="flex items-center">
           <img 
-            src="/src/assets/LOGO-COLOR.png" 
+                          src="/src/assets/logo-color.png" 
             alt="De-Gemini Cleaning Logo" 
             className="h-12 w-auto"
           />

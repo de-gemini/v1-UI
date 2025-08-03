@@ -778,10 +778,10 @@ export const UPHOLSTERY_MATERIAL_TYPES = [
 ];
 
 export const UPHOLSTERY_ITEMS = [
-  { key: 'two_seater_sofa', label: '2 seater sofa', price: 32, icon: 'https://www.emop.co.uk/static/images/steps_booking/sofa.svg' },
-  { key: 'three_seater_sofa', label: '3 seater sofa', price: 40, icon: 'https://www.emop.co.uk/static/images/steps_booking/sofa.svg' },
-  { key: 'four_seater_sofa', label: '4 seater sofa', price: 48, icon: 'https://www.emop.co.uk/static/images/steps_booking/sofa.svg' },
-  { key: 'armchair', label: 'Armchair', price: 16, icon: 'https://www.emop.co.uk/static/images/steps_booking/armchair.svg' },
+  { key: 'two_seater_sofa', label: '2 seater sofa', price: 40, icon: 'https://www.emop.co.uk/static/images/steps_booking/sofa.svg' },
+  { key: 'three_seater_sofa', label: '3 seater sofa', price: 50, icon: 'https://www.emop.co.uk/static/images/steps_booking/sofa.svg' },
+  { key: 'four_seater_sofa', label: '4 seater sofa', price: 60, icon: 'https://www.emop.co.uk/static/images/steps_booking/sofa.svg' },
+  { key: 'armchair', label: 'Armchair', price: 20, icon: 'https://www.emop.co.uk/static/images/steps_booking/armchair.svg' },
   { key: 'single_mattress', label: 'Single Mattress', price: 24, icon: 'https://www.emop.co.uk/static/images/steps_booking/mattress.svg' },
   { key: 'double_mattress', label: 'Double Mattress', price: 32, icon: 'https://www.emop.co.uk/static/images/steps_booking/mattress.svg' },
   { key: 'king_mattress', label: 'King Mattress', price: 40, icon: 'https://www.emop.co.uk/static/images/steps_booking/mattress.svg' },
