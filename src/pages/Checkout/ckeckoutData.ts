@@ -753,12 +753,12 @@ export const CARPET_MATERIAL_TYPES = [
 ];
 
 export const CARPET_ROOMS = [
-  { key: 'single_bedroom', label: 'Single Bedroom', price: 24, icon: 'https://www.emop.co.uk/static/images/steps_booking/bedroom.svg' },
-  { key: 'double_bedroom', label: 'Double Bedroom', price: 32, icon: 'https://www.emop.co.uk/static/images/steps_booking/bedroom.svg' },
-  { key: 'living_room', label: 'Living room', price: 32, icon: 'https://www.emop.co.uk/static/images/steps_booking/living_dining.svg' },
+  { key: 'single_bedroom', label: 'Single Bedroom', price: 30, icon: 'https://www.emop.co.uk/static/images/steps_booking/bedroom.svg' },
+  { key: 'double_bedroom', label: 'Double Bedroom', price: 35, icon: 'https://www.emop.co.uk/static/images/steps_booking/bedroom.svg' },
+  { key: 'living_room', label: 'Living room', price: 35, icon: 'https://www.emop.co.uk/static/images/steps_booking/living_dining.svg' },
   { key: 'dining_room', label: 'Dining room', price: 32, icon: 'https://www.emop.co.uk/static/images/steps_booking/living_dining.svg' },
   { key: 'office', label: 'Office', price: 32, icon: 'https://www.emop.co.uk/static/images/steps_booking/office.svg' },
-  { key: 'hall', label: 'Hall', price: 16, icon: 'https://www.emop.co.uk/static/images/steps_booking/hall.svg' },
+  { key: 'hall', label: 'Hall', price: 20, icon: 'https://www.emop.co.uk/static/images/steps_booking/hall.svg' },
   { key: 'toilet', label: 'Toilet', price: 16, icon: 'https://www.emop.co.uk/static/images/steps_booking/toilet.svg' },
   { key: 'bathroom', label: 'Bathroom', price: 24, icon: 'https://www.emop.co.uk/static/images/steps_booking/bathroom.svg' },
   { key: 'through_lounge', label: 'Through lounge', price: 32, icon: 'https://www.emop.co.uk/static/images/steps_booking/living_dining.svg' },

@@ -481,7 +481,7 @@ const StepTwo: React.FC = () => {
         <div className="flex justify-between items-center bg-gray-50 rounded-xl px-6 py-4 mb-4 shadow">
           <div>
             <div className="text-sm text-gray-500 font-medium">Estimated Time</div>
-            <div className="text-xl font-bold text-brand-primary">{estimatedHours.toFixed(1)} hours</div>
+            <div className="text-xl font-bold text-brand-primary">{estimatedHours}</div>
           </div>
           <div>
             <div className="text-sm text-gray-500 font-medium">Hourly Rate</div>

@@ -202,30 +202,12 @@ const Navbar = () => {
     <header className="relative w-full bg-white shadow-md z-50 py-4 px-6 sm:px-16">
       <nav className="max-w-7xl mx-auto flex items-center justify-between ">
         {/* Logo */}
-        <a href="/" className="flex flex-col items-start relative group">
-          <h1 className='text font-bold text-blue-400 text-[20px]'>
-            De<span className="font-semibold text-brand-primary">Gemini</span>
-          </h1>
-          <svg
-            className="absolute left-0 right-0 -bottom-0 w-full h-2 group-hover:opacity-100 opacity-80 transition"
-            viewBox="0 0 80 8"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            style={{ minWidth: '60px', maxWidth: '120px' }}
-          >
-            <path
-              className="logo-underline-animate"
-              d="M2 6C18 2 62 2 78 6"
-              stroke="#0e57c5"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              fill="none"
-            />
-          </svg>
-          <style>{`
-            @keyframes draw-erase-underline { 0% { stroke-dashoffset: 80; } 3.33% { stroke-dashoffset: 0; } 93.33% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 80; } }
-            .logo-underline-animate { stroke-dasharray: 80; stroke-dashoffset: 80; animation: draw-erase-underline 15s linear infinite; }
-          `}</style>
+        <a href="/" className="flex items-center">
+          <img 
+            src="/src/assets/LOGO-COLOR.png" 
+            alt="De-Gemini Cleaning Logo" 
+            className="h-8 w-auto"
+          />
         </a>
 
         {/* Hamburger/Close Button for Mobile */}

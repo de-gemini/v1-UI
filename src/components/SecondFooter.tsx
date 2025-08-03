@@ -23,10 +23,12 @@ style={{
         {/* Column 1: Logo (Left aligned on desktop) */}
         <div className="lg:col-span-1 flex justify-center md:justify-start">
         <a href="/" className="flex items-center">
-      <h1 className='text-brand-primary  text-[40px]'>
-      De Gemini Services LTD
-      </h1>
-    </a>
+          <img 
+            src="/src/assets/LOGO-COLOR.png" 
+            alt="De-Gemini Cleaning Logo" 
+            className="h-12 w-auto"
+          />
+        </a>
         </div>
 
         {/* Column 2: FOR CUSTOMERS */}

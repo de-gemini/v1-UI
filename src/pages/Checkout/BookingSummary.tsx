@@ -7,12 +7,14 @@ import {
   CARPET_ROOMS,
   CARPET_RUGS,
   UPHOLSTERY_ITEMS,
-  CARPET_ADDONS
+  CARPET_ADDONS,
+  ServiceType
 } from './ckeckoutData';
-import { useCheckoutStore, useEstimatedHours, useEstimatedPrice, usePricingBreakdown, useCarpetCleaningPrice, useCarpetCleaningState, useFinalTotalPrice } from '../../store/checkoutStore';
+import { useCheckoutStore, useEstimatedHours, useEstimatedHoursFromPrice, useEstimatedPrice, usePricingBreakdown, useCarpetCleaningPrice, useCarpetCleaningState, useFinalTotalPrice } from '../../store/checkoutStore';
 
 const BookingSummary: React.FC = () => {
   const [showPriceInfo, setShowPriceInfo] = useState(false);
+  const [showTimeInfo, setShowTimeInfo] = useState(false);
   
   // Get all data from store hooks
   const {
@@ -41,6 +43,9 @@ const BookingSummary: React.FC = () => {
   const pricingBreakdown = usePricingBreakdown();
   const carpetCleaning = useCarpetCleaningState();
   const finalTotalPrice = useFinalTotalPrice();
+  const estimatedHours = useEstimatedHours();
+  const estimatedHoursFromPrice = useEstimatedHoursFromPrice();
+  const selectedType = useCheckoutStore(state => state.selectedType);
 
   const pad = (n: number) => n.toString().padStart(2, '0');
 
@@ -456,6 +461,34 @@ const BookingSummary: React.FC = () => {
               Minimum price has been applied as calculated total was lower
             </div>
           )}
+          
+          {/* Estimated Duration */}
+          <div className="flex justify-between text-md mb-2 mt-4 pt-2 border-t border-gray-200">
+            <div className="flex items-center gap-2">
+              <span className="font-medium text-gray-700">Estimated Duration</span>
+              <button
+                onClick={() => setShowTimeInfo(true)}
+                className="text-gray-400 hover:text-brand-primary transition-colors"
+                title="Learn about time estimates"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                  <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+              </button>
+            </div>
+            <span className="font-semibold text-brand-primary">
+              {selectedType === ServiceType.CARPET_UPHOLSTERY 
+                ? estimatedHoursFromPrice 
+                : estimatedHours !== '0mins' 
+                  ? estimatedHours 
+                  : estimatedHoursFromPrice !== '0mins' 
+                    ? estimatedHoursFromPrice 
+                    : 'N/A'}
+            </span>
+          </div>
+          
           <div className="flex justify-between text-lg font-bold mt-2">
             <div className="flex items-center gap-2">
               <span>Final Total</span>
@@ -533,6 +566,79 @@ const BookingSummary: React.FC = () => {
             <div className="mt-6 flex justify-end">
               <button
                 onClick={() => setShowPriceInfo(false)}
+                className="px-4 py-2 bg-brand-primary text-white rounded-md hover:bg-brand-primary/80 transition-colors"
+              >
+                Got it!
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {/* Time Information Modal */}
+      {showTimeInfo && (
+        <div 
+          className="fixed inset-0 z-[9999] bg-black bg-opacity-50 flex items-center justify-center p-4"
+          onClick={() => setShowTimeInfo(false)}
+        >
+          <div 
+            className="bg-white rounded-lg shadow-xl max-w-md w-full p-6"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-bold text-gray-800">Understanding Time Estimates</h3>
+              <button
+                onClick={() => setShowTimeInfo(false)}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+            
+            <div className="space-y-4 text-sm">
+              <div className="bg-blue-50 p-3 rounded-lg">
+                <h4 className="font-semibold text-blue-800 mb-2">⏱️ Base Time Calculation</h4>
+                <p className="text-blue-700">Our time estimates are based on standard cleaning conditions and typical room sizes. Each room type has a base time allocation.</p>
+              </div>
+              
+              <div className="bg-yellow-50 p-3 rounded-lg">
+                <h4 className="font-semibold text-yellow-800 mb-2">🧽 Factors That May Increase Time</h4>
+                <ul className="text-yellow-700 space-y-1">
+                  <li>• Heavy soiling or stains requiring extra attention</li>
+                  <li>• Delicate fabrics or materials needing special care</li>
+                  <li>• Large furniture that needs to be moved</li>
+                  <li>• High-traffic areas with built-up grime</li>
+                  <li>• Pet hair or odors requiring deep cleaning</li>
+                </ul>
+              </div>
+              
+              <div className="bg-green-50 p-3 rounded-lg">
+                <h4 className="font-semibold text-green-800 mb-2">🎯 Carpet & Upholstery Specific</h4>
+                <ul className="text-green-700 space-y-1">
+                  <li>• Material type (delicate fabrics take longer)</li>
+                  <li>• Stain severity and type</li>
+                  <li>• Furniture size and accessibility</li>
+                  <li>• Drying time requirements</li>
+                </ul>
+              </div>
+              
+              <div className="bg-purple-50 p-3 rounded-lg">
+                <h4 className="font-semibold text-purple-800 mb-2">⚡ Additional Services</h4>
+                <p className="text-purple-700">Each add-on service adds time to your estimate. Eco-friendly products, disinfection, and special treatments all require additional time.</p>
+              </div>
+              
+              <div className="bg-orange-50 p-3 rounded-lg">
+                <h4 className="font-semibold text-orange-800 mb-2">💡 Pro Tip</h4>
+                <p className="text-orange-700">For the most accurate time estimate, please provide details about any special conditions or requirements during booking.</p>
+              </div>
+            </div>
+            
+            <div className="mt-6 flex justify-end">
+              <button
+                onClick={() => setShowTimeInfo(false)}
                 className="px-4 py-2 bg-brand-primary text-white rounded-md hover:bg-brand-primary/80 transition-colors"
               >
                 Got it!

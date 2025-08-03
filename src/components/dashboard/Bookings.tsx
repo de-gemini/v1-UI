@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import axiosInstance from '../../api/axiosInstance';
-import { FaCalendarAlt, FaMapMarkerAlt, FaPoundSign, FaDownload } from 'react-icons/fa';
+import { FaCalendarAlt, FaMapMarkerAlt, FaPoundSign, FaDownload, FaTimes, FaUndo } from 'react-icons/fa';
 import { createBookingsPDF, type PDFBooking } from '../../utils/pdfUtils';
 
 const getAuthHeader = () => {
@@ -106,6 +106,18 @@ const Bookings = () => {
 
     // Use the utility function to create PDF
     createBookingsPDF(pdfBookings, activeFilter);
+  };
+
+  const handleCancelBooking = (bookingId: string) => {
+    const message = `Hello, I want to cancel my booking of ID ${bookingId}`;
+    const whatsappUrl = `https://wa.me/+447399487915?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleRefundBooking = (bookingId: string) => {
+    const message = `Hello, I want a refund for my booking of ID ${bookingId}`;
+    const whatsappUrl = `https://wa.me/+447399487915?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -313,6 +325,29 @@ const Bookings = () => {
             <span>£{schedule.booking.estimatedPrice}</span>
           </div>
         </div>
+
+        {/* Action Buttons - Only show for upcoming paid bookings */}
+        {isPast  && (
+        // {!isPast && (schedule.paymentStatus === 'succeeded' || schedule.paymentStatus === 'completed') && (
+          <div className="flex flex-col sm:flex-row gap-2 pt-2">
+            <button
+              onClick={() => handleCancelBooking(schedule.booking._id)}
+              className="flex items-center justify-center gap-2 px-4 py-2 bg-red-50 text-red-700 border border-red-200 rounded-lg hover:bg-red-100 transition-colors text-sm font-medium"
+              title="Cancel this booking"
+            >
+              <FaTimes className="w-4 h-4" />
+              Cancel Booking
+            </button>
+            <button
+              onClick={() => handleRefundBooking(schedule.booking._id)}
+              className="flex items-center justify-center gap-2 px-4 py-2 bg-orange-50 text-orange-700 border border-orange-200 rounded-lg hover:bg-orange-100 transition-colors text-sm font-medium"
+              title="Request refund for this booking"
+            >
+              <FaUndo className="w-4 h-4" />
+              Request Refund
+            </button>
+          </div>
+        )}
       </div>
       <div className="flex  items-start lg:items-end gap-4">
       {/* Right Section - Payment Status */}

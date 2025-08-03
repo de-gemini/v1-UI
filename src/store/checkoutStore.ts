@@ -143,6 +143,52 @@ const calculateTotalMinutes = (state: CheckoutState): number => {
   );
 };
 
+// Calculate total minutes for carpet and upholstery services
+const calculateCarpetTotalMinutes = (state: CheckoutState): number => {
+  let totalMinutes = 0;
+  const baseHourlyRate = 35; // From PRICING_CONFIG
+  
+  // Add carpet room minutes (convert price to estimated time)
+  Object.entries(state.carpetCleaning.selectedRooms).forEach(([roomType, count]) => {
+    if (count > 0) {
+      const room = CARPET_ROOMS.find(r => r.key === roomType);
+      if (room) {
+        // Convert price to estimated minutes (price / hourly rate * 60)
+        const estimatedMinutes = Math.round((room.price / baseHourlyRate) * 60);
+        totalMinutes += count * estimatedMinutes;
+      }
+    }
+  });
+  
+  // Add carpet rug minutes (convert price to estimated time)
+  Object.entries(state.carpetCleaning.selectedRugs).forEach(([rugType, count]) => {
+    if (count > 0) {
+      const rug = CARPET_RUGS.find(r => r.key === rugType);
+      if (rug) {
+        // Convert price to estimated minutes (price / hourly rate * 60)
+        const estimatedMinutes = Math.round((rug.price / baseHourlyRate) * 60);
+        totalMinutes += count * estimatedMinutes;
+      }
+    }
+  });
+  
+  // Add upholstery minutes (convert price to estimated time)
+  Object.entries(state.carpetCleaning.selectedUpholstery).forEach(([materialType, items]) => {
+    Object.entries(items).forEach(([itemKey, count]) => {
+      if (count > 0) {
+        const item = UPHOLSTERY_ITEMS.find(i => i.key === itemKey);
+        if (item) {
+          // Convert price to estimated minutes (price / hourly rate * 60)
+          const estimatedMinutes = Math.round((item.price / baseHourlyRate) * 60);
+          totalMinutes += count * estimatedMinutes;
+        }
+      }
+    });
+  });
+  
+  return totalMinutes;
+};
+
 // Reusable function to build pricing options from state
 const buildPricingOptions = (state: CheckoutState) => {
   const totalMinutes = calculateTotalMinutes(state);
@@ -242,7 +288,140 @@ export const useCarpetCleaningPrice = () => {
 export const useEstimatedHours = () => {
   return useCheckoutStore(state => {
     const totalMinutes = calculateTotalMinutes(state);
-    return PricingCalculator.calculateTotalHours(totalMinutes);
+    const hours = PricingCalculator.calculateTotalHours(totalMinutes);
+    return formatTimeAsHoursMinutes(hours * 60);
+  });
+};
+
+// Calculate estimated hours from price for fixed price services
+// Helper function to format time as HHh:MMmins
+const formatTimeAsHoursMinutes = (totalMinutes: number): string => {
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = Math.round(totalMinutes % 60);
+  
+  if (hours === 0) {
+    return `${minutes}mins`;
+  }
+  
+  return `${hours}h:${minutes.toString().padStart(2, '0')}mins`;
+};
+
+export const useEstimatedHoursFromPrice = () => {
+  return useCheckoutStore(state => {
+    const { totalPrice } = calculatePricing(state);
+    const baseHourlyRate = 17.99; // From PRICING_CONFIG
+    
+    // Check if there are any selections made for any service type
+    const hasRoomSelections = Object.values(state.roomCounts).some(count => count > 0);
+    const hasAddOnSelections = Object.values(state.selectedAddOns).some(count => count > 0);
+    const hasCarpetSelections = Object.values(state.carpetCleaning.selectedRooms).some(count => count > 0) ||
+                                Object.values(state.carpetCleaning.selectedRugs).some(count => count > 0) ||
+                                Object.values(state.carpetCleaning.selectedUpholstery).some(materialItems => 
+                                  Object.values(materialItems).some(count => count > 0)
+                                );
+    
+    // If no selections made at all, return zero
+    if (!hasRoomSelections && !hasAddOnSelections && !hasCarpetSelections) {
+      return '0mins';
+    }
+    
+    // Handle different service types with switch statement
+    switch (state.selectedType) {
+      case ServiceType.REGULAR_ONE_OFF:
+        // For regular cleaning, use price-based calculation with minutes
+        if (totalPrice > 0) {
+          const additionalServicesCost = PricingCalculator.calculateAdditionalServicesCost({
+            endOfTenancy: state.endOfTenancy,
+            expressStudio: state.expressStudio,
+            ecoFriendly: state.ecoFriendly,
+            hooverMop: state.hooverMop,
+            disinfection: state.disinfection,
+            outdoorCleaning: state.outdoorCleaning,
+            laundry: state.laundry,
+            errandHours: state.errandHours,
+            checkJob: state.checkJob,
+            havePets: state.havePets,
+            keyPickup: state.keyPickup,
+          });
+          
+          const basePrice = totalPrice - additionalServicesCost;
+          let baseHours = 0;
+          if (basePrice > 0) {
+            baseHours = basePrice / baseHourlyRate;
+          }
+          
+          // Add 3 minutes for every pound of additional services
+          const additionalMinutes = additionalServicesCost * 3;
+          const totalMinutes = (baseHours * 60) + additionalMinutes;
+          
+          return formatTimeAsHoursMinutes(totalMinutes);
+        }
+        return '0mins';
+        
+      case ServiceType.END_OF_TENANCY:
+        // For end of tenancy, use price-based calculation with minutes
+        if (totalPrice > 0) {
+          const additionalServicesCost = PricingCalculator.calculateAdditionalServicesCost({
+            endOfTenancy: state.endOfTenancy,
+            expressStudio: state.expressStudio,
+            ecoFriendly: state.ecoFriendly,
+            hooverMop: state.hooverMop,
+            disinfection: state.disinfection,
+            outdoorCleaning: state.outdoorCleaning,
+            laundry: state.laundry,
+            errandHours: state.errandHours,
+            checkJob: state.checkJob,
+            havePets: state.havePets,
+            keyPickup: state.keyPickup,
+          });
+          
+          const basePrice = totalPrice - additionalServicesCost;
+          let baseHours = 0;
+          if (basePrice > 0) {
+            baseHours = basePrice / baseHourlyRate;
+          }
+          
+          // Add 3 minutes for every pound of additional services
+          const additionalMinutes = additionalServicesCost * 3;
+          const totalMinutes = (baseHours * 60) + additionalMinutes;
+          
+          return formatTimeAsHoursMinutes(totalMinutes);
+        }
+        return '0mins';
+        
+      case ServiceType.CARPET_UPHOLSTERY:
+        // For carpet and upholstery, use selections-based calculation
+        if (!hasCarpetSelections) {
+          return '0mins';
+        }
+        
+        // Calculate time from actual carpet selections
+        const carpetTotalMinutes = calculateCarpetTotalMinutes(state);
+        const carpetHours = PricingCalculator.calculateTotalHours(carpetTotalMinutes);
+        
+        // Add 3 minutes for every pound of additional services
+        const additionalServicesCost = PricingCalculator.calculateAdditionalServicesCost({
+          endOfTenancy: state.endOfTenancy,
+          expressStudio: state.expressStudio,
+          ecoFriendly: state.ecoFriendly,
+          hooverMop: state.hooverMop,
+          disinfection: state.disinfection,
+          outdoorCleaning: state.outdoorCleaning,
+          laundry: state.laundry,
+          errandHours: state.errandHours,
+          checkJob: state.checkJob,
+          havePets: state.havePets,
+          keyPickup: state.keyPickup,
+        });
+        
+        const additionalMinutes = additionalServicesCost * 3;
+        const totalMinutes = (carpetHours * 60) + additionalMinutes;
+        
+        return formatTimeAsHoursMinutes(totalMinutes);
+        
+      default:
+        return '0mins';
+    }
   });
 };
 
