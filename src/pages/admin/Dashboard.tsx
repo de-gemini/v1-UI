@@ -114,25 +114,21 @@ const AdminDashboard = () => {
   }, []);
 
   const handleCardClick = (filterType: string) => {
-    // Add a small delay to show the click effect
-    setTimeout(() => {
-      if (filterType === 'revenue') {
-        // Navigate to payments page for revenue card
-        navigate('/admin/payments');
-      } else if (filterType === 'new-customers') {
-        // Navigate to payments page with unique customers filter
-        navigate('/admin/payments?filter=unique-customers');
-      } else if (filterType === 'visitors') {
-        // Scroll to the chart section
-        chartRef.current?.scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'start' 
-        });
-      } else {
-        // Navigate to bookings page with filter for other cards
-        navigate(`/admin/bookings?filter=${filterType}`);
-      }
-    }, 150);
+    if (filterType === 'revenue') {
+      // Navigate to payments page for revenue card
+      navigate('/admin/payments');
+    } else if (filterType === 'new-customers') {
+      // Navigate to payments page with unique customers filter
+      navigate('/admin/payments?filter=unique-customers');
+    } else if (filterType === 'visitors') {
+      // Scroll to the chart section without smooth behavior to prevent zoom issues
+      chartRef.current?.scrollIntoView({ 
+        block: 'start' 
+      });
+    } else {
+      // Navigate to bookings page with filter for other cards
+      navigate(`/admin/bookings?filter=${filterType}`);
+    }
   };
 
   const handleBookingClick = async (booking: any) => {
