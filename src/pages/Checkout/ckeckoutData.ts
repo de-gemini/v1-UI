@@ -52,8 +52,8 @@ export const PRICING_CONFIG = {
   // Dirt level multipliers
   dirtLevelMultipliers: {
     light: 1.0,
-    medium: 1.25,
-    heavy: 1.8,
+    medium: 1.3,
+    heavy: 1.7,
   },
   
   
