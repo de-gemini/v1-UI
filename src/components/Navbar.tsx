@@ -203,7 +203,7 @@ const Navbar = () => {
       <nav className="max-w-7xl mx-auto flex items-center justify-between ">
         {/* Logo */}
         <a href="/" className="flex items-center">
-          <img src="/src/assets/logo.png" 
+          <img src="https://res.cloudinary.com/dy5xob0gn/image/upload/v1754328254/logo-tkuuzo.png" 
             alt="De-Gemini Cleaning Logo" 
             className="h-8 w-auto"
           />
