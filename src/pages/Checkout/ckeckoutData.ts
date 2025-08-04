@@ -646,15 +646,15 @@ export const cleaningTypes = [
 
   
   export const roomTypes = [
-    { type: "bedroom", label: "Bedroom", estimatedTime: 25, icon: "https://www.emop.co.uk/static/images/steps_booking/bedroom.svg" },
-    { type: "living_room", label: "Living/Dining room", estimatedTime: 30, icon: "https://www.emop.co.uk/static/images/steps_booking/living_dining.svg" },
+    { type: "bedroom", label: "Bedroom", estimatedTime:35, icon: "https://www.emop.co.uk/static/images/steps_booking/bedroom.svg" },
+    { type: "living_room", label: "Living/Dining room", estimatedTime: 45, icon: "https://www.emop.co.uk/static/images/steps_booking/living_dining.svg" },
     { type: "bathroom", label: "Bathroom", estimatedTime: 45, icon: "https://www.emop.co.uk/static/images/steps_booking/bathroom.svg" },
-    { type: "hall", label: "Hall", estimatedTime: 10, icon: "https://www.emop.co.uk/static/images/steps_booking/hall.svg" },
-    { type: "staircase", label: "Staircase", estimatedTime: 15, icon: "https://www.emop.co.uk/static/images/steps_booking/stairs.svg" },
-    { type: "toilet", label: "Toilet", estimatedTime: 15, icon: "https://www.emop.co.uk/static/images/steps_booking/toilet.svg" },
+    { type: "hall", label: "Hall", estimatedTime: 20, icon: "https://www.emop.co.uk/static/images/steps_booking/hall.svg" },
+    { type: "staircase", label: "Staircase", estimatedTime: 20, icon: "https://www.emop.co.uk/static/images/steps_booking/stairs.svg" },
+    { type: "toilet", label: "Toilet", estimatedTime: 20, icon: "https://www.emop.co.uk/static/images/steps_booking/toilet.svg" },
     { type: "kitchen", label: "Kitchen", estimatedTime: 45, icon: "https://www.emop.co.uk/static/images/steps_booking/kitchen.svg" },
     { type: "office", label: "Office room", estimatedTime: 20, icon: "https://www.emop.co.uk/static/images/steps_booking/office.svg" },
-    { type: "conservatory", label: "Conservatory", estimatedTime: 25, icon: "https://www.emop.co.uk/static/images/steps_booking/conservatory.svg" },
+    { type: "conservatory", label: "Conservatory", estimatedTime: 30, icon: "https://www.emop.co.uk/static/images/steps_booking/conservatory.svg" },
     { type: "garage", label: "Garage", estimatedTime: 30, icon: "https://www.emop.co.uk/static/images/bookAgain/Garage.svg" },
   ];
   
