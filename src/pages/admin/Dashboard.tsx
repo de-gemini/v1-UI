@@ -113,6 +113,22 @@ const AdminDashboard = () => {
     loadStats();
   }, []);
 
+  // Trigger bar chart animations after data loads
+  useEffect(() => {
+    if (!loading && chartData.length > 0) {
+      const timer = setTimeout(() => {
+        chartData.forEach((_, index) => {
+          const element = document.querySelector(`[data-bar-index="${index}"]`) as HTMLElement;
+          if (element) {
+            element.style.height = '100%';
+          }
+        });
+      }, 100); // Small delay to ensure DOM is ready
+
+      return () => clearTimeout(timer);
+    }
+  }, [loading, chartData]);
+
   const handleCardClick = (filterType: string) => {
     if (filterType === 'revenue') {
       // Navigate to payments page for revenue card
@@ -335,10 +351,10 @@ const AdminDashboard = () => {
                   <div 
                     className={`absolute inset-0 bg-gradient-to-t ${barColors[index]} rounded-t-lg`}
                     style={{
-                      animation: `growBar 0.8s ease-out ${index * 0.1}s forwards`,
-                      transform: 'scaleY(0)',
-                      transformOrigin: 'bottom'
+                      height: '0%',
+                      transition: `height 0.8s ease-out ${index * 0.1}s`
                     }}
+                    data-bar-index={index}
                   ></div>
                 </div>
                 <span className="text-xs text-gray-500 mt-2 font-medium" 
