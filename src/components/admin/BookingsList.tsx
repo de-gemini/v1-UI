@@ -2,6 +2,24 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { DecorativeBackground } from '../../pages/Dashboard';
 
+// Updated interface to work with schedule data
+interface ScheduleData {
+  _id: string;
+  serviceType: string;
+  user?: {
+    name?: string;
+    email?: string;
+  };
+  scheduledDate: string;
+  status: 'pending' | 'confirmed' | 'completed' | 'cancelled';
+  estimatedPrice?: number;
+  // Add schedule-specific fields
+  startDate?: string;
+  time?: string;
+  paymentStatus?: string;
+}
+
+// Keep the old interface for backward compatibility
 interface Booking {
   _id: string;
   serviceType: string;
@@ -14,13 +32,16 @@ interface Booking {
   estimatedPrice?: number;
 }
 
+// Union type to handle both old and new data structures
+type BookingOrSchedule = Booking | ScheduleData;
+
 interface BookingsListProps {
   title: string;
-  bookings: Booking[];
+  bookings: BookingOrSchedule[];
   loading: boolean;
   viewAllLink?: string;
   emptyMessage?: string;
-  onBookingClick?: (booking: Booking) => void;
+  onBookingClick?: (booking: BookingOrSchedule) => void;
 }
 
 const BookingsList: React.FC<BookingsListProps> = ({
@@ -44,6 +65,13 @@ const BookingsList: React.FC<BookingsListProps> = ({
       default:
         return 'bg-gray-100 text-gray-800';
     }
+  };
+
+  // Helper function to get the display date
+  const getDisplayDate = (item: BookingOrSchedule) => {
+    // Use startDate if available (schedule data), otherwise use scheduledDate (booking data)
+    const date = (item as ScheduleData).startDate || item.scheduledDate;
+    return new Date(date).toLocaleDateString();
   };
 
   return (
@@ -83,7 +111,7 @@ const BookingsList: React.FC<BookingsListProps> = ({
               >
                 <td className="py-3">{booking.serviceType}</td>
                 <td className="py-3 text-brand-primary">{booking.user?.name || booking.user?.email || 'N/A'}</td>
-                <td className="py-3">{new Date(booking.scheduledDate).toLocaleDateString()}</td>
+                <td className="py-3">{getDisplayDate(booking)}</td>
                 <td className="py-3 font-medium">£{booking.estimatedPrice?.toFixed(2) || 'N/A'}</td>
                 <td className="py-3">
                   <span className={`px-2 py-1 rounded text-xs font-medium ${getStatusColor(booking.status)}`}>
@@ -118,7 +146,7 @@ const BookingsList: React.FC<BookingsListProps> = ({
               </span>
             </div>
             <div className="flex justify-between items-center text-xs text-gray-500">
-              <span>{new Date(booking.scheduledDate).toLocaleDateString()}</span>
+              <span>{getDisplayDate(booking)}</span>
               <span className="font-medium text-gray-900">£{booking.estimatedPrice?.toFixed(2) || 'N/A'}</span>
             </div>
           </div>

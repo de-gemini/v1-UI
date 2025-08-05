@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaTimes, FaSearch, FaDownload, FaCalendarAlt, FaChevronDown } from 'react-icons/fa';
+import { FaTimes, FaSearch, FaDownload, FaCalendarAlt, FaChevronDown, FaPoundSign } from 'react-icons/fa';
 import { PDFUtils } from '../../../utils/pdfUtils';
 import type { Schedule } from '../../../api/bookingSchedules';
 import { bookingScheduleService } from '../../../api/bookingSchedules';
@@ -11,7 +11,7 @@ interface ScheduleDetailsModalProps {
   onClose: () => void;
   schedule: Schedule | null;
   onStatusUpdate: (scheduleId: string, newStatus: "pending" | "confirmed" | "completed" | "cancelled") => Promise<void>;
-  onPaymentStatusUpdate: (scheduleId: string, newPaymentStatus: "pending" | "paid" | "failed") => Promise<void>;
+  onPaymentStatusUpdate: (scheduleId: string, newPaymentStatus: "pending" | "completed" | "failed") => Promise<void>;
 }
 
 export const ScheduleDetailsModal: React.FC<ScheduleDetailsModalProps> = ({
@@ -24,7 +24,7 @@ export const ScheduleDetailsModal: React.FC<ScheduleDetailsModalProps> = ({
   const [showStatusConfirmation, setShowStatusConfirmation] = useState(false);
   const [showPaymentConfirmation, setShowPaymentConfirmation] = useState(false);
   const [pendingStatus, setPendingStatus] = useState<"pending" | "confirmed" | "completed" | "cancelled" | null>(null);
-  const [pendingPaymentStatus, setPendingPaymentStatus] = useState<"pending" | "paid" | "failed" | null>(null);
+  const [pendingPaymentStatus, setPendingPaymentStatus] = useState<"pending" | "completed" | "failed" | null>(null);
   const [isUpdating, setIsUpdating] = useState(false);
 
   if (!isOpen || !schedule || !schedule.booking) return null;
@@ -51,7 +51,7 @@ export const ScheduleDetailsModal: React.FC<ScheduleDetailsModalProps> = ({
     setShowStatusConfirmation(true);
   };
 
-  const handlePaymentStatusUpdate = async (newPaymentStatus: "pending" | "paid" | "failed") => {
+  const handlePaymentStatusUpdate = async (newPaymentStatus: "pending" | "completed" | "failed") => {
     setPendingPaymentStatus(newPaymentStatus);
     setShowPaymentConfirmation(true);
   };
@@ -297,7 +297,15 @@ export const ScheduleDetailsModal: React.FC<ScheduleDetailsModalProps> = ({
             
             <div className="bg-white p-3 sm:p-4 rounded-lg border border-gray-200">
               <div className="text-sm text-gray-500 mb-1">Payment Status</div>
-              <div className="font-medium text-sm">{schedule.paymentStatus}</div>
+              <div className="font-medium text-sm flex items-center gap-2">
+                {schedule.paymentStatus}
+                {schedule.paidWithCash && (
+                  <span className="inline-flex items-center gap-1 bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full border border-green-200">
+                    <FaPoundSign className="text-green-600" />
+                    Cash
+                  </span>
+                )}
+              </div>
             </div>
             
             <div className="bg-white p-3 sm:p-4 rounded-lg border border-gray-200">
@@ -473,24 +481,24 @@ export const ScheduleDetailsModal: React.FC<ScheduleDetailsModalProps> = ({
                  <input
                    type="radio"
                    name="paymentStatus"
-                   value="paid"
-                   checked={schedule.paymentStatus === 'paid'}
-                   onChange={() => handlePaymentStatusUpdate('paid')}
+                   value="completed"
+                   checked={schedule.paymentStatus === 'completed'}
+                   onChange={() => handlePaymentStatusUpdate('completed')}
                    className="sr-only"
                  />
                  <div className={`w-4 h-4 border-2 rounded-full mr-3 flex items-center justify-center ${
-                   schedule.paymentStatus === 'paid' 
+                   schedule.paymentStatus === 'completed' 
                      ? 'border-green-500 bg-green-500' 
                      : 'border-gray-300'
                  }`}>
-                   {schedule.paymentStatus === 'paid' && (
+                   {schedule.paymentStatus === 'completed' && (
                      <div className="w-2 h-2 bg-white rounded-full"></div>
                    )}
                  </div>
                  <span className={`text-sm font-medium ${
-                   schedule.paymentStatus === 'paid' ? 'text-green-700' : 'text-gray-700'
+                   schedule.paymentStatus === 'completed' ? 'text-green-700' : 'text-gray-700'
                  }`}>
-                   Paid
+                   Completed
                  </span>
                </label>
 
@@ -521,7 +529,7 @@ export const ScheduleDetailsModal: React.FC<ScheduleDetailsModalProps> = ({
              </div>
              <p className="text-xs text-gray-500 mt-3">
                Current payment status: <span className={`font-medium ${
-                 schedule.paymentStatus === 'paid' ? 'text-green-600' :
+                 schedule.paymentStatus === 'completed' ? 'text-green-600' :
                  schedule.paymentStatus === 'pending' ? 'text-yellow-600' :
                  schedule.paymentStatus === 'failed' ? 'text-red-600' : 'text-gray-600'
                }`}>{schedule.paymentStatus ? schedule.paymentStatus.charAt(0).toUpperCase() + schedule.paymentStatus.slice(1) : 'N/A'}</span>

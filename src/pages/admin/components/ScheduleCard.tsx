@@ -161,6 +161,13 @@ export const ScheduleCard: React.FC<ScheduleCardProps> = ({
                     : "Not specified"}
                 </span>
               </div>
+              {/* Cash Payment Badge */}
+              {schedule.paidWithCash && (
+                <div className="flex items-center gap-1 bg-green-100 rounded px-2 py-1 text-xs text-green-700 border border-green-200">
+                  <FaPoundSign className="text-green-600 text-sm" />
+                  <span className="font-medium">Cash</span>
+                </div>
+              )}
             </div>
             {schedule.booking?.notes && (
               <div className="flex items-center gap-1 text-xs text-neutral-700 mt-1 py-2 px-2">

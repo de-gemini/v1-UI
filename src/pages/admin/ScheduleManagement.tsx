@@ -245,7 +245,7 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
 
   const handleSchedulePaymentStatusUpdate = async (
     scheduleId: string,
-    newPaymentStatus: "pending" | "paid" | "failed"
+            newPaymentStatus: "pending" | "completed" | "failed"
   ) => {
     try {
       await bookingScheduleService.updateSchedulePaymentStatusAdmin(scheduleId, newPaymentStatus);

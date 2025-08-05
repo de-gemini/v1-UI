@@ -145,6 +145,30 @@ const StepThree: React.FC = () => {
     }
   }, [user, phone, set]);
 
+  // Prefill name and surname from user profile if empty
+  React.useEffect(() => {
+    if (user) {
+      console.log('[DEBUG] user object:', user);
+      // Prefill name if empty
+      if ((!name || name.trim() === '') && (user.firstName || user.name)) {
+        const prefillName = user.firstName || (user.name ? user.name.split(' ')[0] : '');
+        console.log('[DEBUG] Prefilling name:', prefillName);
+        set({ name: prefillName });
+      }
+      // Prefill surname if empty
+      if ((!surname || surname.trim() === '') && (user.lastName || user.name)) {
+        let last = user.lastName;
+        if (!last && user.name) {
+          const parts = user.name.split(' ');
+          last = parts.length > 1 ? parts.slice(1).join(' ') : '';
+        }
+        console.log('[DEBUG] Prefilling surname:', last);
+        set({ surname: last });
+      }
+    } else {
+      console.log('[DEBUG] No user object available for prefill');
+    }
+  }, [user, name, surname, set]);
 
 
   // Full quote handler with backend submission
@@ -283,15 +307,16 @@ const StepThree: React.FC = () => {
       if(res.status === 201) {
         toast.success('Booking created successfully');
         // Update user details in backend only if address and phone are present
-        if (user && user.id && address && phone) {
-          await fetchWithAuth(`${API_BASE_URL}/users/${user.id}`, {
+        if (user && address && phone) {
+          await fetchWithAuth(`${API_BASE_URL}/auth/profile`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              name,
-              surname,
+              firstName: name, // Use firstName from store
+              lastName: surname, // Use lastName from store
               address,
               phoneNumber: phone,
+              // postcode: user.postcode || '', // Use postcode if available
             }),
           });
         }

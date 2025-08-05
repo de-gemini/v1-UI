@@ -62,6 +62,7 @@ export interface Schedule {
   time: string;
   status: "pending" | "confirmed" | "completed" | "cancelled";
   paymentStatus: string;
+  paidWithCash?: boolean; // Add cash payment indicator
   createdAt: string;
   updatedAt: string;
 }
@@ -224,7 +225,7 @@ export const bookingScheduleService = {
   // Admin: Update schedule payment status
   async updateSchedulePaymentStatusAdmin(
     scheduleId: string,
-    paymentStatus: "pending" | "paid" | "failed"
+    paymentStatus: "pending" | "completed" | "failed"
   ): Promise<ScheduleResponse> {
     const response = await axiosInstance.patch(
       `${API_BASE_URL}/bookings/admin/schedule/${scheduleId}/payment-status`,

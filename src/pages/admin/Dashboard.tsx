@@ -183,7 +183,7 @@ const AdminDashboard = () => {
     }
   };
 
-  const handleSchedulePaymentStatusUpdate = async (scheduleId: string, newPaymentStatus: "pending" | "paid" | "failed") => {
+  const handleSchedulePaymentStatusUpdate = async (scheduleId: string, newPaymentStatus: "pending" | "completed" | "failed") => {
     try {
       await bookingScheduleService.updateSchedulePaymentStatusAdmin(scheduleId, newPaymentStatus);
       toast.success(`Payment status updated to ${newPaymentStatus}`);

@@ -25,7 +25,7 @@ export interface PDFBooking {
     email?: string;
   };
   scheduledDate: string;
-  status: 'pending' | 'confirmed' | 'completed' | 'cancelled';
+  status?: 'pending' | 'confirmed' | 'completed' | 'cancelled'; // Make optional
   address?: string;
   estimatedPrice?: number;
   estimatedDuration?: number;
@@ -141,7 +141,7 @@ export class PDFUtils {
     const capitalizedPaymentStatus = paymentStatus.charAt(0).toUpperCase() + paymentStatus.slice(1);
     
     // Set payment status color and background
-    if (paymentStatus === 'paid') {
+    if (paymentStatus === 'completed') {
       this.doc.setTextColor(34, 197, 94); // Green
       this.doc.setFillColor(240, 253, 244); // Light green background
     } else if (paymentStatus === 'pending') {
@@ -367,10 +367,10 @@ export const createBookingsPDF = (
     pdf.getDocument().text(`Duration: ${booking.estimatedDuration || 0} min`, 20, yPosition);
     yPosition += 6;
     
-    // Status with color
-    yPosition = pdf.addStatusWithColor(booking.status, 20, yPosition);
+    // Status with color - provide fallback
+    yPosition = pdf.addStatusWithColor(booking.status || 'pending', 20, yPosition);
     
-    // Payment status
+    // Payment status - provide fallback
     yPosition = pdf.addPaymentStatusWithColor(booking.paymentStatus || 'N/A', 20, yPosition);
     
     // Add separator line

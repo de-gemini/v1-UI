@@ -100,7 +100,9 @@ const PaymentSuccessPage: React.FC = () => {
           <div className="flex items-center gap-2 text-gray-500"><FaCheckCircle className="text-blue-400" />Booking ID</div>
           <div className="text-gray-800 font-medium text-right">{booking._id}</div>
           <div className="flex items-center gap-2 text-gray-500"><FaCheckCircle className="text-blue-400" />Status</div>
-          <div className="text-blue-600 font-medium text-right">{booking.status}</div>
+          <div className="text-blue-600 font-medium text-right">
+            {booking.status || 'Pending'}
+          </div>
           <div className="flex items-center gap-2 text-gray-500"><FaCheckCircle className="text-blue-400" />Service</div>
           <div className="text-gray-800 text-right">{booking.serviceType}</div>
           <div className="flex items-center gap-2 text-gray-500"><FaCheckCircle className="text-blue-400" />Scheduled Date</div>

@@ -13,6 +13,8 @@ export interface User {
   phoneNumber?: string; // Backend field name
   surname?: string;
   address?: string;
+  firstName?: string; // Add this
+  lastName?: string;  // Add this
 }
 
 interface AuthState {

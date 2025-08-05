@@ -48,8 +48,8 @@ export const filterSchedulesBySearch = (schedules: Schedule[], searchTerm: strin
 
 export const filterSchedulesByPaymentStatus = (schedules: Schedule[], filter: string) => {
   if (filter === 'all') return schedules;
-  if (filter === 'paid') return schedules.filter(s => ['completed', 'succeeded'].includes(s.paymentStatus));
-  if (filter === 'unpaid') return schedules.filter(s => !['completed', 'succeeded'].includes(s.paymentStatus));
+  if (filter === 'paid') return schedules.filter(s => s.paymentStatus === 'completed');
+  if (filter === 'unpaid') return schedules.filter(s => s.paymentStatus !== 'completed');
   return schedules;
 };
 

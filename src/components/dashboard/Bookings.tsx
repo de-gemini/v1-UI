@@ -328,7 +328,7 @@ const Bookings = () => {
 
         {/* Action Buttons - Only show for upcoming paid bookings */}
         {isPast  && (
-        // {!isPast && (schedule.paymentStatus === 'succeeded' || schedule.paymentStatus === 'completed') && (
+                        // {!isPast && schedule.paymentStatus === 'completed' && (
           <div className="flex flex-col sm:flex-row gap-2 pt-2">
             <button
               onClick={() => handleCancelBooking(schedule._id)}
@@ -355,7 +355,7 @@ const Bookings = () => {
         <p className="text-sm font-medium text-gray-500">Payment Status</p>
         <span
           className={`inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium shadow-sm ${
-            schedule.paymentStatus === 'succeeded' || schedule.paymentStatus === 'completed'
+            schedule.paymentStatus === 'completed'
               ? 'bg-green-100 text-green-800'
               : schedule.paymentStatus === 'pending'
               ? 'bg-yellow-100 text-yellow-800'
@@ -364,7 +364,7 @@ const Bookings = () => {
         >
           <span
             className={`w-2 h-2 mr-2 rounded-full ${
-              schedule.paymentStatus === 'succeeded' || schedule.paymentStatus === 'completed'
+              schedule.paymentStatus === 'completed'
                 ? 'bg-green-500'
                 : schedule.paymentStatus === 'pending'
                 ? 'bg-yellow-500'
