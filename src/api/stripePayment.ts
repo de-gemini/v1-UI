@@ -99,7 +99,7 @@ export const fetchPaymentRecords = async (page = 1, limit = 10) => {
 
 export const updateBookingPaymentMethod = async (bookingId: string, paymentMethod: 'card' | 'cash') => {
   const response = await axiosInstance.patch(
-    `/bookings/cash-pay/${bookingId}/payment-method`,
+    `/bookings2/cash-pay/${bookingId}/payment-method`,
     { paymentMethod },
     { headers: getAuthHeader() }
   );
