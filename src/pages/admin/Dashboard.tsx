@@ -328,12 +328,12 @@ const AdminDashboard = () => {
             <button className="px-4 py-2 bg-purple-600 text-white rounded-lg text-sm font-medium">Last 7 days</button>
           </div>
         </div>
-        <div className="h-64 flex items-end justify-center gap-4">
+        <div className="h-64 flex items-end justify-center  sm:max-w-full px-8 mx-auto gap-4">
           {loading ? (
             // Loading skeleton with animated bars
             Array.from({ length: 7 }).map((_, index) => (
-              <div key={index} className="flex-col hidden sm:flex items-center">
-                <div className="w-10 bg-gradient-to-t from-gray-300 to-gray-400 rounded-t-lg" 
+              <div key={index} className="flex flex-col items-center">
+                <div className="w-6 sm:w-10 bg-gradient-to-t from-gray-300 to-gray-400 rounded-t-lg" 
                      style={{ 
                        height: `${Math.random() * 150 + 50}px`,
                        animation: 'loadingBar 2s ease-in-out infinite'
@@ -346,7 +346,7 @@ const AdminDashboard = () => {
           ) : (
             chartData.map((data, index) => (
               <div key={index} className="flex flex-col items-center">
-                <div className="w-10 bg-gray-100 rounded-t-lg relative overflow-hidden" 
+                <div className="w-6 sm:w-10 bg-gray-100 rounded-t-lg relative overflow-hidden" 
                      style={{ height: `${(data.visits / maxVisits) * 200}px` }}>
                   <div 
                     className={`absolute inset-0 bg-gradient-to-t ${barColors[index]} rounded-t-lg`}
