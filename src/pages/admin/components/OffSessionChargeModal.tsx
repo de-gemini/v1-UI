@@ -7,6 +7,7 @@ interface OffSessionChargeModalProps {
   isOpen: boolean;
   onClose: () => void;
   schedule: Schedule | null;
+  onSuccess?: () => void; // Callback to refresh data after successful charge
 }
 
 const MAX_EXTRA_CHARGE = 200;
@@ -15,6 +16,7 @@ export const OffSessionChargeModal: React.FC<OffSessionChargeModalProps> = ({
   isOpen,
   onClose,
   schedule,
+  onSuccess,
 }) => {
   const [chargeAmount, setChargeAmount] = useState('');
   const [chargeReason, setChargeReason] = useState('');
@@ -72,6 +74,7 @@ export const OffSessionChargeModal: React.FC<OffSessionChargeModalProps> = ({
       const pi = res.data?.paymentIntent || res.data?.data?.paymentIntent;
       if (pi && pi.status === 'succeeded') {
         toast.success('Off-session charge succeeded!');
+        onSuccess?.(); // Trigger data refresh
         handleClose();
       } else if (pi && pi.next_action && pi.next_action.type === 'use_stripe_sdk' && pi.next_action.use_stripe_sdk?.stripe_js) {
         setPaymentLink(pi.next_action.use_stripe_sdk.stripe_js);

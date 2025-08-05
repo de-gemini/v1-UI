@@ -210,6 +210,16 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
     });
   }, [filters.year, filters.month, fetchSchedules]);
 
+  // Reusable function to refresh schedules data
+  const refreshSchedules = async () => {
+    await fetchSchedules({
+      year: filters.year,
+      month: filters.month,
+      page: 1,
+      limit: 100,
+    });
+  };
+
   const handleStatusUpdate = async (
     scheduleId: string,
     newStatus: "pending" | "confirmed" | "completed" | "cancelled"
@@ -237,6 +247,9 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
         });
       }
       
+      // Refresh the schedules data to reflect the changes
+      await refreshSchedules();
+      
       // Modal stays open after status update
     } catch (error) {
       toast.error("Failed to update schedule status");
@@ -258,6 +271,9 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
           paymentStatus: newPaymentStatus
         });
       }
+      
+      // Refresh the schedules data to reflect the changes
+      await refreshSchedules();
       
       // Modal stays open after status update
     } catch (error) {
@@ -592,6 +608,10 @@ const ScheduleManagement: React.FC<ScheduleManagementProps> = ({
         isOpen={!!chargingSchedule}
         onClose={() => setChargingSchedule(null)}
         schedule={chargingSchedule}
+        onSuccess={() => {
+          // Refresh the schedules data after successful charge
+          refreshSchedules();
+        }}
       />
     </div>
   );
