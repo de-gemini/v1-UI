@@ -397,9 +397,9 @@ const UnifiedPaymentForm: React.FC<UnifiedStripePaymentFormProps> = ({
             >
               {processing ? 'Processing...' : 'Pay with Cash'}
             </button>
-            <div className="text-xs text-gray-500 bg-gray-50 border border-gray-200 rounded-md p-3">
+            {/* <div className="text-xs text-gray-500 bg-gray-50 border border-gray-200 rounded-md p-3">
               <strong>Test card:</strong> 4242 4242 4242 4242 (any future date, any CVC)
-            </div>
+            </div> */}
           </form>
         )}
         {/* For subscriptions, just show a button to trigger handleSubmit */}

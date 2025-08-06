@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from "../constants";
 import banner from '../assets/images/main-removebg.png'
 import CommonPostcodeInput from '../components/commons/CommonPostcodeInput';
+import ErrorHandler from '../utils/errorHandler';
 
 export default function Reclean() {
 
@@ -35,8 +36,8 @@ export default function Reclean() {
       }
   
     } catch (err: any) {
-      const msg = err?.response?.data?.message || err.message || 'An error occurred';
-      toast.error(msg);
+      const sanitizedMessage = ErrorHandler.getErrorMessage(err, 'RecleanPage');
+      toast.error(sanitizedMessage);
     }
     };
     

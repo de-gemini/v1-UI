@@ -51,6 +51,7 @@ import before6 from '../assets/images/before3.jpeg'
 import before7 from '../assets/images/before7.jpg'
 import before8 from '../assets/images/before8.jpg'
 import before9 from '../assets/images/before9.jpg'
+import ErrorHandler from '../utils/errorHandler';
 
 const Home = () => {
   const features = [
@@ -472,9 +473,9 @@ const Home = () => {
     }
 
   } catch (err: any) {
-    const msg = err?.response?.data?.message || err.message || 'An error occurred';
-    toast.error(msg);
-    setError(msg)
+    const sanitizedMessage = ErrorHandler.getErrorMessage(err, 'HomePage');
+    toast.error(sanitizedMessage);
+    setError(sanitizedMessage)
   }
   };
 

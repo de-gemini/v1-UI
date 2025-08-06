@@ -197,71 +197,7 @@ const items = [
         }}
       />
 
-      {/* Content Container */}
-      <div className="relative z-10 text-left w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8">
-        <div className="w-full lg:w-1/2">
-          {/* Animated Row: Flag and Div only */}
-          <div className="flex items-center gap-2 mb-4 relative" style={{ minHeight: '2rem' }}>
-            <span ref={flagRef} className="inline-block relative z-10">
-              <CountryFlag countryCode="GB" svg style={{ width: '3rem', height: '2rem', boxShadow: '0 2px 8px rgba(0,0,0,0.08)', borderRadius: '0.25rem' }} title="United Kingdom" />
-            </span>
-            <div
-              ref={divDropRef}
-              className="inline-block bg-gray-700 rounded-full absolute z-0"
-              style={{
-                width: '3rem',
-                height: '.6rem',
-                background: '',
-                borderRadius: '',
-                left: 0,
-                top: 0
-              }}
-            />
-            {/* Removed emojis */}
-          </div>
-          {/* Heading */}
-          <h1 className="text-4xl mt-4 sm:text-5xl lg:text-6xl nunito-sans-title text-brand-primary leading-tight mb-8 drop-shadow-sm">
-            <AnimatedLetters
-              text={"Clean Fast, Clean Right In England."}
-              letterRefs={headingRefs.current}
-            />
-          </h1>
-
-          {/* Features List */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-8 mb-10">
-            {features.map((feature, index) => (
-              <div 
-                key={index} 
-                ref={el => featureRefs.current[index] = el}
-                className="flex items-center text-brand-primary"
-              >
-                <Check className="h-6 w-6 text-brand-primary mr-3 flex-shrink-0" />
-                <span className="text-lg sm:text-xl nunito-sans-text text-brand-text">
-                  {feature}
-                </span>
-              </div>
-            ))}
-          </div>
-
-          {/* Postcode Input and Button */}
-          <CommonPostcodeInput />
-          <p className="text-red-500 text-lg">{error}</p>
-        </div>
-
-        <div className="w-full mb-1 lg:w-1/2 flex justify-center">
-          <img
-            src={home}
-            alt=""
-            className="max-w-full h-auto object-contain"
-          />
-        </div>
-      </div>
-      {/* Curvy white overlay at the bottom */}
-      <div className="absolute left-0 right-0 bottom-0 w-full pointer-events-none z-20">
-        <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-[80px]" preserveAspectRatio="none">
-          <path d="M0,100 C360,100 1080,0 1440,100 L1440,100 L0,100 Z" fill="#f7f7f7" />
-        </svg>
-      </div>
+      
 
       {/* Infinite Marquee Section */}
     <div className="absolute w-screen bottom-0 left-[49%] transform -translate-x-1/2 z-[10000] bg-blue-600 backdrop-blur-sm py-2 overflow-hidden -rotate-2">
@@ -320,6 +256,77 @@ const items = [
         }
       `}</style>
     </div>
+
+    {/* Content Container */}
+    <div className="relative sm:z-[99999999] text-left w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div className="w-full lg:w-1/2">
+          {/* Animated Row: Flag and Div only */}
+          <div className="flex items-center gap-2 mb-4 relative" style={{ minHeight: '2rem' }}>
+            <span ref={flagRef} className="inline-block relative z-10">
+              <CountryFlag countryCode="GB" svg style={{ width: '3rem', height: '2rem', boxShadow: '0 2px 8px rgba(0,0,0,0.08)', borderRadius: '0.25rem' }} title="United Kingdom" />
+            </span>
+            <div
+              ref={divDropRef}
+              className="inline-block bg-gray-700 rounded-full absolute z-0"
+              style={{
+                width: '3rem',
+                height: '.6rem',
+                background: '',
+                borderRadius: '',
+                left: 0,
+                top: 0
+              }}
+            />
+            {/* Removed emojis */}
+          </div>
+          {/* Heading */}
+          <h1 className="text-4xl mt-4 sm:text-5xl lg:text-6xl nunito-sans-title text-brand-primary leading-tight mb-8 drop-shadow-sm">
+            <AnimatedLetters
+              text={"Clean Fast, Clean Right In England."}
+              letterRefs={headingRefs.current}
+            />
+          </h1>
+
+          {/* Features List */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-8 mb-10">
+            {features.map((feature, index) => (
+              <div 
+                key={index} 
+                ref={el => featureRefs.current[index] = el}
+                className="flex items-center text-brand-primary"
+              >
+                <Check className="h-6 w-6 text-brand-primary mr-3 flex-shrink-0" />
+                <span className="text-lg sm:text-xl nunito-sans-text text-brand-text">
+                  {feature}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Postcode Input and Button */}
+          <div className="flex flex-col gap-2 relative z-">
+            <CommonPostcodeInput />
+            <p className="text-red-500 text-sm">{error}</p>
+          </div>
+          
+        </div>
+
+        <div className="w-[150%]  sm:w-[150%] sm:translate-x-24 mb-1 flex justify-center">
+          <img
+            src={home}
+            alt=""
+            className="max-w-full h-auto object-contain"
+          />
+        </div>
+      </div>
+      {/* Curvy white overlay at the bottom */}
+      <div className="absolute left-0 right-0 bottom-0 w-full pointer-events-none z-20">
+        <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-[80px]" preserveAspectRatio="none">
+          <path d="M0,100 C360,100 1080,0 1440,100 L1440,100 L0,100 Z" fill="#f7f7f7" />
+        </svg>
+      </div>
+
+
     </section>
   );
 };

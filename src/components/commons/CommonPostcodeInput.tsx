@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axiosInstance from '../../api/axiosInstance';
 import { API_BASE_URL } from '../../constants';
+import ErrorHandler from '../../utils/errorHandler';
 
 const CommonPostcodeInput: React.FC = () => {
   const [postcode, setPostcode] = React.useState('');
@@ -25,15 +26,15 @@ const CommonPostcodeInput: React.FC = () => {
         toast.error('Sorry, your postcode is not within our coverage');
       }
     } catch (err: any) {
-      const msg = err?.response?.data?.message || err.message || 'An error occurred';
-      toast.error(msg);
+      const sanitizedMessage = ErrorHandler.getErrorMessage(err, 'CommonPostcodeInput');
+      toast.error(sanitizedMessage);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-white p-2 pr-2 sm:p-3 sm:pr-3 rounded-xl shadow-lg border border-purple-300 max-w-md w-full">
+    <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-white p-2 pr-2 sm:p-3 sm:pr-3 rounded-xl shadow-lg border border-blue-300 w-full">
       <div className="flex items-center flex-grow p-2">
         <MapPin className="h-6 w-6 text-gray-400 mr-3 flex-shrink-0" />
         <input

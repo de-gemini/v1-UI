@@ -3,6 +3,7 @@
 // utils/postcodeApi.ts
 import axiosInstance from '../api/axiosInstance'; // Assuming you have this set up
 import { API_BASE_URL } from '../constants'; // Assuming you have this set up
+import ErrorHandler from './errorHandler';
 
 interface PostcodeApiResponse {
   area?: string;
@@ -28,7 +29,7 @@ export const callPostcodeApi = async (
       onError('Invalid postcode or area not found.');
     }
   } catch (err: any) {
-    const msg = err?.response?.data?.message || err.message || 'An error occurred';
-    onError(msg);
+    const sanitizedMessage = ErrorHandler.getErrorMessage(err, 'PostcodeAPI');
+    onError(sanitizedMessage);
   }
 };

@@ -5,6 +5,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../constants';
 import CommonPostcodeInput from './commons/CommonPostcodeInput';
+import ErrorHandler from '../utils/errorHandler';
 
 
 interface CostCardProps {
@@ -44,8 +45,8 @@ export const CostCard: React.FC<CostCardProps> = ({
         toast.error('Invalid postcode or area not found.');
       }
     } catch (err: any) {
-      const msg = err?.response?.data?.message || err.message || 'An error occurred';
-      toast.error(msg);
+      const sanitizedMessage = ErrorHandler.getErrorMessage(err, 'PostcodeComponent');
+      toast.error(sanitizedMessage);
     }
   };
 

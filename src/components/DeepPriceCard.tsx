@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../constants';
 import CommonPostcodeInput from './commons/CommonPostcodeInput';
 import { PRICING_CONFIG, calculatePrice, Frequency } from '../pages/Checkout/ckeckoutData';
+import ErrorHandler from '../utils/errorHandler';
 
 // You might consider making these props if you have different variations
 interface PriceCardProps {
@@ -67,8 +68,8 @@ export const DeepPriceCard: React.FC<PriceCardProps> = ({
       }
 
     } catch (err: any) {
-      const msg = err?.response?.data?.message || err.message || 'An error occurred';
-      toast.error(msg);
+      const sanitizedMessage = ErrorHandler.getErrorMessage(err, 'DeepPriceCard');
+      toast.error(sanitizedMessage);
     }
   };
 
