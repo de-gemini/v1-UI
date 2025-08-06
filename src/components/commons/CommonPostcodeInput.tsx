@@ -34,7 +34,7 @@ const CommonPostcodeInput: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-white p-2 pr-2 sm:p-3 sm:pr-3 rounded-xl shadow-lg border border-blue-300 w-full">
+    <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-white opacity-[0.97] p-2 pr-2 sm:p-3 sm:pr-3 rounded-xl shadow-lg border border-blue-300 w-full">
       <div className="flex items-center flex-grow p-2">
         <MapPin className="h-6 w-6 text-gray-400 mr-3 flex-shrink-0" />
         <input
@@ -47,13 +47,13 @@ const CommonPostcodeInput: React.FC = () => {
         />
       </div>
       <button
-        className="mt-4 sm:mt-0 ml-0 sm:ml-4 bg-brand-primary hover:bg-brand-primary/90 text-brand-secondary font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5 flex items-center justify-center min-w-[140px]"
+        className="mt-4 sm:mt-0 ml-0 whitespace-nowrap sm:ml-4 bg-brand-primary hover:bg-brand-primary/90 text-brand-secondary font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-0.5 flex items-center justify-center min-w-[140px]"
         onClick={handleQuoteMeClick}
         disabled={loading}
       >
         {loading ? (
           <span className="flex items-center gap-2">
-            <svg className="animate-spin h-5 w-5 text-brand-secondary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path></svg>
+            <svg className="animate-spin h-5 w-5 text-brand-secondary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"></circle><path className="opacity-25" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path></svg>
             Loading...
           </span>
         ) : (

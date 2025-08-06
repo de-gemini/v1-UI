@@ -147,7 +147,7 @@ useEffect(() => {
       } else {
         set({ selectedAddOns: {} });
       }
-      
+      console.log("We have restored the selectedAddOns")
       // Restore additional fields that might be saved
       set({ address: bookingData.address || "" });
       set({ name: bookingData.name || "" });

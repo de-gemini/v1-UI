@@ -51,8 +51,13 @@ const StepOne: React.FC = () => {
     const params = new URLSearchParams(location.search);
     if (params.get('eot') === 'true' && !endOfTenancy) {
       set({ endOfTenancy: true });
+      console.log("We have restored the endOfTenancy")
     }
-  }, [location.search, endOfTenancy, set]);
+    if (params.get('eot') === 'false' && endOfTenancy) {
+      set({ endOfTenancy: false });
+      console.log("We have restored the endOfTenancy")
+    }
+  }, [location.search, set]);
 
   // Local scroll to top implementation
   useLayoutEffect(() => {
@@ -114,24 +119,30 @@ const StepOne: React.FC = () => {
 
   // Update URL with ?eot=true when End of Tenancy is selected
   useEffect(() => {
-    // ServiceType.END_OF_TENANCY is usually the last index in cleaningTypes
     const eotIdx = cleaningTypes.findIndex(
       t => t.toLowerCase().includes('tenancy')
     );
+    
     if (selectedType === eotIdx) {
-      const params = new URLSearchParams(location.search);
-      if (params.get('eot') !== 'true') {
+      // End of Tenancy is selected
+      if (!endOfTenancy) {
+        const params = new URLSearchParams(location.search);
         params.set('eot', 'true');
+        set({ endOfTenancy: true });
+        console.log("We have set the endOfTenancy to ", endOfTenancy)
         navigate({ search: params.toString() }, { replace: true });
       }
     } else {
-      const params = new URLSearchParams(location.search);
-      if (params.get('eot')) {
+      // End of Tenancy is NOT selected
+      if (endOfTenancy) {
+        const params = new URLSearchParams(location.search);
         params.delete('eot');
+        set({ endOfTenancy: false });
+        console.log("We have set the endOfTenancy to ", endOfTenancy)
         navigate({ search: params.toString() }, { replace: true });
       }
     }
-  }, [selectedType, location.search, navigate]);
+  }, [selectedType, endOfTenancy, navigate, set]);
 
   // State to track current calendar view month
   const [currentViewMonth, setCurrentViewMonth] = useState(() => ({

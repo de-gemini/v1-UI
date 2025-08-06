@@ -306,7 +306,7 @@ const items = [
           {/* Postcode Input and Button */}
           <div className="flex flex-col gap-2 relative z-">
             <CommonPostcodeInput />
-            <p className="text-red-500 text-sm">{error}</p>
+            <p className="text-orange-500 text-sm">{error}</p>
           </div>
           
         </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import axiosInstance from '../../api/axiosInstance';
-import { FaCalendarAlt, FaMapMarkerAlt, FaPoundSign, FaDownload, FaTimes, FaUndo } from 'react-icons/fa';
+import { FaCalendarAlt, FaMapMarkerAlt, FaPoundSign, FaDownload, FaTimes, FaUndo, FaCheckCircle, FaClock, FaExclamationTriangle, FaBan } from 'react-icons/fa';
+import { MdPayment, MdSchedule } from 'react-icons/md';
 import { createBookingsPDF, type PDFBooking } from '../../utils/pdfUtils';
 
 const getAuthHeader = () => {
@@ -331,14 +332,14 @@ const Bookings = () => {
           <div className="flex flex-col sm:flex-row gap-2 pt-2">
             {/* Cancel button - Only for upcoming bookings */}
             {!isPast && (
-              <button
-                onClick={() => handleCancelBooking(schedule._id)}
-                className="flex items-center justify-center gap-2 px-4 py-2 bg-red-50 text-red-700 border border-red-200 rounded-lg hover:bg-red-100 transition-colors text-sm font-medium"
-                title="Cancel this booking"
-              >
-                <FaTimes className="w-4 h-4" />
-                Cancel Booking
-              </button>
+            <button
+              onClick={() => handleCancelBooking(schedule._id)}
+              className="flex items-center justify-center gap-2 px-4 py-2 bg-red-50 text-red-700 border border-red-200 rounded-lg hover:bg-red-100 transition-colors text-sm font-medium"
+              title="Cancel this booking"
+            >
+              <FaTimes className="w-4 h-4" />
+              Cancel Booking
+            </button>
             )}
             {/* Refund button - For both present and past bookings */}
             <button
@@ -352,38 +353,62 @@ const Bookings = () => {
           </div>
         )}
       </div>
-      <div className="flex  items-start lg:items-end gap-4">
-      {/* Right Section - Payment Status */}
-      <div className="flex flex-col items-start lg:items-end gap-2">
-        <p className="text-sm font-medium text-gray-500">Payment Status</p>
-        <span
-          className={`inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium shadow-sm ${
+      {/* Status Section - Modern Design */}
+      <div className="flex flex-col lg:flex-row items-start lg:items-end gap-4 w-full lg:w-auto">
+        {/* Payment Status */}
+        <div className="flex flex-col items-start lg:items-end gap-3 bg-white rounded-xl p-4 shadow-sm border border-gray-100 min-w-[140px]">
+          <div className="flex items-center gap-2 text-gray-600">
+            <MdPayment className="w-4 h-4" />
+            <span className="text-xs font-medium uppercase tracking-wide">Payment</span>
+          </div>
+          <div className={`inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
             schedule.paymentStatus === 'completed'
-              ? 'bg-green-100 text-green-800'
+              ? 'bg-gradient-to-r from-green-50 to-emerald-50 text-green-700 border border-green-200 shadow-sm'
               : schedule.paymentStatus === 'pending'
-              ? 'bg-yellow-100 text-yellow-800'
-              : 'bg-gray-100 text-gray-800'
-          }`}
-        >
-          <span
-            className={`w-2 h-2 mr-2 rounded-full ${
-              schedule.paymentStatus === 'completed'
-                ? 'bg-green-500'
-                : schedule.paymentStatus === 'pending'
-                ? 'bg-yellow-500'
-                : 'bg-gray-400'
-            }`}
-          ></span>
-          {schedule.paymentStatus
-            ? schedule.paymentStatus.charAt(0).toUpperCase() + schedule.paymentStatus.slice(1)
-            : 'Unknown'}
+              ? 'bg-gradient-to-r from-amber-50 to-yellow-50 text-amber-700 border border-amber-200 shadow-sm'
+              : 'bg-gradient-to-r from-gray-50 to-slate-50 text-gray-700 border border-gray-200 shadow-sm'
+          }`}>
+            {schedule.paymentStatus === 'completed' ? (
+              <FaCheckCircle className="w-4 h-4 text-green-600" />
+            ) : schedule.paymentStatus === 'pending' ? (
+              <FaClock className="w-4 h-4 text-amber-600" />
+            ) : (
+              <FaExclamationTriangle className="w-4 h-4 text-gray-500" />
+            )}
+            <span className="capitalize">
+              {schedule.paymentStatus || 'Unknown'}
         </span>
       </div>
-      <div>
-      <p className='text-gray-500 text-sm font-medium'>Booking status</p>
-      <span className={`mt-2 my-8 inline-block text-sm px-3 py-1 rounded-full font-medium ${getStatusColor(schedule.status)}`}>
-              {schedule.status.charAt(0).toUpperCase() + schedule.status.slice(1)}
+        </div>
+
+        {/* Booking Status */}
+        <div className="flex flex-col items-start lg:items-end gap-3 bg-white rounded-xl p-4 shadow-sm border border-gray-100 min-w-[140px]">
+          <div className="flex items-center gap-2 text-gray-600">
+            <MdSchedule className="w-4 h-4" />
+            <span className="text-xs font-medium uppercase tracking-wide">Status</span>
+          </div>
+          <div className={`inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
+            schedule.status === 'confirmed'
+              ? 'bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 border border-blue-200 shadow-sm'
+              : schedule.status === 'completed'
+              ? 'bg-gradient-to-r from-green-50 to-emerald-50 text-green-700 border border-green-200 shadow-sm'
+              : schedule.status === 'cancelled'
+              ? 'bg-gradient-to-r from-red-50 to-rose-50 text-red-700 border border-red-200 shadow-sm'
+              : 'bg-gradient-to-r from-amber-50 to-yellow-50 text-amber-700 border border-amber-200 shadow-sm'
+          }`}>
+            {schedule.status === 'confirmed' ? (
+              <FaCheckCircle className="w-4 h-4 text-blue-600" />
+            ) : schedule.status === 'completed' ? (
+              <FaCheckCircle className="w-4 h-4 text-green-600" />
+            ) : schedule.status === 'cancelled' ? (
+              <FaBan className="w-4 h-4 text-red-600" />
+            ) : (
+              <FaClock className="w-4 h-4 text-amber-600" />
+            )}
+            <span className="capitalize">
+              {schedule.status}
       </span>
+          </div>
     </div>
     </div>
     </div>
