@@ -326,18 +326,21 @@ const Bookings = () => {
           </div>
         </div>
 
-        {/* Action Buttons - Only show for upcoming paid bookings */}
-        {isPast  && (
-                        // {!isPast && schedule.paymentStatus === 'completed' && (
+        {/* Action Buttons - Conditional display based on booking status and date */}
+        {schedule.paymentStatus === 'completed' && schedule.status !== 'cancelled' && schedule.status !== 'completed' && (
           <div className="flex flex-col sm:flex-row gap-2 pt-2">
-            <button
-              onClick={() => handleCancelBooking(schedule._id)}
-              className="flex items-center justify-center gap-2 px-4 py-2 bg-red-50 text-red-700 border border-red-200 rounded-lg hover:bg-red-100 transition-colors text-sm font-medium"
-              title="Cancel this booking"
-            >
-              <FaTimes className="w-4 h-4" />
-              Cancel Booking
-            </button>
+            {/* Cancel button - Only for upcoming bookings */}
+            {!isPast && (
+              <button
+                onClick={() => handleCancelBooking(schedule._id)}
+                className="flex items-center justify-center gap-2 px-4 py-2 bg-red-50 text-red-700 border border-red-200 rounded-lg hover:bg-red-100 transition-colors text-sm font-medium"
+                title="Cancel this booking"
+              >
+                <FaTimes className="w-4 h-4" />
+                Cancel Booking
+              </button>
+            )}
+            {/* Refund button - For both present and past bookings */}
             <button
               onClick={() => handleRefundBooking(schedule._id)}
               className="flex items-center justify-center gap-2 px-4 py-2 bg-orange-50 text-orange-700 border border-orange-200 rounded-lg hover:bg-orange-100 transition-colors text-sm font-medium"
