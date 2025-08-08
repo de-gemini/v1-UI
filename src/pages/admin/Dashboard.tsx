@@ -346,7 +346,7 @@ const AdminDashboard = () => {
           ) : (
             chartData.map((data, index) => (
               <div key={index} className="flex flex-col items-center">
-                <div className="w-10 bg-gray-100 rounded-t-lg relative overflow-hidden" 
+                <div className="sm:w-10 w-5 bg-gray-100 rounded-t-lg relative overflow-hidden" 
                      style={{ height: `${(data.visits / maxVisits) * 200}px` }}>
                   <div 
                     className={`absolute inset-0 bg-gradient-to-t ${barColors[index]} rounded-t-lg`}
