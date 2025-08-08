@@ -147,6 +147,18 @@ export const ScheduleCard: React.FC<ScheduleCardProps> = ({
               <span className={`text-xs font-mono ${isPast ? "line-through" : ""}`}>
                 ID: {schedule._id}
               </span>
+              
+            </div>
+
+            <div className="flex items-center text-gray-600 gap-2">
+              <span className="text-lg font-medium ">
+                {schedule.startDate
+                  ? (() => {
+                      const date = new Date(schedule.startDate);
+                      return isNaN(date.getTime()) ? 'N/A' : date.toLocaleDateString();
+                    })()
+                  : 'N/A'}
+              </span>
             </div>
 
             <div className="flex flex-wrap gap-2 mt-2">
