@@ -333,7 +333,7 @@ const AdminDashboard = () => {
             // Loading skeleton with animated bars
             Array.from({ length: 7 }).map((_, index) => (
               <div key={index} className="flex flex-col items-center">
-                <div className="w-10 bg-gradient-to-t from-gray-300 to-gray-400 rounded-t-lg" 
+                <div className="sm:w-10 w-5 bg-gradient-to-t from-gray-300 to-gray-400 rounded-t-lg" 
                      style={{ 
                        height: `${Math.random() * 150 + 50}px`,
                        animation: 'loadingBar 2s ease-in-out infinite'
