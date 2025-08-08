@@ -197,7 +197,7 @@ export const ScheduleDetailsModal: React.FC<ScheduleDetailsModalProps> = ({
   };
 
   return (
-         <div className="fixed inset-0 z-[999999] flex -top-12  items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm p-4">
+    <div className="fixed inset-0 z-[999999] flex -top-12  items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm p-4">
        <div className="bg-white shadow-xl w-full max-w-6xl min-h-[90vh] max-h-[90vh] overflow-y-auto">
         {/* Header Section */}
         <div className="bg-white border-b border-gray-200 p-4 sm:p-6">
@@ -232,7 +232,7 @@ export const ScheduleDetailsModal: React.FC<ScheduleDetailsModalProps> = ({
                <div className="hidden sm:block">AMOUNT</div>
                <div className="hidden sm:block">DATE & TIME</div>
                <div className="hidden sm:block">ADDRESS</div>
-                               <div>SCHEDULE STATUS</div>
+                <div>SCHEDULE STATUS</div>
              </div>
            </div>
 
@@ -289,6 +289,15 @@ export const ScheduleDetailsModal: React.FC<ScheduleDetailsModalProps> = ({
         <div className="p-4 sm:p-6 bg-gray-50 border-t border-gray-200">
           <h4 className="text-lg font-semibold text-gray-800 mb-4">Additional Details</h4>
           
+          <div className="mt-6 bg-white p-4 text-3xl rounded-lg border border-gray-200">
+            {/* <h5 className="text-sm font-semibold text-gray-700 mb-4">Update Schedule Date</h5> */}
+            <div className="space-y-3">
+              <p className="text-sm text-gray-500">Current schedule date: {schedule.startDate ? new Date(schedule.startDate).toLocaleDateString() : 'N/A'}</p>
+            </div>
+            
+           </div>
+
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             <div className="bg-white p-3 sm:p-4 rounded-lg border border-gray-200">
               <div className="text-sm text-gray-500 mb-1">Frequency</div>
@@ -307,6 +316,8 @@ export const ScheduleDetailsModal: React.FC<ScheduleDetailsModalProps> = ({
                 )}
               </div>
             </div>
+
+
             
             <div className="bg-white p-3 sm:p-4 rounded-lg border border-gray-200">
               <div className="text-sm text-gray-500 mb-1">Email</div>
@@ -447,6 +458,9 @@ export const ScheduleDetailsModal: React.FC<ScheduleDetailsModalProps> = ({
                Current schedule status: <span className={`font-medium ${getStatusColor(schedule.status)}`}>{getStatusText(schedule.status)}</span>
              </p>
            </div>
+
+
+           
 
            {/* Payment Status Update Section */}
            <div className="mt-6 bg-white p-4 rounded-lg border border-gray-200">
