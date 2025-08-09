@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import axiosInstance from '../../api/axiosInstance';
-import { FaCalendarAlt, FaMapMarkerAlt, FaPoundSign, FaDownload, FaTimes, FaUndo, FaCheckCircle, FaClock, FaExclamationTriangle, FaBan } from 'react-icons/fa';
+import { FaCalendarAlt, FaMapMarkerAlt, FaPoundSign, FaDownload, FaTimes, FaUndo, FaCheckCircle, FaClock, FaExclamationTriangle, FaBan, FaCreditCard } from 'react-icons/fa';
 import { MdPayment, MdSchedule } from 'react-icons/md';
 import { createBookingsPDF, type PDFBooking } from '../../utils/pdfUtils';
+import UnifiedStripePaymentForm from '../UnifiedStripePaymentForm';
 
 const getAuthHeader = () => {
   const token = localStorage.getItem('token');
@@ -38,12 +39,23 @@ const Bookings = () => {
   const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState<FilterType>('upcoming');
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [showPaymentFlow, setShowPaymentFlow] = useState(false);
+  const [currentBookingId, setCurrentBookingId] = useState<string>('');
+
+  const fetchSchedules = async () => {
+    try {
+      const res = await axiosInstance.get('/bookings/client-schedules/all', { headers: getAuthHeader() });
+      setSchedules(res.data.payload || res.data.data || res.data || []);
+    } catch (error) {
+      console.error('Failed to fetch schedules:', error);
+      setSchedules([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    axiosInstance.get('/bookings/client-schedules/all', { headers: getAuthHeader() })
-      .then(res => setSchedules(res.data.payload || res.data.data || res.data || []))
-      .catch(() => setSchedules([]))
-      .finally(() => setLoading(false));
+    fetchSchedules();
   }, []);
 
   // Filter schedules based on date
@@ -119,6 +131,24 @@ const Bookings = () => {
     const message = `Hello, I want a refund for my booking of ID ${bookingId}`;
     const whatsappUrl = `https://wa.me/+447399487915?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+  };
+
+  // Utility function to check if Make Payment button should be shown
+  const shouldShowPaymentButton = (schedule: Schedule) => {
+    const scheduleDate = new Date(schedule.startDate);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const isNotExpired = scheduleDate >= today;
+    const isOneTime = schedule.frequency === 'onetime';
+    const isPaymentIncomplete = schedule.paymentStatus !== 'completed';
+    
+    return isNotExpired && isOneTime && isPaymentIncomplete;
+  };
+
+  // Handle Make Payment button click
+  const handleMakePayment = (schedule: Schedule) => {
+    setCurrentBookingId(schedule.booking._id);
+    setShowPaymentFlow(true);
   };
 
   return (
@@ -328,6 +358,21 @@ const Bookings = () => {
         </div>
 
         {/* Action Buttons - Conditional display based on booking status and date */}
+        {/* Make Payment Button - Show when conditions are met */}
+        {shouldShowPaymentButton(schedule) && (
+          <div className="flex flex-col sm:flex-row gap-2 pt-2">
+            <button
+              onClick={() => handleMakePayment(schedule)}
+              className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors text-sm font-medium"
+              title="Make payment for this booking"
+            >
+              <FaCreditCard className="w-4 h-4" />
+              Make Payment
+            </button>
+          </div>
+        )}
+        
+        {/* Existing Action Buttons - Conditional display based on booking status and date */}
         {schedule.paymentStatus === 'completed' && schedule.status !== 'cancelled' && schedule.status !== 'completed' && (
           <div className="flex flex-col sm:flex-row gap-2 pt-2">
             {/* Cancel button - Only for upcoming bookings */}
@@ -418,6 +463,44 @@ const Bookings = () => {
 )
 
           })}
+        </div>
+      )}
+      
+      {/* Payment Flow Modal */}
+      {showPaymentFlow && currentBookingId && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-[2px] p-4">
+          <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-semibold text-gray-900">Complete Payment</h3>
+                <button
+                  onClick={() => setShowPaymentFlow(false)}
+                  className="text-gray-400 hover:text-gray-600 transition-colors"
+                >
+                  <FaTimes className="w-6 h-6" />
+                </button>
+              </div>
+              
+              <UnifiedStripePaymentForm
+                mode="one-time"
+                amount={schedules.find(s => s.booking._id === currentBookingId)?.booking.estimatedPrice || 0}
+                currency="gbp"
+                customerEmail={schedules.find(s => s.booking._id === currentBookingId)?.booking.user.email || ''}
+                customerName={schedules.find(s => s.booking._id === currentBookingId)?.booking.user.name || ''}
+                bookingId={currentBookingId}
+                onSuccess={(result) => {
+                  setShowPaymentFlow(false);
+                  // Refresh the schedules to update payment status
+                  fetchSchedules();
+                }}
+                onError={(error) => {
+                  console.error('Payment error:', error);
+                  // Keep modal open to show error
+                }}
+                onClose={() => setShowPaymentFlow(false)}
+              />
+            </div>
+          </div>
         </div>
       )}
     </div>
