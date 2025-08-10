@@ -16,6 +16,7 @@ interface Schedule {
   status: 'pending' | 'confirmed' | 'completed' | 'cancelled';
   startDate: string;
   time: string;
+  paidWithCash:Boolean;
   frequency: string;
   paymentStatus: string; // Payment status from Schedule document
   booking: {
@@ -141,8 +142,9 @@ const Bookings = () => {
     const isNotExpired = scheduleDate >= today;
     const isOneTime = schedule.frequency === 'onetime';
     const isPaymentIncomplete = schedule.paymentStatus !== 'completed';
+
     
-    return isNotExpired && isOneTime && isPaymentIncomplete;
+    return isNotExpired && isOneTime && isPaymentIncomplete &&!schedule.paidWithCash;
   };
 
   // Handle Make Payment button click
@@ -372,8 +374,19 @@ const Bookings = () => {
           </div>
         )}
         
-        {/* Existing Action Buttons - Conditional display based on booking status and date */}
-        {schedule.paymentStatus === 'completed' && schedule.status !== 'cancelled' && schedule.status !== 'completed' && (
+        {/* Cash Payment Tag */}
+        {schedule.paidWithCash && (
+          <div className="flex items-center gap-2 pt-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-green-50 text-green-700 border border-green-200 rounded-lg text-sm font-medium">
+              <FaPoundSign className="w-3 h-3" />
+              Cash Payment Selected
+            </div>
+          </div>
+        )}
+        
+        {/* Action Buttons - Updated logic for cash payers */}
+        {((schedule.paymentStatus === 'completed' && schedule.status !== 'cancelled' && schedule.status !== 'completed') || 
+          (schedule.paidWithCash && schedule.status !== 'cancelled' && schedule.status !== 'completed')) && (
           <div className="flex flex-col sm:flex-row gap-2 pt-2">
             {/* Cancel button - Only for upcoming bookings */}
             {!isPast && (
@@ -386,15 +399,17 @@ const Bookings = () => {
               Cancel Booking
             </button>
             )}
-            {/* Refund button - For both present and past bookings */}
-            <button
-              onClick={() => handleRefundBooking(schedule._id)}
-              className="flex items-center justify-center gap-2 px-4 py-2 bg-orange-50 text-orange-700 border border-orange-200 rounded-lg hover:bg-orange-100 transition-colors text-sm font-medium"
-              title="Request refund for this booking"
-            >
-              <FaUndo className="w-4 h-4" />
-              Request Refund
-            </button>
+            {/* Refund button - Only for non-cash payments */}
+            {!schedule.paidWithCash && (
+              <button
+                onClick={() => handleRefundBooking(schedule._id)}
+                className="flex items-center justify-center gap-2 px-4 py-2 bg-orange-50 text-orange-700 border border-orange-200 rounded-lg hover:bg-orange-100 transition-colors text-sm font-medium"
+                title="Request refund for this booking"
+              >
+                <FaUndo className="w-4 h-4" />
+                Request Refund
+              </button>
+            )}
           </div>
         )}
       </div>
