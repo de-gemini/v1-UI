@@ -81,13 +81,13 @@ const Login = () => {
             </button>
           </form>
           <div className='flex items-center justify-center gap-[10px]'>
-          <a
-            href="#"
+          <Link
+            to="/forgot-password"
             className="block mt-4 text-sm text-[#3B2E7E] text-center font-medium hover:underline"
             tabIndex={0}
           >
             Forgot password?
-          </a>
+          </Link>
 
           <Link
             to='/register'

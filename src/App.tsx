@@ -10,6 +10,8 @@ import { Suspense, lazy } from "react";
 import { useAuthStore } from "./store/authStore";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import ForgotPassword from "./pages/ForgotPassword";
+import VerifyOtp from "./pages/VerifyOtp";
 import Dashboard from "./pages/Dashboard";
 import CalendarAvailability from "./pages/admin/CalendarAvailability";
 import Contact from "./pages/Contact";
@@ -196,6 +198,16 @@ function App() {
                 <Login />
                 </Layout>
                 } />
+              <Route path="/forgot-password" element={
+                <Layout>
+                  <ForgotPassword />
+                </Layout>
+              } />
+              <Route path="/verify-otp" element={
+                <Layout>
+                  <VerifyOtp />
+                </Layout>
+              } />
               <Route path="/contact" element={<Layout><Contact /></Layout>} />
               <Route
                 path="/dashboard"
