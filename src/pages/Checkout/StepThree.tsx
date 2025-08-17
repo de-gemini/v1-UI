@@ -333,7 +333,10 @@ const StepThree: React.FC = () => {
       setIsSubmitting(false);
       const msg = err?.response?.data?.message || err.message || 'An error occurred';
       toast.error(msg);
+    }finally {
+      setIsSubmitting(false);
     }
+
   };
 
   // Local scroll to top implementation
