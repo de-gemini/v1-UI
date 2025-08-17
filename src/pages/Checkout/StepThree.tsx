@@ -168,7 +168,7 @@ const StepThree: React.FC = () => {
     } else {
       console.log('[DEBUG] No user object available for prefill');
     }
-  }, [user, name, surname, set]);
+  }, [user, set]);
 
 
   // Full quote handler with backend submission
