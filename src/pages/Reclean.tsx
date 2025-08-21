@@ -4,7 +4,7 @@ import axiosInstance from '../api/axiosInstance';
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from "../constants";
-import banner from '../assets/images/main-removebg.png'
+import banner from '../assets/images/optimized-header.webp'
 import CommonPostcodeInput from '../components/commons/CommonPostcodeInput';
 import ErrorHandler from '../utils/errorHandler';
 

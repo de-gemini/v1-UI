@@ -5,7 +5,7 @@ import axiosInstance from '../api/axiosInstance';
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../constants';
-import mainBanner from '../assets/images/main-removebg.png';
+import mainBanner from '../assets/images/optimized-header.webp';
 import CommonPostcodeInput from './commons/CommonPostcodeInput';
 
 interface BannerProps {

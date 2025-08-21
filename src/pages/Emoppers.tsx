@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useMemo } from "react";
-import background from "../assets/images/main-removebg.png";
+import background from "../assets/images/optimized-header.webp";
 import {
   Search,
   ChevronDown,

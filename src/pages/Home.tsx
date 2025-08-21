@@ -29,7 +29,7 @@ import card3 from '../assets/images/Services/Kitchen/4.avif'
 import card4 from '../assets/images/Services/Bathroom/6.avif';
 import card5 from '../assets/images/Services/SittingRoom/4.avif';
 import card6 from '../assets/images/Services/SittingRoom/7.avif';
-import home from '../assets/images/main-removebg.png'
+import home from '../assets/images/optimized-header.webp'
 import office from '../assets/images/office-cleaning.png'
 import 'react-toastify/dist/ReactToastify.css';
 import CommonPostcodeInput from '../components/commons/CommonPostcodeInput';
